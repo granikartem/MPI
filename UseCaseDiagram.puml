@@ -1,0 +1,272 @@
+@startuml UC_1_Request
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Управление заявкой и рейсом
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+
+rectangle "Управление заявкой и рейсом" {
+  usecase "UC-1: Создать заявку\nна перевозку" as UC1 #Gold
+  usecase "UC-2: Управлять\nстатусами заявки" as UC2 #Gold
+  usecase "UC-3: Просмотреть\nреестр рейсов" as UC3 #Gold
+  usecase "UC-4: Поиск и фильтрация\nзавершённых рейсов" as UC4
+}
+
+Dispatcher --> UC1
+Dispatcher --> UC2
+Dispatcher --> UC3
+Dispatcher --> UC4
+CaravanMaster --> UC2
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
+
+@startuml UC_2_Route
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Планирование маршрута и оценка рисков
+
+actor "Диспетчер\nкараванов" as Dispatcher
+
+rectangle "Планирование маршрута и оценка рисков" {
+  usecase "UC-5: Выбрать/спланировать\nмаршрут" as UC5 #Gold
+  usecase "UC-6: Рассчитать\nETA" as UC6
+  usecase "UC-7: Рассчитать\nrisk_score" as UC7
+  usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
+}
+
+actor "Wasteland\nIntel" as WastelandIntel <<external>>
+
+Dispatcher --> UC5
+Dispatcher --> UC6
+Dispatcher --> UC7
+Dispatcher --> UC8
+UC7 <-- WastelandIntel
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
+
+@startuml UC_3_Team
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Формирование команды
+
+actor "Диспетчер\nкараванов" as Dispatcher
+
+rectangle "Формирование команды" {
+  usecase "UC-9: Назначить сотрудников\nна роли рейса" as UC9 #Gold
+  usecase "UC-10: Просмотреть\nдоступных сотрудников" as UC10
+}
+
+Dispatcher --> UC9
+Dispatcher --> UC10
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
+
+@startuml UC_4_Cargo
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Груз и манифест
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Кладовщик" as Storekeeper
+actor "Караван-\nмастер" as CaravanMaster
+
+rectangle "Груз и манифест" {
+  usecase "UC-11: Создать\nгруз-манифест" as UC11 #Gold
+  usecase "UC-12: Указать\nценность груза" as UC12
+  usecase "UC-13: Зарезервировать\nприпасы" as UC13
+  usecase "UC-14: Подтвердить доставку\nгруза (с пломбой)" as UC14 #Gold
+  usecase "UC-15: Выполнить сверку\nманифеста при приёмке" as UC15
+}
+
+Storekeeper --> UC11
+Dispatcher --> UC12
+Storekeeper --> UC13
+CaravanMaster --> UC14
+Storekeeper --> UC15
+CaravanMaster --> UC15
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
+
+@startuml UC_5_Field
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Полевые операции
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+actor "Капитан\nохраны" as SecurityCaptain
+actor "Полевой\nмедик" as Medic
+
+rectangle "Полевые операции" {
+  usecase "UC-16: Подтвердить ключевые\nэтапы рейса" as UC16 #Gold
+  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
+  usecase "UC-19: Зафиксировать\nинцидент" as UC19 #Gold
+  usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
+}
+
+actor "NCR Checkpoint\n& Tax Terminal" as NCRCheckpoint <<external>>
+
+CaravanMaster --> UC16
+CaravanMaster --> UC17
+CaravanMaster --> UC18
+CaravanMaster --> UC19
+CaravanMaster --> UC20
+SecurityCaptain --> UC19
+Medic --> UC19
+Dispatcher --> UC20
+UC18 <-- NCRCheckpoint
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
+
+@startuml UC_6_Finance
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Финансы и интеграции
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+
+rectangle "Финансы" {
+  usecase "UC-21: Сформировать финансовый\nотчёт по рейсу" as UC21
+  usecase "UC-22: Экспортировать\nотчёт на голотейп" as UC22
+}
+
+rectangle "Интеграции с внешними системами" {
+  usecase "UC-23: Получить данные\nоб угрозах" as UC23
+  usecase "UC-24: Получить данные\nо КПП и пошлинах" as UC24
+}
+
+actor "Wasteland\nIntel" as WastelandIntel <<external>>
+actor "NCR Checkpoint\n& Tax Terminal" as NCRCheckpoint <<external>>
+
+Dispatcher --> UC21
+Dispatcher --> UC22
+Dispatcher --> UC23
+CaravanMaster --> UC24
+UC23 <-- WastelandIntel
+UC24 <-- NCRCheckpoint
+@enduml
+
+@startuml UC_7_Users
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Управление пользователями
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+actor "Кладовщик" as Storekeeper
+actor "Капитан\nохраны" as SecurityCaptain
+actor "Полевой\nмедик" as Medic
+
+rectangle "Управление пользователями" {
+  usecase "UC-25: Аутентификация" as UC25 #Gold
+  usecase "UC-26: Создать учётную\nзапись пользователя" as UC26 #Gold
+  usecase "UC-27: Изменить роль\nпользователя" as UC27
+  usecase "UC-28: Деактивировать\nучётную запись" as UC28
+  usecase "UC-29: Редактировать свои\nучётные данные" as UC29
+  usecase "UC-30: Сбросить учётные\nданные пользователя" as UC30
+  usecase "UC-31: Назначить/изменить\nставку сотрудника" as UC31
+}
+
+actor "Супер-\nпользователь" as SuperUser
+
+Dispatcher --> UC25
+Dispatcher --> UC26
+Dispatcher --> UC27
+Dispatcher --> UC28
+Dispatcher --> UC29
+Dispatcher --> UC30
+Dispatcher --> UC31
+CaravanMaster --> UC25
+CaravanMaster --> UC29
+Storekeeper --> UC25
+Storekeeper --> UC29
+SecurityCaptain --> UC25
+SecurityCaptain --> UC29
+Medic --> UC25
+Medic --> UC29
+UC25 <-- SuperUser
+UC29 <-- SuperUser
+UC30 <-- SuperUser
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
+
+@startuml UC_8_Orgs
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Управление организациями
+
+actor "Супер-\nпользователь" as SuperUser
+
+rectangle "Управление организациями" {
+  usecase "UC-32: Создать\nорганизацию" as UC32 #Gold
+  usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33 #Gold
+  usecase "UC-34: Управлять\nподписками" as UC34 #Gold
+}
+
+SuperUser --> UC32
+SuperUser --> UC33
+SuperUser --> UC34
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
