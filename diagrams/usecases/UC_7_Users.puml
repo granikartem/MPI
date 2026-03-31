@@ -1,0 +1,51 @@
+@startuml UC_7_Users
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Управление пользователями
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+actor "Кладовщик" as Storekeeper
+actor "Капитан\nохраны" as SecurityCaptain
+actor "Полевой\nмедик" as Medic
+
+rectangle "Управление пользователями" {
+  usecase "UC-25: Аутентификация" as UC25 #Gold
+  usecase "UC-26: Создать учётную\nзапись пользователя" as UC26 #Gold
+  usecase "UC-27: Изменить роль\nпользователя" as UC27
+  usecase "UC-28: Деактивировать\nучётную запись" as UC28
+  usecase "UC-29: Редактировать свои\nучётные данные" as UC29
+  usecase "UC-30: Сбросить учётные\nданные пользователя" as UC30
+  usecase "UC-31: Назначить/изменить\nставку сотрудника" as UC31
+}
+
+actor "Супер-\nпользователь" as SuperUser
+
+Dispatcher --> UC25
+Dispatcher --> UC26
+Dispatcher --> UC27
+Dispatcher --> UC28
+Dispatcher --> UC29
+Dispatcher --> UC30
+Dispatcher --> UC31
+CaravanMaster --> UC25
+CaravanMaster --> UC29
+Storekeeper --> UC25
+Storekeeper --> UC29
+SecurityCaptain --> UC25
+SecurityCaptain --> UC29
+Medic --> UC25
+Medic --> UC29
+UC25 <-- SuperUser
+UC29 <-- SuperUser
+UC30 <-- SuperUser
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml

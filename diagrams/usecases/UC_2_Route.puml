@@ -1,0 +1,31 @@
+@startuml UC_2_Route
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Планирование маршрута и оценка рисков
+
+actor "Диспетчер\nкараванов" as Dispatcher
+
+rectangle "Планирование маршрута и оценка рисков" {
+  usecase "UC-5: Выбрать/спланировать\nмаршрут" as UC5 #Gold
+  usecase "UC-6: Рассчитать\nETA" as UC6
+  usecase "UC-7: Рассчитать\nrisk_score" as UC7
+  usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
+}
+
+actor "Wasteland\nIntel" as WastelandIntel <<external>>
+
+Dispatcher --> UC5
+Dispatcher --> UC6
+Dispatcher --> UC7
+Dispatcher --> UC8
+UC7 <-- WastelandIntel
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml

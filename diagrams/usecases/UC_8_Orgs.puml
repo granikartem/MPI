@@ -1,0 +1,26 @@
+@startuml UC_8_Orgs
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Управление организациями
+
+actor "Супер-\nпользователь" as SuperUser
+
+rectangle "Управление организациями" {
+  usecase "UC-32: Создать\nорганизацию" as UC32 #Gold
+  usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33 #Gold
+  usecase "UC-34: Управлять\nподписками" as UC34 #Gold
+}
+
+SuperUser --> UC32
+SuperUser --> UC33
+SuperUser --> UC34
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml

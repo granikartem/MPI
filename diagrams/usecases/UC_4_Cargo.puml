@@ -1,0 +1,33 @@
+@startuml UC_4_Cargo
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Груз и манифест
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Кладовщик" as Storekeeper
+actor "Караван-\nмастер" as CaravanMaster
+
+rectangle "Груз и манифест" {
+  usecase "UC-11: Создать\nгруз-манифест" as UC11 #Gold
+  usecase "UC-12: Указать\nценность груза" as UC12
+  usecase "UC-13: Зарезервировать\nприпасы" as UC13
+  usecase "UC-14: Подтвердить доставку\nгруза (с пломбой)" as UC14 #Gold
+  usecase "UC-15: Выполнить сверку\nманифеста при приёмке" as UC15
+}
+
+Storekeeper --> UC11
+Dispatcher --> UC12
+Storekeeper --> UC13
+CaravanMaster --> UC14
+Storekeeper --> UC15
+CaravanMaster --> UC15
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml

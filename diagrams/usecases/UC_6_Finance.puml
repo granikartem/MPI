@@ -1,0 +1,31 @@
+@startuml UC_6_Finance
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Финансы и интеграции
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+
+rectangle "Финансы" {
+  usecase "UC-21: Сформировать финансовый\nотчёт по рейсу" as UC21
+  usecase "UC-22: Экспортировать\nотчёт на голотейп" as UC22
+}
+
+rectangle "Интеграции с внешними системами" {
+  usecase "UC-23: Получить данные\nоб угрозах" as UC23
+  usecase "UC-24: Получить данные\nо КПП и пошлинах" as UC24
+}
+
+actor "Wasteland\nIntel" as WastelandIntel <<external>>
+actor "NCR Checkpoint\n& Tax Terminal" as NCRCheckpoint <<external>>
+
+Dispatcher --> UC21
+Dispatcher --> UC22
+Dispatcher --> UC23
+CaravanMaster --> UC24
+UC23 <-- WastelandIntel
+UC24 <-- NCRCheckpoint
+@enduml
