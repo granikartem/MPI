@@ -1,0 +1,24 @@
+@startuml UC_3_Team
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Формирование команды
+
+actor "Диспетчер\nкараванов" as Dispatcher
+
+rectangle "Формирование команды" {
+  usecase "UC-9: Назначить сотрудников\nна роли рейса" as UC9 #Gold
+  usecase "UC-10: Просмотреть\nдоступных сотрудников" as UC10
+}
+
+Dispatcher --> UC9
+Dispatcher --> UC10
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml

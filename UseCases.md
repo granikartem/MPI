@@ -28,26 +28,7 @@
 | UC-3 | Просмотреть реестр рейсов | Диспетчер | - IMPORTANT
 | UC-4 | Поиск и фильтрация завершённых рейсов | Диспетчер |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-    KM["fa:fa-user Караван-мастер"]
-
-    subgraph " Управление заявкой и рейсом "
-        UC1(["UC-1: Создать заявку на перевозку"]):::important
-        UC2(["UC-2: Управлять статусами заявки"]):::important
-        UC3(["UC-3: Просмотреть реестр рейсов"]):::important
-        UC4(["UC-4: Поиск и фильтрация завершённых рейсов"])
-    end
-
-    D --> UC1
-    D --> UC2
-    D --> UC3
-    D --> UC4
-    KM --> UC2
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-```
+![UC-1..UC-4: Управление заявкой и рейсом](diagrams/out/UC_1_Request.png)
 
 ### Планирование маршрута и оценка рисков
 | # | Прецедент | Акторы |
@@ -57,28 +38,7 @@ flowchart LR
 | UC-7 | Рассчитать risk_score | Диспетчер, Wasteland Intel |
 | UC-8 | Получить рекомендацию по охране и припасам | Диспетчер (система автоматически) |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-
-    subgraph " Планирование маршрута и оценка рисков "
-        UC5(["UC-5: Выбрать/спланировать маршрут"]):::important
-        UC6(["UC-6: Рассчитать ETA"])
-        UC7(["UC-7: Рассчитать risk_score"])
-        UC8(["UC-8: Получить рекомендацию по охране и припасам"])
-    end
-
-    WI["fa:fa-server Wasteland Intel"]:::ext
-
-    D --> UC5
-    D --> UC6
-    D --> UC7
-    D --> UC8
-    UC7 --> WI
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-    classDef ext fill:#E0E0E0,stroke:#666,color:#000
-```
+![UC-5..UC-8: Планирование маршрута и оценка рисков](diagrams/out/UC_2_Route.png)
 
 ### Формирование команды
 | # | Прецедент | Акторы |
@@ -86,20 +46,7 @@ flowchart LR
 | UC-9 | Назначить сотрудников на роли рейса | Диспетчер | - IMPORTANT
 | UC-10 | Просмотреть доступных сотрудников | Диспетчер |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-
-    subgraph " Формирование команды "
-        UC9(["UC-9: Назначить сотрудников на роли рейса"]):::important
-        UC10(["UC-10: Просмотреть доступных сотрудников"])
-    end
-
-    D --> UC9
-    D --> UC10
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-```
+![UC-9..UC-10: Формирование команды](diagrams/out/UC_3_Team.png)
 
 ### Груз и манифест
 | # | Прецедент | Акторы |
@@ -110,29 +57,7 @@ flowchart LR
 | UC-14 | Подтвердить доставку груза (с пломбой) | Караван-мастер | - IMPORTANT
 | UC-15 | Выполнить сверку манифеста при приёмке | Кладовщик, Караван-мастер |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-    KL["fa:fa-user Кладовщик"]
-    KM["fa:fa-user Караван-мастер"]
-
-    subgraph " Груз и манифест "
-        UC11(["UC-11: Создать груз-манифест"]):::important
-        UC12(["UC-12: Указать ценность груза"])
-        UC13(["UC-13: Зарезервировать припасы"])
-        UC14(["UC-14: Подтвердить доставку груза (с пломбой)"]):::important
-        UC15(["UC-15: Выполнить сверку манифеста при приёмке"])
-    end
-
-    KL --> UC11
-    D --> UC12
-    KL --> UC13
-    KM --> UC14
-    KL --> UC15
-    KM --> UC15
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-```
+![UC-11..UC-15: Груз и манифест](diagrams/out/UC_4_Cargo.png)
 
 ### Полевые операции
 | # | Прецедент | Акторы |
@@ -143,36 +68,7 @@ flowchart LR
 | UC-19 | Зафиксировать инцидент | Караван-мастер, Капитан охраны, Полевой медик | - IMPORTANT
 | UC-20 | Инициировать RecoveryRequest | Диспетчер, Караван-мастер |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-    KM["fa:fa-user Караван-мастер"]
-    KO["fa:fa-user Капитан охраны"]
-    PM["fa:fa-user Полевой медик"]
-
-    subgraph " Полевые операции "
-        UC16(["UC-16: Подтвердить ключевые этапы рейса"]):::important
-        UC17(["UC-17: Отметить прохождение контрольной точки"])
-        UC18(["UC-18: Отметить прохождение КПП (с пошлиной)"])
-        UC19(["UC-19: Зафиксировать инцидент"]):::important
-        UC20(["UC-20: Инициировать RecoveryRequest"])
-    end
-
-    NCR["fa:fa-server NCR Checkpoint & Tax Terminal"]:::ext
-
-    KM --> UC16
-    KM --> UC17
-    KM --> UC18
-    KM --> UC19
-    KM --> UC20
-    KO --> UC19
-    PM --> UC19
-    D --> UC20
-    UC18 --> NCR
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-    classDef ext fill:#E0E0E0,stroke:#666,color:#000
-```
+![UC-16..UC-20: Полевые операции](diagrams/out/UC_5_Field.png)
 
 ### Финансы
 | # | Прецедент | Акторы |
@@ -186,33 +82,7 @@ flowchart LR
 | UC-23 | Получить данные об угрозах | Wasteland Intel |
 | UC-24 | Получить данные о КПП и пошлинах | NCR Checkpoint |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-    KM["fa:fa-user Караван-мастер"]
-
-    subgraph " Финансы "
-        UC21(["UC-21: Сформировать финансовый отчёт по рейсу"])
-        UC22(["UC-22: Экспортировать отчёт на голотейп"])
-    end
-
-    subgraph " Интеграции с внешними системами "
-        UC23(["UC-23: Получить данные об угрозах"])
-        UC24(["UC-24: Получить данные о КПП и пошлинах"])
-    end
-
-    WI["fa:fa-server Wasteland Intel"]:::ext
-    NCR["fa:fa-server NCR Checkpoint & Tax Terminal"]:::ext
-
-    D --> UC21
-    D --> UC22
-    D --> UC23
-    KM --> UC24
-    UC23 --> WI
-    UC24 --> NCR
-
-    classDef ext fill:#E0E0E0,stroke:#666,color:#000
-```
+![UC-21..UC-24: Финансы и интеграции](diagrams/out/UC_6_Finance.png)
 
 ### Управление пользователями
 | # | Прецедент | Акторы |
@@ -225,47 +95,7 @@ flowchart LR
 | UC-30 | Сбросить учётные данные пользователя | Диспетчер, Суперпользователь |
 | UC-31 | Назначить/изменить ставку сотрудника | Диспетчер |
 
-```mermaid
-flowchart LR
-    D["fa:fa-user Диспетчер караванов"]
-    KM["fa:fa-user Караван-мастер"]
-    KL["fa:fa-user Кладовщик"]
-    KO["fa:fa-user Капитан охраны"]
-    PM["fa:fa-user Полевой медик"]
-
-    subgraph " Управление пользователями "
-        UC25(["UC-25: Аутентификация"]):::important
-        UC26(["UC-26: Создать учётную запись пользователя"]):::important
-        UC27(["UC-27: Изменить роль пользователя"])
-        UC28(["UC-28: Деактивировать учётную запись"])
-        UC29(["UC-29: Редактировать свои учётные данные"])
-        UC30(["UC-30: Сбросить учётные данные пользователя"])
-        UC31(["UC-31: Назначить/изменить ставку сотрудника"])
-    end
-
-    SU["fa:fa-user-shield Суперпользователь"]
-
-    D --> UC25
-    D --> UC26
-    D --> UC27
-    D --> UC28
-    D --> UC29
-    D --> UC30
-    D --> UC31
-    KM --> UC25
-    KM --> UC29
-    KL --> UC25
-    KL --> UC29
-    KO --> UC25
-    KO --> UC29
-    PM --> UC25
-    PM --> UC29
-    UC25 --> SU
-    UC29 --> SU
-    UC30 --> SU
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-```
+![UC-25..UC-31: Управление пользователями](diagrams/out/UC_7_Users.png)
 
 ### Управление организациями
 | # | Прецедент | Акторы |
@@ -274,22 +104,7 @@ flowchart LR
 | UC-33 | Назначить первого диспетчера организации | Суперпользователь | - IMPORTANT
 | UC-34 | Управлять подписками | Суперпользователь | - IMPORTANT
 
-```mermaid
-flowchart LR
-    SU["fa:fa-user-shield Суперпользователь"]
-
-    subgraph " Управление организациями "
-        UC32(["UC-32: Создать организацию"]):::important
-        UC33(["UC-33: Назначить первого диспетчера организации"]):::important
-        UC34(["UC-34: Управлять подписками"]):::important
-    end
-
-    SU --> UC32
-    SU --> UC33
-    SU --> UC34
-
-    classDef important fill:#FFD700,stroke:#333,color:#000
-```
+![UC-32..UC-34: Управление организациями](diagrams/out/UC_8_Orgs.png)
 
 ---
 

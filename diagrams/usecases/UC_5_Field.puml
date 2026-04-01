@@ -1,0 +1,39 @@
+@startuml UC_5_Field
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Полевые операции
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+actor "Капитан\nохраны" as SecurityCaptain
+actor "Полевой\nмедик" as Medic
+
+rectangle "Полевые операции" {
+  usecase "UC-16: Подтвердить ключевые\nэтапы рейса" as UC16 #Gold
+  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
+  usecase "UC-19: Зафиксировать\nинцидент" as UC19 #Gold
+  usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
+}
+
+actor "NCR Checkpoint\n& Tax Terminal" as NCRCheckpoint <<external>>
+
+CaravanMaster --> UC16
+CaravanMaster --> UC17
+CaravanMaster --> UC18
+CaravanMaster --> UC19
+CaravanMaster --> UC20
+SecurityCaptain --> UC19
+Medic --> UC19
+Dispatcher --> UC20
+UC18 <-- NCRCheckpoint
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml

@@ -1,0 +1,30 @@
+@startuml UC_1_Request
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Управление заявкой и рейсом
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+
+rectangle "Управление заявкой и рейсом" {
+  usecase "UC-1: Создать заявку\nна перевозку" as UC1 #Gold
+  usecase "UC-2: Управлять\nстатусами заявки" as UC2 #Gold
+  usecase "UC-3: Просмотреть\nреестр рейсов" as UC3 #Gold
+  usecase "UC-4: Поиск и фильтрация\nзавершённых рейсов" as UC4
+}
+
+Dispatcher --> UC1
+Dispatcher --> UC2
+Dispatcher --> UC3
+Dispatcher --> UC4
+CaravanMaster --> UC2
+
+legend right
+  |= Цвет |= Значение |
+  | <#Gold> | Значимый прецедент |
+  | <#White> | Обычный прецедент |
+endlegend
+@enduml
