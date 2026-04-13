@@ -1,0 +1,138 @@
+@startuml UC_0_General
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title Общая диаграмма прецедентов — ИС «Караваны»
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Караван-\nмастер" as CaravanMaster
+actor "Кладовщик" as Storekeeper
+actor "Капитан\nохраны" as SecurityCaptain
+actor "Полевой\nмедик" as Medic
+actor "Супер-\nпользователь" as SuperUser
+actor "Wasteland\nIntel" as WI <<external>>
+actor "NCR Checkpoint\n& Tax Terminal" as NCR <<external>>
+
+rectangle "Управление заявкой и рейсом" {
+  usecase "UC-1: Создать заявку\nна перевозку" as UC1
+  usecase "UC-2: Управлять\nстатусами заявки" as UC2
+  usecase "UC-3: Просмотреть\nреестр рейсов" as UC3
+  usecase "UC-4: Поиск и фильтрация\nзавершённых рейсов" as UC4
+}
+
+rectangle "Планирование маршрута\nи оценка рисков" {
+  usecase "UC-5: Выбрать/\nспланировать маршрут" as UC5
+  usecase "UC-6: Рассчитать ETA" as UC6
+  usecase "UC-7: Рассчитать\nrisk_score" as UC7
+  usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
+}
+
+rectangle "Формирование команды" {
+  usecase "UC-9: Назначить сотрудников\nна роли рейса" as UC9
+  usecase "UC-10: Просмотреть\nдоступных сотрудников" as UC10
+}
+
+rectangle "Груз и манифест" {
+  usecase "UC-11: Создать\nгруз-манифест" as UC11
+  usecase "UC-12: Указать\nценность груза" as UC12
+  usecase "UC-13: Зарезервировать\nприпасы" as UC13
+  usecase "UC-14: Подтвердить\nдоставку груза" as UC14
+  usecase "UC-15: Выполнить сверку\nманифеста при приёмке" as UC15
+}
+
+rectangle "Полевые операции" {
+  usecase "UC-16: Подтвердить ключевые\nэтапы рейса" as UC16
+  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
+  usecase "UC-19: Зафиксировать\nинцидент" as UC19
+  usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
+}
+
+rectangle "Финансы и интеграции" {
+  usecase "UC-21: Сформировать\nфинансовый отчёт" as UC21
+  usecase "UC-22: Экспортировать\nотчёт на голотейп" as UC22
+  usecase "UC-23: Получить данные\nоб угрозах" as UC23
+  usecase "UC-24: Получить данные\nо КПП и пошлинах" as UC24
+}
+
+rectangle "Управление пользователями" {
+  usecase "UC-25: Аутентификация" as UC25
+  usecase "UC-26: Создать учётную\nзапись пользователя" as UC26
+  usecase "UC-27: Изменить роль\nпользователя" as UC27
+  usecase "UC-28: Деактивировать\nучётную запись" as UC28
+  usecase "UC-29: Редактировать\nсвои учётные данные" as UC29
+  usecase "UC-30: Сбросить учётные\nданные пользователя" as UC30
+  usecase "UC-31: Назначить/изменить\nставку сотрудника" as UC31
+}
+
+rectangle "Управление организациями" {
+  usecase "UC-32: Создать\nорганизацию" as UC32
+  usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33
+  usecase "UC-34: Управлять\nподписками" as UC34
+}
+
+' --- Диспетчер ---
+Dispatcher --> UC1
+Dispatcher --> UC2
+Dispatcher --> UC3
+Dispatcher --> UC4
+Dispatcher --> UC5
+Dispatcher --> UC9
+Dispatcher --> UC10
+Dispatcher --> UC12
+Dispatcher --> UC20
+Dispatcher --> UC21
+Dispatcher --> UC22
+Dispatcher --> UC25
+Dispatcher --> UC26
+Dispatcher --> UC27
+Dispatcher --> UC28
+Dispatcher --> UC30
+Dispatcher --> UC31
+
+' --- Караван-мастер ---
+CaravanMaster --> UC2
+CaravanMaster --> UC14
+CaravanMaster --> UC15
+CaravanMaster --> UC16
+CaravanMaster --> UC17
+CaravanMaster --> UC18
+CaravanMaster --> UC19
+CaravanMaster --> UC20
+CaravanMaster --> UC25
+
+' --- Кладовщик ---
+Storekeeper --> UC11
+Storekeeper --> UC13
+Storekeeper --> UC15
+Storekeeper --> UC25
+
+' --- Капитан охраны ---
+SecurityCaptain --> UC19
+SecurityCaptain --> UC25
+
+' --- Полевой медик ---
+Medic --> UC19
+Medic --> UC25
+
+' --- Суперпользователь ---
+SuperUser --> UC25
+SuperUser --> UC30
+SuperUser --> UC32
+SuperUser --> UC33
+SuperUser --> UC34
+
+' --- Внешние системы ---
+WI --> UC7
+WI --> UC23
+NCR --> UC18
+NCR --> UC24
+
+' --- Зависимости ---
+UC6 ..> UC5 : <<include>>
+UC7 ..> UC5 : <<include>>
+UC8 ..> UC7 : <<include>>
+
+@enduml
