@@ -26,15 +26,13 @@
 | LCO / LCA / IOC / PR | Контрольные вехи RUP: цели жизненного цикла, архитектура, начальная операционная готовность и релиз продукта. |
 
 ## 1.4 References (Ссылки)
-
-| Документ / источник | Назначение в проекте |
-| --- | --- |
-| Vision.md | Источник бизнес-целей, позиционирования, ключевых стейкхолдеров, качественных диапазонов и продуктовых приоритетов. |
-| SRS.md | Базовый документ требований: 35 функциональных требований, ограничения разработки, интерфейсы и целевые НФТ. |
-| UseCases.md | Список 34 прецедентов с актёрами, базовыми сценариями и activity-диаграммами для ключевых UC. |
-| Glossary_Karavany_FNV.md | Единый словарь терминов предметной области и ролей системы. |
-| UseCaseDiagram.puml и архив usecases.rar | Исходники диаграмм прецедентов, используемые как материал для архитектурной и тестовой декомпозиции. |
-| Лор Fallout / Fallout Wiki | Контекст предметной области и терминология мира, в рамках которого моделируется продукт. |
+1. **Игровой лор Fallout: New Vegas** – источник истины о мире Fallout, в рамках которого разрабатывается система
+    
+2. **Вики Fallout** русскоязычная - [https://fallout.fandom.com/ru/wiki/Fallout](https://fallout.fandom.com/ru/wiki/Fallout), и англоязычная - [https://fallout.fandom.com/wiki/Fallout_Wiki](https://fallout.fandom.com/wiki/Fallout_Wiki)
+    
+3. **Глоссарий** [https://docs.google.com/document/d/1AoE4qzqL8gtCE5ctFHvpofifqBhW2ubGu15-tvnP3i8/edit?usp=sharing](https://docs.google.com/document/d/1AoE4qzqL8gtCE5ctFHvpofifqBhW2ubGu15-tvnP3i8/edit?usp=sharing)
+    
+4. **Vison** [https://docs.google.com/document/d/16DPB8_gGFQS-jttED2Ayl4UiRRkqW5dMni9uQASKMng/edit?usp=sharing](https://docs.google.com/document/d/16DPB8_gGFQS-jttED2Ayl4UiRRkqW5dMni9uQASKMng/edit?usp=sharing)
 
 ## 1.5 Overview (Обзор документа)
 
