@@ -29,7 +29,9 @@
 
 ![Диаграмма активности UC-1](diagrams/out/UC_1_Activity.png)
 
-Макет интерфейса (HTML, открыть в браузере): [открыть макет](https://htmlpreview.github.io/?https://github.com/granikartem/MPI/blob/main/mockups/uc1_create_request.html) · [исходник](mockups/uc1_create_request.html)
+![Макет UC-1](mockups/caravan_dispatch.png)
+
+_Исходник: [mockups/uc1_create_request.html](mockups/uc1_create_request.html)_
 
 ---
 
@@ -48,7 +50,11 @@
 
 ![Диаграмма активности UC-7](diagrams/out/UC_7_Activity.png)
 
-Макет интерфейса (HTML, открыть в браузере): [открыть макет](https://htmlpreview.github.io/?https://github.com/granikartem/MPI/blob/main/mockups/uc7_risk_score.html) · [исходник](mockups/uc7_risk_score.html)
+![Макет UC-7 — успешный расчёт](mockups/risk_assessment_1.png)
+
+![Макет UC-7 — обработка ошибок](mockups/risk_assessment_2.png)
+
+_Исходник: [mockups/uc7_risk_score.html](mockups/uc7_risk_score.html)_
 
 ---
 
@@ -67,7 +73,9 @@
 
 ![Диаграмма активности UC-16](diagrams/out/UC_16_Activity.png)
 
-Макет интерфейса (HTML, открыть в браузере): [открыть макет](https://htmlpreview.github.io/?https://github.com/granikartem/MPI/blob/main/mockups/uc16_caravan_stages.html) · [исходник](mockups/uc16_caravan_stages.html)
+![Макет UC-16](mockups/caravan_stages.png)
+
+_Исходник: [mockups/uc16_caravan_stages.html](mockups/uc16_caravan_stages.html)_
 
 ---
 
@@ -86,7 +94,9 @@
 
 ![Диаграмма активности UC-19](diagrams/out/UC_19_Activity.png)
 
-Макет интерфейса (HTML, открыть в браузере): [открыть макет](https://htmlpreview.github.io/?https://github.com/granikartem/MPI/blob/main/mockups/uc19_incident_report.html) · [исходник](mockups/uc19_incident_report.html)
+![Макет UC-19](mockups/incident_report.png)
+
+_Исходник: [mockups/uc19_incident_report.html](mockups/uc19_incident_report.html)_
 
 ---
 
@@ -105,4 +115,6 @@
 
 ![Диаграмма активности UC-32](diagrams/out/UC_32_Activity.png)
 
-Макет интерфейса (HTML, открыть в браузере): [открыть макет](https://htmlpreview.github.io/?https://github.com/granikartem/MPI/blob/main/mockups/uc32_create_organization.html) · [исходник](mockups/uc32_create_organization.html)
+![Макет UC-32](mockups/create_org.png)
+
+_Исходник: [mockups/uc32_create_organization.html](mockups/uc32_create_organization.html)_
