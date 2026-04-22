@@ -43,6 +43,7 @@ def main() -> None:
 
     cmd = [
         "java",
+        "-DPLANTUML_LIMIT_SIZE=16384",
         "-jar",
         str(jar),
         f"-t{args.fmt}",

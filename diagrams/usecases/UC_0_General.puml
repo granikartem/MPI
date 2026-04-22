@@ -3,38 +3,46 @@ skinparam actorStyle awesome
 skinparam usecaseBackgroundColor #White
 skinparam usecaseBorderColor #333333
 skinparam rectangleBackgroundColor #F5F5F5
+skinparam nodesep 15
+skinparam ranksep 25
 
 title Общая диаграмма прецедентов — ИС «Караваны»
 
+' --- Левая колонка акторов ---
 actor "Диспетчер\nкараванов" as Dispatcher
-actor "Караван-\nмастер" as CaravanMaster
 actor "Кладовщик" as Storekeeper
+actor "Супер-\nпользователь" as SuperUser
+
+' --- Правая колонка акторов ---
+actor "Караван-\nмастер" as CaravanMaster
 actor "Капитан\nохраны" as SecurityCaptain
 actor "Полевой\nмедик" as Medic
-actor "Супер-\nпользователь" as SuperUser
+
+' --- Внешние системы ---
 actor "Wasteland\nIntel" as WI <<external>>
 actor "NCR Checkpoint\n& Tax Terminal" as NCR <<external>>
 
-rectangle "Управление заявкой и рейсом" {
+' --- Верхний ряд блоков ---
+rectangle "Управление заявкой и рейсом" as R1 {
   usecase "UC-1: Создать заявку\nна перевозку" as UC1
   usecase "UC-2: Управлять\nстатусами заявки" as UC2
   usecase "UC-3: Просмотреть\nреестр рейсов" as UC3
   usecase "UC-4: Поиск и фильтрация\nзавершённых рейсов" as UC4
 }
 
-rectangle "Планирование маршрута\nи оценка рисков" {
+rectangle "Планирование маршрута\nи оценка рисков" as R2 {
   usecase "UC-5: Выбрать/\nспланировать маршрут" as UC5
   usecase "UC-6: Рассчитать ETA" as UC6
   usecase "UC-7: Рассчитать\nrisk_score" as UC7
   usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
 }
 
-rectangle "Формирование команды" {
+rectangle "Формирование команды" as R3 {
   usecase "UC-9: Назначить сотрудников\nна роли рейса" as UC9
   usecase "UC-10: Просмотреть\nдоступных сотрудников" as UC10
 }
 
-rectangle "Груз и манифест" {
+rectangle "Груз и манифест" as R4 {
   usecase "UC-11: Создать\nгруз-манифест" as UC11
   usecase "UC-12: Указать\nценность груза" as UC12
   usecase "UC-13: Зарезервировать\nприпасы" as UC13
@@ -42,7 +50,7 @@ rectangle "Груз и манифест" {
   usecase "UC-15: Выполнить сверку\nманифеста при приёмке" as UC15
 }
 
-rectangle "Полевые операции" {
+rectangle "Полевые операции" as R5 {
   usecase "UC-16: Подтвердить ключевые\nэтапы рейса" as UC16
   usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
   usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
@@ -50,14 +58,14 @@ rectangle "Полевые операции" {
   usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
 }
 
-rectangle "Финансы и интеграции" {
+rectangle "Финансы и интеграции" as R6 {
   usecase "UC-21: Сформировать\nфинансовый отчёт" as UC21
   usecase "UC-22: Экспортировать\nотчёт на голотейп" as UC22
   usecase "UC-23: Получить данные\nоб угрозах" as UC23
   usecase "UC-24: Получить данные\nо КПП и пошлинах" as UC24
 }
 
-rectangle "Управление пользователями" {
+rectangle "Управление пользователями" as R7 {
   usecase "UC-25: Аутентификация" as UC25
   usecase "UC-26: Создать учётную\nзапись пользователя" as UC26
   usecase "UC-27: Изменить роль\nпользователя" as UC27
@@ -67,13 +75,36 @@ rectangle "Управление пользователями" {
   usecase "UC-31: Назначить/изменить\nставку сотрудника" as UC31
 }
 
-rectangle "Управление организациями" {
+rectangle "Управление организациями" as R8 {
   usecase "UC-32: Создать\nорганизацию" as UC32
   usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33
   usecase "UC-34: Управлять\nподписками" as UC34
 }
 
-' --- Диспетчер ---
+' --- Вертикальное выстраивание блоков в две колонки ---
+R1 -[hidden]down- R3
+R3 -[hidden]down- R5
+R5 -[hidden]down- R7
+
+R2 -[hidden]down- R4
+R4 -[hidden]down- R6
+R6 -[hidden]down- R8
+
+R1 -[hidden]right- R2
+R3 -[hidden]right- R4
+R5 -[hidden]right- R6
+R7 -[hidden]right- R8
+
+' --- Выстраивание акторов ---
+Dispatcher -[hidden]down- Storekeeper
+Storekeeper -[hidden]down- SuperUser
+
+CaravanMaster -[hidden]down- SecurityCaptain
+SecurityCaptain -[hidden]down- Medic
+
+WI -[hidden]down- NCR
+
+' --- Связи акторов с UC ---
 Dispatcher --> UC1
 Dispatcher --> UC2
 Dispatcher --> UC3
@@ -92,7 +123,6 @@ Dispatcher --> UC28
 Dispatcher --> UC30
 Dispatcher --> UC31
 
-' --- Караван-мастер ---
 CaravanMaster --> UC2
 CaravanMaster --> UC14
 CaravanMaster --> UC15
@@ -103,34 +133,28 @@ CaravanMaster --> UC19
 CaravanMaster --> UC20
 CaravanMaster --> UC25
 
-' --- Кладовщик ---
 Storekeeper --> UC11
 Storekeeper --> UC13
 Storekeeper --> UC15
 Storekeeper --> UC25
 
-' --- Капитан охраны ---
 SecurityCaptain --> UC19
 SecurityCaptain --> UC25
 
-' --- Полевой медик ---
 Medic --> UC19
 Medic --> UC25
 
-' --- Суперпользователь ---
 SuperUser --> UC25
 SuperUser --> UC30
 SuperUser --> UC32
 SuperUser --> UC33
 SuperUser --> UC34
 
-' --- Внешние системы ---
 WI --> UC7
 WI --> UC23
 NCR --> UC18
 NCR --> UC24
 
-' --- Зависимости ---
 UC6 ..> UC5 : <<include>>
 UC7 ..> UC5 : <<include>>
 UC8 ..> UC7 : <<include>>

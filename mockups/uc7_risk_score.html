@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>RISK ASSESSMENT // MOJAVE WASTELAND</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f0a;
+    --bg-alt: #0d140d;
+    --bg-deep: #000;
+    --fg: #33ff66;
+    --fg-dim: #1e7a3a;
+    --fg-faint: #164a24;
+    --warn: #ffb84d;
+    --err: #ff4a4a;
+    --risk-low: #33ff66;
+    --risk-mid: #e8e23a;
+    --risk-high: #ff8a3a;
+    --risk-crit: #ff4a4a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Share Tech Mono', 'VT323', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    text-shadow: 0 0 1px var(--fg), 0 0 6px rgba(51,255,102,0.25);
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.18) 3px,
+      rgba(0,0,0,0.18) 3px
+    );
+    z-index: 1000;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+    z-index: 999;
+  }
+
+  .page {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 16px 20px 40px;
+  }
+
+  .page-head {
+    border: 1px solid var(--fg);
+    background: var(--bg-alt);
+    padding: 8px 14px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+  }
+  .page-head .t { letter-spacing: 2px; font-size: 14px; }
+  .page-head .s { color: var(--fg-dim); letter-spacing: 1px; }
+
+  .states-label {
+    color: var(--fg-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin: 14px 0 6px 4px;
+  }
+  .states-label::before { content: "// "; color: var(--fg); }
+
+  /* ============ WIDGET ============ */
+  .widget {
+    border: 1px solid var(--fg);
+    background: var(--bg-alt);
+    padding: 0;
+    margin-bottom: 22px;
+  }
+
+  .w-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--fg);
+    background: rgba(51,255,102,0.04);
+  }
+  .w-head .title {
+    font-size: 15px;
+    letter-spacing: 2px;
+  }
+  .w-head .title::before { content: "◤ "; }
+  .w-head .title::after  { content: " ◢"; }
+  .w-head .meta {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+    text-align: right;
+    line-height: 1.3;
+  }
+
+  .w-body {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 0;
+  }
+  .w-left {
+    padding: 12px 14px;
+    border-right: 1px dashed var(--fg-faint);
+  }
+  .w-right {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ------- Intel timestamp ------- */
+  .intel-stamp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    padding: 5px 8px;
+    border: 1px solid var(--fg-faint);
+    background: var(--bg-deep);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .intel-stamp .k { color: var(--fg-dim); }
+  .intel-stamp .v { color: var(--fg); }
+  .intel-stamp .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--fg);
+    box-shadow: 0 0 6px var(--fg);
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .intel-stamp.stale .dot { background: var(--warn); box-shadow: 0 0 6px var(--warn); }
+  .intel-stamp.stale .v { color: var(--warn); }
+  .intel-stamp.offline .dot { background: var(--err); box-shadow: 0 0 6px var(--err); }
+  .intel-stamp.offline .v { color: var(--err); }
+
+  /* ------- Segments ------- */
+  .seg-title {
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .seg-title::before { content: "> "; color: var(--fg); }
+
+  .segments {
+    border: 1px solid var(--fg-faint);
+    background: var(--bg-deep);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+  }
+
+  .route-line {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--fg-dim);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .route-line b { color: var(--fg); }
+
+  .segment {
+    display: grid;
+    grid-template-columns: 150px 70px 14px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 12px;
+    border-bottom: 1px dotted var(--fg-faint);
+  }
+  .segment:last-child { border-bottom: none; }
+  .segment .leg {
+    letter-spacing: 0.5px;
+  }
+  .segment .leg .arrow { color: var(--fg-faint); }
+
+  .risk-pill {
+    display: inline-block;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 1px 0;
+    border: 1px solid;
+    background: #000;
+  }
+  .risk-pill.low  { color: var(--risk-low);  border-color: var(--risk-low); }
+  .risk-pill.mid  { color: var(--risk-mid);  border-color: var(--risk-mid); }
+  .risk-pill.high { color: var(--risk-high); border-color: var(--risk-high); }
+  .risk-pill.crit {
+    color: #000; background: var(--risk-crit); border-color: var(--risk-crit);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+  .seg-bar {
+    height: 10px;
+    border: 1px solid var(--fg-faint);
+    background: #000;
+    position: relative;
+  }
+  .seg-bar .fill { height: 100%; }
+  .seg-bar.low  .fill { width: 25%;  background: var(--risk-low); }
+  .seg-bar.mid  .fill { width: 50%;  background: var(--risk-mid); }
+  .seg-bar.high .fill { width: 75%;  background: var(--risk-high); }
+  .seg-bar.crit .fill { width: 100%; background: var(--risk-crit); }
+
+  .threats {
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 0.5px;
+  }
+  .threats .th {
+    display: inline-block;
+    padding: 0 5px;
+    margin: 0 2px 2px 0;
+    border: 1px dashed var(--fg-faint);
+    color: var(--fg);
+    font-size: 10px;
+  }
+  .threats .th.warn { color: var(--warn); border-color: var(--warn); }
+  .threats .th.crit { color: var(--risk-crit); border-color: var(--risk-crit); }
+
+  /* ------- Cargo coefficient ------- */
+  .cargo-block {
+    border: 1px solid var(--fg-faint);
+    background: var(--bg-deep);
+    padding: 8px 10px;
+  }
+  .cargo-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .cargo-head .k { color: var(--fg-dim); }
+  .cargo-head .v {
+    color: var(--fg);
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  .cargo-head .v .x { color: var(--fg-dim); font-size: 11px; }
+
+  .slider {
+    margin-top: 8px;
+    position: relative;
+    height: 18px;
+  }
+  .slider .track {
+    position: absolute;
+    top: 8px; left: 0; right: 0;
+    height: 2px;
+    background: var(--fg-faint);
+  }
+  .slider .fill {
+    position: absolute;
+    top: 8px; left: 0;
+    height: 2px;
+    background: var(--fg);
+    box-shadow: 0 0 4px var(--fg);
+  }
+  .slider .thumb {
+    position: absolute;
+    top: 3px;
+    width: 12px; height: 12px;
+    background: var(--bg-deep);
+    border: 2px solid var(--fg);
+    box-shadow: 0 0 6px var(--fg);
+    transform: translateX(-50%);
+  }
+  .slider .ticks {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: var(--fg-faint);
+    letter-spacing: 1px;
+  }
+  .slider .ticks span { padding-top: 15px; }
+  .cargo-note {
+    font-size: 10px;
+    color: var(--fg-dim);
+    margin-top: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ------- Score panel (right) ------- */
+  .score {
+    border: 1px solid var(--fg);
+    background: var(--bg-deep);
+    padding: 12px 10px 10px;
+    text-align: center;
+  }
+  .score .lbl {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 2px;
+  }
+  .score .val {
+    font-family: 'VT323', 'Share Tech Mono', monospace;
+    font-size: 72px;
+    line-height: 1;
+    margin: 2px 0;
+    letter-spacing: 2px;
+  }
+  .score .val .slash { font-size: 22px; color: var(--fg-dim); vertical-align: super; }
+  .score .tag {
+    display: inline-block;
+    padding: 2px 14px;
+    border: 1px solid;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-top: 2px;
+  }
+
+  .score.low  .val, .score.low  .tag { color: var(--risk-low);  border-color: var(--risk-low);  text-shadow: 0 0 2px var(--risk-low),  0 0 10px rgba(51,255,102,0.45); }
+  .score.mid  .val, .score.mid  .tag { color: var(--risk-mid);  border-color: var(--risk-mid);  text-shadow: 0 0 2px var(--risk-mid),  0 0 10px rgba(232,226,58,0.45); }
+  .score.high .val, .score.high .tag { color: var(--risk-high); border-color: var(--risk-high); text-shadow: 0 0 2px var(--risk-high), 0 0 10px rgba(255,138,58,0.45); }
+  .score.crit .val, .score.crit .tag { color: var(--risk-crit); border-color: var(--risk-crit); text-shadow: 0 0 2px var(--risk-crit), 0 0 12px rgba(255,74,74,0.55); }
+  .score.na   .val { color: var(--err); font-size: 60px; text-shadow: 0 0 2px var(--err), 0 0 10px rgba(255,74,74,0.45); }
+  .score.na   .tag { color: var(--err); border-color: var(--err); }
+
+  .score-scale {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 10px;
+  }
+  .score-scale .cell {
+    height: 10px;
+    border: 1px solid var(--fg-faint);
+    font-size: 8px;
+    text-align: center;
+    line-height: 10px;
+    letter-spacing: 1px;
+    color: var(--fg-faint);
+  }
+  .score-scale .cell.on-low  { background: var(--risk-low);  color: #000; border-color: var(--risk-low); }
+  .score-scale .cell.on-mid  { background: var(--risk-mid);  color: #000; border-color: var(--risk-mid); }
+  .score-scale .cell.on-high { background: var(--risk-high); color: #000; border-color: var(--risk-high); }
+  .score-scale .cell.on-crit { background: var(--risk-crit); color: #000; border-color: var(--risk-crit); }
+
+  .score-legend {
+    font-size: 10px;
+    color: var(--fg-faint);
+    margin-top: 4px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ------- Recommendation ------- */
+  .rec {
+    border: 1px solid var(--fg);
+    background: var(--bg-deep);
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .rec .rec-t {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 2px;
+    border-bottom: 1px dashed var(--fg-faint);
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+  }
+  .rec .rec-t::before { content: "▸ "; color: var(--fg); }
+  .rec ul { list-style: none; }
+  .rec li {
+    padding: 2px 0;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .rec li .k { color: var(--fg-dim); }
+  .rec li .v { color: var(--fg); }
+  .rec li.crit .v { color: var(--risk-crit); }
+  .rec.disabled { opacity: 0.45; }
+  .rec.disabled li .v { color: var(--fg-dim); }
+
+  /* ------- Banners ------- */
+  .banner {
+    padding: 8px 12px;
+    margin: 10px 14px 0;
+    border: 1px dashed;
+    font-size: 12px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .banner.warn {
+    border-color: var(--warn);
+    color: var(--warn);
+    background: rgba(255,184,77,0.05);
+    text-shadow: 0 0 1px var(--warn), 0 0 6px rgba(255,184,77,0.3);
+    animation: warnblink 2s ease-in-out infinite;
+  }
+  .banner.err {
+    border-color: var(--err);
+    color: var(--err);
+    background: rgba(255,74,74,0.06);
+    text-shadow: 0 0 1px var(--err), 0 0 8px rgba(255,74,74,0.4);
+    animation: warnblink 1.4s ease-in-out infinite;
+  }
+  @keyframes warnblink { 0%,100% { opacity: 1; } 50% { opacity: 0.65; } }
+
+  .banner .left { display: flex; align-items: center; gap: 8px; }
+  .banner .left .sym { font-size: 16px; }
+  .banner .left .sub {
+    display: block;
+    font-size: 10px;
+    color: inherit;
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .btn-retry {
+    background: #000;
+    border: 1px solid var(--err);
+    color: var(--err);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 5px 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-shadow: 0 0 1px var(--err), 0 0 6px rgba(255,74,74,0.35);
+  }
+  .btn-retry:hover { background: rgba(255,74,74,0.12); }
+
+  /* Muted body when widget is in an unusable state */
+  .widget.offline .w-body { opacity: 0.5; filter: saturate(0.6); }
+  .widget.offline .w-body .threats .th.crit { animation: none; }
+  .widget.offline .score-scale .cell { background: transparent !important; color: var(--fg-faint) !important; border-color: var(--fg-faint) !important; }
+
+  .ascii-sep {
+    color: var(--fg-faint);
+    font-size: 11px;
+    white-space: pre;
+    line-height: 1;
+    margin: 4px 0 8px;
+  }
+
+  .w-foot {
+    border-top: 1px solid var(--fg);
+    padding: 5px 14px;
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    background: rgba(51,255,102,0.03);
+  }
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-head">
+    <div class="t">CARAVAN // DISPATCH · RISK WIDGET PREVIEW</div>
+    <div class="s">ORG :: CRIMSON CARAVAN CO. &nbsp;·&nbsp; CARD #CRV-2281-1047 &nbsp;·&nbsp; 3 STATES</div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- STATE 1 — OK -->
+  <!-- ============================================ -->
+  <div class="states-label">STATE 01 — УСПЕШНЫЙ РАСЧЁТ · ИНТЕЛ АКТУАЛЕН</div>
+  <div class="widget">
+    <div class="w-head">
+      <div class="title">RISK ASSESSMENT // MOJAVE WASTELAND</div>
+      <div class="meta">
+        NODE :: MCCARRAN-04<br>
+        ROUTE ID :: R-1047.A · I-15 SOUTH
+      </div>
+    </div>
+
+    <div class="w-body">
+      <!-- LEFT -->
+      <div class="w-left">
+        <div class="intel-stamp">
+          <span><span class="dot"></span><span class="k">WASTELAND INTEL :: LIVE FEED</span></span>
+          <span class="v">АКТУАЛЬНО · 2281-10-23 &nbsp;13:58:41 &nbsp;(−00:09)</span>
+        </div>
+
+        <div class="seg-title">СЕГМЕНТЫ МАРШРУТА</div>
+        <div class="segments">
+          <div class="route-line"><b>Goodsprings</b> → <b>Primm</b> → <b>Nipton</b> → <b>Novac</b> → <b>New Vegas</b></div>
+
+          <div class="segment">
+            <div class="leg">Goodsprings <span class="arrow">→</span> Primm</div>
+            <div class="risk-pill low">LOW</div>
+            <div></div>
+            <div>
+              <div class="seg-bar low"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th">геккон пустынный</span>
+                <span class="th">радиация: фон</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Primm <span class="arrow">→</span> Nipton</div>
+            <div class="risk-pill mid">MID</div>
+            <div></div>
+            <div>
+              <div class="seg-bar mid"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th warn">рейдеры (Jackals)</span>
+                <span class="th">разбитый асфальт</span>
+                <span class="th">песчаная буря</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Nipton <span class="arrow">→</span> Novac</div>
+            <div class="risk-pill high">HIGH</div>
+            <div></div>
+            <div>
+              <div class="seg-bar high"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th crit">Caesar's Legion · патрули</span>
+                <span class="th warn">супермутанты</span>
+                <span class="th">радиация: 2 R/h</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Novac <span class="arrow">→</span> New Vegas</div>
+            <div class="risk-pill mid">MID</div>
+            <div></div>
+            <div>
+              <div class="seg-bar mid"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th warn">NCR · блокпост (досмотр)</span>
+                <span class="th">когти смерти: маловероятно</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cargo-block">
+          <div class="cargo-head">
+            <span class="k">КОЭФФИЦИЕНТ ЦЕННОСТИ ГРУЗА</span>
+            <span class="v">1.45<span class="x"> ×</span></span>
+          </div>
+          <div class="slider">
+            <div class="track"></div>
+            <div class="fill" style="width: 45%;"></div>
+            <div class="thumb" style="left: 45%;"></div>
+            <div class="ticks">
+              <span>0.5×</span><span>1.0×</span><span>1.5×</span><span>2.0×</span><span>3.0×</span>
+            </div>
+          </div>
+          <div class="cargo-note">стимпаки + запчасти Pip-Boy · 4 250 крышек · риск повышен на +18%</div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="w-right">
+        <div class="score high">
+          <div class="lbl">RISK_SCORE</div>
+          <div class="val">67<span class="slash">/100</span></div>
+          <div class="tag">HIGH</div>
+          <div class="score-scale">
+            <div class="cell">LOW</div>
+            <div class="cell">MID</div>
+            <div class="cell on-high">HIGH</div>
+            <div class="cell">CRIT</div>
+          </div>
+          <div class="score-legend"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+        </div>
+
+        <div class="rec">
+          <div class="rec-t">РЕКОМЕНДУЕМЫЙ СОСТАВ</div>
+          <ul>
+            <li><span class="k">Охрана:</span><span class="v">4 чел.</span></li>
+            <li><span class="k">├ стрелки:</span><span class="v">3</span></li>
+            <li><span class="k">└ разведчик:</span><span class="v">1</span></li>
+            <li><span class="k">Вода:</span><span class="v">36 л</span></li>
+            <li><span class="k">Патроны (.308):</span><span class="v">240</span></li>
+            <li><span class="k">Стимпаки:</span><span class="v">8</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-foot">
+      <span>◈ RECALC :: 14:07:12 · 142 мс</span>
+      <span>MODEL v2.3.1 · DATASET 2281.W43</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- STATE 2 — STALE -->
+  <!-- ============================================ -->
+  <div class="states-label">STATE 02 — ДАННЫЕ УСТАРЕЛИ (&gt; 24 Ч)</div>
+  <div class="widget">
+    <div class="w-head">
+      <div class="title">RISK ASSESSMENT // MOJAVE WASTELAND</div>
+      <div class="meta">
+        NODE :: MCCARRAN-04<br>
+        ROUTE ID :: R-1047.A · I-15 SOUTH
+      </div>
+    </div>
+
+    <div class="banner warn">
+      <div class="left">
+        <span class="sym">⚠</span>
+        <span>
+          ДАННЫЕ УСТАРЕЛИ
+          <span class="sub">последнее обновление Wasteland Intel: 2281-10-22 &nbsp;09:14 &nbsp;(−28 ч 53 мин)</span>
+        </span>
+      </div>
+      <span style="font-size:10px;">РАСЧЁТ ОСНОВАН НА КЭШЕ · НЕ ОПТИМАЛЬНО</span>
+    </div>
+
+    <div class="w-body">
+      <div class="w-left">
+        <div class="intel-stamp stale">
+          <span><span class="dot"></span><span class="k">WASTELAND INTEL :: CACHED</span></span>
+          <span class="v">УСТАРЕЛО · 2281-10-22 &nbsp;09:14:02 &nbsp;(−28 ч 53 м)</span>
+        </div>
+
+        <div class="seg-title">СЕГМЕНТЫ МАРШРУТА</div>
+        <div class="segments">
+          <div class="route-line"><b>Goodsprings</b> → <b>Primm</b> → <b>Nipton</b> → <b>Novac</b> → <b>New Vegas</b></div>
+
+          <div class="segment">
+            <div class="leg">Goodsprings <span class="arrow">→</span> Primm</div>
+            <div class="risk-pill low">LOW</div>
+            <div></div>
+            <div>
+              <div class="seg-bar low"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th">геккон пустынный</span>
+                <span class="th">радиация: фон</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Primm <span class="arrow">→</span> Nipton</div>
+            <div class="risk-pill mid">MID</div>
+            <div></div>
+            <div>
+              <div class="seg-bar mid"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th warn">рейдеры (Jackals)</span>
+                <span class="th">песчаная буря</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Nipton <span class="arrow">→</span> Novac</div>
+            <div class="risk-pill high">HIGH</div>
+            <div></div>
+            <div>
+              <div class="seg-bar high"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th warn">Caesar's Legion · устарело</span>
+                <span class="th warn">супермутанты</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Novac <span class="arrow">→</span> New Vegas</div>
+            <div class="risk-pill mid">MID</div>
+            <div></div>
+            <div>
+              <div class="seg-bar mid"><div class="fill"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th">NCR · блокпост</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cargo-block">
+          <div class="cargo-head">
+            <span class="k">КОЭФФИЦИЕНТ ЦЕННОСТИ ГРУЗА</span>
+            <span class="v">1.45<span class="x"> ×</span></span>
+          </div>
+          <div class="slider">
+            <div class="track"></div>
+            <div class="fill" style="width: 45%;"></div>
+            <div class="thumb" style="left: 45%;"></div>
+            <div class="ticks">
+              <span>0.5×</span><span>1.0×</span><span>1.5×</span><span>2.0×</span><span>3.0×</span>
+            </div>
+          </div>
+          <div class="cargo-note">стимпаки + запчасти Pip-Boy · 4 250 крышек</div>
+        </div>
+      </div>
+
+      <div class="w-right">
+        <div class="score mid">
+          <div class="lbl">RISK_SCORE (CACHED)</div>
+          <div class="val">54<span class="slash">/100</span></div>
+          <div class="tag">MEDIUM</div>
+          <div class="score-scale">
+            <div class="cell">LOW</div>
+            <div class="cell on-mid">MID</div>
+            <div class="cell">HIGH</div>
+            <div class="cell">CRIT</div>
+          </div>
+          <div class="score-legend"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+        </div>
+
+        <div class="rec">
+          <div class="rec-t">РЕКОМЕНДУЕМЫЙ СОСТАВ (ОЦЕНОЧНО)</div>
+          <ul>
+            <li><span class="k">Охрана:</span><span class="v">3 чел.</span></li>
+            <li><span class="k">├ стрелки:</span><span class="v">2</span></li>
+            <li><span class="k">└ разведчик:</span><span class="v">1</span></li>
+            <li><span class="k">Вода:</span><span class="v">30 л</span></li>
+            <li><span class="k">Патроны (.308):</span><span class="v">180</span></li>
+            <li><span class="k">Стимпаки:</span><span class="v">6</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-foot">
+      <span style="color: var(--warn);">◈ ИСПОЛЬЗУЕТСЯ КЭШ · ЗАПУСТИТЕ ПЕРЕРАСЧЁТ ПОСЛЕ СИНХРОНИЗАЦИИ</span>
+      <span>MODEL v2.3.1 · DATASET 2281.W42</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- STATE 3 — OFFLINE -->
+  <!-- ============================================ -->
+  <div class="states-label">STATE 03 — WASTELAND INTEL OFFLINE</div>
+  <div class="widget offline">
+    <div class="w-head">
+      <div class="title">RISK ASSESSMENT // MOJAVE WASTELAND</div>
+      <div class="meta">
+        NODE :: MCCARRAN-04<br>
+        ROUTE ID :: R-1047.A · I-15 SOUTH
+      </div>
+    </div>
+
+    <div class="banner err">
+      <div class="left">
+        <span class="sym">✕</span>
+        <span>
+          WASTELAND INTEL OFFLINE
+          <span class="sub">потеряна связь с ретранслятором · последняя попытка 14:06:32 · retry in 00:04:12</span>
+        </span>
+      </div>
+      <button class="btn-retry" type="button">[ ↻ ПОВТОРИТЬ РАСЧЁТ ]</button>
+    </div>
+
+    <div class="w-body">
+      <div class="w-left">
+        <div class="intel-stamp offline">
+          <span><span class="dot"></span><span class="k">WASTELAND INTEL :: NO SIGNAL</span></span>
+          <span class="v">FEED LOST · 2281-10-23 &nbsp;11:42:08 &nbsp;(−02 ч 25 м)</span>
+        </div>
+
+        <div class="seg-title">СЕГМЕНТЫ МАРШРУТА</div>
+        <div class="segments">
+          <div class="route-line"><b>Goodsprings</b> → <b>Primm</b> → <b>Nipton</b> → <b>Novac</b> → <b>New Vegas</b></div>
+
+          <div class="segment">
+            <div class="leg">Goodsprings <span class="arrow">→</span> Primm</div>
+            <div class="risk-pill" style="color:var(--fg-faint); border-color:var(--fg-faint);">N/A</div>
+            <div></div>
+            <div>
+              <div class="seg-bar"><div class="fill" style="width:0"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th" style="color:var(--fg-faint); border-color:var(--fg-faint);">нет данных</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Primm <span class="arrow">→</span> Nipton</div>
+            <div class="risk-pill" style="color:var(--fg-faint); border-color:var(--fg-faint);">N/A</div>
+            <div></div>
+            <div>
+              <div class="seg-bar"><div class="fill" style="width:0"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th" style="color:var(--fg-faint); border-color:var(--fg-faint);">нет данных</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Nipton <span class="arrow">→</span> Novac</div>
+            <div class="risk-pill" style="color:var(--fg-faint); border-color:var(--fg-faint);">N/A</div>
+            <div></div>
+            <div>
+              <div class="seg-bar"><div class="fill" style="width:0"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th" style="color:var(--fg-faint); border-color:var(--fg-faint);">нет данных</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="segment">
+            <div class="leg">Novac <span class="arrow">→</span> New Vegas</div>
+            <div class="risk-pill" style="color:var(--fg-faint); border-color:var(--fg-faint);">N/A</div>
+            <div></div>
+            <div>
+              <div class="seg-bar"><div class="fill" style="width:0"></div></div>
+              <div class="threats" style="margin-top:3px;">
+                <span class="th" style="color:var(--fg-faint); border-color:var(--fg-faint);">нет данных</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cargo-block">
+          <div class="cargo-head">
+            <span class="k">КОЭФФИЦИЕНТ ЦЕННОСТИ ГРУЗА</span>
+            <span class="v" style="color: var(--fg-dim);">1.45<span class="x"> ×</span></span>
+          </div>
+          <div class="slider">
+            <div class="track"></div>
+            <div class="fill" style="width: 45%; background: var(--fg-dim); box-shadow:none;"></div>
+            <div class="thumb" style="left: 45%; border-color: var(--fg-dim); box-shadow:none;"></div>
+            <div class="ticks">
+              <span>0.5×</span><span>1.0×</span><span>1.5×</span><span>2.0×</span><span>3.0×</span>
+            </div>
+          </div>
+          <div class="cargo-note">ввод сохранён · будет применён при следующем расчёте</div>
+        </div>
+      </div>
+
+      <div class="w-right">
+        <div class="score na">
+          <div class="lbl" style="color: var(--err);">RISK_SCORE</div>
+          <div class="val">Н/Д</div>
+          <div class="tag">UNAVAILABLE</div>
+          <div class="score-scale">
+            <div class="cell">LOW</div>
+            <div class="cell">MID</div>
+            <div class="cell">HIGH</div>
+            <div class="cell">CRIT</div>
+          </div>
+          <div class="score-legend"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+        </div>
+
+        <div class="rec disabled">
+          <div class="rec-t">СОСТАВ НЕ РАССЧИТАН</div>
+          <ul>
+            <li><span class="k">Охрана:</span><span class="v">—</span></li>
+            <li><span class="k">Вода:</span><span class="v">—</span></li>
+            <li><span class="k">Патроны:</span><span class="v">—</span></li>
+            <li><span class="k">Стимпаки:</span><span class="v">—</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-foot">
+      <span style="color: var(--err);">◈ СВЯЗЬ ПОТЕРЯНА · ДИСПЕТЧЕР НЕ МОЖЕТ УТВЕРДИТЬ ЗАЯВКУ БЕЗ RISK_SCORE</span>
+      <span>MODEL v2.3.1 · DATASET —</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

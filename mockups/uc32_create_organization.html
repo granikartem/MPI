@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ROBCO PLATFORM // SUPERUSER CONSOLE</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #141414;
+    --bg-alt: #1a1a1a;
+    --bg-deep: #0a0a0a;
+    --fg: #ffb000;
+    --fg-bright: #ffd060;
+    --fg-dim: #8a5e00;
+    --fg-faint: #4a3200;
+    --warn: #ff8a3a;
+    --err: #ff4a4a;
+    --ok: #5ed66e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Share Tech Mono', 'VT323', monospace;
+    font-size: 13px;
+    line-height: 1.35;
+    overflow: hidden;
+    text-shadow: 0 0 1px var(--fg), 0 0 6px rgba(255,176,0,0.25);
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.18) 3px,
+      rgba(0,0,0,0.18) 3px
+    );
+    z-index: 1000;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+    z-index: 999;
+  }
+
+  .terminal {
+    width: 1280px;
+    height: 720px;
+    display: grid;
+    grid-template-rows: 54px 1fr 36px;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    border: 1px solid var(--fg);
+    padding: 6px 12px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: var(--bg-alt);
+  }
+  .hdr-left .sys-title {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .hdr-left .sys-sub {
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .hdr-center {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .hdr-center .mode {
+    border: 1px solid var(--fg);
+    padding: 3px 10px;
+    background: rgba(255,176,0,0.1);
+    color: var(--fg-bright);
+    animation: glow 2s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%,100% { box-shadow: 0 0 6px rgba(255,176,0,0.3); }
+    50%     { box-shadow: 0 0 14px rgba(255,176,0,0.6); }
+  }
+  .hdr-right {
+    text-align: right;
+    font-size: 11px;
+  }
+  .hdr-right .org { color: var(--fg-dim); }
+  .hdr-right .user { color: var(--fg-bright); }
+  .hdr-right .blink { animation: blink 1.2s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0.15; } }
+
+  /* ---------- MAIN ---------- */
+  .main {
+    display: grid;
+    grid-template-columns: 180px 1fr 280px;
+    gap: 6px;
+    min-height: 0;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    border: 1px solid var(--fg);
+    padding: 8px 0;
+    background: var(--bg-alt);
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-title {
+    font-size: 11px;
+    color: var(--fg-dim);
+    padding: 0 10px 6px;
+    border-bottom: 1px dashed var(--fg-faint);
+    letter-spacing: 1px;
+  }
+  nav ul { list-style: none; margin-top: 6px; }
+  nav li {
+    padding: 6px 10px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    color: var(--fg-dim);
+  }
+  nav li::before { content: "[ ] "; color: var(--fg-faint); }
+  nav li.active {
+    color: var(--fg-bright);
+    border-left-color: var(--fg);
+    background: rgba(255,176,0,0.08);
+  }
+  nav li.active::before { content: "[>] "; color: var(--fg); }
+  nav li:hover { color: var(--fg); }
+
+  .nav-foot {
+    margin-top: auto;
+    padding: 8px 10px 0;
+    border-top: 1px dashed var(--fg-faint);
+    font-size: 10px;
+    color: var(--fg-dim);
+    line-height: 1.5;
+  }
+  .nav-foot .crit { color: var(--err); }
+
+  /* ---------- CENTER PANEL ---------- */
+  .center {
+    border: 1px solid var(--fg);
+    padding: 10px 14px;
+    background: var(--bg-alt);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .panel-title {
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--fg);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .panel-title .tag { font-size: 10px; color: var(--fg-dim); letter-spacing: 1px; }
+
+  /* ---------- Info banner ---------- */
+  .info-banner {
+    border: 1px dashed var(--fg);
+    padding: 6px 10px;
+    font-size: 11px;
+    line-height: 1.45;
+    background: rgba(255,176,0,0.04);
+    letter-spacing: 0.5px;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 8px;
+    align-items: start;
+  }
+  .info-banner .i {
+    color: var(--fg-bright);
+    font-size: 14px;
+    line-height: 1;
+    padding-top: 1px;
+  }
+  .info-banner b { color: var(--fg-bright); }
+
+  /* ---------- Stepper ---------- */
+  .stepper {
+    display: grid;
+    grid-template-columns: 1fr 24px 1fr;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .step {
+    border: 1px solid var(--fg-dim);
+    padding: 4px 10px;
+    color: var(--fg-dim);
+    background: var(--bg-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step .num {
+    display: inline-block;
+    width: 18px; height: 18px;
+    border: 1px solid var(--fg-dim);
+    text-align: center;
+    line-height: 16px;
+    font-size: 11px;
+  }
+  .step.active {
+    border-color: var(--fg);
+    color: var(--fg-bright);
+    background: rgba(255,176,0,0.08);
+  }
+  .step.active .num { border-color: var(--fg); color: var(--fg-bright); }
+  .step.done { color: var(--fg); }
+  .step.done .num { border-color: var(--fg); }
+  .step.done .num::before { content: "✓"; }
+  .step.done .num span { display: none; }
+  .step-arrow {
+    text-align: center;
+    color: var(--fg-faint);
+    font-size: 16px;
+  }
+
+  /* ---------- Form ---------- */
+  .form-wrap {
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .step-block {
+    border: 1px solid var(--fg-dim);
+    padding: 8px 12px;
+    background: var(--bg-deep);
+  }
+  .step-block.inactive {
+    opacity: 0.4;
+    pointer-events: none;
+    position: relative;
+  }
+  .step-block.inactive::after {
+    content: "[ЗАБЛОКИРОВАНО · ЗАВЕРШИТЕ ШАГ 1]";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--fg-dim);
+    border: 1px dashed var(--fg-dim);
+    padding: 2px 8px;
+    background: var(--bg-deep);
+  }
+  .step-head {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--fg-bright);
+    margin-bottom: 6px;
+    padding-bottom: 2px;
+    border-bottom: 1px dashed var(--fg-faint);
+  }
+  .step-head::before { content: "◣ "; color: var(--fg); }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 16px;
+  }
+  .field { display: flex; flex-direction: column; gap: 2px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .field label::before { content: "> "; color: var(--fg); }
+  .field .hint {
+    font-size: 10px;
+    color: var(--fg-faint);
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+  }
+  .field .hint.err { color: var(--err); text-shadow: 0 0 1px var(--err), 0 0 4px rgba(255,74,74,0.3); }
+
+  .input, .textarea, .select {
+    background: #000;
+    border: 1px solid var(--fg-dim);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 4px 8px;
+    outline: none;
+    letter-spacing: 0.5px;
+  }
+  .input::placeholder { color: var(--fg-faint); }
+  .input:focus { border-color: var(--fg); }
+  .input.error {
+    border-color: var(--err);
+    color: var(--err);
+    text-shadow: 0 0 1px var(--err), 0 0 4px rgba(255,74,74,0.3);
+    background: rgba(255,74,74,0.05);
+  }
+  .textarea { resize: none; min-height: 36px; font-family: inherit; }
+
+  /* ---------- Plan cards ---------- */
+  .plans {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .plan {
+    border: 1px solid var(--fg-dim);
+    padding: 6px 8px;
+    background: #000;
+    cursor: pointer;
+    position: relative;
+  }
+  .plan .p-name {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--fg-bright);
+  }
+  .plan .p-price {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+  .plan ul { list-style: none; font-size: 10px; line-height: 1.4; }
+  .plan li::before { content: "· "; color: var(--fg); }
+  .plan li { color: var(--fg); }
+
+  .plan.selected {
+    border-color: var(--fg);
+    background: rgba(255,176,0,0.08);
+    box-shadow: 0 0 6px rgba(255,176,0,0.25);
+  }
+  .plan.selected::after {
+    content: "[SELECTED]";
+    position: absolute;
+    top: 4px; right: 6px;
+    font-size: 9px;
+    color: var(--fg-bright);
+    letter-spacing: 1px;
+  }
+
+  /* ---------- Error banner ---------- */
+  .err-banner {
+    border: 1px solid var(--err);
+    background: rgba(255,74,74,0.08);
+    color: var(--err);
+    padding: 5px 10px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 1px var(--err), 0 0 5px rgba(255,74,74,0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: errpulse 1.6s ease-in-out infinite;
+  }
+  @keyframes errpulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+  .err-banner .x { font-size: 13px; margin-right: 6px; }
+  .err-banner .act {
+    color: var(--fg-bright);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  /* ---------- Checkbox ---------- */
+  .chk {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--fg);
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    padding: 2px 0;
+  }
+  .chk .box {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 1px solid var(--fg);
+    text-align: center;
+    line-height: 12px;
+    font-size: 11px;
+    color: var(--fg);
+    background: #000;
+  }
+  .chk.checked .box::before { content: "✓"; }
+
+  /* ---------- SUMMARY ---------- */
+  .summary {
+    border: 1px solid var(--fg);
+    background: var(--bg-alt);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .sum-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--fg);
+  }
+  .sum-title::before { content: "◤ "; }
+  .sum-title::after  { content: " ◢"; }
+
+  .sum-sec {
+    border: 1px solid var(--fg-faint);
+    padding: 6px 8px;
+    background: var(--bg-deep);
+    font-size: 11px;
+  }
+  .sum-sec .sh {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 2px;
+    margin-bottom: 3px;
+  }
+  .sum-sec .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 0;
+    border-bottom: 1px dotted var(--fg-faint);
+  }
+  .sum-sec .row:last-child { border-bottom: none; }
+  .sum-sec .row .k { color: var(--fg-dim); letter-spacing: 0.5px; }
+  .sum-sec .row .v { color: var(--fg); }
+  .sum-sec .row .v.err { color: var(--err); }
+  .sum-sec .row .v.muted { color: var(--fg-faint); }
+
+  .sum-effect {
+    border: 1px dashed var(--fg);
+    padding: 6px 8px;
+    font-size: 10px;
+    line-height: 1.5;
+    background: rgba(255,176,0,0.04);
+  }
+  .sum-effect .eh {
+    font-size: 10px;
+    color: var(--fg-bright);
+    letter-spacing: 2px;
+    margin-bottom: 3px;
+  }
+  .sum-effect ul { list-style: none; }
+  .sum-effect li { padding: 1px 0; color: var(--fg); }
+  .sum-effect li::before { content: "+ "; color: var(--ok); }
+
+  .sum-foot {
+    margin-top: auto;
+    font-size: 10px;
+    color: var(--fg-faint);
+    letter-spacing: 1px;
+    text-align: center;
+    padding-top: 4px;
+    border-top: 1px dashed var(--fg-faint);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border: 1px solid var(--fg);
+    background: var(--bg-alt);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+  .foot-status { color: var(--fg-dim); letter-spacing: 1px; }
+  .foot-status .dot { color: var(--fg); animation: blink 1.2s steps(2) infinite; }
+  .foot-status .err-inline { color: var(--err); }
+  .foot-buttons { display: flex; gap: 8px; }
+  .btn {
+    background: #000;
+    border: 1px solid var(--fg-dim);
+    color: var(--fg-dim);
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  .btn:hover { color: var(--fg); border-color: var(--fg); }
+  .btn-primary {
+    background: rgba(255,176,0,0.1);
+    border: 1px solid var(--fg);
+    color: var(--fg-bright);
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: rgba(255,176,0,0.22); }
+  .btn-primary.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    border-color: var(--fg-dim);
+    color: var(--fg-dim);
+    background: #000;
+  }
+  .btn-create {
+    background: rgba(94,214,110,0.08);
+    border: 1px solid var(--ok);
+    color: var(--ok);
+    padding: 5px 16px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-shadow: 0 0 1px var(--ok), 0 0 6px rgba(94,214,110,0.3);
+  }
+  .btn-create:hover { background: rgba(94,214,110,0.18); }
+  .btn-create.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    color: var(--fg-dim);
+    border-color: var(--fg-dim);
+    background: #000;
+    text-shadow: none;
+  }
+
+  .ascii-sep {
+    color: var(--fg-faint);
+    font-size: 10px;
+    white-space: pre;
+    line-height: 1;
+    margin: 0;
+  }
+
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <!-- HEADER -->
+  <header>
+    <div class="hdr-left">
+      <div class="sys-title">╔ ROBCO PLATFORM // SUPERUSER CONSOLE ╗</div>
+      <div class="sys-sub">ROBCO INDUSTRIES (TM) TERMLINK · PLATFORM v4.21.07 · TENANT OPS</div>
+    </div>
+    <div class="hdr-center">
+      <span class="mode">◆ SUPERUSER MODE ◆</span>
+    </div>
+    <div class="hdr-right">
+      <div class="org">ROLE :: PLATFORM OPERATOR (SU)</div>
+      <div class="user">USER :: SU.VAULT-TEC.ADMIN &nbsp;|&nbsp; CLR-9 &nbsp;|&nbsp; <span class="blink">●</span> 2281-10-23 / 14:07</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-title">-- PLATFORM --</div>
+      <ul>
+        <li class="active">ORGANIZATIONS</li>
+        <li>SUBSCRIPTIONS</li>
+        <li>AUDIT LOG</li>
+        <li>SYSTEM HEALTH</li>
+      </ul>
+      <div class="nav-foot">
+        TENANTS: 14<br>
+        ACTIVE USERS: 217<br>
+        UPTIME: 47d 12h<br>
+        <span class="crit">⚠ 1 INCIDENT OPEN</span>
+      </div>
+    </nav>
+
+    <!-- CENTER -->
+    <section class="center">
+      <div class="panel-title">
+        <span>▸ CREATE ORGANIZATION</span>
+        <span class="tag">WIZARD · STEP 1 / 2</span>
+      </div>
+
+      <!-- Info banner -->
+      <div class="info-banner">
+        <div class="i">ⓘ</div>
+        <div>
+          Создание организации <b>изолирует её данные</b> от других организаций платформы (отдельный tenant-скоуп, ключи шифрования, журнал аудита).
+          Суперпользователь сохраняет <b>полный доступ</b> ко всем организациям и может принимать действия от их имени; все такие действия попадают в Audit Log.
+        </div>
+      </div>
+
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step active"><span class="num">1</span> ДАННЫЕ ОРГАНИЗАЦИИ</div>
+        <div class="step-arrow">━━▶</div>
+        <div class="step"><span class="num">2</span> ПЕРВЫЙ ДИСПЕТЧЕР</div>
+      </div>
+
+      <!-- Error banner -->
+      <div class="err-banner">
+        <div><span class="x">✕</span> Organization name «Crimson Caravan Company» already exists (tenant_id = tnt_0041, registered 2279-08-12)</div>
+        <span class="act">[ OPEN EXISTING ]</span>
+      </div>
+
+      <!-- Form -->
+      <div class="form-wrap">
+
+        <div class="step-block">
+          <div class="step-head">STEP 1 · ДАННЫЕ ОРГАНИЗАЦИИ</div>
+          <div class="form-grid">
+            <div class="field full">
+              <label>NAME · НАЗВАНИЕ ОРГАНИЗАЦИИ</label>
+              <input class="input error" type="text" value="Crimson Caravan Company" />
+              <div class="hint err">✕ ИМЯ УЖЕ ЗАНЯТО · должно быть уникальным в пределах платформы</div>
+            </div>
+
+            <div class="field full">
+              <label>SUBSCRIPTION TIER · УРОВЕНЬ ПОДПИСКИ</label>
+              <div class="plans">
+                <div class="plan">
+                  <div class="p-name">BASIC</div>
+                  <div class="p-price">200 caps / мес.</div>
+                  <ul>
+                    <li>до 3 диспетчеров</li>
+                    <li>до 50 рейсов / мес</li>
+                    <li>Wasteland Intel: базовый</li>
+                  </ul>
+                </div>
+                <div class="plan selected">
+                  <div class="p-name">STANDARD</div>
+                  <div class="p-price">600 caps / мес.</div>
+                  <ul>
+                    <li>до 10 диспетчеров</li>
+                    <li>до 300 рейсов / мес</li>
+                    <li>Intel: расширенный</li>
+                  </ul>
+                </div>
+                <div class="plan">
+                  <div class="p-name">PRO</div>
+                  <div class="p-price">1 500 caps / мес.</div>
+                  <ul>
+                    <li>без лимита</li>
+                    <li>SLA 99.5% · приоритет</li>
+                    <li>Intel: live-feed + API</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="field full">
+              <label>LEGAL ADDRESS · ЮРИДИЧЕСКИЙ АДРЕС</label>
+              <textarea class="textarea">Freeside, North Gate, Block 4, Unit 7 / NCR-registered / New Vegas</textarea>
+            </div>
+
+            <div class="field">
+              <label>PRIMARY CONTACT · ОСНОВНОЙ КОНТАКТ</label>
+              <input class="input" type="text" value="Alice Hawthorne" />
+            </div>
+            <div class="field">
+              <label>HOLOPHONE / EMAIL</label>
+              <input class="input" type="text" value="a.hawthorne@crimson.cvn" />
+              <div class="hint">формат: user@tenant.cvn · резервный канал — радио-позывной</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 — visually locked since step 1 has error -->
+        <div class="step-block inactive">
+          <div class="step-head">STEP 2 · ПЕРВЫЙ ДИСПЕТЧЕР</div>
+          <div class="form-grid">
+            <div class="field">
+              <label>FULL NAME · ФИО</label>
+              <input class="input" type="text" placeholder="Surname, First name" />
+            </div>
+            <div class="field">
+              <label>LOGIN · ЛОГИН</label>
+              <input class="input" type="text" placeholder="disp.name" />
+            </div>
+            <div class="field">
+              <label>INITIAL PASSWORD</label>
+              <input class="input" type="text" placeholder="auto-generated" />
+            </div>
+            <div class="field">
+              <label>EMAIL / HOLOPHONE</label>
+              <input class="input" type="text" placeholder="user@tenant.cvn" />
+            </div>
+            <div class="field full">
+              <div class="chk">
+                <span class="box"></span>
+                <span>SKIP · Пропустить (назначить диспетчера позже)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SUMMARY -->
+    <aside class="summary">
+      <div class="sum-title">SUMMARY</div>
+
+      <div class="sum-sec">
+        <div class="sh">-- ORGANIZATION --</div>
+        <div class="row"><span class="k">Name:</span><span class="v err">CONFLICT</span></div>
+        <div class="row"><span class="k">Tier:</span><span class="v">STANDARD</span></div>
+        <div class="row"><span class="k">Billing:</span><span class="v">600 c/мес</span></div>
+        <div class="row"><span class="k">Region:</span><span class="v">Mojave · NV</span></div>
+      </div>
+
+      <div class="sum-sec">
+        <div class="sh">-- FIRST DISPATCHER --</div>
+        <div class="row"><span class="k">Status:</span><span class="v muted">НЕ ЗАПОЛНЕНО</span></div>
+        <div class="row"><span class="k">Login:</span><span class="v muted">—</span></div>
+        <div class="row"><span class="k">Access:</span><span class="v muted">—</span></div>
+      </div>
+
+      <div class="sum-effect">
+        <div class="eh">-- БУДЕТ СОЗДАНО --</div>
+        <ul>
+          <li>TENANT: изолированный scope данных</li>
+          <li>ORG: запись в каталоге организаций</li>
+          <li>USER: учётная запись диспетчера</li>
+          <li>KEYS: комплект ключей шифрования</li>
+          <li>AUDIT: начальная запись журнала</li>
+        </ul>
+      </div>
+
+      <div class="sum-foot">[ PROVISIONING EST. ~ 4 сек ]</div>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-status">
+      <span class="dot">●</span> SU-CONSOLE &nbsp;·&nbsp;
+      <span class="err-inline">✕ VALIDATION FAILED · исправьте конфликт имени</span>
+      &nbsp;·&nbsp; F1 HELP · ESC EXIT
+    </div>
+    <div class="foot-buttons">
+      <button class="btn" type="button">[ BACK ]</button>
+      <button class="btn-primary disabled" type="button">[ NEXT ▶ ]</button>
+      <button class="btn-create disabled" type="button">[ ◆ CREATE ORGANIZATION ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

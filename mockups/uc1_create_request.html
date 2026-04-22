@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>CARAVAN // DISPATCH TERMINAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f0a;
+    --bg-alt: #0d140d;
+    --fg: #33ff66;
+    --fg-dim: #1e7a3a;
+    --fg-faint: #164a24;
+    --warn: #ffb84d;
+    --risk-low: #33ff66;
+    --risk-mid: #e8e23a;
+    --risk-high: #ff8a3a;
+    --risk-crit: #ff4a4a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1280px;
+    height: 720px;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Share Tech Mono', 'VT323', monospace;
+    font-size: 13px;
+    line-height: 1.35;
+    overflow: hidden;
+    text-shadow: 0 0 1px var(--fg), 0 0 6px rgba(51,255,102,0.25);
+  }
+
+  /* Scanlines overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.18) 3px,
+      rgba(0,0,0,0.18) 3px
+    );
+    z-index: 1000;
+  }
+  /* Subtle CRT vignette */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%);
+    z-index: 999;
+  }
+
+  .terminal {
+    width: 1280px;
+    height: 720px;
+    display: grid;
+    grid-template-rows: 54px 1fr 36px;
+    padding: 8px;
+    gap: 6px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header {
+    border: 1px solid var(--fg);
+    padding: 6px 12px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    background: var(--bg-alt);
+  }
+  .hdr-left .sys-title {
+    font-size: 18px;
+    letter-spacing: 2px;
+  }
+  .hdr-left .sys-sub {
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .hdr-center {
+    text-align: center;
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .hdr-center .blink {
+    color: var(--fg);
+    animation: blink 1.2s steps(2) infinite;
+  }
+  .hdr-right {
+    text-align: right;
+    font-size: 11px;
+  }
+  .hdr-right .org { color: var(--fg-dim); }
+  .hdr-right .user { color: var(--fg); }
+
+  @keyframes blink { 50% { opacity: 0.15; } }
+
+  /* ---------- MAIN ---------- */
+  .main {
+    display: grid;
+    grid-template-columns: 180px 1fr 300px;
+    gap: 6px;
+    min-height: 0;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    border: 1px solid var(--fg);
+    padding: 8px 0;
+    background: var(--bg-alt);
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-title {
+    font-size: 11px;
+    color: var(--fg-dim);
+    padding: 0 10px 6px;
+    border-bottom: 1px dashed var(--fg-faint);
+    letter-spacing: 1px;
+  }
+  nav ul { list-style: none; margin-top: 6px; }
+  nav li {
+    padding: 6px 10px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    color: var(--fg-dim);
+  }
+  nav li::before { content: "[ ] "; color: var(--fg-faint); }
+  nav li.active {
+    color: var(--fg);
+    border-left-color: var(--fg);
+    background: rgba(51,255,102,0.06);
+  }
+  nav li.active::before { content: "[>] "; color: var(--fg); }
+  nav li:hover { color: var(--fg); }
+
+  .nav-foot {
+    margin-top: auto;
+    padding: 8px 10px 0;
+    border-top: 1px dashed var(--fg-faint);
+    font-size: 10px;
+    color: var(--fg-dim);
+    line-height: 1.5;
+  }
+
+  /* ---------- FORM PANEL ---------- */
+  .form-panel {
+    border: 1px solid var(--fg);
+    padding: 10px 14px;
+    background: var(--bg-alt);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .panel-title {
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--fg);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .panel-title .tag {
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .ascii-sep {
+    color: var(--fg-faint);
+    font-size: 11px;
+    letter-spacing: 0;
+    margin: 4px 0;
+    white-space: pre;
+    line-height: 1;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 18px;
+  }
+  .field { display: flex; flex-direction: column; gap: 3px; }
+  .field.full { grid-column: 1 / -1; }
+  .field label {
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .field label::before { content: "> "; color: var(--fg); }
+
+  .input, .select, .textarea {
+    background: #000;
+    border: 1px solid var(--fg-dim);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 5px 8px;
+    outline: none;
+    letter-spacing: 0.5px;
+  }
+  .input::placeholder, .textarea::placeholder { color: var(--fg-faint); }
+  .input:focus, .select:focus, .textarea:focus { border-color: var(--fg); }
+  .textarea { resize: none; min-height: 52px; }
+
+  .select {
+    appearance: none;
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--fg) 50%),
+      linear-gradient(135deg, var(--fg) 50%, transparent 50%);
+    background-position: calc(100% - 14px) 50%, calc(100% - 9px) 50%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 22px;
+  }
+
+  .route-row { display: flex; gap: 6px; }
+  .route-row .select { flex: 1; }
+  .btn {
+    background: #000;
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+    letter-spacing: 1px;
+  }
+  .btn:hover { background: rgba(51,255,102,0.1); }
+  .btn-ghost {
+    border-color: var(--fg-dim);
+    color: var(--fg-dim);
+  }
+
+  .caps-input {
+    position: relative;
+  }
+  .caps-input .suffix {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+    pointer-events: none;
+  }
+  .caps-input .input { padding-right: 48px; }
+
+  .date-hint {
+    font-size: 10px;
+    color: var(--fg-faint);
+    margin-top: 2px;
+  }
+
+  .form-meta {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 10px;
+    color: var(--fg-dim);
+    border-top: 1px dashed var(--fg-faint);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ---------- EVAL PANEL ---------- */
+  .eval-panel {
+    border: 1px solid var(--fg);
+    padding: 10px 12px;
+    background: var(--bg-alt);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+  }
+  .eval-title {
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--fg);
+  }
+  .eval-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12px;
+    border-bottom: 1px dotted var(--fg-faint);
+    padding-bottom: 4px;
+  }
+  .eval-row .k {
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .eval-row .v {
+    color: var(--fg);
+    font-size: 13px;
+  }
+
+  /* Risk indicator bar */
+  .risk-block { padding: 2px 0; }
+  .risk-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    margin-top: 5px;
+  }
+  .risk-bar .cell {
+    height: 14px;
+    border: 1px solid var(--fg-faint);
+    background: #000;
+    text-align: center;
+    font-size: 9px;
+    line-height: 14px;
+    color: var(--fg-faint);
+    letter-spacing: 1px;
+  }
+  .risk-bar .cell.on-low { background: var(--risk-low); color: #000; border-color: var(--risk-low); }
+  .risk-bar .cell.on-mid { background: var(--risk-mid); color: #000; border-color: var(--risk-mid); }
+  .risk-bar .cell.on-high { background: var(--risk-high); color: #000; border-color: var(--risk-high); }
+  .risk-bar .cell.on-crit { background: var(--risk-crit); color: #000; border-color: var(--risk-crit); }
+
+  .risk-label {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .risk-label .val-high { color: var(--risk-high); }
+
+  /* Offline warning box */
+  .offline-box {
+    border: 1px dashed var(--warn);
+    color: var(--warn);
+    padding: 6px 8px;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    background: rgba(255,184,77,0.05);
+    text-shadow: 0 0 1px var(--warn), 0 0 6px rgba(255,184,77,0.3);
+    animation: warnblink 2s ease-in-out infinite;
+  }
+  @keyframes warnblink { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+  .rec-block {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .rec-block .rec-head {
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .rec-block ul {
+    list-style: none;
+    margin-left: 2px;
+  }
+  .rec-block li::before { content: "· "; color: var(--fg); }
+  .rec-block li {
+    padding: 1px 0;
+  }
+  .rec-block .muted { color: var(--fg-dim); }
+
+  .eval-foot {
+    margin-top: auto;
+    font-size: 10px;
+    color: var(--fg-faint);
+    letter-spacing: 1px;
+    text-align: center;
+    padding-top: 4px;
+    border-top: 1px dashed var(--fg-faint);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border: 1px solid var(--fg);
+    background: var(--bg-alt);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+  .foot-status { color: var(--fg-dim); letter-spacing: 1px; }
+  .foot-status .dot { color: var(--fg); animation: blink 1.2s steps(2) infinite; }
+  .foot-buttons { display: flex; gap: 8px; }
+  .btn-primary {
+    background: rgba(51,255,102,0.1);
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: rgba(51,255,102,0.22); }
+  .btn-danger {
+    background: #000;
+    border: 1px solid var(--risk-crit);
+    color: var(--risk-crit);
+    padding: 5px 14px;
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-shadow: 0 0 1px var(--risk-crit), 0 0 6px rgba(255,74,74,0.3);
+  }
+  .btn-danger:hover { background: rgba(255,74,74,0.12); }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <!-- HEADER -->
+  <header>
+    <div class="hdr-left">
+      <div class="sys-title">╔ CARAVAN // DISPATCH TERMINAL ╗</div>
+      <div class="sys-sub">ROBCO INDUSTRIES (TM) TERMLINK · v4.21.07 · CARGO OPS</div>
+    </div>
+    <div class="hdr-center">
+      [ LINK ][ MOJAVE RELAY 07 ]<span class="blink"> ● </span>ONLINE
+    </div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY</div>
+      <div class="user">USER :: DISP_ALICE.HAWTHORNE &nbsp;|&nbsp; CLEARANCE 3 &nbsp;|&nbsp; 2281-10-23 / 14:07</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li>РЕЕСТР РЕЙСОВ</li>
+        <li class="active">НОВАЯ ЗАЯВКА</li>
+        <li>КОМАНДА</li>
+        <li>СКЛАД</li>
+        <li>ОТЧЁТЫ</li>
+        <li>АДМИН</li>
+      </ul>
+      <div class="nav-foot">
+        SESSION: 00:12:43<br>
+        NODE: MCCARRAN-04<br>
+        LAST SYNC: 13:58
+      </div>
+    </nav>
+
+    <!-- FORM -->
+    <section class="form-panel">
+      <div class="panel-title">
+        <span>▸ НОВАЯ ЗАЯВКА НА ПЕРЕВОЗКУ</span>
+        <span class="tag">DRAFT :: #CRV-2281-1047</span>
+      </div>
+      <div class="ascii-sep">═══════════════════════════════════════════════════════════════════════════════</div>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>ПУНКТ ОТПРАВЛЕНИЯ</label>
+          <select class="select">
+            <option>Goodsprings</option>
+            <option>Primm</option>
+            <option>Nipton</option>
+            <option>New Vegas</option>
+            <option>Novac</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>ПУНКТ НАЗНАЧЕНИЯ</label>
+          <select class="select">
+            <option>Goodsprings</option>
+            <option>Primm</option>
+            <option>Nipton</option>
+            <option selected>New Vegas</option>
+            <option>Novac</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>ДАТА ОТПРАВКИ</label>
+          <input class="input" type="text" value="2281-10-25" />
+          <div class="date-hint">[YYYY-MM-DD] &nbsp;·&nbsp; окно выхода: 06:00 – 10:00</div>
+        </div>
+
+        <div class="field">
+          <label>ЦЕННОСТЬ ГРУЗА</label>
+          <div class="caps-input">
+            <input class="input" type="text" value="4 250" />
+            <span class="suffix">CAPS ⦿</span>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>ОПИСАНИЕ ГРУЗА</label>
+          <textarea class="textarea" placeholder="описание, вес, особые условия хранения...">12 ящиков — стимпаки, RadAway; 2 ящика — запчасти Pip-Boy; брутто ~180 lbs. Хрупкое, сухое хранение.</textarea>
+        </div>
+
+        <div class="field full">
+          <label>МАРШРУТ</label>
+          <div class="route-row">
+            <select class="select">
+              <option>[ШАБЛОН] I-15 South → Primm → Mojave Outpost → NV</option>
+              <option>[ШАБЛОН] Long 15 — прямой, через Nipton</option>
+              <option>[ШАБЛОН] Northern Passage — Novac → HELIOS One → NV</option>
+              <option>[ШАБЛОН] Safe Route — обход каньона Quarry Junction</option>
+            </select>
+            <button class="btn btn-ghost" type="button">[ РУЧНОЙ МАРШРУТ ]</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-meta">
+        <span>◈ AUTOSAVE: 14:06:51</span>
+        <span>◈ ПОЛЯ ОБЯЗАТЕЛЬНЫ: 6 / 6 &nbsp; VALIDATION: OK</span>
+      </div>
+    </section>
+
+    <!-- EVAL -->
+    <aside class="eval-panel">
+      <div class="eval-title">◤ ОЦЕНКА РЕЙСА ◢</div>
+
+      <div class="eval-row">
+        <span class="k">ETA</span>
+        <span class="v">~ 2281-10-26 &nbsp; 18:40</span>
+      </div>
+      <div class="eval-row">
+        <span class="k">ДИСТАНЦИЯ</span>
+        <span class="v">148 mi</span>
+      </div>
+      <div class="eval-row">
+        <span class="k">ХОД</span>
+        <span class="v">36 ч &nbsp;(1 ночёвка)</span>
+      </div>
+
+      <div class="risk-block">
+        <div class="eval-row" style="border:none; padding-bottom:0;">
+          <span class="k">RISK_SCORE</span>
+          <span class="v" style="color: var(--warn); font-size:11px;">// OFFLINE //</span>
+        </div>
+        <div class="risk-bar">
+          <div class="cell">LOW</div>
+          <div class="cell">MID</div>
+          <div class="cell">HIGH</div>
+          <div class="cell">CRIT</div>
+        </div>
+        <div class="offline-box" style="margin-top:6px;">
+          ⚠ WASTELAND INTEL OFFLINE<br>
+          risk_score будет пересчитан позже.<br>
+          <span style="color: var(--fg-dim); font-size:10px;">last feed: 11:42 · retry in 00:04:12</span>
+        </div>
+      </div>
+
+      <div class="rec-block">
+        <div class="rec-head">-- РЕКОМЕНДУЕМАЯ ОХРАНА --</div>
+        <ul>
+          <li>стрелков: <b>2</b> <span class="muted">(оценочно)</span></li>
+          <li>проводник: <b>1</b></li>
+          <li>брамин: <b>2 гол.</b></li>
+        </ul>
+      </div>
+
+      <div class="rec-block">
+        <div class="rec-head">-- ПРИПАСЫ (МИН.) --</div>
+        <ul>
+          <li>вода очищенная: 24 ед.</li>
+          <li>паёк (RadAway/Stimpak): 6 / 4</li>
+          <li>боеприпасы: 2 кейса .308</li>
+        </ul>
+      </div>
+
+      <div class="eval-foot">[ ДАННЫЕ ПРЕДВАРИТЕЛЬНЫЕ ]</div>
+    </aside>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-status">
+      <span class="dot">●</span> READY &nbsp;·&nbsp; F1 HELP &nbsp;·&nbsp; F5 RECALC &nbsp;·&nbsp; ESC CANCEL
+    </div>
+    <div class="foot-buttons">
+      <button class="btn-danger" type="button">[ ОТМЕНИТЬ ]</button>
+      <button class="btn-primary" type="button">[ СОХРАНИТЬ ЧЕРНОВИК ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

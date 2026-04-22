@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ОТЧЁТ ОБ ИНЦИДЕНТЕ // CARAVAN</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0f0a;
+    --bg-alt: #101810;
+    --bg-deep: #000;
+    --fg: #33ff66;
+    --fg-bright: #7fff9a;
+    --fg-dim: #1e7a3a;
+    --fg-faint: #164a24;
+    --muted: #5a8a6a;
+    --warn: #ffb84d;
+    --err: #ff4a4a;
+    --sev-1: #33ff66;
+    --sev-2: #e8e23a;
+    --sev-3: #ff8a3a;
+    --sev-4: #ff4a4a;
+
+    --font-mono: 'Share Tech Mono', 'VT323', ui-monospace, monospace;
+    --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: #050805;
+    color: var(--fg);
+    font-family: var(--font-ui);
+    min-height: 100vh;
+    padding: 24px 16px 48px;
+  }
+
+  /* ========== Page layout (three phone frames side by side) ========== */
+  .page-head {
+    text-align: center;
+    color: var(--fg);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+  }
+  .page-head span { color: var(--fg-dim); }
+
+  .phones {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .phone-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .phone-label {
+    color: var(--fg-dim);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+  }
+  .phone-label::before { content: "// "; color: var(--fg); }
+
+  /* ========== Phone frame ========== */
+  .phone {
+    width: 390px;
+    height: 844px;
+    background: #000;
+    border: 10px solid #1a1a1a;
+    border-radius: 44px;
+    box-shadow:
+      0 0 0 2px #2a2a2a,
+      0 12px 30px rgba(0,0,0,0.6);
+    overflow: hidden;
+    position: relative;
+  }
+  /* Notch */
+  .phone::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 28px;
+    background: #000;
+    border-radius: 0 0 18px 18px;
+    z-index: 100;
+  }
+  /* Home indicator */
+  .phone::after {
+    content: "";
+    position: absolute;
+    bottom: 6px; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 4px;
+    background: #4a4a4a;
+    border-radius: 2px;
+    z-index: 100;
+  }
+
+  .screen {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  /* Status bar (iOS-like) */
+  .statusbar {
+    height: 44px;
+    padding: 0 24px 0 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 6px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+    flex-shrink: 0;
+  }
+  .statusbar .time { letter-spacing: 0.5px; }
+  .statusbar .icons { display: flex; gap: 5px; align-items: center; font-size: 12px; }
+  .statusbar .icons .bars { letter-spacing: 1px; }
+
+  /* ========== App header ========== */
+  .app-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--fg-dim);
+    padding: 10px 16px 8px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+  }
+  .app-header .t1 {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: var(--fg);
+    line-height: 1.2;
+  }
+  .app-header .t2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-dim);
+    letter-spacing: 1px;
+  }
+  .conn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border: 1px solid;
+    border-radius: 3px;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+  .conn.online { color: var(--fg); border-color: var(--fg); }
+  .conn.offline { color: var(--warn); border-color: var(--warn); }
+  .conn .dot { font-size: 10px; }
+
+  /* ========== Scrollable content ========== */
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px 100px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Section titles */
+  .sec-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--fg-dim);
+    margin: 14px 0 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .sec-title:first-child { margin-top: 0; }
+  .sec-title::before { content: "▸ "; color: var(--fg); }
+  .sec-title .req { color: var(--err); font-size: 10px; }
+
+  /* ========== Auto-filled panel ========== */
+  .auto-panel {
+    border: 1px solid var(--fg-faint);
+    background: var(--bg-alt);
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 10px;
+    align-items: center;
+  }
+  .auto-panel .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: baseline;
+    grid-column: 1;
+  }
+  .auto-panel .k {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+  .auto-panel .v {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg-dim);
+    letter-spacing: 0.5px;
+  }
+  .auto-panel .v.bright { color: var(--fg); }
+  .auto-panel .gps-btn {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    width: 48px; height: 48px;
+    border: 1px solid var(--fg);
+    background: rgba(51,255,102,0.08);
+    border-radius: 6px;
+    color: var(--fg);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .auto-panel .gps-btn:active { background: rgba(51,255,102,0.2); }
+  .auto-panel .gps-btn .lbl {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-top: -2px;
+  }
+  .auto-panel .gps-btn .wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ========== Type tiles ========== */
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .tile {
+    min-height: 64px;
+    border: 1px solid var(--fg-dim);
+    background: var(--bg-alt);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .tile .ic {
+    font-size: 18px;
+    color: var(--fg);
+    line-height: 1;
+  }
+  .tile .tn {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--fg);
+    line-height: 1.15;
+  }
+  .tile:active { background: rgba(51,255,102,0.12); }
+  .tile.selected {
+    border-color: var(--fg);
+    background: rgba(51,255,102,0.18);
+    box-shadow: inset 0 0 0 1px var(--fg), 0 0 10px rgba(51,255,102,0.25);
+  }
+  .tile.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 6px; right: 8px;
+    color: var(--fg);
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .tile.full { grid-column: 1 / -1; min-height: 52px; }
+
+  /* ========== Severity segmented ========== */
+  .severity {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    background: var(--bg-alt);
+    border: 1px solid var(--fg-faint);
+    border-radius: 8px;
+    padding: 4px;
+  }
+  .sev-seg {
+    min-height: 52px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .sev-seg .bar {
+    width: 70%;
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    opacity: 0.5;
+  }
+  .sev-seg[data-s="1"] .bar { background: var(--sev-1); }
+  .sev-seg[data-s="2"] .bar { background: var(--sev-2); }
+  .sev-seg[data-s="3"] .bar { background: var(--sev-3); }
+  .sev-seg[data-s="4"] .bar { background: var(--sev-4); }
+  .sev-seg .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--fg-dim);
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .sev-seg.selected[data-s="1"] { background: rgba(51,255,102,0.18); border-color: var(--sev-1); }
+  .sev-seg.selected[data-s="1"] .lbl { color: var(--sev-1); }
+  .sev-seg.selected[data-s="1"] .bar { opacity: 1; }
+
+  .sev-seg.selected[data-s="2"] { background: rgba(232,226,58,0.15); border-color: var(--sev-2); }
+  .sev-seg.selected[data-s="2"] .lbl { color: var(--sev-2); }
+  .sev-seg.selected[data-s="2"] .bar { opacity: 1; }
+
+  .sev-seg.selected[data-s="3"] { background: rgba(255,138,58,0.15); border-color: var(--sev-3); }
+  .sev-seg.selected[data-s="3"] .lbl { color: var(--sev-3); }
+  .sev-seg.selected[data-s="3"] .bar { opacity: 1; }
+
+  .sev-seg.selected[data-s="4"] {
+    background: rgba(255,74,74,0.2);
+    border-color: var(--sev-4);
+    animation: critpulse 1.4s ease-in-out infinite;
+  }
+  .sev-seg.selected[data-s="4"] .lbl { color: var(--sev-4); }
+  .sev-seg.selected[data-s="4"] .bar { opacity: 1; }
+  @keyframes critpulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,74,74,0.4); }
+    50%     { box-shadow: 0 0 10px 1px rgba(255,74,74,0.45); }
+  }
+
+  /* ========== Textarea ========== */
+  .ta {
+    width: 100%;
+    min-height: 110px;
+    background: var(--bg-deep);
+    border: 1px solid var(--fg-dim);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: var(--fg);
+    font-family: var(--font-ui);
+    font-size: 15px;
+    line-height: 1.4;
+    resize: none;
+    outline: none;
+  }
+  .ta:focus { border-color: var(--fg); box-shadow: 0 0 0 2px rgba(51,255,102,0.2); }
+  .ta::placeholder { color: var(--muted); font-style: italic; }
+
+  .ta-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ========== Team list ========== */
+  .team {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .member {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 8px 12px;
+    border: 1px solid var(--fg-faint);
+    background: var(--bg-alt);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .member:active { background: rgba(51,255,102,0.08); }
+
+  .m-avatar {
+    width: 36px; height: 36px;
+    border: 1px solid var(--fg-dim);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg);
+    background: var(--bg-deep);
+    letter-spacing: 0.5px;
+  }
+  .m-info { flex: 1; min-width: 0; }
+  .m-name {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--fg);
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .m-role {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* iOS-like toggle */
+  .toggle {
+    width: 48px; height: 28px;
+    background: #2a3a2a;
+    border-radius: 14px;
+    position: relative;
+    flex-shrink: 0;
+    border: 1px solid var(--fg-faint);
+    transition: background 0.2s;
+  }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 22px; height: 22px;
+    background: #8a9a8a;
+    border-radius: 50%;
+    transition: all 0.2s;
+  }
+  .member.casualty .toggle {
+    background: rgba(255,74,74,0.3);
+    border-color: var(--err);
+  }
+  .member.casualty .toggle::after {
+    left: 22px;
+    background: var(--err);
+    box-shadow: 0 0 6px rgba(255,74,74,0.6);
+  }
+  .member.casualty {
+    border-color: var(--err);
+    background: rgba(255,74,74,0.08);
+  }
+  .member.casualty .m-name { color: var(--err); }
+  .member.casualty .m-avatar { border-color: var(--err); color: var(--err); }
+
+  .casualty-tag {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--err);
+    letter-spacing: 1px;
+    border: 1px solid var(--err);
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-left: 6px;
+  }
+
+  /* ========== Sticky bottom button ========== */
+  .submit-bar {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 10px 16px 22px;
+    background: linear-gradient(to top, var(--bg) 70%, rgba(10,15,10,0.8) 100%, rgba(10,15,10,0));
+    border-top: 1px solid var(--fg-faint);
+  }
+  .submit-btn {
+    width: 100%;
+    min-height: 60px;
+    border: 2px solid var(--fg);
+    background: rgba(51,255,102,0.15);
+    color: var(--fg);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .submit-btn:active { background: rgba(51,255,102,0.3); }
+  .submit-btn.critical {
+    border-color: var(--err);
+    color: var(--err);
+    background: rgba(255,74,74,0.15);
+    text-shadow: 0 0 6px rgba(255,74,74,0.5);
+    animation: critpulse 1.4s ease-in-out infinite;
+  }
+  .submit-hint {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  /* ========== SUCCESS / OFFLINE states ========== */
+  .result {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 24px 24px;
+    text-align: center;
+    overflow-y: auto;
+  }
+  .result .big-icon {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--fg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    color: var(--fg);
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px rgba(51,255,102,0.35), inset 0 0 15px rgba(51,255,102,0.15);
+    animation: okpulse 2s ease-in-out infinite;
+  }
+  @keyframes okpulse {
+    0%,100% { box-shadow: 0 0 30px rgba(51,255,102,0.35), inset 0 0 15px rgba(51,255,102,0.15); }
+    50%     { box-shadow: 0 0 50px rgba(51,255,102,0.55), inset 0 0 25px rgba(51,255,102,0.25); }
+  }
+  .result.offline .big-icon {
+    border-color: var(--warn);
+    color: var(--warn);
+    box-shadow: 0 0 30px rgba(255,184,77,0.35), inset 0 0 15px rgba(255,184,77,0.15);
+    animation: warnpulse 2s ease-in-out infinite;
+  }
+  @keyframes warnpulse {
+    0%,100% { box-shadow: 0 0 30px rgba(255,184,77,0.35), inset 0 0 15px rgba(255,184,77,0.15); }
+    50%     { box-shadow: 0 0 50px rgba(255,184,77,0.55), inset 0 0 25px rgba(255,184,77,0.25); }
+  }
+
+  .result .r-title {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--fg);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .result.offline .r-title { color: var(--warn); }
+
+  .result .r-sub {
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 280px;
+    margin-bottom: 22px;
+  }
+  .result.offline .r-sub { color: #c9954a; }
+
+  /* Summary card (shown after submit) */
+  .r-card {
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid var(--fg-faint);
+    border-radius: 10px;
+    background: var(--bg-alt);
+    padding: 12px 14px;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  .result.offline .r-card { border-color: var(--warn); }
+
+  .r-card .r-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px dashed var(--fg-faint);
+  }
+  .r-card .r-id {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--fg);
+    letter-spacing: 1px;
+  }
+  .result.offline .r-card .r-id { color: var(--warn); }
+  .r-card .r-ts {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+  .r-card .r-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    font-size: 12px;
+  }
+  .r-card .r-row .k {
+    font-family: var(--font-mono);
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-size: 10px;
+  }
+  .r-card .r-row .v {
+    font-family: var(--font-ui);
+    color: var(--fg);
+    font-size: 13px;
+    text-align: right;
+  }
+  .r-card .r-row .v.crit { color: var(--err); }
+  .r-card .r-row .v.warn { color: var(--warn); }
+
+  /* Offline queue indicator */
+  .queue-info {
+    width: 100%;
+    max-width: 320px;
+    border: 1px dashed var(--warn);
+    background: rgba(255,184,77,0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--warn);
+    letter-spacing: 0.5px;
+    text-align: left;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .queue-info .qh {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--warn);
+    margin-bottom: 3px;
+  }
+  .queue-info .qh::before { content: "◌ "; }
+
+  .r-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .r-btn-primary {
+    min-height: 52px;
+    border: 2px solid var(--fg);
+    background: rgba(51,255,102,0.15);
+    color: var(--fg);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .r-btn-primary:active { background: rgba(51,255,102,0.3); }
+  .result.offline .r-btn-primary {
+    border-color: var(--warn);
+    color: var(--warn);
+    background: rgba(255,184,77,0.15);
+  }
+  .r-btn-secondary {
+    min-height: 48px;
+    border: 1px solid var(--fg-dim);
+    background: transparent;
+    color: var(--fg-dim);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .r-btn-secondary:active { color: var(--fg); border-color: var(--fg); }
+
+  /* Hide scrollbars on webkit */
+  .content::-webkit-scrollbar, .result::-webkit-scrollbar { display: none; }
+
+</style>
+</head>
+<body>
+
+  <div class="page-head">CARAVAN PWA · INCIDENT REPORT <span>// 3 STATES</span></div>
+
+  <div class="phones">
+
+    <!-- ==================== PHONE 1 — FILLING ==================== -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 01 — ЗАПОЛНЕНИЕ</div>
+      <div class="phone">
+        <div class="screen">
+
+          <div class="statusbar">
+            <span class="time">11:47</span>
+            <span class="icons"><span class="bars">▂▃▅</span> <span>5G</span> <span>▮82%</span></span>
+          </div>
+
+          <!-- App header -->
+          <header class="app-header">
+            <div class="t1">ОТЧЁТ ОБ ИНЦИДЕНТЕ</div>
+            <div class="t2">
+              <span>РЕЙС · #C-2287-04</span>
+              <span class="conn online"><span class="dot">●</span> ONLINE</span>
+            </div>
+          </header>
+
+          <!-- Scrollable body -->
+          <div class="content">
+
+            <!-- Auto panel -->
+            <div class="sec-title">АВТО-ДАННЫЕ</div>
+            <div class="auto-panel">
+              <div class="row">
+                <span class="k">TIME</span>
+                <span class="v bright">2287-04-12 · 11:47:02</span>
+              </div>
+              <div class="row">
+                <span class="k">GPS</span>
+                <span class="v bright">N36°47.012' W115°26.884'</span>
+              </div>
+              <button class="gps-btn" type="button" aria-label="Обновить GPS">
+                <span class="wrap">
+                  <span>↻</span>
+                  <span class="lbl">GPS</span>
+                </span>
+              </button>
+            </div>
+
+            <!-- Type tiles -->
+            <div class="sec-title">ТИП ИНЦИДЕНТА <span class="req">* обязательно</span></div>
+            <div class="tiles">
+              <div class="tile selected">
+                <span class="ic">⚔</span>
+                <span class="tn">НАПАДЕНИЕ</span>
+              </div>
+              <div class="tile">
+                <span class="ic">🦎</span>
+                <span class="tn">КОГОТЬ СМЕРТИ</span>
+              </div>
+              <div class="tile">
+                <span class="ic">⚙</span>
+                <span class="tn">ПОЛОМКА</span>
+              </div>
+              <div class="tile">
+                <span class="ic">✚</span>
+                <span class="tn">МЕД. ЭКСТР.</span>
+              </div>
+              <div class="tile">
+                <span class="ic">📦</span>
+                <span class="tn">ПОТЕРЯ ГРУЗА</span>
+              </div>
+              <div class="tile">
+                <span class="ic">☢</span>
+                <span class="tn">ШТОРМ / РАДИАЦИЯ</span>
+              </div>
+              <div class="tile full">
+                <span class="ic">…</span>
+                <span class="tn">ПРОЧЕЕ</span>
+              </div>
+            </div>
+
+            <!-- Severity -->
+            <div class="sec-title">ТЯЖЕСТЬ <span class="req">* обязательно</span></div>
+            <div class="severity">
+              <div class="sev-seg" data-s="1">
+                <div class="bar"></div>
+                <div class="lbl">НИЗКАЯ</div>
+              </div>
+              <div class="sev-seg" data-s="2">
+                <div class="bar"></div>
+                <div class="lbl">СРЕДНЯЯ</div>
+              </div>
+              <div class="sev-seg selected" data-s="3">
+                <div class="bar"></div>
+                <div class="lbl">ВЫСОКАЯ</div>
+              </div>
+              <div class="sev-seg" data-s="4">
+                <div class="bar"></div>
+                <div class="lbl">КРИТИЧ.</div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="sec-title">ОПИСАНИЕ</div>
+            <textarea class="ta" placeholder="Кратко опишите: кто / что / сколько / где / нужна ли помощь...">Засада ~4 рейдера (Jackals) ок. 11:42, холм к западу от дороги. Ведём бой, отступили за фургон. Груз цел.</textarea>
+            <div class="ta-meta">
+              <span>AUTOSAVE · 11:47:08</span>
+              <span>128 / 800</span>
+            </div>
+
+            <!-- Team -->
+            <div class="sec-title">УЧАСТНИКИ — отметьте пострадавших</div>
+            <div class="team">
+              <div class="member">
+                <div class="m-avatar">ДК</div>
+                <div class="m-info">
+                  <div class="m-name">Дж. Кассиди</div>
+                  <div class="m-role">КАРАВАН-МАСТЕР</div>
+                </div>
+                <div class="toggle"></div>
+              </div>
+              <div class="member casualty">
+                <div class="m-avatar">АС</div>
+                <div class="m-info">
+                  <div class="m-name">А. Сэнт-Джеймс <span class="casualty-tag">ПОСТРАДАЛ</span></div>
+                  <div class="m-role">КАПИТАН ОХРАНЫ</div>
+                </div>
+                <div class="toggle"></div>
+              </div>
+              <div class="member">
+                <div class="m-avatar">МГ</div>
+                <div class="m-info">
+                  <div class="m-name">М. Гаррет</div>
+                  <div class="m-role">ПОЛЕВОЙ МЕДИК</div>
+                </div>
+                <div class="toggle"></div>
+              </div>
+              <div class="member">
+                <div class="m-avatar">БР</div>
+                <div class="m-info">
+                  <div class="m-name">Б. Райт</div>
+                  <div class="m-role">ПОГОНЩИК БРАМИНОВ</div>
+                </div>
+                <div class="toggle"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Sticky submit -->
+          <div class="submit-bar">
+            <div class="submit-hint">будет отправлено диспетчеру · Crimson Caravan</div>
+            <button class="submit-btn" type="button">► ОТПРАВИТЬ ОТЧЁТ</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PHONE 2 — SUCCESS ==================== -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 02 — УСПЕШНО СОХРАНЕНО</div>
+      <div class="phone">
+        <div class="screen">
+
+          <div class="statusbar">
+            <span class="time">11:47</span>
+            <span class="icons"><span class="bars">▂▃▅</span> <span>5G</span> <span>▮82%</span></span>
+          </div>
+
+          <header class="app-header">
+            <div class="t1">ОТЧЁТ ОБ ИНЦИДЕНТЕ</div>
+            <div class="t2">
+              <span>РЕЙС · #C-2287-04</span>
+              <span class="conn online"><span class="dot">●</span> ONLINE</span>
+            </div>
+          </header>
+
+          <div class="result">
+            <div class="big-icon">✓</div>
+            <div class="r-title">ИНЦИДЕНТ ЗАРЕГИСТРИРОВАН</div>
+            <div class="r-sub">Диспетчер уведомлён. К вам выдвигается группа поддержки — следуйте инструкциям на радиоканале 4.</div>
+
+            <div class="r-card">
+              <div class="r-hdr">
+                <span class="r-id">INC-2287-0417</span>
+                <span class="r-ts">11:47:14</span>
+              </div>
+              <div class="r-row"><span class="k">ТИП</span><span class="v">Нападение (Jackals)</span></div>
+              <div class="r-row"><span class="k">ТЯЖЕСТЬ</span><span class="v warn">ВЫСОКАЯ</span></div>
+              <div class="r-row"><span class="k">ПОСТРАДАВШИЕ</span><span class="v">1 · Сэнт-Джеймс</span></div>
+              <div class="r-row"><span class="k">GPS</span><span class="v">N36°47.012' W115°26.884'</span></div>
+              <div class="r-row"><span class="k">СТАТУС</span><span class="v">DELIVERED ✓</span></div>
+            </div>
+
+            <div class="r-actions">
+              <button class="r-btn-primary" type="button">ОТКРЫТЬ ДЕТАЛИ</button>
+              <button class="r-btn-secondary" type="button">НОВЫЙ ИНЦИДЕНТ</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== PHONE 3 — OFFLINE QUEUED ==================== -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 03 — ОФЛАЙН · В ОЧЕРЕДИ</div>
+      <div class="phone">
+        <div class="screen">
+
+          <div class="statusbar">
+            <span class="time">11:47</span>
+            <span class="icons"><span style="color: var(--warn);">✈</span> <span>▮82%</span></span>
+          </div>
+
+          <header class="app-header">
+            <div class="t1">ОТЧЁТ ОБ ИНЦИДЕНТЕ</div>
+            <div class="t2">
+              <span>РЕЙС · #C-2287-04</span>
+              <span class="conn offline"><span class="dot">◌</span> OFFLINE</span>
+            </div>
+          </header>
+
+          <div class="result offline">
+            <div class="big-icon">◌</div>
+            <div class="r-title">ОТЧЁТ В ОЧЕРЕДИ</div>
+            <div class="r-sub">◌ ОФЛАЙН — синхронизация произойдёт автоматически при восстановлении связи.</div>
+
+            <div class="r-card">
+              <div class="r-hdr">
+                <span class="r-id">INC-LOCAL-0417</span>
+                <span class="r-ts">11:47:14</span>
+              </div>
+              <div class="r-row"><span class="k">ТИП</span><span class="v">Нападение (Jackals)</span></div>
+              <div class="r-row"><span class="k">ТЯЖЕСТЬ</span><span class="v warn">ВЫСОКАЯ</span></div>
+              <div class="r-row"><span class="k">ПОСТРАДАВШИЕ</span><span class="v">1 · Сэнт-Джеймс</span></div>
+              <div class="r-row"><span class="k">GPS</span><span class="v">N36°47.012' W115°26.884'</span></div>
+              <div class="r-row"><span class="k">СТАТУС</span><span class="v warn">QUEUED ◌</span></div>
+            </div>
+
+            <div class="queue-info">
+              <div class="qh">ОЧЕРЕДЬ СИНХРОНИЗАЦИИ</div>
+              Событий ожидает отправки: <b>3</b><br>
+              Следующая попытка: <b>00:00:42</b><br>
+              Сохранено на устройстве · зашифровано
+            </div>
+
+            <div class="r-actions">
+              <button class="r-btn-primary" type="button">↻ ПОВТОРИТЬ СЕЙЧАС</button>
+              <button class="r-btn-secondary" type="button">НОВЫЙ ИНЦИДЕНТ</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Responsive fallback: on narrow viewports, stack phones and shrink -->
+  <style>
+    @media (max-width: 1280px) {
+      .phones { gap: 32px; }
+    }
+    @media (max-width: 900px) {
+      body { padding: 16px 8px 32px; }
+      .phones { flex-direction: column; align-items: center; }
+      .phone {
+        width: 100%;
+        max-width: 390px;
+        height: 780px;
+      }
+    }
+    @media (max-width: 430px) {
+      body { padding: 8px 0 24px; }
+      .phone {
+        width: 100%;
+        height: auto;
+        min-height: 740px;
+        border-radius: 28px;
+        border-width: 6px;
+      }
+      .phone::before { width: 90px; height: 22px; }
+    }
+  </style>
+
+</body>
+</html>
