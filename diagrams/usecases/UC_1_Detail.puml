@@ -1,0 +1,30 @@
+@startuml UC_1_Detail
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title UC-1: Создать заявку на перевозку — диаграмма прецедента
+
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Wasteland\nIntel" as WI <<external>>
+
+rectangle "Система «Караваны»" {
+  usecase UC1 as "**UC-1: Создать заявку на перевозку**" #Gold
+  usecase "UC-5: Выбрать/\nспланировать маршрут" as UC5
+  usecase "UC-6: Рассчитать ETA" as UC6
+  usecase "UC-7: Рассчитать\nrisk_score" as UC7
+  usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
+  usecase "UC-12: Указать\nценность груза" as UC12
+}
+
+Dispatcher --> UC1
+WI --> UC7
+
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC6 : <<include>>
+UC1 ..> UC7 : <<include>>
+UC1 ..> UC8 : <<include>>
+UC1 ..> UC12 : <<include>>
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml UC_16_Detail
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title UC-16: Подтвердить ключевые этапы рейса — диаграмма прецедента
+
+actor "Караван-\nмастер" as CM
+actor "NCR Checkpoint\n& Tax Terminal" as NCR <<external>>
+
+rectangle "Система «Караваны»" {
+  usecase "UC-16: Подтвердить\nключевые этапы рейса\n.. extension points ..\nEP-1: Прибытие на КТ\nEP-2: Прохождение КПП\nEP-3: Подтверждение доставки" as UC16 #Gold
+  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
+  usecase "UC-14: Подтвердить\nдоставку груза\n(с пломбой)" as UC14
+}
+
+CM --> UC16
+NCR --> UC18
+
+UC17 ..> UC16 : <<extend>>\n(EP-1)
+UC18 ..> UC16 : <<extend>>\n(EP-2)
+UC14 ..> UC16 : <<extend>>\n(EP-3)
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml UC_32_Detail
+skinparam actorStyle awesome
+skinparam usecaseBackgroundColor #White
+skinparam usecaseBorderColor #333333
+skinparam rectangleBackgroundColor #F5F5F5
+
+title UC-32: Создать организацию — диаграмма прецедента
+
+actor "Супер-\nпользователь" as Super
+
+rectangle "Система «Караваны»" {
+  usecase "UC-32: Создать\nорганизацию\n.. extension points ..\nEP-1: Назначение первого\nдиспетчера\nEP-2: Управление подпиской" as UC32 #Gold
+  usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33
+  usecase "UC-34: Управлять\nподписками" as UC34
+}
+
+Super --> UC32
+Super --> UC33
+Super --> UC34
+
+UC33 ..> UC32 : <<extend>>\n(EP-1)
+UC34 ..> UC32 : <<extend>>\n(EP-2)
+
+@enduml
