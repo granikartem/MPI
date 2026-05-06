@@ -7,18 +7,18 @@ skinparam rectangleBackgroundColor #F5F5F5
 title UC-7: Рассчитать risk_score — диаграмма прецедента
 
 actor "Диспетчер\nкараванов" as Dispatcher
+actor "Система\n(планировщик)" as Sys
 actor "Wasteland\nIntel" as WI <<external>>
 
 rectangle "Система «Караваны»" {
-  usecase UC7 as "**UC-7: Рассчитать risk_score**" #Gold
-  usecase "UC-23: Получить данные\nоб угрозах" as UC23
+  usecase "UC-7: Рассчитать risk_score" as UC7 #Gold
   usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
 }
 
 Dispatcher --> UC7
-WI --> UC23
+Sys --> UC7
+UC7 --> WI
 
-UC7 ..> UC23 : <<include>>
 UC7 ..> UC8 : <<include>>
 
 @enduml

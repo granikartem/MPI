@@ -4,21 +4,24 @@ skinparam usecaseBackgroundColor #White
 skinparam usecaseBorderColor #333333
 skinparam rectangleBackgroundColor #F5F5F5
 
-title UC-19: Зафиксировать инцидент — диаграмма прецедента
+title UC-19: Сообщить об инциденте в рейсе — диаграмма прецедента
 
+actor "Полевой\nпользователь" as Field
 actor "Караван-\nмастер" as CM
 actor "Капитан\nохраны" as SC
 actor "Полевой\nмедик" as Medic
 actor "Диспетчер\nкараванов" as Dispatcher
 
+CM --|> Field
+SC --|> Field
+Medic --|> Field
+
 rectangle "Система «Караваны»" {
-  usecase "UC-19: Зафиксировать\nинцидент\n.. extension points ..\nEP-1: Критический инцидент\nзарегистрирован" as UC19 #Gold
+  usecase "UC-19: Сообщить\nоб инциденте в рейсе\n.. extension points ..\nEP-1: Критический инцидент\nзарегистрирован" as UC19 #Gold
   usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
 }
 
-CM --> UC19
-SC --> UC19
-Medic --> UC19
+Field --> UC19
 
 CM --> UC20
 Dispatcher --> UC20
