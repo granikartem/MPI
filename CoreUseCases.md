@@ -38,7 +38,7 @@ _Исходник: [mockups/uc1_create_request.html](mockups/uc1_create_request.
 
 ---
 
-## UC-7. Рассчитать risk_scoreпо п
+## UC-7. Рассчитать risk_score
 
 | Прецедент: Рассчитать risk_score |
 |:---|
