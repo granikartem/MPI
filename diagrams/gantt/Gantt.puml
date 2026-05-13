@@ -1,0 +1,131 @@
+@startgantt
+title ИС «Караваны» — диаграмма Ганта по ролям, активностям и стоимости
+Project starts 2026-03-23
+Project ends 2026-12-31
+printscale weekly
+saturday are closed
+sunday are closed
+
+legend right
+|= Исполнитель |= Цвет |= Совмещаемые роли |
+| Гордей | LightSkyBlue | PM/BA, Requirements Analyst, Backend Engineer, QA, Technical Writer |
+| Сергей | PaleGreen | Solution Architect, Backend Lead, Backend Engineer, DevOps, Release Manager |
+| Артём | SandyBrown | Frontend Engineer, UI/UX, Backend Engineer, QA, Technical Writer |
+| Расчёт | | Стоимость активности = часы в роли × ставка роли |
+endlegend
+
+-- Inception / LCO: 200 ч · 3 980 крышек --
+[Гордей / PM / BA — Kick-off  scope  SDP (60ч × 20 = 1 200 кр)] starts 2026-03-23 and ends 2026-04-05
+[Гордей / PM / BA — Kick-off  scope  SDP (60ч × 20 = 1 200 кр)] is colored in LightSkyBlue
+[Гордей / Product / Requirements Analyst — Vision/SRS/UC baseline (40ч × 18 = 720 кр)] starts 2026-03-23 and ends 2026-04-05
+[Гордей / Product / Requirements Analyst — Vision/SRS/UC baseline (40ч × 18 = 720 кр)] is colored in LightSkyBlue
+[Сергей / Solution Architect — Tech risks  architecture sketch (30ч × 24 = 720 кр)] starts 2026-03-23 and ends 2026-04-05
+[Сергей / Solution Architect — Tech risks  architecture sketch (30ч × 24 = 720 кр)] is colored in PaleGreen
+[Сергей / Backend Lead — Backend approach/API boundaries (20ч × 24 = 480 кр)] starts 2026-03-23 and ends 2026-04-05
+[Сергей / Backend Lead — Backend approach/API boundaries (20ч × 24 = 480 кр)] is colored in PaleGreen
+[Сергей / Backend Engineer — Prototype skeleton (20ч × 20 = 400 кр)] starts 2026-03-23 and ends 2026-04-05
+[Сергей / Backend Engineer — Prototype skeleton (20ч × 20 = 400 кр)] is colored in PaleGreen
+[Артём / UI/UX Designer — UX concept for web/Pip-Boy (10ч × 16 = 160 кр)] starts 2026-03-23 and ends 2026-04-05
+[Артём / UI/UX Designer — UX concept for web/Pip-Boy (10ч × 16 = 160 кр)] is colored in SandyBrown
+[Гордей / QA / Test Analyst — Quality approach (10ч × 14 = 140 кр)] starts 2026-03-23 and ends 2026-04-05
+[Гордей / QA / Test Analyst — Quality approach (10ч × 14 = 140 кр)] is colored in LightSkyBlue
+[Сергей / DevOps Engineer — Environment scheme (10ч × 16 = 160 кр)] starts 2026-03-23 and ends 2026-04-05
+[Сергей / DevOps Engineer — Environment scheme (10ч × 16 = 160 кр)] is colored in PaleGreen
+[Веха LCO / baseline scope] happens at 2026-04-05
+
+-- Elaboration / LCA: 950 ч · 18 520 крышек --
+[Гордей / PM / BA — Iteration planning  phase gate (100ч × 20 = 2 000 кр)] starts 2026-04-06 and ends 2026-05-03
+[Гордей / PM / BA — Iteration planning  phase gate (100ч × 20 = 2 000 кр)] is colored in LightSkyBlue
+[Гордей / Product / Requirements Analyst — UC-1..UC-11  acceptance criteria (120ч × 18 = 2 160 кр)] starts 2026-04-06 and ends 2026-05-03
+[Гордей / Product / Requirements Analyst — UC-1..UC-11  acceptance criteria (120ч × 18 = 2 160 кр)] is colored in LightSkyBlue
+[Сергей / Solution Architect — Architecture baseline  data model (150ч × 24 = 3 600 кр)] starts 2026-04-06 and ends 2026-05-03
+[Сергей / Solution Architect — Architecture baseline  data model (150ч × 24 = 3 600 кр)] is colored in PaleGreen
+[Сергей / Backend Lead — API standards  backend decomposition (100ч × 24 = 2 400 кр)] starts 2026-04-06 and ends 2026-05-03
+[Сергей / Backend Lead — API standards  backend decomposition (100ч × 24 = 2 400 кр)] is colored in PaleGreen
+[Сергей / Backend Engineer — Auth/org skeleton  API spike (80ч × 20 = 1 600 кр)] starts 2026-04-06 and ends 2026-05-03
+[Сергей / Backend Engineer — Auth/org skeleton  API spike (80ч × 20 = 1 600 кр)] is colored in PaleGreen
+[Гордей / Backend Engineer — Domain spike  status model (40ч × 20 = 800 кр)] starts 2026-04-06 and ends 2026-05-03
+[Гордей / Backend Engineer — Domain spike  status model (40ч × 20 = 800 кр)] is colored in LightSkyBlue
+[Артём / Backend Engineer — Client/backend contract support (30ч × 20 = 600 кр)] starts 2026-04-06 and ends 2026-05-03
+[Артём / Backend Engineer — Client/backend contract support (30ч × 20 = 600 кр)] is colored in SandyBrown
+[Артём / Frontend Engineer — Skeleton web UI and Pip-Boy UI (120ч × 18 = 2 160 кр)] starts 2026-04-06 and ends 2026-05-03
+[Артём / Frontend Engineer — Skeleton web UI and Pip-Boy UI (120ч × 18 = 2 160 кр)] is colored in SandyBrown
+[Артём / UI/UX Designer — Mockups  field flows  3-5 steps (90ч × 16 = 1 440 кр)] starts 2026-04-06 and ends 2026-05-03
+[Артём / UI/UX Designer — Mockups  field flows  3-5 steps (90ч × 16 = 1 440 кр)] is colored in SandyBrown
+[Гордей / QA / Test Analyst — Test strategy  traceability (40ч × 14 = 560 кр)] starts 2026-04-06 and ends 2026-05-03
+[Гордей / QA / Test Analyst — Test strategy  traceability (40ч × 14 = 560 кр)] is colored in LightSkyBlue
+[Артём / QA / Test Analyst — UI acceptance checks (20ч × 14 = 280 кр)] starts 2026-04-06 and ends 2026-05-03
+[Артём / QA / Test Analyst — UI acceptance checks (20ч × 14 = 280 кр)] is colored in SandyBrown
+[Сергей / DevOps Engineer — CI/CD MVP  test env (50ч × 16 = 800 кр)] starts 2026-04-06 and ends 2026-05-03
+[Сергей / DevOps Engineer — CI/CD MVP  test env (50ч × 16 = 800 кр)] is colored in PaleGreen
+[Гордей / Technical Writer — Architecture/requirements notes (10ч × 12 = 120 кр)] starts 2026-04-06 and ends 2026-05-03
+[Гордей / Technical Writer — Architecture/requirements notes (10ч × 12 = 120 кр)] is colored in LightSkyBlue
+[Веха LCA / architecture baseline] happens at 2026-05-03
+
+-- Construction / IOC: 3340 ч · 64 040 крышек --
+[Гордей / PM / BA — Iteration control  backlog  demos (240ч × 20 = 4 800 кр)] starts 2026-05-04 and ends 2026-11-29
+[Гордей / PM / BA — Iteration control  backlog  demos (240ч × 20 = 4 800 кр)] is colored in LightSkyBlue
+[Гордей / Product / Requirements Analyst — Backlog refinement  CR analysis (100ч × 18 = 1 800 кр)] starts 2026-05-04 and ends 2026-11-29
+[Гордей / Product / Requirements Analyst — Backlog refinement  CR analysis (100ч × 18 = 1 800 кр)] is colored in LightSkyBlue
+[Сергей / Solution Architect — Architecture support  decisions (120ч × 24 = 2 880 кр)] starts 2026-05-04 and ends 2026-11-29
+[Сергей / Solution Architect — Architecture support  decisions (120ч × 24 = 2 880 кр)] is colored in PaleGreen
+[Сергей / Backend Lead — API review  backend quality  integration design (380ч × 24 = 9 120 кр)] starts 2026-05-04 and ends 2026-11-29
+[Сергей / Backend Lead — API review  backend quality  integration design (380ч × 24 = 9 120 кр)] is colored in PaleGreen
+[Сергей / Backend Engineer — Core backend  integrations  migrations (540ч × 20 = 10 800 кр)] starts 2026-05-04 and ends 2026-11-29
+[Сергей / Backend Engineer — Core backend  integrations  migrations (540ч × 20 = 10 800 кр)] is colored in PaleGreen
+[Гордей / Backend Engineer — Requests  route/status domain logic (280ч × 20 = 5 600 кр)] starts 2026-05-04 and ends 2026-11-29
+[Гордей / Backend Engineer — Requests  route/status domain logic (280ч × 20 = 5 600 кр)] is colored in LightSkyBlue
+[Артём / Backend Engineer — Aux API  reports  frontend support (460ч × 20 = 9 200 кр)] starts 2026-05-04 and ends 2026-11-29
+[Артём / Backend Engineer — Aux API  reports  frontend support (460ч × 20 = 9 200 кр)] is colored in SandyBrown
+[Артём / Frontend Engineer — Web terminal and Pip-Boy scenarios (600ч × 18 = 10 800 кр)] starts 2026-05-04 and ends 2026-11-29
+[Артём / Frontend Engineer — Web terminal and Pip-Boy scenarios (600ч × 18 = 10 800 кр)] is colored in SandyBrown
+[Артём / UI/UX Designer — UX polishing  error/empty states (70ч × 16 = 1 120 кр)] starts 2026-05-04 and ends 2026-11-29
+[Артём / UI/UX Designer — UX polishing  error/empty states (70ч × 16 = 1 120 кр)] is colored in SandyBrown
+[Гордей / QA / Test Analyst — Functional/regression QA (220ч × 14 = 3 080 кр)] starts 2026-05-04 and ends 2026-11-29
+[Гордей / QA / Test Analyst — Functional/regression QA (220ч × 14 = 3 080 кр)] is colored in LightSkyBlue
+[Артём / QA / Test Analyst — Frontend QA  UAT prep (100ч × 14 = 1 400 кр)] starts 2026-05-04 and ends 2026-11-29
+[Артём / QA / Test Analyst — Frontend QA  UAT prep (100ч × 14 = 1 400 кр)] is colored in SandyBrown
+[Сергей / DevOps Engineer — Environments  monitoring  backup (110ч × 16 = 1 760 кр)] starts 2026-05-04 and ends 2026-11-29
+[Сергей / DevOps Engineer — Environments  monitoring  backup (110ч × 16 = 1 760 кр)] is colored in PaleGreen
+[Гордей / Technical Writer — User guide draft (60ч × 12 = 720 кр)] starts 2026-05-04 and ends 2026-11-29
+[Гордей / Technical Writer — User guide draft (60ч × 12 = 720 кр)] is colored in LightSkyBlue
+[Артём / Technical Writer — UI screenshots/instructions (20ч × 12 = 240 кр)] starts 2026-05-04 and ends 2026-11-29
+[Артём / Technical Writer — UI screenshots/instructions (20ч × 12 = 240 кр)] is colored in SandyBrown
+[Сергей / Release Manager — RC checklist prep (40ч × 18 = 720 кр)] starts 2026-05-04 and ends 2026-11-29
+[Сергей / Release Manager — RC checklist prep (40ч × 18 = 720 кр)] is colored in PaleGreen
+[Веха IOC / release 0.9] happens at 2026-11-29
+
+-- Transition / PR: 670 ч · 11 820 крышек --
+[Гордей / PM / BA — UAT coordination  final acceptance (60ч × 20 = 1 200 кр)] starts 2026-11-30 and ends 2026-12-31
+[Гордей / PM / BA — UAT coordination  final acceptance (60ч × 20 = 1 200 кр)] is colored in LightSkyBlue
+[Гордей / Product / Requirements Analyst — UAT findings  scope control (20ч × 18 = 360 кр)] starts 2026-11-30 and ends 2026-12-31
+[Гордей / Product / Requirements Analyst — UAT findings  scope control (20ч × 18 = 360 кр)] is colored in LightSkyBlue
+[Сергей / Solution Architect — Handover architecture consult (20ч × 24 = 480 кр)] starts 2026-11-30 and ends 2026-12-31
+[Сергей / Solution Architect — Handover architecture consult (20ч × 24 = 480 кр)] is colored in PaleGreen
+[Сергей / Backend Lead — Critical fixes review (60ч × 24 = 1 440 кр)] starts 2026-11-30 and ends 2026-12-31
+[Сергей / Backend Lead — Critical fixes review (60ч × 24 = 1 440 кр)] is colored in PaleGreen
+[Сергей / Backend Engineer — Migration/release fixes (60ч × 20 = 1 200 кр)] starts 2026-11-30 and ends 2026-12-31
+[Сергей / Backend Engineer — Migration/release fixes (60ч × 20 = 1 200 кр)] is colored in PaleGreen
+[Гордей / Backend Engineer — UAT backend fixes (40ч × 20 = 800 кр)] starts 2026-11-30 and ends 2026-12-31
+[Гордей / Backend Engineer — UAT backend fixes (40ч × 20 = 800 кр)] is colored in LightSkyBlue
+[Артём / Backend Engineer — Report/UI support fixes (30ч × 20 = 600 кр)] starts 2026-11-30 and ends 2026-12-31
+[Артём / Backend Engineer — Report/UI support fixes (30ч × 20 = 600 кр)] is colored in SandyBrown
+[Артём / Frontend Engineer — UI fixes after pilot (40ч × 18 = 720 кр)] starts 2026-11-30 and ends 2026-12-31
+[Артём / Frontend Engineer — UI fixes after pilot (40ч × 18 = 720 кр)] is colored in SandyBrown
+[Артём / UI/UX Designer — UX tweaks after UAT (10ч × 16 = 160 кр)] starts 2026-11-30 and ends 2026-12-31
+[Артём / UI/UX Designer — UX tweaks after UAT (10ч × 16 = 160 кр)] is colored in SandyBrown
+[Гордей / QA / Test Analyst — UAT support  release regression (50ч × 14 = 700 кр)] starts 2026-11-30 and ends 2026-12-31
+[Гордей / QA / Test Analyst — UAT support  release regression (50ч × 14 = 700 кр)] is colored in LightSkyBlue
+[Артём / QA / Test Analyst — Regression retest  UI acceptance (60ч × 14 = 840 кр)] starts 2026-11-30 and ends 2026-12-31
+[Артём / QA / Test Analyst — Regression retest  UI acceptance (60ч × 14 = 840 кр)] is colored in SandyBrown
+[Сергей / DevOps Engineer — Production deploy  rollback checks (50ч × 16 = 800 кр)] starts 2026-11-30 and ends 2026-12-31
+[Сергей / DevOps Engineer — Production deploy  rollback checks (50ч × 16 = 800 кр)] is colored in PaleGreen
+[Гордей / Technical Writer — Release notes  user guide final (50ч × 12 = 600 кр)] starts 2026-11-30 and ends 2026-12-31
+[Гордей / Technical Writer — Release notes  user guide final (50ч × 12 = 600 кр)] is colored in LightSkyBlue
+[Артём / Technical Writer — Screenshots  field instructions (40ч × 12 = 480 кр)] starts 2026-11-30 and ends 2026-12-31
+[Артём / Technical Writer — Screenshots  field instructions (40ч × 12 = 480 кр)] is colored in SandyBrown
+[Сергей / Release Manager — Release 1.0 package and handover (80ч × 18 = 1 440 кр)] starts 2026-11-30 and ends 2026-12-31
+[Сергей / Release Manager — Release 1.0 package and handover (80ч × 18 = 1 440 кр)] is colored in PaleGreen
+[Веха PR / release 1.0] happens at 2026-12-31
+
+@endgantt
