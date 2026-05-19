@@ -32,10 +32,14 @@ endlegend
 [Гордей / Use-Case Specifier — acceptance criteria UC-1..UC-11 (40ч)] is colored in LightSkyBlue
 [Гордей / Project Manager — iteration plan, risks, budget baseline (24ч)] starts 2026-04-06 and ends 2026-04-19
 [Гордей / Project Manager — iteration plan, risks, budget baseline (24ч)] is colored in LightSkyBlue
+[Гордей / Project Manager — GitHub Issues setup and schedule control rules (16ч)] starts 2026-04-06 and ends 2026-04-19
+[Гордей / Project Manager — GitHub Issues setup and schedule control rules (16ч)] is colored in LightSkyBlue
 [Сергей / Software Architect — domain model and architecture baseline (48ч)] starts 2026-04-06 and ends 2026-04-19
 [Сергей / Software Architect — domain model and architecture baseline (48ч)] is colored in PaleGreen
 [Сергей / Designer — API boundaries and component contracts (24ч)] starts 2026-04-06 and ends 2026-04-19
 [Сергей / Designer — API boundaries and component contracts (24ч)] is colored in PaleGreen
+[Сергей / Integrator — CI quality gate and task traceability automation (8ч)] starts 2026-04-06 and ends 2026-04-19
+[Сергей / Integrator — CI quality gate and task traceability automation (8ч)] is colored in PaleGreen
 [Артём / User-Interface Designer — web/Pip-Boy wireframes UC-1, UC-7, UC-16 (40ч)] starts 2026-04-06 and ends 2026-04-19
 [Артём / User-Interface Designer — web/Pip-Boy wireframes UC-1, UC-7, UC-16 (40ч)] is colored in SandyBrown
 [Артём / Implementer — React skeleton and UI routing (24ч)] starts 2026-04-06 and ends 2026-04-19
@@ -128,6 +132,8 @@ endlegend
 [Артём / User-Interface Designer — Pip-Boy stage UX UC-16 (28ч)] is colored in SandyBrown
 [Артём / Implementer — Pip-Boy stage flow UC-16, UC-17 (44ч)] starts 2026-06-29 and ends 2026-07-12
 [Артём / Implementer — Pip-Boy stage flow UC-16, UC-17 (44ч)] is colored in SandyBrown
+[Артём / Tester — Pip-Boy readability and offline usability checks UC-16, UC-17 (8ч)] starts 2026-06-29 and ends 2026-07-12
+[Артём / Tester — Pip-Boy readability and offline usability checks UC-16, UC-17 (8ч)] is colored in SandyBrown
 
 -- Construction / I9: NCR checkpoints and sync --
 [Гордей / Implementer — DutyTax rules UC-18, UC-21 (36ч)] starts 2026-07-13 and ends 2026-07-26
