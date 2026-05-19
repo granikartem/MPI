@@ -1,131 +1,309 @@
 @startgantt
-title ИС «Караваны» — диаграмма Ганта по ролям, активностям и стоимости
+title ИС «Караваны» — диаграмма Ганта по RUP-ролям, сервисам, UC и релизам
 Project starts 2026-03-23
-Project ends 2026-12-31
 printscale weekly
 saturday are closed
 sunday are closed
 
 legend right
-|= Исполнитель |= Цвет |= Совмещаемые роли |
-| Гордей | LightSkyBlue | PM/BA, Requirements Analyst, Backend Engineer, QA, Technical Writer |
-| Сергей | PaleGreen | Solution Architect, Backend Lead, Backend Engineer, DevOps, Release Manager |
-| Артём | SandyBrown | Frontend Engineer, UI/UX, Backend Engineer, QA, Technical Writer |
-| Расчёт | | Стоимость активности = часы в роли × ставка роли |
+|= Исполнитель |= Цвет |= RUP-роли в плане |
+| Гордей | LightSkyBlue | Project Manager, System Analyst, Use-Case Specifier, Change Control Manager, Test Designer, Tester, Technical Writer, Implementer |
+| Сергей | PaleGreen | Software Architect, Designer, Implementer, Integrator, Configuration Manager, Deployment Manager |
+| Артём | SandyBrown | User-Interface Designer, Implementer, Tester, Technical Writer |
+| Правило загрузки | White | Не более 80 ч за 2-недельную итерацию, то есть не более 40 ч/неделю |
+| Версионирование | White | Semantic Versioning: MAJOR.MINOR.PATCH-prerelease.N |
 endlegend
 
--- Inception / LCO: 200 ч · 3 980 крышек --
-[Гордей / PM / BA — Kick-off  scope  SDP (60ч × 20 = 1 200 кр)] starts 2026-03-23 and ends 2026-04-05
-[Гордей / PM / BA — Kick-off  scope  SDP (60ч × 20 = 1 200 кр)] is colored in LightSkyBlue
-[Гордей / Product / Requirements Analyst — Vision/SRS/UC baseline (40ч × 18 = 720 кр)] starts 2026-03-23 and ends 2026-04-05
-[Гордей / Product / Requirements Analyst — Vision/SRS/UC baseline (40ч × 18 = 720 кр)] is colored in LightSkyBlue
-[Сергей / Solution Architect — Tech risks  architecture sketch (30ч × 24 = 720 кр)] starts 2026-03-23 and ends 2026-04-05
-[Сергей / Solution Architect — Tech risks  architecture sketch (30ч × 24 = 720 кр)] is colored in PaleGreen
-[Сергей / Backend Lead — Backend approach/API boundaries (20ч × 24 = 480 кр)] starts 2026-03-23 and ends 2026-04-05
-[Сергей / Backend Lead — Backend approach/API boundaries (20ч × 24 = 480 кр)] is colored in PaleGreen
-[Сергей / Backend Engineer — Prototype skeleton (20ч × 20 = 400 кр)] starts 2026-03-23 and ends 2026-04-05
-[Сергей / Backend Engineer — Prototype skeleton (20ч × 20 = 400 кр)] is colored in PaleGreen
-[Артём / UI/UX Designer — UX concept for web/Pip-Boy (10ч × 16 = 160 кр)] starts 2026-03-23 and ends 2026-04-05
-[Артём / UI/UX Designer — UX concept for web/Pip-Boy (10ч × 16 = 160 кр)] is colored in SandyBrown
-[Гордей / QA / Test Analyst — Quality approach (10ч × 14 = 140 кр)] starts 2026-03-23 and ends 2026-04-05
-[Гордей / QA / Test Analyst — Quality approach (10ч × 14 = 140 кр)] is colored in LightSkyBlue
-[Сергей / DevOps Engineer — Environment scheme (10ч × 16 = 160 кр)] starts 2026-03-23 and ends 2026-04-05
-[Сергей / DevOps Engineer — Environment scheme (10ч × 16 = 160 кр)] is colored in PaleGreen
-[Веха LCO / baseline scope] happens at 2026-04-05
+-- Inception / I1 / LCO: 156 ч --
+[Гордей / Project Manager — SDP, LCO plan, task tracker, risks (32ч)] starts 2026-03-23 and ends 2026-04-05
+[Гордей / Project Manager — SDP, LCO plan, task tracker, risks (32ч)] is colored in LightSkyBlue
+[Гордей / System Analyst — Scope and priority UC-1, UC-7, UC-16, UC-19, UC-32 (28ч)] starts 2026-03-23 and ends 2026-04-05
+[Гордей / System Analyst — Scope and priority UC-1, UC-7, UC-16, UC-19, UC-32 (28ч)] is colored in LightSkyBlue
+[Сергей / Software Architect — architecture sketch, layered backend, data risks (40ч)] starts 2026-03-23 and ends 2026-04-05
+[Сергей / Software Architect — architecture sketch, layered backend, data risks (40ч)] is colored in PaleGreen
+[Сергей / Deployment Manager — dev/test environment scheme (16ч)] starts 2026-03-23 and ends 2026-04-05
+[Сергей / Deployment Manager — dev/test environment scheme (16ч)] is colored in PaleGreen
+[Артём / User-Interface Designer — web and Pip-Boy UX concept (40ч)] starts 2026-03-23 and ends 2026-04-05
+[Артём / User-Interface Designer — web and Pip-Boy UX concept (40ч)] is colored in SandyBrown
+[Release v0.1.0-alpha.0 / LCO baseline] happens at 2026-04-05
 
--- Elaboration / LCA: 950 ч · 18 520 крышек --
-[Гордей / PM / BA — Iteration planning  phase gate (100ч × 20 = 2 000 кр)] starts 2026-04-06 and ends 2026-05-03
-[Гордей / PM / BA — Iteration planning  phase gate (100ч × 20 = 2 000 кр)] is colored in LightSkyBlue
-[Гордей / Product / Requirements Analyst — UC-1..UC-11  acceptance criteria (120ч × 18 = 2 160 кр)] starts 2026-04-06 and ends 2026-05-03
-[Гордей / Product / Requirements Analyst — UC-1..UC-11  acceptance criteria (120ч × 18 = 2 160 кр)] is colored in LightSkyBlue
-[Сергей / Solution Architect — Architecture baseline  data model (150ч × 24 = 3 600 кр)] starts 2026-04-06 and ends 2026-05-03
-[Сергей / Solution Architect — Architecture baseline  data model (150ч × 24 = 3 600 кр)] is colored in PaleGreen
-[Сергей / Backend Lead — API standards  backend decomposition (100ч × 24 = 2 400 кр)] starts 2026-04-06 and ends 2026-05-03
-[Сергей / Backend Lead — API standards  backend decomposition (100ч × 24 = 2 400 кр)] is colored in PaleGreen
-[Сергей / Backend Engineer — Auth/org skeleton  API spike (80ч × 20 = 1 600 кр)] starts 2026-04-06 and ends 2026-05-03
-[Сергей / Backend Engineer — Auth/org skeleton  API spike (80ч × 20 = 1 600 кр)] is colored in PaleGreen
-[Гордей / Backend Engineer — Domain spike  status model (40ч × 20 = 800 кр)] starts 2026-04-06 and ends 2026-05-03
-[Гордей / Backend Engineer — Domain spike  status model (40ч × 20 = 800 кр)] is colored in LightSkyBlue
-[Артём / Backend Engineer — Client/backend contract support (30ч × 20 = 600 кр)] starts 2026-04-06 and ends 2026-05-03
-[Артём / Backend Engineer — Client/backend contract support (30ч × 20 = 600 кр)] is colored in SandyBrown
-[Артём / Frontend Engineer — Skeleton web UI and Pip-Boy UI (120ч × 18 = 2 160 кр)] starts 2026-04-06 and ends 2026-05-03
-[Артём / Frontend Engineer — Skeleton web UI and Pip-Boy UI (120ч × 18 = 2 160 кр)] is colored in SandyBrown
-[Артём / UI/UX Designer — Mockups  field flows  3-5 steps (90ч × 16 = 1 440 кр)] starts 2026-04-06 and ends 2026-05-03
-[Артём / UI/UX Designer — Mockups  field flows  3-5 steps (90ч × 16 = 1 440 кр)] is colored in SandyBrown
-[Гордей / QA / Test Analyst — Test strategy  traceability (40ч × 14 = 560 кр)] starts 2026-04-06 and ends 2026-05-03
-[Гордей / QA / Test Analyst — Test strategy  traceability (40ч × 14 = 560 кр)] is colored in LightSkyBlue
-[Артём / QA / Test Analyst — UI acceptance checks (20ч × 14 = 280 кр)] starts 2026-04-06 and ends 2026-05-03
-[Артём / QA / Test Analyst — UI acceptance checks (20ч × 14 = 280 кр)] is colored in SandyBrown
-[Сергей / DevOps Engineer — CI/CD MVP  test env (50ч × 16 = 800 кр)] starts 2026-04-06 and ends 2026-05-03
-[Сергей / DevOps Engineer — CI/CD MVP  test env (50ч × 16 = 800 кр)] is colored in PaleGreen
-[Гордей / Technical Writer — Architecture/requirements notes (10ч × 12 = 120 кр)] starts 2026-04-06 and ends 2026-05-03
-[Гордей / Technical Writer — Architecture/requirements notes (10ч × 12 = 120 кр)] is colored in LightSkyBlue
-[Веха LCA / architecture baseline] happens at 2026-05-03
+-- Elaboration / I2: requirements and architecture alpha --
+[Гордей / Use-Case Specifier — acceptance criteria UC-1..UC-11 (40ч)] starts 2026-04-06 and ends 2026-04-19
+[Гордей / Use-Case Specifier — acceptance criteria UC-1..UC-11 (40ч)] is colored in LightSkyBlue
+[Гордей / Project Manager — iteration plan, risks, budget baseline (24ч)] starts 2026-04-06 and ends 2026-04-19
+[Гордей / Project Manager — iteration plan, risks, budget baseline (24ч)] is colored in LightSkyBlue
+[Сергей / Software Architect — domain model and architecture baseline (48ч)] starts 2026-04-06 and ends 2026-04-19
+[Сергей / Software Architect — domain model and architecture baseline (48ч)] is colored in PaleGreen
+[Сергей / Designer — API boundaries and component contracts (24ч)] starts 2026-04-06 and ends 2026-04-19
+[Сергей / Designer — API boundaries and component contracts (24ч)] is colored in PaleGreen
+[Артём / User-Interface Designer — web/Pip-Boy wireframes UC-1, UC-7, UC-16 (40ч)] starts 2026-04-06 and ends 2026-04-19
+[Артём / User-Interface Designer — web/Pip-Boy wireframes UC-1, UC-7, UC-16 (40ч)] is colored in SandyBrown
+[Артём / Implementer — React skeleton and UI routing (24ч)] starts 2026-04-06 and ends 2026-04-19
+[Артём / Implementer — React skeleton and UI routing (24ч)] is colored in SandyBrown
 
--- Construction / IOC: 3340 ч · 64 040 крышек --
-[Гордей / PM / BA — Iteration control  backlog  demos (240ч × 20 = 4 800 кр)] starts 2026-05-04 and ends 2026-11-29
-[Гордей / PM / BA — Iteration control  backlog  demos (240ч × 20 = 4 800 кр)] is colored in LightSkyBlue
-[Гордей / Product / Requirements Analyst — Backlog refinement  CR analysis (100ч × 18 = 1 800 кр)] starts 2026-05-04 and ends 2026-11-29
-[Гордей / Product / Requirements Analyst — Backlog refinement  CR analysis (100ч × 18 = 1 800 кр)] is colored in LightSkyBlue
-[Сергей / Solution Architect — Architecture support  decisions (120ч × 24 = 2 880 кр)] starts 2026-05-04 and ends 2026-11-29
-[Сергей / Solution Architect — Architecture support  decisions (120ч × 24 = 2 880 кр)] is colored in PaleGreen
-[Сергей / Backend Lead — API review  backend quality  integration design (380ч × 24 = 9 120 кр)] starts 2026-05-04 and ends 2026-11-29
-[Сергей / Backend Lead — API review  backend quality  integration design (380ч × 24 = 9 120 кр)] is colored in PaleGreen
-[Сергей / Backend Engineer — Core backend  integrations  migrations (540ч × 20 = 10 800 кр)] starts 2026-05-04 and ends 2026-11-29
-[Сергей / Backend Engineer — Core backend  integrations  migrations (540ч × 20 = 10 800 кр)] is colored in PaleGreen
-[Гордей / Backend Engineer — Requests  route/status domain logic (280ч × 20 = 5 600 кр)] starts 2026-05-04 and ends 2026-11-29
-[Гордей / Backend Engineer — Requests  route/status domain logic (280ч × 20 = 5 600 кр)] is colored in LightSkyBlue
-[Артём / Backend Engineer — Aux API  reports  frontend support (460ч × 20 = 9 200 кр)] starts 2026-05-04 and ends 2026-11-29
-[Артём / Backend Engineer — Aux API  reports  frontend support (460ч × 20 = 9 200 кр)] is colored in SandyBrown
-[Артём / Frontend Engineer — Web terminal and Pip-Boy scenarios (600ч × 18 = 10 800 кр)] starts 2026-05-04 and ends 2026-11-29
-[Артём / Frontend Engineer — Web terminal and Pip-Boy scenarios (600ч × 18 = 10 800 кр)] is colored in SandyBrown
-[Артём / UI/UX Designer — UX polishing  error/empty states (70ч × 16 = 1 120 кр)] starts 2026-05-04 and ends 2026-11-29
-[Артём / UI/UX Designer — UX polishing  error/empty states (70ч × 16 = 1 120 кр)] is colored in SandyBrown
-[Гордей / QA / Test Analyst — Functional/regression QA (220ч × 14 = 3 080 кр)] starts 2026-05-04 and ends 2026-11-29
-[Гордей / QA / Test Analyst — Functional/regression QA (220ч × 14 = 3 080 кр)] is colored in LightSkyBlue
-[Артём / QA / Test Analyst — Frontend QA  UAT prep (100ч × 14 = 1 400 кр)] starts 2026-05-04 and ends 2026-11-29
-[Артём / QA / Test Analyst — Frontend QA  UAT prep (100ч × 14 = 1 400 кр)] is colored in SandyBrown
-[Сергей / DevOps Engineer — Environments  monitoring  backup (110ч × 16 = 1 760 кр)] starts 2026-05-04 and ends 2026-11-29
-[Сергей / DevOps Engineer — Environments  monitoring  backup (110ч × 16 = 1 760 кр)] is colored in PaleGreen
-[Гордей / Technical Writer — User guide draft (60ч × 12 = 720 кр)] starts 2026-05-04 and ends 2026-11-29
-[Гордей / Technical Writer — User guide draft (60ч × 12 = 720 кр)] is colored in LightSkyBlue
-[Артём / Technical Writer — UI screenshots/instructions (20ч × 12 = 240 кр)] starts 2026-05-04 and ends 2026-11-29
-[Артём / Technical Writer — UI screenshots/instructions (20ч × 12 = 240 кр)] is colored in SandyBrown
-[Сергей / Release Manager — RC checklist prep (40ч × 18 = 720 кр)] starts 2026-05-04 and ends 2026-11-29
-[Сергей / Release Manager — RC checklist prep (40ч × 18 = 720 кр)] is colored in PaleGreen
-[Веха IOC / release 0.9] happens at 2026-11-29
+-- Elaboration / I3 / LCA: executable architecture --
+[Гордей / System Analyst — traceability FR/UC to backlog (32ч)] starts 2026-04-20 and ends 2026-05-03
+[Гордей / System Analyst — traceability FR/UC to backlog (32ч)] is colored in LightSkyBlue
+[Гордей / Test Designer — quality gates and test strategy (28ч)] starts 2026-04-20 and ends 2026-05-03
+[Гордей / Test Designer — quality gates and test strategy (28ч)] is colored in LightSkyBlue
+[Сергей / Designer — Auth and Organization design spike UC-25..UC-34 (42ч)] starts 2026-04-20 and ends 2026-05-03
+[Сергей / Designer — Auth and Organization design spike UC-25..UC-34 (42ч)] is colored in PaleGreen
+[Сергей / Integrator — CI MVP and external API mocks (28ч)] starts 2026-04-20 and ends 2026-05-03
+[Сергей / Integrator — CI MVP and external API mocks (28ч)] is colored in PaleGreen
+[Артём / User-Interface Designer — core mockups UC-1, UC-7, UC-16, UC-19, UC-32 (36ч)] starts 2026-04-20 and ends 2026-05-03
+[Артём / User-Interface Designer — core mockups UC-1, UC-7, UC-16, UC-19, UC-32 (36ч)] is colored in SandyBrown
+[Артём / Implementer — frontend skeleton and API client draft (32ч)] starts 2026-04-20 and ends 2026-05-03
+[Артём / Implementer — frontend skeleton and API client draft (32ч)] is colored in SandyBrown
+[Release v0.2.0-alpha.0 / LCA architecture baseline] happens at 2026-05-03
 
--- Transition / PR: 670 ч · 11 820 крышек --
-[Гордей / PM / BA — UAT coordination  final acceptance (60ч × 20 = 1 200 кр)] starts 2026-11-30 and ends 2026-12-31
-[Гордей / PM / BA — UAT coordination  final acceptance (60ч × 20 = 1 200 кр)] is colored in LightSkyBlue
-[Гордей / Product / Requirements Analyst — UAT findings  scope control (20ч × 18 = 360 кр)] starts 2026-11-30 and ends 2026-12-31
-[Гордей / Product / Requirements Analyst — UAT findings  scope control (20ч × 18 = 360 кр)] is colored in LightSkyBlue
-[Сергей / Solution Architect — Handover architecture consult (20ч × 24 = 480 кр)] starts 2026-11-30 and ends 2026-12-31
-[Сергей / Solution Architect — Handover architecture consult (20ч × 24 = 480 кр)] is colored in PaleGreen
-[Сергей / Backend Lead — Critical fixes review (60ч × 24 = 1 440 кр)] starts 2026-11-30 and ends 2026-12-31
-[Сергей / Backend Lead — Critical fixes review (60ч × 24 = 1 440 кр)] is colored in PaleGreen
-[Сергей / Backend Engineer — Migration/release fixes (60ч × 20 = 1 200 кр)] starts 2026-11-30 and ends 2026-12-31
-[Сергей / Backend Engineer — Migration/release fixes (60ч × 20 = 1 200 кр)] is colored in PaleGreen
-[Гордей / Backend Engineer — UAT backend fixes (40ч × 20 = 800 кр)] starts 2026-11-30 and ends 2026-12-31
-[Гордей / Backend Engineer — UAT backend fixes (40ч × 20 = 800 кр)] is colored in LightSkyBlue
-[Артём / Backend Engineer — Report/UI support fixes (30ч × 20 = 600 кр)] starts 2026-11-30 and ends 2026-12-31
-[Артём / Backend Engineer — Report/UI support fixes (30ч × 20 = 600 кр)] is colored in SandyBrown
-[Артём / Frontend Engineer — UI fixes after pilot (40ч × 18 = 720 кр)] starts 2026-11-30 and ends 2026-12-31
-[Артём / Frontend Engineer — UI fixes after pilot (40ч × 18 = 720 кр)] is colored in SandyBrown
-[Артём / UI/UX Designer — UX tweaks after UAT (10ч × 16 = 160 кр)] starts 2026-11-30 and ends 2026-12-31
-[Артём / UI/UX Designer — UX tweaks after UAT (10ч × 16 = 160 кр)] is colored in SandyBrown
-[Гордей / QA / Test Analyst — UAT support  release regression (50ч × 14 = 700 кр)] starts 2026-11-30 and ends 2026-12-31
-[Гордей / QA / Test Analyst — UAT support  release regression (50ч × 14 = 700 кр)] is colored in LightSkyBlue
-[Артём / QA / Test Analyst — Regression retest  UI acceptance (60ч × 14 = 840 кр)] starts 2026-11-30 and ends 2026-12-31
-[Артём / QA / Test Analyst — Regression retest  UI acceptance (60ч × 14 = 840 кр)] is colored in SandyBrown
-[Сергей / DevOps Engineer — Production deploy  rollback checks (50ч × 16 = 800 кр)] starts 2026-11-30 and ends 2026-12-31
-[Сергей / DevOps Engineer — Production deploy  rollback checks (50ч × 16 = 800 кр)] is colored in PaleGreen
-[Гордей / Technical Writer — Release notes  user guide final (50ч × 12 = 600 кр)] starts 2026-11-30 and ends 2026-12-31
-[Гордей / Technical Writer — Release notes  user guide final (50ч × 12 = 600 кр)] is colored in LightSkyBlue
-[Артём / Technical Writer — Screenshots  field instructions (40ч × 12 = 480 кр)] starts 2026-11-30 and ends 2026-12-31
-[Артём / Technical Writer — Screenshots  field instructions (40ч × 12 = 480 кр)] is colored in SandyBrown
-[Сергей / Release Manager — Release 1.0 package and handover (80ч × 18 = 1 440 кр)] starts 2026-11-30 and ends 2026-12-31
-[Сергей / Release Manager — Release 1.0 package and handover (80ч × 18 = 1 440 кр)] is colored in PaleGreen
-[Веха PR / release 1.0] happens at 2026-12-31
+-- Construction / I4: request and trip core --
+[Гордей / Implementer — CaravanRequestService UC-1..UC-4 (40ч)] starts 2026-05-04 and ends 2026-05-17
+[Гордей / Implementer — CaravanRequestService UC-1..UC-4 (40ч)] is colored in LightSkyBlue
+[Гордей / Test Designer — status/audit test cases UC-1..UC-4 (20ч)] starts 2026-05-04 and ends 2026-05-17
+[Гордей / Test Designer — status/audit test cases UC-1..UC-4 (20ч)] is colored in LightSkyBlue
+[Сергей / Designer — persistence design for trip domain (30ч)] starts 2026-05-04 and ends 2026-05-17
+[Сергей / Designer — persistence design for trip domain (30ч)] is colored in PaleGreen
+[Сергей / Implementer — TripStatus model and migrations UC-2 (38ч)] starts 2026-05-04 and ends 2026-05-17
+[Сергей / Implementer — TripStatus model and migrations UC-2 (38ч)] is colored in PaleGreen
+[Артём / Implementer — dispatch forms and registry UI UC-1, UC-3 (48ч)] starts 2026-05-04 and ends 2026-05-17
+[Артём / Implementer — dispatch forms and registry UI UC-1, UC-3 (48ч)] is colored in SandyBrown
+[Артём / Tester — UI smoke for request flow (16ч)] starts 2026-05-04 and ends 2026-05-17
+[Артём / Tester — UI smoke for request flow (16ч)] is colored in SandyBrown
+
+-- Construction / I5: users, security, organizations --
+[Гордей / System Analyst — access and organization criteria UC-25..UC-34 (20ч)] starts 2026-05-18 and ends 2026-05-31
+[Гордей / System Analyst — access and organization criteria UC-25..UC-34 (20ч)] is colored in LightSkyBlue
+[Гордей / Implementer — user role policy hooks UC-25..UC-31 (36ч)] starts 2026-05-18 and ends 2026-05-31
+[Гордей / Implementer — user role policy hooks UC-25..UC-31 (36ч)] is colored in LightSkyBlue
+[Сергей / Implementer — OrganizationService UC-32..UC-34 (42ч)] starts 2026-05-18 and ends 2026-05-31
+[Сергей / Implementer — OrganizationService UC-32..UC-34 (42ч)] is colored in PaleGreen
+[Сергей / Integrator — tenant isolation integration (26ч)] starts 2026-05-18 and ends 2026-05-31
+[Сергей / Integrator — tenant isolation integration (26ч)] is colored in PaleGreen
+[Артём / Implementer — SecurityService and user admin UI UC-25..UC-31 (50ч)] starts 2026-05-18 and ends 2026-05-31
+[Артём / Implementer — SecurityService and user admin UI UC-25..UC-31 (50ч)] is colored in SandyBrown
+[Артём / Tester — access smoke tests (16ч)] starts 2026-05-18 and ends 2026-05-31
+[Артём / Tester — access smoke tests (16ч)] is colored in SandyBrown
+[Release v0.3.0-alpha.0 / security and org alpha] happens at 2026-05-31
+
+-- Construction / I6: route, ETA and risk --
+[Гордей / Implementer — RouteService and ETA rules UC-5, UC-6 (42ч)] starts 2026-06-01 and ends 2026-06-14
+[Гордей / Implementer — RouteService and ETA rules UC-5, UC-6 (42ч)] is colored in LightSkyBlue
+[Гордей / Use-Case Specifier — risk acceptance criteria UC-7, UC-8 (18ч)] starts 2026-06-01 and ends 2026-06-14
+[Гордей / Use-Case Specifier — risk acceptance criteria UC-7, UC-8 (18ч)] is colored in LightSkyBlue
+[Сергей / Implementer — RiskScoreService and WastelandIntelAdapter UC-7, UC-23 (50ч)] starts 2026-06-01 and ends 2026-06-14
+[Сергей / Implementer — RiskScoreService and WastelandIntelAdapter UC-7, UC-23 (50ч)] is colored in PaleGreen
+[Сергей / Integrator — Wasteland Intel mock contract (20ч)] starts 2026-06-01 and ends 2026-06-14
+[Сергей / Integrator — Wasteland Intel mock contract (20ч)] is colored in PaleGreen
+[Артём / Implementer — request, route and risk UI UC-1, UC-5, UC-7 (52ч)] starts 2026-06-01 and ends 2026-06-14
+[Артём / Implementer — request, route and risk UI UC-1, UC-5, UC-7 (52ч)] is colored in SandyBrown
+[Артём / Tester — route/risk UI checks (16ч)] starts 2026-06-01 and ends 2026-06-14
+[Артём / Tester — route/risk UI checks (16ч)] is colored in SandyBrown
+[Release v0.4.0-alpha.0 / dispatch alpha] happens at 2026-06-14
+
+-- Construction / I7: team and cargo --
+[Гордей / Implementer — TeamAssignmentService UC-9, UC-10 (40ч)] starts 2026-06-15 and ends 2026-06-28
+[Гордей / Implementer — TeamAssignmentService UC-9, UC-10 (40ч)] is colored in LightSkyBlue
+[Гордей / Test Designer — cargo/team tests UC-9..UC-15 (18ч)] starts 2026-06-15 and ends 2026-06-28
+[Гордей / Test Designer — cargo/team tests UC-9..UC-15 (18ч)] is colored in LightSkyBlue
+[Сергей / Implementer — CargoManifestService UC-11..UC-15 (48ч)] starts 2026-06-15 and ends 2026-06-28
+[Сергей / Implementer — CargoManifestService UC-11..UC-15 (48ч)] is colored in PaleGreen
+[Сергей / Designer — manifest validation design (20ч)] starts 2026-06-15 and ends 2026-06-28
+[Сергей / Designer — manifest validation design (20ч)] is colored in PaleGreen
+[Артём / Implementer — team and manifest UI UC-9, UC-11, UC-13 (54ч)] starts 2026-06-15 and ends 2026-06-28
+[Артём / Implementer — team and manifest UI UC-9, UC-11, UC-13 (54ч)] is colored in SandyBrown
+[Артём / Tester — team/manifest UI checks (16ч)] starts 2026-06-15 and ends 2026-06-28
+[Артём / Tester — team/manifest UI checks (16ч)] is colored in SandyBrown
+[Release v0.5.0-alpha.0 / cargo and team alpha] happens at 2026-06-28
+
+-- Construction / I8: field stages --
+[Гордей / Test Designer — field scenarios UC-16..UC-18 (32ч)] starts 2026-06-29 and ends 2026-07-12
+[Гордей / Test Designer — field scenarios UC-16..UC-18 (32ч)] is colored in LightSkyBlue
+[Гордей / System Analyst — offline rules and event conflicts (20ч)] starts 2026-06-29 and ends 2026-07-12
+[Гордей / System Analyst — offline rules and event conflicts (20ч)] is colored in LightSkyBlue
+[Сергей / Implementer — CheckpointLogService UC-16..UC-18 (50ч)] starts 2026-06-29 and ends 2026-07-12
+[Сергей / Implementer — CheckpointLogService UC-16..UC-18 (50ч)] is colored in PaleGreen
+[Сергей / Designer — offline event model (20ч)] starts 2026-06-29 and ends 2026-07-12
+[Сергей / Designer — offline event model (20ч)] is colored in PaleGreen
+[Артём / User-Interface Designer — Pip-Boy stage UX UC-16 (28ч)] starts 2026-06-29 and ends 2026-07-12
+[Артём / User-Interface Designer — Pip-Boy stage UX UC-16 (28ч)] is colored in SandyBrown
+[Артём / Implementer — Pip-Boy stage flow UC-16, UC-17 (44ч)] starts 2026-06-29 and ends 2026-07-12
+[Артём / Implementer — Pip-Boy stage flow UC-16, UC-17 (44ч)] is colored in SandyBrown
+
+-- Construction / I9: NCR checkpoints and sync --
+[Гордей / Implementer — DutyTax rules UC-18, UC-21 (36ч)] starts 2026-07-13 and ends 2026-07-26
+[Гордей / Implementer — DutyTax rules UC-18, UC-21 (36ч)] is colored in LightSkyBlue
+[Гордей / Test Designer — sync and fee test cases UC-18, UC-24 (20ч)] starts 2026-07-13 and ends 2026-07-26
+[Гордей / Test Designer — sync and fee test cases UC-18, UC-24 (20ч)] is colored in LightSkyBlue
+[Сергей / Implementer — NCRCheckpointAdapter UC-18, UC-24 (44ч)] starts 2026-07-13 and ends 2026-07-26
+[Сергей / Implementer — NCRCheckpointAdapter UC-18, UC-24 (44ч)] is colored in PaleGreen
+[Сергей / Integrator — SyncQueue for offline events (26ч)] starts 2026-07-13 and ends 2026-07-26
+[Сергей / Integrator — SyncQueue for offline events (26ч)] is colored in PaleGreen
+[Артём / Implementer — checkpoint UX and sync states UC-18 (52ч)] starts 2026-07-13 and ends 2026-07-26
+[Артём / Implementer — checkpoint UX and sync states UC-18 (52ч)] is colored in SandyBrown
+[Артём / Tester — offline UI checks (18ч)] starts 2026-07-13 and ends 2026-07-26
+[Артём / Tester — offline UI checks (18ч)] is colored in SandyBrown
+[Release v0.6.0-alpha.0 / operational alpha] happens at 2026-07-26
+
+-- Construction / I10: incidents --
+[Гордей / System Analyst — incident severity model UC-19, UC-20 (22ч)] starts 2026-07-27 and ends 2026-08-09
+[Гордей / System Analyst — incident severity model UC-19, UC-20 (22ч)] is colored in LightSkyBlue
+[Гордей / Test Designer — incident test design UC-19 (28ч)] starts 2026-07-27 and ends 2026-08-09
+[Гордей / Test Designer — incident test design UC-19 (28ч)] is colored in LightSkyBlue
+[Сергей / Implementer — IncidentService UC-19 (48ч)] starts 2026-07-27 and ends 2026-08-09
+[Сергей / Implementer — IncidentService UC-19 (48ч)] is colored in PaleGreen
+[Сергей / Integrator — dispatcher notification events UC-19 (20ч)] starts 2026-07-27 and ends 2026-08-09
+[Сергей / Integrator — dispatcher notification events UC-19 (20ч)] is colored in PaleGreen
+[Артём / Implementer — IncidentReportService and Pip-Boy UI UC-19 (52ч)] starts 2026-07-27 and ends 2026-08-09
+[Артём / Implementer — IncidentReportService and Pip-Boy UI UC-19 (52ч)] is colored in SandyBrown
+[Артём / Tester — incident UI checks (18ч)] starts 2026-07-27 and ends 2026-08-09
+[Артём / Tester — incident UI checks (18ч)] is colored in SandyBrown
+
+-- Construction / I11: recovery --
+[Гордей / Implementer — RecoveryRequestService UC-20 (40ч)] starts 2026-08-10 and ends 2026-08-23
+[Гордей / Implementer — RecoveryRequestService UC-20 (40ч)] is colored in LightSkyBlue
+[Гордей / Change Control Manager — defect/scope triage for beta (16ч)] starts 2026-08-10 and ends 2026-08-23
+[Гордей / Change Control Manager — defect/scope triage for beta (16ч)] is colored in LightSkyBlue
+[Сергей / Implementer — reschedule workflow UC-20 (46ч)] starts 2026-08-10 and ends 2026-08-23
+[Сергей / Implementer — reschedule workflow UC-20 (46ч)] is colored in PaleGreen
+[Сергей / Integrator — external fallback handling UC-23, UC-24 (24ч)] starts 2026-08-10 and ends 2026-08-23
+[Сергей / Integrator — external fallback handling UC-23, UC-24 (24ч)] is colored in PaleGreen
+[Артём / Implementer — dispatcher recovery UI UC-20 (52ч)] starts 2026-08-10 and ends 2026-08-23
+[Артём / Implementer — dispatcher recovery UI UC-20 (52ч)] is colored in SandyBrown
+[Артём / Tester — recovery workflow checks (16ч)] starts 2026-08-10 and ends 2026-08-23
+[Артём / Tester — recovery workflow checks (16ч)] is colored in SandyBrown
+[Release v0.7.0-beta.1 / recovery beta] happens at 2026-08-23
+
+-- Construction / I12: finance --
+[Гордей / Implementer — FinanceReportService UC-21, UC-22 (38ч)] starts 2026-08-24 and ends 2026-09-06
+[Гордей / Implementer — FinanceReportService UC-21, UC-22 (38ч)] is colored in LightSkyBlue
+[Гордей / Use-Case Specifier — report acceptance UC-21, UC-22 (16ч)] starts 2026-08-24 and ends 2026-09-06
+[Гордей / Use-Case Specifier — report acceptance UC-21, UC-22 (16ч)] is colored in LightSkyBlue
+[Сергей / Implementer — ledger aggregation and export API UC-21, UC-22 (44ч)] starts 2026-08-24 and ends 2026-09-06
+[Сергей / Implementer — ledger aggregation and export API UC-21, UC-22 (44ч)] is colored in PaleGreen
+[Сергей / Integrator — holotape export integration UC-22 (22ч)] starts 2026-08-24 and ends 2026-09-06
+[Сергей / Integrator — holotape export integration UC-22 (22ч)] is colored in PaleGreen
+[Артём / Implementer — report UI and holotape export UC-21, UC-22 (50ч)] starts 2026-08-24 and ends 2026-09-06
+[Артём / Implementer — report UI and holotape export UC-21, UC-22 (50ч)] is colored in SandyBrown
+[Артём / Tester — report/export UI checks (18ч)] starts 2026-08-24 and ends 2026-09-06
+[Артём / Tester — report/export UI checks (18ч)] is colored in SandyBrown
+[Release v0.8.0-beta.1 / finance beta] happens at 2026-09-06
+
+-- Construction / I13: integration hardening --
+[Гордей / Test Designer — integration test suite and traceability (42ч)] starts 2026-09-07 and ends 2026-09-20
+[Гордей / Test Designer — integration test suite and traceability (42ч)] is colored in LightSkyBlue
+[Гордей / System Analyst — FR/UC traceability update (14ч)] starts 2026-09-07 and ends 2026-09-20
+[Гордей / System Analyst — FR/UC traceability update (14ч)] is colored in LightSkyBlue
+[Сергей / Integrator — Wasteland/NCR contract tests UC-23, UC-24 (40ч)] starts 2026-09-07 and ends 2026-09-20
+[Сергей / Integrator — Wasteland/NCR contract tests UC-23, UC-24 (40ч)] is colored in PaleGreen
+[Сергей / Configuration Manager — audit baseline and build reproducibility (28ч)] starts 2026-09-07 and ends 2026-09-20
+[Сергей / Configuration Manager — audit baseline and build reproducibility (28ч)] is colored in PaleGreen
+[Артём / Tester — cross-client regression web/Pip-Boy (44ч)] starts 2026-09-07 and ends 2026-09-20
+[Артём / Tester — cross-client regression web/Pip-Boy (44ч)] is colored in SandyBrown
+[Артём / Implementer — UI defect fixes from integration pass (24ч)] starts 2026-09-07 and ends 2026-09-20
+[Артём / Implementer — UI defect fixes from integration pass (24ч)] is colored in SandyBrown
+
+-- Construction / I14: UX and security polish --
+[Гордей / Test Designer — UAT scenarios UC-1, UC-7, UC-16, UC-19, UC-32 (30ч)] starts 2026-09-21 and ends 2026-10-04
+[Гордей / Test Designer — UAT scenarios UC-1, UC-7, UC-16, UC-19, UC-32 (30ч)] is colored in LightSkyBlue
+[Гордей / Technical Writer — draft user instructions (20ч)] starts 2026-09-21 and ends 2026-10-04
+[Гордей / Technical Writer — draft user instructions (20ч)] is colored in LightSkyBlue
+[Сергей / Designer — security/access audit design (28ч)] starts 2026-09-21 and ends 2026-10-04
+[Сергей / Designer — security/access audit design (28ч)] is colored in PaleGreen
+[Сергей / Implementer — performance and access fixes (38ч)] starts 2026-09-21 and ends 2026-10-04
+[Сергей / Implementer — performance and access fixes (38ч)] is colored in PaleGreen
+[Артём / User-Interface Designer — UX polish and empty/error states (30ч)] starts 2026-09-21 and ends 2026-10-04
+[Артём / User-Interface Designer — UX polish and empty/error states (30ч)] is colored in SandyBrown
+[Артём / Implementer — web/Pip-Boy error and empty states (40ч)] starts 2026-09-21 and ends 2026-10-04
+[Артём / Implementer — web/Pip-Boy error and empty states (40ч)] is colored in SandyBrown
+[Release v0.8.1-beta.2 / UX and integration beta] happens at 2026-10-04
+
+-- Construction / I15: stabilization --
+[Гордей / Project Manager — scope freeze and demo governance (24ч)] starts 2026-10-05 and ends 2026-10-18
+[Гордей / Project Manager — scope freeze and demo governance (24ч)] is colored in LightSkyBlue
+[Гордей / Change Control Manager — backlog triage and CR decisions (24ч)] starts 2026-10-05 and ends 2026-10-18
+[Гордей / Change Control Manager — backlog triage and CR decisions (24ч)] is colored in LightSkyBlue
+[Сергей / Integrator — API stabilization and dependency alignment (36ч)] starts 2026-10-05 and ends 2026-10-18
+[Сергей / Integrator — API stabilization and dependency alignment (36ч)] is colored in PaleGreen
+[Сергей / Implementer — migration scripts and backend defects (34ч)] starts 2026-10-05 and ends 2026-10-18
+[Сергей / Implementer — migration scripts and backend defects (34ч)] is colored in PaleGreen
+[Артём / Tester — hardening regression pass (40ч)] starts 2026-10-05 and ends 2026-10-18
+[Артём / Tester — hardening regression pass (40ч)] is colored in SandyBrown
+[Артём / Implementer — web/Pip-Boy defect fixes (30ч)] starts 2026-10-05 and ends 2026-10-18
+[Артём / Implementer — web/Pip-Boy defect fixes (30ч)] is colored in SandyBrown
+[Release v0.8.2-beta.3 / stabilization build] happens at 2026-10-18
+
+-- Construction / I16: regression baseline --
+[Гордей / Test Designer — regression baseline and coverage matrix (36ч)] starts 2026-10-19 and ends 2026-11-01
+[Гордей / Test Designer — regression baseline and coverage matrix (36ч)] is colored in LightSkyBlue
+[Гордей / Tester — defect verification medium/high (24ч)] starts 2026-10-19 and ends 2026-11-01
+[Гордей / Tester — defect verification medium/high (24ч)] is colored in LightSkyBlue
+[Сергей / Deployment Manager — CI/CD, monitoring, backup rehearsal (34ч)] starts 2026-10-19 and ends 2026-11-01
+[Сергей / Deployment Manager — CI/CD, monitoring, backup rehearsal (34ч)] is colored in PaleGreen
+[Сергей / Integrator — deploy rehearsal and smoke pipeline (32ч)] starts 2026-10-19 and ends 2026-11-01
+[Сергей / Integrator — deploy rehearsal and smoke pipeline (32ч)] is colored in PaleGreen
+[Артём / Tester — frontend regression and readability checks (58ч)] starts 2026-10-19 and ends 2026-11-01
+[Артём / Tester — frontend regression and readability checks (58ч)] is colored in SandyBrown
+[Артём / Technical Writer — known UI issues draft (12ч)] starts 2026-10-19 and ends 2026-11-01
+[Артём / Technical Writer — known UI issues draft (12ч)] is colored in SandyBrown
+[Release v0.9.0-beta.1 / regression beta] happens at 2026-11-01
+
+-- Construction / I17: release candidate prep --
+[Гордей / Project Manager — RC planning and stakeholder demo (22ч)] starts 2026-11-02 and ends 2026-11-15
+[Гордей / Project Manager — RC planning and stakeholder demo (22ч)] is colored in LightSkyBlue
+[Гордей / Test Designer — acceptance checklist and known issues (30ч)] starts 2026-11-02 and ends 2026-11-15
+[Гордей / Test Designer — acceptance checklist and known issues (30ч)] is colored in LightSkyBlue
+[Сергей / Configuration Manager — release branch and baseline tags (36ч)] starts 2026-11-02 and ends 2026-11-15
+[Сергей / Configuration Manager — release branch and baseline tags (36ч)] is colored in PaleGreen
+[Сергей / Deployment Manager — RC build automation (32ч)] starts 2026-11-02 and ends 2026-11-15
+[Сергей / Deployment Manager — RC build automation (32ч)] is colored in PaleGreen
+[Артём / Tester — RC retest and blocker verification (42ч)] starts 2026-11-02 and ends 2026-11-15
+[Артём / Tester — RC retest and blocker verification (42ч)] is colored in SandyBrown
+[Артём / Technical Writer — UI instructions and screenshots (26ч)] starts 2026-11-02 and ends 2026-11-15
+[Артём / Technical Writer — UI instructions and screenshots (26ч)] is colored in SandyBrown
+
+-- Construction / I18 / IOC: feature-complete beta --
+[Гордей / Tester — system testing and pilot readiness (34ч)] starts 2026-11-16 and ends 2026-11-29
+[Гордей / Tester — system testing and pilot readiness (34ч)] is colored in LightSkyBlue
+[Гордей / Technical Writer — pilot test report and release notes draft (24ч)] starts 2026-11-16 and ends 2026-11-29
+[Гордей / Technical Writer — pilot test report and release notes draft (24ч)] is colored in LightSkyBlue
+[Сергей / Deployment Manager — pilot environment preparation (38ч)] starts 2026-11-16 and ends 2026-11-29
+[Сергей / Deployment Manager — pilot environment preparation (38ч)] is colored in PaleGreen
+[Сергей / Integrator — rollback checklist and final integration pass (28ч)] starts 2026-11-16 and ends 2026-11-29
+[Сергей / Integrator — rollback checklist and final integration pass (28ч)] is colored in PaleGreen
+[Артём / Tester — beta fixes validation and UAT prep (42ч)] starts 2026-11-16 and ends 2026-11-29
+[Артём / Tester — beta fixes validation and UAT prep (42ч)] is colored in SandyBrown
+[Артём / Implementer — UAT prep fixes for UI scenarios (26ч)] starts 2026-11-16 and ends 2026-11-29
+[Артём / Implementer — UAT prep fixes for UI scenarios (26ч)] is colored in SandyBrown
+[Release v1.0.0-rc.1 / IOC feature complete] happens at 2026-11-29
+
+-- Transition / I19: pilot UAT --
+[Гордей / Project Manager — UAT coordination and defect triage (28ч)] starts 2026-11-30 and ends 2026-12-13
+[Гордей / Project Manager — UAT coordination and defect triage (28ч)] is colored in LightSkyBlue
+[Гордей / Tester — UAT support and release regression (30ч)] starts 2026-11-30 and ends 2026-12-13
+[Гордей / Tester — UAT support and release regression (30ч)] is colored in LightSkyBlue
+[Сергей / Deployment Manager — pilot deployment and backup/restore check (44ч)] starts 2026-11-30 and ends 2026-12-13
+[Сергей / Deployment Manager — pilot deployment and backup/restore check (44ч)] is colored in PaleGreen
+[Сергей / Configuration Manager — RC package integrity and tags (20ч)] starts 2026-11-30 and ends 2026-12-13
+[Сергей / Configuration Manager — RC package integrity and tags (20ч)] is colored in PaleGreen
+[Артём / Tester — UAT fixes verification (34ч)] starts 2026-11-30 and ends 2026-12-13
+[Артём / Tester — UAT fixes verification (34ч)] is colored in SandyBrown
+[Артём / Technical Writer — user training materials and screenshots (30ч)] starts 2026-11-30 and ends 2026-12-13
+[Артём / Technical Writer — user training materials and screenshots (30ч)] is colored in SandyBrown
+[Release v1.0.0-rc.2 / UAT candidate] happens at 2026-12-13
+
+-- Transition / I20 / PR: production release --
+[Гордей / Project Manager — final acceptance and close-out report (24ч)] starts 2026-12-14 and ends 2026-12-31
+[Гордей / Project Manager — final acceptance and close-out report (24ч)] is colored in LightSkyBlue
+[Гордей / Technical Writer — handover docs and release notes final (36ч)] starts 2026-12-14 and ends 2026-12-31
+[Гордей / Technical Writer — handover docs and release notes final (36ч)] is colored in LightSkyBlue
+[Сергей / Deployment Manager — production package v1.0.0 and rollback rehearsal (36ч)] starts 2026-12-14 and ends 2026-12-31
+[Сергей / Deployment Manager — production package v1.0.0 and rollback rehearsal (36ч)] is colored in PaleGreen
+[Сергей / Configuration Manager — final baseline, checksums, access handover (24ч)] starts 2026-12-14 and ends 2026-12-31
+[Сергей / Configuration Manager — final baseline, checksums, access handover (24ч)] is colored in PaleGreen
+[Артём / Tester — final regression and smoke evidence (28ч)] starts 2026-12-14 and ends 2026-12-31
+[Артём / Tester — final regression and smoke evidence (28ч)] is colored in SandyBrown
+[Артём / Technical Writer — user guide final and field instructions (32ч)] starts 2026-12-14 and ends 2026-12-31
+[Артём / Technical Writer — user guide final and field instructions (32ч)] is colored in SandyBrown
+[Release v1.0.0 / PR final acceptance] happens at 2026-12-31
 
 @endgantt
