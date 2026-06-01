@@ -1,0 +1,70 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: karavany
+      POSTGRES_USER: karavany
+      POSTGRES_PASSWORD: karavany
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U karavany -d karavany"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  mock-intel:
+    image: wiremock/wiremock:3.9.1
+    command: ["--port", "8080"]
+    volumes:
+      - ./mock-integrations:/home/wiremock
+    ports:
+      - "8089:8080"
+
+  backend:
+    build: ./backend
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mongo:
+        condition: service_healthy
+      mock-intel:
+        condition: service_started
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/karavany
+      SPRING_DATASOURCE_USERNAME: karavany
+      SPRING_DATASOURCE_PASSWORD: karavany
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/karavany
+      INTEL_BASE_URL: http://mock-intel:8080
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    environment:
+      VITE_API_PROXY: http://backend:8080
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+
+volumes:
+  pgdata:
+  mongodata:

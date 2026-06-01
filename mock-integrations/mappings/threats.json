@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/threats"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "asOf": "2287-10-21T08:00:00+00:00",
+      "segments": [
+        { "segment": "GOODSPRINGS-PRIMM", "threatLevel": 2, "threats": ["RAIDERS"] },
+        { "segment": "PRIMM-NIPTON", "threatLevel": 4, "threats": ["POWDER_GANGERS", "LEGION"] },
+        { "segment": "NIPTON-NOVAC", "threatLevel": 3, "threats": ["RADIATION", "DEATHCLAW"] },
+        { "segment": "NOVAC-NEW_VEGAS", "threatLevel": 1, "threats": ["RAIDERS"] }
+      ]
+    }
+  }
+}
