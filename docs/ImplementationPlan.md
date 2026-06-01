@@ -1,0 +1,82 @@
+# План реализации — UC-1 и UC-7
+
+Рабочий план реализации программной части. Без методологической обвязки — цель быстро получить работающий каркас и довести до рабочего состояния два прецедента: **UC-1 (Создать заявку)** и **UC-7 (Рассчитать risk_score)**. Эти два UC берёт на себя **Артём**. Остальные UC и их распределение — вне этого документа.
+
+## 1. Решения
+
+- Всё в Docker Compose: PostgreSQL 16, MongoDB 7, backend, frontend, mock внешних систем.
+- Внешние интеграции (Wasteland Intel) — заглушка (WireMock), не реальный сервис.
+- Обе БД поднимаем реально (Postgres — оперативные данные, Mongo — события/аудит).
+- Стек по [SRS 3.5](SRS.md): Java 21 + Spring Boot, React 18 + Vite, без лишних абстракций.
+- Сначала каркас (поднимается и пингует обе БД), затем на нём UC-1 и UC-7.
+
+## 2. Стек
+
+**Backend:** Spring Boot 3.x, Spring Web, Spring Data JPA (Postgres), Spring Data MongoDB, Flyway, Gradle, Java 21.
+**Frontend:** Vite + React 18 + TypeScript, Axios. Без тяжёлой UI-обвязки на старте.
+**Инфра:** docker-compose (postgres, mongo, backend, frontend, mock-intel через WireMock).
+
+## 3. Структура репозитория
+
+```
+backend/    Spring Boot (Gradle), сборка внутри Docker
+frontend/   Vite + React
+docker-compose.yml
+docs/       документация (этот файл здесь)
+```
+
+Backend по слоям внутри модулей: `web` (Controller/DTO) → `service` → `repository` → `domain`.
+
+## 4. Каркас (делаем первым)
+
+Минимум, который должен подняться и работать до фич:
+
+- `docker-compose.yml`: postgres + mongo + backend + frontend + mock-intel.
+- Backend стартует, Flyway применяет миграции, эндпоинт `GET /api/health` пингует Postgres и Mongo.
+- Frontend поднимается, ходит на `/api/health` через proxy и показывает статус.
+
+Когда это работает — каркас готов, дальше фичи.
+
+## 5. UC-1 — Создать заявку на перевозку (Артём)
+
+Полное описание потока — [CoreUseCases UC-1](CoreUseCases.md).
+
+**Данные (Postgres):**
+- `caravan_request` — заявка (origin, destination, departure_date, cargo_description, cargo_value_caps, route_id, eta, risk_score, recommendation, status, created_at).
+- `route` / `route_segment` — маршрут (шаблон или ручной) и его участки.
+- `checkpoint` — справочник точек (seed).
+
+**Backend:**
+- Создание заявки в статусе `Draft` (FR-1), выбор шаблона маршрута или ручной ввод (альт. 3а).
+- Расчёт ETA (FR-5).
+- Вызов расчёта risk_score (UC-7) и рекомендации (FR-8, FR-13).
+- Fallback при недоступности Wasteland Intel (альт. 4а): заявка без risk_score, пометка «требует пересчёта».
+- `POST /api/requests`, `GET /api/requests` (реестр).
+
+**Frontend:**
+- Форма создания заявки (макет: [mockups/caravan_dispatch.png](mockups/caravan_dispatch.png)).
+- Реестр заявок со статусом и risk_score.
+
+## 6. UC-7 — Рассчитать risk_score (Артём)
+
+Полное описание — [CoreUseCases UC-7](CoreUseCases.md).
+
+**Интеграция (mock):**
+- WireMock-стаб Wasteland Intel: `GET /threats?segments=...` → угрозы по участкам + дата актуальности. Конфигурируется для сценариев: норма / устаревшие данные / недоступен.
+
+**Backend:**
+- Клиент Wasteland Intel с timeout/fallback.
+- Расчёт: агрегация угроз → базовый risk_score → корректировка ценностью груза (FR-7, FR-14).
+- Рекомендация по охране/припасам (FR-8).
+- Состояния: успех / данные устарели (>24 ч) / источник недоступен (`risk_score = "Н/Д"`, флаг пересчёта).
+- `POST /api/requests/{id}/risk-score`.
+
+**Frontend:**
+- Виджет risk_score в карточке заявки (макеты: [норма](mockups/risk_assessment_1.png), [ошибки](mockups/risk_assessment_2.png)).
+- Три состояния виджета.
+
+## 7. Порядок работ
+
+1. Каркас (Docker + health) — общий, без него ничего не работает.
+2. UC-7 (расчёт risk_score + mock Wasteland Intel) — нужен для UC-1.
+3. UC-1 (создание заявки, использует UC-7).
