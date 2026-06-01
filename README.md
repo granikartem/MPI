@@ -5,16 +5,52 @@
 ## Структура репозитория
 
 ```
-docs/        — проектная документация (Vision, SRS, SDP, UseCases, BusinessCase, RiskList, Glossary)
-  diagrams/  — диаграммы (PlantUML-исходники + отрендеренные PNG)
-  mockups/   — HTML-макеты и скриншоты интерфейсов
-  scripts/   — служебные скрипты (рендер диаграмм и графиков)
-  tools/     — внешние инструменты (plantuml.jar)
-backend/     — серверная часть (Java 21, Spring Boot) — в разработке
-frontend/    — веб-клиент (React 18) — в разработке
+docs/             — проектная документация (Vision, SRS, SDP, UseCases, BusinessCase, RiskList, Glossary)
+  diagrams/       — диаграммы (PlantUML-исходники + отрендеренные PNG)
+  mockups/        — HTML-макеты и скриншоты интерфейсов
+  scripts/        — служебные скрипты (рендер диаграмм и графиков)
+  tools/          — внешние инструменты (plantuml.jar)
+backend/          — серверная часть (Java 21, Spring Boot, PostgreSQL + MongoDB)
+frontend/         — веб-клиент (React 18 + Vite + TypeScript)
+mock-integrations/— WireMock-заглушка внешней системы Wasteland Intel
+docker-compose.yml
 ```
 
-Подробный план реализации — [docs/ImplementationPlan.md](docs/ImplementationPlan.md).
+Подробный план реализации и статус — [docs/ImplementationPlan.md](docs/ImplementationPlan.md).
+
+## Запуск
+
+Требуется Docker + Docker Compose. Поднимает всё (PostgreSQL 16, MongoDB 7, backend, frontend, mock Wasteland Intel):
+
+```bash
+docker compose up -d --build
+```
+
+Затем открыть **http://localhost:5173** → «Открыть терминал диспетчера».
+
+| Сервис | Порт | Назначение |
+|--------|------|-----------|
+| frontend | 5173 | веб-клиент диспетчера |
+| backend | 8080 | REST API |
+| postgres | 5432 | оперативные данные (заявки, маршруты) |
+| mongo | 27017 | снимки оценки риска, события |
+| mock-intel | 8089 | заглушка Wasteland Intel (`GET /threats`) |
+
+### Реализовано
+
+Прецеденты **UC-1 (создание заявки)** и **UC-7 (расчёт risk_score)** — см. [docs/ImplementationPlan.md](docs/ImplementationPlan.md).
+
+Ключевые эндпоинты:
+
+| Метод | Путь | Назначение |
+|-------|------|-----------|
+| GET | `/api/health` | доступность PostgreSQL и MongoDB |
+| GET | `/api/routes` | шаблоны маршрутов |
+| GET | `/api/checkpoints` | контрольные точки (для ручного маршрута) |
+| GET/POST | `/api/requests` | реестр / создание заявки (шаблон или ручной маршрут) |
+| POST | `/api/requests/{id}/risk-score` | пересчитать risk_score |
+| GET | `/api/requests/{id}/risk` | снимок оценки риска с разбивкой по участкам |
+| DELETE | `/api/requests/{id}/risk` | сбросить оценку риска |
 
 ## Документация
 
