@@ -12,7 +12,7 @@
 
 ## 1.3 Definitions, Acronyms, and Abbreviations
 
-Определения и аббревиатуры содержатся в глоссарии: https://github.com/granikartem/MPI/blob/main/Glossary_Karavany_FNV.md
+Определения и аббревиатуры содержатся в глоссарии: https://github.com/granikartem/MPI/blob/main/docs/Glossary_Karavany_FNV.md
 
 ## 1.4 References
 
@@ -21,10 +21,10 @@
 Вики Fallout русскоязычная - https://fallout.fandom.com/ru/wiki/Fallout, и англоязычная - https://fallout.fandom.com/wiki/Fallout_Wiki
 
 Глоссарий
-https://github.com/granikartem/MPI/blob/main/Glossary_Karavany_FNV.md
+https://github.com/granikartem/MPI/blob/main/docs/Glossary_Karavany_FNV.md
 
 SDP
-https://github.com/granikartem/MPI/blob/main/SDP.md
+https://github.com/granikartem/MPI/blob/main/docs/SDP.md
 
 ## 1.5 Overview
 
