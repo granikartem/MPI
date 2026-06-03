@@ -26,19 +26,22 @@ docker-compose.yml
 docker compose up -d --build
 ```
 
-Затем открыть **http://localhost:5173** → «Открыть терминал диспетчера».
+Затем открыть **http://localhost:5173**:
+- «Открыть терминал диспетчера» — UC-1/UC-7.
+- «Открыть консоль организаций» — UC-32.
 
 | Сервис | Порт | Назначение |
 |--------|------|-----------|
 | frontend | 5173 | веб-клиент диспетчера |
 | backend | 8080 | REST API |
-| postgres | 5432 | оперативные данные (заявки, маршруты) |
-| mongo | 27017 | снимки оценки риска, события |
+| postgres | 5432 | оперативные данные (заявки, маршруты, организации, пользователи) |
+| mongo | 27017 | снимки оценки риска, audit-события |
 | mock-intel | 8089 | заглушка Wasteland Intel (`GET /threats`) |
 
 ### Реализовано
 
 Прецеденты **UC-1 (создание заявки)** и **UC-7 (расчёт risk_score)** — см. [docs/ImplementationPlan.md](docs/ImplementationPlan.md).
+Прецедент **UC-32 (создать организацию)** — см. [plan.md](plan.md).
 
 Ключевые эндпоинты:
 
@@ -51,6 +54,7 @@ docker compose up -d --build
 | POST | `/api/requests/{id}/risk-score` | пересчитать risk_score |
 | GET | `/api/requests/{id}/risk` | снимок оценки риска с разбивкой по участкам |
 | DELETE | `/api/requests/{id}/risk` | сбросить оценку риска |
+| GET/POST | `/api/organizations` | реестр / создание организации с опциональным первым диспетчером |
 
 ## Документация
 

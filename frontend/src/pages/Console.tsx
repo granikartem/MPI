@@ -39,7 +39,10 @@ export default function Console() {
       <header>
         <div className="header-top">
           <h1>CARAVAN // DISPATCH TERMINAL</h1>
-          <button className="link" onClick={() => navigate('/')}>← на главную</button>
+          <div className="header-actions">
+            <button className="link" onClick={() => navigate('/organizations')}>консоль организаций</button>
+            <button className="link" onClick={() => navigate('/')}>← на главную</button>
+          </div>
         </div>
         <div className="health">
           {health ? (

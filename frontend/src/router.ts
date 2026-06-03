@@ -1,16 +1,23 @@
-import { useEffect, useState } from 'react'
+type Listener = () => void
 
-export function navigate(to: string) {
-  window.history.pushState({}, '', to)
-  window.dispatchEvent(new PopStateEvent('popstate'))
+const listeners = new Set<Listener>()
+
+export function currentPath(): string {
+  return window.location.pathname
 }
 
-export function usePath(): string {
-  const [path, setPath] = useState(window.location.pathname)
-  useEffect(() => {
-    const onPop = () => setPath(window.location.pathname)
-    window.addEventListener('popstate', onPop)
-    return () => window.removeEventListener('popstate', onPop)
-  }, [])
-  return path
+export function navigate(path: string) {
+  window.history.pushState({}, '', path)
+  listeners.forEach((listener) => listener())
+}
+
+export function subscribeRouter(listener: Listener) {
+  listeners.add(listener)
+  const onPopState = () => listener()
+  window.addEventListener('popstate', onPopState)
+
+  return () => {
+    listeners.delete(listener)
+    window.removeEventListener('popstate', onPopState)
+  }
 }

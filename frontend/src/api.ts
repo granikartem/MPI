@@ -71,6 +71,48 @@ export interface RiskAssessment {
   segments: SegmentRisk[]
 }
 
+export interface FirstDispatcher {
+  id: string
+  fullName: string
+  login: string
+  role: string
+  contactChannel: string | null
+  active: boolean
+  createdAt: string
+}
+
+export interface Organization {
+  id: string
+  tenantKey: string
+  name: string
+  subscriptionTier: string
+  legalAddress: string | null
+  primaryContact: string | null
+  contactChannel: string | null
+  region: string | null
+  status: string
+  createdAt: string
+  userCount: number
+  firstDispatcher: FirstDispatcher | null
+}
+
+export interface CreateFirstDispatcherBody {
+  fullName: string
+  login: string
+  initialPassword: string
+  contactChannel: string
+}
+
+export interface CreateOrganizationBody {
+  name: string
+  subscriptionTier: string
+  legalAddress: string
+  primaryContact: string
+  contactChannel: string
+  region: string
+  firstDispatcher?: CreateFirstDispatcherBody
+}
+
 export const getHealth = () =>
   api.get<HealthResponse>('/api/health').then((r) => r.data)
 
@@ -94,3 +136,9 @@ export const getRisk = (id: string) =>
 
 export const deleteRisk = (id: string) =>
   api.delete<CaravanRequest>(`/api/requests/${id}/risk`).then((r) => r.data)
+
+export const getOrganizations = () =>
+  api.get<Organization[]>('/api/organizations').then((r) => r.data)
+
+export const createOrganization = (body: CreateOrganizationBody) =>
+  api.post<Organization>('/api/organizations', body).then((r) => r.data)
