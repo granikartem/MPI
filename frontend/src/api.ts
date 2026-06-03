@@ -12,6 +12,7 @@ export interface HealthResponse {
 
 export interface RouteOption {
   id: string
+  code: string
   name: string
 }
 
@@ -22,11 +23,13 @@ export interface Checkpoint {
 
 export interface CaravanRequest {
   id: string
+  organizationId: string | null
   origin: string
   destination: string
   departureDate: string
   cargoDescription: string | null
   cargoValueCaps: number
+  routeCode: string | null
   routeName: string | null
   etaHours: number | null
   riskScore: number | null
@@ -43,12 +46,14 @@ export interface SegmentInput {
 }
 
 export interface CreateRequestBody {
+  organizationId: string
   origin: string
   destination: string
   departureDate: string
   cargoDescription: string
   cargoValueCaps: number
   routeId?: string
+  routeName?: string
   segments?: SegmentInput[]
 }
 
@@ -122,8 +127,12 @@ export const getRoutes = () =>
 export const getCheckpoints = () =>
   api.get<Checkpoint[]>('/api/checkpoints').then((r) => r.data)
 
-export const getRequests = () =>
-  api.get<CaravanRequest[]>('/api/requests').then((r) => r.data)
+export const getRequests = (organizationId?: string) =>
+  api
+    .get<CaravanRequest[]>('/api/requests', {
+      params: organizationId ? { organizationId } : {},
+    })
+    .then((r) => r.data)
 
 export const createRequest = (body: CreateRequestBody) =>
   api.post<CaravanRequest>('/api/requests', body).then((r) => r.data)

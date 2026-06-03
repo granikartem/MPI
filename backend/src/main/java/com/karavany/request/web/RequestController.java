@@ -6,12 +6,14 @@ import com.karavany.request.service.RequestService.SegmentSpec;
 import com.karavany.risk.RiskAssessment;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,8 +35,11 @@ public class RequestController {
 
     @GetMapping
     @Transactional(readOnly = true)
-    public List<RequestResponse> list() {
-        return service.findAll().stream().map(RequestResponse::from).toList();
+    public List<RequestResponse> list(@RequestParam(required = false) UUID organizationId) {
+        List<CaravanRequest> requests = organizationId == null
+                ? service.findAll()
+                : service.findByOrganization(organizationId);
+        return requests.stream().map(RequestResponse::from).toList();
     }
 
     @PostMapping
@@ -43,14 +48,14 @@ public class RequestController {
     public RequestResponse create(@RequestBody CreateRequest body) {
         CaravanRequest created;
         if (body.routeId() != null) {
-            created = service.create(body.origin(), body.destination(), body.departureDate(),
-                    body.cargoDescription(), body.cargoValueCaps(), body.routeId());
+            created = service.create(body.organizationId(), body.origin(), body.destination(),
+                    body.departureDate(), body.cargoDescription(), body.cargoValueCaps(), body.routeId());
         } else if (body.segments() != null && !body.segments().isEmpty()) {
             List<SegmentSpec> specs = body.segments().stream()
                     .map(s -> new SegmentSpec(s.fromCode(), s.toCode(), s.distanceKm()))
                     .toList();
-            created = service.createWithManualRoute(body.origin(), body.destination(), body.departureDate(),
-                    body.cargoDescription(), body.cargoValueCaps(), specs);
+            created = service.createWithManualRoute(body.organizationId(), body.origin(), body.destination(),
+                    body.departureDate(), body.cargoDescription(), body.cargoValueCaps(), body.routeName(), specs);
         } else {
             throw new IllegalArgumentException("Нужно указать routeId (шаблон) или segments (ручной маршрут)");
         }
@@ -63,7 +68,7 @@ public class RequestController {
         return RequestResponse.from(service.recalculateRisk(id));
     }
 
-    @org.springframework.web.bind.annotation.DeleteMapping("/{id}/risk")
+    @DeleteMapping("/{id}/risk")
     @Transactional
     public RequestResponse clearRisk(@PathVariable UUID id) {
         return RequestResponse.from(service.clearRisk(id));
@@ -88,21 +93,24 @@ public class RequestController {
         return new ErrorResponse(e.getMessage());
     }
 
-    public record CreateRequest(String origin, String destination, LocalDate departureDate,
+    public record CreateRequest(UUID organizationId, String origin, String destination, LocalDate departureDate,
                                 String cargoDescription, int cargoValueCaps, UUID routeId,
-                                List<SegmentInput> segments) {
+                                String routeName, List<SegmentInput> segments) {
     }
 
     public record SegmentInput(String fromCode, String toCode, double distanceKm) {
     }
 
-    public record RequestResponse(UUID id, String origin, String destination, LocalDate departureDate,
-                                  String cargoDescription, int cargoValueCaps, String routeName,
-                                  Double etaHours, Integer riskScore, String riskStatus,
-                                  String recommendation, String status, OffsetDateTime createdAt) {
+    public record RequestResponse(UUID id, UUID organizationId, String origin, String destination,
+                                  LocalDate departureDate, String cargoDescription, int cargoValueCaps,
+                                  String routeCode, String routeName, Double etaHours, Integer riskScore,
+                                  String riskStatus, String recommendation, String status, OffsetDateTime createdAt) {
         static RequestResponse from(CaravanRequest r) {
-            return new RequestResponse(r.getId(), r.getOrigin(), r.getDestination(), r.getDepartureDate(),
+            return new RequestResponse(r.getId(),
+                    r.getOrganization() != null ? r.getOrganization().getId() : null,
+                    r.getOrigin(), r.getDestination(), r.getDepartureDate(),
                     r.getCargoDescription(), r.getCargoValueCaps(),
+                    r.getRoute() != null ? r.getRoute().getCode() : null,
                     r.getRoute() != null ? r.getRoute().getName() : null,
                     r.getEtaHours(), r.getRiskScore(), r.getRiskStatus(), r.getRecommendation(),
                     r.getStatus(), r.getCreatedAt());

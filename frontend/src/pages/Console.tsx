@@ -4,35 +4,33 @@ import {
   Checkpoint,
   getCheckpoints,
   getHealth,
+  getOrganizations,
   getRequests,
   getRoutes,
   HealthResponse,
+  Organization,
   RouteOption,
 } from '../api'
 import RequestForm from '../components/RequestForm'
 import RequestList from '../components/RequestList'
-import { navigate } from '../router'
+import { navigate, subscribeRouter } from '../router'
+
+function selectedOrgId(): string | null {
+  return new URLSearchParams(window.location.search).get('org')
+}
 
 export default function Console() {
   const [health, setHealth] = useState<HealthResponse | null>(null)
-  const [routes, setRoutes] = useState<RouteOption[]>([])
-  const [checkpoints, setCheckpoints] = useState<Checkpoint[]>([])
-  const [requests, setRequests] = useState<CaravanRequest[]>([])
+  const [organizations, setOrganizations] = useState<Organization[]>([])
+  const [orgId, setOrgId] = useState<string | null>(selectedOrgId())
 
   useEffect(() => {
     getHealth().then(setHealth).catch(() => setHealth(null))
-    getRoutes().then(setRoutes).catch(() => setRoutes([]))
-    getCheckpoints().then(setCheckpoints).catch(() => setCheckpoints([]))
-    getRequests().then(setRequests).catch(() => setRequests([]))
+    getOrganizations().then(setOrganizations).catch(() => setOrganizations([]))
+    return subscribeRouter(() => setOrgId(selectedOrgId()))
   }, [])
 
-  function onCreated(request: CaravanRequest) {
-    setRequests((prev) => [request, ...prev])
-  }
-
-  function onUpdated(request: CaravanRequest) {
-    setRequests((prev) => prev.map((r) => (r.id === request.id ? request : r)))
-  }
+  const org = organizations.find((o) => o.id === orgId) ?? null
 
   return (
     <div className="app">
@@ -59,11 +57,90 @@ export default function Console() {
       </header>
 
       <main>
-        {routes.length > 0 && checkpoints.length > 0 && (
-          <RequestForm routes={routes} checkpoints={checkpoints} onCreated={onCreated} />
+        {orgId ? (
+          <OrgDispatch org={org} orgId={orgId} />
+        ) : (
+          <OrgPicker organizations={organizations} />
         )}
-        <RequestList requests={requests} onUpdated={onUpdated} />
       </main>
     </div>
+  )
+}
+
+function OrgPicker({ organizations }: { organizations: Organization[] }) {
+  return (
+    <div className="card">
+      <h2>Организации</h2>
+      <p className="muted small">Выберите организацию, чтобы работать с её рейсами.</p>
+      {organizations.length === 0 ? (
+        <div className="muted">
+          Организаций пока нет. Создайте в{' '}
+          <button className="link" onClick={() => navigate('/organizations')}>консоли организаций</button>.
+        </div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Организация</th>
+              <th>Подписка</th>
+              <th>Пользователи</th>
+              <th>Статус</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {organizations.map((o) => (
+              <tr key={o.id}>
+                <td>{o.name}</td>
+                <td>{o.subscriptionTier}</td>
+                <td>{o.userCount}</td>
+                <td>{o.status}</td>
+                <td>
+                  <button onClick={() => navigate(`/requests?org=${o.id}`)}>Рейсы →</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  )
+}
+
+function OrgDispatch({ org, orgId }: { org: Organization | null; orgId: string }) {
+  const [routes, setRoutes] = useState<RouteOption[]>([])
+  const [checkpoints, setCheckpoints] = useState<Checkpoint[]>([])
+  const [requests, setRequests] = useState<CaravanRequest[]>([])
+
+  useEffect(() => {
+    getRoutes().then(setRoutes).catch(() => setRoutes([]))
+    getCheckpoints().then(setCheckpoints).catch(() => setCheckpoints([]))
+    getRequests(orgId).then(setRequests).catch(() => setRequests([]))
+  }, [orgId])
+
+  function onCreated(request: CaravanRequest) {
+    setRequests((prev) => [request, ...prev])
+  }
+  function onUpdated(request: CaravanRequest) {
+    setRequests((prev) => prev.map((r) => (r.id === request.id ? request : r)))
+  }
+
+  return (
+    <>
+      <div className="card org-banner">
+        <button className="link" onClick={() => navigate('/requests')}>← все организации</button>
+        <h2>Рейсы · {org?.name ?? 'организация'}</h2>
+        {org && <span className="muted small">{org.subscriptionTier} · tenant {org.tenantKey}</span>}
+      </div>
+      {routes.length > 0 && checkpoints.length > 0 && (
+        <RequestForm
+          organizationId={orgId}
+          routes={routes}
+          checkpoints={checkpoints}
+          onCreated={onCreated}
+        />
+      )}
+      <RequestList requests={requests} onUpdated={onUpdated} />
+    </>
   )
 }

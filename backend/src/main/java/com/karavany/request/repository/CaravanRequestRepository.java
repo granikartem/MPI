@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface CaravanRequestRepository extends JpaRepository<CaravanRequest, UUID> {
 
     List<CaravanRequest> findAllByOrderByCreatedAtDesc();
+
+    List<CaravanRequest> findByOrganization_IdOrderByCreatedAtDesc(UUID organizationId);
 }

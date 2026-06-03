@@ -23,10 +23,10 @@ public class RouteController {
     @Transactional(readOnly = true)
     public List<RouteOption> templates() {
         return routeRepository.findByTemplateTrue().stream()
-                .map(r -> new RouteOption(r.getId(), r.getName()))
+                .map(r -> new RouteOption(r.getId(), r.getCode(), r.getName()))
                 .toList();
     }
 
-    public record RouteOption(UUID id, String name) {
+    public record RouteOption(UUID id, String code, String name) {
     }
 }

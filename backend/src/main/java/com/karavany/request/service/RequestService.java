@@ -1,5 +1,7 @@
 package com.karavany.request.service;
 
+import com.karavany.organization.domain.Organization;
+import com.karavany.organization.repository.OrganizationRepository;
 import com.karavany.request.domain.CaravanRequest;
 import com.karavany.request.repository.CaravanRequestRepository;
 import com.karavany.risk.RiskAssessment;
@@ -20,21 +22,23 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/** UC-1: создание и сопровождение заявки на перевозку. */
+/** UC-1: создание и сопровождение заявки на перевозку (в рамках организации). */
 @Service
 public class RequestService {
 
     private final CaravanRequestRepository requestRepository;
+    private final OrganizationRepository organizationRepository;
     private final RouteRepository routeRepository;
     private final RouteSegmentRepository routeSegmentRepository;
     private final CheckpointRepository checkpointRepository;
     private final EtaService etaService;
     private final RiskService riskService;
 
-    public RequestService(CaravanRequestRepository requestRepository, RouteRepository routeRepository,
-                          RouteSegmentRepository routeSegmentRepository, CheckpointRepository checkpointRepository,
-                          EtaService etaService, RiskService riskService) {
+    public RequestService(CaravanRequestRepository requestRepository, OrganizationRepository organizationRepository,
+                          RouteRepository routeRepository, RouteSegmentRepository routeSegmentRepository,
+                          CheckpointRepository checkpointRepository, EtaService etaService, RiskService riskService) {
         this.requestRepository = requestRepository;
+        this.organizationRepository = organizationRepository;
         this.routeRepository = routeRepository;
         this.routeSegmentRepository = routeSegmentRepository;
         this.checkpointRepository = checkpointRepository;
@@ -51,6 +55,11 @@ public class RequestService {
     }
 
     @Transactional(readOnly = true)
+    public List<CaravanRequest> findByOrganization(UUID organizationId) {
+        return requestRepository.findByOrganization_IdOrderByCreatedAtDesc(organizationId);
+    }
+
+    @Transactional(readOnly = true)
     public CaravanRequest getById(UUID id) {
         return requestRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Заявка не найдена: " + id));
@@ -58,22 +67,28 @@ public class RequestService {
 
     /** Основной поток: маршрут выбран из шаблона. */
     @Transactional
-    public CaravanRequest create(String origin, String destination, LocalDate departureDate,
+    public CaravanRequest create(UUID organizationId, String origin, String destination, LocalDate departureDate,
                                  String cargoDescription, int cargoValueCaps, UUID routeId) {
+        Organization organization = loadOrganization(organizationId);
         Route route = routeRepository.findById(routeId)
                 .orElseThrow(() -> new IllegalArgumentException("Маршрут не найден: " + routeId));
-        return build(origin, destination, departureDate, cargoDescription, cargoValueCaps, route);
+        return build(organization, origin, destination, departureDate, cargoDescription, cargoValueCaps, route);
     }
 
     /** Альт. поток 3а: маршрут задан вручную последовательностью участков. */
     @Transactional
-    public CaravanRequest createWithManualRoute(String origin, String destination, LocalDate departureDate,
-                                                String cargoDescription, int cargoValueCaps,
-                                                List<SegmentSpec> specs) {
+    public CaravanRequest createWithManualRoute(UUID organizationId, String origin, String destination,
+                                                LocalDate departureDate, String cargoDescription, int cargoValueCaps,
+                                                String routeName, List<SegmentSpec> specs) {
         if (specs == null || specs.isEmpty()) {
             throw new IllegalArgumentException("Ручной маршрут должен содержать хотя бы один участок");
         }
-        Route route = routeRepository.save(new Route("Ручной маршрут: " + origin + " → " + destination, false));
+        Organization organization = loadOrganization(organizationId);
+
+        String name = routeName != null && !routeName.isBlank()
+                ? routeName.trim()
+                : "Ручной маршрут: " + origin + " → " + destination;
+        Route route = routeRepository.save(new Route(nextRouteCode(), name, false));
 
         List<RouteSegment> segments = new ArrayList<>();
         int ord = 1;
@@ -87,7 +102,7 @@ public class RequestService {
         routeSegmentRepository.saveAll(segments);
         route.getSegments().addAll(segments);
 
-        return build(origin, destination, departureDate, cargoDescription, cargoValueCaps, route);
+        return build(organization, origin, destination, departureDate, cargoDescription, cargoValueCaps, route);
     }
 
     @Transactional
@@ -100,12 +115,6 @@ public class RequestService {
         return saved;
     }
 
-    @Transactional(readOnly = true)
-    public Optional<RiskAssessment> latestRiskAssessment(UUID id) {
-        return riskService.latestAssessment(id);
-    }
-
-    /** Сброс оценки риска: удаляет снимки из Mongo и обнуляет risk_score заявки (статус NA). */
     @Transactional
     public CaravanRequest clearRisk(UUID id) {
         CaravanRequest request = getById(id);
@@ -114,15 +123,30 @@ public class RequestService {
         return requestRepository.save(request);
     }
 
-    private CaravanRequest build(String origin, String destination, LocalDate departureDate,
-                                 String cargoDescription, int cargoValueCaps, Route route) {
-        CaravanRequest request = new CaravanRequest(origin, destination, departureDate,
+    @Transactional(readOnly = true)
+    public Optional<RiskAssessment> latestRiskAssessment(UUID id) {
+        return riskService.latestAssessment(id);
+    }
+
+    private Organization loadOrganization(UUID organizationId) {
+        if (organizationId == null) {
+            throw new IllegalArgumentException("Не указана организация");
+        }
+        return organizationRepository.findById(organizationId)
+                .orElseThrow(() -> new IllegalArgumentException("Организация не найдена: " + organizationId));
+    }
+
+    private String nextRouteCode() {
+        return "RT-" + (routeRepository.count() + 1);
+    }
+
+    private CaravanRequest build(Organization organization, String origin, String destination,
+                                 LocalDate departureDate, String cargoDescription, int cargoValueCaps, Route route) {
+        CaravanRequest request = new CaravanRequest(organization, origin, destination, departureDate,
                 cargoDescription, cargoValueCaps, route);
 
-        // FR-5: ETA по маршруту
         request.applyEta(etaService.computeHours(route));
 
-        // UC-7: risk_score (с fallback при недоступности Wasteland Intel)
         RiskResult risk = riskService.calculate(route, cargoValueCaps);
         request.applyRisk(risk.score(), risk.status(), risk.recommendation());
 

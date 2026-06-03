@@ -8,6 +8,7 @@ import {
 } from '../api'
 
 interface Props {
+  organizationId: string
   routes: RouteOption[]
   checkpoints: Checkpoint[]
   onCreated: (request: CaravanRequest) => void
@@ -15,7 +16,7 @@ interface Props {
 
 type Mode = 'template' | 'manual'
 
-export default function RequestForm({ routes, checkpoints, onCreated }: Props) {
+export default function RequestForm({ organizationId, routes, checkpoints, onCreated }: Props) {
   const [origin, setOrigin] = useState('Goodsprings')
   const [destination, setDestination] = useState('New Vegas')
   const [departureDate, setDepartureDate] = useState('2287-10-21')
@@ -23,6 +24,7 @@ export default function RequestForm({ routes, checkpoints, onCreated }: Props) {
   const [cargoValueCaps, setCargoValueCaps] = useState(5000)
   const [mode, setMode] = useState<Mode>('template')
   const [routeId, setRouteId] = useState(routes[0]?.id ?? '')
+  const [routeName, setRouteName] = useState('')
   const [segments, setSegments] = useState<SegmentInput[]>([
     { fromCode: checkpoints[0]?.code ?? '', toCode: checkpoints[1]?.code ?? '', distanceKm: 40 },
   ])
@@ -47,9 +49,9 @@ export default function RequestForm({ routes, checkpoints, onCreated }: Props) {
     setBusy(true)
     setError(null)
     try {
-      const base = { origin, destination, departureDate, cargoDescription, cargoValueCaps }
+      const base = { organizationId, origin, destination, departureDate, cargoDescription, cargoValueCaps }
       const body =
-        mode === 'template' ? { ...base, routeId } : { ...base, segments }
+        mode === 'template' ? { ...base, routeId } : { ...base, routeName, segments }
       const created = await createRequest(body)
       onCreated(created)
     } catch (err: any) {
@@ -98,13 +100,21 @@ export default function RequestForm({ routes, checkpoints, onCreated }: Props) {
           <select value={routeId} onChange={(e) => setRouteId(e.target.value)}>
             {routes.map((r) => (
               <option key={r.id} value={r.id}>
-                {r.name}
+                {r.code} · {r.name}
               </option>
             ))}
           </select>
         </label>
       ) : (
         <div className="segments">
+          <label>
+            Название маршрута
+            <input
+              value={routeName}
+              onChange={(e) => setRouteName(e.target.value)}
+              placeholder="Напр. Южный объезд через Primm"
+            />
+          </label>
           <div className="muted small">Участки маршрута (по порядку)</div>
           {segments.map((s, i) => (
             <div className="segment-row" key={i}>

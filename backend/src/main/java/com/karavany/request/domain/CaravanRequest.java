@@ -1,5 +1,6 @@
 package com.karavany.request.domain;
 
+import com.karavany.organization.domain.Organization;
 import com.karavany.route.domain.Route;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +23,10 @@ public class CaravanRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 
     private String origin;
     private String destination;
@@ -58,8 +63,9 @@ public class CaravanRequest {
     protected CaravanRequest() {
     }
 
-    public CaravanRequest(String origin, String destination, LocalDate departureDate,
+    public CaravanRequest(Organization organization, String origin, String destination, LocalDate departureDate,
                           String cargoDescription, int cargoValueCaps, Route route) {
+        this.organization = organization;
         this.origin = origin;
         this.destination = destination;
         this.departureDate = departureDate;
@@ -80,6 +86,10 @@ public class CaravanRequest {
 
     public UUID getId() {
         return id;
+    }
+
+    public Organization getOrganization() {
+        return organization;
     }
 
     public String getOrigin() {

@@ -33,7 +33,7 @@ export default function RequestList({ requests, onUpdated }: Props) {
       <table>
         <thead>
           <tr>
-            <th>Маршрут</th>
+            <th>Маршрут (id · название)</th>
             <th>Откуда → Куда</th>
             <th>Груз</th>
             <th>Ценность</th>
@@ -46,7 +46,10 @@ export default function RequestList({ requests, onUpdated }: Props) {
         <tbody>
           {requests.map((r) => (
             <tr key={r.id}>
-              <td>{r.routeName ?? '—'}</td>
+              <td>
+                {r.routeCode && <span className="route-code">{r.routeCode}</span>}
+                {r.routeName ?? '—'}
+              </td>
               <td>
                 {r.origin} → {r.destination}
               </td>

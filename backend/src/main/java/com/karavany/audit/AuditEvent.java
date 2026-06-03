@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/** Audit event stream for platform and tenant operations. */
 @Document("audit_event")
 public class AuditEvent {
 

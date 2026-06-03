@@ -21,6 +21,8 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    private String code;
+
     private String name;
 
     @Column(name = "is_template")
@@ -33,13 +35,18 @@ public class Route {
     protected Route() {
     }
 
-    public Route(String name, boolean template) {
+    public Route(String code, String name, boolean template) {
+        this.code = code;
         this.name = name;
         this.template = template;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getName() {

@@ -170,6 +170,25 @@ th {
   font-size: 11px;
 }
 
+.route-code {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0 5px;
+  margin-right: 6px;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+.org-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.org-banner h2 {
+  margin: 6px 0 0;
+}
+
 .mode-toggle {
   display: flex;
   gap: 8px;
