@@ -33,10 +33,12 @@ public class RequestService {
     private final CheckpointRepository checkpointRepository;
     private final EtaService etaService;
     private final RiskService riskService;
+    private final RequestStatusService statusService;
 
     public RequestService(CaravanRequestRepository requestRepository, OrganizationRepository organizationRepository,
                           RouteRepository routeRepository, RouteSegmentRepository routeSegmentRepository,
-                          CheckpointRepository checkpointRepository, EtaService etaService, RiskService riskService) {
+                          CheckpointRepository checkpointRepository, EtaService etaService, RiskService riskService,
+                          RequestStatusService statusService) {
         this.requestRepository = requestRepository;
         this.organizationRepository = organizationRepository;
         this.routeRepository = routeRepository;
@@ -44,6 +46,7 @@ public class RequestService {
         this.checkpointRepository = checkpointRepository;
         this.etaService = etaService;
         this.riskService = riskService;
+        this.statusService = statusService;
     }
 
     public record SegmentSpec(String fromCode, String toCode, double distanceKm) {
@@ -152,6 +155,7 @@ public class RequestService {
 
         CaravanRequest saved = requestRepository.save(request);
         riskService.saveAssessment(saved.getId(), risk);
+        statusService.recordCreation(saved);
         return saved;
     }
 }

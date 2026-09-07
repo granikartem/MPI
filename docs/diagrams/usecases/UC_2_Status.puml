@@ -1,0 +1,54 @@
+@startuml UC_2_Status
+!pragma layout smetana
+skinparam state {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Arial
+}
+skinparam shadowing false
+
+title UC-2. Статусная модель заявки на перевозку
+
+state "Draft\nЧерновик" as Draft
+state "Ready\nГотов к отправке" as Ready
+state "En Route\nВ пути" as EnRoute
+state "Delayed\nЗадержка" as Delayed
+state "Delivered\nДоставлен" as Delivered
+state "Closed\nЗакрыт" as Closed #LightGreen
+state "Cancelled\nОтменён" as Cancelled #MistyRose
+
+[*] --> Draft : UC-1: заявка создана
+
+Draft --> Ready : Укомплектовать рейс\n<Диспетчер>
+Draft --> Cancelled : Отменить заявку\n<Диспетчер>
+
+Ready --> EnRoute : Караван вышел на маршрут\n<Караван-мастер>\n[FR-10: обязательные роли\nкоманды заполнены — UC-9]
+Ready --> Cancelled : Отменить рейс до выхода\n<Диспетчер>
+
+EnRoute --> Delayed : Зафиксировать задержку\n<Караван-мастер / Диспетчер / Система>\n[причина]
+Delayed --> EnRoute : Движение возобновлено\n<Караван-мастер / Диспетчер>
+EnRoute --> Delivered : Груз доставлен\n<Караван-мастер>
+
+Delivered --> Closed : Закрыть рейс\n<Диспетчер>
+
+Closed --> [*]
+Cancelled --> [*]
+
+note right of Delayed
+  UC-19: инцидент высокой или
+  критической тяжести переводит
+  рейс в Delayed автоматически
+  (актор Система)
+end note
+
+note bottom of Cancelled
+  Отмена возможна только
+  до выхода каравана
+  на маршрут
+end note
+
+legend right
+  Каждый переход пишется в request_status_history (FR-3)
+  и в audit-журнал MongoDB (REQUEST_STATUS_CHANGED)
+endlegend
+@enduml

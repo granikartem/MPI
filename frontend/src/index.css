@@ -362,6 +362,57 @@ button.danger:hover:not(:disabled) {
   color: var(--bg);
 }
 
+.status-badge {
+  display: inline-block;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-family: inherit;
+  background: transparent;
+  white-space: nowrap;
+}
+button.status-badge {
+  cursor: pointer;
+}
+button.status-badge:hover {
+  filter: brightness(1.3);
+  background: transparent;
+}
+
+.status-current {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.actor-row {
+  display: flex;
+  gap: 12px;
+}
+.actor-row label {
+  flex: 1;
+}
+
+.transitions {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.transition-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.transition button {
+  font-size: 12px;
+  padding: 6px 12px;
+  min-width: 190px;
+}
+
 .admin-console {
   --admin-bg: #111;
   --admin-panel: #191919;

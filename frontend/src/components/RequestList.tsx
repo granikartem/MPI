@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { CaravanRequest, recalcRisk } from '../api'
 import RiskBadge from './RiskBadge'
 import RiskModal from './RiskModal'
+import StatusBadge from './StatusBadge'
+import StatusModal from './StatusModal'
 
 interface Props {
   requests: CaravanRequest[]
@@ -17,6 +19,7 @@ function formatEta(hours: number | null): string {
 
 export default function RequestList({ requests, onUpdated }: Props) {
   const [riskFor, setRiskFor] = useState<CaravanRequest | null>(null)
+  const [statusFor, setStatusFor] = useState<CaravanRequest | null>(null)
 
   async function recalc(id: string) {
     const updated = await recalcRisk(id)
@@ -60,7 +63,9 @@ export default function RequestList({ requests, onUpdated }: Props) {
                 <RiskBadge score={r.riskScore} status={r.riskStatus} onClick={() => setRiskFor(r)} />
                 {r.recommendation && <div className="rec">{r.recommendation}</div>}
               </td>
-              <td>{r.status}</td>
+              <td>
+                <StatusBadge status={r.status} label={r.statusLabel} onClick={() => setStatusFor(r)} />
+              </td>
               <td>
                 <button className="link" onClick={() => recalc(r.id)}>
                   Пересчитать риск
@@ -76,6 +81,17 @@ export default function RequestList({ requests, onUpdated }: Props) {
           request={riskFor}
           onClose={() => setRiskFor(null)}
           onUpdated={onUpdated}
+        />
+      )}
+
+      {statusFor && (
+        <StatusModal
+          request={statusFor}
+          onClose={() => setStatusFor(null)}
+          onUpdated={(updated) => {
+            onUpdated(updated)
+            setStatusFor(updated)
+          }}
         />
       )}
     </div>

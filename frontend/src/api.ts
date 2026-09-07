@@ -36,6 +36,7 @@ export interface CaravanRequest {
   riskStatus: string
   recommendation: string | null
   status: string
+  statusLabel: string
   createdAt: string
 }
 
@@ -74,6 +75,43 @@ export interface RiskAssessment {
   base: number
   cargoFactor: number
   segments: SegmentRisk[]
+}
+
+export interface StatusTransition {
+  to: string
+  toLabel: string
+  action: string
+  roles: string[]
+  reasonRequired: boolean
+  blockedReason: string | null
+}
+
+export interface RequestStatusInfo {
+  requestId: string
+  status: string
+  statusLabel: string
+  terminal: boolean
+  transitions: StatusTransition[]
+}
+
+export interface StatusHistoryEntry {
+  id: string
+  fromStatus: string | null
+  fromLabel: string | null
+  toStatus: string
+  toLabel: string
+  actorRole: string
+  actorRoleLabel: string
+  actorName: string | null
+  reason: string | null
+  occurredAt: string
+}
+
+export interface ChangeStatusBody {
+  targetStatus: string
+  actorRole: string
+  actorName?: string
+  reason?: string
 }
 
 export interface FirstDispatcher {
@@ -145,6 +183,15 @@ export const getRisk = (id: string) =>
 
 export const deleteRisk = (id: string) =>
   api.delete<CaravanRequest>(`/api/requests/${id}/risk`).then((r) => r.data)
+
+export const getStatusInfo = (id: string) =>
+  api.get<RequestStatusInfo>(`/api/requests/${id}/status`).then((r) => r.data)
+
+export const getStatusHistory = (id: string) =>
+  api.get<StatusHistoryEntry[]>(`/api/requests/${id}/status-history`).then((r) => r.data)
+
+export const changeStatus = (id: string, body: ChangeStatusBody) =>
+  api.post<CaravanRequest>(`/api/requests/${id}/status`, body).then((r) => r.data)
 
 export const getOrganizations = () =>
   api.get<Organization[]>('/api/organizations').then((r) => r.data)

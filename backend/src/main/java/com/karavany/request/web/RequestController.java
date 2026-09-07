@@ -104,7 +104,8 @@ public class RequestController {
     public record RequestResponse(UUID id, UUID organizationId, String origin, String destination,
                                   LocalDate departureDate, String cargoDescription, int cargoValueCaps,
                                   String routeCode, String routeName, Double etaHours, Integer riskScore,
-                                  String riskStatus, String recommendation, String status, OffsetDateTime createdAt) {
+                                  String riskStatus, String recommendation, String status, String statusLabel,
+                                  OffsetDateTime createdAt) {
         static RequestResponse from(CaravanRequest r) {
             return new RequestResponse(r.getId(),
                     r.getOrganization() != null ? r.getOrganization().getId() : null,
@@ -113,7 +114,7 @@ public class RequestController {
                     r.getRoute() != null ? r.getRoute().getCode() : null,
                     r.getRoute() != null ? r.getRoute().getName() : null,
                     r.getEtaHours(), r.getRiskScore(), r.getRiskStatus(), r.getRecommendation(),
-                    r.getStatus(), r.getCreatedAt());
+                    r.getStatus().name(), r.getStatus().label(), r.getCreatedAt());
         }
     }
 

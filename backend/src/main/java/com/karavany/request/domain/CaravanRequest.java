@@ -4,6 +4,8 @@ import com.karavany.organization.domain.Organization;
 import com.karavany.route.domain.Route;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -55,7 +57,8 @@ public class CaravanRequest {
 
     private String recommendation;
 
-    private String status = "DRAFT";
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status = RequestStatus.DRAFT;
 
     @Column(name = "created_at", insertable = false, updatable = false)
     private OffsetDateTime createdAt;
@@ -76,6 +79,10 @@ public class CaravanRequest {
 
     public void applyEta(Double etaHours) {
         this.etaHours = etaHours;
+    }
+
+    public void changeStatus(RequestStatus next) {
+        this.status = next;
     }
 
     public void applyRisk(Integer riskScore, String riskStatus, String recommendation) {
@@ -132,7 +139,7 @@ public class CaravanRequest {
         return recommendation;
     }
 
-    public String getStatus() {
+    public RequestStatus getStatus() {
         return status;
     }
 

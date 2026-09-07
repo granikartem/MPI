@@ -45,6 +45,19 @@ public class AuditEvent {
                 dispatcherId, details, Instant.now());
     }
 
+    public static AuditEvent requestStatusChanged(UUID organizationId, UUID requestId,
+                                                  String fromStatus, String toStatus,
+                                                  String actorRole, String actorName, String reason) {
+        Map<String, Object> details = new LinkedHashMap<>();
+        details.put("requestId", requestId);
+        details.put("from", fromStatus);
+        details.put("to", toStatus);
+        details.put("actorName", actorName == null ? "—" : actorName);
+        details.put("reason", reason == null ? "—" : reason);
+        return new AuditEvent("REQUEST_STATUS_CHANGED", actorRole, organizationId,
+                null, details, Instant.now());
+    }
+
     public String getId() {
         return id;
     }
