@@ -7,6 +7,7 @@
 ```
 docs/             — проектная документация (Vision, SRS, SDP, UseCases, BusinessCase, RiskList, Glossary)
   diagrams/       — диаграммы (PlantUML-исходники + отрендеренные PNG)
+    sad/          — диаграммы для SAD (State Machine, Sequence, Cooperative × 3 view)
   mockups/        — HTML-макеты и скриншоты интерфейсов
   scripts/        — служебные скрипты (рендер диаграмм и графиков)
   tools/          — внешние инструменты (plantuml.jar)
@@ -65,6 +66,7 @@ docker compose up -d --build
 ## Документация
 
 Точка входа — [docs/Vision.md](docs/Vision.md) (концепция) и [docs/SRS.md](docs/SRS.md) (требования). Архитектурно значимые прецеденты с диаграммами и макетами — [docs/CoreUseCases.md](docs/CoreUseCases.md).
+Диаграммы к документу описания архитектуры (SAD) — [docs/SAD_Diagrams.md](docs/SAD_Diagrams.md).
 
 ## Генерация диаграмм из PUML
 
@@ -75,6 +77,13 @@ docker compose up -d --build
 ```bash
 cd docs
 python scripts/render_puml.py --jar tools/plantuml/plantuml.jar --fmt png
+```
+
+Рендер диаграмм SAD из `docs/diagrams/sad/`:
+
+```bash
+cd docs
+python scripts/render_puml.py --jar tools/plantuml/plantuml.jar --src diagrams/sad --out diagrams/out --fmt png
 ```
 
 Генерация графика окупаемости (требуется Python + matplotlib):

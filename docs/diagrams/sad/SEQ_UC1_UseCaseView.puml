@@ -1,0 +1,71 @@
+@startuml SEQ_UC1_UseCaseView
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #333333
+skinparam ActorBackgroundColor #F5F5F5
+
+title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Use-Case View)\nАбстрактное описание: обмен между актором, системой и внешней системой
+
+actor "Диспетчер\nкараванов" as D
+participant "ИС «Караваны»" as S
+participant "Wasteland Intel" as WI <<внешняя система>>
+
+autonumber "<b>0."
+D -> S : открыть форму создания заявки
+activate S
+S --> D : форма со списком шаблонов маршрутов
+deactivate S
+
+D -> S : ввести основные данные\n(откуда, куда, дата отправки, описание груза)
+activate S
+
+alt основной поток: маршрут из шаблона
+  D -> S : выбрать шаблон маршрута
+else альт. поток 3а: маршрут задаётся вручную
+  D -> S : задать последовательность контрольных точек
+end
+
+S -> WI : запросить данные об угрозах\nпо участкам маршрута
+activate WI
+
+alt данные получены
+  WI --> S : угрозы по участкам + дата актуальности
+  deactivate WI
+  S -> S : рассчитать risk_score маршрута
+else альт. поток 4а: Wasteland Intel недоступен
+  WI --> S : ошибка / нет ответа
+  S -> S : пометить risk_score как «Требует пересчёта»
+  S --> D : предупреждение о недоступности\nвнешней системы
+end
+
+S -> S : рассчитать ETA по маршруту
+S --> D : предварительная сводка маршрута
+deactivate S
+
+D -> S : указать оценочную ценность груза (в крышках)
+activate S
+S -> S : пересчитать risk_score\nс учётом ценности груза
+S -> S : сформировать рекомендацию\nпо охране и припасам (UC-8)
+S --> D : сводка заявки: маршрут, ETA,\nrisk_score, рекомендация
+deactivate S
+
+alt диспетчер подтверждает создание
+  D -> S : подтвердить создание заявки
+  activate S
+  S -> S : сохранить заявку в статусе «Черновик»\nи зафиксировать событие создания
+  S --> D : заявка создана, отображена в реестре
+  deactivate S
+else альт. поток 8а: отмена
+  D -> S : отменить создание
+  activate S
+  S --> D : заявка не сохранена
+  deactivate S
+end
+
+note over S
+  Постусловия: заявка существует в статусе «Черновик»,
+  содержит маршрут, ETA, risk_score и рекомендацию
+  по охране и припасам
+end note
+@enduml

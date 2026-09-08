@@ -1,0 +1,163 @@
+@startuml SEQ_UC1_ImplementationView
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #333333
+skinparam ActorBackgroundColor #F5F5F5
+skinparam DatabaseBackgroundColor #F5F5F5
+skinparam BoxPadding 8
+skinparam SequenceMessageFontName Courier
+
+title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Implementation View)\nРеальные классы, методы и HTTP-контракт реализации
+
+actor "Диспетчер" as D
+
+box "frontend (React 18 + Vite)" #FDFDFD
+  participant "form:RequestForm.tsx" as UI
+  participant "api:api.ts (axios)" as API
+end box
+
+box "backend (Spring Boot 3, Java 21)" #FDFDFD
+  participant "c:RequestController\n<<@RestController>>" as WEB
+  participant "s:RequestService\n<<@Service>>" as SVC
+  participant "eta:EtaService" as ETA
+  participant "risk:RiskService" as RISK
+  participant "intel:WastelandIntelClient" as INTEL
+  participant "st:RequestStatusService" as STAT
+  participant "repo:CaravanRequestRepository\nrouteRepo:RouteRepository\ncpRepo:CheckpointRepository\nsegRepo:RouteSegmentRepository\norgRepo:OrganizationRepository\nhRepo:RequestStatusHistoryRepository" as REPO
+  participant "aRepo:RiskAssessmentRepository" as MREPO
+end box
+
+box "инфраструктура" #FDFDFD
+  database "PostgreSQL 16" as PG
+  database "MongoDB 7" as MG
+  participant "mock-intel:WireMock\n(Wasteland Intel)" as WI
+end box
+
+autonumber "<b>0."
+D -> UI : submit(e: FormEvent)
+activate UI
+UI -> API : createRequest(body: CreateRequestBody)
+activate API
+API -> WEB : POST /api/requests\n{organizationId, origin, destination, departureDate,\n cargoDescription, cargoValueCaps, routeId | routeName+segments}
+activate WEB
+
+alt body.routeId() != null  — основной поток
+  WEB -> SVC : create(organizationId, origin, destination,\ndepartureDate, cargoDescription, cargoValueCaps, routeId)
+  activate SVC
+  SVC -> REPO : organizationRepository.findById(organizationId)
+  activate REPO
+  REPO -> PG : SELECT * FROM organization WHERE id = ?
+  REPO --> SVC : Optional<Organization>
+  deactivate REPO
+  SVC -> REPO : routeRepository.findById(routeId)
+  activate REPO
+  REPO -> PG : SELECT * FROM route / route_segment
+  REPO --> SVC : Optional<Route>
+  deactivate REPO
+else body.segments() != null — альт. поток 3а (ручной маршрут)
+  WEB -> SVC : createWithManualRoute(organizationId, ..., routeName,\nList<SegmentSpec> specs)
+  activate SVC
+  SVC -> REPO : routeRepository.save(new Route(nextRouteCode(), name, false))
+  activate REPO
+  REPO -> PG : INSERT INTO route
+  deactivate REPO
+  loop для каждого SegmentSpec
+    SVC -> REPO : checkpointRepository.findByCode(spec.fromCode() / toCode())
+    activate REPO
+    REPO -> PG : SELECT * FROM checkpoint WHERE code = ?
+    REPO --> SVC : Optional<Checkpoint>
+    deactivate REPO
+  end
+  SVC -> REPO : routeSegmentRepository.saveAll(segments)
+  activate REPO
+  REPO -> PG : INSERT INTO route_segment (ord, from, to, distance_km)
+  deactivate REPO
+end
+
+SVC -> SVC : build(organization, origin, destination, departureDate,\ncargoDescription, cargoValueCaps, route)
+SVC -> SVC : new CaravanRequest(...)  // status = RequestStatus.DRAFT
+
+SVC -> ETA : computeHours(route) : double
+activate ETA
+ETA --> SVC : sum(RouteSegment::getDistanceKm) / 4.0 км/ч
+deactivate ETA
+SVC -> SVC : request.applyEta(etaHours)
+
+SVC -> RISK : calculate(route, cargoValueCaps) : RiskResult
+activate RISK
+RISK -> RISK : keys = route.getSegments()\n  .map(RouteSegment::segmentKey)
+RISK -> INTEL : fetchThreats(keys) : Optional<ThreatReport>
+activate INTEL
+INTEL -> WI : GET {intel.base-url}/threats?segments=GS-PR,PR-NV\n(connectTimeout = readTimeout = 2000 ms)
+activate WI
+
+alt HTTP 200 — данные получены
+  WI --> INTEL : {"asOf": "...", "segments":[{segment, threatLevel, threats[]}]}
+  deactivate WI
+  INTEL --> RISK : Optional.of(ThreatReport)
+  deactivate INTEL
+  RISK -> RISK : threatSum = Σ threatLevel\nbase = min(100, threatSum * 6)\ncargoFactor = cargoFactor(caps)\nscore = min(100, base + cargoFactor)\nstatus = isStale(asOf) ? "STALE" : "OK"\nrecommendation(score)
+  RISK --> SVC : new RiskResult(score, status, recommendation,\nasOf, threatSum, base, cargoFactor, segments)
+else исключение / таймаут — альт. поток 4а
+  WI --> INTEL : ошибка соединения
+  INTEL --> RISK : Optional.empty()
+  RISK --> SVC : RiskResult.unavailable()\n// score = null, status = "NA"
+end
+deactivate RISK
+SVC -> SVC : request.applyRisk(risk.score(), risk.status(),\nrisk.recommendation())
+
+SVC -> REPO : requestRepository.save(request)
+activate REPO
+REPO -> PG : INSERT INTO caravan_request\n(organization_id, origin, destination, departure_date,\n cargo_description, cargo_value_caps, route_id,\n eta_hours, risk_score, risk_status, recommendation, status='DRAFT')
+PG --> REPO : id : UUID
+REPO --> SVC : saved : CaravanRequest
+deactivate REPO
+
+SVC -> RISK : saveAssessment(saved.getId(), risk)
+activate RISK
+RISK -> MREPO : assessmentRepository.save(\nnew RiskAssessment(requestId, result, Instant.now()))
+activate MREPO
+MREPO -> MG : db.risk_assessment.insertOne({...})
+deactivate MREPO
+deactivate RISK
+
+SVC -> STAT : recordCreation(saved)
+activate STAT
+STAT -> REPO : historyRepository.save(new RequestStatusHistory(\nrequest, null, DRAFT, ActorRole.DISPATCHER, null, "Заявка создана"))
+activate REPO
+REPO -> PG : INSERT INTO request_status_history
+deactivate REPO
+deactivate STAT
+
+SVC --> WEB : saved : CaravanRequest
+deactivate SVC
+WEB -> WEB : RequestResponse.from(created)
+WEB --> API : HTTP 201 Created\n{id, organizationId, routeCode, etaHours,\n riskScore, riskStatus, recommendation,\n status:"DRAFT", statusLabel:"Черновик", ...}
+deactivate WEB
+API --> UI : Promise<CaravanRequest>
+deactivate API
+UI -> UI : onCreated(created)\n// Console.OrgDispatch: setRequests([created, ...prev])
+UI --> D : карточка заявки в реестре\n(StatusBadge «Черновик», RiskBadge)
+deactivate UI
+
+group альтернатива: ошибка валидации
+  WEB -> WEB : IllegalArgumentException\n→ handleBadRequest(e) @ExceptionHandler
+  WEB --> API : HTTP 400 {"message": "..."}
+  API --> UI : rejected Promise
+  UI -> UI : setError(err.response.data.message)
+end
+
+note over SVC, MREPO
+  Транзакционность: @Transactional на RequestController.create(...)
+  и RequestService.create(...) — запись в PostgreSQL атомарна;
+  запись снимка оценки в MongoDB выполняется вне транзакции JPA
+end note
+
+note over WI
+  Известные ограничения реализации:
+  • mock-intel отдаёт фиксированный asOf (2287) — ветка "STALE" не воспроизводится,
+    хотя реализована в RiskService.isStale(...)
+  • audit-событие REQUEST_CREATED в MongoDB не пишется (FR-35, пробел UC-1)
+end note
+@enduml

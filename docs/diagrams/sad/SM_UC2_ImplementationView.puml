@@ -1,0 +1,85 @@
+@startuml SM_UC2_ImplementationView
+!pragma layout smetana
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Courier
+}
+
+title UC-2 «Управлять статусами заявки» — State Machine Diagram (Implementation View)\nЗначения RequestStatus, реальные вызовы методов и HTTP-контракт
+
+state "DRAFT\n«Черновик»" as DRAFT
+state "READY\n«Готов к отправке»" as READY
+state "EN_ROUTE\n«В пути»" as EN_ROUTE
+state "DELAYED\n«Задержка»" as DELAYED
+state "DELIVERED\n«Доставлен»" as DELIVERED
+state "CLOSED\n«Закрыт»" as CLOSED #LightGreen
+state "CANCELLED\n«Отменён»" as CANCELLED #MistyRose
+
+DRAFT : поле caravan_request.status
+DRAFT : @Enumerated(EnumType.STRING)
+EN_ROUTE : RequestStatusMachine.from(EN_ROUTE)
+EN_ROUTE : → {DELAYED, DELIVERED}
+CLOSED : RequestStatusMachine.isTerminal(CLOSED) == true
+CANCELLED : RequestStatusMachine.isTerminal(CANCELLED) == true
+
+[*] --> DRAFT : RequestController.create(CreateRequest)\n→ RequestService.build(...)\n→ new CaravanRequest(...) : status = DRAFT\n→ CaravanRequestRepository.save(r)\n→ RequestStatusService.recordCreation(saved)\n→ RequestStatusHistoryRepository.save(\n    new RequestStatusHistory(r, null, DRAFT,\n    DISPATCHER, null, "Заявка создана"))
+
+DRAFT --> READY : POST /api/requests/{id}/status\n{targetStatus:"READY", actorRole:"DISPATCHER"}\n[Transition(DRAFT, READY, "Укомплектовать рейс",\n {DISPATCHER}, reasonRequired=false)]
+DRAFT --> CANCELLED : POST /api/requests/{id}/status\n{targetStatus:"CANCELLED", actorRole:"DISPATCHER"}\n[Transition(DRAFT, CANCELLED,\n "Отменить заявку", {DISPATCHER}, false)]
+
+READY --> EN_ROUTE : POST /api/requests/{id}/status\n{targetStatus:"EN_ROUTE", actorRole:"CARAVAN_MASTER"}\n[Transition(READY, EN_ROUTE,\n "Караван вышел на маршрут", {CARAVAN_MASTER}, false)]\n[RequestReadinessGuard.blockerFor(r, EN_ROUTE) == null]
+READY --> CANCELLED : POST /api/requests/{id}/status\n{targetStatus:"CANCELLED", actorRole:"DISPATCHER"}\n[Transition(READY, CANCELLED,\n "Отменить рейс до выхода", {DISPATCHER}, false)]
+
+EN_ROUTE --> DELAYED : POST /api/requests/{id}/status\n{targetStatus:"DELAYED", actorRole:"CARAVAN_MASTER"|\n"DISPATCHER"|"SYSTEM", reason:"..."}\n[Transition(EN_ROUTE, DELAYED, "Зафиксировать задержку",\n {DISPATCHER, CARAVAN_MASTER, SYSTEM},\n reasonRequired=true)]
+DELAYED --> EN_ROUTE : POST /api/requests/{id}/status\n{targetStatus:"EN_ROUTE"}\n[Transition(DELAYED, EN_ROUTE,\n "Движение возобновлено",\n {DISPATCHER, CARAVAN_MASTER}, false)]
+EN_ROUTE --> DELIVERED : POST /api/requests/{id}/status\n{targetStatus:"DELIVERED", actorRole:"CARAVAN_MASTER"}\n[Transition(EN_ROUTE, DELIVERED,\n "Груз доставлен", {CARAVAN_MASTER}, false)]
+
+DELIVERED --> CLOSED : POST /api/requests/{id}/status\n{targetStatus:"CLOSED", actorRole:"DISPATCHER"}\n[Transition(DELIVERED, CLOSED,\n "Закрыть рейс", {DISPATCHER}, false)]
+
+CLOSED --> [*]
+CANCELLED --> [*]
+
+note as N_Flow
+  **Обработка команды перехода**
+  RequestStatusController.changeStatus(UUID id, ChangeStatusRequest body)
+    1. RequestService.getById(id) : CaravanRequest
+    2. RequestStatus.parse(body.targetStatus()), ActorRole.parse(body.actorRole())
+    3. RequestStatusService.changeStatus(request, target, actorRole, actorName, reason)
+    4. RequestResponse.from(updated) → HTTP 200
+end note
+
+note as N_Guards
+  **Порядок проверок в RequestStatusService.changeStatus(...)**
+  1) current == target → StatusTransitionException («заявка уже в статусе»)
+  2) RequestStatusMachine.find(current, target).orElseThrow(...) —
+     недопустимый переход или финальный статус (isTerminal)
+  3) !transition.roles().contains(actorRole) → отказ с перечнем ролей
+  4) transition.reasonRequired() && reason == null → отказ
+  5) RequestReadinessGuard.blockerFor(request, target) != null → отказ
+  Любой отказ → StatusTransitionException → @ExceptionHandler → **HTTP 409**;
+  неизвестный статус/роль или отсутствие заявки → IllegalArgumentException → **HTTP 400**
+end note
+
+note as N_Effect
+  **Эффект успешного перехода** (RequestStatusService.changeStatus, @Transactional)
+  request.changeStatus(target)
+  CaravanRequestRepository.save(request)                    → PostgreSQL: caravan_request
+  RequestStatusHistoryRepository.save(new RequestStatusHistory(
+      saved, current, target, actorRole, actorName, reason)) → PostgreSQL: request_status_history
+  AuditEventRepository.save(AuditEvent.requestStatusChanged(
+      orgId, requestId, from, to, actorRole, actorName, reason))
+                                                            → MongoDB: audit_event
+                                                              (type = REQUEST_STATUS_CHANGED)
+end note
+
+note as N_Limits
+  **Ограничения текущей реализации**
+  • RequestReadinessGuard.blockerFor(...) возвращает null для всех переходов:
+    проверка FR-10 (укомплектованность обязательных ролей) появится вместе с UC-9
+  • ActorRole приходит из тела запроса, а не из сессии — до реализации UC-25
+  • Автоматический переход EN_ROUTE → DELAYED ролью SYSTEM разрешён моделью,
+    вызов появится вместе с UC-19
+end note
+@enduml

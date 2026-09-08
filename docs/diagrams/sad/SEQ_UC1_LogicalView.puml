@@ -1,0 +1,124 @@
+@startuml SEQ_UC1_LogicalView
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #333333
+skinparam ActorBackgroundColor #F5F5F5
+skinparam DatabaseBackgroundColor #F5F5F5
+skinparam BoxPadding 8
+
+title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Logical View)\nВзаимодействие компонентов по слоям; уровни совпадают с диаграммой пакетов
+
+actor "Диспетчер\nкараванов" as D
+
+box "Клиент (frontend)" #FDFDFD
+  participant "Форма заявки\n<<pages/components>>" as UI
+  participant "Клиент REST API\n<<api>>" as API
+end box
+
+box "Сервер (backend)" #FDFDFD
+  participant "Контроллер заявок\n<<web>>" as WEB
+  participant "Сервис заявок\n<<service>>" as SVC
+  participant "Репозитории маршрутов\nи контрольных точек\n<<repository>>" as ROUTE
+  participant "Сервис ETA\n<<service>>" as ETA
+  participant "Сервис оценки риска\n<<service>>" as RISK
+  participant "Клиент внешней\nразведки <<service>>" as INTEL
+  participant "Сервис статусов\nзаявки <<service>>" as STAT
+  participant "Репозитории заявок\nи истории <<repository>>" as REPO
+  participant "Репозиторий оценок\nриска <<repository>>" as MREPO
+end box
+
+box "Хранилища и внешние системы" #FDFDFD
+  database "PostgreSQL\n(оперативные данные)" as PG
+  database "MongoDB\n(снимки оценок, аудит)" as MG
+  participant "Wasteland Intel" as WI <<внешняя система>>
+end box
+
+autonumber "<b>0."
+D -> UI : заполнить форму и подтвердить создание
+activate UI
+UI -> API : создать заявку(данные заявки,\nмаршрут или участки)
+activate API
+API -> WEB : HTTP-запрос создания заявки
+activate WEB
+WEB -> SVC : создать заявку(параметры)
+activate SVC
+
+alt основной поток: выбран шаблон маршрута
+  SVC -> ROUTE : получить шаблон маршрута
+  activate ROUTE
+  ROUTE -> PG : выбрать маршрут и его участки
+  PG --> ROUTE : маршрут
+  ROUTE --> SVC : маршрут
+  deactivate ROUTE
+else альт. поток 3а: маршрут задан вручную
+  SVC -> ROUTE : сохранить новый маршрут\nи последовательность участков
+  activate ROUTE
+  ROUTE -> PG : записать маршрут и участки
+  PG --> ROUTE : сохранённый маршрут
+  ROUTE --> SVC : маршрут
+  deactivate ROUTE
+end
+
+SVC -> ETA : рассчитать ETA(маршрут)
+activate ETA
+ETA --> SVC : длительность рейса
+deactivate ETA
+
+SVC -> RISK : рассчитать риск(маршрут, ценность груза)
+activate RISK
+RISK -> INTEL : запросить угрозы(участки маршрута)
+activate INTEL
+INTEL -> WI : запрос данных об угрозах
+activate WI
+
+alt внешняя система ответила
+  WI --> INTEL : угрозы по участкам, дата актуальности
+  deactivate WI
+  INTEL --> RISK : отчёт об угрозах
+  deactivate INTEL
+  RISK -> RISK : агрегировать угрозы, применить\nкоэффициент ценности груза,\nсформировать рекомендацию
+  RISK --> SVC : оценка риска (актуальная\nили на устаревших данных)
+else альт. поток 4а: источник недоступен
+  WI --> INTEL : ошибка / таймаут
+  INTEL --> RISK : данных нет
+  RISK --> SVC : оценка «требует пересчёта»
+end
+deactivate RISK
+
+SVC -> SVC : собрать заявку в статусе «Черновик»\n(маршрут, ETA, риск, рекомендация)
+SVC -> REPO : сохранить заявку
+activate REPO
+REPO -> PG : записать заявку
+PG --> REPO : идентификатор заявки
+REPO --> SVC : сохранённая заявка
+deactivate REPO
+
+SVC -> MREPO : сохранить снимок оценки риска
+activate MREPO
+MREPO -> MG : записать снимок оценки
+deactivate MREPO
+
+SVC -> STAT : зафиксировать создание заявки
+activate STAT
+STAT -> REPO : записать стартовую запись\nистории статусов («— → Черновик»)
+activate REPO
+REPO -> PG : записать историю статуса
+deactivate REPO
+deactivate STAT
+
+SVC --> WEB : созданная заявка
+deactivate SVC
+WEB --> API : представление заявки
+deactivate WEB
+API --> UI : данные созданной заявки
+deactivate API
+UI --> D : заявка добавлена в реестр\nсо статусом и risk_score
+deactivate UI
+
+note over WEB, SVC
+  Слой **web** отвечает только за контракт (валидация тела запроса,
+  коды ответов и обработка ошибок), бизнес-логика целиком в слое **service**;
+  слой **domain** хранит состояние заявки, слой **repository** — доступ к БД
+end note
+@enduml

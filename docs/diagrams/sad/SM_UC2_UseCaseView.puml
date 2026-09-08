@@ -1,0 +1,55 @@
+@startuml SM_UC2_UseCaseView
+!pragma layout smetana
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Arial
+}
+
+title UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)\nАбстрактное описание: состояния заявки и действия акторов
+
+state "Черновик\n(Draft)" as Draft
+state "Готов к отправке\n(Ready)" as Ready
+state "В пути\n(En Route)" as EnRoute
+state "Задержка\n(Delayed)" as Delayed
+state "Доставлен\n(Delivered)" as Delivered
+state "Закрыт\n(Closed)" as Closed #LightGreen
+state "Отменён\n(Cancelled)" as Cancelled #MistyRose
+
+[*] --> Draft : UC-1: диспетчер создал\nзаявку на перевозку
+
+Draft --> Ready : Укомплектовать рейс\n(Диспетчер)
+Draft --> Cancelled : Отменить заявку\n(Диспетчер)
+
+Ready --> EnRoute : Караван вышел на маршрут\n(Караван-мастер)
+Ready --> Cancelled : Отменить рейс до выхода\n(Диспетчер)
+
+EnRoute --> Delayed : Зафиксировать задержку\n(Караван-мастер / Диспетчер / Система)\n[указана причина]
+Delayed --> EnRoute : Движение возобновлено\n(Караван-мастер / Диспетчер)
+EnRoute --> Delivered : Груз доставлен\n(Караван-мастер)
+
+Delivered --> Closed : Закрыть рейс\n(Диспетчер)
+
+Closed --> [*]
+Cancelled --> [*]
+
+note right of Delayed
+  UC-19: инцидент высокой или
+  критической тяжести переводит
+  рейс в «Задержку» автоматически
+  (актор Система)
+end note
+
+note bottom of Cancelled
+  Отмена возможна только
+  до выхода каравана на маршрут.
+  «Закрыт» и «Отменён» — финальные
+end note
+
+legend right
+  Переход инициирует актор, указанный в скобках.
+  Каждый переход попадает в историю статусов (FR-3)
+  и в журнал аудита (FR-35).
+endlegend
+@enduml
