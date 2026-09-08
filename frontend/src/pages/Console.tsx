@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import {
-  CaravanRequest,
   Checkpoint,
   getCheckpoints,
   getHealth,
   getOrganizations,
-  getRequests,
   getRoutes,
   HealthResponse,
   Organization,
   RouteOption,
 } from '../api'
 import RequestForm from '../components/RequestForm'
-import RequestList from '../components/RequestList'
+import RequestRegistry from '../components/RequestRegistry'
 import { navigate, subscribeRouter } from '../router'
 
 function selectedOrgId(): string | null {
@@ -110,20 +108,12 @@ function OrgPicker({ organizations }: { organizations: Organization[] }) {
 function OrgDispatch({ org, orgId }: { org: Organization | null; orgId: string }) {
   const [routes, setRoutes] = useState<RouteOption[]>([])
   const [checkpoints, setCheckpoints] = useState<Checkpoint[]>([])
-  const [requests, setRequests] = useState<CaravanRequest[]>([])
+  const [created, setCreated] = useState(0)
 
   useEffect(() => {
     getRoutes().then(setRoutes).catch(() => setRoutes([]))
     getCheckpoints().then(setCheckpoints).catch(() => setCheckpoints([]))
-    getRequests(orgId).then(setRequests).catch(() => setRequests([]))
   }, [orgId])
-
-  function onCreated(request: CaravanRequest) {
-    setRequests((prev) => [request, ...prev])
-  }
-  function onUpdated(request: CaravanRequest) {
-    setRequests((prev) => prev.map((r) => (r.id === request.id ? request : r)))
-  }
 
   return (
     <>
@@ -137,10 +127,10 @@ function OrgDispatch({ org, orgId }: { org: Organization | null; orgId: string }
           organizationId={orgId}
           routes={routes}
           checkpoints={checkpoints}
-          onCreated={onCreated}
+          onCreated={() => setCreated((n) => n + 1)}
         />
       )}
-      <RequestList requests={requests} onUpdated={onUpdated} />
+      <RequestRegistry organizationId={orgId} reloadToken={created} />
     </>
   )
 }

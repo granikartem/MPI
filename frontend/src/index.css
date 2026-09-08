@@ -413,6 +413,184 @@ button.status-badge:hover {
   min-width: 190px;
 }
 
+/* Реестр рейсов UC-3 */
+.registry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.registry-head h2 {
+  margin: 0;
+}
+.registry-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.registry-state {
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  padding: 14px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.registry-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scope-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+.scope-tabs button {
+  flex: 1;
+  font-size: 12px;
+  padding: 7px;
+  letter-spacing: 1px;
+}
+.scope-tabs button.active {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.summary-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+.summary-tile {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #07120a;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tile-head {
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.tile-value {
+  font-size: 26px;
+  line-height: 1;
+  color: #fff;
+}
+.tile-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.summary-mark {
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.summary-mark.attention {
+  color: var(--dim);
+}
+
+.registry-hint {
+  margin-top: 8px;
+}
+
+.filter-bar {
+  border-top: 1px solid var(--border);
+  margin-top: 12px;
+  padding-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.filter-title {
+  color: var(--dim);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.filter-group .check-row {
+  margin: 0;
+  font-size: 12px;
+}
+.filter-actions {
+  margin-left: auto;
+}
+.filter-actions button {
+  font-size: 12px;
+  padding: 6px 12px;
+}
+.sort-select {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+.sort-select select {
+  min-width: 240px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chip {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 9px;
+  font-size: 12px;
+  background: transparent;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+.chip:hover:not(:disabled) {
+  background: transparent;
+  opacity: 1;
+}
+.chip.active {
+  opacity: 1;
+  background: rgba(51, 255, 102, 0.1);
+}
+
+.registry-table {
+  overflow-x: auto;
+}
+.attention-marks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.attention-mark {
+  border: 1px solid #ff9800;
+  border-radius: 3px;
+  padding: 1px 6px;
+  color: #ff9800;
+  font-size: 11px;
+}
+.row-attention td {
+  background: rgba(255, 152, 0, 0.06);
+}
+.row-attention td:first-child {
+  border-left: 2px solid #ff9800;
+}
+
 .admin-console {
   --admin-bg: #111;
   --admin-panel: #191919;

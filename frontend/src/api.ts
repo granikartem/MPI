@@ -114,6 +114,70 @@ export interface ChangeStatusBody {
   reason?: string
 }
 
+export interface AttentionMark {
+  code: string
+  label: string
+}
+
+export interface RegistryRow {
+  id: string
+  routeCode: string | null
+  routeName: string | null
+  origin: string
+  destination: string
+  departureDate: string
+  cargoDescription: string | null
+  cargoValueCaps: number
+  etaHours: number | null
+  riskScore: number | null
+  riskStatus: string
+  riskLevel: string
+  riskLevelLabel: string
+  recommendation: string | null
+  status: string
+  statusLabel: string
+  terminal: boolean
+  lastStatusChangeAt: string | null
+  lastStatusActorRole: string | null
+  lastStatusActorRoleLabel: string | null
+  lastStatusActorName: string | null
+  lastStatusReason: string | null
+  attention: AttentionMark[]
+  createdAt: string
+}
+
+export interface RegistrySummary {
+  active: number
+  completed: number
+  scopeTotal: number
+  byStatus: Record<string, number>
+  byRiskLevel: Record<string, number>
+  byAttention: Record<string, number>
+  attentionTotal: number
+}
+
+export interface TripRegistry {
+  organizationId: string
+  scope: string
+  scopeLabel: string
+  sort: string
+  limit: number
+  shown: number
+  truncated: boolean
+  generatedAt: string
+  summary: RegistrySummary
+  rows: RegistryRow[]
+}
+
+export interface RegistryQuery {
+  scope?: string
+  status?: string[]
+  riskLevel?: string[]
+  attentionOnly?: boolean
+  sort?: string
+  limit?: number
+}
+
 export interface FirstDispatcher {
   id: string
   fullName: string
@@ -192,6 +256,14 @@ export const getStatusHistory = (id: string) =>
 
 export const changeStatus = (id: string, body: ChangeStatusBody) =>
   api.post<CaravanRequest>(`/api/requests/${id}/status`, body).then((r) => r.data)
+
+export const getRegistry = (organizationId: string, q: RegistryQuery = {}) =>
+  api
+    .get<TripRegistry>('/api/requests/registry', {
+      params: { organizationId, ...q },
+      paramsSerializer: { indexes: null },
+    })
+    .then((r) => r.data)
 
 export const getOrganizations = () =>
   api.get<Organization[]>('/api/organizations').then((r) => r.data)

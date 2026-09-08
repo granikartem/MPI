@@ -27,7 +27,7 @@ docker compose up -d --build
 ```
 
 Затем открыть **http://localhost:5173**:
-- «Открыть терминал диспетчера» — UC-1/UC-2/UC-7.
+- «Открыть терминал диспетчера» — UC-1/UC-2/UC-3/UC-7.
 - «Открыть консоль организаций» — UC-32.
 
 | Сервис | Порт | Назначение |
@@ -43,6 +43,7 @@ docker compose up -d --build
 Прецеденты **UC-1 (создание заявки)** и **UC-7 (расчёт risk_score)** — см. [docs/ImplementationPlan.md](docs/ImplementationPlan.md).
 Прецедент **UC-32 (создать организацию)** — см. [docs/UC-32.md](docs/UC-32.md).
 Прецедент **UC-2 (управлять статусами заявки)** — см. [docs/UC-2.md](docs/UC-2.md).
+Прецедент **UC-3 (просмотреть реестр рейсов)** — см. [docs/UC-3.md](docs/UC-3.md).
 
 Ключевые эндпоинты:
 
@@ -52,6 +53,7 @@ docker compose up -d --build
 | GET | `/api/routes` | шаблоны маршрутов |
 | GET | `/api/checkpoints` | контрольные точки (для ручного маршрута) |
 | GET/POST | `/api/requests` | реестр / создание заявки (шаблон или ручной маршрут) |
+| GET | `/api/requests/registry` | реестр рейсов организации: срез, фильтры, сортировка, сводка (UC-3) |
 | POST | `/api/requests/{id}/risk-score` | пересчитать risk_score |
 | GET | `/api/requests/{id}/risk` | снимок оценки риска с разбивкой по участкам |
 | DELETE | `/api/requests/{id}/risk` | сбросить оценку риска |
