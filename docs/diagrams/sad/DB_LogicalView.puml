@@ -1,0 +1,162 @@
+@startuml DB_LogicalView
+!pragma layout smetana
+title Data Base Diagram ИС «Караваны» (Logical View)
+
+class CaravanRequest {
+    - id: String
+    - status: TripStatus
+    - createdAt: DateTime
+    - cargoValue: Money
+    - eta: DateTime
+    - riskScore: RiskScore
+}
+
+enum TripStatus {
+    DRAFT
+    READY
+    EN_ROUTE
+    DELAYED
+    DELIVERED
+    CLOSED
+    CANCELLED
+}
+
+class Route {
+    - id: String
+    - startPoint: Location
+    - endPoint: Location
+    - estimatedTime: Duration
+}
+
+class Checkpoint {
+    - id: String
+    - name: String
+    - location: Location
+    - sequenceNumber: Integer
+}
+
+class CargoManifest {
+    - id: String
+    - seals: List<Seal>
+}
+
+class CargoItem {
+    - id: String
+    - description: String
+    - quantity: Integer
+    - weight: Weight
+    - isSpecialCargo: Boolean
+}
+
+class Team {
+    - id: String
+}
+
+class User {
+    - id: String
+    - login: String
+    - fullName: String
+    - role: Role
+}
+
+enum Role {
+    DISPATCHER
+    CARAVAN_MASTER
+    WAREHOUSEMAN
+    SECURITY_CAPTAIN
+    FIELD_MEDIC
+    SUPERUSER
+}
+
+class Organization {
+    - id: String
+    - name: String
+}
+
+class Incident {
+    - id: String
+    - type: IncidentType
+    - severity: Severity
+    - timestamp: DateTime
+    - location: Location
+    - description: String
+}
+
+enum IncidentType {
+    ATTACK
+    BREAKDOWN
+    THEFT
+    RADIATION
+    INJURY
+}
+
+enum Severity {
+    LOW
+    MEDIUM
+    HIGH
+    CRITICAL
+}
+
+class RecoveryRequest {
+    - id: String
+    - type: RecoveryType
+    - status: RecoveryStatus
+}
+
+enum RecoveryType {
+    EVACUATION
+    REINFORCEMENT
+    RESUPPLY
+    REPAIR
+}
+
+enum RecoveryStatus {
+    CREATED
+    IN_PROGRESS
+    COMPLETED
+    CANCELLED
+}
+
+class CheckpointLog {
+    - timestamp: DateTime
+    - location: Location
+    - status: String
+    - taxPaid: Money
+    - currency: String
+    - delayReason: String
+}
+
+class FinancialReport {
+    - id: String
+    - totalCost: Money
+    - taxes: Money
+    - totalRevenue: Money
+    - netResult: Money
+}
+
+class SupplyReservation {
+    - id: String
+    - water: Quantity
+    - food: Quantity
+    - ammunition: Quantity
+    - repairKits: Quantity
+    - medicalSupplies: Quantity
+}
+
+' Связи
+CaravanRequest "1" --> "0..1" Route : has
+CaravanRequest "1" --> "1" CargoManifest : contains
+CaravanRequest "1" --> "0..1" Team : assignedTo
+CaravanRequest "1" --> "0..*" Incident : loggedDuring
+CaravanRequest "1" --> "0..1" FinancialReport : generates
+CaravanRequest "1" --> "0..1" SupplyReservation : uses
+Route "1" --> "1..*" Checkpoint : consistsOf
+CargoManifest "1" --> "1..*" CargoItem : includes
+Team "1" --> "0..*" User : hasMember
+Team "1" --> "1" User : master
+Team "1" --> "0..1" User : medic
+User "1" --> "1" Organization : belongsTo
+CaravanRequest "1" --> "1" Organization : belongsTo
+Incident "0..1" --> "0..1" RecoveryRequest : triggers
+CheckpointLog "1" --> "1" CaravanRequest : refersTo
+@enduml

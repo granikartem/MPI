@@ -1,0 +1,73 @@
+@startuml DEP_DeploymentView
+!pragma layout smetana
+title Deployment Diagram ИС «Караваны»
+
+skinparam node {
+    BackgroundColor #lightblue
+    BorderColor black
+    FontColor black
+}
+skinparam database {
+    BackgroundColor #lightyellow
+    BorderColor black
+}
+skinparam artifact {
+    BackgroundColor #white
+    BorderColor black
+}
+skinparam arrow {
+    Color #333333
+    FontColor #333333
+}
+
+node "Wasteland Intel" as WI {
+    artifact "Радиосеть"
+}
+
+node "NCR Checkpoint" as NCR {
+    artifact "Терминал КПП"
+}
+
+node "Сервер караванной конторы" as Server {
+    database "PostgreSQL" as DB {
+        artifact "Пользователи, рейсы, манифесты"
+    }
+    database "MongoDB" as Mongo {
+        artifact "События, аудит"
+    }
+    node "Kafka" as Kafka {
+        artifact "Очереди сообщений"
+    }
+    node "Backend (Spring Boot)" as Backend {
+        artifact "REST API"
+        artifact "Java 21"
+    }
+    node "Центральный терминал управления" as AdminTerminal {
+        artifact "Web-интерфейс (React)"
+    }
+}
+
+node "Стационарный терминал (офис)" as Office {
+    artifact "Веб-клиент (React)"
+}
+
+node "Полевое устройство Pip-Boy" as PipBoy {
+    artifact "PWA-клиент" as PipBoyApp
+    artifact "Локальное хранилище (offline)" as PipBoyStore
+}
+
+artifact "Резервная кассета (holotape)" as Backup
+
+Backend --> WI : REST/HTTPS
+Backend --> NCR : REST/HTTPS
+
+Office --> Backend : HTTPS
+PipBoy --> Backend : HTTPS (офлайн-синхронизация)
+PipBoyApp --> PipBoyStore : локально
+
+Backend --> DB : JDBC
+Backend --> Mongo : MongoDB Driver
+Backend --> Kafka : Producer/Consumer
+
+Backend --> Backup : резервное копирование
+@enduml

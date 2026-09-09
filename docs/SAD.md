@@ -91,8 +91,13 @@ _Не заполнено._
 | State Machine, UC-2 | Состояния, сторожевые условия и эффекты переходов в разрезе слоёв | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
 | Sequence, UC-1 | Взаимодействие компонентов по слоям | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
 | Cooperative, UC-32 | Объекты по слоям приложения | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
+| Package, система целиком | Пакеты приложения, их состав и зависимости, включая внешние системы | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
+| Data Base, система целиком | Сущности данных, их атрибуты и связи с кратностями, без привязки к СУБД | [DB_LogicalView.puml](diagrams/sad/DB_LogicalView.puml) | [png](diagrams/out/DB_LogicalView.png) |
 
-Package Diagram, которую матрица раздела 2 требует для этой точки зрения, не построена.
+Диаграмма пакетов делит приложение на слои `presentation` → `application` → `domain` с
+`infrastructure` и `common` и показывает зависимости между ними. Её имена пакетов относятся к
+целевому разделению по слоям и не совпадают с именами пакетов в перечне уровней взаимодействия
+выше, взятыми из фактической структуры кода.
 
 Краткие описания всех диаграмм этого раздела — [SAD_Diagrams.md](SAD_Diagrams.md).
 
@@ -102,7 +107,11 @@ _Не заполнено._
 
 ## 7. Deployment View
 
-_Не заполнено._
+| Диаграмма | Что показывает | Исходник | Изображение |
+|---|---|---|---|
+| Deployment | Узлы развёртывания, хранилища и каналы взаимодействия: сервер караванной конторы (backend, PostgreSQL, MongoDB, Kafka), стационарный терминал, полевое устройство Pip-Boy, внешние системы | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
+
+Краткое описание диаграммы — [SAD_Diagrams.md](SAD_Diagrams.md).
 
 ## 8. Implementation View
 
@@ -113,8 +122,12 @@ _Не заполнено._
 | State Machine, UC-2 | Значения `RequestStatus`, реальные вызовы методов и HTTP-контракт | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
 | Sequence, UC-1 | Реальные классы, методы и HTTP-контракт реализации | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
 | Cooperative, UC-32 | Объекты реализации: классы, вызываемые методы и хранилища | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |
+| Data Base, система целиком | Таблицы PostgreSQL и коллекции MongoDB с типами колонок, ключами, индексами и внешними ключами | [DB_ImplementationView.puml](diagrams/sad/DB_ImplementationView.puml) | [png](diagrams/out/DB_ImplementationView.png) |
 
-Data Base Diagram, которую матрица раздела 2 требует для этой точки зрения, не построена.
+Даталогическая модель на диаграмме баз данных описывает целевую схему хранения и шире фактической:
+в миграциях `V1`–`V6` пока созданы `caravan_request`, `route`, `route_segment`, `checkpoint`,
+`organization`, `app_user`, `request_status_history` в PostgreSQL и коллекции `risk_assessment`,
+`audit_event` в MongoDB.
 
 Краткие описания всех диаграмм этого раздела — [SAD_Diagrams.md](SAD_Diagrams.md).
 

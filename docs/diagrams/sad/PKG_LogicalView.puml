@@ -1,0 +1,63 @@
+@startuml PKG_LogicalView
+!pragma layout smetana
+title Package Diagram ИС «Караваны» (Logical View)
+
+skinparam linetype ortho
+
+package "presentation" <<Application-specific>> {
+    rectangle "RestControllers"
+    rectangle "DTOs"
+    rectangle "Validation"
+    rectangle "Exceptions"
+}
+
+package "application" <<Application-specific>> {
+    rectangle "Services"
+    rectangle "UseCases"
+    rectangle "DTOs_application"
+    rectangle "ServiceImplementations"
+}
+
+package "domain" <<Application-specific>> {
+    rectangle "Entities"
+    rectangle "Repositories_interfaces"
+    rectangle "ValueObjects"
+    rectangle "DomainExceptions"
+}
+
+package "infrastructure" <<Common>> {
+    rectangle "RepositoryImplementations"
+    rectangle "ExternalAdapters"
+    rectangle "Security"
+    rectangle "Audit"
+    rectangle "Config"
+    rectangle "Kafka"
+    rectangle "Database_specifics"
+}
+
+package "common" <<Common>> {
+    rectangle "Utils"
+    rectangle "Constants"
+    rectangle "SharedExceptions"
+}
+
+package "Wasteland_Intel" <<External>> {
+    rectangle "getThreats"
+    rectangle "getRouteData"
+}
+
+package "NCR_Checkpoint" <<External>> {
+    rectangle "getCheckpointData"
+    rectangle "getTaxInfo"
+}
+
+presentation ..> application
+application ..> domain
+infrastructure ..> domain
+common ..> domain
+common ..> application
+common ..> infrastructure
+infrastructure ..> Wasteland_Intel
+infrastructure ..> NCR_Checkpoint
+application ..> infrastructure : <<access>>
+@enduml

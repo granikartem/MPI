@@ -20,6 +20,9 @@ Sequence, Cooperative и State Machine. Use Case Diagram и Class Diagram в э�
 | Activity Diagram | **UC-7 «Рассчитать risk_score»** | Единственный оставшийся свободным реализованный прецедент: ветвление основного потока (внешние данные получены / источник недоступен / данные устарели) даёт содержательную диаграмму активности, а Implementation View опирается на фактический код, а не на проект |
 | Use Case Diagram | — (система целиком) | Сноской не ограничена: показывает акторов, границу системы и архитектурно значимые прецеденты |
 | Class Diagram | — (система целиком) | Сноской не ограничена: три точки зрения — это три уровня детализации одной модели (сущности → классы по слоям → полные классы), а не три прецедента |
+| Package Diagram | — (система целиком) | Сноской не ограничена: делит приложение на слои и показывает зависимости между ними; матрица требует её только в Logical View |
+| Data Base Diagram | — (система целиком) | Сноской не ограничена: модель данных системы. Матрица требует её в Implementation View; логический вид добавлен дополнительно, чтобы отделить сущности данных от даталогической модели |
+| Deployment Diagram | — (система целиком) | Сноской не ограничена: узлы развёртывания и каналы взаимодействия; матрица требует её только в Deployment View |
 
 Прецеденты UC-16 «Зафиксировать прохождение этапа рейса» и UC-19 «Сообщить об инциденте в рейсе»
 под диаграммы, привязанные к одному прецеденту, не брались: в коде они не реализованы, поэтому
@@ -44,14 +47,18 @@ Implementation View для них был бы проектным. Их сущн�
 | 5. Logical View | State Machine, UC-2 | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
 | 5. Logical View | Sequence, UC-1 | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
 | 5. Logical View | Cooperative, UC-32 | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
+| 5. Logical View | Package, система целиком | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
+| 5. Logical View | Data Base, система целиком | [DB_LogicalView.puml](diagrams/sad/DB_LogicalView.puml) | [png](diagrams/out/DB_LogicalView.png) |
+| 7. Deployment View | Deployment, система целиком | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
 | 8. Implementation View | Class, система целиком | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
 | 8. Implementation View | Activity, UC-7 | [ACT_UC7_ImplementationView.puml](diagrams/sad/ACT_UC7_ImplementationView.puml) | [png](diagrams/out/ACT_UC7_ImplementationView.png) |
 | 8. Implementation View | State Machine, UC-2 | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
 | 8. Implementation View | Sequence, UC-1 | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
 | 8. Implementation View | Cooperative, UC-32 | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |
+| 8. Implementation View | Data Base, система целиком | [DB_ImplementationView.puml](diagrams/sad/DB_ImplementationView.puml) | [png](diagrams/out/DB_ImplementationView.png) |
 
-Итого 16 диаграмм: Use Case — одна, Class и Activity — по три, State Machine, Sequence и
-Cooperative — по три.
+Итого 20 диаграмм: Use Case, Package и Deployment — по одной, Data Base — две (логический и
+реализационный виды), Class, Activity, State Machine, Sequence и Cooperative — по три.
 
 ## Уровень детализации по точкам зрения
 
@@ -117,6 +124,39 @@ Cooperative — по три.
   рекомендаций 80 / 60 / 30, ветка `RiskResult.unavailable()`, проверка `asOf` на 24 часа и
   сохранение снимка в коллекцию `risk_assessment` вместе с полями `risk_score`, `risk_status` и
   `recommendation` в таблице `caravan_request`.
+
+### Package Diagram — система целиком
+
+- **Logical View.** Приложение разделено на пакеты `presentation` (контроллеры, DTO, валидация,
+  обработчики исключений), `application` (сервисы, сценарии, DTO слоя приложения),
+  `domain` (сущности, интерфейсы репозиториев, объекты-значения, доменные исключения),
+  `infrastructure` (реализации репозиториев, адаптеры внешних систем, безопасность, аудит,
+  конфигурация, Kafka, специфика СУБД) и `common` (утилиты, константы, общие исключения). Показаны
+  зависимости `presentation → application → domain`, обращение `infrastructure → domain`,
+  доступ `application → infrastructure` и связи `infrastructure` с внешними системами
+  Wasteland Intel и NCR Checkpoint. Имена пакетов здесь отражают целевое разделение по слоям и не
+  совпадают с именами фактических пакетов кода, перечисленными в разделе «Уровень детализации».
+
+### Data Base Diagram — система целиком
+
+- **Logical View.** Сущности данных с атрибутами и связями с кратностями, без привязки к СУБД:
+  заявка на перевозку и её статус, маршрут с контрольными точками, груз-манифест с позициями,
+  команда рейса и пользователи с ролями, организация, инцидент со типом и тяжестью,
+  RecoveryRequest, журнал контрольных точек, финансовый отчёт и резерв припасов.
+- **Implementation View.** Даталогическая модель: таблицы PostgreSQL с типами колонок, первичными
+  и внешними ключами, индексами и уникальными ограничениями, и коллекции MongoDB для событий и
+  аудита (`incidents`, `recovery_requests`, `checkpoint_logs`, `audit_log`), а также внешние ключи
+  между таблицами.
+
+### Deployment Diagram — система целиком
+
+- **Deployment View.** Узел «Сервер караванной конторы» с backend на Spring Boot (Java 21, REST
+  API), PostgreSQL для оперативных данных, MongoDB для событий и аудита, Kafka для очередей
+  сообщений и центральным терминалом управления; клиентские узлы — стационарный терминал офиса
+  (веб-клиент на React) и полевое устройство Pip-Boy (PWA-клиент с локальным хранилищем для работы
+  офлайн); внешние узлы Wasteland Intel и NCR Checkpoint. На связях указаны протоколы: HTTPS от
+  клиентов, REST/HTTPS до внешних систем, JDBC и MongoDB Driver до хранилищ, Producer/Consumer до
+  Kafka, а также резервное копирование на голотейп.
 
 ### State Machine Diagram — UC-2 «Управлять статусами заявки»
 
@@ -188,9 +228,21 @@ Cooperative — по три.
   манифестов, пользователей, организаций»). Событий создания заявки и пересчёта `risk_score` в
   `audit_event` нет — на диаграмме активности UC-7 это отмечено заметкой. Требование FR-35
   относится только к операциям по управлению пользователями и к данным заявки не применяется.
-- **Package Diagram (раздел 5) и Data Base Diagram (раздел 8)**, которые матрица требует для этих
-  точек зрения, ещё не построены; имена уровней взаимодействия для будущей диаграммы пакетов
-  зафиксированы выше.
+- **Диаграмма пакетов** описывает целевое разделение на слои (`presentation`, `application`,
+  `domain`, `infrastructure`, `common`). Фактическая структура кода другая — пакеты по предметным
+  модулям (`com.karavany.request`, `.organization`, `.route`, `.risk`, `.audit`), внутри каждого
+  слои `web` / `service` / `domain` / `repository`; именно эти имена перечислены в разделе
+  «Уровень детализации» и использованы на диаграммах классов и активности. Kafka на диаграмме
+  пакетов и на диаграмме развёртывания заявлена как целевой компонент — в `docker-compose.yml`
+  её нет.
+- **Диаграмма баз данных** описывает целевую схему хранения. Фактически миграциями `V1`–`V6`
+  созданы таблицы `caravan_request`, `route`, `route_segment`, `checkpoint`, `organization`,
+  `app_user`, `request_status_history` и коллекции `risk_assessment`, `audit_event`. Таблиц команды
+  рейса, груз-манифеста, припасов и финансового отчёта, а также коллекций инцидентов,
+  RecoveryRequest и журнала контрольных точек в базе пока нет — они относятся к прецедентам
+  UC-9…UC-22, которые не реализованы.
+- **Timeline Diagram (раздел 6, Process View)** не построена: матрица требует её только при наличии
+  процессов, жёстко привязанных к моментам времени.
 
 ## Рендеринг
 
