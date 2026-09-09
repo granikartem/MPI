@@ -1,0 +1,163 @@
+@startuml ACT_UC7_ImplementationView
+skinparam shadowing false
+skinparam defaultFontName Courier
+skinparam ArrowColor #333333
+skinparam activityBackgroundColor #F5F5F5
+skinparam activityBorderColor #333333
+skinparam activityDiamondBackgroundColor #F5F5F5
+skinparam activityDiamondBorderColor #333333
+skinparam activityStartColor #333333
+skinparam activityEndColor #333333
+skinparam activityBarColor #333333
+skinparam partitionBackgroundColor #FDFDFD
+skinparam partitionBorderColor #333333
+
+title UC-7 «Рассчитать risk_score» — Activity Diagram (Implementation View)\nПолное описание: фактические методы, эндпоинты, формула, пороги и ветвления реализации
+
+start
+
+partition "frontend/src: RequestList.tsx → api.ts (axios)" {
+  :recalc(id: string)\n→ recalcRisk(id) : Promise<CaravanRequest>;
+  :POST /api/requests/{id}/risk-score\n(dev-прокси Vite: /api → backend:8080);
+}
+
+partition "RequestController.recalculateRisk(@PathVariable UUID id)\n<<@RestController>> @RequestMapping "/api/requests" @Transactional" {
+  :return RequestResponse.from(\n    service.recalculateRisk(id));
+}
+
+partition "RequestService.recalculateRisk(UUID id) <<@Service>> @Transactional" {
+  :getById(id) → requestRepository.findById(id)\nвыборка заявки по идентификатору: из-за\n@ManyToOne(FetchType.EAGER) на organization и route\nHibernate добавляет к select left join на organization\nи route и перечисляет колонки явно (не "select *");
+  if (заявка найдена?) then (да)
+    :request : CaravanRequest\n(getRoute(), getCargoValueCaps());
+  else (нет)
+    :throw new IllegalArgumentException(\n    "Заявка не найдена: " + id);<<#MistyRose>>
+    :RequestController.handleBadRequest(e)\n@ExceptionHandler → HTTP 400 ErrorResponse(message)\nна клиенте: setError(err.response.data.message);<<#MistyRose>>
+    stop
+  endif
+  :riskService.calculate(request.getRoute(),\n    request.getCargoValueCaps()) : RiskResult;
+}
+
+partition "RiskService.calculate(Route route, int cargoValueCaps) <<@Service>>" {
+  :keys = route.getSegments().stream()\n    .map(RouteSegment::segmentKey).toList()\nsegmentKey() = from.getCode() + "-" + to.getCode()\n["GOODSPRINGS-PRIMM", "PRIMM-NIPTON", "NIPTON-NOVAC", ...];
+  :intelClient.fetchThreats(keys) : Optional<ThreatReport>;
+}
+
+partition "WastelandIntelClient.fetchThreats(List<String> segments) <<@Component>>" {
+  :RestClient.get().uri(path "/threats",\n    queryParam "segments" = String.join(",", segments))\nGET ${intel.base-url}/threats?segments=\n    GOODSPRINGS-PRIMM,PRIMM-NIPTON,NIPTON-NOVAC\nSimpleClientHttpRequestFactory:\n    connectTimeout = readTimeout = 2000 ms;
+  if (тело ответа разобрано в ThreatReport?) then (да)
+    :return Optional.ofNullable(report)\nasOf = "2287-10-21T08:00:00+00:00",\nsegments = [{segment: "GOODSPRINGS-PRIMM",\n    threatLevel: 2, threats: ["RAIDERS"]}, ...];
+  else (нет: исключение, таймаут, ошибка HTTP)
+    :catch (Exception e) → return Optional.empty();<<#MistyRose>>
+  endif
+}
+
+partition "RiskService.calculate: ветвление по наличию отчёта" {
+  if (maybeReport.isEmpty()?) then (да — альт. поток 2а)
+    :return RiskResult.unavailable()\nscore = null; status = "NA"; asOf = null;\nthreatSum = base = cargoFactor = 0; segments = List.of();\nrecommendation = "risk_score требует пересчёта\n    — Wasteland Intel недоступен";<<#MistyRose>>
+  else (нет — основной поток)
+    :byKey = report.segments().stream().collect(toMap(\n    SegmentThreat::segment, s -> s, (a, b) -> a))\nreport.segments() == null → Map.of();
+    :segments = keys.map(k -> byKey.get(k) == null\n    ? new SegmentRisk(k, 0, List.of())\n    : new SegmentRisk(k, t.threatLevel(),\n        t.threats() == null ? List.of() : t.threats()));
+    :threatSum = сумма SegmentRisk::threatLevel\nbase = Math.min(100, threatSum * 6);
+    :cargoFactor = cargoFactor(cargoValueCaps)   (FR-14)\ncaps >= 20 000 → 30; caps >= 5 000 → 20;\ncaps >= 1 000 → 10; иначе → 0;
+    :score = Math.min(100, base + cargoFactor);
+    if (isStale(report.asOf()):\nOffsetDateTime.parse(asOf).isBefore(\nOffsetDateTime.now().minusHours(24))?) then (да — альт. поток 2б)
+      :status = "STALE";<<#OldLace>>
+    else (нет)
+      :status = "OK"\nasOf == null / пустой / неразбираемый → тоже "OK"\n(catch (Exception e) → return false);
+    endif
+    :recommendation(score), пороги 80 / 60 / 30   (FR-8)\n>= 80 "Критический риск: охрана ≥8,\n       медик обязателен, удвоенные припасы"\n>= 60 "Высокий риск: охрана ≥6, усиленные припасы"\n>= 30 "Средний риск: охрана ≥4, стандартные припасы"\nиначе "Низкий риск: охрана ≥2, базовые припасы";
+    :return new RiskResult(score, status, recommendation,\n    report.asOf(), threatSum, base, cargoFactor, segments);
+  endif
+}
+
+partition "RequestService.recalculateRisk: фиксация результата" {
+  :request.applyRisk(risk.score(), risk.status(),\n    risk.recommendation());
+  :requestRepository.save(request)\nupdate caravan_request ... where id = ?\n@DynamicUpdate не задан, поэтому Hibernate обновляет все\nизменяемые колонки строки, среди них risk_score,\nrisk_status и recommendation\nV1: risk_score integer, risk_status varchar(16)\n    not null default 'NA', recommendation varchar(2000);
+  :riskService.saveAssessment(saved.getId(), risk)\n→ assessmentRepository.save(new RiskAssessment(\n    requestId, result, Instant.now()))\ndb.risk_assessment.insertOne({requestId, score, status,\n    recommendation, asOf, threatSum, base, cargoFactor,\n    segments[{segment, threatLevel, threats[]}], computedAt});
+  :return saved : CaravanRequest;
+}
+
+partition "RequestController → HTTP-ответ" {
+  :RequestResponse.from(saved) → HTTP 200\n{id, organizationId, origin, destination, departureDate,\n cargoDescription, cargoValueCaps, routeCode, routeName,\n etaHours, riskScore, riskStatus, recommendation,\n status, statusLabel, createdAt};
+}
+
+partition "frontend/src: RequestList.tsx → RequestRegistry.tsx → api.ts\n(перечитать реестр рейсов — UC-3)" {
+  :onChanged() → RequestRegistry.load();
+  :load() → getRegistry(organizationId, query)\nGET /api/requests/registry?organizationId=…;
+}
+
+partition "RequestRegistryService.entry(request, last) <<@Service>>\n@Transactional(readOnly = true)" {
+  :RegistryEntry.riskLevel = RiskLevel.of(\n    request.getRiskScore(), request.getRiskStatus())\n"NA" / null → UNKNOWN «Н/Д»; >= 80 → CRITICAL;\n>= 60 → HIGH; >= 30 → MEDIUM; иначе → LOW;
+}
+
+partition "RequestRegistryController.RegistryRowResponse.from(entry)\n<<@RestController>> @RequestMapping "/api/requests/registry"" {
+  :RequestRegistry.attentionFor(entry) : Set<AttentionFlag>\nriskStatus "NA"    → RISK_RECALCULATION_REQUIRED\n                     «Требует пересчёта risk_score»\nriskStatus "STALE" → RISK_DATA_STALE\n                     «risk_score по устаревшим данным»;
+  :RegistryRowResponse (24 поля) → HTTP 200\nriskScore, riskStatus, riskLevel, riskLevelLabel,\nrecommendation, attention[{code, label}];
+}
+
+partition "frontend/src/components: отображение результата" {
+  :RiskBadge.tsx: "NA" → «risk Н/Д» (#888);\nscore >= 80 → #ff4444; >= 60 → #ff9800;\n>= 30 → #ffd633; иначе → #33ff66;\n"STALE" → «risk <значение> (устар.)»;
+  :RiskModal.tsx: GET /api/requests/{id}/risk\n→ RiskAssessmentResponse: разбор\nthreatSum → base → cargoFactor → score;
+}
+stop
+
+floating note left
+  **Две точки входа в UC-7**
+  1) UC-1, создание заявки: RequestService.build(...) вызывает
+     riskService.calculate(route, cargoValueCaps) и saveAssessment(...)
+     до записи стартовой истории статусов — те же шаги, что на диаграмме
+  2) повторный расчёт: POST /api/requests/{id}/risk-score
+     (кнопка «Пересчитать риск» в реестре, RequestList.recalc)
+  **Смежные операции над оценкой**
+  • GET /api/requests/{id}/risk → RequestService.latestRiskAssessment(id)
+    → findFirstByRequestIdOrderByComputedAtDesc(requestId);
+    оценка не найдена → IllegalArgumentException → HTTP 400
+  • DELETE /api/requests/{id}/risk → RequestService.clearRisk(id):
+    deleteAssessments(id) + applyRisk(null, "NA", null) —
+    так альт. поток 2а воспроизводится вручную для демонстрации
+  **Где считаются уровень риска и пометки внимания**
+  • RiskLevel.of(...) — com.karavany.risk, вызывается в
+    RequestRegistryService.entry(...); RequestRegistry.attentionFor(...) —
+    com.karavany.request.domain, вызывается в
+    RequestRegistryController.RegistryRowResponse.from(...)
+  • оба вычисления выполняются на сервере; frontend получает готовые
+    riskLevel, riskLevelLabel и attention[] (frontend/src/api.ts,
+    интерфейс RegistryRow) и только отображает их
+end note
+
+floating note right
+  **Ограничения текущей реализации**
+  • mock-intel (WireMock, mock-integrations/mappings/threats.json)
+    отдаёт фиксированный asOf = 2287-10-21T08:00:00+00:00 — дата в будущем,
+    поэтому isStale(...) == false и ветка "STALE" (2б) на заглушке
+    не воспроизводится, хотя реализована в RiskService
+  • неразбираемый asOf трактуется как актуальные данные (isStale → false),
+    отдельного признака «формат даты не распознан» нет
+  • audit-событие о расчёте risk_score не пишется: AuditEventRepository
+    вызывается только из OrganizationService и RequestStatusService —
+    **пробел по RL-4** (журнал аудита всех операций изменения данных);
+    FR-35 к данным заявки не относится: он про управление пользователями
+  • снимок оценки сохраняется и в альт. потоке 2а — документ risk_assessment
+    со status = "NA" и нулевыми слагаемыми
+  • запись в MongoDB выполняется вне транзакции JPA: @Transactional
+    покрывает только PostgreSQL
+end note
+
+legend right
+  **Обозначения**
+  • partition-блоки — фактические методы реализации, а не дорожки слоёв:
+    так уровень визуально отличается от ACT_UC7_LogicalView,
+    где дорожки — пакеты слоёв
+  • розовым выделен альт. поток 2а и обработка ошибок,
+    песочным — альт. поток 2б (status = "STALE")
+  • обращения к БД описаны по смыслу: точный текст запроса формируют
+    Hibernate и Spring Data, дословный SQL в коде не задан
+  **Формула и пороги (RiskService.java)**
+  • base = min(100, threatSum × 6)
+  • score = min(100, base + cargoFactor), cargoFactor из {0, 10, 20, 30}
+  • пороги уровня риска и рекомендации: 80 / 60 / 30
+  **Требования и ограничения (docs/SRS.md)**
+  • FR-6, FR-7, FR-8, FR-14; пробел по RL-4
+  • DC-3 (Java 21), DC-4 (PostgreSQL), DC-5 (MongoDB), DC-6 (слои)
+endlegend
+@enduml

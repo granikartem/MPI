@@ -1,0 +1,551 @@
+@startuml CLS_LogicalView
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  ArrowColor #333333
+  FontName Arial
+}
+skinparam enum {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Arial
+}
+hide circle
+hide empty members
+
+' точка в имени пакета — часть имени слоя, а не разделитель вложенности
+set separator none
+
+title ИС «Караваны» — Class Diagram (Logical View)\nОписание по слоям: основные классы и интерфейсы их взаимодействия; уровни совпадают с перечнем уровней взаимодействия раздела 5 SAD
+
+package "frontend" #FDFDFD {
+
+  package "frontend (корневые модули)" #FDFDFD {
+    class "main.tsx" as MAIN <<корень src>> #F5F5F5 {
+      .. монтирует App в DOM ..
+    }
+    class "App.tsx" as APP <<корень src>> #F5F5F5 {
+      + App()
+    }
+    class "router.ts" as ROUTER <<корень src>> #F5F5F5 {
+      + currentPath()
+      + navigate()
+      + subscribeRouter()
+    }
+  }
+
+  package "frontend.pages" #FDFDFD {
+    class "Landing.tsx" as LANDING <<pages>> #F5F5F5 {
+      + Landing()
+    }
+    class "Console.tsx" as CONSOLE <<pages>> #F5F5F5 {
+      + Console()
+      - OrgPicker()
+      - OrgDispatch()
+      - selectedOrgId()
+    }
+    class "Organizations.tsx" as ORGPAGE <<pages>> #F5F5F5 {
+      + Organizations()
+      - tierPrice()
+    }
+  }
+
+  package "frontend.components" #FDFDFD {
+    class "RequestForm.tsx" as FORM <<components>> #F5F5F5 {
+      + RequestForm()
+      - submit()
+      - addSegment()
+      - updateSegment()
+      - removeSegment()
+    }
+    class "RequestRegistry.tsx" as REG <<components>> #F5F5F5 {
+      + RequestRegistry()
+      - load()
+      - changeScope()
+      - changeQuery()
+    }
+    class "RegistryFilters.tsx" as FILTERS <<components>> #F5F5F5 {
+      + RegistryFilters()
+      - toggled()
+    }
+    class "RegistrySummary.tsx" as SUMMARY <<components>> #F5F5F5 {
+      + STATUS_ORDER : порядок статусов
+      + RISK_LEVEL_ORDER : порядок уровней риска
+      + RegistrySummary()
+      + riskLevelColor()
+      + riskLevelLabel()
+    }
+    class "RequestList.tsx" as LIST <<components>> #F5F5F5 {
+      + RequestList()
+      - recalc()
+      - toRequest()
+      - actorOf()
+    }
+    class "StatusModal.tsx" as SMODAL <<components>> #F5F5F5 {
+      + StatusModal()
+      - apply()
+      - blockerFor()
+    }
+    class "RiskModal.tsx" as RMODAL <<components>> #F5F5F5 {
+      + RiskModal()
+      - onDelete()
+      - cargoTier()
+      - statusNote()
+    }
+    class "StatusBadge.tsx" as SBADGE <<components>> #F5F5F5 {
+      + StatusBadge()
+      + statusLabel()
+      + statusColor()
+    }
+    class "RiskBadge.tsx" as RBADGE <<components>> #F5F5F5 {
+      + RiskBadge()
+      - color()
+      - label()
+    }
+  }
+
+  package "frontend.api" #FDFDFD {
+    class "api.ts\n{frontend/src/api.ts}" as API <<api>> #F5F5F5 {
+      + getRequests() / createRequest()
+      + getRegistry()
+      + getStatusInfo() / changeStatus()
+      + getStatusHistory()
+      + recalcRisk() / getRisk() / deleteRisk()
+      + getOrganizations() / createOrganization()
+      + getRoutes() / getCheckpoints()
+      + getHealth()
+    }
+  }
+}
+
+package "backend" #FDFDFD {
+
+  package "backend.web" #FDFDFD {
+    class RequestController <<@RestController>> #F5F5F5 {
+      + list()
+      + create() : UC-1
+      + recalculateRisk() : UC-7
+      + clearRisk()
+      + risk()
+      + handleBadRequest()
+    }
+    class RequestStatusController <<@RestController>> #F5F5F5 {
+      + status()
+      + changeStatus() : UC-2
+      + history()
+      + handleConflict()
+      + handleBadRequest()
+    }
+    class RequestRegistryController <<@RestController>> #F5F5F5 {
+      + registry() : UC-3
+      + handleTypeMismatch()
+      + handleBadRequest()
+    }
+    class OrganizationController <<@RestController>> #F5F5F5 {
+      + list()
+      + create() : UC-32
+      + handleConflict()
+      + handleBadRequest()
+    }
+    class RouteController <<@RestController>> #F5F5F5 {
+      + templates()
+    }
+    class CheckpointController <<@RestController>> #F5F5F5 {
+      + list()
+    }
+    class HealthController <<@RestController>> #F5F5F5 {
+      + health()
+    }
+  }
+
+  package "backend.service" #FDFDFD {
+    class RequestService <<@Service>> #F5F5F5 {
+      + create()
+      + createWithManualRoute()
+      + recalculateRisk()
+      + clearRisk()
+      + findByOrganization()
+      + getById()
+    }
+    class RequestStatusService <<@Service>> #F5F5F5 {
+      + recordCreation()
+      + changeStatus()
+      + availableTransitions()
+      + history()
+    }
+    class RequestRegistryService <<@Service>> #F5F5F5 {
+      + load()
+    }
+    class EtaService <<@Service>> #F5F5F5 {
+      + computeHours()
+    }
+    class RiskService <<@Service>> #F5F5F5 {
+      + calculate()
+      + saveAssessment()
+      + latestAssessment()
+      + deleteAssessments()
+    }
+    class OrganizationService <<@Service>> #F5F5F5 {
+      + create()
+      + findAll()
+    }
+    class WastelandIntelClient <<@Component>> #F5F5F5 {
+      + fetchThreats()
+    }
+    class RequestReadinessGuard <<утилита>> #F5F5F5 {
+      + blockerFor()
+    }
+    class StatusTransitionException <<исключение>> #F5F5F5 {
+      .. extends RuntimeException ..
+    }
+  }
+
+  package "backend.repository" #FDFDFD {
+    interface CaravanRequestRepository <<JpaRepository>> #F5F5F5 {
+      + findAllByOrderByCreatedAtDesc()
+      + findByOrganization_Id…()
+    }
+    interface RequestStatusHistoryRepository <<JpaRepository>> #F5F5F5 {
+      + findByRequest_Id…()
+      + findByRequest_IdIn…()
+    }
+    interface OrganizationRepository <<JpaRepository>> #F5F5F5 {
+      + findAllByOrderByCreatedAtDesc()
+      + findByNameIgnoreCase()
+    }
+    interface AppUserRepository <<JpaRepository>> #F5F5F5 {
+      + findByLoginIgnoreCase()
+      + countByOrganization_Id()
+    }
+    interface RouteRepository <<JpaRepository>> #F5F5F5 {
+      + findByTemplateTrue()
+    }
+    interface RouteSegmentRepository <<JpaRepository>> #F5F5F5 {
+      + saveAll() {унаследован}
+    }
+    interface CheckpointRepository <<JpaRepository>> #F5F5F5 {
+      + findByCode()
+    }
+    interface RiskAssessmentRepository <<MongoRepository>> #F5F5F5 {
+      + findFirstByRequestId…()
+      + deleteByRequestId()
+    }
+    interface AuditEventRepository <<MongoRepository>> #F5F5F5 {
+      + save() {унаследован}
+    }
+  }
+
+  package "backend.domain" #FDFDFD {
+    class CaravanRequest <<PostgreSQL>> #F5F5F5 {
+      + applyEta()
+      + applyRisk()
+      + changeStatus()
+    }
+    class RequestStatusHistory <<PostgreSQL>> #F5F5F5 {
+      .. поля и геттеры ..
+    }
+    class Organization <<PostgreSQL>> #F5F5F5 {
+      .. поля и геттеры ..
+    }
+    class AppUser <<PostgreSQL>> #F5F5F5 {
+      .. поля и геттеры, кроме passwordHash ..
+    }
+    class Route <<PostgreSQL>> #F5F5F5 {
+      + getSegments()
+      + isTemplate()
+    }
+    class RouteSegment <<PostgreSQL>> #F5F5F5 {
+      + segmentKey()
+    }
+    class Checkpoint <<PostgreSQL>> #F5F5F5 {
+      + getCode()
+      + getName()
+    }
+    class RequestStatusMachine <<не хранится>> #EDE7F6 {
+      + all()
+      + from()
+      + find()
+      + isTerminal()
+    }
+    class RequestRegistry <<не хранится>> #EDE7F6 {
+      + attentionFor()
+      + matches()
+      + rows()
+      + truncated()
+      + summarize()
+      + validateLimit()
+      + parseStatuses()
+      + parseRiskLevels()
+    }
+    class RegistryEntry <<не хранится>> #EDE7F6 {
+      .. record: 19 полей строки реестра ..
+    }
+    class RiskResult <<не хранится>> #EDE7F6 {
+      + unavailable()
+    }
+    class RiskAssessment <<MongoDB>> #E8F5E9 {
+      .. поля снимка расчёта и геттеры ..
+    }
+    class AuditEvent <<MongoDB>> #E8F5E9 {
+      + organizationCreated()
+      + requestStatusChanged()
+    }
+    enum RequestStatus <<перечисление>> #F5F5F5 {
+      + label()
+      + parse()
+    }
+    enum ActorRole <<перечисление>> #F5F5F5 {
+      + label()
+      + parse()
+    }
+    enum RiskLevel <<перечисление>> #F5F5F5 {
+      + label()
+      + parse()
+      + of()
+    }
+    enum RegistryScope <<перечисление>> #F5F5F5 {
+      + label()
+      + parse()
+      + contains()
+      + statuses()
+    }
+    enum RegistrySort <<перечисление>> #F5F5F5 {
+      + parse()
+      + comparator()
+    }
+    enum AttentionFlag <<перечисление>> #F5F5F5 {
+      + label()
+    }
+  }
+}
+
+package "инфраструктура" #FDFDFD {
+  class "PostgreSQL 16" as PG <<database>> #F5F5F5 {
+    .. оперативные данные: заявки, история статусов, ..
+    .. организации, пользователи, маршруты (DC-4) ..
+  }
+  class "MongoDB 7" as MG <<database>> #F5F5F5 {
+    .. коллекции risk_assessment и audit_event (DC-5) ..
+  }
+  class "Wasteland Intel" as WI <<внешняя система>> #F5F5F5 {
+    .. HTTP-источник данных об угрозах ..
+    .. по участкам маршрута (FR-6) ..
+  }
+}
+
+' ─── frontend: корень src → страницы → компоненты → клиент REST API ──
+MAIN ..> APP
+APP ..> ROUTER
+APP ..> LANDING
+APP ..> CONSOLE
+APP ..> ORGPAGE
+LANDING ..> ROUTER
+CONSOLE ..> ROUTER
+ORGPAGE ..> ROUTER
+CONSOLE ..> FORM
+CONSOLE ..> REG
+REG ..> FILTERS
+REG ..> SUMMARY
+REG ..> LIST
+FILTERS ..> SUMMARY
+FILTERS ..> SBADGE
+SUMMARY ..> SBADGE
+LIST ..> SMODAL
+LIST ..> RMODAL
+LIST ..> SBADGE
+LIST ..> RBADGE
+SMODAL ..> SBADGE
+CONSOLE ..> API
+ORGPAGE ..> API
+FORM ..> API
+REG ..> API
+LIST ..> API : recalcRisk()
+SMODAL ..> API
+RMODAL ..> API
+FILTERS ..> API : типы контракта
+SUMMARY ..> API : типы контракта
+
+' ─── frontend → backend: только через REST-контракт слоя web ──────────
+API ..> RequestController : REST-контракт
+API ..> RequestStatusController
+API ..> RequestRegistryController
+API ..> OrganizationController
+API ..> RouteController
+API ..> CheckpointController
+API ..> HealthController
+
+' ─── web → service ───────────────────────────────────────────────────
+RequestController ..> RequestService
+RequestStatusController ..> RequestService
+RequestStatusController ..> RequestStatusService
+RequestRegistryController ..> RequestRegistryService
+OrganizationController ..> OrganizationService
+
+' ─── web → domain: фактические обращения к доменным правилам ─────────
+RequestRegistryController ..> RequestRegistry : attentionFor()
+RequestRegistryController ..> RequestStatusMachine : isTerminal()
+RequestStatusController ..> RequestStatusMachine : isTerminal()
+RequestStatusController ..> RequestStatus : parse()
+RequestStatusController ..> ActorRole : parse()
+
+' ─── фактические отступления от DC-6 (см. заметку) ───────────────────
+RouteController ..> RouteRepository : в обход слоя service
+CheckpointController ..> CheckpointRepository : в обход слоя service
+
+' ─── service → service ──────────────────────────────────────────────
+RequestService ..> EtaService
+RequestService ..> RiskService
+RequestService ..> RequestStatusService
+RiskService ..> WastelandIntelClient
+RequestStatusService ..> RequestReadinessGuard : готовность рейса (FR-10)
+RequestStatusService ..> StatusTransitionException : отказ в переходе
+
+' ─── service → repository ───────────────────────────────────────────
+RequestService ..> CaravanRequestRepository
+RequestService ..> OrganizationRepository
+RequestService ..> RouteRepository
+RequestService ..> RouteSegmentRepository
+RequestService ..> CheckpointRepository
+RequestStatusService ..> CaravanRequestRepository
+RequestStatusService ..> RequestStatusHistoryRepository
+RequestStatusService ..> AuditEventRepository
+RequestRegistryService ..> CaravanRequestRepository
+RequestRegistryService ..> RequestStatusHistoryRepository
+RequestRegistryService ..> OrganizationRepository
+RiskService ..> RiskAssessmentRepository
+OrganizationService ..> OrganizationRepository
+OrganizationService ..> AppUserRepository
+OrganizationService ..> AuditEventRepository
+
+' ─── service → domain ───────────────────────────────────────────────
+RequestService ..> CaravanRequest : заявка в статусе DRAFT
+RequestStatusService ..> RequestStatusMachine : допустимость перехода
+RequestStatusService ..> AuditEvent : событие смены статуса
+OrganizationService ..> AuditEvent : событие создания организации
+RequestRegistryService ..> RequestRegistry : отбор, сортировка, сводка
+RequestRegistryService ..> RegistryEntry : строки реестра
+RequestRegistryService ..> RiskLevel : уровень риска по score
+RiskService ..> RiskResult : результат расчёта
+RiskService ..> RiskAssessment : снимок расчёта
+RiskService ..> RouteSegment : ключи участков
+EtaService ..> Route : длина маршрута
+
+' ─── связи доменных сущностей (кратности — на обоих концах) ─────────
+Organization "1" o-- "0..*" AppUser
+Organization "1" o-- "0..*" CaravanRequest
+CaravanRequest "0..*" --> "0..1" Route
+CaravanRequest "1" *-- "1..*" RequestStatusHistory
+Route "1" *-- "1..*" RouteSegment
+RouteSegment "0..*" --> "1" Checkpoint
+
+' ─── repository → инфраструктура ────────────────────────────────────
+CaravanRequestRepository ..> PG
+RequestStatusHistoryRepository ..> PG
+OrganizationRepository ..> PG
+AppUserRepository ..> PG
+RouteRepository ..> PG
+RouteSegmentRepository ..> PG
+CheckpointRepository ..> PG
+RiskAssessmentRepository ..> MG
+AuditEventRepository ..> MG
+WastelandIntelClient ..> WI : HTTP, таймауты 2 с
+
+' ─── компоновка: слой domain — под слоем repository, в две колонки ───
+CaravanRequestRepository -[hidden]down- Organization
+RequestStatusMachine -[hidden]down- RequestStatus
+RequestStatus -[hidden]down- ActorRole
+RequestRegistry -[hidden]down- RegistryEntry
+RegistryEntry -[hidden]down- RegistryScope
+RegistryScope -[hidden]down- RegistrySort
+RegistrySort -[hidden]down- AttentionFlag
+RiskResult -[hidden]down- RiskLevel
+RiskAssessment -[hidden]down- AuditEvent
+
+note as N_Layers
+  **Правила взаимодействия слоёв (DC-6: Controller → Service → Repository)**
+  • frontend обращается к backend только через REST-контракт слоя **web**;
+  • слой **web** прецеденты не считает: разбор тела запроса, коды ответов,
+    обработчики исключений (@ExceptionHandler) — но именно он открывает
+    транзакцию и обращается к отдельным доменным правилам напрямую
+    (см. «Фактические отступления от DC-6»);
+  • вся логика прецедентов — в слое **service**;
+  • слой **domain** хранит состояние сущностей и правила предметной области:
+    статусная модель, правила реестра, слагаемые оценки риска;
+  • слой **repository** скрывает выбор хранилища за интерфейсами Spring Data;
+  • взаимодействие только сверху вниз: ссылок из domain в service нет.
+end note
+
+note as N_Deviations
+  **Фактические отступления от DC-6 в текущем коде**
+  • транзакция открывается в слое **web**: @Transactional стоит на методах
+    RequestController, RequestStatusController, OrganizationController,
+    RouteController и CheckpointController (у чтения — readOnly = true),
+    а @Transactional сервисов присоединяется к уже открытой транзакции;
+    исключение — RequestRegistryController: у него @Transactional нет,
+    границу задаёт RequestRegistryService.load();
+  • слой **web** обращается к слою **domain** напрямую при разборе параметров
+    и сборке DTO: RequestStatus.parse(), ActorRole.parse(),
+    RequestStatusMachine.isTerminal(), RequestRegistry.attentionFor();
+  • RouteController и CheckpointController внедряют репозитории напрямую:
+    сервисного слоя для справочников маршрутов и точек нет;
+  • HealthController обращается к JdbcTemplate и MongoTemplate, минуя слои
+    service и repository (проверка готовности PostgreSQL и MongoDB);
+  • WastelandIntelClient помечен @Component и лежит в пакете com.karavany.risk:
+    по роли это адаптер внешней системы, вызывается только из RiskService.
+end note
+
+note as N_Gaps
+  **Что на этом виде отсутствует и почему**
+  • классов прецедентов UC-16 «Зафиксировать прохождение этапа рейса»
+    и UC-19 «Сообщить об инциденте в рейсе» нет ни в одном слое —
+    их сущности показаны как «проект» на CLS_UseCaseView;
+  • RequestReadinessGuard.blockerFor() возвращает null для всех переходов:
+    проверка укомплектованности рейса (FR-10) появится вместе с UC-9;
+  • слоя аутентификации нет — роль актора приходит в теле запроса,
+    а выбранная организация хранится в строке адреса (до UC-25);
+  • событие создания заявки в журнал аудита не пишется: единственная точка
+    записи audit-события по заявке — RequestStatusService.changeStatus()
+    (пробел по RL-4).
+end note
+
+legend right
+  |= Обозначение |= Значение |
+  | <#F5F5F5> | «PostgreSQL» — хранится в PostgreSQL (DC-4) |
+  | <#E8F5E9> | «MongoDB» — хранится в MongoDB (DC-5) |
+  | <#EDE7F6> | «не хранится» — в БД не сохраняется |
+  | <#FFF2CC> | «проект» — ещё не реализовано |
+  **Один цвет — несколько стереотипов:** фон #F5F5F5 несут также
+  «перечисление» (enum-класс, в БД varchar), «database», «внешняя система»
+  и классы слоёв frontend, web, service и repository — их различает
+  стереотип, а не цвет. Цвет «проект» на этом виде не встречается.
+  **Стереотипы слоёв:** «корень src», «pages», «components», «api» —
+  frontend; «@RestController» — backend.web; «@Service», «@Component»,
+  «утилита», «исключение» — backend.service; «JpaRepository»,
+  «MongoRepository» — backend.repository; «PostgreSQL», «MongoDB»,
+  «не хранится», «перечисление» — backend.domain; «database»
+  и «внешняя система» — инфраструктура.
+  **Имена пакетов** приведены дословно (""set separator none""), внешние
+  рамки ""frontend"" и ""backend"" — только группировка слоёв.
+  **frontend.api — слой, а не каталог:** файл лежит в корне frontend/src.
+  **Типы связей:** ""-->"" направленная ассоциация с кратностями
+  на обоих концах, ""*--"" композиция, ""o--"" агрегация,
+  ""..>"" зависимость: вызов, внедрение зависимости через конструктор,
+  импорт модуля или обращение к хранилищу (кратности на зависимостях
+  не указываются).
+  **Методы приведены без полных сигнатур;** ""{унаследован}"" — метод
+  не объявлен в интерфейсе, а получен от Spring Data; ""+"" — экспортируемый
+  (public) член, ""-"" — внутренний (у frontend-модулей — функция,
+  которая не экспортируется), многоточие в имени — сокращение длинного
+  производного метода Spring Data, ""..текст.."" — разделитель-пояснение,
+  а не член класса. Полные сигнатуры, поля, аннотации, таблицы
+  и коллекции — на CLS_ImplementationView; пакет com.karavany.route
+  в контур того вида не вошёл (см. там заметку «Контур диаграммы»),
+  поэтому полей и сигнатур Route, RouteSegment, Checkpoint
+  и их репозиториев там нет.
+endlegend
+@enduml

@@ -1,0 +1,242 @@
+@startuml UCD_UseCaseView
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam actorStyle awesome
+skinparam ArrowColor #333333
+skinparam nodesep 18
+skinparam ranksep 30
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+}
+skinparam actor {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+}
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+}
+
+title ИС «Караваны» — Use Case Diagram (Use-Case View)\nАбстрактное описание: акторы, граница системы и архитектурно значимые прецеденты
+
+' ==================== Акторы-пользователи ====================
+actor "Диспетчер\nкараванов" as Dispatcher
+actor "Кладовщик" as Storekeeper
+actor "Супер-\nпользователь" as SuperUser
+
+actor "Полевой\nпользователь" as FieldUser <<абстрактный>>
+actor "Караван-\nмастер" as CaravanMaster
+actor "Капитан\nохраны" as SecurityCaptain
+actor "Полевой\nмедик" as Medic
+
+' Обобщение полевых ролей абстрактным актором (UseCases.md, раздел «Акторы»)
+CaravanMaster --|> FieldUser
+SecurityCaptain --|> FieldUser
+Medic --|> FieldUser
+
+' ==================== Внешние системы ====================
+actor "Wasteland\nIntel" as WI <<внешняя система>>
+actor "NCR Checkpoint\n& Tax Terminal" as NCR <<внешняя система>>
+
+' Порядок акторов
+Dispatcher -[hidden]down- Storekeeper
+Storekeeper -[hidden]down- SuperUser
+FieldUser -[hidden]down- CaravanMaster
+CaravanMaster -[hidden]down- SecurityCaptain
+SecurityCaptain -[hidden]down- Medic
+WI -[hidden]down- NCR
+
+' ==================== Граница системы ====================
+rectangle "ИС «Караваны»" as System {
+
+  rectangle "Управление заявкой и рейсом" as G1 {
+    usecase UC1 as "**UC-1: Создать заявку**\n**на перевозку**"
+    usecase UC2 as "**UC-2: Управлять**\n**статусами заявки**"
+    usecase UC3 as "UC-3: Просмотреть\nреестр рейсов"
+  }
+
+  rectangle "Планирование маршрута\nи оценка рисков" as G2 {
+    usecase UC5 as "UC-5: Выбрать/\nспланировать маршрут"
+    usecase UC6 as "UC-6: Рассчитать ETA"
+    usecase UC7 as "**UC-7: Рассчитать**\n**risk_score**"
+    usecase UC8 as "UC-8: Получить рекомендацию\nпо охране и припасам"
+  }
+
+  rectangle "Груз и манифест" as G3 {
+    usecase UC12 as "UC-12: Указать\nценность груза"
+  }
+
+  rectangle "Полевые операции" as G4 {
+    usecase UC16 as "**UC-16: Зафиксировать**\n**прохождение этапа рейса**" #FFF2CC
+    usecase UC19 as "**UC-19: Сообщить**\n**об инциденте в рейсе**" #FFF2CC
+  }
+
+  rectangle "Управление организациями" as G5 {
+    usecase UC32 as "**UC-32: Создать**\n**организацию**"
+  }
+
+  rectangle "Остальные прецеденты —\nсостав на диаграмме не раскрыт" as G6 {
+    usecase REST as "23 прецедента:\nUC-4, UC-9…UC-11, UC-13…UC-15,\nUC-17, UC-18, UC-20…UC-31,\nUC-33, UC-34" #FFFFFF;line.dashed
+  }
+
+  ' Сетка групп внутри границы системы: два столбца
+  G1 -[hidden]right- G2
+  G3 -[hidden]right- G4
+  G5 -[hidden]right- G6
+  G1 -[hidden]down- G3
+  G3 -[hidden]down- G5
+  G2 -[hidden]down- G4
+  G4 -[hidden]down- G6
+}
+
+' ==================== Связи акторов с прецедентами ====================
+Dispatcher --> UC1
+Dispatcher --> UC2
+Dispatcher --> UC3
+Dispatcher --> UC5
+Dispatcher --> UC7
+Dispatcher --> UC12
+Dispatcher --> REST
+
+CaravanMaster --> UC2
+CaravanMaster --> UC16
+FieldUser --> UC19
+
+' У полевых акторов есть прецеденты и внутри нераскрытой группы:
+' караван-мастер — UC-14, UC-15, UC-17, UC-18, UC-20; все пользователи — UC-25, UC-29
+CaravanMaster --> REST
+FieldUser --> REST
+
+Storekeeper --> REST
+SuperUser --> UC32
+SuperUser --> REST
+
+UC7 --> WI
+REST --> WI
+REST --> NCR
+
+' ==================== Включаемые прецеденты ====================
+UC1 ..> UC5 : <<include>>
+UC1 ..> UC6 : <<include>>
+UC1 ..> UC7 : <<include>>
+UC1 ..> UC8 : <<include>>
+UC1 ..> UC12 : <<include>>
+UC7 ..> UC8 : <<include>>
+
+' ==================== Заметки ====================
+note bottom of UC3
+  **UC-3 — точка входа диспетчера**
+  • пустой реестр ведёт к UC-1
+  • карточка рейса — к UC-2 и UC-7
+  • архивный срез — к UC-4
+  • сам реестр данные только читает
+end note
+
+note left of UC2
+  **Переходы статуса**
+  • инициируют диспетчер
+    и караван-мастер
+  • инцидент высокой или
+    критической тяжести (UC-19) —
+    актором фиксируется «Система»
+  • фиксация этапа рейса (UC-16)
+    тоже меняет статус
+  **Пробел реализации**
+  • проверка готовности рейса
+    перед выходом на маршрут
+    (FR-10) не выполняется:
+    модель команды рейса (UC-9)
+    не реализована
+end note
+
+note top of UC1
+  **UC-1 создаёт заявку**
+  • статус «Черновик»
+  • маршрут, ETA, risk_score
+    и рекомендация по охране
+    и припасам
+  **Пробел реализации**
+  • событие создания заявки
+    в журнал аудита не пишется
+    (пробел по RL-4)
+end note
+
+note left of UC7
+  **Внешние данные (FR-6)**
+  • нет ответа Wasteland Intel →
+    risk_score «Н/Д», пометка
+    «требует пересчёта» (альт. 2а)
+  • данные старше 24 часов →
+    пометка «на основе устаревших
+    данных» (альт. 2б)
+  **Автоматические прецеденты**
+  • UC-6 и UC-8 актор не вызывает:
+    выполняются автоматически
+    в составе UC-1 и UC-7
+end note
+
+note right of UC16
+  **Спроектировано, но не реализовано**
+  • UC-16: этапы рейса, журнал контрольных
+    точек и офлайн-фиксация на полевом
+    устройстве в системе отсутствуют
+  • UC-19: карточка инцидента, уведомление
+    диспетчера и автоперевод рейса
+    в «Задержку» в системе отсутствуют
+  **Точки расширения (CoreUseCases.md)**
+  • UC-16: EP-1 прибытие на КТ → UC-17;
+    EP-2 прохождение КПП → UC-18;
+    EP-3 подтверждение доставки → UC-14
+  • UC-19: EP-1 критический инцидент →
+    UC-20 «Инициировать RecoveryRequest»
+end note
+
+note right of UC32
+  **Основание мультитенантности**
+  • прецедент выделяет организации изолированное
+    пространство данных (FR-23, FR-24) —
+    на него опираются UC-1 и UC-3
+  **Точки расширения (CoreUseCases.md)**
+  • EP-1 → UC-33 «Назначить первого диспетчера
+    организации»: выполняется в том же шаге —
+    учётная запись создаётся вместе
+    с организацией и необязательна (альт. 6а)
+  • EP-2 → UC-34 «Управлять подписками»:
+    уровень подписки только сохраняется,
+    управление подписками не реализовано
+end note
+
+legend right
+  **Обозначения**
+  • рамка ИС «Караваны» — граница системы; акторы вне рамки
+  • **жирный шрифт** — архитектурно значимый прецедент
+    (CoreUseCases.md): UC-1, UC-7, UC-16, UC-19, UC-32
+  • светло-серый фон #F5F5F5 (как у UC-1) — прецедент реализован
+    в системе: UC-1, UC-2, UC-3, UC-5, UC-6, UC-7, UC-8, UC-12, UC-32
+  • кремовый фон #FFF2CC (как у UC-16) — прецедент спроектирован
+    по документам, но не реализован: UC-16, UC-19
+  • белый фон + пунктирная рамка — группа прецедентов, состав
+    и статус реализации на диаграмме не раскрыты; связи акторов
+    с группой показаны, но какие именно прецеденты они вызывают —
+    видно только в docs/UseCases.md
+  • <<абстрактный>> — актор-обобщение: «Полевой пользователь»
+    обобщает караван-мастера, капитана охраны и полевого медика
+  • <<внешняя система>> — актор-система за границей ИС «Караваны»
+
+  **Полный перечень 34 прецедентов** — docs/UseCases.md
+  и общая диаграмма diagrams/out/UC_0_General.png;
+  детальные диаграммы — diagrams/usecases/UC_*_Detail.puml.
+
+  **Трассировка на SRS:** UC-1 → FR-1; UC-2 → FR-2, FR-3;
+  UC-3 → FR-2, FR-3, FR-7, FR-8, FR-24 (по docs/UC-3.md; FR-23 —
+  предусловие, а не покрываемое требование); UC-6 → FR-5;
+  UC-7 → FR-6, FR-7; UC-8 → FR-8; UC-12 → FR-13, FR-14;
+  UC-16 → FR-18; UC-19 → FR-19, FR-20; UC-32 → FR-23, FR-24, FR-25.
+  UC-5 отдельного требования не имеет и входит в FR-1.
+  Журнал аудита по операциям с данными — RL-4 и RL-5
+  (FR-35 относится только к управлению пользователями).
+endlegend
+@enduml

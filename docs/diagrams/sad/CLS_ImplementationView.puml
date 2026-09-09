@@ -1,0 +1,933 @@
+@startuml CLS_ImplementationView
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Courier
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  ArrowColor #333333
+  FontName Courier
+}
+skinparam enum {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Courier
+}
+skinparam classFontSize 11
+skinparam classAttributeFontSize 10
+skinparam classStereotypeFontSize 10
+skinparam noteFontSize 10
+skinparam legendFontSize 10
+hide circle
+hide empty members
+
+' точка в имени пакета — часть имени Java-пакета, а не разделитель вложенности:
+' слои вложены явно, как в COL_UC32_ImplementationView.puml
+set separator none
+
+title ИС «Караваны» — Class Diagram (Implementation View)\nПолное описание классов: поля, сигнатуры методов, аннотации JPA и MongoDB, таблицы PostgreSQL и коллекции MongoDB
+
+package "com.karavany.request" #FDFDFD {
+  package "web" as req_web #FDFDFD {
+    class RequestController <<@RestController>> #F5F5F5 {
+      .. @RestController @RequestMapping("/api/requests") ..
+      .. @Transactional на всех методах; readOnly = true у list() и risk() ..
+      - service : RequestService
+      -- эндпоинты --
+      + list(organizationId : UUID) : List<RequestResponse> {GET, 200}
+      + create(body : CreateRequest) : RequestResponse {POST, 201}
+      + recalculateRisk(id : UUID) : RequestResponse {POST /{id}/risk-score, 200}
+      + clearRisk(id : UUID) : RequestResponse {DELETE /{id}/risk, 200}
+      + risk(id : UUID) : RiskAssessmentResponse {GET /{id}/risk, 200}
+      + handleBadRequest(e : IllegalArgumentException) : ErrorResponse {@ExceptionHandler, 400}
+    }
+
+    class "RequestController.CreateRequest" as CreateRequest <<не хранится>> #EDE7F6 {
+      .. record, тело запроса ..
+      + organizationId : UUID
+      + origin : String
+      + destination : String
+      + departureDate : LocalDate
+      + cargoDescription : String
+      + cargoValueCaps : int
+      + routeId : UUID {основной поток: шаблон}
+      + routeName : String {альт. поток 3а}
+      + segments : List<SegmentInput> {альт. поток 3а}
+    }
+
+    class "RequestController.SegmentInput" as SegmentInput <<не хранится>> #EDE7F6 {
+      .. record ..
+      + fromCode : String
+      + toCode : String
+      + distanceKm : double
+    }
+
+    class RequestStatusController <<@RestController>> #F5F5F5 {
+      .. @RestController @RequestMapping("/api/requests/{id}") ..
+      .. @Transactional на всех методах; readOnly = true у status() и history() ..
+      - requestService : RequestService
+      - statusService : RequestStatusService
+      -- эндпоинты --
+      + status(id : UUID) : StatusInfoResponse {GET /status, 200}
+      + changeStatus(id : UUID, body : ChangeStatusRequest) : RequestResponse {POST /status, 200}
+      + history(id : UUID) : List<StatusHistoryResponse> {GET /status-history, 200}
+      + handleConflict(e : StatusTransitionException) : ErrorResponse {@ExceptionHandler, 409}
+      + handleBadRequest(e : IllegalArgumentException) : ErrorResponse {@ExceptionHandler, 400}
+    }
+
+    class "RequestStatusController.ChangeStatusRequest" as ChangeStatusRequest <<не хранится>> #EDE7F6 {
+      .. record, тело запроса ..
+      + targetStatus : String
+      + actorRole : String
+      + actorName : String
+      + reason : String {обязателен при переходе в DELAYED}
+    }
+
+    class RequestRegistryController <<@RestController>> #F5F5F5 {
+      .. @RestController @RequestMapping("/api/requests/registry") ..
+      .. @Transactional нет: границу задаёт RequestRegistryService.load() ..
+      - service : RequestRegistryService
+      -- эндпоинты --
+      + registry(orgId, scope, status, riskLevel, attentionOnly, sort, limit) : RegistryResponse {GET, 200}
+      + handleTypeMismatch(e : MethodArgumentTypeMismatchException) : ErrorResponse {400}
+      + handleBadRequest(e : IllegalArgumentException) : ErrorResponse {400}
+    }
+  }
+
+  package "service" as req_service #FDFDFD {
+    class RequestService <<@Service>> #F5F5F5 {
+      .. @Service ..
+      - requestRepository : CaravanRequestRepository
+      - organizationRepository : OrganizationRepository
+      - routeRepository : RouteRepository
+      - routeSegmentRepository : RouteSegmentRepository
+      - checkpointRepository : CheckpointRepository
+      - etaService : EtaService
+      - riskService : RiskService
+      - statusService : RequestStatusService
+      -- методы (@Transactional) --
+      + create(orgId, origin, destination, departureDate, cargoDescription, caps, routeId) : CaravanRequest
+      + createWithManualRoute(параметры create, routeName, specs) : CaravanRequest
+      + recalculateRisk(id : UUID) : CaravanRequest
+      + clearRisk(id : UUID) : CaravanRequest
+      + latestRiskAssessment(id : UUID) : Optional<RiskAssessment>
+      + findAll() : List<CaravanRequest>
+      + findByOrganization(organizationId : UUID) : List<CaravanRequest>
+      + getById(id : UUID) : CaravanRequest
+      - loadOrganization(organizationId : UUID) : Organization
+      - nextRouteCode() : String {"RT-" + (count + 1)}
+      - build(organization, origin, destination, departureDate, cargoDescription, caps, route)
+    }
+
+    class "RequestService.SegmentSpec" as SegmentSpec <<не хранится>> #EDE7F6 {
+      .. record ..
+      + fromCode : String
+      + toCode : String
+      + distanceKm : double
+    }
+
+    class RequestStatusService <<@Service>> #F5F5F5 {
+      .. @Service ..
+      - requestRepository : CaravanRequestRepository
+      - historyRepository : RequestStatusHistoryRepository
+      - auditEventRepository : AuditEventRepository
+      -- методы (@Transactional) --
+      + recordCreation(request : CaravanRequest) : void
+      + changeStatus(request, target, actorRole, actorName, reason) : CaravanRequest
+      + availableTransitions(request : CaravanRequest) : List<AvailableTransition>
+      + history(requestId : UUID) : List<RequestStatusHistory>
+      - rolesLabel(roles : Set<ActorRole>) : String
+      - clean(value : String) : String
+    }
+
+    class "RequestStatusService.AvailableTransition" as AvailableTransition <<не хранится>> #EDE7F6 {
+      .. record ..
+      + to : RequestStatus
+      + action : String
+      + roles : Set<ActorRole>
+      + reasonRequired : boolean
+      + blockedReason : String
+    }
+
+    class RequestRegistryService <<@Service>> #F5F5F5 {
+      .. @Service ..
+      - requestRepository : CaravanRequestRepository
+      - historyRepository : RequestStatusHistoryRepository
+      - organizationRepository : OrganizationRepository
+      -- методы (@Transactional(readOnly)) --
+      + load(orgId, scope, statuses, riskLevels, attentionOnly, sort, limit) : RegistryView
+      - lastStatusChanges(requests : List<CaravanRequest>) : Map<UUID, RequestStatusHistory>
+      - entry(request : CaravanRequest, last : RequestStatusHistory) : RegistryEntry
+    }
+
+    class "RequestRegistryService.RegistryView" as RegistryView <<не хранится>> #EDE7F6 {
+      .. record ..
+      + organizationId : UUID
+      + scope : RegistryScope
+      + sort : RegistrySort
+      + limit : int
+      + shown : int
+      + truncated : boolean
+      + generatedAt : OffsetDateTime
+      + summary : RequestRegistry.Summary
+      + rows : List<RegistryEntry>
+    }
+
+    class EtaService <<@Service>> #F5F5F5 {
+      .. @Service ..
+      - {static} CARAVAN_SPEED_KMH : double = 4.0
+      -- методы --
+      + computeHours(route : Route) : double {сумма distanceKm / 4.0}
+    }
+
+    class RequestReadinessGuard <<утилита>> #F5F5F5 {
+      .. final, приватный конструктор ..
+      + {static} blockerFor(request : CaravanRequest, target : RequestStatus) : String
+    }
+
+    class StatusTransitionException <<исключение>> #F5F5F5 {
+      .. extends RuntimeException ..
+      + StatusTransitionException(message : String)
+    }
+  }
+
+  package "domain" as req_domain #FDFDFD {
+    class CaravanRequest <<PostgreSQL>> #F5F5F5 {
+      .. @Entity @Table("caravan_request") ..
+      - id : UUID {@Id @GeneratedValue(UUID)}
+      - organization : Organization {@ManyToOne(EAGER) @JoinColumn("organization_id")}
+      - origin : String
+      - destination : String
+      - departureDate : LocalDate {@Column("departure_date")}
+      - cargoDescription : String {@Column("cargo_description")}
+      - cargoValueCaps : int {@Column("cargo_value_caps")}
+      - route : Route {@ManyToOne(EAGER) @JoinColumn("route_id")}
+      - etaHours : Double {@Column("eta_hours")}
+      - riskScore : Integer {@Column("risk_score")}
+      - riskStatus : String = "NA" {@Column("risk_status")}
+      - recommendation : String
+      - status : RequestStatus = DRAFT {@Enumerated(STRING)}
+      - createdAt : OffsetDateTime {@Column(insertable=false, updatable=false)}
+      -- методы --
+      + applyEta(etaHours : Double) : void
+      + applyRisk(score : Integer, status : String, recommendation : String) : void
+      + changeStatus(next : RequestStatus) : void
+      .. плюс геттеры всех полей ..
+    }
+
+    class RequestStatusHistory <<PostgreSQL>> #F5F5F5 {
+      .. @Entity @Table("request_status_history") ..
+      - id : UUID {@Id @GeneratedValue(UUID)}
+      - request : CaravanRequest {@ManyToOne(LAZY, optional=false) @JoinColumn("request_id")}
+      - fromStatus : RequestStatus {@Enumerated(STRING) @Column("from_status")}
+      - toStatus : RequestStatus {@Enumerated(STRING) @Column("to_status", nullable=false)}
+      - actorRole : ActorRole {@Enumerated(STRING) @Column("actor_role", nullable=false)}
+      - actorName : String {@Column("actor_name")}
+      - reason : String
+      - occurredAt : OffsetDateTime = now() {@Column("occurred_at", nullable=false)}
+      -- методы --
+      + RequestStatusHistory(request, fromStatus, toStatus, actorRole, actorName, reason)
+      .. плюс геттеры всех полей ..
+    }
+
+    enum RequestStatus <<перечисление>> #F5F5F5 {
+      DRAFT("Черновик")
+      READY("Готов к отправке")
+      EN_ROUTE("В пути")
+      DELAYED("Задержка")
+      DELIVERED("Доставлен")
+      CLOSED("Закрыт")
+      CANCELLED("Отменён")
+      -- методы --
+      + label() : String
+      + {static} parse(value : String) : RequestStatus
+    }
+
+    enum ActorRole <<перечисление>> #F5F5F5 {
+      DISPATCHER("Диспетчер караванов")
+      CARAVAN_MASTER("Караван-мастер")
+      SYSTEM("Система")
+      -- методы --
+      + label() : String
+      + {static} parse(value : String) : ActorRole
+    }
+
+    class RequestStatusMachine <<не хранится>> #EDE7F6 {
+      .. final, приватный конструктор ..
+      - {static} TRANSITIONS : List<Transition> {8 переходов}
+      - {static} DISPATCHER, MASTER, DISPATCHER_OR_MASTER, ANY_WITH_SYSTEM : Set<ActorRole>
+      -- методы --
+      + {static} all() : List<Transition>
+      + {static} from(status : RequestStatus) : List<Transition>
+      + {static} find(from : RequestStatus, to : RequestStatus) : Optional<Transition>
+      + {static} isTerminal(status : RequestStatus) : boolean
+    }
+
+    class "RequestStatusMachine.Transition" as Transition <<не хранится>> #EDE7F6 {
+      .. record ..
+      + from : RequestStatus
+      + to : RequestStatus
+      + action : String
+      + roles : Set<ActorRole>
+      + reasonRequired : boolean
+    }
+
+    class RequestRegistry <<не хранится>> #EDE7F6 {
+      .. final, приватный конструктор ..
+      + {static} DEFAULT_LIMIT : int = 200
+      + {static} MAX_LIMIT : int = 1000
+      -- методы --
+      + {static} attentionFor(entry : RegistryEntry) : Set<AttentionFlag>
+      + {static} matches(entry, statuses, levels, attentionOnly) : boolean
+      + {static} rows(scopeEntries, statuses, levels, attentionOnly, sort, limit) : List<RegistryEntry>
+      + {static} truncated(matchedCount : int, limit : int) : boolean
+      + {static} summarize(all : List<RegistryEntry>, scope : RegistryScope) : Summary
+      + {static} validateLimit(limit : Integer) : int
+      + {static} parseStatuses(raw : List<String>, scope : RegistryScope) : Set<RequestStatus>
+      + {static} parseRiskLevels(raw : List<String>) : Set<RiskLevel>
+    }
+
+    class "RequestRegistry.Summary" as Summary <<не хранится>> #EDE7F6 {
+      .. record ..
+      + active : int
+      + completed : int
+      + scopeTotal : int
+      + byStatus : Map<RequestStatus, Integer>
+      + byRiskLevel : Map<RiskLevel, Integer>
+      + byAttention : Map<AttentionFlag, Integer>
+      + attentionTotal : int
+    }
+
+    class RegistryEntry <<не хранится>> #EDE7F6 {
+      .. record ..
+      + id : UUID
+      + routeCode : String
+      + routeName : String
+      + origin : String
+      + destination : String
+      + departureDate : LocalDate
+      + cargoDescription : String
+      + cargoValueCaps : int
+      + etaHours : Double
+      + riskScore : Integer
+      + riskStatus : String
+      + riskLevel : RiskLevel
+      + recommendation : String
+      + status : RequestStatus
+      + lastStatusChangeAt : OffsetDateTime
+      + lastStatusActorRole : ActorRole
+      + lastStatusActorName : String
+      + lastStatusReason : String
+      + createdAt : OffsetDateTime
+    }
+
+    enum RegistryScope <<перечисление>> #F5F5F5 {
+      ACTIVE("Активные")
+      COMPLETED("Архив")
+      -- методы --
+      + label() : String
+      + {static} parse(value : String) : RegistryScope
+      + contains(status : RequestStatus) : boolean
+      + statuses() : Set<RequestStatus>
+    }
+
+    enum RegistrySort <<перечисление>> #F5F5F5 {
+      CREATED_DESC
+      DEPARTURE_ASC
+      RISK_DESC
+      STATUS_CHANGED_DESC
+      -- методы --
+      + {static} parse(value : String) : RegistrySort
+      + comparator() : Comparator<RegistryEntry>
+    }
+
+    enum AttentionFlag <<перечисление>> #F5F5F5 {
+      DELAYED("Задержка")
+      AWAITING_CLOSURE("Ждёт закрытия")
+      RISK_RECALCULATION_REQUIRED("Требует пересчёта risk_score")
+      RISK_DATA_STALE("risk_score по устаревшим данным")
+      -- методы --
+      + label() : String
+    }
+  }
+
+  package "repository" as req_repo #FDFDFD {
+    interface CaravanRequestRepository <<JpaRepository>> #F5F5F5 {
+      .. JpaRepository<CaravanRequest, UUID> ..
+      + findAllByOrderByCreatedAtDesc() : List<CaravanRequest>
+      + findByOrganization_IdOrderByCreatedAtDesc(orgId : UUID) : List<CaravanRequest>
+    }
+
+    interface RequestStatusHistoryRepository <<JpaRepository>> #F5F5F5 {
+      .. JpaRepository<RequestStatusHistory, UUID> ..
+      + findByRequest_IdOrderByOccurredAtAsc(requestId : UUID) : List<RequestStatusHistory>
+      + findByRequest_IdInOrderByOccurredAtAsc(ids : Collection<UUID>) : List<RequestStatusHistory>
+    }
+  }
+}
+
+package "com.karavany.organization" #FDFDFD {
+  package "web" as org_web #FDFDFD {
+    class OrganizationController <<@RestController>> #F5F5F5 {
+      .. @RestController @RequestMapping("/api/organizations") ..
+      .. @Transactional на обоих методах; readOnly = true у list() ..
+      - service : OrganizationService
+      -- эндпоинты --
+      + list() : List<OrganizationResponse> {GET, 200}
+      + create(body : CreateOrganization) : OrganizationResponse {POST, 201}
+      + handleBadRequest(e : IllegalArgumentException) : ErrorResponse {@ExceptionHandler, 400}
+      + handleConflict() : ErrorResponse {DataIntegrityViolationException, 400}
+    }
+
+    class "OrganizationController.CreateOrganization" as CreateOrganization <<не хранится>> #EDE7F6 {
+      .. record, тело запроса ..
+      + name : String
+      + subscriptionTier : String {BASIC / STANDARD / PRO}
+      + legalAddress : String
+      + primaryContact : String
+      + contactChannel : String
+      + region : String
+      + firstDispatcher : FirstDispatcher {null — альт. поток 6а}
+    }
+  }
+
+  package "service" as org_service #FDFDFD {
+    class OrganizationService <<@Service>> #F5F5F5 {
+      .. @Service ..
+      - {static} TIERS : List<String> = [BASIC, STANDARD, PRO]
+      - organizationRepository : OrganizationRepository
+      - userRepository : AppUserRepository
+      - auditEventRepository : AuditEventRepository
+      -- методы (@Transactional) --
+      + create(command : CreateOrganizationCommand) : OrganizationProvisioning
+      + findAll() : List<OrganizationProvisioning>
+      - validateDispatcher(dispatcher : FirstDispatcherCommand) : void
+      - normalizeTier(value : String) : String
+      - generateTenantKey() : String {"tnt_" + UUID[0..8]}
+      - passwordHash(initialPassword : String) : String {"sha256:" + hex(SHA-256)}
+      - required(value : String, message : String) : String
+      - clean(value : String) : String
+    }
+
+    class "OrganizationService.CreateOrganizationCommand" as CreateOrgCmd <<не хранится>> #EDE7F6 {
+      .. record ..
+      + name : String
+      + subscriptionTier : String
+      + legalAddress : String
+      + primaryContact : String
+      + contactChannel : String
+      + region : String
+      + firstDispatcher : FirstDispatcherCommand
+    }
+
+    class "OrganizationService.FirstDispatcherCommand" as FirstDispCmd <<не хранится>> #EDE7F6 {
+      .. record ..
+      + fullName : String
+      + login : String
+      + initialPassword : String
+      + contactChannel : String
+    }
+
+    class "OrganizationService.OrganizationProvisioning" as Provisioning <<не хранится>> #EDE7F6 {
+      .. record ..
+      + organization : Organization
+      + firstDispatcher : AppUser
+      + userCount : int
+    }
+  }
+
+  package "domain" as org_domain #FDFDFD {
+    class Organization <<PostgreSQL>> #F5F5F5 {
+      .. @Entity @Table("organization") ..
+      - id : UUID {@Id @GeneratedValue(UUID)}
+      - tenantKey : String {@Column("tenant_key")}
+      - name : String
+      - subscriptionTier : String {@Column("subscription_tier")}
+      - legalAddress : String {@Column("legal_address")}
+      - primaryContact : String {@Column("primary_contact")}
+      - contactChannel : String {@Column("contact_channel")}
+      - region : String
+      - status : String = "ACTIVE"
+      - createdAt : OffsetDateTime = now() {@Column("created_at", updatable=false)}
+      -- методы --
+      + Organization(tenantKey, name, subscriptionTier, legalAddress, primaryContact, contactChannel, region)
+      .. плюс геттеры всех полей ..
+    }
+
+    class AppUser <<PostgreSQL>> #F5F5F5 {
+      .. @Entity @Table("app_user") ..
+      - id : UUID {@Id @GeneratedValue(UUID)}
+      - organization : Organization {@ManyToOne(LAZY) @JoinColumn("organization_id")}
+      - fullName : String {@Column("full_name")}
+      - login : String
+      - passwordHash : String {@Column("password_hash")}
+      - role : String {приложение пишет только "DISPATCHER"}
+      - contactChannel : String {@Column("contact_channel")}
+      - active : boolean = true
+      - createdAt : OffsetDateTime = now() {@Column("created_at", updatable=false)}
+      -- методы --
+      + AppUser(organization, fullName, login, passwordHash, role, contactChannel)
+      .. плюс геттеры всех полей, кроме passwordHash ..
+    }
+  }
+
+  package "repository" as org_repo #FDFDFD {
+    interface OrganizationRepository <<JpaRepository>> #F5F5F5 {
+      .. JpaRepository<Organization, UUID> ..
+      + findAllByOrderByCreatedAtDesc() : List<Organization>
+      + findByNameIgnoreCase(name : String) : Optional<Organization>
+    }
+
+    interface AppUserRepository <<JpaRepository>> #F5F5F5 {
+      .. JpaRepository<AppUser, UUID> ..
+      + findByLoginIgnoreCase(login : String) : Optional<AppUser>
+      + countByOrganization_Id(organizationId : UUID) : int
+    }
+  }
+}
+
+package "com.karavany.risk" #FDFDFD {
+  class RiskService <<@Service>> #F5F5F5 {
+    .. @Service ..
+    - intelClient : WastelandIntelClient
+    - assessmentRepository : RiskAssessmentRepository
+    -- методы --
+    + calculate(route : Route, cargoValueCaps : int) : RiskResult
+    + saveAssessment(requestId : UUID, result : RiskResult) : void
+    + latestAssessment(requestId : UUID) : Optional<RiskAssessment>
+    + deleteAssessments(requestId : UUID) : void
+    - cargoFactor(caps : int) : int
+    - isStale(asOf : String) : boolean
+    - recommendation(score : int) : String
+  }
+
+  class RiskResult <<не хранится>> #EDE7F6 {
+    .. record ..
+    + score : Integer {null при NA}
+    + status : String {OK / STALE / NA}
+    + recommendation : String
+    + asOf : String
+    + threatSum : int
+    + base : int
+    + cargoFactor : int
+    + segments : List<SegmentRisk>
+    -- методы --
+    + {static} unavailable() : RiskResult
+  }
+
+  class "RiskResult.SegmentRisk" as SegmentRisk <<не хранится>> #EDE7F6 {
+    .. record ..
+    + segment : String
+    + threatLevel : int
+    + threats : List<String>
+  }
+
+  class RiskAssessment <<MongoDB>> #E8F5E9 {
+    .. @Document("risk_assessment") ..
+    - id : String {@Id}
+    - requestId : UUID {без внешнего ключа}
+    - score : Integer
+    - status : String
+    - recommendation : String
+    - asOf : String
+    - threatSum : int
+    - base : int
+    - cargoFactor : int
+    - segments : List<Segment>
+    - computedAt : Instant
+    -- методы --
+    + RiskAssessment(requestId : UUID, result : RiskResult, computedAt : Instant)
+    .. плюс геттеры всех полей ..
+  }
+
+  class "RiskAssessment.Segment" as AssessmentSegment <<MongoDB>> #E8F5E9 {
+    .. record ..
+    + segment : String
+    + threatLevel : int
+    + threats : List<String>
+  }
+
+  class WastelandIntelClient <<@Component>> #F5F5F5 {
+    .. @Component ..
+    - client : RestClient {baseUrl = ${intel.base-url}, connect/read timeout 2000 мс}
+    -- методы --
+    + fetchThreats(segments : List<String>) : Optional<ThreatReport>
+  }
+
+  class "WastelandIntelClient.ThreatReport" as ThreatReport <<не хранится>> #EDE7F6 {
+    .. record ..
+    + asOf : String
+    + segments : List<SegmentThreat>
+  }
+
+  class "WastelandIntelClient.SegmentThreat" as SegmentThreat <<не хранится>> #EDE7F6 {
+    .. record ..
+    + segment : String
+    + threatLevel : int
+    + threats : List<String>
+  }
+
+  enum RiskLevel <<перечисление>> #F5F5F5 {
+    UNKNOWN("Н/Д")
+    LOW("Низкий")
+    MEDIUM("Средний")
+    HIGH("Высокий")
+    CRITICAL("Критический")
+    -- методы --
+    + label() : String
+    + {static} parse(value : String) : RiskLevel
+    + {static} of(score : Integer, riskStatus : String) : RiskLevel
+  }
+
+  interface RiskAssessmentRepository <<MongoRepository>> #F5F5F5 {
+    .. MongoRepository<RiskAssessment, String> ..
+    + findFirstByRequestIdOrderByComputedAtDesc(requestId : UUID) : Optional<RiskAssessment>
+    + deleteByRequestId(requestId : UUID) : void
+  }
+}
+
+package "com.karavany.audit" #FDFDFD {
+  class AuditEvent <<MongoDB>> #E8F5E9 {
+    .. @Document("audit_event") ..
+    - id : String {@Id}
+    - type : String {ORGANIZATION_CREATED / REQUEST_STATUS_CHANGED}
+    - actor : String
+    - organizationId : UUID {без внешнего ключа}
+    - userId : UUID
+    - details : Map<String, Object> {LinkedHashMap}
+    - occurredAt : Instant
+    -- методы --
+    + {static} organizationCreated(orgId, dispatcherId, name, tier, login) : AuditEvent
+    + {static} requestStatusChanged(orgId, requestId, from, to, actorRole, actorName, reason) : AuditEvent
+    .. плюс геттеры всех полей ..
+  }
+
+  interface AuditEventRepository <<MongoRepository>> #F5F5F5 {
+    .. MongoRepository<AuditEvent, String> ..
+    + save(event : AuditEvent) : AuditEvent {унаследован}
+  }
+}
+
+package "инфраструктура" #FDFDFD {
+  class "PostgreSQL 16" as PG <<database>> #F5F5F5 {
+    .. схема создаётся Flyway, миграции V1…V6 ..
+    .. таблицы, индексы и ограничения — в заметке «Схема хранения» ..
+  }
+
+  class "MongoDB 7" as MG <<database>> #F5F5F5 {
+    .. коллекции Spring Data MongoDB ..
+    .. risk_assessment, audit_event — в заметке «Схема хранения» ..
+  }
+
+  class "Wasteland Intel" as WI <<внешняя система>> #F5F5F5 {
+    .. HTTP, в dev — WireMock ..
+    .. GET /threats?segments=КОД_ОТ-КОД_ДО,… ..
+    .. ответ: {asOf, segments[{segment, threatLevel, threats[]}]} ..
+    .. connect timeout 2000 мс, read timeout 2000 мс ..
+  }
+}
+
+' ─── компоновка: Java-пакеты друг под другом, классы слоя — в столбец ───
+' (без этих связей полотно шире 8000 px и текст не читается в печати)
+RequestRegistryController -[hidden]down- OrganizationController
+OrganizationController -[hidden]down- RiskService
+RiskService -[hidden]down- AuditEvent
+' классы внутри слоёв — в столбец
+SegmentInput -[hidden]down- RequestStatusController
+ChangeStatusRequest -[hidden]down- RequestRegistryController
+SegmentSpec -[hidden]down- RequestStatusService
+AvailableTransition -[hidden]down- RequestRegistryService
+RegistryView -[hidden]down- EtaService
+EtaService -[hidden]down- RequestReadinessGuard
+RequestReadinessGuard -[hidden]down- StatusTransitionException
+RequestStatusHistory -[hidden]down- RequestStatus
+RequestStatus -[hidden]down- ActorRole
+ActorRole -[hidden]down- RequestStatusMachine
+Transition -[hidden]down- RequestRegistry
+Summary -[hidden]down- RegistryEntry
+RegistryEntry -[hidden]down- RegistryScope
+RegistryScope -[hidden]down- RegistrySort
+RegistrySort -[hidden]down- AttentionFlag
+CaravanRequestRepository -[hidden]down- RequestStatusHistoryRepository
+FirstDispCmd -[hidden]down- Provisioning
+OrganizationRepository -[hidden]down- AppUserRepository
+RiskService -[hidden]down- RiskResult
+SegmentRisk -[hidden]down- RiskAssessment
+AssessmentSegment -[hidden]down- WastelandIntelClient
+SegmentThreat -[hidden]down- RiskLevel
+RiskLevel -[hidden]down- RiskAssessmentRepository
+AuditEvent -[hidden]down- AuditEventRepository
+PG -[hidden]down- MG
+MG -[hidden]down- WI
+
+' слои друг под другом, а не рядом: service → domain → repository
+StatusTransitionException -[hidden]down- CaravanRequest
+AttentionFlag -[hidden]down- CaravanRequestRepository
+Provisioning -[hidden]down- AppUser
+Organization -[hidden]down- OrganizationRepository
+
+' ─── связи сущностей: фактические JPA-отображения ────────────────────
+CaravanRequest "0..*" --> "1" Organization : @ManyToOne(EAGER)\norganization_id (not null с V4)
+AppUser "0..*" --> "1" Organization : @ManyToOne(LAZY)\norganization_id (not null с V3)
+RequestStatusHistory "1..*" --> "1" CaravanRequest : @ManyToOne(LAZY, optional=false)\nrequest_id
+CaravanRequest "1" .. "0..*" RiskAssessment : по requestId, без внешнего ключа
+Organization "1" .. "0..*" AuditEvent : по organizationId, без внешнего ключа
+
+' ─── вложенные типы (композиция объявлений) ──────────────────────────
+RequestStatusMachine +-- Transition
+RequestRegistry +-- Summary
+RequestService +-- SegmentSpec
+RequestStatusService +-- AvailableTransition
+RequestRegistryService +-- RegistryView
+OrganizationService +-- CreateOrgCmd
+OrganizationService +-- FirstDispCmd
+OrganizationService +-- Provisioning
+CreateOrgCmd "1" o-- "0..1" FirstDispCmd
+RiskResult +-- SegmentRisk
+RiskAssessment +-- AssessmentSegment
+WastelandIntelClient +-- ThreatReport
+WastelandIntelClient +-- SegmentThreat
+ThreatReport "1" o-- "0..*" SegmentThreat
+RequestController +-- CreateRequest
+RequestController +-- SegmentInput
+CreateRequest "1" o-- "0..*" SegmentInput
+RequestStatusController +-- ChangeStatusRequest
+OrganizationController +-- CreateOrganization
+
+' ─── web → service: внедрение через конструктор ──────────────────────
+RequestController ..> RequestService
+RequestStatusController ..> RequestService
+RequestStatusController ..> RequestStatusService
+RequestRegistryController ..> RequestRegistryService
+OrganizationController ..> OrganizationService
+
+' ─── web → domain: фактические обращения к доменным правилам ─────────
+RequestRegistryController ..> RequestRegistry : attentionFor()
+RequestRegistryController ..> RequestStatusMachine : isTerminal()
+RequestStatusController ..> RequestStatusMachine : isTerminal()
+RequestStatusController ..> RequestStatus : parse()
+RequestStatusController ..> ActorRole : parse()
+
+' ─── service → service ──────────────────────────────────────────────
+RequestService ..> EtaService
+RequestService ..> RiskService
+RequestService ..> RequestStatusService
+RiskService ..> WastelandIntelClient
+RequestStatusService ..> RequestStatusMachine : find(), isTerminal()
+RequestStatusService ..> RequestReadinessGuard : blockerFor()
+RequestStatusService ..> StatusTransitionException : throws
+RequestRegistryService ..> RequestRegistry : rows(), summarize()
+RequestRegistryService ..> RiskLevel : of()
+
+' ─── repository → хранилище ─────────────────────────────────────────
+CaravanRequestRepository ..> PG : caravan_request
+RequestStatusHistoryRepository ..> PG : request_status_history
+OrganizationRepository ..> PG : organization
+AppUserRepository ..> PG : app_user
+RiskAssessmentRepository ..> MG : risk_assessment
+AuditEventRepository ..> MG : audit_event
+WastelandIntelClient ..> WI : RestClient.get()
+
+note as N_Scope
+  **Контур диаграммы**
+  • показаны классы реализованных прецедентов UC-1
+    «Создать заявку на перевозку», UC-2 «Управлять
+    статусами заявки», UC-3 «Просмотреть реестр рейсов»,
+    UC-7 «Рассчитать risk_score» и UC-32 «Создать
+    организацию»;
+  • чтобы диаграмма читалась при вставке по ширине
+    страницы, из контура убран пакет com.karavany.route
+    целиком: RouteController и CheckpointController
+    (слой web), Route, RouteSegment и Checkpoint
+    (слой domain), RouteRepository,
+    RouteSegmentRepository и CheckpointRepository
+    (слой repository), а с ними — связи
+    CaravanRequest → Route,
+    Route → RouteSegment → Checkpoint и обращения
+    контроллеров справочников к репозиториям в обход
+    слоя service. Маршрут остался как тип поля
+    CaravanRequest.route и параметр
+    RiskService.calculate(route, cargoValueCaps),
+    его таблицы — в заметке «Схема хранения»,
+    сами классы — на CLS_LogicalView;
+  • также вне контура: HealthController (проверка
+    готовности хранилищ), KaravanyApplication и модуль
+    frontend (страницы и компоненты — на CLS_LogicalView,
+    контракт api.ts повторяет record-DTO контроллеров);
+  • классов UC-16 и UC-19 в коде нет: их проектируемые
+    сущности показаны как «проект» на CLS_UseCaseView.
+  **Границы слоёв**
+  • в com.karavany.request и com.karavany.organization
+    слои — вложенные пакеты
+    web / service / domain / repository, ровно как в коде;
+  • com.karavany.risk и com.karavany.audit в коде
+    подпакетов не имеют: слой каждого класса виден
+    по стереотипу («@Service», «@Component»,
+    «MongoRepository», «MongoDB», «не хранится»,
+    «перечисление»).
+end note
+
+note bottom of PG
+  **Схема хранения**
+  **PostgreSQL 16** (схема создаётся Flyway, V1…V6):
+  • checkpoint — V1; 5 строк справочника поставляет V2
+  • route — V1; code varchar(32) not null unique — V4
+  • route.organization_id — V3, nullable,
+    приложением не заполняется
+  • route_segment — V1; ord, from_checkpoint_id,
+    to_checkpoint_id, distance_km
+  • caravan_request — V1; organization_id not null — V4;
+    risk_score integer, risk_status varchar(16)
+    not null default 'NA' (OK / STALE / NA),
+    recommendation varchar(2000)
+  • ck_caravan_request_status — V5; 7 значений статуса
+  • ix_caravan_request_org_created — V6;
+    (organization_id, created_at desc)
+  • request_status_history — V5;
+    ix_request_status_history_request; той же миграцией
+    восстановлена стартовая запись «— → DRAFT»
+    для заявок, созданных до UC-2
+  • organization — V3; uq_organization_name_ci
+    по lower(name)
+  • app_user — V3; organization_id not null,
+    uq_app_user_login_ci по lower(login)
+  **MongoDB 7** (коллекции Spring Data MongoDB):
+  • risk_assessment — снимок каждого расчёта risk_score
+  • audit_event — ORGANIZATION_CREATED,
+    REQUEST_STATUS_CHANGED
+end note
+
+note as N_DTO
+  **Вложенные record-DTO контроллеров**
+  Отдельными классами показаны те, что участвуют
+  в связях: CreateRequest, SegmentInput,
+  ChangeStatusRequest, CreateOrganization.
+  Остальные — представления ответов:
+  • RequestController: RequestResponse (16 полей
+    представления заявки), RiskAssessmentResponse
+    и SegmentRiskResponse (разбор оценки риска),
+    ErrorResponse(message : String)
+  • RequestStatusController: StatusInfoResponse
+    и TransitionResponse (доступные переходы),
+    StatusHistoryResponse (запись истории)
+  • RequestRegistryController: RegistryResponse (срез,
+    сортировка, limit, shown, truncated, generatedAt),
+    RegistryRowResponse (24 поля строки реестра),
+    SummaryResponse и AttentionResponse
+    (сводка и пометки)
+  • OrganizationController: FirstDispatcher (часть тела
+    запроса), OrganizationResponse и UserResponse,
+    ErrorResponse
+end note
+
+note bottom of RiskService
+  **RiskService.calculate(route, cargoValueCaps)**
+  keys = route.getSegments()
+      .map(RouteSegment::segmentKey)
+  intelClient.fetchThreats(keys).isEmpty()
+    → RiskResult.unavailable() (score = null,
+    status = "NA", recommendation = «требует пересчёта»)
+  threatSum = сумма threatLevel по участкам ключа
+  base = min(100, threatSum * 6)
+  cargoFactor: caps >= 20000 → 30; >= 5000 → 20;
+    >= 1000 → 10; иначе 0
+  score = min(100, base + cargoFactor)
+  status = isStale(asOf) ? "STALE" : "OK", где isStale
+    истинно, если OffsetDateTime.parse(asOf) <
+    now().minusHours(24); при пустом или неразборном
+    asOf isStale возвращает false
+  recommendation: score >= 80 / 60 / 30 → критический /
+    высокий / средний риск, иначе низкий
+    (состав охраны и объём припасов)
+  RiskLevel.of(score, riskStatus): "NA" или score == null
+    → UNKNOWN, иначе >= 80 → CRITICAL, >= 60 → HIGH,
+    >= 30 → MEDIUM, иначе LOW
+end note
+
+note bottom of RequestStatusMachine
+  **RequestStatusMachine.TRANSITIONS — 8 переходов**
+  Transition(DRAFT, READY, «Укомплектовать рейс»,
+    {DISPATCHER}, false)
+  Transition(DRAFT, CANCELLED, «Отменить заявку»,
+    {DISPATCHER}, false)
+  Transition(READY, CANCELLED,
+    «Отменить рейс до выхода», {DISPATCHER}, false)
+  Transition(READY, EN_ROUTE,
+    «Караван вышел на маршрут», {CARAVAN_MASTER}, false)
+  Transition(EN_ROUTE, DELAYED,
+    «Зафиксировать задержку»,
+    {DISPATCHER, CARAVAN_MASTER, SYSTEM},
+    reasonRequired = true)
+  Transition(DELAYED, EN_ROUTE,
+    «Движение возобновлено»,
+    {DISPATCHER, CARAVAN_MASTER}, false)
+  Transition(EN_ROUTE, DELIVERED, «Груз доставлен»,
+    {CARAVAN_MASTER}, false)
+  Transition(DELIVERED, CLOSED, «Закрыть рейс»,
+    {DISPATCHER}, false)
+  isTerminal(CLOSED) == isTerminal(CANCELLED) == true
+end note
+
+note as N_Limits
+  **Ограничения текущей реализации**
+  • GET /api/requests: organizationId объявлен как
+    @RequestParam(required = false); без него
+    RequestService.findAll() возвращает заявки всех
+    организаций — пробел по FR-24, правка отложена
+    до UC-25/UC-26 (docs/ImplementationPlan.md);
+  • RequestReadinessGuard.blockerFor(request, target)
+    возвращает null для всех переходов: проверка
+    укомплектованности рейса (FR-10) появится
+    вместе с UC-9;
+  • AppUser.role — varchar(32) без constraint,
+    приложение пишет только литерал "DISPATCHER"
+    (OrganizationService.create);
+  • событие создания заявки в audit_event не пишется:
+    AuditEvent имеет только фабрики
+    organizationCreated() и requestStatusChanged() —
+    пробел по RL-4 (журнал аудита всех операций
+    изменения данных);
+  • транзакция открывается в слое web: @Transactional
+    стоит на методах контроллеров, кроме
+    RequestRegistryController, — отступление от DC-6
+    отмечено в строках аннотаций и в заметке
+    CLS_LogicalView;
+  • RequestStatusService.changeStatus() выполняет
+    проверки в порядке: current == target → find() →
+    roles().contains() → reasonRequired → blockerFor();
+    любой отказ — StatusTransitionException → HTTP 409.
+end note
+
+legend right
+  |= Обозначение |= Значение |
+  | <#F5F5F5> | «PostgreSQL» — @Entity, хранится в PostgreSQL (DC-4) |
+  | <#E8F5E9> | «MongoDB» — @Document, хранится в MongoDB (DC-5) |
+  | <#EDE7F6> | «не хранится» — record или утилита, в БД не сохраняется |
+  | <#FFF2CC> | «проект» — ещё не реализовано |
+  **Один цвет — несколько стереотипов:** фон #F5F5F5 несут также
+  «перечисление» (enum Java, в БД varchar), «@RestController», «@Service»,
+  «@Component», «утилита», «исключение», «JpaRepository»,
+  «MongoRepository», «database» и «внешняя система» — их различает
+  стереотип, а не цвет. Цвет «проект» на этом виде не встречается:
+  проектируемые сущности — на CLS_UseCaseView.
+  **Нотация:** ""-"" private, ""+"" public, ""{static}"" статический член;
+  ""имя : Тип"" для полей, ""имя(параметр : Тип) : Возврат"" для методов;
+  ""..текст.."" — разделитель-пояснение (аннотации класса, вид объявления,
+  контракт внешней системы, сноска), а не член класса.
+  У методов с пятью и более параметрами показаны только имена параметров —
+  их типы совпадают с полями соответствующего record-DTO.
+  В фигурных скобках — аннотации, имена колонок, коды ответов и пояснения.
+  **Типы связей:** ""-->"" направленная ассоциация — фактическое
+  JPA-отображение, кратности на обоих концах; ""*--"" композиция,
+  ""o--"" агрегация, ""+--"" вложенный тип (объявление, не ассоциация),
+  "".."" связь по значению без внешнего ключа, ""..>"" зависимость: вызов
+  или обращение к хранилищу (на зависимостях и на вложенности кратности
+  не указываются).
+  **Внедрённые зависимости сервисов** показаны полями класса
+  (""- requestRepository : CaravanRequestRepository"" и т. п.); рёбрами
+  проведены переходы между слоями web → service, web → domain,
+  service → service и repository → хранилище.
+endlegend
+@enduml

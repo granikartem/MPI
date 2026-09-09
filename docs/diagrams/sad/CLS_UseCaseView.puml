@@ -1,0 +1,367 @@
+@startuml CLS_UseCaseView
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam packageStyle rectangle
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  ArrowColor #333333
+  FontName Arial
+}
+skinparam enum {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Arial
+}
+hide circle
+hide methods
+hide empty members
+
+title ИС «Караваны» — Class Diagram (Use-Case View)\nАбстрактное описание: сущности предметной области и связи между ними, без методов и слоёв
+
+' ─── Организация как граница арендатора ──────────────────────────────
+class Organization <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  tenantKey : текст {ключ изолированного пространства данных}
+  name : текст {уникально без учёта регистра}
+  subscriptionTier : текст {BASIC / STANDARD / PRO}
+  status : текст {ACTIVE при создании}
+  createdAt : момент времени
+}
+
+class AppUser <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  fullName : текст
+  login : текст {уникален глобально, без учёта регистра}
+  passwordHash : текст {хеш пароля; открытый пароль не хранится}
+  role : текст {реализовано только DISPATCHER}
+  contactChannel : текст
+  active : признак
+  createdAt : момент времени
+}
+
+' ─── Заявка и рейс ───────────────────────────────────────────────────
+class CaravanRequest <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  origin : текст {пункт отправления}
+  destination : текст {пункт назначения}
+  departureDate : дата {желаемая дата отправки}
+  cargoDescription : текст {описание груза}
+  cargoValueCaps : число {ценность груза в крышках}
+  etaHours : число {расчёт системы, FR-5}
+  riskScore : число {0..100; не задан — «Н/Д»}
+  riskStatus : текст {OK / STALE / NA}
+  recommendation : текст {охрана и припасы, FR-8}
+  status : RequestStatus {при создании DRAFT}
+  createdAt : момент времени
+}
+
+class RequestStatusHistory <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  fromStatus : RequestStatus {не задан у стартовой записи}
+  toStatus : RequestStatus
+  actorRole : ActorRole
+  actorName : текст {без ссылки на учётную запись}
+  reason : текст {обязательна при фиксации задержки}
+  occurredAt : момент времени
+}
+
+enum RequestStatus <<перечисление>> #F5F5F5 {
+  DRAFT {Черновик}
+  READY {Готов к отправке}
+  EN_ROUTE {В пути}
+  DELAYED {Задержка}
+  DELIVERED {Доставлен}
+  CLOSED {Закрыт}
+  CANCELLED {Отменён}
+}
+
+note right of RequestStatus : CLOSED и CANCELLED — финальные состояния: переходов из них нет
+
+enum ActorRole <<перечисление>> #F5F5F5 {
+  DISPATCHER {Диспетчер караванов}
+  CARAVAN_MASTER {Караван-мастер}
+  SYSTEM {Система}
+}
+
+enum RiskLevel <<перечисление>> #F5F5F5 {
+  UNKNOWN {Н/Д}
+  LOW {Низкий}
+  MEDIUM {Средний}
+  HIGH {Высокий}
+  CRITICAL {Критический}
+}
+
+' ─── Маршрут ─────────────────────────────────────────────────────────
+class Route <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  code : текст {RT-N, уникален}
+  name : текст
+  template : признак {да — общий шаблон платформы}
+}
+
+class RouteSegment <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  ord : число {порядок участка в маршруте}
+  distanceKm : число
+  /segmentKey : текст {«код_от-код_до», производное}
+}
+
+class Checkpoint <<PostgreSQL>> #F5F5F5 {
+  id : идентификатор
+  code : текст {уникален}
+  name : текст
+}
+
+' ─── Данные внешней системы, в БД не хранятся ────────────────────────
+class ThreatReport <<не хранится>> #EDE7F6 {
+  asOf : момент времени {дата актуальности данных Wasteland Intel}
+}
+
+class SegmentThreat <<не хранится>> #EDE7F6 {
+  segment : текст {ключ участка}
+  threatLevel : число {уровень опасности участка}
+  threats : список текстов {типы угроз}
+}
+
+' ─── Снимки расчётов и журнал событий (MongoDB) ──────────────────────
+class RiskAssessment <<MongoDB>> #E8F5E9 {
+  id : идентификатор
+  requestId : идентификатор {ссылка на заявку, без внешнего ключа}
+  score : число {не задан при NA}
+  status : текст {OK / STALE / NA}
+  recommendation : текст
+  asOf : момент времени {дата актуальности данных источника}
+  threatSum : число {сумма уровней угроз}
+  base : число {базовая оценка маршрута}
+  cargoFactor : число {надбавка за ценность груза}
+  segments : список участков {разбор оценки по участкам}
+  computedAt : момент времени
+}
+
+class AuditEvent <<MongoDB>> #E8F5E9 {
+  id : идентификатор
+  type : текст {ORGANIZATION_CREATED / REQUEST_STATUS_CHANGED}
+  actor : текст {SUPERUSER или роль инициатора перехода}
+  organizationId : идентификатор {без внешнего ключа}
+  userId : идентификатор {первый диспетчер или не задан}
+  details : набор значений {снимок значимых полей}
+  occurredAt : момент времени
+}
+
+' ─── Проектируемые сущности полевых прецедентов UC-16 и UC-19 ─────────
+class TripStage <<проект>> #FFF2CC {
+  id : идентификатор
+  ord : число {порядок этапа в рейсе}
+  type : StageType
+  plannedAt : момент времени {плановое время этапа}
+  confirmed : признак {этап подтверждён}
+}
+
+enum StageType <<проект>> #FFF2CC {
+  LOADING_DONE {загрузка завершена}
+  DEPARTURE {караван вышел}
+  CHECKPOINT_ARRIVAL {прибытие на КТ}
+  NCR_GATE {прохождение КПП}
+  DELIVERY {груз выдан получателю}
+}
+
+class CheckpointLog <<проект>> #FFF2CC {
+  id : идентификатор
+  occurredAt : момент времени {фактическое время события}
+  latitude : число {подставляет устройство}
+  longitude : число {подставляет устройство}
+  result : текст
+  delayReason : текст
+  syncedAt : момент времени {время попадания на сервер}
+}
+
+class Incident <<проект>> #FFF2CC {
+  id : идентификатор
+  type : IncidentType
+  severity : IncidentSeverity
+  occurredAt : момент времени {фактическое время инцидента}
+  latitude : число
+  longitude : число
+  description : текст {описание произошедшего}
+  syncState : текст {LOCAL / SYNCED}
+}
+
+enum IncidentType <<проект>> #FFF2CC {
+  ATTACK {нападение}
+  BREAKDOWN {поломка}
+  MEDICAL {медицинское происшествие}
+  CARGO_LOSS {потеря груза}
+  DISASTER {стихийное бедствие}
+  OTHER {прочее}
+}
+
+enum IncidentSeverity <<проект>> #FFF2CC {
+  LOW {низкая}
+  MEDIUM {средняя}
+  HIGH {высокая}
+  CRITICAL {критическая}
+}
+
+class IncidentParticipant <<проект>> #FFF2CC {
+  id : идентификатор
+  roleInIncident : текст
+  injured : признак {пострадал}
+  comment : текст {состояние, оказанная помощь}
+}
+
+class RecoveryRequest <<проект>> #FFF2CC {
+  id : идентификатор
+  type : RecoveryType
+  status : текст {открыт / в работе / закрыт}
+  createdAt : момент времени
+  comment : текст {что требуется}
+}
+
+enum RecoveryType <<проект>> #FFF2CC {
+  EVACUATION {эвакуация}
+  BACKUP {подмога}
+  REDELIVERY {повторная доставка}
+  REPAIR {ремонт}
+}
+
+' ─── Организация объединяет пользователей и рейсы ────────────────────
+Organization "1" o-- "0..*" AppUser : сотрудники организации
+Organization "1" o-- "0..*" CaravanRequest : заявки и рейсы организации\n(FR-23 / FR-24)
+
+' ─── Маршрут рейса ───────────────────────────────────────────────────
+CaravanRequest "0..*" --> "0..1" Route : выполняется по маршруту
+Route "1" *-- "1..*" RouteSegment : участки в порядке ord
+RouteSegment "0..*" --> "1" Checkpoint : начало участка (from)
+RouteSegment "0..*" --> "1" Checkpoint : конец участка (to)
+
+' ─── Статусная модель и её история ───────────────────────────────────
+CaravanRequest "1" *-- "1..*" RequestStatusHistory : история переходов (FR-3);\nстартовая запись создаётся вместе с заявкой
+CaravanRequest ..> RequestStatus : status
+RequestStatusHistory ..> RequestStatus : fromStatus / toStatus
+RequestStatusHistory ..> ActorRole : actorRole
+CaravanRequest ..> RiskLevel : уровень риска выводится\nиз riskScore и riskStatus при чтении (UC-3)
+
+' ─── Оценка риска: внешние данные, расчёт, снимок ────────────────────
+RouteSegment ..> ThreatReport : ключи участков уходят\nв запрос к Wasteland Intel (FR-6)
+ThreatReport "1" o-- "0..*" SegmentThreat : угрозы по участкам
+SegmentThreat ..> RouteSegment : сопоставление segment = segmentKey
+ThreatReport ..> CaravanRequest : уровни угроз и ценность груза\nдают riskScore, riskStatus, recommendation (FR-7)
+CaravanRequest "1" .. "0..*" RiskAssessment : снимок каждого расчёта\n(по requestId, без внешнего ключа)
+
+' ─── Журнал аудита ───────────────────────────────────────────────────
+Organization "1" .. "0..*" AuditEvent : события организации\n(по organizationId, без внешнего ключа)
+AppUser "0..1" .. "0..*" AuditEvent : первый диспетчер\n(по userId, без внешнего ключа)
+RequestStatusHistory "0..1" .. "0..1" AuditEvent : переход статуса дублируется событием\nREQUEST_STATUS_CHANGED (без внешнего ключа)
+CaravanRequest ..> AuditEvent : событие создания заявки ещё не пишется —\nпостусловие 3 UC-1 не закрыто (пробел по RL-4)
+
+' ─── Полевые прецеденты (проект) ──────────────────────────────────────
+CaravanRequest "1" *-- "0..*" TripStage : план этапов рейса (FR-18)
+TripStage ..> StageType : type
+TripStage "0..*" --> "0..1" Checkpoint : плановая контрольная точка / КПП этапа
+TripStage "1" *-- "0..1" CheckpointLog : запись журнала по факту отметки
+TripStage ..> RequestStatusHistory : подтверждение этапа\nвызывает переход статуса
+CheckpointLog ..> ActorRole : отметку делает CARAVAN_MASTER
+CaravanRequest "1" *-- "0..*" Incident : инциденты рейса (FR-19);\nрейс в статусе EN_ROUTE или DELAYED
+Incident ..> IncidentType : type
+Incident ..> IncidentSeverity : severity
+Incident "1" *-- "0..*" IncidentParticipant : участники инцидента (FR-20)
+Incident "0..*" --> "1" AppUser : автор карточки — полевой пользователь
+Incident "1" o-- "0..*" RecoveryRequest : основание для реагирования (FR-21)
+RecoveryRequest ..> RecoveryType : type
+Incident ..> RequestStatusHistory : при тяжести HIGH / CRITICAL —\nавтопереход EN_ROUTE → DELAYED, актор SYSTEM
+
+note top of Route
+  **Маршрут рейса**
+  • маршрут выбирается из шаблонов платформы либо задаётся
+    вручную последовательностью участков вместе с заявкой
+  • связи «Организация — Маршрут» на диаграмме нет: у маршрута
+    нет владельца-организации, шаблоны общие для платформы
+  • как это устроено в схеме БД — на CLS_ImplementationView
+end note
+
+note right of CaravanRequest
+  **Значения riskStatus** (отдельной сущности нет,
+  это текстовый признак заявки)
+  • OK — данные Wasteland Intel свежие
+  • STALE — данные старше 24 ч, оценка помечается
+    как полученная на устаревших данных
+  • NA — источник недоступен, риск не рассчитан,
+    рейс «требует пересчёта risk_score»
+  **Уровень риска RiskLevel не хранится:**
+  ≥ 80 — CRITICAL, ≥ 60 — HIGH, ≥ 30 — MEDIUM,
+  иначе LOW; при NA или незаданной оценке — UNKNOWN
+end note
+
+note bottom of RequestStatusHistory
+  **История переходов**
+  • стартовая запись «— → DRAFT» создаётся при создании
+    заявки всегда, поэтому кратность 1..*: заявок
+    без истории не бывает
+  • автор перехода хранится как роль + имя, без ссылки
+    на учётную запись (до реализации UC-25)
+end note
+
+note bottom of AuditEvent
+  **Журнал аудита (RL-4, RL-5)**
+  • реализован и пишется из двух мест: создание организации
+    (ORGANIZATION_CREATED) и смена статуса заявки
+    (REQUEST_STATUS_CHANGED)
+  • событие создания заявки не пишется — это ограничение
+    показано на связи с CaravanRequest, а не на самом классе
+end note
+
+note bottom of Incident
+  **Проектируемые сущности полевых прецедентов**
+  • UC-16 «Зафиксировать прохождение этапа рейса» —
+    TripStage, StageType, CheckpointLog
+  • UC-19 «Сообщить об инциденте в рейсе» — Incident,
+    IncidentType, IncidentSeverity, IncidentParticipant,
+    RecoveryRequest, RecoveryType
+  • время и координаты подставляет полевое устройство;
+    при отсутствии связи карточка остаётся в состоянии LOCAL
+    и синхронизируется позже (RL-1)
+  • хранилище для проектируемых сущностей ещё не выбрано —
+    классов в коде нет
+end note
+
+legend right
+  |= Обозначение |= Значение |
+  | <#F5F5F5> | «PostgreSQL» — реализовано, хранится в PostgreSQL (DC-4) |
+  | <#E8F5E9> | «MongoDB» — реализовано, хранится в MongoDB (DC-5) |
+  | <#EDE7F6> | «не хранится» — в БД не сохраняется |
+  | <#FFF2CC> | «проект» — ещё не реализовано |
+  **Один цвет — несколько стереотипов:** фон #F5F5F5 несёт также
+  «перечисление» (в БД это varchar), а на CLS_LogicalView
+  и CLS_ImplementationView — ещё «database» и «внешняя система»;
+  их различает стереотип, а не цвет.
+  **Цвет обозначает будущее размещение сущности, а не деталь реализации:**
+  поля, аннотации, таблицы и колонки — на CLS_ImplementationView.
+  Исключение — Route, RouteSegment и Checkpoint: пакет com.karavany.route
+  в контур CLS_ImplementationView не вошёл, их таблицы описаны там
+  только в заметке «Схема хранения».
+  **Типы полей на этом виде деловые** (""текст"", ""число"", ""дата"",
+  ""момент времени"", ""признак"", ""идентификатор""), нотация — ""имя : Тип"",
+  пояснение в ""{…}"", одно поле — одна строка.
+  **Перечисления** показаны enum-классами всюду, где перечисление —
+  самостоятельное понятие модели (реализованные и проектируемые).
+  Набор значений, который остаётся текстовым признаком сущности
+  (riskStatus, status, subscriptionTier, syncState, type события аудита),
+  приведён списком в ""{…}"" у самого поля.
+  **Типы связей:** ""*--"" композиция (часть не живёт без целого),
+  ""o--"" агрегация, ""-->"" направленная ассоциация, "".."" связь
+  по значению без внешнего ключа, ""..>"" зависимость
+  (на зависимостях кратности не указываются).
+  **Трассировка:** FR-1 (заявка), FR-2 и FR-3 (статусная модель
+  и история), FR-5 (ETA), FR-6 (Wasteland Intel), FR-7 (risk_score),
+  FR-8 (рекомендация), FR-13 и FR-14 (ценность груза), FR-18 (этапы
+  рейса), FR-19 — FR-21 (инциденты и реагирование), FR-23 и FR-24
+  (организация и изоляция её данных; фактическое ограничение изоляции
+  на чтении — в заметке «Ограничения» на CLS_ImplementationView),
+  FR-27 (нет самостоятельной регистрации), RL-1 (офлайн-фиксация),
+  RL-4 и RL-5 (журнал аудита), DC-4 и DC-5 (PostgreSQL и MongoDB).
+  Полный перечень прецедентов — в docs/UseCases.md.
+endlegend
+@enduml
