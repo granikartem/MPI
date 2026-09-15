@@ -92,8 +92,6 @@ note bottom of infrastructure
     risk.RiskResult, RiskLevel, RiskAssessment; audit.AuditEvent
   • infrastructure → com.karavany.*.repository; risk.RiskAssessmentRepository,
     WastelandIntelClient; audit.AuditEventRepository; resources/db/migration
-  **Брокера сообщений нет:** обмен синхронный (REST / JSON), события
-  полевых устройств приходят через REST API и сохраняются в MongoDB.
 end note
 
 legend right

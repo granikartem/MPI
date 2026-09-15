@@ -38,7 +38,7 @@ package "com.karavany.audit" {
   object "aRepo:AuditEventRepository" as AREPO <<MongoRepository>>
 }
 
-package "инфраструктура (docker compose)" {
+package "инфраструктура" {
   object "pg:PostgreSQL 16" as PG <<database>>
   object "mg:MongoDB 7" as MG <<database>>
 }

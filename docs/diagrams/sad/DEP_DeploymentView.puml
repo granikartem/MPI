@@ -22,31 +22,26 @@ title ИС «Караваны» — Deployment Diagram (Deployment View)\nГде
 ' ─── Центральный сервер ──────────────────────────────────────────────
 node "**Центральный сервер караванной конторы** <<device>>\nCPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64\nRAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется" as SRV {
 
-  node "**FreeBSD 14.3-STABLE** <<execution environment>>\nгипервизор bhyve (vm-bhyve) · хранилище ZFS · сетевой фильтр pf\nресурсы хоста: 4 ядра, 32 ГБ (ZFS ARC, резервное копирование)" as HOST #EEEEEE {
+  node "**FreeBSD 14.3-STABLE** <<execution environment>>\nZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)\nсетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d" as OS #EEEEEE {
 
-    node "**Виртуальная машина bhyve** <<execution environment>>\nгостевая ОС Ubuntu Server 24.04 LTS\n12 vCPU · 96 ГБ RAM · диск ZFS zvol 4 ТБ · virtio-net через if_bridge" as VM #FFF2CC {
-
-      node "**Docker Engine + Docker Compose** <<execution environment>>\nвнутренняя сеть karavany; наружу открыт только порт 443" as DOCKER #FFFFFF {
-
-        node "frontend <<container>>\nnginx: статика React 18, TLS, прокси /api" as C_FRONT #FFF2CC {
-          artifact "web-клиент и PWA\n(сборка vite build)" as A_WEB
-        }
-
-        node "backend <<container>>\neclipse-temurin:21-jre" as C_BACK {
-          artifact "karavany-0.1.0.jar\nSpring Boot 3.3, миграции Flyway V1–V6" as A_JAR
-        }
-
-        node "postgres <<container>>\npostgres:16, том pgdata" as C_PG {
-          database "БД karavany\nPostgreSQL 16" as DB_PG
-        }
-
-        node "mongo <<container>>\nmongo:7, том mongodata" as C_MONGO {
-          database "БД karavany\nMongoDB 7" as DB_MONGO
-        }
-      }
+    node "**nginx 1.30** <<execution environment>>\nпакет www/nginx · служба nginx · TLS на :443" as NGINX {
+      artifact "web-клиент и PWA\n/usr/local/www/karavany\n(сборка vite build)" as A_WEB
+      artifact "конфигурация сайта\nTLS, прокси /api/* → 127.0.0.1:8080" as A_NGINX_CONF #FFF2CC
     }
 
-    artifact "Резервные копии\npg_dump, mongodump,\nZFS-снапшоты тома VM" as A_BACKUP #FFF2CC
+    node "**OpenJDK 21** <<execution environment>>\nпакет java/openjdk21 · служба karavany · слушает 127.0.0.1:8080" as JVM {
+      artifact "karavany-0.1.0.jar\nSpring Boot 3.3, миграции Flyway V1–V6" as A_JAR
+    }
+
+    node "**PostgreSQL 16** <<execution environment>>\nпакет databases/postgresql16-server\nслужба postgresql · слушает 127.0.0.1:5432" as PG {
+      database "БД karavany\nоперативные данные" as DB_PG
+    }
+
+    node "**MongoDB 7.0** <<execution environment>>\nпакет databases/mongodb70\nслужба mongod · слушает 127.0.0.1:27017" as MONGO {
+      database "БД karavany\nснимки риска, аудит, события" as DB_MONGO
+    }
+
+    artifact "Резервные копии\npg_dump, mongodump,\nZFS-снапшоты датасетов" as A_BACKUP #FFF2CC
   }
 }
 
@@ -71,44 +66,38 @@ node "**Wasteland Intel** <<external system>>\nданные об угрозах 
 node "**NCR Checkpoint & Tax Terminal** <<external system>>\nпрохождение КПП и пошлины" as NCR #EDE7F6
 
 ' ─── Интерфейсы взаимодействия ───────────────────────────────────────
-BROWSER --> C_FRONT : HTTPS :443\nстатика + REST / JSON
-PIP_BROWSER --> C_FRONT : HTTPS :443, REST / JSON\nсинхронизация при появлении связи (≤ 60 с, RL-3)
-C_FRONT --> C_BACK : HTTP :8080, /api/*\nвнутренняя сеть Docker
-C_BACK --> C_PG : JDBC (PostgreSQL wire), TCP :5432
-C_BACK --> C_MONGO : MongoDB Wire Protocol, TCP :27017
-C_BACK --> WI : REST / HTTPS :443, JSON\nGET /threats?segments=…\nconnect / read timeout 2 с
-C_BACK ..> NCR : REST / HTTPS :443, JSON\n(проект, UC-24)
-C_PG ..> A_BACKUP : pg_dump
-C_MONGO ..> A_BACKUP : mongodump
+BROWSER --> NGINX : HTTPS :443\nстатика + REST / JSON
+PIP_BROWSER --> NGINX : HTTPS :443, REST / JSON\nсинхронизация при появлении связи (≤ 60 с, RL-3)
+NGINX --> JVM : HTTP, 127.0.0.1:8080\n/api/*
+JVM --> PG : JDBC (PostgreSQL wire)\n127.0.0.1:5432
+JVM --> MONGO : MongoDB Wire Protocol\n127.0.0.1:27017
+JVM --> WI : REST / HTTPS :443, JSON\nGET /threats?segments=…\nconnect / read timeout 2 с
+JVM ..> NCR : REST / HTTPS :443, JSON\n(проект, UC-24)
+PG ..> A_BACKUP : pg_dump
+MONGO ..> A_BACKUP : mongodump
 A_BACKUP --> HOLO : запись резервной копии
 TERM ..> PIP : установка PWA через RobCo-интерфейс\nтерминала или с голотейпа (Vision 4.5)
 
-note right of HOST
-  **Почему виртуальная машина.** На FreeBSD нет нативного
-  Docker Engine и нет официальных сборок MongoDB 7, а проект
-  собран на Docker Compose (DC-4, DC-5). Поэтому контейнеры
-  запускаются в гостевом Linux под bhyve, а хост FreeBSD
-  отвечает за ZFS-хранилище, сетевой фильтр и резервные копии.
-  Цена решения — дополнительный слой виртуализации:
-  накладные расходы virtio на диск и сеть, отдельное
-  обновление гостевой ОС.
-end note
-
-note bottom of DOCKER
-  **Отличия от стенда разработки (docker-compose.yml):**
-  • frontend — Vite dev-сервер на :5173 без TLS (npm run dev);
-    production-образ на nginx — проект;
-  • backend, postgres, mongo публикуют :8080, :5432, :27017 наружу;
-    в целевой схеме доступны только внутри сети Docker;
-  • вместо Wasteland Intel — WireMock mock-intel на :8089.
-  Брокера сообщений (Kafka) нет: все обмены — синхронный REST.
+note right of OS
+  **Размещение на сервере.** Все компоненты работают
+  в одной ОС как отдельные службы rc.d под своими
+  системными пользователями. Наружу через pf доступен
+  только nginx на :443; backend, PostgreSQL и MongoDB
+  слушают только loopback-интерфейс 127.0.0.1.
+  **Поставка артефактов.** karavany-0.1.0.jar собирается
+  gradle bootJar (JDK 21), web-клиент — npm run build;
+  на сервер копируются готовые файлы.
+  **MongoDB.** Порт databases/mongodb70 содержит
+  FreeBSD-специфичный патч, не проходивший QA MongoDB Inc.,
+  поэтому перед вводом в эксплуатацию — нагрузочная
+  проверка (PF-1…PF-3). AVX процессор поддерживает.
 end note
 
 legend right
   |= Цвет |= Значение |
-  | <#F5F5F5> | реализовано: образ или артефакт уже собирается проектом |
+  | <#F5F5F5> | реализовано: артефакт собирается проектом, пакет есть в FreeBSD |
   | <#E8F5E9> | хранилище данных |
-  | <#FFF2CC> | проект — решение Deployment View, в репозитории ещё нет |
+  | <#FFF2CC> | проект — в репозитории ещё нет |
   | <#EDE7F6> | внешняя система |
   **Характеристики** сервера, терминала и Pip-Boy — Vision 9.2;
   число устройств — Vision 9.3 и PF-1 (50 терминалов + 150 Pip-Boy).

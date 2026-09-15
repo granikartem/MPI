@@ -123,8 +123,7 @@ Implementation View для них был бы проектным. Их сущн�
   Компоненты названы так же, как участники Logical View диаграмм последовательности, кооперации и
   состояний; нереализованные помечены как проект. Зависимости идут только сверху вниз; красной
   связью показано фактическое отступление от DC-6 — контроллеры справочников читают репозитории
-  напрямую. Заметка сопоставляет пакеты с фактической структурой кода. Брокера сообщений (Kafka)
-  в системе нет и на диаграмме тоже.
+  напрямую. Заметка сопоставляет пакеты с фактической структурой кода.
 
 ### Activity Diagram — UC-7 «Рассчитать risk_score»
 
@@ -241,14 +240,15 @@ Implementation View для них был бы проектным. Их сущн�
 ### Deployment Diagram — система целиком
 
 - **Deployment View.** Центральный сервер (Intel Xeon E5-2643, 16 ядер, 128 ГБ, 26 ТБ, 10 Гбит/с)
-  под FreeBSD 14.3-STABLE; в нём виртуальная машина bhyve с Ubuntu Server 24.04 LTS (12 vCPU,
-  96 ГБ, ZFS zvol 4 ТБ), в ней Docker Compose с контейнерами `frontend` (nginx, статика React, TLS),
-  `backend` (`eclipse-temurin:21-jre`, `karavany-0.1.0.jar`), `postgres:16`, `mongo:7`. Резервные
-  копии (`pg_dump`, `mongodump`, ZFS-снапшоты) записываются на голотейп. Клиенты — офисный терминал
-  (2 ядра, 8 ГБ, браузер; до 50) и Pip-Boy 3000 (ARM, 1 ГБ, 64 ГБ, Wi-Fi; PWA с IndexedDB; до 150).
-  На связях указаны протоколы и порты: HTTPS :443 от клиентов, HTTP :8080 внутри сети Docker,
-  JDBC :5432, MongoDB Wire Protocol :27017, REST / HTTPS к Wasteland Intel и NCR Checkpoint.
-  Заметки объясняют выбор виртуальной машины и отличия от стенда разработки `docker-compose.yml`.
+  под FreeBSD 14.3-STABLE. Все компоненты установлены в ОС из пакетов и работают как службы rc.d:
+  nginx 1.30 (`www/nginx`: web-клиент и PWA, TLS, прокси `/api/*`), OpenJDK 21 (`java/openjdk21`:
+  `karavany-0.1.0.jar`), PostgreSQL 16 (`databases/postgresql16-server`) и MongoDB 7.0
+  (`databases/mongodb70`) на отдельных ZFS-датасетах. Резервные копии (`pg_dump`, `mongodump`,
+  ZFS-снапшоты) записываются на голотейп. Клиенты — офисный терминал (2 ядра, 8 ГБ, браузер; до 50)
+  и Pip-Boy 3000 (ARM, 1 ГБ, 64 ГБ, Wi-Fi; PWA с IndexedDB; до 150). На связях указаны протоколы и
+  порты: HTTPS :443 от клиентов к nginx, HTTP 127.0.0.1:8080 от nginx к backend, JDBC 127.0.0.1:5432,
+  MongoDB Wire Protocol 127.0.0.1:27017, REST / HTTPS к Wasteland Intel и NCR Checkpoint. Заметка
+  описывает изоляцию служб, фильтр pf, поставку артефактов и проверку порта MongoDB.
 
 ## Что показано как предполагаемая реализация
 
@@ -300,11 +300,9 @@ Implementation View для них был бы проектным. Их сущн�
   прецедентам.
 - **Timeline Diagram.** Реализованы только таймауты Wasteland Intel (UC-1) и проверка 24 часов при
   расчёте risk_score. Сроки подписки, TTL журнала аудита, полевая синхронизация и уведомления — проект.
-- **Deployment Diagram.** В репозитории есть только стенд разработки `docker-compose.yml`: frontend —
-  Vite dev-сервер на :5173 без TLS, порты backend и баз данных открыты наружу, вместо Wasteland Intel —
-  WireMock. Виртуальная машина bhyve, production-образ frontend на nginx, TLS, PWA полевого клиента и
-  резервное копирование на голотейп — проект. Kafka в системе не используется: упоминания убраны из
-  [Vision](Vision.md) (6.2, 9.2), там же версии PostgreSQL и MongoDB приведены к SRS (16 и 7).
+- **Deployment Diagram.** Артефакты `karavany-0.1.0.jar` и сборка web-клиента уже собираются проектом,
+  пакеты nginx, OpenJDK 21, PostgreSQL 16 и MongoDB 7.0 есть в FreeBSD 14. Конфигурация nginx с TLS,
+  скрипты служб rc.d, правила pf, PWA полевого клиента и резервное копирование на голотейп — проект.
 
 ## Рендеринг
 
