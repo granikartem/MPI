@@ -1,0 +1,56 @@
+@startuml TL_Calendar_ProcessView
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+title ИС «Караваны» — Timeline Diagram (Process View)\nПроцессы, привязанные к календарю. Ось — сутки от начала события
+
+scale 10 as 110 pixels
+
+concise "Подписка (UC-34)" as SUB
+concise "risk_status (UC-7)" as RISK
+concise "Аудит (RL-5)" as AUD
+
+@0
+SUB is "ACTIVE — оплаченный период"
+RISK is "OK, не обновляется"
+AUD is "запись хранится, удаление запрещено"
+
+@20
+RISK is "STALE — после пересчёта"
+
+@30
+SUB is "GRACE — только чтение"
+
+@60
+SUB is "BLOCKED"
+
+@92
+AUD is "может быть удалена"
+
+SUB@0 <-> @30 : {30 сут}
+SUB@30 <-> @60 : {30 сут}
+AUD@0 <-> @92 : {≥ 3 мес. (92 сут)}
+
+highlight 30 to 60 #FFF2CC;line:DimGrey
+
+note bottom of SUB
+  **Проект (UC-34, Vision 4.5).** В момент period_end API-ключ терминала истекает:
+  расширенные функции блокируются, данные рейсов доступны только для чтения
+  (жёлтая зона — grace-период). Через 30 сут (grace_until) без продления — BLOCKED.
+  Продление выпускает новый ключ и открывает новый период ACTIVE.
+  Смену subscription.status выполняет задача по расписанию раз в сутки в 00:00.
+end note
+
+note bottom of RISK
+  **Реализовано (UC-7, альт. 2б).** Признак STALE вычисляется только в момент
+  расчёта: RiskService.isStale — asOf старше now − 24 ч. Через 24 ч после asOf
+  сохранённый risk_status остаётся OK, пока диспетчер не нажмёт «Пересчитать
+  риск» (здесь — на 20-е сутки). Фоновой переоценки по времени в коде нет.
+end note
+
+note bottom of AUD
+  **Проект (RL-5).** TTL-индекс MongoDB на audit_event.occurredAt,
+  expireAfterSeconds = 7 948 800 (92 сут). Сейчас индекса нет: события
+  хранятся бессрочно, требование «не менее 3 месяцев» выполняется.
+end note
+@enduml

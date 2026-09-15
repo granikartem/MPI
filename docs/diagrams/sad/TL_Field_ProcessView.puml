@@ -1,0 +1,59 @@
+@startuml TL_Field_ProcessView
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+title ИС «Караваны» — Timeline Diagram (Process View)\nФиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3) — проект. Ось — секунды
+
+scale 60 as 160 pixels
+
+concise "Связь" as NET
+concise "Pip-Boy (PWA)" as PB
+concise "Сервер" as SRV
+concise "Статус рейса" as TRIP
+concise "Диспетчер" as DSP
+
+@0
+NET is "нет связи"
+PB is {-}
+SRV is {-}
+TRIP is "EN_ROUTE"
+DSP is {-}
+
+@30
+PB is "LOCAL — карточка в очереди на устройстве"
+
+@120
+NET is "связь есть"
+
+@150
+PB is "SYNCED"
+SRV is "инцидент принят"
+TRIP is "DELAYED (актор SYSTEM)"
+DSP is "уведомление формируется"
+
+@300
+DSP is "уведомление доставлено"
+
+PB@150 -> SRV@150
+NET@120 <-> @180 : {≤ 60 с (RL-3)}
+DSP@150 <-> @450 : {≤ 5 мин (Vision)}
+
+highlight 0 to 120 #EEEEEE;line:DimGrey
+
+note bottom of NET
+  Серая зона — связи нет; на практике это до 3 ч и дольше (Vision 7.2),
+  на оси промежуток сжат. Очередь событий хранится в IndexedDB устройства.
+end note
+
+note bottom of PB
+  Время и координаты подставляются в момент фиксации (@30), а не синхронизации.
+  После появления связи PWA отправляет очередь в REST API; clientEventId делает
+  повторную отправку идемпотентной (UNIQUE INDEX в коллекции incident).
+end note
+
+note bottom of TRIP
+  При тяжести HIGH / CRITICAL сервер сразу после приёма выполняет переход
+  EN_ROUTE → DELAYED ролью SYSTEM (разрешён RequestStatusMachine,
+  вызывающего кода пока нет).
+end note
+@enduml

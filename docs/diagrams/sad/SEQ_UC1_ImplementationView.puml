@@ -8,11 +8,12 @@ skinparam DatabaseBackgroundColor #F5F5F5
 skinparam BoxPadding 8
 skinparam SequenceMessageFontName Courier
 
-title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Implementation View)\nРеальные классы, методы и HTTP-контракт реализации
+title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Implementation View)\nРеальные классы, методы, предусловия и HTTP-контракт реализации
 
 actor "Диспетчер" as D
 
 box "frontend (React 18 + Vite)" #FDFDFD
+  participant "console:Console.tsx\n(OrgDispatch)" as CON
   participant "form:RequestForm.tsx" as UI
   participant "api:api.ts (axios)" as API
 end box
@@ -24,7 +25,7 @@ box "backend (Spring Boot 3, Java 21)" #FDFDFD
   participant "risk:RiskService" as RISK
   participant "intel:WastelandIntelClient" as INTEL
   participant "st:RequestStatusService" as STAT
-  participant "repo:CaravanRequestRepository\nrouteRepo:RouteRepository\ncpRepo:CheckpointRepository\nsegRepo:RouteSegmentRepository\norgRepo:OrganizationRepository\nhRepo:RequestStatusHistoryRepository" as REPO
+  participant "orgRepo:OrganizationRepository\nrouteRepo:RouteRepository\ncpRepo:CheckpointRepository\nsegRepo:RouteSegmentRepository\nrepo:CaravanRequestRepository\nhRepo:RequestStatusHistoryRepository" as REPO
   participant "aRepo:RiskAssessmentRepository" as MREPO
 end box
 
@@ -34,30 +35,65 @@ box "инфраструктура" #FDFDFD
   participant "mock-intel:WireMock\n(Wasteland Intel)" as WI
 end box
 
+note over D, API
+  **Предусловия UC-1 в реализации**
+  1) Организация выбрана: Console.selectedOrgId() читает ?org=<id>;
+     без параметра рендерится OrgPicker и форма заявки не показывается;
+     если организаций нет — «Организаций пока нет. Создайте в консоли организаций» (UC-32)
+  2) Организация существует — проверяется **только на backend**:
+     при неизвестном ?org=<id> OrgDispatch получает org == null, но всё равно
+     рендерит RequestForm с organizationId = orgId → см. фрагмент «Предусловие: организация существует»
+  3) Справочники загружены: RequestForm рендерится при routes.length > 0 && checkpoints.length > 0
+  4) Аутентификация диспетчера **не реализована** (до UC-25)
+end note
+
 autonumber "<b>0."
 D -> UI : submit(e: FormEvent)
 activate UI
-UI -> API : createRequest(body: CreateRequestBody)
+UI -> API : createRequest(body: CreateRequestBody)\n// organizationId из Console (?org=)
 activate API
 API -> WEB : POST /api/requests\n{organizationId, origin, destination, departureDate,\n cargoDescription, cargoValueCaps, routeId | routeName+segments}
 activate WEB
 
-alt body.routeId() != null  — основной поток
+alt body.routeId() != null — основной поток
   WEB -> SVC : create(organizationId, origin, destination,\ndepartureDate, cargoDescription, cargoValueCaps, routeId)
-  activate SVC
+else body.segments() != null && !body.segments().isEmpty() — альт. поток 3а
+  WEB -> SVC : createWithManualRoute(organizationId, ..., routeName,\nList<SegmentSpec> specs)
+else ни routeId, ни segments
+  break
+    WEB -> WEB : throw new IllegalArgumentException(\n"Нужно указать routeId (шаблон) или segments (ручной маршрут)")
+    WEB --> API : HTTP 400 {"message": "..."}
+  end
+end
+activate SVC
+
+group Предусловие: организация существует — RequestService.loadOrganization(organizationId)
+  break organizationId == null
+    SVC --> WEB : throw new IllegalArgumentException("Не указана организация")
+    WEB --> API : HTTP 400 {"message": "Не указана организация"}
+  end
   SVC -> REPO : organizationRepository.findById(organizationId)
   activate REPO
   REPO -> PG : SELECT * FROM organization WHERE id = ?
   REPO --> SVC : Optional<Organization>
   deactivate REPO
+  break Optional.empty() — организации нет
+    SVC --> WEB : throw new IllegalArgumentException(\n"Организация не найдена: " + organizationId)
+    WEB --> API : HTTP 400 {"message": "Организация не найдена: ..."}
+  end
+end
+
+alt create(...) — маршрут из шаблона
   SVC -> REPO : routeRepository.findById(routeId)
   activate REPO
   REPO -> PG : SELECT * FROM route / route_segment
   REPO --> SVC : Optional<Route>
   deactivate REPO
-else body.segments() != null — альт. поток 3а (ручной маршрут)
-  WEB -> SVC : createWithManualRoute(organizationId, ..., routeName,\nList<SegmentSpec> specs)
-  activate SVC
+  break Optional.empty()
+    SVC --> WEB : throw new IllegalArgumentException("Маршрут не найден: " + routeId)
+    WEB --> API : HTTP 400
+  end
+else createWithManualRoute(...) — ручной маршрут
   SVC -> REPO : routeRepository.save(new Route(nextRouteCode(), name, false))
   activate REPO
   REPO -> PG : INSERT INTO route
@@ -68,6 +104,10 @@ else body.segments() != null — альт. поток 3а (ручной марш
     REPO -> PG : SELECT * FROM checkpoint WHERE code = ?
     REPO --> SVC : Optional<Checkpoint>
     deactivate REPO
+    break Optional.empty()
+      SVC --> WEB : throw new IllegalArgumentException(\n"Контрольная точка не найдена: " + code)\n// @Transactional: INSERT INTO route откатывается
+      WEB --> API : HTTP 400
+    end
   end
   SVC -> REPO : routeSegmentRepository.saveAll(segments)
   activate REPO
@@ -76,7 +116,7 @@ else body.segments() != null — альт. поток 3а (ручной марш
 end
 
 SVC -> SVC : build(organization, origin, destination, departureDate,\ncargoDescription, cargoValueCaps, route)
-SVC -> SVC : new CaravanRequest(...)  // status = RequestStatus.DRAFT
+SVC -> SVC : new CaravanRequest(organization, ...)  // status = RequestStatus.DRAFT
 
 SVC -> ETA : computeHours(route) : double
 activate ETA
@@ -94,9 +134,7 @@ activate WI
 
 alt HTTP 200 — данные получены
   WI --> INTEL : {"asOf": "...", "segments":[{segment, threatLevel, threats[]}]}
-  deactivate WI
   INTEL --> RISK : Optional.of(ThreatReport)
-  deactivate INTEL
   RISK -> RISK : threatSum = Σ threatLevel\nbase = min(100, threatSum * 6)\ncargoFactor = cargoFactor(caps)\nscore = min(100, base + cargoFactor)\nstatus = isStale(asOf) ? "STALE" : "OK"\nrecommendation(score)
   RISK --> SVC : new RiskResult(score, status, recommendation,\nasOf, threatSum, base, cargoFactor, segments)
 else исключение / таймаут — альт. поток 4а
@@ -104,12 +142,14 @@ else исключение / таймаут — альт. поток 4а
   INTEL --> RISK : Optional.empty()
   RISK --> SVC : RiskResult.unavailable()\n// score = null, status = "NA"
 end
+deactivate WI
+deactivate INTEL
 deactivate RISK
 SVC -> SVC : request.applyRisk(risk.score(), risk.status(),\nrisk.recommendation())
 
 SVC -> REPO : requestRepository.save(request)
 activate REPO
-REPO -> PG : INSERT INTO caravan_request\n(organization_id, origin, destination, departure_date,\n cargo_description, cargo_value_caps, route_id,\n eta_hours, risk_score, risk_status, recommendation, status='DRAFT')
+REPO -> PG : INSERT INTO caravan_request\n(organization_id NOT NULL, origin, destination, departure_date,\n cargo_description, cargo_value_caps, route_id,\n eta_hours, risk_score, risk_status, recommendation, status='DRAFT')
 PG --> REPO : id : UUID
 REPO --> SVC : saved : CaravanRequest
 deactivate REPO
@@ -137,27 +177,30 @@ WEB --> API : HTTP 201 Created\n{id, organizationId, routeCode, etaHours,\n risk
 deactivate WEB
 API --> UI : Promise<CaravanRequest>
 deactivate API
-UI -> UI : onCreated(created)\n// Console.OrgDispatch: setRequests([created, ...prev])
-UI --> D : карточка заявки в реестре\n(StatusBadge «Черновик», RiskBadge)
+UI -> CON : onCreated(created)
+activate CON
+CON -> CON : setCreated(n => n + 1)\n// RequestRegistry: reloadToken изменился → load()
+CON -> API : getRegistry(organizationId, query)\nGET /api/requests/registry
+CON --> D : заявка в реестре организации\n(StatusBadge «Черновик», RiskBadge)
+deactivate CON
 deactivate UI
 
-group альтернатива: ошибка валидации
-  WEB -> WEB : IllegalArgumentException\n→ handleBadRequest(e) @ExceptionHandler
-  WEB --> API : HTTP 400 {"message": "..."}
+group Общая обработка отказов (все фрагменты break)
+  WEB -> WEB : IllegalArgumentException\n→ handleBadRequest(e) @ExceptionHandler → HTTP 400 ErrorResponse(message)
   API --> UI : rejected Promise
-  UI -> UI : setError(err.response.data.message)
+  UI -> UI : setError(err.response.data.message\n?? 'Ошибка создания заявки')
 end
 
 note over SVC, MREPO
   Транзакционность: @Transactional на RequestController.create(...)
-  и RequestService.create(...) — запись в PostgreSQL атомарна;
-  запись снимка оценки в MongoDB выполняется вне транзакции JPA
+  и RequestService.create(...) / createWithManualRoute(...) — запись в PostgreSQL атомарна,
+  при любом break изменения откатываются; запись снимка в MongoDB — вне транзакции JPA
 end note
 
 note over WI
   Известные ограничения реализации:
   • mock-intel отдаёт фиксированный asOf (2287) — ветка "STALE" не воспроизводится,
     хотя реализована в RiskService.isStale(...)
-  • audit-событие REQUEST_CREATED в MongoDB не пишется (FR-35, пробел UC-1)
+  • audit-событие REQUEST_CREATED в MongoDB не пишется (пробел UC-1)
 end note
 @enduml

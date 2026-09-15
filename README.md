@@ -7,7 +7,7 @@
 ```
 docs/             — проектная документация (Vision, SRS, SDP, UseCases, BusinessCase, RiskList, Glossary)
   diagrams/       — диаграммы (PlantUML-исходники + отрендеренные PNG)
-    sad/          — диаграммы для SAD (State Machine, Sequence, Cooperative × 3 view)
+    sad/          — диаграммы для SAD (23 шт., индекс — docs/SAD_Diagrams.md)
   mockups/        — HTML-макеты и скриншоты интерфейсов
   scripts/        — служебные скрипты (рендер диаграмм и графиков)
   tools/          — внешние инструменты (plantuml.jar)

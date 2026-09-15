@@ -4,121 +4,118 @@ skinparam sequenceMessageAlign left
 skinparam ParticipantBackgroundColor #F5F5F5
 skinparam ParticipantBorderColor #333333
 skinparam ActorBackgroundColor #F5F5F5
-skinparam DatabaseBackgroundColor #F5F5F5
 skinparam BoxPadding 8
 
-title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Logical View)\nВзаимодействие компонентов по слоям; уровни совпадают с диаграммой пакетов
+title UC-1 «Создать заявку на перевозку» — Sequence Diagram (Logical View)\nВзаимодействие логических компонентов; уровни совпадают с диаграммой пакетов
 
 actor "Диспетчер\nкараванов" as D
 
-box "Клиент (frontend)" #FDFDFD
-  participant "Форма заявки\n<<pages/components>>" as UI
-  participant "Клиент REST API\n<<api>>" as API
+box "presentation" #FDFDFD
+  participant "Интерфейс\nзаявок" as PRES
 end box
 
-box "Сервер (backend)" #FDFDFD
-  participant "Контроллер заявок\n<<web>>" as WEB
-  participant "Сервис заявок\n<<service>>" as SVC
-  participant "Репозитории маршрутов\nи контрольных точек\n<<repository>>" as ROUTE
-  participant "Сервис ETA\n<<service>>" as ETA
-  participant "Сервис оценки риска\n<<service>>" as RISK
-  participant "Клиент внешней\nразведки <<service>>" as INTEL
-  participant "Сервис статусов\nзаявки <<service>>" as STAT
-  participant "Репозитории заявок\nи истории <<repository>>" as REPO
-  participant "Репозиторий оценок\nриска <<repository>>" as MREPO
+box "application" #FDFDFD
+  participant "Создание заявки\n(UC-1)" as APP
+  participant "Расчёт ETA\n(UC-6)" as ETA
+  participant "Оценка риска\n(UC-7, UC-8)" as RISK
 end box
 
-box "Хранилища и внешние системы" #FDFDFD
-  database "PostgreSQL\n(оперативные данные)" as PG
-  database "MongoDB\n(снимки оценок, аудит)" as MG
-  participant "Wasteland Intel" as WI <<внешняя система>>
+box "domain" #FDFDFD
+  participant "Маршрут" as ROUTE
+  participant "Заявка" as REQ
+end box
+
+box "infrastructure" #FDFDFD
+  participant "Хранение\nданных" as STORE
+  participant "Адаптер\nWasteland Intel" as ADAPTER
+end box
+
+box "внешняя система" #FDFDFD
+  participant "Wasteland Intel" as WI
 end box
 
 autonumber "<b>0."
-D -> UI : заполнить форму и подтвердить создание
-activate UI
-UI -> API : создать заявку(данные заявки,\nмаршрут или участки)
-activate API
-API -> WEB : HTTP-запрос создания заявки
-activate WEB
-WEB -> SVC : создать заявку(параметры)
-activate SVC
+D -> PRES : заполнить форму заявки\nи подтвердить создание
+activate PRES
 
-alt основной поток: выбран шаблон маршрута
-  SVC -> ROUTE : получить шаблон маршрута
-  activate ROUTE
-  ROUTE -> PG : выбрать маршрут и его участки
-  PG --> ROUTE : маршрут
-  ROUTE --> SVC : маршрут
-  deactivate ROUTE
-else альт. поток 3а: маршрут задан вручную
-  SVC -> ROUTE : сохранить новый маршрут\nи последовательность участков
-  activate ROUTE
-  ROUTE -> PG : записать маршрут и участки
-  PG --> ROUTE : сохранённый маршрут
-  ROUTE --> SVC : маршрут
-  deactivate ROUTE
+break не указан ни шаблон маршрута, ни участки
+  PRES --> D : отказ: «нужно указать маршрут»
 end
 
-SVC -> ETA : рассчитать ETA(маршрут)
+PRES -> APP : создать заявку(организация, данные заявки,\nшаблон маршрута или участки)
+activate APP
+
+group Предусловие: заявка создаётся в существующей организации
+  APP -> STORE : найти организацию
+  activate STORE
+  STORE --> APP : организация или «не найдена»
+  deactivate STORE
+  break организация не указана или не найдена
+    APP --> PRES : отказ: «организация не найдена»
+    PRES --> D : ошибка, заявка не создана
+  end
+end
+
+alt основной поток: маршрут из шаблона
+  APP -> STORE : получить шаблон маршрута
+  activate STORE
+  STORE --> APP : маршрут с участками
+  deactivate STORE
+else альт. поток 3а: маршрут задан вручную
+  APP -> STORE : найти контрольные точки участков
+  activate STORE
+  STORE --> APP : контрольные точки
+  deactivate STORE
+  APP -> ROUTE : сформировать маршрут\nиз последовательности участков
+  activate ROUTE
+  ROUTE --> APP : маршрут
+  deactivate ROUTE
+  APP -> STORE : сохранить маршрут
+end
+
+APP -> ETA : рассчитать ETA(маршрут)
 activate ETA
-ETA --> SVC : длительность рейса
+ETA --> APP : длительность рейса
 deactivate ETA
 
-SVC -> RISK : рассчитать риск(маршрут, ценность груза)
+APP -> RISK : оценить риск(маршрут, ценность груза)
 activate RISK
-RISK -> INTEL : запросить угрозы(участки маршрута)
-activate INTEL
-INTEL -> WI : запрос данных об угрозах
+RISK -> ADAPTER : запросить угрозы(участки маршрута)
+activate ADAPTER
+ADAPTER -> WI : запрос данных об угрозах
 activate WI
 
 alt внешняя система ответила
-  WI --> INTEL : угрозы по участкам, дата актуальности
-  deactivate WI
-  INTEL --> RISK : отчёт об угрозах
-  deactivate INTEL
-  RISK -> RISK : агрегировать угрозы, применить\nкоэффициент ценности груза,\nсформировать рекомендацию
-  RISK --> SVC : оценка риска (актуальная\nили на устаревших данных)
+  WI --> ADAPTER : угрозы по участкам, дата актуальности
+  ADAPTER --> RISK : отчёт об угрозах
+  RISK -> RISK : агрегировать угрозы, учесть ценность груза,\nсформировать рекомендацию по охране и припасам
+  RISK --> APP : оценка риска\n(актуальная или на устаревших данных)
 else альт. поток 4а: источник недоступен
-  WI --> INTEL : ошибка / таймаут
-  INTEL --> RISK : данных нет
-  RISK --> SVC : оценка «требует пересчёта»
+  WI --> ADAPTER : ошибка / таймаут
+  ADAPTER --> RISK : данных нет
+  RISK --> APP : оценка «требует пересчёта»
 end
+deactivate WI
+deactivate ADAPTER
 deactivate RISK
 
-SVC -> SVC : собрать заявку в статусе «Черновик»\n(маршрут, ETA, риск, рекомендация)
-SVC -> REPO : сохранить заявку
-activate REPO
-REPO -> PG : записать заявку
-PG --> REPO : идентификатор заявки
-REPO --> SVC : сохранённая заявка
-deactivate REPO
+APP -> REQ : создать заявку в статусе «Черновик»\n(организация, маршрут, ETA, риск, рекомендация)
+activate REQ
+REQ --> APP : заявка
+deactivate REQ
 
-SVC -> MREPO : сохранить снимок оценки риска
-activate MREPO
-MREPO -> MG : записать снимок оценки
-deactivate MREPO
+APP -> STORE : сохранить заявку
+APP -> STORE : сохранить снимок оценки риска
+APP -> STORE : записать стартовую запись\nистории статусов («— → Черновик»)
 
-SVC -> STAT : зафиксировать создание заявки
-activate STAT
-STAT -> REPO : записать стартовую запись\nистории статусов («— → Черновик»)
-activate REPO
-REPO -> PG : записать историю статуса
-deactivate REPO
-deactivate STAT
+APP --> PRES : созданная заявка
+deactivate APP
+PRES --> D : заявка добавлена в реестр\nсо статусом и risk_score
+deactivate PRES
 
-SVC --> WEB : созданная заявка
-deactivate SVC
-WEB --> API : представление заявки
-deactivate WEB
-API --> UI : данные созданной заявки
-deactivate API
-UI --> D : заявка добавлена в реестр\nсо статусом и risk_score
-deactivate UI
-
-note over WEB, SVC
-  Слой **web** отвечает только за контракт (валидация тела запроса,
-  коды ответов и обработка ошибок), бизнес-логика целиком в слое **service**;
-  слой **domain** хранит состояние заявки, слой **repository** — доступ к БД
+note over PRES, STORE
+  Зависимости между уровнями — как на диаграмме пакетов:
+  presentation → application → domain; application обращается к infrastructure (<<access>>);
+  внешняя система доступна только через адаптер уровня infrastructure
 end note
 @enduml

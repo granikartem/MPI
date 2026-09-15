@@ -7,7 +7,7 @@ skinparam packageStyle rectangle
 skinparam ArrowColor #333333
 skinparam defaultFontName Courier
 
-title UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Implementation View)\nОбъекты реализации: классы, вызываемые методы и хранилища
+title UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Implementation View)\nОбъекты реализации: классы, вызываемые методы, предусловия и хранилища
 
 object "su:Суперпользователь" as SU <<actor>> #White
 
@@ -43,52 +43,71 @@ package "инфраструктура (docker compose)" {
   object "mg:MongoDB 7" as MG <<database>>
 }
 
-SU --> UI : 1: submit(e: FormEvent)
-UI --> API : 1.1: createOrganization(body: CreateOrganizationBody)
-API --> WEB : 1.1.1: POST /api/organizations\n{name, subscriptionTier, legalAddress, primaryContact,\ncontactChannel, region, firstDispatcher{fullName, login,\ninitialPassword, contactChannel}}
-WEB --> SVC : 1.1.1.1: create(new CreateOrganizationCommand(...,\nnew FirstDispatcherCommand(...)))\n// @Transactional
+SU --> UI : 1 [canCreate]: submit(e: FormEvent)
+UI --> API : 1.1: createOrganization(body: CreateOrganizationBody)\n// firstDispatcher = skipDispatcher ? undefined : {...}
+API --> WEB : 1.1.1: POST /api/organizations\n{name, subscriptionTier, legalAddress, primaryContact,\ncontactChannel, region, firstDispatcher?{fullName, login,\ninitialPassword, contactChannel}}
+WEB --> SVC : 1.1.1.1: create(new CreateOrganizationCommand(...,\nfirstDispatcher == null ? null : new FirstDispatcherCommand(...)))\n// @Transactional
 
-note left of SVC
-  **Внутренние операции s:OrganizationService**
-  1.1.1.1.1: required(command.name(), "Название организации обязательно")
-  1.1.1.1.2: normalizeTier(tier) ∈ {BASIC, STANDARD, PRO}
-  1.1.1.1.7: generateTenantKey() : "tnt_" + UUID[0..8]
-  1.1.1.1.9: passwordHash(pwd) : "sha256:" + hex(SHA-256("karavany:" + pwd))
-end note
-
-SVC --> OREPO : 1.1.1.1.3: findByNameIgnoreCase(name) : Optional<Organization>\n1.1.1.1.8: save(org) : Organization
-SVC --> UREPO : 1.1.1.1.5: findByLoginIgnoreCase(login) : Optional<AppUser>\n1.1.1.1.10: save(usr) : AppUser
+SVC --> OREPO : 1.1.1.1.3: findByNameIgnoreCase(name) : Optional<Organization>\n1.1.1.1.7 [findByNameIgnoreCase(name).isEmpty()]: save(org) : Organization
+SVC --> UREPO : 1.1.1.1.4.1 [firstDispatcher != null]:\nfindByLoginIgnoreCase(login) : Optional<AppUser>\n1.1.1.1.10 [firstDispatcher != null]: save(usr) : AppUser
 
 SVC --> ORG : 1.1.1.1.6: new Organization(tenantKey, name, tier,\nlegalAddress, primaryContact, contactChannel, region)\n// status = "ACTIVE", createdAt = now()
-SVC --> USR : 1.1.1.1.4: validateDispatcher(dispatcherCommand)\n1.1.1.1.11: new AppUser(organization, fullName, login,\npasswordHash, "DISPATCHER", contactChannel)
+SVC --> USR : 1.1.1.1.9 [firstDispatcher != null]:\nnew AppUser(organization, fullName, login,\npasswordHash, "DISPATCHER", contactChannel)
 
-SVC --> EVT : 1.1.1.1.12: AuditEvent.organizationCreated(\norganizationId, dispatcherId, name, tier, login)\n// type = "ORGANIZATION_CREATED", actor = "SUPERUSER"
-SVC --> AREPO : 1.1.1.1.13: save(evt) : AuditEvent
+SVC --> EVT : 1.1.1.1.11: AuditEvent.organizationCreated(\norganizationId, dispatcherId, name, tier, login | null)\n// type = "ORGANIZATION_CREATED", actor = "SUPERUSER"
+SVC --> AREPO : 1.1.1.1.12: save(evt) : AuditEvent
 
-OREPO --> PG : 1.1.1.1.3.1: SELECT * FROM organization\nWHERE lower(name) = lower(?)\n1.1.1.1.8.1: INSERT INTO organization\n(tenant_key, name, subscription_tier, legal_address,\nprimary_contact, contact_channel, region, status)
-UREPO --> PG : 1.1.1.1.5.1: SELECT * FROM app_user WHERE lower(login) = lower(?)\n1.1.1.1.10.1: INSERT INTO app_user\n(organization_id, full_name, login, password_hash, role, contact_channel)
-AREPO --> MG : 1.1.1.1.13.1: db.audit_event.insertOne(\n{type, actor, organizationId, userId, details, occurredAt})
+OREPO --> PG : 1.1.1.1.3.1: SELECT * FROM organization\nWHERE lower(name) = lower(?)\n1.1.1.1.7.1: INSERT INTO organization\n(tenant_key, name, subscription_tier, legal_address,\nprimary_contact, contact_channel, region, status)
+UREPO --> PG : 1.1.1.1.4.1.1: SELECT * FROM app_user\nWHERE lower(login) = lower(?)\n1.1.1.1.10.1: INSERT INTO app_user (organization_id,\nfull_name, login, password_hash, role, contact_channel)
+AREPO --> MG : 1.1.1.1.12.1: db.audit_event.insertOne(\n{type, actor, organizationId, userId, details, occurredAt})
 
 SVC --> WEB : 1.1.1.2: new OrganizationProvisioning(\norganization, firstDispatcher, userCount)
 WEB --> API : 1.1.2: OrganizationResponse.from(created)\nHTTP 201 Created {id, tenantKey, name, subscriptionTier,\nstatus:"ACTIVE", userCount, firstDispatcher{...}}
 API --> UI : 1.2: Promise<Organization>
-UI --> SU : 2: setCreated(organization),\nsetOrganizations([organization, ...prev])
+UI --> SU : 2: setOrganizations([organization, ...prev]),\nsetCreated(organization)
+
+note left of SVC
+  **Внутренние операции s:OrganizationService**
+  1.1.1.1.1: required(command.name(), "Название организации обязательно")
+  1.1.1.1.2: normalizeTier(subscriptionTier) ∈ {BASIC, STANDARD, PRO}
+  1.1.1.1.4 [firstDispatcher != null]: validateDispatcher(cmd) —
+             required(login), required(fullName), required(initialPassword)
+  1.1.1.1.5: generateTenantKey() : "tnt_" + UUID[0..8]
+  1.1.1.1.8 [firstDispatcher != null]: passwordHash(initialPassword) :
+             "sha256:" + hex(SHA-256("karavany:" + pwd))
+end note
+
+note as N_Pre
+  **Предусловия UC-32 и их проверка в реализации**
+  1) Организации с таким названием нет (без учёта регистра) — проверяется дважды:
+     • 1.1.1.1.3: findByNameIgnoreCase(name).isPresent() →
+       IllegalArgumentException("Организация с таким названием уже существует") → **HTTP 400**;
+       сообщения 1.1.1.1.4–1.1.1.1.12 не выполняются (альт. поток 4а)
+     • в БД: уникальный индекс uq_organization_name_ci ON organization (lower(name)) —
+       при одновременных запросах → DataIntegrityViolationException → **HTTP 400**
+  2) Логин первого диспетчера свободен — 1.1.1.1.4.1: findByLoginIgnoreCase(login).isPresent() →
+     IllegalArgumentException("Пользователь с таким логином уже существует");
+     в БД — индекс uq_app_user_login_ci ON app_user (lower(login))
+     Порядок: обе проверки выполняются **до** 1.1.1.1.7 — без организации пользователь не создаётся
+  3) Суперпользователь аутентифицирован — **в коде не проверяется**: аутентификации нет до UC-25,
+     актор "SUPERUSER" в AuditEvent.organizationCreated(...) задан константой
+end note
 
 note as N_Errors
-  **Обработка ошибок**
-  IllegalArgumentException («Организация с таким названием уже существует»,
-  «Пользователь с таким логином уже существует», «Неизвестный уровень подписки: …»)
-  → OrganizationController.handleBadRequest(e) @ExceptionHandler → **HTTP 400** ErrorResponse(message)
-  DataIntegrityViolationException (нарушение unique-ограничений БД)
-  → handleConflict() → **HTTP 400** «Название организации или логин уже заняты»
-  На клиенте: catch → setError(err.response.data.message ?? 'Ошибка создания организации')
+  **Обработка отказов**
+  IllegalArgumentException (предусловия 1–2, пустое название, «Неизвестный уровень подписки: …»)
+  → OrganizationController.handleBadRequest(e) → **HTTP 400** ErrorResponse(message)
+  DataIntegrityViolationException → handleConflict() → **HTTP 400**
+  «Название организации или логин уже заняты»; @Transactional откатывает INSERT
+  Клиент: catch → setError(err.response.data.message ?? 'Ошибка создания организации');
+  conflict = error.includes('существ') — подсветка поля с конфликтом
 end note
 
 note bottom of SVC
-  **Альт. поток 6а (диспетчер не назначается):** body.firstDispatcher == null —
-  сообщения 1.1.1.1.4, 1.1.1.1.5, 1.1.1.1.9–1.1.1.1.11 не выполняются,
+  **Альт. поток 6а (диспетчер не назначается):** skipDispatcher → firstDispatcher == null —
+  сообщения 1.1.1.1.4, 1.1.1.1.4.1, 1.1.1.1.8–1.1.1.1.10 не выполняются,
   в audit-событие пишется firstDispatcher = "SKIPPED", userCount = 0
-  **Мультитенантность:** tenantKey организации — ключ изоляции данных;
-  сущности арендатора (заявки, пользователи) связаны с organization_id
+  **Мультитенантность:** tenantKey — ключ изоляции данных организации;
+  app_user.organization_id и caravan_request.organization_id — NOT NULL
 end note
 @enduml

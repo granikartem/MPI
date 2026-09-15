@@ -1,73 +1,119 @@
 @startuml DEP_DeploymentView
 !pragma layout smetana
-title Deployment Diagram ИС «Караваны»
-
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam ArrowColor #333333
 skinparam node {
-    BackgroundColor #lightblue
-    BorderColor black
-    FontColor black
-}
-skinparam database {
-    BackgroundColor #lightyellow
-    BorderColor black
+  BackgroundColor #F5F5F5
+  BorderColor #333333
 }
 skinparam artifact {
-    BackgroundColor #white
-    BorderColor black
+  BackgroundColor #FFFFFF
+  BorderColor #333333
 }
-skinparam arrow {
-    Color #333333
-    FontColor #333333
-}
-
-node "Wasteland Intel" as WI {
-    artifact "Радиосеть"
+skinparam database {
+  BackgroundColor #E8F5E9
+  BorderColor #333333
 }
 
-node "NCR Checkpoint" as NCR {
-    artifact "Терминал КПП"
-}
+title ИС «Караваны» — Deployment Diagram (Deployment View)\nГде развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия
 
-node "Сервер караванной конторы" as Server {
-    database "PostgreSQL" as DB {
-        artifact "Пользователи, рейсы, манифесты"
+' ─── Центральный сервер ──────────────────────────────────────────────
+node "**Центральный сервер караванной конторы** <<device>>\nCPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64\nRAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется" as SRV {
+
+  node "**FreeBSD 14.3-STABLE** <<execution environment>>\nгипервизор bhyve (vm-bhyve) · хранилище ZFS · сетевой фильтр pf\nресурсы хоста: 4 ядра, 32 ГБ (ZFS ARC, резервное копирование)" as HOST #EEEEEE {
+
+    node "**Виртуальная машина bhyve** <<execution environment>>\nгостевая ОС Ubuntu Server 24.04 LTS\n12 vCPU · 96 ГБ RAM · диск ZFS zvol 4 ТБ · virtio-net через if_bridge" as VM #FFF2CC {
+
+      node "**Docker Engine + Docker Compose** <<execution environment>>\nвнутренняя сеть karavany; наружу открыт только порт 443" as DOCKER #FFFFFF {
+
+        node "frontend <<container>>\nnginx: статика React 18, TLS, прокси /api" as C_FRONT #FFF2CC {
+          artifact "web-клиент и PWA\n(сборка vite build)" as A_WEB
+        }
+
+        node "backend <<container>>\neclipse-temurin:21-jre" as C_BACK {
+          artifact "karavany-0.1.0.jar\nSpring Boot 3.3, миграции Flyway V1–V6" as A_JAR
+        }
+
+        node "postgres <<container>>\npostgres:16, том pgdata" as C_PG {
+          database "БД karavany\nPostgreSQL 16" as DB_PG
+        }
+
+        node "mongo <<container>>\nmongo:7, том mongodata" as C_MONGO {
+          database "БД karavany\nMongoDB 7" as DB_MONGO
+        }
+      }
     }
-    database "MongoDB" as Mongo {
-        artifact "События, аудит"
-    }
-    node "Kafka" as Kafka {
-        artifact "Очереди сообщений"
-    }
-    node "Backend (Spring Boot)" as Backend {
-        artifact "REST API"
-        artifact "Java 21"
-    }
-    node "Центральный терминал управления" as AdminTerminal {
-        artifact "Web-интерфейс (React)"
-    }
+
+    artifact "Резервные копии\npg_dump, mongodump,\nZFS-снапшоты тома VM" as A_BACKUP #FFF2CC
+  }
 }
 
-node "Стационарный терминал (офис)" as Office {
-    artifact "Веб-клиент (React)"
+node "**Резервная кассета (голотейп)** <<device>>\nнакопитель, подключённый к серверу" as HOLO #FFF2CC
+
+' ─── Клиентские устройства ───────────────────────────────────────────
+node "**Офисный терминал** <<device>> × до 50\nCPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768\nОС: Windows 10 / macOS 11 / Ubuntu 20.04+\nсеть: LAN или Wi-Fi, 10 Мбит/с" as TERM {
+  node "Браузер Chrome / Firefox / Opera\n<<execution environment>>" as BROWSER {
+    artifact "web-клиент ИС «Караваны»\nдиспетчер, кладовщик, суперпользователь" as A_WEB_RUN
+  }
 }
 
-node "Полевое устройство Pip-Boy" as PipBoy {
-    artifact "PWA-клиент" as PipBoyApp
-    artifact "Локальное хранилище (offline)" as PipBoyStore
+node "**Pip-Boy 3000 или совместимое устройство** <<device>> × до 150\nARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ\nWi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч" as PIP #FFF2CC {
+  node "Браузер устройства\n<<execution environment>>" as PIP_BROWSER #FFF2CC {
+    artifact "PWA полевого клиента\nкараван-мастер, капитан охраны, медик" as A_PWA
+    database "IndexedDB: очередь\nсобытий без связи ≥ 3 ч" as PIP_STORE #FFF2CC
+  }
 }
 
-artifact "Резервная кассета (holotape)" as Backup
+' ─── Внешние системы ─────────────────────────────────────────────────
+node "**Wasteland Intel** <<external system>>\nданные об угрозах по участкам" as WI #EDE7F6
+node "**NCR Checkpoint & Tax Terminal** <<external system>>\nпрохождение КПП и пошлины" as NCR #EDE7F6
 
-Backend --> WI : REST/HTTPS
-Backend --> NCR : REST/HTTPS
+' ─── Интерфейсы взаимодействия ───────────────────────────────────────
+BROWSER --> C_FRONT : HTTPS :443\nстатика + REST / JSON
+PIP_BROWSER --> C_FRONT : HTTPS :443, REST / JSON\nсинхронизация при появлении связи (≤ 60 с, RL-3)
+C_FRONT --> C_BACK : HTTP :8080, /api/*\nвнутренняя сеть Docker
+C_BACK --> C_PG : JDBC (PostgreSQL wire), TCP :5432
+C_BACK --> C_MONGO : MongoDB Wire Protocol, TCP :27017
+C_BACK --> WI : REST / HTTPS :443, JSON\nGET /threats?segments=…\nconnect / read timeout 2 с
+C_BACK ..> NCR : REST / HTTPS :443, JSON\n(проект, UC-24)
+C_PG ..> A_BACKUP : pg_dump
+C_MONGO ..> A_BACKUP : mongodump
+A_BACKUP --> HOLO : запись резервной копии
+TERM ..> PIP : установка PWA через RobCo-интерфейс\nтерминала или с голотейпа (Vision 4.5)
 
-Office --> Backend : HTTPS
-PipBoy --> Backend : HTTPS (офлайн-синхронизация)
-PipBoyApp --> PipBoyStore : локально
+note right of HOST
+  **Почему виртуальная машина.** На FreeBSD нет нативного
+  Docker Engine и нет официальных сборок MongoDB 7, а проект
+  собран на Docker Compose (DC-4, DC-5). Поэтому контейнеры
+  запускаются в гостевом Linux под bhyve, а хост FreeBSD
+  отвечает за ZFS-хранилище, сетевой фильтр и резервные копии.
+  Цена решения — дополнительный слой виртуализации:
+  накладные расходы virtio на диск и сеть, отдельное
+  обновление гостевой ОС.
+end note
 
-Backend --> DB : JDBC
-Backend --> Mongo : MongoDB Driver
-Backend --> Kafka : Producer/Consumer
+note bottom of DOCKER
+  **Отличия от стенда разработки (docker-compose.yml):**
+  • frontend — Vite dev-сервер на :5173 без TLS (npm run dev);
+    production-образ на nginx — проект;
+  • backend, postgres, mongo публикуют :8080, :5432, :27017 наружу;
+    в целевой схеме доступны только внутри сети Docker;
+  • вместо Wasteland Intel — WireMock mock-intel на :8089.
+  Брокера сообщений (Kafka) нет: все обмены — синхронный REST.
+end note
 
-Backend --> Backup : резервное копирование
+legend right
+  |= Цвет |= Значение |
+  | <#F5F5F5> | реализовано: образ или артефакт уже собирается проектом |
+  | <#E8F5E9> | хранилище данных |
+  | <#FFF2CC> | проект — решение Deployment View, в репозитории ещё нет |
+  | <#EDE7F6> | внешняя система |
+  **Характеристики** сервера, терминала и Pip-Boy — Vision 9.2;
+  число устройств — Vision 9.3 и PF-1 (50 терминалов + 150 Pip-Boy).
+  Разрешение терминала: Vision 9.2 — от 1024×768, глоссарий — от 1280×720.
+  **Интерфейсы:** клиент — сервер только HTTPS (SRS 3.6.4),
+  внешние системы — REST по HTTPS, формат JSON.
+endlegend
 @enduml

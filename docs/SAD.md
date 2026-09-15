@@ -86,30 +86,59 @@ _Не заполнено._
 
 | Диаграмма | Что показывает | Исходник | Изображение |
 |---|---|---|---|
+| Package, система целиком | Логические пакеты слоёв, их компоненты, внешние системы и зависимости; соответствие пакетам кода | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
 | Class, система целиком | Основные классы и интерфейсы их взаимодействия по слоям | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
 | Activity, UC-7 | Те же шаги в дорожках слоёв приложения | [ACT_UC7_LogicalView.puml](diagrams/sad/ACT_UC7_LogicalView.puml) | [png](diagrams/out/ACT_UC7_LogicalView.png) |
 | State Machine, UC-2 | Состояния, сторожевые условия и эффекты переходов в разрезе слоёв | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
 | Sequence, UC-1 | Взаимодействие компонентов по слоям | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
 | Cooperative, UC-32 | Объекты по слоям приложения | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
-| Package, система целиком | Пакеты приложения, их состав и зависимости, включая внешние системы | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
-| Data Base, система целиком | Сущности данных, их атрибуты и связи с кратностями, без привязки к СУБД | [DB_LogicalView.puml](diagrams/sad/DB_LogicalView.puml) | [png](diagrams/out/DB_LogicalView.png) |
 
-Диаграмма пакетов делит приложение на слои `presentation` → `application` → `domain` с
-`infrastructure` и `common` и показывает зависимости между ними. Её имена пакетов относятся к
-целевому разделению по слоям и не совпадают с именами пакетов в перечне уровней взаимодействия
-выше, взятыми из фактической структуры кода.
+Диаграмма пакетов делит систему на слои `presentation` → `application` → `domain`,
+`application` → `infrastructure` (`<<access>>`), `infrastructure` → `domain`, и показывает внешние
+системы Wasteland Intel и NCR Checkpoint & Tax Terminal. Логические компоненты внутри пакетов названы
+так же, как участники диаграмм последовательности, кооперации и состояний («Интерфейс заявок»,
+«Создание заявки», «Оценка риска», «Хранение данных», «Адаптер Wasteland Intel» и т.д.). Фактическая
+структура кода — пакеты по предметным модулям (`com.karavany.request`, `.organization`, `.route`,
+`.risk`, `.audit`) со слоями `web` / `service` / `domain` / `repository` внутри; соответствие приведено
+заметкой на диаграмме. Брокера сообщений в системе нет: все обмены синхронные, по REST.
 
 Краткие описания всех диаграмм этого раздела — [SAD_Diagrams.md](SAD_Diagrams.md).
 
 ## 6. Process View
 
-_Не заполнено._
+Процессы, жёстко привязанные к моментам времени, в системе есть, поэтому представление описывается:
+
+- **календарные** — окончание оплаченного периода подписки и 30-дневный grace-период
+  ([Vision](Vision.md) 4.5, UC-34), устаревание данных Wasteland Intel через 24 часа (UC-7, альт. 2б),
+  срок хранения журнала аудита не менее 3 месяцев (RL-5);
+- **полевые** — передача событий с Pip-Boy на сервер не позднее 60 секунд после появления связи
+  (RL-3) и уведомление диспетчера о критическом событии не позднее 5 минут;
+- **обработка запроса UC-1** — таймауты обращения к Wasteland Intel (2000 мс на соединение и 2000 мс
+  на чтение) против требования PF-4 «отклик не более 1 секунды».
+
+| Диаграмма | Что показывает | Исходник | Изображение |
+|---|---|---|---|
+| Timeline, календарные процессы | Подписка и grace-период, признак устаревания risk_score, срок хранения аудита; ось — сутки | [TL_Calendar_ProcessView.puml](diagrams/sad/TL_Calendar_ProcessView.puml) | [png](diagrams/out/TL_Calendar_ProcessView.png) |
+| Timeline, полевая синхронизация | Инцидент без связи, синхронизация Pip-Boy, автопереход статуса, уведомление; ось — секунды | [TL_Field_ProcessView.puml](diagrams/sad/TL_Field_ProcessView.puml) | [png](diagrams/out/TL_Field_ProcessView.png) |
+| Timeline, UC-1 | Поток обработки создания заявки при ответе и молчании Wasteland Intel; ось — миллисекунды | [TL_UC1_ProcessView.puml](diagrams/sad/TL_UC1_ProcessView.puml) | [png](diagrams/out/TL_UC1_ProcessView.png) |
+
+В коде реализованы только таймауты Wasteland Intel и проверка 24 часов в момент расчёта risk_score;
+подписки, TTL журнала аудита и полевая синхронизация показаны как проект.
 
 ## 7. Deployment View
 
 | Диаграмма | Что показывает | Исходник | Изображение |
 |---|---|---|---|
-| Deployment | Узлы развёртывания, хранилища и каналы взаимодействия: сервер караванной конторы (backend, PostgreSQL, MongoDB, Kafka), стационарный терминал, полевое устройство Pip-Boy, внешние системы | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
+| Deployment, система целиком | Узлы и среды выполнения, размещение контейнеров и артефактов, характеристики машин, протоколы и порты | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
+
+Центральный сервер (Intel Xeon E5-2643, 16 ядер, 128 ГБ RAM, 26 ТБ, Ethernet 10 Гбит/с) работает под
+FreeBSD 14.3-STABLE ([Vision](Vision.md) 9.2). Для FreeBSD нет нативного Docker Engine и официальных
+сборок MongoDB 7, поэтому серверные компоненты размещаются в виртуальной машине bhyve с гостевой ОС
+Ubuntu Server 24.04 LTS (12 vCPU, 96 ГБ RAM, диск ZFS zvol 4 ТБ). Внутри неё Docker Compose запускает
+контейнеры `frontend` (nginx: статика React и TLS), `backend` (Java 21, Spring Boot), `postgres:16` и
+`mongo:7`; наружу открыт только HTTPS :443. Хост FreeBSD отвечает за ZFS-хранилище, сетевой фильтр и
+резервные копии, которые записываются на голотейп. Клиенты — до 50 офисных терминалов (браузер) и до
+150 устройств Pip-Boy (PWA с локальной очередью событий). Внешние системы вызываются по REST через HTTPS.
 
 Краткое описание диаграммы — [SAD_Diagrams.md](SAD_Diagrams.md).
 
@@ -122,12 +151,21 @@ _Не заполнено._
 | State Machine, UC-2 | Значения `RequestStatus`, реальные вызовы методов и HTTP-контракт | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
 | Sequence, UC-1 | Реальные классы, методы и HTTP-контракт реализации | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
 | Cooperative, UC-32 | Объекты реализации: классы, вызываемые методы и хранилища | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |
-| Data Base, система целиком | Таблицы PostgreSQL и коллекции MongoDB с типами колонок, ключами, индексами и внешними ключами | [DB_ImplementationView.puml](diagrams/sad/DB_ImplementationView.puml) | [png](diagrams/out/DB_ImplementationView.png) |
+| Data Base, часть 1: ER-модель | Все сущности данных, атрибуты, ключи и связи с кратностями (нотация «воронья лапка») | [DB_ER_ImplementationView.puml](diagrams/sad/DB_ER_ImplementationView.puml) | [png](diagrams/out/DB_ER_ImplementationView.png) |
+| Data Base, часть 2: даталогическая модель | Таблицы PostgreSQL 16 и коллекции MongoDB 7: типы, PK / FK, UNIQUE, CHECK, индексы | [DB_Datalogical_ImplementationView.puml](diagrams/sad/DB_Datalogical_ImplementationView.puml) | [png](diagrams/out/DB_Datalogical_ImplementationView.png) |
 
-Даталогическая модель на диаграмме баз данных описывает целевую схему хранения и шире фактической:
-в миграциях `V1`–`V6` пока созданы `caravan_request`, `route`, `route_segment`, `checkpoint`,
-`organization`, `app_user`, `request_status_history` в PostgreSQL и коллекции `risk_assessment`,
-`audit_event` в MongoDB.
+Модель базы данных описывает целевую схему и шире фактической: миграциями `V1`–`V6` пока созданы
+`caravan_request`, `route`, `route_segment`, `checkpoint`, `organization`, `app_user`,
+`request_status_history` в PostgreSQL и коллекции `risk_assessment`, `audit_event` в MongoDB; остальные
+таблицы и коллекции помечены как проект. Изменения существующих таблиц помечены `[V7]`:
+
+- роли вынесены в справочник `role` и используются по id — вместо текстовых `app_user.role` и
+  `request_status_history.actor_role`;
+- караван-мастер, капитан охраны и полевой медик рейса — строки `trip_crew_member`
+  (заявка, роль, сотрудник), а не колонки `master_id` / `medic_id`; обязательность ролей для FR-10
+  задаётся в `role`;
+- `caravan_request.eta_hours` переименовывается в `estimated_delivery_hours` — расчётное время
+  доставки в часах: в колонке хранится длительность пути, а не момент прибытия, как понимает ETA глоссарий.
 
 Краткие описания всех диаграмм этого раздела — [SAD_Diagrams.md](SAD_Diagrams.md).
 

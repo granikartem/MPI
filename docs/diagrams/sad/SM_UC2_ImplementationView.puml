@@ -41,10 +41,24 @@ DELIVERED --> CLOSED : POST /api/requests/{id}/status\n{targetStatus:"CLOSED", a
 CLOSED --> [*]
 CANCELLED --> [*]
 
+note as N_Pre
+  **Предусловия UC-2 и их проверка в реализации**
+  1) Заявка существует — RequestService.getById(id):
+     requestRepository.findById(id).orElseThrow(() ->
+         new IllegalArgumentException("Заявка не найдена: " + id)) → **HTTP 400**
+  2) Заявка привязана к организации — caravan_request.organization_id NOT NULL
+     (миграция V4); request.getOrganization().getId() уходит в AuditEvent.requestStatusChanged(...)
+  3) Актор действует в рамках организации заявки — **в коде не проверяется**:
+     RequestStatusController.changeStatus(...) не сравнивает request.getOrganization()
+     с организацией актора (аутентификации нет до UC-25) — статус может сменить
+     любой клиент, знающий id заявки
+  4) Статус не финальный и роль допускает переход — см. «Порядок проверок», шаги 2–3 → **HTTP 409**
+end note
+
 note as N_Flow
   **Обработка команды перехода**
   RequestStatusController.changeStatus(UUID id, ChangeStatusRequest body)
-    1. RequestService.getById(id) : CaravanRequest
+    1. RequestService.getById(id) : CaravanRequest  // предусловие «заявка существует»
     2. RequestStatus.parse(body.targetStatus()), ActorRole.parse(body.actorRole())
     3. RequestStatusService.changeStatus(request, target, actorRole, actorName, reason)
     4. RequestResponse.from(updated) → HTTP 200

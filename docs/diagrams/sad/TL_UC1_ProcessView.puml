@@ -1,0 +1,56 @@
+@startuml TL_UC1_ProcessView
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+
+title ИС «Караваны» — Timeline Diagram (Process View)\nUC-1 «Создать заявку»: обработка POST /api/requests и таймауты Wasteland Intel — реализовано. Ось — миллисекунды
+
+scale 500 as 240 pixels
+
+concise "Backend: Intel отвечает" as OK
+concise "Wasteland Intel" as WI
+concise "Backend: Intel молчит" as BAD
+
+@0
+OK is "обработка, HTTP 201"
+WI is {-}
+BAD is "connect ≤ 2000 мс"
+
+@50
+WI is "ответ /threats"
+
+@300
+WI is {-}
+
+@450
+OK is {-}
+
+@2000
+BAD is "read ≤ 2000 мс"
+
+@4000
+BAD is "NA → HTTP 201"
+
+@4300
+BAD is {-}
+
+OK@0 <-> @1000 : {PF-4: ≤ 1 с}
+BAD@0 <-> @2000 : {connectTimeout}
+BAD@2000 <-> @4000 : {readTimeout}
+
+highlight 0 to 1000 #E8F5E9;line:DimGrey
+
+note bottom of OK
+  Один поток Tomcat выполняет всё синхронно: RequestController.create → RequestService
+  (проверка организации и маршрута) → EtaService → RiskService → WastelandIntelClient
+  GET /threats → сохранение заявки, снимка риска и истории статусов → HTTP 201.
+  Длительности нормального сценария условные; фиксированы только таймауты
+  SimpleClientHttpRequestFactory (connect 2000 мс, read 2000 мс) и бюджеты
+  PF-4 ≤ 1 с и Vision 9.3 ≤ 500 мс на перезагрузку реестра (замер UC-3: 14 мс).
+end note
+
+note bottom of BAD
+  **Расхождение с PF-4.** Если Wasteland Intel принимает соединение, но не отвечает,
+  ответ на создание заявки приходит примерно через 4,3 с. Заявка всё равно создаётся,
+  risk_status = NA, «требует пересчёта» (UC-7, альт. 2а).
+end note
+@enduml
