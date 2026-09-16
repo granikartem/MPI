@@ -121,10 +121,6 @@ _Не заполнено._
 | Timeline, календарные процессы | Подписка и grace-период, признак устаревания risk_score, срок хранения аудита; ось — сутки | [TL_Calendar_ProcessView.puml](diagrams/sad/TL_Calendar_ProcessView.puml) | [png](diagrams/out/TL_Calendar_ProcessView.png) |
 | Timeline, полевая синхронизация | Инцидент без связи, синхронизация Pip-Boy, автопереход статуса, уведомление; ось — секунды | [TL_Field_ProcessView.puml](diagrams/sad/TL_Field_ProcessView.puml) | [png](diagrams/out/TL_Field_ProcessView.png) |
 | Timeline, UC-1 | Поток обработки создания заявки при ответе и молчании Wasteland Intel; ось — миллисекунды | [TL_UC1_ProcessView.puml](diagrams/sad/TL_UC1_ProcessView.puml) | [png](diagrams/out/TL_UC1_ProcessView.png) |
-
-В коде реализованы только таймауты Wasteland Intel и проверка 24 часов в момент расчёта risk_score;
-подписки, TTL журнала аудита и полевая синхронизация показаны как проект.
-
 ## 7. Deployment View
 
 | Диаграмма | Что показывает | Исходник | Изображение |
@@ -155,18 +151,19 @@ REST через HTTPS.
 | Data Base, часть 1: ER-модель | Все сущности данных, атрибуты, ключи и связи с кратностями (нотация «воронья лапка») | [DB_ER_ImplementationView.puml](diagrams/sad/DB_ER_ImplementationView.puml) | [png](diagrams/out/DB_ER_ImplementationView.png) |
 | Data Base, часть 2: даталогическая модель | Таблицы PostgreSQL 16 и коллекции MongoDB 7: типы, PK / FK, UNIQUE, CHECK, индексы | [DB_Datalogical_ImplementationView.puml](diagrams/sad/DB_Datalogical_ImplementationView.puml) | [png](diagrams/out/DB_Datalogical_ImplementationView.png) |
 
-Модель базы данных описывает целевую схему и шире фактической: миграциями `V1`–`V6` пока созданы
-`caravan_request`, `route`, `route_segment`, `checkpoint`, `organization`, `app_user`,
-`request_status_history` в PostgreSQL и коллекции `risk_assessment`, `audit_event` в MongoDB; остальные
-таблицы и коллекции помечены как проект. Изменения существующих таблиц помечены `[V7]`:
+Ключевые решения модели данных:
 
-- роли вынесены в справочник `role` и используются по id — вместо текстовых `app_user.role` и
-  `request_status_history.actor_role`;
+- роли пользователей — справочник `role`; учётные записи, участники команды рейса и история статусов
+  ссылаются на роль по id;
 - караван-мастер, капитан охраны и полевой медик рейса — строки `trip_crew_member`
-  (заявка, роль, сотрудник), а не колонки `master_id` / `medic_id`; обязательность ролей для FR-10
-  задаётся в `role`;
-- `caravan_request.eta_hours` переименовывается в `estimated_delivery_hours` — расчётное время
-  доставки в часах: в колонке хранится длительность пути, а не момент прибытия, как понимает ETA глоссарий.
+  (заявка, роль, сотрудник) с уникальностью (заявка, роль) и (заявка, сотрудник); обязательность ролей
+  для FR-10 задаётся в `role`;
+- расчётное время доставки хранится в `caravan_request.estimated_delivery_hours` — длительность пути
+  по маршруту в часах;
+- финансовый отчёт перевозки — одна таблица `financial_report`: стоимость доставки, расходы по статьям
+  и финансовый результат в крышках; экспорт на голотейп выгружает эту запись;
+- оперативные данные хранятся в PostgreSQL 16, снимки оценки риска, журнал аудита и полевые события —
+  в MongoDB 7; ссылки между хранилищами — по значению идентификатора.
 
 Краткие описания всех диаграмм этого раздела — [SAD_Diagrams.md](SAD_Diagrams.md).
 

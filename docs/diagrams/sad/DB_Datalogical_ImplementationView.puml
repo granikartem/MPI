@@ -11,452 +11,517 @@ skinparam class {
   BorderColor #333333
 }
 hide circle
-hide methods
 hide empty members
 
 title ИС «Караваны» — Data Base Diagram (Implementation View)\nЧасть 2. Даталогическая модель: PostgreSQL 16 (схема public) и MongoDB 7 (база karavany)
 
 ' ═══════════════════════════ PostgreSQL 16 ═══════════════════════════
-package "PostgreSQL 16 — оперативные данные (DC-4)" <<Database>> {
+package "PostgreSQL 16 — оперативные данные" <<Database>> {
 
   package "Организации и доступ" {
-    class role <<table, V7>> #FFF2CC {
-      id : smallint <<PK>>
-      code : varchar(32) NOT NULL <<UQ>>
-      name : varchar(64) NOT NULL
-      scope : varchar(16) NOT NULL
-      crew_required : boolean NOT NULL DEFAULT false
-      crew_required_from_risk_score : smallint
+    class role <<table>> {
+      {field} id : smallint NOT NULL <<PK>>
+      {field} code : varchar(32) NOT NULL
+      {field} name : varchar(64) NOT NULL
+      {field} scope : varchar(16) NOT NULL
+      {field} crew_required : boolean NOT NULL DEFAULT false
+      {field} crew_required_from_risk_score : smallint
       --
-      CHECK scope IN (PLATFORM, OFFICE, FIELD, SYSTEM)
-      CHECK crew_required_from_risk_score BETWEEN 0 AND 100
+      {field} PRIMARY KEY (id)
+      {field} UNIQUE (code)
+      {field} CHECK (scope IN ('PLATFORM', 'OFFICE', 'FIELD', 'SYSTEM'))
+      {field} CHECK (crew_required_from_risk_score BETWEEN 0 AND 100)
     }
 
-    class organization <<table, V3>> #F5F5F5 {
-      id : uuid <<PK>> DEFAULT gen_random_uuid()
-      tenant_key : varchar(64) NOT NULL <<UQ>>
-      name : varchar(255) NOT NULL
-      subscription_tier : varchar(32) NOT NULL
-      legal_address : varchar(1000)
-      primary_contact : varchar(255)
-      contact_channel : varchar(255)
-      region : varchar(255)
-      status : varchar(32) NOT NULL DEFAULT 'ACTIVE'
-      created_at : timestamptz NOT NULL DEFAULT now()
+    class organization <<table>> {
+      {field} id : uuid NOT NULL DEFAULT gen_random_uuid() <<PK>>
+      {field} tenant_key : varchar(64) NOT NULL
+      {field} name : varchar(255) NOT NULL
+      {field} subscription_tier : varchar(32) NOT NULL
+      {field} legal_address : varchar(1000)
+      {field} primary_contact : varchar(255)
+      {field} contact_channel : varchar(255)
+      {field} region : varchar(255)
+      {field} status : varchar(32) NOT NULL DEFAULT 'ACTIVE'
+      {field} created_at : timestamptz NOT NULL DEFAULT now()
       --
-      UNIQUE INDEX uq_organization_name_ci (lower(name))
+      {field} PRIMARY KEY (id)
+      {field} UNIQUE (tenant_key)
+      {field} UNIQUE INDEX uq_organization_name_ci (lower(name))
     }
 
-    class subscription <<table, проект UC-34>> #FFF2CC {
-      id : uuid <<PK>>
-      organization_id : uuid NOT NULL <<FK>>
-      tier : varchar(16) NOT NULL
-      period_start : date NOT NULL
-      period_end : date NOT NULL
-      grace_until : date NOT NULL
-      status : varchar(16) NOT NULL
-      created_at : timestamptz NOT NULL DEFAULT now()
+    class subscription <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} organization_id : uuid NOT NULL <<FK>>
+      {field} tier : varchar(16) NOT NULL
+      {field} period_start : date NOT NULL
+      {field} period_end : date NOT NULL
+      {field} grace_until : date NOT NULL
+      {field} status : varchar(16) NOT NULL
+      {field} created_at : timestamptz NOT NULL DEFAULT now()
       --
-      CHECK tier IN (BASIC, STANDARD, PRO)
-      CHECK status IN (ACTIVE, GRACE, BLOCKED)
-      CHECK grace_until = period_end + 30
-      INDEX ix_subscription_org_end (organization_id, period_end DESC)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (organization_id) REFERENCES organization (id)
+      {field} CHECK (tier IN ('BASIC', 'STANDARD', 'PRO'))
+      {field} CHECK (status IN ('ACTIVE', 'GRACE', 'BLOCKED'))
+      {field} CHECK (grace_until = period_end + 30)
+      {field} INDEX ix_subscription_org_end (organization_id, period_end DESC)
     }
 
-    class terminal <<table, проект Vision 4.5>> #FFF2CC {
-      id : uuid <<PK>>
-      organization_id : uuid NOT NULL <<FK>>
-      subscription_id : uuid NOT NULL <<FK>>
-      name : varchar(128) NOT NULL
-      api_key_hash : varchar(255) NOT NULL <<UQ>>
-      activated_at : timestamptz
-      status : varchar(16) NOT NULL
+    class terminal <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} organization_id : uuid NOT NULL <<FK>>
+      {field} subscription_id : uuid NOT NULL <<FK>>
+      {field} name : varchar(128) NOT NULL
+      {field} api_key_hash : varchar(255) NOT NULL
+      {field} activated_at : timestamptz
+      {field} status : varchar(16) NOT NULL
       --
-      CHECK status IN (ACTIVE, REVOKED)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (organization_id) REFERENCES organization (id)
+      {field} FOREIGN KEY (subscription_id) REFERENCES subscription (id)
+      {field} UNIQUE (api_key_hash)
+      {field} CHECK (status IN ('ACTIVE', 'REVOKED'))
     }
 
-    class app_user <<table, V3 + V7>> #E3F2FD {
-      id : uuid <<PK>> DEFAULT gen_random_uuid()
-      organization_id : uuid <<FK>>  [V7: NULL только у SUPERUSER]
-      role_id : smallint NOT NULL <<FK>>  [V7: вместо role varchar(32)]
-      full_name : varchar(255) NOT NULL
-      login : varchar(128) NOT NULL
-      password_hash : varchar(255) NOT NULL
-      must_change_password : boolean NOT NULL DEFAULT true  [V7]
-      contact_channel : varchar(255)
-      active : boolean NOT NULL DEFAULT true
-      created_at : timestamptz NOT NULL DEFAULT now()
+    class app_user <<table>> {
+      {field} id : uuid NOT NULL DEFAULT gen_random_uuid() <<PK>>
+      {field} organization_id : uuid <<FK>>
+      {field} role_id : smallint NOT NULL <<FK>>
+      {field} full_name : varchar(255) NOT NULL
+      {field} login : varchar(128) NOT NULL
+      {field} password_hash : varchar(255) NOT NULL
+      {field} must_change_password : boolean NOT NULL DEFAULT true
+      {field} contact_channel : varchar(255)
+      {field} active : boolean NOT NULL DEFAULT true
+      {field} created_at : timestamptz NOT NULL DEFAULT now()
       --
-      UNIQUE INDEX uq_app_user_login_ci (lower(login))
-      INDEX ix_app_user_org_role (organization_id, role_id)  [V7]
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (organization_id) REFERENCES organization (id)
+      {field} FOREIGN KEY (role_id) REFERENCES role (id)
+      {field} UNIQUE INDEX uq_app_user_login_ci (lower(login))
+      {field} INDEX ix_app_user_org_role (organization_id, role_id)
+      {field} organization_id IS NULL только у роли SUPERUSER
     }
 
-    class employee_rate <<table, проект UC-31>> #FFF2CC {
-      id : uuid <<PK>>
-      user_id : uuid NOT NULL <<FK>>
-      amount_caps : numeric(12,2) NOT NULL
-      valid_from : date NOT NULL
-      valid_to : date
-      set_by : uuid NOT NULL <<FK>>
+    class employee_rate <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} user_id : uuid NOT NULL <<FK>>
+      {field} amount_caps : numeric(12,2) NOT NULL
+      {field} valid_from : date NOT NULL
+      {field} valid_to : date
+      {field} set_by : uuid NOT NULL <<FK>>
       --
-      UNIQUE (user_id, valid_from)
-      CHECK amount_caps >= 0
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (user_id) REFERENCES app_user (id)
+      {field} FOREIGN KEY (set_by) REFERENCES app_user (id)
+      {field} UNIQUE (user_id, valid_from)
+      {field} CHECK (amount_caps >= 0)
     }
   }
 
   package "Заявка и маршрут" {
-    class caravan_request <<table, V1 + V3…V6 + V7>> #E3F2FD {
-      id : uuid <<PK>> DEFAULT gen_random_uuid()
-      organization_id : uuid NOT NULL <<FK>>
-      route_id : uuid <<FK>>
-      origin : varchar(255) NOT NULL
-      destination : varchar(255) NOT NULL
-      departure_date : date NOT NULL
-      cargo_description : varchar(2000)
-      cargo_value_caps : integer NOT NULL DEFAULT 0
-      estimated_delivery_hours : double precision  [V7: переименование eta_hours]
-      risk_score : integer
-      risk_status : varchar(16) NOT NULL DEFAULT 'NA'
-      recommendation : varchar(2000)
-      status : varchar(32) NOT NULL DEFAULT 'DRAFT'
-      created_at : timestamptz NOT NULL DEFAULT now()
+    class caravan_request <<table>> {
+      {field} id : uuid NOT NULL DEFAULT gen_random_uuid() <<PK>>
+      {field} organization_id : uuid NOT NULL <<FK>>
+      {field} route_id : uuid <<FK>>
+      {field} origin : varchar(255) NOT NULL
+      {field} destination : varchar(255) NOT NULL
+      {field} departure_date : date NOT NULL
+      {field} cargo_description : varchar(2000)
+      {field} cargo_value_caps : integer NOT NULL DEFAULT 0
+      {field} estimated_delivery_hours : double precision
+      {field} risk_score : integer
+      {field} risk_status : varchar(16) NOT NULL DEFAULT 'NA'
+      {field} recommendation : varchar(2000)
+      {field} status : varchar(32) NOT NULL DEFAULT 'DRAFT'
+      {field} created_at : timestamptz NOT NULL DEFAULT now()
       --
-      CHECK ck_caravan_request_status: status IN (DRAFT, READY,
-        EN_ROUTE, DELAYED, DELIVERED, CLOSED, CANCELLED)  [V5]
-      CHECK risk_status IN (OK, STALE, NA)  [V7]
-      CHECK risk_score BETWEEN 0 AND 100  [V7]
-      CHECK cargo_value_caps >= 0  [V7]
-      INDEX ix_caravan_request_org_created (organization_id, created_at DESC)  [V6]
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (organization_id) REFERENCES organization (id)
+      {field} FOREIGN KEY (route_id) REFERENCES route (id)
+      {field} CHECK ck_caravan_request_status (status IN ('DRAFT', 'READY',
+      {field}     'EN_ROUTE', 'DELAYED', 'DELIVERED', 'CLOSED', 'CANCELLED'))
+      {field} CHECK (risk_status IN ('OK', 'STALE', 'NA'))
+      {field} CHECK (risk_score BETWEEN 0 AND 100)
+      {field} CHECK (cargo_value_caps >= 0)
+      {field} INDEX ix_caravan_request_org_created (organization_id, created_at DESC)
     }
 
-    class request_status_history <<table, V5 + V7>> #E3F2FD {
-      id : uuid <<PK>> DEFAULT gen_random_uuid()
-      request_id : uuid NOT NULL <<FK>>
-      from_status : varchar(32)
-      to_status : varchar(32) NOT NULL
-      actor_role_id : smallint NOT NULL <<FK>>  [V7: вместо actor_role varchar(32)]
-      actor_user_id : uuid <<FK>>  [V7, после UC-25]
-      actor_name : varchar(255)
-      reason : varchar(1000)
-      occurred_at : timestamptz NOT NULL DEFAULT now()
+    class request_status_history <<table>> {
+      {field} id : uuid NOT NULL DEFAULT gen_random_uuid() <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} from_status : varchar(32)
+      {field} to_status : varchar(32) NOT NULL
+      {field} actor_role_id : smallint NOT NULL <<FK>>
+      {field} actor_user_id : uuid <<FK>>
+      {field} actor_name : varchar(255)
+      {field} reason : varchar(1000)
+      {field} occurred_at : timestamptz NOT NULL DEFAULT now()
       --
-      INDEX ix_request_status_history_request (request_id, occurred_at)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (actor_role_id) REFERENCES role (id)
+      {field} FOREIGN KEY (actor_user_id) REFERENCES app_user (id)
+      {field} INDEX ix_request_status_history_request (request_id, occurred_at)
     }
 
-    class escort_plan <<table, проект UC-8>> #FFF2CC {
-      request_id : uuid <<PK, FK>>
-      recommended_guards : smallint NOT NULL
-      recommended_supply_level : varchar(16) NOT NULL
-      accepted_guards : smallint
-      accepted_supply_level : varchar(16)
-      accepted_by : uuid <<FK>>
-      accepted_at : timestamptz
+    class escort_plan <<table>> {
+      {field} request_id : uuid NOT NULL <<PK, FK>>
+      {field} recommended_guards : smallint NOT NULL
+      {field} recommended_supply_level : varchar(16) NOT NULL
+      {field} accepted_guards : smallint
+      {field} accepted_supply_level : varchar(16)
+      {field} accepted_by : uuid <<FK>>
+      {field} accepted_at : timestamptz
       --
-      CHECK *_supply_level IN (BASIC, STANDARD, REINFORCED, DOUBLE)
+      {field} PRIMARY KEY (request_id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (accepted_by) REFERENCES app_user (id)
+      {field} CHECK (recommended_supply_level IN ('BASIC', 'STANDARD', 'REINFORCED', 'DOUBLE'))
+      {field} CHECK (accepted_supply_level IN ('BASIC', 'STANDARD', 'REINFORCED', 'DOUBLE'))
     }
 
-    class route <<table, V1 + V3 + V4>> #F5F5F5 {
-      id : uuid <<PK>>
-      code : varchar(32) NOT NULL
-      name : varchar(255) NOT NULL
-      is_template : boolean NOT NULL DEFAULT true
-      organization_id : uuid <<FK>>
+    class route <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} code : varchar(32) NOT NULL
+      {field} name : varchar(255) NOT NULL
+      {field} is_template : boolean NOT NULL DEFAULT true
+      {field} organization_id : uuid <<FK>>
       --
-      UNIQUE INDEX uq_route_code (code)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (organization_id) REFERENCES organization (id)
+      {field} UNIQUE INDEX uq_route_code (code)
     }
 
-    class route_segment <<table, V1>> #F5F5F5 {
-      id : uuid <<PK>>
-      route_id : uuid NOT NULL <<FK>>
-      ord : integer NOT NULL
-      from_checkpoint_id : uuid NOT NULL <<FK>>
-      to_checkpoint_id : uuid NOT NULL <<FK>>
-      distance_km : double precision NOT NULL
+    class route_segment <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} route_id : uuid NOT NULL <<FK>>
+      {field} ord : integer NOT NULL
+      {field} from_checkpoint_id : uuid NOT NULL <<FK>>
+      {field} to_checkpoint_id : uuid NOT NULL <<FK>>
+      {field} distance_km : double precision NOT NULL
       --
-      UNIQUE (route_id, ord)  [V7]
-      CHECK distance_km > 0  [V7]
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (route_id) REFERENCES route (id)
+      {field} FOREIGN KEY (from_checkpoint_id) REFERENCES checkpoint (id)
+      {field} FOREIGN KEY (to_checkpoint_id) REFERENCES checkpoint (id)
+      {field} UNIQUE (route_id, ord)
+      {field} CHECK (distance_km > 0)
     }
 
-    class checkpoint <<table, V1>> #F5F5F5 {
-      id : uuid <<PK>>
-      code : varchar(64) NOT NULL <<UQ>>
-      name : varchar(255) NOT NULL
-      is_ncr_gate : boolean NOT NULL DEFAULT false  [проект UC-18]
+    class checkpoint <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} code : varchar(64) NOT NULL
+      {field} name : varchar(255) NOT NULL
+      {field} is_ncr_gate : boolean NOT NULL DEFAULT false
+      --
+      {field} PRIMARY KEY (id)
+      {field} UNIQUE (code)
     }
   }
 
   package "Команда, груз и припасы" {
-    class trip_crew_member <<table, проект UC-9, UC-10>> #FFF2CC {
-      id : uuid <<PK>>
-      request_id : uuid NOT NULL <<FK>>
-      role_id : smallint NOT NULL <<FK>>
-      user_id : uuid NOT NULL <<FK>>
-      assigned_by : uuid NOT NULL <<FK>>
-      assigned_at : timestamptz NOT NULL DEFAULT now()
+    class trip_crew_member <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} role_id : smallint NOT NULL <<FK>>
+      {field} user_id : uuid NOT NULL <<FK>>
+      {field} assigned_by : uuid NOT NULL <<FK>>
+      {field} assigned_at : timestamptz NOT NULL DEFAULT now()
       --
-      UNIQUE (request_id, role_id)
-      UNIQUE (request_id, user_id)
-      INDEX ix_trip_crew_member_user (user_id)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (role_id) REFERENCES role (id)
+      {field} FOREIGN KEY (user_id) REFERENCES app_user (id)
+      {field} FOREIGN KEY (assigned_by) REFERENCES app_user (id)
+      {field} UNIQUE (request_id, role_id)
+      {field} UNIQUE (request_id, user_id)
+      {field} INDEX ix_trip_crew_member_user (user_id)
     }
 
-    class cargo_manifest <<table, проект UC-11>> #FFF2CC {
-      id : uuid <<PK>>
-      request_id : uuid NOT NULL <<FK>> <<UQ>>
-      status : varchar(16) NOT NULL
-      created_by : uuid NOT NULL <<FK>>
-      created_at : timestamptz NOT NULL DEFAULT now()
+    class cargo_manifest <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} status : varchar(16) NOT NULL
+      {field} created_by : uuid NOT NULL <<FK>>
+      {field} created_at : timestamptz NOT NULL DEFAULT now()
       --
-      CHECK status IN (DRAFT, SEALED, RECONCILED)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (created_by) REFERENCES app_user (id)
+      {field} UNIQUE (request_id)
+      {field} CHECK (status IN ('DRAFT', 'SEALED', 'RECONCILED'))
     }
 
-    class cargo_item <<table, проект UC-11>> #FFF2CC {
-      id : uuid <<PK>>
-      manifest_id : uuid NOT NULL <<FK>>
-      ord : integer NOT NULL
-      name : varchar(255) NOT NULL
-      quantity : numeric(12,3) NOT NULL
-      unit : varchar(16) NOT NULL
-      weight_kg : numeric(10,2)
-      value_caps : integer
-      is_special : boolean NOT NULL DEFAULT false
+    class cargo_item <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} manifest_id : uuid NOT NULL <<FK>>
+      {field} ord : integer NOT NULL
+      {field} name : varchar(255) NOT NULL
+      {field} quantity : numeric(12,3) NOT NULL
+      {field} unit : varchar(16) NOT NULL
+      {field} weight_kg : numeric(10,2)
+      {field} value_caps : integer
+      {field} is_special : boolean NOT NULL DEFAULT false
       --
-      UNIQUE (manifest_id, ord)
-      CHECK quantity > 0
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (manifest_id) REFERENCES cargo_manifest (id)
+      {field} UNIQUE (manifest_id, ord)
+      {field} CHECK (quantity > 0)
     }
 
-    class cargo_seal <<table, проект UC-11, UC-14>> #FFF2CC {
-      id : uuid <<PK>>
-      manifest_id : uuid NOT NULL <<FK>>
-      seal_number : varchar(64) NOT NULL <<UQ>>
-      sealed_by : uuid NOT NULL <<FK>>
-      sealed_at : timestamptz NOT NULL
-      intact_on_delivery : boolean
-      checked_by : uuid <<FK>>
-      checked_at : timestamptz
-    }
-
-    class manifest_reconciliation <<table, проект UC-15>> #FFF2CC {
-      id : uuid <<PK>>
-      manifest_id : uuid NOT NULL <<FK>>
-      performed_by : uuid NOT NULL <<FK>>
-      result : varchar(16) NOT NULL
-      comment : varchar(2000)
-      performed_at : timestamptz NOT NULL DEFAULT now()
+    class cargo_seal <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} manifest_id : uuid NOT NULL <<FK>>
+      {field} seal_number : varchar(64) NOT NULL
+      {field} sealed_by : uuid NOT NULL <<FK>>
+      {field} sealed_at : timestamptz NOT NULL
+      {field} intact_on_delivery : boolean
+      {field} checked_by : uuid <<FK>>
+      {field} checked_at : timestamptz
       --
-      CHECK result IN (MATCH, MISMATCH)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (manifest_id) REFERENCES cargo_manifest (id)
+      {field} FOREIGN KEY (sealed_by) REFERENCES app_user (id)
+      {field} FOREIGN KEY (checked_by) REFERENCES app_user (id)
+      {field} UNIQUE (seal_number)
     }
 
-    class reconciliation_discrepancy <<table, проект UC-15>> #FFF2CC {
-      id : uuid <<PK>>
-      reconciliation_id : uuid NOT NULL <<FK>>
-      cargo_item_id : uuid NOT NULL <<FK>>
-      expected_quantity : numeric(12,3) NOT NULL
-      actual_quantity : numeric(12,3) NOT NULL
-    }
-
-    class supply_reservation <<table, проект UC-13>> #FFF2CC {
-      id : uuid <<PK>>
-      request_id : uuid NOT NULL <<FK>>
-      supply_type : varchar(16) NOT NULL
-      quantity : numeric(12,3) NOT NULL
-      unit : varchar(16) NOT NULL
-      reserved_by : uuid NOT NULL <<FK>>
-      reserved_at : timestamptz NOT NULL DEFAULT now()
+    class manifest_reconciliation <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} manifest_id : uuid NOT NULL <<FK>>
+      {field} performed_by : uuid NOT NULL <<FK>>
+      {field} result : varchar(16) NOT NULL
+      {field} comment : varchar(2000)
+      {field} performed_at : timestamptz NOT NULL DEFAULT now()
       --
-      UNIQUE (request_id, supply_type)
-      CHECK supply_type IN (WATER, FOOD, AMMO, MEDICAL, REPAIR_KIT)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (manifest_id) REFERENCES cargo_manifest (id)
+      {field} FOREIGN KEY (performed_by) REFERENCES app_user (id)
+      {field} CHECK (result IN ('MATCH', 'MISMATCH'))
+    }
+
+    class reconciliation_discrepancy <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} reconciliation_id : uuid NOT NULL <<FK>>
+      {field} cargo_item_id : uuid NOT NULL <<FK>>
+      {field} expected_quantity : numeric(12,3) NOT NULL
+      {field} actual_quantity : numeric(12,3) NOT NULL
+      --
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (reconciliation_id) REFERENCES manifest_reconciliation (id)
+      {field} FOREIGN KEY (cargo_item_id) REFERENCES cargo_item (id)
+    }
+
+    class supply_reservation <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} supply_type : varchar(16) NOT NULL
+      {field} quantity : numeric(12,3) NOT NULL
+      {field} unit : varchar(16) NOT NULL
+      {field} reserved_by : uuid NOT NULL <<FK>>
+      {field} reserved_at : timestamptz NOT NULL DEFAULT now()
+      --
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (reserved_by) REFERENCES app_user (id)
+      {field} UNIQUE (request_id, supply_type)
+      {field} CHECK (supply_type IN ('WATER', 'FOOD', 'AMMO', 'MEDICAL', 'REPAIR_KIT'))
+      {field} CHECK (quantity > 0)
     }
   }
 
   package "Полевые операции и финансы" {
-    class trip_stage <<table, проект UC-16>> #FFF2CC {
-      id : uuid <<PK>>
-      request_id : uuid NOT NULL <<FK>>
-      ord : integer NOT NULL
-      stage_type : varchar(32) NOT NULL
-      checkpoint_id : uuid <<FK>>
-      planned_at : timestamptz
-      confirmed_at : timestamptz
-      confirmed_by : uuid <<FK>>
+    class trip_stage <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} ord : integer NOT NULL
+      {field} stage_type : varchar(32) NOT NULL
+      {field} checkpoint_id : uuid <<FK>>
+      {field} planned_at : timestamptz
+      {field} confirmed_at : timestamptz
+      {field} confirmed_by : uuid <<FK>>
       --
-      UNIQUE (request_id, ord)
-      CHECK stage_type IN (LOADING_DONE, DEPARTURE,
-        CHECKPOINT_ARRIVAL, NCR_GATE, DELIVERY)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (checkpoint_id) REFERENCES checkpoint (id)
+      {field} FOREIGN KEY (confirmed_by) REFERENCES app_user (id)
+      {field} UNIQUE (request_id, ord)
+      {field} CHECK (stage_type IN ('LOADING_DONE', 'DEPARTURE',
+      {field}     'CHECKPOINT_ARRIVAL', 'NCR_GATE', 'DELIVERY'))
     }
 
-    class recovery_request <<table, проект UC-20>> #FFF2CC {
-      id : uuid <<PK>>
-      request_id : uuid NOT NULL <<FK>>
-      incident_id : char(24)  {ObjectId документа incident, без FK}
-      type : varchar(16) NOT NULL
-      status : varchar(16) NOT NULL
-      comment : varchar(2000)
-      created_by : uuid NOT NULL <<FK>>
-      created_at : timestamptz NOT NULL DEFAULT now()
-      closed_at : timestamptz
+    class recovery_request <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} incident_id : char(24)
+      {field} type : varchar(16) NOT NULL
+      {field} status : varchar(16) NOT NULL
+      {field} comment : varchar(2000)
+      {field} created_by : uuid NOT NULL <<FK>>
+      {field} created_at : timestamptz NOT NULL DEFAULT now()
+      {field} closed_at : timestamptz
       --
-      CHECK type IN (EVACUATION, BACKUP, REDELIVERY, REPAIR)
-      CHECK status IN (OPEN, IN_PROGRESS, CLOSED)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (created_by) REFERENCES app_user (id)
+      {field} CHECK (type IN ('EVACUATION', 'BACKUP', 'REDELIVERY', 'REPAIR'))
+      {field} CHECK (status IN ('OPEN', 'IN_PROGRESS', 'CLOSED'))
+      {field} incident_id — ObjectId документа incident
     }
 
-    class financial_report <<table, проект UC-21, UC-22>> #FFF2CC {
-      id : uuid <<PK>>
-      request_id : uuid NOT NULL <<FK>> <<UQ>>
-      revenue_caps : numeric(14,2) NOT NULL
-      expense_caps : numeric(14,2) NOT NULL
-      result_caps : numeric(14,2) NOT NULL
-      generated_by : uuid NOT NULL <<FK>>
-      generated_at : timestamptz NOT NULL DEFAULT now()
-      holotape_exported_at : timestamptz
+    class financial_report <<table>> {
+      {field} id : uuid NOT NULL <<PK>>
+      {field} request_id : uuid NOT NULL <<FK>>
+      {field} delivery_revenue_caps : numeric(14,2) NOT NULL
+      {field} guards_cost_caps : numeric(14,2) NOT NULL DEFAULT 0
+      {field} medics_cost_caps : numeric(14,2) NOT NULL DEFAULT 0
+      {field} supplies_cost_caps : numeric(14,2) NOT NULL DEFAULT 0
+      {field} ncr_fees_caps : numeric(14,2) NOT NULL DEFAULT 0
+      {field} other_costs_caps : numeric(14,2) NOT NULL DEFAULT 0
+      {field} total_expense_caps : numeric(14,2) NOT NULL
+      {field} result_caps : numeric(14,2) NOT NULL
+      {field} generated_by : uuid NOT NULL <<FK>>
+      {field} generated_at : timestamptz NOT NULL DEFAULT now()
+      {field} holotape_exported_at : timestamptz
       --
-      CHECK result_caps = revenue_caps - expense_caps
-    }
-
-    class financial_report_line <<table, проект UC-21>> #FFF2CC {
-      id : uuid <<PK>>
-      report_id : uuid NOT NULL <<FK>>
-      kind : varchar(8) NOT NULL
-      category : varchar(16) NOT NULL
-      amount : numeric(14,2) NOT NULL
-      currency : varchar(16) NOT NULL
-      rate_to_caps : numeric(12,6) NOT NULL
-      amount_caps : numeric(14,2) NOT NULL
-      --
-      CHECK kind IN (INCOME, EXPENSE)
-      CHECK category IN (DELIVERY, GUARDS, MEDICS,
-        SUPPLIES, NCR_FEE, OTHER)
-      CHECK currency IN (CAPS, NCR_DOLLAR, DENARIUS)
+      {field} PRIMARY KEY (id)
+      {field} FOREIGN KEY (request_id) REFERENCES caravan_request (id)
+      {field} FOREIGN KEY (generated_by) REFERENCES app_user (id)
+      {field} UNIQUE (request_id)
+      {field} CHECK (total_expense_caps = guards_cost_caps + medics_cost_caps +
+      {field}     supplies_cost_caps + ncr_fees_caps + other_costs_caps)
+      {field} CHECK (result_caps = delivery_revenue_caps - total_expense_caps)
     }
   }
 }
 
 ' ═══════════════════════════ MongoDB 7 ═══════════════════════════════
-package "MongoDB 7 — события, снимки расчётов, аудит (DC-5)" <<Database>> {
-  class risk_assessment <<collection, реализовано>> #E8F5E9 {
-    _id : ObjectId <<PK>>
-    requestId : UUID (Binary, java-legacy)
-    score : Int32 | null
-    status : String  {OK | STALE | NA}
-    recommendation : String
-    asOf : String  {ISO-8601 от Wasteland Intel}
-    threatSum : Int32
-    base : Int32
-    cargoFactor : Int32
-    segments : Array<{segment: String, threatLevel: Int32, threats: Array<String>}>
-    computedAt : Date
-    _class : String  {служебное поле Spring Data}
+package "MongoDB 7 — события, снимки расчётов, аудит" <<Database>> {
+  class risk_assessment <<collection>> {
+    {field} _id : ObjectId <<PK>>
+    {field} requestId : UUID
+    {field} score : Int32 | null
+    {field} status : String — OK | STALE | NA
+    {field} recommendation : String
+    {field} asOf : String — ISO-8601
+    {field} threatSum : Int32
+    {field} base : Int32
+    {field} cargoFactor : Int32
+    {field} segments : Array<{segment: String, threatLevel: Int32, threats: Array<String>}>
+    {field} computedAt : Date
     --
-    INDEX {requestId: 1, computedAt: -1}  [проект: в коде не объявлен]
+    {field} INDEX {requestId: 1, computedAt: -1}
   }
 
-  class audit_event <<collection, реализовано>> #E8F5E9 {
-    _id : ObjectId <<PK>>
-    type : String  {ORGANIZATION_CREATED | REQUEST_STATUS_CHANGED}
-    actor : String
-    organizationId : UUID | null
-    userId : UUID | null
-    entityType : String  [проект, RL-4]
-    entityId : String  [проект, RL-4]
-    details : Object
-    occurredAt : Date
-    _class : String
+  class audit_event <<collection>> {
+    {field} _id : ObjectId <<PK>>
+    {field} type : String
+    {field} actor : String
+    {field} organizationId : UUID | null
+    {field} userId : UUID | null
+    {field} entityType : String
+    {field} entityId : String
+    {field} details : Object
+    {field} occurredAt : Date
     --
-    INDEX {organizationId: 1, occurredAt: -1}  [проект]
-    TTL INDEX {occurredAt: 1}, expireAfterSeconds 7948800
-      {92 сут — RL-5 «не менее 3 месяцев»}  [проект]
+    {field} INDEX {organizationId: 1, occurredAt: -1}
+    {field} TTL INDEX {occurredAt: 1}, expireAfterSeconds: 7948800 (92 сут, RL-5)
   }
 
-  class checkpoint_log <<collection, проект UC-16…UC-18>> #FFF2CC {
-    _id : ObjectId <<PK>>
-    clientEventId : UUID  {id события на Pip-Boy}
-    organizationId : UUID
-    requestId : UUID
-    tripStageId : UUID | null
-    checkpointCode : String
-    kind : String  {CHECKPOINT | NCR_GATE}
-    occurredAt : Date
-    location : {lat: Double, lon: Double}
-    result : String
-    delayReason : String | null
-    ncrFee : {amount: Decimal128, currency: String,
-      rateToCaps: Decimal128, amountCaps: Decimal128} | null
-    recordedBy : UUID
-    deviceId : String
-    syncedAt : Date
+  class checkpoint_log <<collection>> {
+    {field} _id : ObjectId <<PK>>
+    {field} clientEventId : UUID
+    {field} organizationId : UUID
+    {field} requestId : UUID
+    {field} tripStageId : UUID | null
+    {field} checkpointCode : String
+    {field} kind : String — CHECKPOINT | NCR_GATE
+    {field} occurredAt : Date
+    {field} location : {lat: Double, lon: Double}
+    {field} result : String
+    {field} delayReason : String | null
+    {field} ncrFee : {amount: Decimal128, currency: String,
+    {field}     rateToCaps: Decimal128, amountCaps: Decimal128} | null
+    {field} recordedBy : UUID
+    {field} deviceId : String
+    {field} syncedAt : Date
     --
-    UNIQUE INDEX {clientEventId: 1}  {повторная синхронизация идемпотентна}
-    INDEX {requestId: 1, occurredAt: 1}
+    {field} UNIQUE INDEX {clientEventId: 1}
+    {field} INDEX {requestId: 1, occurredAt: 1}
   }
 
-  class incident <<collection, проект UC-19>> #FFF2CC {
-    _id : ObjectId <<PK>>
-    clientEventId : UUID
-    organizationId : UUID
-    requestId : UUID
-    type : String  {ATTACK | BREAKDOWN | MEDICAL | CARGO_LOSS | DISASTER | OTHER}
-    severity : String  {LOW | MEDIUM | HIGH | CRITICAL}
-    occurredAt : Date
-    location : {lat: Double, lon: Double}
-    description : String
-    participants : Array<{userId: UUID, roleCode: String,
-      injured: Boolean, comment: String}>
-    medical : {injuredCount: Int32,
-      suppliesUsed: Array<{item: String, quantity: Int32}>} | null
-    reportedBy : UUID
-    deviceId : String
-    syncState : String  {LOCAL | SYNCED}
-    syncedAt : Date | null
+  class incident <<collection>> {
+    {field} _id : ObjectId <<PK>>
+    {field} clientEventId : UUID
+    {field} organizationId : UUID
+    {field} requestId : UUID
+    {field} type : String — ATTACK | BREAKDOWN | MEDICAL | CARGO_LOSS | DISASTER | OTHER
+    {field} severity : String — LOW | MEDIUM | HIGH | CRITICAL
+    {field} occurredAt : Date
+    {field} location : {lat: Double, lon: Double}
+    {field} description : String
+    {field} participants : Array<{userId: UUID, roleCode: String,
+    {field}     injured: Boolean, comment: String}>
+    {field} medical : {injuredCount: Int32,
+    {field}     suppliesUsed: Array<{item: String, quantity: Int32}>} | null
+    {field} reportedBy : UUID
+    {field} deviceId : String
+    {field} syncState : String — LOCAL | SYNCED
+    {field} syncedAt : Date | null
     --
-    UNIQUE INDEX {clientEventId: 1}
-    INDEX {requestId: 1, occurredAt: -1}
-    INDEX {organizationId: 1, severity: 1}
+    {field} UNIQUE INDEX {clientEventId: 1}
+    {field} INDEX {requestId: 1, occurredAt: -1}
+    {field} INDEX {organizationId: 1, severity: 1}
   }
 }
 
 ' ─── Внешние ключи PostgreSQL ────────────────────────────────────────
-subscription }o--|| organization : organization_id
-terminal }o--|| organization : organization_id
-terminal }o--|| subscription : subscription_id
-app_user }o--o| organization : organization_id
-app_user }o--|| role : role_id
-employee_rate }o--|| app_user : user_id
+subscription "0..*" -- "1..1" organization : organization_id
+terminal "0..*" -- "1..1" organization : organization_id
+terminal "0..*" -- "1..1" subscription : subscription_id
+app_user "0..*" -- "0..1" organization : organization_id
+app_user "0..*" -- "1..1" role : role_id
+employee_rate "0..*" -- "1..1" app_user : user_id
 
-caravan_request }o--|| organization : organization_id
-caravan_request }o--o| route : route_id
-route }o--o| organization : organization_id
-route_segment }|--|| route : route_id
-route_segment }o--|| checkpoint : from_checkpoint_id,\nto_checkpoint_id
-request_status_history }|--|| caravan_request : request_id
-request_status_history }o--|| role : actor_role_id
-request_status_history }o--o| app_user : actor_user_id
-escort_plan |o--|| caravan_request : request_id
+caravan_request "0..*" -- "1..1" organization : organization_id
+caravan_request "0..*" -- "0..1" route : route_id
+route "0..*" -- "0..1" organization : organization_id
+route_segment "1..*" -- "1..1" route : route_id
+route_segment "0..*" -- "1..1" checkpoint : from_checkpoint_id
+route_segment "0..*" -- "1..1" checkpoint : to_checkpoint_id
+request_status_history "1..*" -- "1..1" caravan_request : request_id
+request_status_history "0..*" -- "1..1" role : actor_role_id
+request_status_history "0..*" -- "0..1" app_user : actor_user_id
+escort_plan "0..1" -- "1..1" caravan_request : request_id
 
-trip_crew_member }o--|| caravan_request : request_id
-trip_crew_member }o--|| role : role_id
-trip_crew_member }o--|| app_user : user_id
-cargo_manifest |o--|| caravan_request : request_id
-cargo_item }|--|| cargo_manifest : manifest_id
-cargo_seal }o--|| cargo_manifest : manifest_id
-manifest_reconciliation }o--|| cargo_manifest : manifest_id
-reconciliation_discrepancy }o--|| manifest_reconciliation : reconciliation_id
-reconciliation_discrepancy }o--|| cargo_item : cargo_item_id
-supply_reservation }o--|| caravan_request : request_id
+trip_crew_member "0..*" -- "1..1" caravan_request : request_id
+trip_crew_member "0..*" -- "1..1" role : role_id
+trip_crew_member "0..*" -- "1..1" app_user : user_id
+cargo_manifest "0..1" -- "1..1" caravan_request : request_id
+cargo_item "1..*" -- "1..1" cargo_manifest : manifest_id
+cargo_seal "0..*" -- "1..1" cargo_manifest : manifest_id
+manifest_reconciliation "0..*" -- "1..1" cargo_manifest : manifest_id
+reconciliation_discrepancy "0..*" -- "1..1" manifest_reconciliation : reconciliation_id
+reconciliation_discrepancy "0..*" -- "1..1" cargo_item : cargo_item_id
+supply_reservation "0..*" -- "1..1" caravan_request : request_id
 
-trip_stage }o--|| caravan_request : request_id
-trip_stage }o--o| checkpoint : checkpoint_id
-recovery_request }o--|| caravan_request : request_id
-financial_report |o--|| caravan_request : request_id
-financial_report_line }|--|| financial_report : report_id
+trip_stage "0..*" -- "1..1" caravan_request : request_id
+trip_stage "0..*" -- "0..1" checkpoint : checkpoint_id
+recovery_request "0..*" -- "1..1" caravan_request : request_id
+financial_report "0..1" -- "1..1" caravan_request : request_id
 
-' ─── Ссылки по значению между хранилищами ────────────────────────────
-risk_assessment }o..|| caravan_request : requestId
-checkpoint_log }o..|| caravan_request : requestId
-incident }o..|| caravan_request : requestId
-recovery_request }o..o| incident : incident_id
-audit_event }o..o| organization : organizationId
+' ─── Ссылки по значению между PostgreSQL и MongoDB ───────────────────
+risk_assessment "0..*" .. "1..1" caravan_request : requestId
+checkpoint_log "0..*" .. "1..1" caravan_request : requestId
+checkpoint_log "0..1" .. "0..1" trip_stage : tripStageId
+incident "0..*" .. "1..1" caravan_request : requestId
+recovery_request "0..*" .. "0..1" incident : incident_id
+audit_event "0..*" .. "0..1" organization : organizationId
 
 note top of role
-  **Сид справочника role (V7)**
+  **Справочник role**
   1 SUPERUSER — PLATFORM
   2 DISPATCHER — OFFICE
   3 WAREHOUSE_KEEPER — OFFICE
@@ -467,27 +532,19 @@ note top of role
 end note
 
 note bottom of trip_crew_member
-  **Вместо teams.master_id / medic_id / team_guards**
-  медик — строка (request_id, role_id = FIELD_MEDIC, user_id).
-  Сервис при назначении проверяет app_user.role_id = role_id,
-  при переходе READY → EN_ROUTE (FR-10) — наличие строк
-  для всех ролей с crew_required или с порогом ≤ risk_score.
+  **Команда рейса:** медик — строка (request_id, role_id = FIELD_MEDIC, user_id),
+  так же караван-мастер и капитан охраны. При назначении проверяется
+  app_user.role_id = role_id, при переходе READY → EN_ROUTE (FR-10) —
+  наличие строк для всех ролей с crew_required или с порогом ≤ risk_score.
 end note
 
 legend right
-  |= Цвет |= Значение |
-  | <#F5F5F5> | создано миграциями Flyway V1–V6 и не меняется |
-  | <#E3F2FD> | создано V1–V6, в целевой схеме меняется — изменения помечены [V7] |
-  | <#E8F5E9> | коллекция MongoDB, создаётся кодом (Spring Data) |
-  | <#FFF2CC> | проект — таблицы / коллекции для нереализованных прецедентов |
-  **Изменения V7 (проект миграции V7__roles_and_naming.sql):**
-  • справочник role; app_user.role → role_id, request_status_history.actor_role → actor_role_id;
-  • caravan_request.eta_hours → estimated_delivery_hours (расчётное время доставки, ч):
-    «ETA» по глоссарию — момент прибытия, а в колонке хранится длительность пути;
-  • CHECK на risk_status, risk_score, cargo_value_caps, distance_km; UNIQUE (route_id, ord).
-  **Не показаны:** flyway_schema_history (служебная таблица Flyway);
-  колонки *_by → app_user(id) перечислены в таблицах, линии не проведены.
-  **Кратности:** ""}o"" ноль или много, ""}|"" один или много, ""||"" ровно один,
-  ""o|"" ноль или один; пунктир — ссылка по значению без внешнего ключа.
+  **Кратности:** 1..1 — ровно один, 0..1 — ноль или один,
+  1..* — один или много, 0..* — ноль или много.
+  Сплошная линия — внешний ключ PostgreSQL;
+  пунктир — ссылка по значению идентификатора между PostgreSQL и MongoDB.
+  Колонки *_by (составил, назначил, подтвердил …) ссылаются на app_user (id):
+  ограничения перечислены в таблицах, линии не проведены.
+  Служебная таблица Flyway flyway_schema_history не показана.
 endlegend
 @enduml

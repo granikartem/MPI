@@ -12,11 +12,11 @@ skinparam entity {
 hide circle
 hide empty members
 
-title ИС «Караваны» — Data Base Diagram (Implementation View)\nЧасть 1. ER-модель: сущности, атрибуты, ключи и связи с кратностями (нотация «воронья лапка»)
+title ИС «Караваны» — Data Base Diagram (Implementation View)\nЧасть 1. ER-модель: сущности, атрибуты, ключи и связи с кратностями
 
 ' ─── Организации и доступ ────────────────────────────────────────────
 package "Организации и доступ" {
-  entity "Организация" as organization #F5F5F5 {
+  entity "Организация" as organization {
     * id <<PK>>
     --
     * ключ арендатора <<уникальный>>
@@ -30,18 +30,18 @@ package "Организации и доступ" {
     * момент создания
   }
 
-  entity "Подписка" as subscription <<проект>> #FFF2CC {
+  entity "Подписка" as subscription {
     * id <<PK>>
     --
     * организация <<FK>>
-    * уровень (BASIC / STANDARD / PRO)
+    * уровень: BASIC, STANDARD, PRO
     * начало оплаченного периода
     * окончание оплаченного периода
-    * окончание grace-периода {+30 сут}
-    * статус (ACTIVE / GRACE / BLOCKED)
+    * окончание grace-периода
+    * статус: ACTIVE, GRACE, BLOCKED
   }
 
-  entity "Терминал" as terminal <<проект>> #FFF2CC {
+  entity "Терминал" as terminal {
     * id <<PK>>
     --
     * организация <<FK>>
@@ -49,23 +49,23 @@ package "Организации и доступ" {
     * название
     * хеш API-ключа <<уникальный>>
     момент активации
-    * статус (ACTIVE / REVOKED)
+    * статус: ACTIVE, REVOKED
   }
 
-  entity "Роль" as role <<проект>> #FFF2CC {
+  entity "Роль" as role {
     * id <<PK>>
     --
     * код <<уникальный>>
     * название
-    * область (PLATFORM / OFFICE / FIELD / SYSTEM)
+    * область: PLATFORM, OFFICE, FIELD, SYSTEM
     * обязательна в команде рейса
     обязательна при risk_score от
   }
 
-  entity "Пользователь (сотрудник)" as app_user <<меняется>> #E3F2FD {
+  entity "Пользователь (сотрудник)" as app_user {
     * id <<PK>>
     --
-    организация <<FK>> {не задана только у суперпользователя}
+    организация <<FK>>
     * роль <<FK>>
     * ФИО
     * логин <<уникальный без учёта регистра>>
@@ -76,7 +76,7 @@ package "Организации и доступ" {
     * момент создания
   }
 
-  entity "Ставка сотрудника" as employee_rate <<проект>> #FFF2CC {
+  entity "Ставка сотрудника" as employee_rate {
     * id <<PK>>
     --
     * сотрудник <<FK>>
@@ -89,7 +89,7 @@ package "Организации и доступ" {
 
 ' ─── Заявка и маршрут ────────────────────────────────────────────────
 package "Заявка и маршрут" {
-  entity "Заявка на перевозку" as caravan_request <<меняется>> #E3F2FD {
+  entity "Заявка на перевозку" as caravan_request {
     * id <<PK>>
     --
     * организация <<FK>>
@@ -99,15 +99,15 @@ package "Заявка и маршрут" {
     * дата отправки
     описание груза
     * ценность груза, крышек
-    расчётное время доставки, ч {FR-5}
-    risk_score {0..100}
-    * актуальность risk_score (OK / STALE / NA)
+    расчётное время доставки, ч
+    risk_score: 0…100
+    * актуальность risk_score: OK, STALE, NA
     рекомендация по охране и припасам
-    * статус (7 значений статусной модели)
+    * статус
     * момент создания
   }
 
-  entity "Запись истории статусов" as request_status_history <<меняется>> #E3F2FD {
+  entity "Запись истории статусов" as request_status_history {
     * id <<PK>>
     --
     * заявка <<FK>>
@@ -120,7 +120,7 @@ package "Заявка и маршрут" {
     * момент перехода
   }
 
-  entity "План охраны и припасов" as escort_plan <<проект>> #FFF2CC {
+  entity "План охраны и припасов" as escort_plan {
     * заявка <<PK, FK>>
     --
     * рекомендовано охранников
@@ -131,16 +131,16 @@ package "Заявка и маршрут" {
     момент принятия
   }
 
-  entity "Маршрут" as route #F5F5F5 {
+  entity "Маршрут" as route {
     * id <<PK>>
     --
     * код RT-N <<уникальный>>
     * название
     * шаблон платформы
-    организация <<FK>> {для ручного маршрута}
+    организация <<FK>>
   }
 
-  entity "Участок маршрута" as route_segment #F5F5F5 {
+  entity "Участок маршрута" as route_segment {
     * id <<PK>>
     --
     * маршрут <<FK>>
@@ -150,52 +150,52 @@ package "Заявка и маршрут" {
     * длина, км
   }
 
-  entity "Контрольная точка" as checkpoint #F5F5F5 {
+  entity "Контрольная точка" as checkpoint {
     * id <<PK>>
     --
     * код <<уникальный>>
     * название
-    * является КПП НКР {проект}
+    * является КПП НКР
   }
 
-  entity "Снимок оценки риска" as risk_assessment <<MongoDB>> #E8F5E9 {
+  entity "Снимок оценки риска" as risk_assessment {
     * id <<PK>>
     --
-    * заявка {по значению}
+    * заявка <<FK>>
     score
-    * статус (OK / STALE / NA)
+    * статус: OK, STALE, NA
     рекомендация
     дата актуальности данных
     * сумма уровней угроз
     * базовая оценка
     * надбавка за ценность груза
-    * угрозы по участкам [список]
+    * угрозы по участкам
     * момент расчёта
   }
 }
 
 ' ─── Команда, груз и припасы ─────────────────────────────────────────
 package "Команда, груз и припасы" {
-  entity "Участник команды рейса" as trip_crew_member <<проект>> #FFF2CC {
+  entity "Участник команды рейса" as trip_crew_member {
     * id <<PK>>
     --
     * заявка <<FK>>
-    * роль в рейсе <<FK>> {только область FIELD}
+    * роль в рейсе <<FK>>
     * сотрудник <<FK>>
     * назначил <<FK>>
     * момент назначения
   }
 
-  entity "Груз-манифест" as cargo_manifest <<проект>> #FFF2CC {
+  entity "Груз-манифест" as cargo_manifest {
     * id <<PK>>
     --
     * заявка <<FK, уникальный>>
-    * статус (DRAFT / SEALED / RECONCILED)
+    * статус: DRAFT, SEALED, RECONCILED
     * составил <<FK>>
     * момент создания
   }
 
-  entity "Позиция манифеста" as cargo_item <<проект>> #FFF2CC {
+  entity "Позиция манифеста" as cargo_item {
     * id <<PK>>
     --
     * манифест <<FK>>
@@ -208,7 +208,7 @@ package "Команда, груз и припасы" {
     * спецгруз
   }
 
-  entity "Пломба" as cargo_seal <<проект>> #FFF2CC {
+  entity "Пломба" as cargo_seal {
     * id <<PK>>
     --
     * манифест <<FK>>
@@ -220,17 +220,17 @@ package "Команда, груз и припасы" {
     момент проверки
   }
 
-  entity "Сверка манифеста" as manifest_reconciliation <<проект>> #FFF2CC {
+  entity "Сверка манифеста" as manifest_reconciliation {
     * id <<PK>>
     --
     * манифест <<FK>>
     * выполнил <<FK>>
-    * результат (MATCH / MISMATCH)
+    * результат: MATCH, MISMATCH
     комментарий
     * момент сверки
   }
 
-  entity "Расхождение по позиции" as reconciliation_discrepancy <<проект>> #FFF2CC {
+  entity "Расхождение по позиции" as reconciliation_discrepancy {
     * id <<PK>>
     --
     * сверка <<FK>>
@@ -239,11 +239,11 @@ package "Команда, груз и припасы" {
     * фактическое количество
   }
 
-  entity "Резерв припасов" as supply_reservation <<проект>> #FFF2CC {
+  entity "Резерв припасов" as supply_reservation {
     * id <<PK>>
     --
     * заявка <<FK>>
-    * вид припаса (WATER / FOOD / AMMO / MEDICAL / REPAIR_KIT)
+    * вид припаса: WATER, FOOD, AMMO, MEDICAL, REPAIR_KIT
     * количество
     * единица измерения
     * зарезервировал <<FK>>
@@ -253,7 +253,7 @@ package "Команда, груз и припасы" {
 
 ' ─── Полевые операции, финансы и аудит ───────────────────────────────
 package "Полевые операции, финансы и аудит" {
-  entity "Этап рейса" as trip_stage <<проект>> #FFF2CC {
+  entity "Этап рейса" as trip_stage {
     * id <<PK>>
     --
     * заявка <<FK>>
@@ -265,131 +265,125 @@ package "Полевые операции, финансы и аудит" {
     подтвердил <<FK>>
   }
 
-  entity "Отметка контрольной точки / КПП" as checkpoint_log <<проект, MongoDB>> #FFF2CC {
+  entity "Отметка контрольной точки / КПП" as checkpoint_log {
     * id <<PK>>
     --
     * идентификатор события на устройстве <<уникальный>>
-    * заявка {по значению}
-    этап рейса {по значению}
+    * заявка <<FK>>
+    этап рейса <<FK>>
     * код контрольной точки
-    * вид (CHECKPOINT / NCR_GATE)
+    * вид: CHECKPOINT, NCR_GATE
     * момент события
     координаты
     результат
     причина задержки
-    пошлина {сумма, валюта, курс, в крышках}
-    * отметил
+    пошлина: сумма, валюта, курс, сумма в крышках
+    * отметил <<FK>>
     * устройство
     момент синхронизации
   }
 
-  entity "Инцидент" as incident <<проект, MongoDB>> #FFF2CC {
+  entity "Инцидент" as incident {
     * id <<PK>>
     --
     * идентификатор события на устройстве <<уникальный>>
-    * заявка {по значению}
+    * заявка <<FK>>
     * тип
-    * тяжесть (LOW / MEDIUM / HIGH / CRITICAL)
+    * тяжесть: LOW, MEDIUM, HIGH, CRITICAL
     * момент инцидента
     координаты
     описание
-    участники [список: сотрудник, роль, пострадал]
-    медицинская часть {раненые, расход медприпасов}
-    * автор
+    участники: сотрудник, роль, пострадал
+    медицинская часть: раненые, расход медприпасов
+    * автор <<FK>>
     * устройство
-    * состояние синхронизации (LOCAL / SYNCED)
+    * состояние синхронизации: LOCAL, SYNCED
   }
 
-  entity "RecoveryRequest" as recovery_request <<проект>> #FFF2CC {
+  entity "RecoveryRequest" as recovery_request {
     * id <<PK>>
     --
     * заявка <<FK>>
-    инцидент {по значению}
-    * тип (EVACUATION / BACKUP / REDELIVERY / REPAIR)
-    * статус (OPEN / IN_PROGRESS / CLOSED)
+    инцидент <<FK>>
+    * тип: EVACUATION, BACKUP, REDELIVERY, REPAIR
+    * статус: OPEN, IN_PROGRESS, CLOSED
     комментарий
     * создал <<FK>>
     * момент создания
     момент закрытия
   }
 
-  entity "Финансовый отчёт перевозки" as financial_report <<проект>> #FFF2CC {
+  entity "Финансовый отчёт перевозки" as financial_report {
     * id <<PK>>
     --
     * заявка <<FK, уникальный>>
-    * доходы, крышек
-    * расходы, крышек
+    * стоимость доставки, крышек
+    * оплата охраны, крышек
+    * оплата медиков, крышек
+    * припасы, крышек
+    * пошлины КПП, крышек
+    * прочие расходы, крышек
+    * итого расходов, крышек
     * финансовый результат, крышек
     * сформировал <<FK>>
     * момент формирования
     момент экспорта на голотейп
   }
 
-  entity "Статья отчёта" as financial_report_line <<проект>> #FFF2CC {
-    * id <<PK>>
-    --
-    * отчёт <<FK>>
-    * вид (доход / расход)
-    * категория
-    * сумма
-    * валюта
-    * курс к крышкам
-    * сумма, крышек
-  }
-
-  entity "Событие аудита" as audit_event <<MongoDB>> #E8F5E9 {
+  entity "Событие аудита" as audit_event {
     * id <<PK>>
     --
     * тип события
     * актор
-    организация {по значению}
-    пользователь {по значению}
-    тип сущности {проект}
-    id сущности {проект}
+    организация <<FK>>
+    пользователь <<FK>>
+    тип сущности
+    id сущности
     * изменённые данные
     * момент события
   }
 }
 
 ' ─── Связи ───────────────────────────────────────────────────────────
-organization ||--o{ subscription : оплачивает
-subscription ||--o{ terminal : активирует
-organization ||--o{ terminal : владеет
-organization |o--o{ app_user : сотрудники
-role ||--o{ app_user : роль учётной записи
-app_user ||--o{ employee_rate : ставки по периодам
+organization "1..1" -- "0..*" subscription : оплачивает
+subscription "1..1" -- "0..*" terminal : активирует
+organization "1..1" -- "0..*" terminal : владеет
+organization "0..1" -- "0..*" app_user : сотрудники
+role "1..1" -- "0..*" app_user : роль учётной записи
+app_user "1..1" -- "0..*" employee_rate : ставки по периодам
 
-organization ||--o{ caravan_request : заявки
-route |o--o{ caravan_request : выполняется по
-organization |o--o{ route : ручные маршруты
-route ||--|{ route_segment : участки
-checkpoint ||--o{ route_segment : начало / конец участка
-caravan_request ||--|{ request_status_history : история переходов
-role ||--o{ request_status_history : роль актора
-app_user |o--o{ request_status_history : актор
-caravan_request ||--o| escort_plan : рекомендация UC-8
-caravan_request ||..o{ risk_assessment : снимки расчёта
+organization "1..1" -- "0..*" caravan_request : заявки
+route "0..1" -- "0..*" caravan_request : выполняется по
+organization "0..1" -- "0..*" route : ручные маршруты
+route "1..1" -- "1..*" route_segment : участки
+checkpoint "1..1" -- "0..*" route_segment : начало участка
+checkpoint "1..1" -- "0..*" route_segment : конец участка
+caravan_request "1..1" -- "1..*" request_status_history : история переходов
+role "1..1" -- "0..*" request_status_history : роль актора
+app_user "0..1" -- "0..*" request_status_history : актор
+caravan_request "1..1" -- "0..1" escort_plan : рекомендация
+caravan_request "1..1" -- "0..*" risk_assessment : снимки расчёта
 
-caravan_request ||--o{ trip_crew_member : команда рейса
-role ||--o{ trip_crew_member : роль в рейсе
-app_user ||--o{ trip_crew_member : назначен
-caravan_request ||--o| cargo_manifest : манифест
-cargo_manifest ||--|{ cargo_item : позиции
-cargo_manifest ||--o{ cargo_seal : пломбы
-cargo_manifest ||--o{ manifest_reconciliation : сверки
-manifest_reconciliation ||--o{ reconciliation_discrepancy : расхождения
-cargo_item ||--o{ reconciliation_discrepancy : по позиции
-caravan_request ||--o{ supply_reservation : припасы
+caravan_request "1..1" -- "0..*" trip_crew_member : команда рейса
+role "1..1" -- "0..*" trip_crew_member : роль в рейсе
+app_user "1..1" -- "0..*" trip_crew_member : назначен
+caravan_request "1..1" -- "0..1" cargo_manifest : манифест
+cargo_manifest "1..1" -- "1..*" cargo_item : позиции
+cargo_manifest "1..1" -- "0..*" cargo_seal : пломбы
+cargo_manifest "1..1" -- "0..*" manifest_reconciliation : сверки
+manifest_reconciliation "1..1" -- "0..*" reconciliation_discrepancy : расхождения
+cargo_item "1..1" -- "0..*" reconciliation_discrepancy : по позиции
+caravan_request "1..1" -- "0..*" supply_reservation : припасы
 
-caravan_request ||--o{ trip_stage : план этапов
-checkpoint |o--o{ trip_stage : точка этапа
-trip_stage ||..o| checkpoint_log : отметка по факту
-caravan_request ||..o{ incident : инциденты
-incident |o..o{ recovery_request : основание
-caravan_request ||--o{ recovery_request : реагирование
-caravan_request ||--o| financial_report : итог рейса
-financial_report ||--|{ financial_report_line : статьи
-organization ||..o{ audit_event : события
+caravan_request "1..1" -- "0..*" trip_stage : план этапов
+checkpoint "0..1" -- "0..*" trip_stage : точка этапа
+trip_stage "0..1" -- "0..1" checkpoint_log : отметка по факту
+caravan_request "1..1" -- "0..*" checkpoint_log : отметки
+caravan_request "1..1" -- "0..*" incident : инциденты
+incident "0..1" -- "0..*" recovery_request : основание
+caravan_request "1..1" -- "0..*" recovery_request : реагирование
+caravan_request "1..1" -- "0..1" financial_report : итог рейса
+organization "0..1" -- "0..*" audit_event : события
 
 note top of role
   **Роли — справочник, ссылка по id**
@@ -403,8 +397,8 @@ note top of role
 end note
 
 note bottom of trip_crew_member
-  **Медик, караван-мастер, капитан охраны — строки команды рейса,**
-  **а не колонки medic_id / master_id**
+  **Караван-мастер, капитан охраны и медик рейса —**
+  **строки команды рейса с соответствующей ролью**
   • одна роль в рейсе — один сотрудник: уникальность (заявка, роль);
   • один сотрудник — одна роль в рейсе: уникальность (заявка, сотрудник);
   • роль в рейсе совпадает с ролью учётной записи сотрудника;
@@ -417,25 +411,28 @@ end note
 
 note bottom of caravan_request
   **Расчётное время доставки, ч** — ожидаемая длительность
-  перевозки по маршруту: сумма длин участков / 4 км/ч
-  (EtaService). В глоссарии это ETA; в текущей схеме
-  колонка называется eta_hours — см. часть 2.
+  перевозки по маршруту: сумма длин участков / 4 км/ч (FR-5).
+end note
+
+note bottom of financial_report
+  Итого расходов = охрана + медики + припасы + пошлины + прочее;
+  результат = стоимость доставки − итого расходов (FR-22).
+  Исходная валюта и курс пошлин хранятся в отметках КПП.
+  Экспорт на голотейп (UC-22) выгружает эту запись.
 end note
 
 legend right
-  |= Цвет |= Значение |
-  | <#F5F5F5> | реализовано (миграции V1–V6), в целевой схеме без изменений |
-  | <#E3F2FD> | реализовано, в целевой схеме меняется (см. часть 2, изменения V7) |
-  | <#E8F5E9> | реализовано, хранится в MongoDB |
-  | <#FFF2CC> | проект — прецедент ещё не реализован |
-  **Нотация:** «*» — обязательный атрибут; ""||"" ровно один, ""|o"" ноль или один,
-  ""|{"" один или много, ""o{"" ноль или много; сплошная линия — внешний ключ,
-  пунктир — ссылка по значению между PostgreSQL и MongoDB.
-  Атрибуты «составил / назначил / подтвердил / выполнил …» ссылаются на
-  «Пользователя»; линии к ним не проведены, чтобы не загромождать схему.
-  **Трассировка:** FR-1…FR-4 (заявка и история), FR-5…FR-8 (маршрут, ETA,
-  риск, рекомендация), FR-9…FR-11 (команда), FR-12…FR-17 (груз), FR-18…FR-21
-  (полевые события), FR-22 (финансы), FR-23…FR-25, UC-34 (организации,
-  подписки), FR-26…FR-35 (пользователи, роли, ставки), RL-4, RL-5 (аудит).
+  **Кратности:** 1..1 — ровно один, 0..1 — ноль или один,
+  1..* — один или много, 0..* — ноль или много.
+  «*» — обязательный атрибут; <<PK>> — первичный ключ,
+  <<FK>> — внешний ключ.
+  Атрибуты «составил / назначил / подтвердил / выполнил …»
+  ссылаются на «Пользователя»; линии к ним не проведены,
+  чтобы не загромождать схему.
+  **Трассировка:** FR-1…FR-4 (заявка и история), FR-5…FR-8
+  (маршрут, ETA, риск, рекомендация), FR-9…FR-11 (команда),
+  FR-12…FR-17 (груз), FR-18…FR-21 (полевые события),
+  FR-22 (финансы), FR-23…FR-25, UC-34 (организации, подписки),
+  FR-26…FR-35 (пользователи, роли, ставки), RL-4, RL-5 (аудит).
 endlegend
 @enduml

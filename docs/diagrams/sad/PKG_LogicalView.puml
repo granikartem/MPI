@@ -22,15 +22,15 @@ package "presentation" as presentation {
     rectangle "HTTP-клиент\n<size:10>REST / JSON</size>" as P_HTTP
   }
   package "Полевой клиент Pip-Boy (PWA)" as pwa {
-    rectangle "Полевые формы\n<size:10>UC-16…UC-19</size>" as P_FIELD #FFF2CC
-    rectangle "Локальная очередь\nсобытий\n<size:10>RL-1</size>" as P_QUEUE #FFF2CC
+    rectangle "Полевые формы\n<size:10>UC-16…UC-19</size>" as P_FIELD
+    rectangle "Локальная очередь\nсобытий\n<size:10>RL-1</size>" as P_QUEUE
   }
   package "REST API" as restapi {
     rectangle "API заявок,\nстатусов и реестра" as P_API_REQ
     rectangle "API организаций" as P_API_ORG
     rectangle "API справочников\nмаршрутов" as P_API_REF
     rectangle "API состояния\nсервиса" as P_API_HEALTH
-    rectangle "API команды, груза,\nполевых событий, финансов" as P_API_NEXT #FFF2CC
+    rectangle "API команды, груза,\nполевых событий, финансов" as P_API_NEXT
   }
 }
 
@@ -41,12 +41,12 @@ package "application" as application {
   rectangle "Расчёт ETA\n<size:10>UC-6</size>" as A_ETA
   rectangle "Оценка риска\n<size:10>UC-7, UC-8</size>" as A_RISK
   rectangle "Создание организации\n<size:10>UC-32</size>" as A_ORG
-  rectangle "Команда рейса\n<size:10>UC-9, UC-10</size>" as A_CREW #FFF2CC
-  rectangle "Груз и припасы\n<size:10>UC-11…UC-15</size>" as A_CARGO #FFF2CC
-  rectangle "Полевые события\n<size:10>UC-16…UC-20</size>" as A_FIELD #FFF2CC
-  rectangle "Финансовый отчёт\n<size:10>UC-21, UC-22</size>" as A_FIN #FFF2CC
-  rectangle "Пользователи и доступ\n<size:10>UC-25…UC-31</size>" as A_USERS #FFF2CC
-  rectangle "Подписки\n<size:10>UC-33, UC-34</size>" as A_SUBS #FFF2CC
+  rectangle "Команда рейса\n<size:10>UC-9, UC-10</size>" as A_CREW
+  rectangle "Груз и припасы\n<size:10>UC-11…UC-15</size>" as A_CARGO
+  rectangle "Полевые события\n<size:10>UC-16…UC-20</size>" as A_FIELD
+  rectangle "Финансовый отчёт\n<size:10>UC-21, UC-22</size>" as A_FIN
+  rectangle "Пользователи и доступ\n<size:10>UC-25…UC-31</size>" as A_USERS
+  rectangle "Подписки\n<size:10>UC-33, UC-34</size>" as A_SUBS
 }
 
 package "domain" as domain {
@@ -64,8 +64,8 @@ package "infrastructure" as infrastructure {
   rectangle "Хранение снимков риска\n<size:10>MongoDB 7</size>" as I_RISK
   rectangle "Журнал аудита\n<size:10>MongoDB 7</size>" as I_AUDIT
   rectangle "Адаптер Wasteland Intel\n<size:10>REST, таймауты 2 с</size>" as I_WI
-  rectangle "Адаптер NCR Checkpoint\n<size:10>REST</size>" as I_NCR #FFF2CC
-  rectangle "Безопасность\n<size:10>аутентификация, JWT</size>" as I_SEC #FFF2CC
+  rectangle "Адаптер NCR Checkpoint\n<size:10>REST</size>" as I_NCR
+  rectangle "Безопасность\n<size:10>аутентификация, JWT</size>" as I_SEC
 }
 
 package "Внешние системы" as external {
@@ -81,10 +81,10 @@ I_WI ..> X_WI : REST / HTTPS, JSON
 I_NCR ..> X_NCR : REST / HTTPS, JSON
 P_HTTP ..> restapi : HTTPS, JSON
 P_QUEUE ..> restapi : синхронизация\nпри появлении связи
-P_API_REF ..> I_PG #CC0000 : отступление от DC-6
+P_API_REF .[#CC0000].> I_PG : отступление от DC-6
 
 note bottom of infrastructure
-  **Соответствие фактическому коду** — пакеты по предметным модулям, слои внутри модуля:
+  **Соответствие структуре кода** — пакеты по предметным модулям, слои внутри модуля:
   • presentation → frontend/src/pages, components, api.ts; com.karavany.request.web,
     .organization.web, .route.web, .common.health
   • application → com.karavany.request.service, .organization.service; risk.RiskService
@@ -96,13 +96,12 @@ end note
 
 legend right
   |= Обозначение |= Значение |
-  | <#F5F5F5> | реализовано |
-  | <#FFF2CC> | проект — прецедент ещё не реализован |
+  | <#F5F5F5> | компонент системы |
   | <#EDE7F6> | внешняя система |
   Зависимости только сверху вниз: presentation → application →
   domain; application обращается к infrastructure (<<access>>),
   infrastructure зависит от domain.
-  **Красная связь** — фактическое отступление от DC-6:
+  **Красная связь** — отступление от DC-6:
   RouteController и CheckpointController читают
   репозитории напрямую, минуя application.
   Имена логических компонентов совпадают с участниками

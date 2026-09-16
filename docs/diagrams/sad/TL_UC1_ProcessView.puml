@@ -2,7 +2,7 @@
 skinparam defaultFontName Arial
 skinparam defaultFontSize 12
 
-title ИС «Караваны» — Timeline Diagram (Process View)\nUC-1 «Создать заявку»: обработка POST /api/requests и таймауты Wasteland Intel — реализовано. Ось — миллисекунды
+title ИС «Караваны» — Timeline Diagram (Process View)\nUC-1 «Создать заявку»: обработка POST /api/requests и таймауты Wasteland Intel. Ось — миллисекунды
 
 scale 500 as 240 pixels
 
@@ -40,12 +40,12 @@ BAD@2000 <-> @4000 : {readTimeout}
 highlight 0 to 1000 #E8F5E9;line:DimGrey
 
 note bottom of OK
-  Один поток Tomcat выполняет всё синхронно: RequestController.create → RequestService
+  Один поток обработки выполняет всё синхронно: RequestController.create → RequestService
   (проверка организации и маршрута) → EtaService → RiskService → WastelandIntelClient
   GET /threats → сохранение заявки, снимка риска и истории статусов → HTTP 201.
-  Длительности нормального сценария условные; фиксированы только таймауты
-  SimpleClientHttpRequestFactory (connect 2000 мс, read 2000 мс) и бюджеты
-  PF-4 ≤ 1 с и Vision 9.3 ≤ 500 мс на перезагрузку реестра (замер UC-3: 14 мс).
+  Длительности шагов нормального сценария условные; фиксированы таймауты
+  WastelandIntelClient (connect 2000 мс, read 2000 мс) и бюджеты
+  PF-4 ≤ 1 с и Vision 9.3 ≤ 500 мс на перезагрузку реестра.
 end note
 
 note bottom of BAD

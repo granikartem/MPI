@@ -26,11 +26,11 @@ node "**Центральный сервер караванной конторы*
 
     node "**nginx 1.30** <<execution environment>>\nпакет www/nginx · служба nginx · TLS на :443" as NGINX {
       artifact "web-клиент и PWA\n/usr/local/www/karavany\n(сборка vite build)" as A_WEB
-      artifact "конфигурация сайта\nTLS, прокси /api/* → 127.0.0.1:8080" as A_NGINX_CONF #FFF2CC
+      artifact "конфигурация сайта\nTLS, прокси /api/* → 127.0.0.1:8080" as A_NGINX_CONF
     }
 
     node "**OpenJDK 21** <<execution environment>>\nпакет java/openjdk21 · служба karavany · слушает 127.0.0.1:8080" as JVM {
-      artifact "karavany-0.1.0.jar\nSpring Boot 3.3, миграции Flyway V1–V6" as A_JAR
+      artifact "karavany-0.1.0.jar\nSpring Boot 3.3, миграции Flyway" as A_JAR
     }
 
     node "**PostgreSQL 16** <<execution environment>>\nпакет databases/postgresql16-server\nслужба postgresql · слушает 127.0.0.1:5432" as PG {
@@ -41,11 +41,11 @@ node "**Центральный сервер караванной конторы*
       database "БД karavany\nснимки риска, аудит, события" as DB_MONGO
     }
 
-    artifact "Резервные копии\npg_dump, mongodump,\nZFS-снапшоты датасетов" as A_BACKUP #FFF2CC
+    artifact "Резервные копии\npg_dump, mongodump,\nZFS-снапшоты датасетов" as A_BACKUP
   }
 }
 
-node "**Резервная кассета (голотейп)** <<device>>\nнакопитель, подключённый к серверу" as HOLO #FFF2CC
+node "**Резервная кассета (голотейп)** <<device>>\nнакопитель, подключённый к серверу" as HOLO
 
 ' ─── Клиентские устройства ───────────────────────────────────────────
 node "**Офисный терминал** <<device>> × до 50\nCPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768\nОС: Windows 10 / macOS 11 / Ubuntu 20.04+\nсеть: LAN или Wi-Fi, 10 Мбит/с" as TERM {
@@ -54,10 +54,10 @@ node "**Офисный терминал** <<device>> × до 50\nCPU 2 ядра 
   }
 }
 
-node "**Pip-Boy 3000 или совместимое устройство** <<device>> × до 150\nARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ\nWi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч" as PIP #FFF2CC {
-  node "Браузер устройства\n<<execution environment>>" as PIP_BROWSER #FFF2CC {
+node "**Pip-Boy 3000 или совместимое устройство** <<device>> × до 150\nARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ\nWi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч" as PIP {
+  node "Браузер устройства\n<<execution environment>>" as PIP_BROWSER {
     artifact "PWA полевого клиента\nкараван-мастер, капитан охраны, медик" as A_PWA
-    database "IndexedDB: очередь\nсобытий без связи ≥ 3 ч" as PIP_STORE #FFF2CC
+    database "IndexedDB: очередь\nсобытий без связи ≥ 3 ч" as PIP_STORE
   }
 }
 
@@ -72,7 +72,7 @@ NGINX --> JVM : HTTP, 127.0.0.1:8080\n/api/*
 JVM --> PG : JDBC (PostgreSQL wire)\n127.0.0.1:5432
 JVM --> MONGO : MongoDB Wire Protocol\n127.0.0.1:27017
 JVM --> WI : REST / HTTPS :443, JSON\nGET /threats?segments=…\nconnect / read timeout 2 с
-JVM ..> NCR : REST / HTTPS :443, JSON\n(проект, UC-24)
+JVM --> NCR : REST / HTTPS :443, JSON\n(UC-24)
 PG ..> A_BACKUP : pg_dump
 MONGO ..> A_BACKUP : mongodump
 A_BACKUP --> HOLO : запись резервной копии
@@ -95,9 +95,9 @@ end note
 
 legend right
   |= Цвет |= Значение |
-  | <#F5F5F5> | реализовано: артефакт собирается проектом, пакет есть в FreeBSD |
+  | <#F5F5F5> | устройство или среда выполнения |
+  | <#FFFFFF> | артефакт |
   | <#E8F5E9> | хранилище данных |
-  | <#FFF2CC> | проект — в репозитории ещё нет |
   | <#EDE7F6> | внешняя система |
   **Характеристики** сервера, терминала и Pip-Boy — Vision 9.2;
   число устройств — Vision 9.3 и PF-1 (50 терминалов + 150 Pip-Boy).

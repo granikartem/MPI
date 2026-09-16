@@ -2,7 +2,7 @@
 skinparam defaultFontName Arial
 skinparam defaultFontSize 12
 
-title ИС «Караваны» — Timeline Diagram (Process View)\nФиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3) — проект. Ось — секунды
+title ИС «Караваны» — Timeline Diagram (Process View)\nФиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды
 
 scale 60 as 160 pixels
 
@@ -53,7 +53,6 @@ end note
 
 note bottom of TRIP
   При тяжести HIGH / CRITICAL сервер сразу после приёма выполняет переход
-  EN_ROUTE → DELAYED ролью SYSTEM (разрешён RequestStatusMachine,
-  вызывающего кода пока нет).
+  EN_ROUTE → DELAYED ролью SYSTEM (переход разрешён RequestStatusMachine).
 end note
 @enduml
