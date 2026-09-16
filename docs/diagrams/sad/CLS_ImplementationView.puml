@@ -596,7 +596,7 @@ package "com.karavany.audit" #FDFDFD {
     - actor : String
     - organizationId : UUID {без внешнего ключа}
     - userId : UUID
-    - details : Map<String, Object> {LinkedHashMap}
+    - details : Map<String, Object>
     - occurredAt : Instant
     -- методы --
     + {static} organizationCreated(orgId, dispatcherId, name, tier, login) : AuditEvent
@@ -732,41 +732,14 @@ WastelandIntelClient ..> WI : RestClient.get()
 
 note as N_Scope
   **Контур диаграммы**
-  • показаны классы реализованных прецедентов UC-1
-    «Создать заявку на перевозку», UC-2 «Управлять
-    статусами заявки», UC-3 «Просмотреть реестр рейсов»,
-    UC-7 «Рассчитать risk_score» и UC-32 «Создать
-    организацию»;
-  • чтобы диаграмма читалась при вставке по ширине
-    страницы, из контура убран пакет com.karavany.route
-    целиком: RouteController и CheckpointController
-    (слой web), Route, RouteSegment и Checkpoint
-    (слой domain), RouteRepository,
-    RouteSegmentRepository и CheckpointRepository
-    (слой repository), а с ними — связи
-    CaravanRequest → Route,
-    Route → RouteSegment → Checkpoint и обращения
-    контроллеров справочников к репозиториям в обход
-    слоя service. Маршрут остался как тип поля
-    CaravanRequest.route и параметр
-    RiskService.calculate(route, cargoValueCaps),
-    его таблицы — в заметке «Схема хранения»,
-    сами классы — на CLS_LogicalView;
-  • также вне контура: HealthController (проверка
-    готовности хранилищ), KaravanyApplication и модуль
-    frontend (страницы и компоненты — на CLS_LogicalView,
-    контракт api.ts повторяет record-DTO контроллеров);
+  • показаны классы реализованных прецедентов
+    UC-1, UC-2, UC-3, UC-7 и UC-32;
+  • вне контура, чтобы диаграмма читалась по ширине
+    страницы: пакет com.karavany.route целиком,
+    HealthController и frontend (они есть
+    на CLS_LogicalView), а также KaravanyApplication;
   • классов UC-16 и UC-19 в коде нет: их проектируемые
     сущности показаны как «проект» на CLS_UseCaseView.
-  **Границы слоёв**
-  • в com.karavany.request и com.karavany.organization
-    слои — вложенные пакеты
-    web / service / domain / repository, ровно как в коде;
-  • com.karavany.risk и com.karavany.audit в коде
-    подпакетов не имеют: слой каждого класса виден
-    по стереотипу («@Service», «@Component»,
-    «MongoRepository», «MongoDB», «не хранится»,
-    «перечисление»).
 end note
 
 note bottom of PG
@@ -824,50 +797,20 @@ end note
 
 note bottom of RiskService
   **RiskService.calculate(route, cargoValueCaps)**
-  keys = route.getSegments()
-      .map(RouteSegment::segmentKey)
-  intelClient.fetchThreats(keys).isEmpty()
-    → RiskResult.unavailable() (score = null,
-    status = "NA", recommendation = «требует пересчёта»)
-  threatSum = сумма threatLevel по участкам ключа
-  base = min(100, threatSum * 6)
-  cargoFactor: caps >= 20000 → 30; >= 5000 → 20;
-    >= 1000 → 10; иначе 0
-  score = min(100, base + cargoFactor)
-  status = isStale(asOf) ? "STALE" : "OK", где isStale
-    истинно, если OffsetDateTime.parse(asOf) <
-    now().minusHours(24); при пустом или неразборном
-    asOf isStale возвращает false
-  recommendation: score >= 80 / 60 / 30 → критический /
-    высокий / средний риск, иначе низкий
-    (состав охраны и объём припасов)
-  RiskLevel.of(score, riskStatus): "NA" или score == null
-    → UNKNOWN, иначе >= 80 → CRITICAL, >= 60 → HIGH,
-    >= 30 → MEDIUM, иначе LOW
+  Пошаговый алгоритм, формула и пороги — на диаграмме
+  активности ACT_UC7_ImplementationView.
+  Здесь существенно поведение isStale(asOf): при пустом
+  или неразборном asOf возвращает false, то есть оценка
+  считается актуальной.
 end note
 
 note bottom of RequestStatusMachine
   **RequestStatusMachine.TRANSITIONS — 8 переходов**
-  Transition(DRAFT, READY, «Укомплектовать рейс»,
-    {DISPATCHER}, false)
-  Transition(DRAFT, CANCELLED, «Отменить заявку»,
-    {DISPATCHER}, false)
-  Transition(READY, CANCELLED,
-    «Отменить рейс до выхода», {DISPATCHER}, false)
-  Transition(READY, EN_ROUTE,
-    «Караван вышел на маршрут», {CARAVAN_MASTER}, false)
-  Transition(EN_ROUTE, DELAYED,
-    «Зафиксировать задержку»,
-    {DISPATCHER, CARAVAN_MASTER, SYSTEM},
-    reasonRequired = true)
-  Transition(DELAYED, EN_ROUTE,
-    «Движение возобновлено»,
-    {DISPATCHER, CARAVAN_MASTER}, false)
-  Transition(EN_ROUTE, DELIVERED, «Груз доставлен»,
-    {CARAVAN_MASTER}, false)
-  Transition(DELIVERED, CLOSED, «Закрыть рейс»,
-    {DISPATCHER}, false)
-  isTerminal(CLOSED) == isTerminal(CANCELLED) == true
+  Состав переходов с ролями и признаком обязательной
+  причины показан на диаграмме состояний SM_UC2.
+  Здесь существенно: isTerminal(CLOSED) и
+  isTerminal(CANCELLED) истинны — из этих статусов
+  переходов нет.
 end note
 
 note as N_Limits
@@ -925,9 +868,7 @@ legend right
   "".."" связь по значению без внешнего ключа, ""..>"" зависимость: вызов
   или обращение к хранилищу (на зависимостях и на вложенности кратности
   не указываются).
-  **Внедрённые зависимости сервисов** показаны полями класса
-  (""- requestRepository : CaravanRequestRepository"" и т. п.); рёбрами
-  проведены переходы между слоями web → service, web → domain,
-  service → service и repository → хранилище.
+  **Внедрённые зависимости** показаны полями класса
+  (""- requestRepository : CaravanRequestRepository"" и т. п.).
 endlegend
 @enduml
