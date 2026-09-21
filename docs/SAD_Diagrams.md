@@ -19,7 +19,7 @@ Sequence, Cooperative и State Machine. Остальные типы в эту с
 | State Machine Diagram | **UC-2 «Управлять статусами заявки»** | Единственный прецедент с явной статусной моделью; реализован полностью (`RequestStatusMachine`, история статусов, audit) |
 | Sequence Diagram | **UC-1 «Создать заявку на перевозку»** | Самый длинный обмен сообщениями: клиент → сервер → внешняя система Wasteland Intel → хранилища; включает UC-5, UC-6, UC-7, UC-8 |
 | Cooperative (Communication) Diagram | **UC-32 «Создать организацию»** | Мультитенантность и провижининг: наглядная кооперация объектов разных слоёв, не пересекается с UC-1 и UC-2 |
-| Activity Diagram | **UC-7 «Рассчитать risk_score»** | Единственный оставшийся свободным реализованный прецедент: ветвление основного потока (внешние данные получены / источник недоступен / данные устарели) даёт содержательную диаграмму активности, а Implementation View опирается на фактический код, а не на проект |
+| Activity Diagram | **UC-7 «Рассчитать risk_score»** (Use-Case View), **UC-1 «Создать заявку на перевозку»** (Logical View), **UC-32 «Создать организацию»** (Implementation View) | Один тип диаграмм покрывает разные прецеденты в разных точках зрения. Взяты все три реализованных коровых прецедента: UC-7 даёт ветвление по внешним данным, UC-1 — самый длинный поток через все логические компоненты, UC-32 — провижининг с двумя хранилищами и аудитом |
 | Use Case Diagram | — (система целиком) | Сноской не ограничена: показывает акторов, границу системы и архитектурно значимые прецеденты |
 | Class Diagram | — (система целиком) | Сноской не ограничена: три точки зрения — это три уровня детализации одной модели (сущности → классы по слоям → полные классы), а не три прецедента |
 | Package Diagram | — (система целиком) | Сноской не ограничена: задаёт слои, на которые опираются Logical View остальных диаграмм |
@@ -47,7 +47,7 @@ Implementation View для них был бы проектным. Их сущн�
 | 4. Use-Case View | Cooperative, UC-32 | [COL_UC32_UseCaseView.puml](diagrams/sad/COL_UC32_UseCaseView.puml) | [png](diagrams/out/COL_UC32_UseCaseView.png) |
 | 5. Logical View | Package, система целиком | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
 | 5. Logical View | Class, система целиком | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
-| 5. Logical View | Activity, UC-7 | [ACT_UC7_LogicalView.puml](diagrams/sad/ACT_UC7_LogicalView.puml) | [png](diagrams/out/ACT_UC7_LogicalView.png) |
+| 5. Logical View | Activity, UC-1 | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [png](diagrams/out/ACT_UC1_LogicalView.png) |
 | 5. Logical View | State Machine, UC-2 | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
 | 5. Logical View | Sequence, UC-1 | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
 | 5. Logical View | Cooperative, UC-32 | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
@@ -56,7 +56,7 @@ Implementation View для них был бы проектным. Их сущн�
 | 6. Process View | Timeline, UC-1 | [TL_UC1_ProcessView.puml](diagrams/sad/TL_UC1_ProcessView.puml) | [png](diagrams/out/TL_UC1_ProcessView.png) |
 | 7. Deployment View | Deployment, система целиком | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
 | 8. Implementation View | Class, система целиком | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
-| 8. Implementation View | Activity, UC-7 | [ACT_UC7_ImplementationView.puml](diagrams/sad/ACT_UC7_ImplementationView.puml) | [png](diagrams/out/ACT_UC7_ImplementationView.png) |
+| 8. Implementation View | Activity, UC-32 | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [png](diagrams/out/ACT_UC32_ImplementationView.png) |
 | 8. Implementation View | State Machine, UC-2 | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
 | 8. Implementation View | Sequence, UC-1 | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
 | 8. Implementation View | Cooperative, UC-32 | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |
@@ -80,7 +80,8 @@ Implementation View для них был бы проектным. Их сущн�
   данных»), а не по техническим ролям классов: сервисы, репозитории и контроллеры появляются только
   в Implementation View. Диаграмма классов в Logical View пока использует имена
   фактических пакетов кода (`backend.web` / `backend.service` / `backend.repository`);
-  на диаграмме активности UC-7 эти слои укрупнены до пяти дорожек.
+  диаграмма активности Logical View построена на тех же логических
+  компонентах, что Sequence, Cooperative и State Machine.
 - **Implementation View — полное описание.** Фактические классы и методы реализации, сигнатуры,
   эндпоинты, тела запросов, коды ответов, таблицы PostgreSQL и коллекции MongoDB.
 
@@ -126,25 +127,31 @@ Implementation View для них был бы проектным. Их сущн�
   связью показано фактическое отступление от DC-6 — контроллеры справочников читают репозитории
   напрямую. Заметка сопоставляет пакеты с фактической структурой кода.
 
-### Activity Diagram — UC-7 «Рассчитать risk_score»
+### Activity Diagram — три прецедента
 
-- **Use-Case View.** Шаги основного потока в дорожках «Диспетчер караванов», «ИС «Караваны»» и «Wasteland
-  Intel»: запрос угроз по участкам маршрута, агрегация, корректировка ценностью груза, сохранение и
-  формирование рекомендации. Показаны альтернативные потоки 2а (источник недоступен → `risk_score`
-  = «Н/Д», пометка «требует пересчёта») и 2б (данные актуальности старше 24 часов → пометка «на
-  основе устаревших данных»).
-- **Logical View.** Те же шаги, разложенные по дорожкам слоёв — `frontend.components` /
-  `frontend.api`, `backend.web`, `backend.domain` и инфраструктура (Wasteland Intel, PostgreSQL,
-  MongoDB).
-- **Implementation View.** Фактический след вызовов:
-  `POST /api/requests/{id}/risk-score` → `RequestController.recalculateRisk()` →
-  `RequestService.recalculateRisk()` → `RiskService.calculate(route, cargoValueCaps)` →
-  `WastelandIntelClient.fetchThreats()` → `GET /threats?segments=…`. Приведены формула
-  `base = min(100, сумма уровней угроз × 6)`, коэффициент ценности груза (`≥20000` → +30,
-  `≥5000` → +20, `≥1000` → +10, иначе 0), итог `score = min(100, base + cargoFactor)`, пороги
-  рекомендаций 80 / 60 / 30, ветка `RiskResult.unavailable()`, проверка `asOf` на 24 часа и
-  сохранение снимка в коллекцию `risk_assessment` вместе с полями `risk_score`, `risk_status` и
-  `recommendation` в таблице `caravan_request`.
+Один тип диаграмм разнесён по разным прецедентам, формат у всех трёх один: дорожки идут слева
+направо от актора к инфраструктуре и внешним системам.
+
+- **Use-Case View — UC-7 «Рассчитать risk_score».** Шаги основного потока в дорожках
+  «Диспетчер караванов», «ИС «Караваны»» и «Wasteland Intel»: запрос угроз по участкам маршрута,
+  агрегация, корректировка ценностью груза, сохранение и формирование рекомендации. Показаны
+  альтернативные потоки 2а (источник недоступен → `risk_score` = «Н/Д», пометка «требует
+  пересчёта») и 2б (данные актуальности старше 24 часов → пометка «на основе устаревших данных»).
+- **Logical View — UC-1 «Создать заявку на перевозку».** Дорожки — логические компоненты
+  диаграммы пакетов: «Интерфейс заявок» (`presentation`), «Создание заявки», «Расчёт ETA»,
+  «Оценка риска» (`application`), «Маршрут, Заявка» (`domain`), «Хранение данных» и
+  «Адаптер Wasteland Intel» (`infrastructure`). Порядок шагов — по
+  [CoreUseCases](CoreUseCases.md): маршрут из шаблона или вручную (альт. 3а), расчёт risk_score
+  и ETA, ценность груза, подтверждение диспетчера (альт. 8а — отмена), сохранение в статусе
+  «Черновик». Недоступность Wasteland Intel показана как альт. поток 4а.
+- **Implementation View — UC-32 «Создать организацию».** Те же дорожки логических компонентов,
+  в узлах — фактические классы и методы: `POST /api/organizations` →
+  `OrganizationController.create()` → `OrganizationService.create(CreateOrganizationCommand)` →
+  `organizationRepository.findByNameIgnoreCase()` → `save(new Organization(tenantKey, …))` →
+  `userRepository.save(new AppUser(…))` → `AuditEvent.organizationCreated()` → коллекция
+  `audit_event`. Показаны альт. поток 4а (название занято → HTTP 400), альт. поток 6а
+  (диспетчер не назначается), `tenantKey = "tnt_" + 8 символов UUID` как основа
+  мультитенантности (FR-23, FR-24) и хеш пароля `"sha256:" + hex(SHA-256("karavany:" + пароль))`.
 
 ### Data Base Diagram — система целиком
 

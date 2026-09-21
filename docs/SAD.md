@@ -90,7 +90,7 @@ _Не заполнено._
 |---|---|---|---|
 | Package, система целиком | Логические пакеты слоёв, их компоненты, внешние системы и зависимости; соответствие пакетам кода | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
 | Class, система целиком | Основные классы и интерфейсы их взаимодействия по слоям | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
-| Activity, UC-7 | Те же шаги в дорожках слоёв приложения | [ACT_UC7_LogicalView.puml](diagrams/sad/ACT_UC7_LogicalView.puml) | [png](diagrams/out/ACT_UC7_LogicalView.png) |
+| Activity, UC-1 | Шаги создания заявки в дорожках логических компонентов слоёв | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [png](diagrams/out/ACT_UC1_LogicalView.png) |
 | State Machine, UC-2 | Состояния, сторожевые условия и эффекты переходов в разрезе слоёв | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
 | Sequence, UC-1 | Взаимодействие компонентов по слоям | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
 | Cooperative, UC-32 | Объекты по слоям приложения | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
@@ -146,7 +146,7 @@ REST через HTTPS.
 | Диаграмма | Что показывает | Исходник | Изображение |
 |---|---|---|---|
 | Class, система целиком | Поля, сигнатуры методов, аннотации JPA и MongoDB, таблицы PostgreSQL и коллекции MongoDB | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
-| Activity, UC-7 | Фактические методы, эндпоинты, формула, пороги и ветвления реализации | [ACT_UC7_ImplementationView.puml](diagrams/sad/ACT_UC7_ImplementationView.puml) | [png](diagrams/out/ACT_UC7_ImplementationView.png) |
+| Activity, UC-32 | Те же дорожки логических компонентов, в узлах — классы, методы, эндпоинты и хранилища | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [png](diagrams/out/ACT_UC32_ImplementationView.png) |
 | State Machine, UC-2 | Значения `RequestStatus`, реальные вызовы методов и HTTP-контракт | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
 | Sequence, UC-1 | Реальные классы, методы и HTTP-контракт реализации | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
 | Cooperative, UC-32 | Объекты реализации: классы, вызываемые методы и хранилища | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |

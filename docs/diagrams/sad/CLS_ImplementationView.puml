@@ -797,11 +797,12 @@ end note
 
 note bottom of RiskService
   **RiskService.calculate(route, cargoValueCaps)**
-  Пошаговый алгоритм, формула и пороги — на диаграмме
-  активности ACT_UC7_ImplementationView.
-  Здесь существенно поведение isStale(asOf): при пустом
-  или неразборном asOf возвращает false, то есть оценка
-  считается актуальной.
+  base = min(100, сумма threatLevel * 6)
+  score = min(100, base + cargoFactor), cargoFactor из {0, 10, 20, 30}
+  пороги recommendation: 80 / 60 / 30
+  isStale(asOf): при пустом или неразборном asOf
+  возвращает false — оценка считается актуальной.
+  Предметные шаги расчёта — на ACT_UC7_UseCaseView.
 end note
 
 note bottom of RequestStatusMachine

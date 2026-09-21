@@ -1,0 +1,122 @@
+@startuml ACT_UC32_ImplementationView
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ArrowColor #333333
+skinparam activityBackgroundColor #F5F5F5
+skinparam activityBorderColor #333333
+skinparam activityDiamondBackgroundColor #F5F5F5
+skinparam activityDiamondBorderColor #333333
+skinparam activityStartColor #333333
+skinparam activityEndColor #333333
+skinparam activityBarColor #333333
+skinparam swimlaneBorderColor #333333
+skinparam swimlaneTitleFontStyle bold
+
+title UC-32 «Создать организацию» — Activity Diagram (Implementation View)\nТе же дорожки логических компонентов, что в Logical View; в узлах — фактические классы, методы, эндпоинты и хранилища
+
+|#F5F5F5|Супер-\nпользователь|
+|#F5F5F5|presentation\nOrganizations.tsx\n→ api.ts|
+|#F5F5F5|presentation\nOrganizationController|
+|#F5F5F5|application\nOrganizationService|
+|#F5F5F5|domain\nOrganization,\nAppUser|
+|#F5F5F5|domain\nAuditEvent|
+|#F5F5F5|infrastructure\nХранение данных\n(PostgreSQL)|
+|#F5F5F5|infrastructure\nЖурнал аудита\n(MongoDB)|
+
+|Супер-\nпользователь|
+start
+:Заполнить форму организации\nи подтвердить создание;
+
+|presentation\nOrganizations.tsx\n→ api.ts|
+:createOrganization(body)\nPOST /api/organizations;
+
+|presentation\nOrganizationController|
+:create(CreateOrganization body)\n<<@PostMapping>> @Transactional, 201;
+
+|application\nOrganizationService|
+:create(CreateOrganizationCommand)\n<<@Service>> @Transactional;
+:required(name),\nnormalizeTier(tier) из {BASIC, STANDARD, PRO};
+
+|infrastructure\nХранение данных\n(PostgreSQL)|
+:organizationRepository\n    .findByNameIgnoreCase(name);
+
+|application\nOrganizationService|
+if (название свободно?) then (да)
+  :validateDispatcher(...): required(fullName),\nrequired(login), required(initialPassword)\n— если диспетчер задан;
+else (нет — альт. поток 4а)
+  :throw new IllegalArgumentException\n«Организация с таким названием уже существует»;<<#MistyRose>>
+  |presentation\nOrganizationController|
+  :@ExceptionHandler(IllegalArgumentException)\n→ HTTP 400 ErrorResponse(message);<<#MistyRose>>
+  stop
+endif
+
+|infrastructure\nХранение данных\n(PostgreSQL)|
+:если диспетчер задан — userRepository\n    .findByLoginIgnoreCase(login);
+
+|application\nOrganizationService|
+if (логин свободен\nили диспетчер не задан?) then (да)
+  :generateTenantKey() =\n"tnt_" + 8 символов UUID;
+else (нет — логин занят)
+  :throw new IllegalArgumentException\n«Пользователь с таким логином уже существует»;<<#MistyRose>>
+  |presentation\nOrganizationController|
+  :@ExceptionHandler(IllegalArgumentException)\n→ HTTP 400 ErrorResponse(message);<<#MistyRose>>
+  stop
+endif
+
+|infrastructure\nХранение данных\n(PostgreSQL)|
+:organizationRepository.save(new Organization(\n    tenantKey, name, tier, …))\n→ таблица organization;
+
+|domain\nOrganization,\nAppUser|
+:Проставить tenantKey — изолированное\nпространство данных: сущности организации\nссылаются на organization_id (FR-23, FR-24);
+
+|application\nOrganizationService|
+if (command.firstDispatcher() != null?) then (да — основной поток)
+  |domain\nOrganization,\nAppUser|
+  :Вычислить passwordHash = "sha256:" + hex(\n    SHA-256("karavany:" + пароль));
+  |infrastructure\nХранение данных\n(PostgreSQL)|
+  :userRepository.save(new AppUser(organization,\n    fullName, login, passwordHash,\n    "DISPATCHER", contactChannel))\n→ таблица app_user;
+else (нет — альт. поток 6а)
+  |domain\nOrganization,\nAppUser|
+  :Организация создана без учётных записей,\nuserCount = 0 — диспетчера назначит UC-33;
+endif
+
+|domain\nAuditEvent|
+:AuditEvent.organizationCreated(orgId,\n    dispatcherId, name, tier, login);
+
+|infrastructure\nЖурнал аудита\n(MongoDB)|
+:auditEventRepository.save(event)\n→ коллекция audit_event   (RL-4);
+
+|application\nOrganizationService|
+:return new OrganizationProvisioning(\n    organization, dispatcher, userCount);
+
+|presentation\nOrganizationController|
+:OrganizationResponse.from(created)\n→ HTTP 201;
+
+|presentation\nOrganizations.tsx\n→ api.ts|
+:Перезагрузить список организаций;
+
+|Супер-\nпользователь|
+:Увидеть организацию и учётную запись\nпервого диспетчера;
+stop
+
+floating note left
+  **Ограничение реализации:** аутентификация
+  суперпользователя не проверяется, актор
+  в audit-событии задан константой SUPERUSER.
+  Уникальность названия и логина продублирована
+  индексами uq_organization_name_ci
+  и uq_app_user_login_ci; их нарушение даёт
+  DataIntegrityViolationException → HTTP 400.
+end note
+
+legend right
+  **Обозначения**
+  • дорожки — те же слои и компоненты, что в Logical View
+    (PKG_LogicalView); в заголовках указаны реализующие их
+    классы и хранилища
+  • розовым выделены альт. поток 4а и обработка ошибок
+  **Требования (docs/SRS.md)**
+  • FR-23, FR-24, FR-25, RL-4
+  • DC-4 (PostgreSQL), DC-5 (MongoDB), DC-6 (слои)
+endlegend
+@enduml
