@@ -35,25 +35,35 @@ package "presentation" as presentation {
 }
 
 package "application" as application {
-  rectangle "Создание заявки\n<size:10>UC-1</size>" as A_REQ
-  rectangle "Управление статусами\n<size:10>UC-2</size>" as A_STATUS
-  rectangle "Реестр рейсов\n<size:10>UC-3</size>" as A_REG
-  rectangle "Расчёт ETA\n<size:10>UC-6</size>" as A_ETA
-  rectangle "Оценка риска\n<size:10>UC-7, UC-8</size>" as A_RISK
-  rectangle "Создание организации\n<size:10>UC-32</size>" as A_ORG
-  rectangle "Команда рейса\n<size:10>UC-9, UC-10</size>" as A_CREW
-  rectangle "Груз и припасы\n<size:10>UC-11…UC-15</size>" as A_CARGO
-  rectangle "Полевые события\n<size:10>UC-16…UC-20</size>" as A_FIELD
-  rectangle "Финансовый отчёт\n<size:10>UC-21, UC-22</size>" as A_FIN
-  rectangle "Пользователи и доступ\n<size:10>UC-25…UC-31</size>" as A_USERS
-  rectangle "Подписки\n<size:10>UC-33, UC-34</size>" as A_SUBS
+  package "Заявка и рейс\n<size:10>UC-1…UC-3</size>" as APP_REQUEST {
+    rectangle "Создание заявки\nUC-1" as A_REQ
+    rectangle "Управление статусами\nUC-2" as A_STATUS
+    rectangle "Реестр рейсов\nUC-3" as A_REG
+  }
+  package "Маршрут и риски\n<size:10>UC-6…UC-8</size>" as APP_ROUTE {
+    rectangle "Расчёт ETA\nUC-6" as A_ETA
+    rectangle "Оценка риска\nUC-7, UC-8" as A_RISK
+  }
+  rectangle "Команда рейса\nUC-9, UC-10" as A_CREW
+  rectangle "Груз и припасы\nUC-11…UC-15" as A_CARGO
+  rectangle "Полевые события\nUC-16…UC-20" as A_FIELD
+  rectangle "Финансовый отчёт\nUC-21, UC-22" as A_FIN
+  rectangle "Пользователи и доступ\nUC-25…UC-31" as A_USERS
+  package "Организации\n<size:10>UC-32…UC-34</size>" as APP_ORG {
+    rectangle "Создание организации\nUC-32" as A_ORG
+    rectangle "Подписки\nUC-33, UC-34" as A_SUBS
+  }
 }
 
 package "domain" as domain {
-  rectangle "Заявка\n<size:10>статусная модель, история</size>" as D_REQ
-  rectangle "Реестр\n<size:10>срезы, сортировка, флаги</size>" as D_REG
-  rectangle "Маршрут\n<size:10>участки, контрольные точки</size>" as D_ROUTE
-  rectangle "Риск\n<size:10>результат, уровень, снимок</size>" as D_RISK
+  package "Заявка и рейс" as DOM_REQUEST {
+    rectangle "Заявка\nстатусная модель, история" as D_REQ
+    rectangle "Реестр\nсрезы, сортировка, флаги" as D_REG
+  }
+  package "Маршрут и риски" as DOM_ROUTE {
+    rectangle "Маршрут\nучастки, контрольные точки" as D_ROUTE
+    rectangle "Риск\nрезультат, уровень, снимок" as D_RISK
+  }
   rectangle "Организация" as D_ORG
   rectangle "Учётная запись" as D_USER
   rectangle "Событие аудита" as D_AUDIT
@@ -61,10 +71,14 @@ package "domain" as domain {
 
 package "infrastructure" as infrastructure {
   rectangle "Хранение данных\n<size:10>PostgreSQL 16, миграции Flyway</size>" as I_PG
-  rectangle "Хранение снимков риска\n<size:10>MongoDB 7</size>" as I_RISK
-  rectangle "Журнал аудита\n<size:10>MongoDB 7</size>" as I_AUDIT
-  rectangle "Адаптер Wasteland Intel\n<size:10>REST, таймауты 2 с</size>" as I_WI
-  rectangle "Адаптер NCR Checkpoint\n<size:10>REST</size>" as I_NCR
+  package "Документные хранилища\n<size:10>MongoDB 7</size>" as INFRA_MONGO {
+    rectangle "Хранение снимков риска" as I_RISK
+    rectangle "Журнал аудита" as I_AUDIT
+  }
+  package "Внешние адаптеры" as INFRA_EXT {
+    rectangle "Адаптер Wasteland Intel\n<size:10>REST, таймауты 2 с</size>" as I_WI
+    rectangle "Адаптер NCR Checkpoint\n<size:10>REST</size>" as I_NCR
+  }
   rectangle "Безопасность\n<size:10>аутентификация, JWT</size>" as I_SEC
 }
 
@@ -82,6 +96,12 @@ I_NCR ..> X_NCR : REST / HTTPS, JSON
 P_HTTP ..> restapi : HTTPS, JSON
 P_QUEUE ..> restapi : синхронизация\nпри появлении связи
 P_API_REF .[#CC0000].> I_PG : отступление от DC-6
+
+' ─── Скрытые связи только для компоновки (без семантики) ─────────────
+presentation -[hidden]d-> application
+application -[hidden]d-> infrastructure
+infrastructure -[hidden]d-> domain
+infrastructure -[hidden]r-> external
 
 note bottom of infrastructure
   **Соответствие структуре кода** — пакеты по предметным модулям, слои внутри модуля:

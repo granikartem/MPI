@@ -29,8 +29,11 @@ node "**Центральный сервер караванной конторы*
       artifact "конфигурация сайта\nTLS, прокси /api/* → 127.0.0.1:8080" as A_NGINX_CONF
     }
 
-    node "**OpenJDK 21** <<execution environment>>\nпакет java/openjdk21 · служба karavany · слушает 127.0.0.1:8080" as JVM {
-      artifact "karavany-0.1.0.jar\nSpring Boot 3.3, миграции Flyway" as A_JAR
+    node "**OpenJDK 21 (JVM)** <<execution environment>>\nпакет java/openjdk21 · служба karavany (rc.d)\nзапуск: java -jar karavany-0.1.0.jar\nJava heap: -Xms512m -Xmx2g (рекомендация)" as JVM {
+
+      node "**Embedded Apache Tomcat 10.1.31** <<execution environment>>\nвстроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует\nJakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080\nthread pool: 10–200 потоков (по умолчанию Spring Boot)" as TOMCAT {
+        artifact "karavany-0.1.0.jar\nSpring Boot 3.3.5:\n• Spring MVC — DispatcherServlet, REST-контроллеры /api/*\n• Spring Data JPA (Hibernate) → PostgreSQL\n• Spring Data MongoDB → MongoDB\n• Flyway — миграции схемы при старте\n• Spring Boot Actuator — /api/health, /api/info" as A_JAR
+      }
     }
 
     node "**PostgreSQL 16** <<execution environment>>\nпакет databases/postgresql16-server\nслужба postgresql · слушает 127.0.0.1:5432" as PG {
@@ -68,11 +71,12 @@ node "**NCR Checkpoint & Tax Terminal** <<external system>>\nпрохожден�
 ' ─── Интерфейсы взаимодействия ───────────────────────────────────────
 BROWSER --> NGINX : HTTPS :443\nстатика + REST / JSON
 PIP_BROWSER --> NGINX : HTTPS :443, REST / JSON\nсинхронизация при появлении связи (≤ 60 с, RL-3)
-NGINX --> JVM : HTTP, 127.0.0.1:8080\n/api/*
-JVM --> PG : JDBC (PostgreSQL wire)\n127.0.0.1:5432
-JVM --> MONGO : MongoDB Wire Protocol\n127.0.0.1:27017
-JVM --> WI : REST / HTTPS :443, JSON\nGET /threats?segments=…\nconnect / read timeout 2 с
-JVM --> NCR : REST / HTTPS :443, JSON\n(UC-24)
+NGINX --> TOMCAT : HTTP, 127.0.0.1:8080\nNIO-коннектор принимает /api/*
+TOMCAT --> A_JAR : Jakarta Servlet\nDispatcherServlet маршрутизирует запрос
+A_JAR --> PG : JDBC (PostgreSQL wire)\n127.0.0.1:5432
+A_JAR --> MONGO : MongoDB Wire Protocol\n127.0.0.1:27017
+A_JAR --> WI : REST / HTTPS :443, JSON\nGET /threats?segments=…\nconnect / read timeout 2 с
+A_JAR --> NCR : REST / HTTPS :443, JSON\n(UC-24)
 PG ..> A_BACKUP : pg_dump
 MONGO ..> A_BACKUP : mongodump
 A_BACKUP --> HOLO : запись резервной копии
@@ -87,6 +91,13 @@ note right of OS
   **Поставка артефактов.** karavany-0.1.0.jar собирается
   gradle bootJar (JDK 21), web-клиент — npm run build;
   на сервер копируются готовые файлы.
+  **Встроенный Tomcat.** karavany-0.1.0.jar — исполняемый
+  fat-jar Spring Boot: HTTP-сервер не устанавливается и не
+  настраивается отдельно, а встроен в jar через
+  spring-boot-starter-tomcat (Apache Tomcat 10.1.31,
+  Jakarta Servlet 6.0) и поднимается той же командой
+  java -jar; отдельного WAR и внешнего сервера приложений
+  в проекте нет.
   **MongoDB.** Порт databases/mongodb70 содержит
   FreeBSD-специфичный патч, не проходивший QA MongoDB Inc.,
   поэтому перед вводом в эксплуатацию — нагрузочная
@@ -104,5 +115,8 @@ legend right
   Разрешение терминала: Vision 9.2 — от 1024×768, глоссарий — от 1280×720.
   **Интерфейсы:** клиент — сервер только HTTPS (SRS 3.6.4),
   внешние системы — REST по HTTPS, формат JSON.
+  **Встроенный контейнер:** Apache Tomcat 10.1.31 идёт внутри
+  spring-boot-starter-web (Spring Boot 3.3.5) — отдельно не
+  устанавливается.
 endlegend
 @enduml
