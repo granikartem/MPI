@@ -1,0 +1,86 @@
+@startuml COL_UC1_ImplementationView
+!pragma layout smetana
+set separator none
+skinparam shadowing false
+skinparam objectBackgroundColor #F5F5F5
+skinparam objectBorderColor #333333
+skinparam packageStyle rectangle
+skinparam ArrowColor #333333
+skinparam defaultFontName Courier
+
+title UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)\nОбъекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе
+
+object "d:Диспетчер" as D <<actor>> #White
+
+package "frontend/src (React 18 + TypeScript)" {
+  object "form:RequestForm.tsx" as FORM
+  object "console:Console.tsx" as CON
+  object "api:api.ts (axios)" as API
+}
+
+package "com.karavany.request" {
+  object "c:RequestController" as WEB <<@RestController>>
+  object "s:RequestService" as SVC <<@Service>>
+  object "eta:EtaService" as ETA <<@Service>>
+  object "st:RequestStatusService" as ST <<@Service>>
+  object "repo:CaravanRequestRepository" as REPO <<JpaRepository>>
+  object "hRepo:RequestStatusHistoryRepository" as HREPO <<JpaRepository>>
+}
+
+package "com.karavany.organization" {
+  object "orgRepo:OrganizationRepository" as OREPO <<JpaRepository>>
+}
+
+package "com.karavany.route" {
+  object "routeRepo:RouteRepository" as RREPO <<JpaRepository>>
+  object "cpRepo:CheckpointRepository" as CPREPO <<JpaRepository>>
+  object "segRepo:RouteSegmentRepository" as SREPO <<JpaRepository>>
+}
+
+package "com.karavany.risk" {
+  object "risk:RiskService" as RISK <<@Service>>
+  object "intel:WastelandIntelClient" as INTEL <<@Component>>
+  object "raRepo:RiskAssessmentRepository" as RAREPO <<MongoRepository>>
+}
+
+package "хранилища и внешняя система" {
+  object "pg:PostgreSQL 16" as PG <<database>>
+  object "mg:MongoDB 7" as MG <<database>>
+  object "wi:Wasteland Intel" as WI <<external system>>
+}
+
+D --> FORM : 1: submit(e: FormEvent)
+FORM --> API : 1.1: created = createRequest(body: CreateRequestBody)
+API --> WEB : 1.1.1: POST /api/requests : HTTP 201 | 400
+WEB --> SVC : 1.1.1.1 [routeId != null]: create(organizationId, origin, destination,\ndepartureDate, cargoDescription, cargoValueCaps, routeId)\n1.1.1.1 [segments != null]: createWithManualRoute(..., routeName, specs)
+SVC --> OREPO : 1.1.1.1.1: findById(organizationId) : Optional<Organization>
+SVC --> RREPO : 1.1.1.1.2 [шаблон]: findById(routeId) : Optional<Route>\n1.1.1.1.2 [ручной]: save(new Route(nextRouteCode(), name, false))
+SVC --> CPREPO : 1.1.1.1.3 [ручной] *[для каждого участка]:\nfindByCode(code) : Optional<Checkpoint>
+SVC --> SREPO : 1.1.1.1.4 [ручной]: saveAll(segments)
+SVC --> ETA : 1.1.1.1.5: etaHours = computeHours(route)
+SVC --> RISK : 1.1.1.1.6: risk = calculate(route, cargoValueCaps)\n1.1.1.1.8: saveAssessment(saved.getId(), risk)
+RISK --> INTEL : 1.1.1.1.6.1: report = fetchThreats(segmentKeys)
+INTEL --> WI : 1.1.1.1.6.1.1: GET /threats?segments=…\n(connect / read timeout 2000 мс)
+SVC --> REPO : 1.1.1.1.7: saved = save(request)  // status = DRAFT
+RISK --> RAREPO : 1.1.1.1.8.1: save(new RiskAssessment(requestId, risk, now))
+SVC --> ST : 1.1.1.1.9: recordCreation(saved)
+ST --> HREPO : 1.1.1.1.9.1: save(new RequestStatusHistory(saved, null,\nDRAFT, DISPATCHER, null, "Заявка создана"))
+
+OREPO --> PG : 1.1.1.1.1.1: SELECT … FROM organization WHERE id = ?
+RREPO --> PG : 1.1.1.1.2.1: SELECT … FROM route, route_segment\n| INSERT INTO route
+CPREPO --> PG : 1.1.1.1.3.1: SELECT … FROM checkpoint WHERE code = ?
+SREPO --> PG : 1.1.1.1.4.1: INSERT INTO route_segment
+REPO --> PG : 1.1.1.1.7.1: INSERT INTO caravan_request
+RAREPO --> MG : 1.1.1.1.8.1.1: db.risk_assessment.insertOne(...)
+HREPO --> PG : 1.1.1.1.9.1.1: INSERT INTO request_status_history
+
+FORM --> CON : 1.2: onCreated(created)
+CON --> API : 1.2.1 (асинхронно): getRegistry(organizationId, query)\nGET /api/requests/registry
+
+note bottom of SVC
+  [организация, маршрут или контрольная точка не найдены] →
+  IllegalArgumentException → handleBadRequest → HTTP 400,
+  @Transactional откатывает INSERT.
+  [Wasteland Intel не ответил] → RiskResult.unavailable(): risk_status = NA
+end note
+@enduml

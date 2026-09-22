@@ -1,0 +1,110 @@
+@startuml SEQ_UC2_ImplementationView
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #333333
+skinparam ActorBackgroundColor #F5F5F5
+skinparam DatabaseBackgroundColor #F5F5F5
+skinparam BoxPadding 8
+skinparam SequenceMessageFontName Courier
+
+title UC-2 «Управлять статусами заявки» — Sequence Diagram (Implementation View)\nРеальные классы, методы и HTTP-контракт перехода статуса
+
+actor "Диспетчер /\nкараван-мастер" as U
+
+box "frontend (React 18 + TypeScript)" #FDFDFD
+  participant "modal:StatusModal.tsx" as MODAL
+  participant "list:RequestList.tsx" as LIST
+  participant "reg:RequestRegistry.tsx" as REG
+  participant "api:api.ts (axios)" as API
+end box
+
+box "backend (Spring Boot 3, Java 21)" #FDFDFD
+  participant "c:RequestStatusController" as C
+  participant "rs:RequestService" as RS
+  participant "st:RequestStatusService" as ST
+  participant "RequestStatusMachine" as SM
+  participant "RequestReadinessGuard" as G
+  participant "repo:CaravanRequestRepository" as REPO
+  participant "hRepo:RequestStatusHistoryRepository" as HREPO
+  participant "aRepo:AuditEventRepository" as AREPO
+end box
+
+box "хранилища" #FDFDFD
+  database "PostgreSQL 16" as PG
+  database "MongoDB 7" as MG
+end box
+
+autonumber "<b>0."
+U -> MODAL : apply(t: StatusTransition)
+activate MODAL
+MODAL -> API : updated = await changeStatus(id,\n{targetStatus, actorRole, actorName, reason})
+activate API
+API -> C : POST /api/requests/{id}/status : HTTP 200 | 400 | 409
+activate C
+
+C -> RS : request = getById(id)
+activate RS
+RS -> REPO : findById(id) : Optional<CaravanRequest>
+activate REPO
+REPO -> PG : SELECT * FROM caravan_request WHERE id = ?
+deactivate REPO
+deactivate RS
+break Optional.empty() → IllegalArgumentException
+  C -> C : handleBadRequest(e) : HTTP 400
+  MODAL -> MODAL : setError(message)
+end
+
+C -> C : target = RequestStatus.parse(body.targetStatus())\nrole = ActorRole.parse(body.actorRole())
+C -> ST : updated = changeStatus(request, target, role,\nactorName, reason)  // @Transactional
+activate ST
+ST -> SM : transition = find(current, target) : Optional<Transition>
+break current == target || transition пусто || !transition.roles().contains(role)\n|| transition.reasonRequired() && reason == null
+  ST -> ST : throw StatusTransitionException(message)
+  C -> C : handleConflict(e) : HTTP 409
+  MODAL -> MODAL : setError(message)
+end
+ST -> G : blocker = blockerFor(request, target) : String
+break blocker != null
+  C -> C : handleConflict(e) : HTTP 409
+  MODAL -> MODAL : setError(blocker)
+end
+
+ST -> ST : request.changeStatus(target)
+ST -> REPO : saved = save(request)
+activate REPO
+REPO -> PG : UPDATE caravan_request SET status = ?
+deactivate REPO
+ST -> HREPO : save(new RequestStatusHistory(saved, current,\ntarget, role, actorName, reason))
+activate HREPO
+HREPO -> PG : INSERT INTO request_status_history
+deactivate HREPO
+ST -> AREPO : save(AuditEvent.requestStatusChanged(orgId,\nrequestId, from, to, role, actorName, reason))
+activate AREPO
+AREPO -> MG : db.audit_event.insertOne({type: "REQUEST_STATUS_CHANGED", ...})
+deactivate AREPO
+deactivate ST
+C -> C : RequestResponse.from(updated) : HTTP 200
+deactivate C
+deactivate API
+
+MODAL -> LIST : onUpdated(updated)
+activate LIST
+LIST -> REG : onChanged() → load()
+activate REG
+REG ->> API : getRegistry(organizationId, query)\nGET /api/requests/registry
+deactivate REG
+deactivate LIST
+MODAL ->> API : getStatusInfo(id)\nGET /api/requests/{id}/status
+MODAL ->> API : getStatusHistory(id)\nGET /api/requests/{id}/status-history
+MODAL ->> U : показать новый статус и историю переходов
+deactivate MODAL
+
+legend right
+  Сплошная линия, закрашенная стрелка — синхронный вызов;
+  результат вызова — в подписи: «результат = операция(...)».
+  Сплошная линия, открытая стрелка — асинхронный вызов:
+  getRegistry, getStatusInfo, getStatusHistory запускаются
+  без ожидания результата (Promise без await).
+endlegend
+@enduml

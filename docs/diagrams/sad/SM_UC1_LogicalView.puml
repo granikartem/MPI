@@ -1,0 +1,49 @@
+@startuml SM_UC1_LogicalView
+!pragma layout smetana
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Arial
+}
+
+title UC-1 «Создать заявку на перевозку» — State Machine Diagram (Logical View)\nСостояния заявки при создании; эффекты переходов выполняют компоненты слоёв диаграммы пакетов
+
+state "Заполняется" as Filling
+
+state "Формируется" as Forming {
+  state "Организация\nподтверждена" as OrgOk
+  state "Маршрут определён" as Routed
+  state "ETA рассчитано" as Eta
+  state "Риск оценён\n(OK или STALE)" as Assessed
+  state "Риск требует\nпересчёта (NA)" as NeedsRecalc
+
+  [*] --> OrgOk : [организация существует]\n/ Хранение данных: найти организацию
+  OrgOk --> Routed : [выбран шаблон]\n/ Хранение данных: прочитать шаблон маршрута
+  OrgOk --> Routed : [заданы участки] (альт. 3а)\n/ Маршрут: собрать из участков;\nХранение данных: сохранить маршрут
+  Routed --> Eta : / Расчёт ETA: длина маршрута / 4 км/ч
+  Eta --> Assessed : [Wasteland Intel ответил]\n/ Оценка риска через Адаптер Wasteland Intel:\nrisk_score и рекомендация по охране и припасам
+  Eta --> NeedsRecalc : [Wasteland Intel недоступен] (альт. 4а)\n/ Оценка риска: risk_score = Н/Д
+}
+
+state "Черновик\n(Draft)" as Draft #LightGreen
+state "Не создана" as NotCreated #MistyRose
+
+[*] --> Filling : диспетчер открыл форму\n(Интерфейс заявок)
+Filling --> Forming : подтвердить создание\n/ Интерфейс заявок → Создание заявки
+Filling --> NotCreated : отменить создание (альт. 8а)
+Forming --> Filling : [организация, шаблон маршрута\nили контрольная точка не найдены]\n/ откат транзакции, показать причину отказа
+Assessed --> Draft : / Заявка: статус «Черновик»;\nХранение данных: сохранить заявку, снимок риска\nи запись истории «— → Черновик»
+NeedsRecalc --> Draft : / то же, с пометкой\n«требует пересчёта risk_score»
+Draft --> [*] : далее — UC-2
+NotCreated --> [*]
+
+legend right
+  Подпись перехода: событие [сторожевое условие] / эффект.
+  В эффекте указан логический компонент диаграммы пакетов:
+  presentation — Интерфейс заявок;
+  application — Создание заявки, Расчёт ETA, Оценка риска;
+  domain — Заявка, Маршрут;
+  infrastructure — Хранение данных, Адаптер Wasteland Intel.
+endlegend
+@enduml

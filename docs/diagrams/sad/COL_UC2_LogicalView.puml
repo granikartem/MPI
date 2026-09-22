@@ -1,0 +1,47 @@
+@startuml COL_UC2_LogicalView
+!pragma layout smetana
+skinparam shadowing false
+skinparam objectBackgroundColor #F5F5F5
+skinparam objectBorderColor #333333
+skinparam packageStyle rectangle
+skinparam ArrowColor #333333
+
+title UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)\nКооперация логических компонентов; уровни совпадают с диаграммой пакетов
+
+object "Диспетчер /\nКараван-мастер" as U <<actor>> #White
+
+package "presentation" {
+  object ":Интерфейс заявок" as PRES
+}
+
+package "application" {
+  object ":Управление статусами\n(UC-2)" as APP
+}
+
+package "domain" {
+  object ":Заявка" as REQ
+  object ":Статусная модель\nзаявки" as SM
+  object ":Запись истории\nстатусов" as HIST
+  object ":Событие аудита" as EVT
+}
+
+package "infrastructure" {
+  object ":Хранение данных" as STORE
+  object ":Журнал аудита" as AUDIT
+}
+
+U --> PRES : 1: выбрать действие перехода\n(целевой статус, роль, имя, причина)
+PRES --> APP : 1.1: заявка = сменитьСтатус(заявка, целевой статус,\nроль, имя, причина)
+APP --> STORE : 1.1.1: заявка = найти заявку\n1.1.5: сохранить заявку\n1.1.7: сохранить запись истории
+APP --> SM : 1.1.2: переход = найти переход(текущий, целевой)\n1.1.3: проверить роль, причину\nи готовность рейса
+APP --> REQ : 1.1.4 [переход допустим]: установить статус
+APP --> HIST : 1.1.6: создать запись(из, в, роль, имя, причина)
+APP --> EVT : 1.1.8: сформировать событие «статус изменён»
+APP --> AUDIT : 1.1.9: записать событие
+PRES --> U : 2: показать новый статус\nи историю переходов
+
+note bottom of APP
+  [переход недопустим] — сообщения 1.1.4–1.1.9
+  не выполняются, интерфейс показывает причину отказа
+end note
+@enduml

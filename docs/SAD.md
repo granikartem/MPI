@@ -48,14 +48,16 @@ _Не заполнено._
 \*\* Всё представление описывается только в случае, если в системе есть процессы, жёстко привязанные
 к определённым моментам времени (пример — наступление нового месяца, времени суток и т.д.).
 
-Прецеденты, выбранные под типы диаграмм, привязанные к одному прецеденту:
+Прецеденты, выбранные под типы диаграмм, привязанные к прецеденту. Каждый из четырёх типов построен
+в трёх точках зрения на трёх разных прецедентах; у State Machine, Sequence и Cooperative каждый из
+UC-1, UC-2 и UC-32 встречается в строке и в столбце таблицы по одному разу.
 
-| Тип диаграммы | Прецедент |
-|---|---|
-| State Machine Diagram | UC-2 «Управлять статусами заявки» |
-| Sequence Diagram | UC-1 «Создать заявку на перевозку» |
-| Cooperative (Communication) Diagram | UC-32 «Создать организацию» |
-| Activity Diagram | UC-7 «Рассчитать risk_score» |
+| Тип диаграммы | Use-Case View | Logical View | Implementation View |
+|---|---|---|---|
+| Activity Diagram | UC-7 «Рассчитать risk_score» | UC-1 «Создать заявку на перевозку» | UC-32 «Создать организацию» |
+| State Machine Diagram | UC-2 «Управлять статусами заявки» | UC-1 «Создать заявку на перевозку» | UC-32 «Создать организацию» |
+| Sequence Diagram | UC-1 «Создать заявку на перевозку» | UC-32 «Создать организацию» | UC-2 «Управлять статусами заявки» |
+| Cooperative (Communication) Diagram | UC-32 «Создать организацию» | UC-2 «Управлять статусами заявки» | UC-1 «Создать заявку на перевозку» |
 
 Use Case Diagram и Class Diagram сноской не ограничены и построены на систему целиком.
 
@@ -79,10 +81,9 @@ _Не заполнено._
 ## 5. Logical View
 
 Уровни взаимодействия (на диаграммах классов Logical и Implementation View имена
-приведены как имена пакетов; на диаграмме активности UC-7 дорожки
-укрупнены до пяти; на диаграммах последовательности и кооперации — как
-стереотипы участников и вложенные пакеты; на диаграмме состояний пакетов нет,
-имена уровней перечислены в заметке к диаграмме):
+приведены как имена пакетов; на диаграммах активности — как дорожки логических компонентов;
+на диаграммах последовательности и кооперации — как стереотипы участников и вложенные пакеты;
+на диаграмме состояний — как компоненты в эффектах переходов и в легенде):
 `frontend.pages` / `frontend.components` / `frontend.api` → `backend.web` → `backend.service` →
 `backend.domain` / `backend.repository` → инфраструктура (PostgreSQL, MongoDB, Wasteland Intel).
 
@@ -91,9 +92,9 @@ _Не заполнено._
 | Package, система целиком | Логические пакеты слоёв, их компоненты, внешние системы и зависимости; соответствие пакетам кода | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
 | Class, система целиком | Основные классы и интерфейсы их взаимодействия по слоям | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
 | Activity, UC-1 | Шаги создания заявки в дорожках логических компонентов слоёв | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [png](diagrams/out/ACT_UC1_LogicalView.png) |
-| State Machine, UC-2 | Состояния, сторожевые условия и эффекты переходов в разрезе слоёв | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
-| Sequence, UC-1 | Взаимодействие компонентов по слоям | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
-| Cooperative, UC-32 | Объекты по слоям приложения | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
+| State Machine, UC-1 | Состояния заявки при создании; эффекты переходов выполняют компоненты слоёв | [SM_UC1_LogicalView.puml](diagrams/sad/SM_UC1_LogicalView.puml) | [png](diagrams/out/SM_UC1_LogicalView.png) |
+| Sequence, UC-32 | Взаимодействие компонентов слоёв при создании организации | [SEQ_UC32_LogicalView.puml](diagrams/sad/SEQ_UC32_LogicalView.puml) | [png](diagrams/out/SEQ_UC32_LogicalView.png) |
+| Cooperative, UC-2 | Кооперация компонентов слоёв при смене статуса заявки | [COL_UC2_LogicalView.puml](diagrams/sad/COL_UC2_LogicalView.puml) | [png](diagrams/out/COL_UC2_LogicalView.png) |
 
 Диаграмма пакетов делит систему на слои `presentation` → `application` → `domain`,
 `application` → `infrastructure` (`<<access>>`), `infrastructure` → `domain`, и показывает внешние
@@ -147,9 +148,9 @@ REST через HTTPS.
 |---|---|---|---|
 | Class, система целиком | Поля, сигнатуры методов, аннотации JPA и MongoDB, таблицы PostgreSQL и коллекции MongoDB | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
 | Activity, UC-32 | Те же дорожки логических компонентов, в узлах — классы, методы, эндпоинты и хранилища | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [png](diagrams/out/ACT_UC32_ImplementationView.png) |
-| State Machine, UC-2 | Значения `RequestStatus`, реальные вызовы методов и HTTP-контракт | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
-| Sequence, UC-1 | Реальные классы, методы и HTTP-контракт реализации | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
-| Cooperative, UC-32 | Объекты реализации: классы, вызываемые методы и хранилища | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |
+| State Machine, UC-32 | Состояния `OrganizationService.create(...)`: методы, классы и HTTP-контракт | [SM_UC32_ImplementationView.puml](diagrams/sad/SM_UC32_ImplementationView.puml) | [png](diagrams/out/SM_UC32_ImplementationView.png) |
+| Sequence, UC-2 | Реальные классы, методы и HTTP-контракт перехода статуса, асинхронная перезагрузка данных | [SEQ_UC2_ImplementationView.puml](diagrams/sad/SEQ_UC2_ImplementationView.puml) | [png](diagrams/out/SEQ_UC2_ImplementationView.png) |
+| Cooperative, UC-1 | Объекты реализации создания заявки: классы, методы, хранилища и внешняя система | [COL_UC1_ImplementationView.puml](diagrams/sad/COL_UC1_ImplementationView.puml) | [png](diagrams/out/COL_UC1_ImplementationView.png) |
 | Data Base, часть 1: ER-модель | Все сущности данных, атрибуты, ключи и связи с кратностями (нотация «воронья лапка») | [DB_ER_ImplementationView.puml](diagrams/sad/DB_ER_ImplementationView.puml) | [png](diagrams/out/DB_ER_ImplementationView.png) |
 | Data Base, часть 2: даталогическая модель | Таблицы PostgreSQL 16 и коллекции MongoDB 7: типы, PK / FK, UNIQUE, CHECK, индексы | [DB_Datalogical_ImplementationView.puml](diagrams/sad/DB_Datalogical_ImplementationView.puml) | [png](diagrams/out/DB_Datalogical_ImplementationView.png) |
 

@@ -1,0 +1,72 @@
+@startuml SEQ_UC32_LogicalView
+skinparam shadowing false
+skinparam sequenceMessageAlign left
+skinparam ParticipantBackgroundColor #F5F5F5
+skinparam ParticipantBorderColor #333333
+skinparam ActorBackgroundColor #F5F5F5
+skinparam BoxPadding 8
+
+title UC-32 «Создать организацию» — Sequence Diagram (Logical View)\nВзаимодействие логических компонентов; уровни совпадают с диаграммой пакетов
+
+actor "Суперпользователь" as SU
+
+box "presentation" #FDFDFD
+  participant "Интерфейс управления\nорганизациями" as PRES
+end box
+
+box "application" #FDFDFD
+  participant "Создание организации\n(UC-32)" as APP
+end box
+
+box "domain" #FDFDFD
+  participant "Организация" as ORG
+  participant "Учётная запись" as USR
+  participant "Событие аудита" as EVT
+end box
+
+box "infrastructure" #FDFDFD
+  participant "Хранение\nданных" as STORE
+  participant "Журнал\nаудита" as AUDIT
+end box
+
+autonumber "<b>0."
+SU -> PRES : заполнить данные организации\nи первого диспетчера, подтвердить
+activate PRES
+PRES -> APP : результат = создатьОрганизацию(данные организации,\nданные первого диспетчера)
+activate APP
+
+APP -> STORE : занято = найти организацию по названию
+break название занято (альт. 4а)
+  PRES ->> SU : показать ошибку «Организация\nс таким названием уже существует»
+end
+
+opt первый диспетчер задан
+  APP -> STORE : занят = найти пользователя по логину
+  break логин занят
+    PRES ->> SU : показать ошибку «Пользователь\nс таким логином уже существует»
+  end
+end
+
+APP -> ORG : организация = создать(ключ арендатора, название,\nуровень подписки, контакты)
+APP -> STORE : сохранить организацию
+
+alt первый диспетчер задан
+  APP -> USR : учётная запись = создать(организация, ФИО, логин,\nхеш начального пароля, роль «Диспетчер»)
+  APP -> STORE : сохранить учётную запись
+else альт. 6а: назначение пропущено
+  note over APP : организация создаётся без пользователей,\nдиспетчер назначается позже (UC-33)
+end
+
+APP -> EVT : событие = сформировать «организация создана»
+APP -> AUDIT : записать событие
+deactivate APP
+
+PRES ->> SU : показать организацию в реестре,\nключ арендатора и логин диспетчера
+deactivate PRES
+
+legend right
+  Сплошная линия, закрашенная стрелка — синхронный вызов;
+  результат вызова — в подписи: «результат = операция(...)».
+  Сплошная линия, открытая стрелка — асинхронное сообщение.
+endlegend
+@enduml

@@ -24,7 +24,7 @@ hide circle
 hide empty members
 
 ' точка в имени пакета — часть имени Java-пакета, а не разделитель вложенности:
-' слои вложены явно, как в COL_UC32_ImplementationView.puml
+' слои вложены явно
 set separator none
 
 title ИС «Караваны» — Class Diagram (Implementation View)\nПолное описание классов: поля, сигнатуры методов, аннотации JPA и MongoDB, таблицы PostgreSQL и коллекции MongoDB

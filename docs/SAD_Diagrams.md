@@ -8,17 +8,19 @@ Cooperative, Class и Activity это все три — Use-Case View, Logical V
 Data Base Diagram — только Implementation View, для Deployment Diagram — только Deployment View,
 для Timeline Diagram — только Process View.
 
-Сноска матрицы требует строить **на основе одного прецедента** четыре типа диаграмм: Activity,
-Sequence, Cooperative и State Machine. Остальные типы в эту сноску не входят, поэтому построены на
-систему целиком.
+Сноска матрицы относит к прецедентам четыре типа диаграмм: Activity, Sequence, Cooperative и
+State Machine. Каждый из них построен в трёх точках зрения на трёх разных прецедентах; для State
+Machine, Sequence и Cooperative прецеденты UC-1, UC-2 и UC-32 распределены так, что у каждого типа и
+в каждой точке зрения прецедент свой. Остальные типы в сноску не входят и построены на систему
+целиком.
 
 ## Распределение прецедентов по типам диаграмм
 
 | Тип диаграммы | Прецедент | Почему выбран |
 |---|---|---|
-| State Machine Diagram | **UC-2 «Управлять статусами заявки»** | Единственный прецедент с явной статусной моделью; реализован полностью (`RequestStatusMachine`, история статусов, audit) |
-| Sequence Diagram | **UC-1 «Создать заявку на перевозку»** | Самый длинный обмен сообщениями: клиент → сервер → внешняя система Wasteland Intel → хранилища; включает UC-5, UC-6, UC-7, UC-8 |
-| Cooperative (Communication) Diagram | **UC-32 «Создать организацию»** | Мультитенантность и провижининг: наглядная кооперация объектов разных слоёв, не пересекается с UC-1 и UC-2 |
+| State Machine Diagram | **UC-2** (Use-Case View), **UC-1** (Logical View), **UC-32** (Implementation View) | UC-2: статусная модель заявки; UC-1: заявка проходит состояния формирования (маршрут, ETA, оценка риска) до «Черновика»; UC-32: создание организации — цепочка состояний внутри одной транзакции `OrganizationService.create(...)` |
+| Sequence Diagram | **UC-1** (Use-Case View), **UC-32** (Logical View), **UC-2** (Implementation View) | UC-1: обмен актора, системы и Wasteland Intel; UC-32: вызовы между слоями при создании организации; UC-2: полный HTTP-путь перехода статуса, включая асинхронную перезагрузку данных на клиенте |
+| Cooperative (Communication) Diagram | **UC-32** (Use-Case View), **UC-2** (Logical View), **UC-1** (Implementation View) | UC-32: аналитические объекты boundary / control / entity; UC-2: кооперация компонентов слоёв при смене статуса; UC-1: самый широкий набор объектов реализации — клиент, сервисы, репозитории, хранилища и внешняя система |
 | Activity Diagram | **UC-7 «Рассчитать risk_score»** (Use-Case View), **UC-1 «Создать заявку на перевозку»** (Logical View), **UC-32 «Создать организацию»** (Implementation View) | Один тип диаграмм покрывает разные прецеденты в разных точках зрения. Взяты все три реализованных коровых прецедента: UC-7 даёт ветвление по внешним данным, UC-1 — самый длинный поток через все логические компоненты, UC-32 — провижининг с двумя хранилищами и аудитом |
 | Use Case Diagram | — (система целиком) | Сноской не ограничена: показывает акторов, границу системы и архитектурно значимые прецеденты |
 | Class Diagram | — (система целиком) | Сноской не ограничена: три точки зрения — это три уровня детализации одной модели (сущности → классы по слоям → полные классы), а не три прецедента |
@@ -48,18 +50,18 @@ Implementation View для них был бы проектным. Их сущн�
 | 5. Logical View | Package, система целиком | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
 | 5. Logical View | Class, система целиком | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
 | 5. Logical View | Activity, UC-1 | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [png](diagrams/out/ACT_UC1_LogicalView.png) |
-| 5. Logical View | State Machine, UC-2 | [SM_UC2_LogicalView.puml](diagrams/sad/SM_UC2_LogicalView.puml) | [png](diagrams/out/SM_UC2_LogicalView.png) |
-| 5. Logical View | Sequence, UC-1 | [SEQ_UC1_LogicalView.puml](diagrams/sad/SEQ_UC1_LogicalView.puml) | [png](diagrams/out/SEQ_UC1_LogicalView.png) |
-| 5. Logical View | Cooperative, UC-32 | [COL_UC32_LogicalView.puml](diagrams/sad/COL_UC32_LogicalView.puml) | [png](diagrams/out/COL_UC32_LogicalView.png) |
+| 5. Logical View | State Machine, UC-1 | [SM_UC1_LogicalView.puml](diagrams/sad/SM_UC1_LogicalView.puml) | [png](diagrams/out/SM_UC1_LogicalView.png) |
+| 5. Logical View | Sequence, UC-32 | [SEQ_UC32_LogicalView.puml](diagrams/sad/SEQ_UC32_LogicalView.puml) | [png](diagrams/out/SEQ_UC32_LogicalView.png) |
+| 5. Logical View | Cooperative, UC-2 | [COL_UC2_LogicalView.puml](diagrams/sad/COL_UC2_LogicalView.puml) | [png](diagrams/out/COL_UC2_LogicalView.png) |
 | 6. Process View | Timeline, календарные процессы | [TL_Calendar_ProcessView.puml](diagrams/sad/TL_Calendar_ProcessView.puml) | [png](diagrams/out/TL_Calendar_ProcessView.png) |
 | 6. Process View | Timeline, полевая синхронизация | [TL_Field_ProcessView.puml](diagrams/sad/TL_Field_ProcessView.puml) | [png](diagrams/out/TL_Field_ProcessView.png) |
 | 6. Process View | Timeline, UC-1 | [TL_UC1_ProcessView.puml](diagrams/sad/TL_UC1_ProcessView.puml) | [png](diagrams/out/TL_UC1_ProcessView.png) |
 | 7. Deployment View | Deployment, система целиком | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
 | 8. Implementation View | Class, система целиком | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
 | 8. Implementation View | Activity, UC-32 | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [png](diagrams/out/ACT_UC32_ImplementationView.png) |
-| 8. Implementation View | State Machine, UC-2 | [SM_UC2_ImplementationView.puml](diagrams/sad/SM_UC2_ImplementationView.puml) | [png](diagrams/out/SM_UC2_ImplementationView.png) |
-| 8. Implementation View | Sequence, UC-1 | [SEQ_UC1_ImplementationView.puml](diagrams/sad/SEQ_UC1_ImplementationView.puml) | [png](diagrams/out/SEQ_UC1_ImplementationView.png) |
-| 8. Implementation View | Cooperative, UC-32 | [COL_UC32_ImplementationView.puml](diagrams/sad/COL_UC32_ImplementationView.puml) | [png](diagrams/out/COL_UC32_ImplementationView.png) |
+| 8. Implementation View | State Machine, UC-32 | [SM_UC32_ImplementationView.puml](diagrams/sad/SM_UC32_ImplementationView.puml) | [png](diagrams/out/SM_UC32_ImplementationView.png) |
+| 8. Implementation View | Sequence, UC-2 | [SEQ_UC2_ImplementationView.puml](diagrams/sad/SEQ_UC2_ImplementationView.puml) | [png](diagrams/out/SEQ_UC2_ImplementationView.png) |
+| 8. Implementation View | Cooperative, UC-1 | [COL_UC1_ImplementationView.puml](diagrams/sad/COL_UC1_ImplementationView.puml) | [png](diagrams/out/COL_UC1_ImplementationView.png) |
 | 8. Implementation View | Data Base, часть 1: ER-модель | [DB_ER_ImplementationView.puml](diagrams/sad/DB_ER_ImplementationView.puml) | [png](diagrams/out/DB_ER_ImplementationView.png) |
 | 8. Implementation View | Data Base, часть 2: даталогическая модель | [DB_Datalogical_ImplementationView.puml](diagrams/sad/DB_Datalogical_ImplementationView.puml) | [png](diagrams/out/DB_Datalogical_ImplementationView.png) |
 
@@ -171,63 +173,64 @@ Implementation View для них был бы проектным. Их сущн�
   MongoDB. Роли — справочник `role`, команда рейса — `trip_crew_member`, финансовый отчёт — одна
   таблица `financial_report` с расходами по статьям.
 
-### State Machine Diagram — UC-2 «Управлять статусами заявки»
+### State Machine Diagram
 
-- **Use-Case View.** Семь состояний заявки (Черновик, Готов к отправке, В пути, Задержка,
-  Доставлен, Закрыт, Отменён) и переходы между ними; на каждом переходе указано действие и актор,
-  который его инициирует. Показано, что «Закрыт» и «Отменён» — финальные, а отмена возможна только
-  до выхода каравана на маршрут.
-- **Logical View.** Те же состояния с добавлением сторожевых условий (роль актора, обязательная
-  причина, проверка готовности рейса), общих предусловий всех переходов (заявка существует, актор
-  действует в рамках организации заявки, статус не финальный) и общего эффекта «записать переход».
-  Состояния «В пути» и «Задержка» объединены в композитное состояние «Рейс на маршруте». Заметками
-  описаны ответственность слоёв `presentation` / `application` / `domain` / `infrastructure` и
-  поведение при отклонении перехода.
-- **Implementation View.** Состояния — константы `RequestStatus`; переходы подписаны реальными
-  элементами таблицы `RequestStatusMachine.TRANSITIONS`, телом запроса
-  `POST /api/requests/{id}/status` и порядком проверок в `RequestStatusService.changeStatus(...)`.
-  Отдельно показаны предусловия и их проверка в коде (заявка существует — `getById` → 400; привязка
-  к организации — `organization_id NOT NULL`; принадлежность актора организации заявки **не
-  проверяется**), эффект успешного перехода (запись в `caravan_request`, `request_status_history`,
-  `audit_event`) и коды ответов 200 / 400 / 409.
+- **Use-Case View, UC-2 «Управлять статусами заявки».** Семь состояний заявки (Черновик, Готов к
+  отправке, В пути, Задержка, Доставлен, Закрыт, Отменён) и переходы между ними; на каждом переходе
+  указано действие и актор, который его инициирует. Показано, что «Закрыт» и «Отменён» — финальные,
+  а отмена возможна только до выхода каравана на маршрут.
+- **Logical View, UC-1 «Создать заявку на перевозку».** Заявка от открытия формы до «Черновика»:
+  «Заполняется» → композитное состояние «Формируется» (организация подтверждена → маршрут определён
+  из шаблона или по участкам → ETA рассчитано → риск оценён либо требует пересчёта) → «Черновик».
+  Альтернативы — отмена (8а) и возврат к заполнению, если не найдены организация, шаблон маршрута
+  или контрольная точка. Эффекты переходов подписаны логическими компонентами диаграммы пакетов:
+  «Интерфейс заявок», «Создание заявки», «Расчёт ETA», «Оценка риска», «Заявка», «Маршрут»,
+  «Хранение данных», «Адаптер Wasteland Intel».
+- **Implementation View, UC-32 «Создать организацию».** Состояния внутри одной транзакции
+  `OrganizationService.create(...)`: команда принята → данные проверены (`findByNameIgnoreCase`,
+  `validateDispatcher`) → организация `ACTIVE` (`organizationRepository.save`) → диспетчер назначен
+  (`userRepository.save`; при альт. 6а пропускается) → событие `ORGANIZATION_CREATED` записано →
+  HTTP 201. Отклонение — `IllegalArgumentException` или `DataIntegrityViolationException`, откат
+  транзакции, HTTP 400.
 
-### Sequence Diagram — UC-1 «Создать заявку на перевозку»
+### Sequence Diagram
 
-- **Use-Case View.** Обмен между диспетчером, системой и Wasteland Intel по шагам основного потока;
-  альтернативы показаны фрагментами `alt`: ручной маршрут (3а), недоступность внешней системы (4а),
-  отмена создания (8а).
-- **Logical View.** Те же шаги, но участники — логические компоненты слоёв диаграммы пакетов:
-  «Интерфейс заявок» (`presentation`), «Создание заявки», «Расчёт ETA», «Оценка риска»
-  (`application`), «Маршрут» и «Заявка» (`domain`), «Хранение данных» и «Адаптер Wasteland Intel»
-  (`infrastructure`). Предусловие «организация существует» показано отдельным фрагментом с `break`.
-- **Implementation View.** Предусловия реализации (организация выбрана через `?org=`, существует —
-  проверяется только на backend в `RequestService.loadOrganization()`, справочники загружены,
-  аутентификации нет) и полный след вызовов: `RequestForm.submit()` → `api.createRequest()` →
-  `POST /api/requests` → `RequestController.create()` → `RequestService.create()` /
-  `createWithManualRoute()` → `EtaService.computeHours()` → `RiskService.calculate()` →
-  `WastelandIntelClient.fetchThreats()` → `GET /threats?segments=…` → сохранение заявки, снимка
-  оценки риска и стартовой записи истории статусов, ответ `HTTP 201`, перезагрузка реестра через
-  `getRegistry()`. Фрагментами `break` показаны отказы: не указан маршрут, не указана или не найдена
-  организация, не найден маршрут или контрольная точка (HTTP 400). Показана формула risk_score и
-  ветка `RiskResult.unavailable()`.
+Синхронный вызов — сплошная линия с закрашенной стрелкой, результат вызова указан в подписи
+(«результат = операция(...)»); асинхронный — сплошная линия с открытой стрелкой. Ответные сообщения
+(по UML 2.5 — пунктир) не рисуются.
 
-### Cooperative (Communication) Diagram — UC-32 «Создать организацию»
+- **Use-Case View, UC-1 «Создать заявку на перевозку».** Обмен между диспетчером, системой и
+  Wasteland Intel по шагам основного потока; альтернативы показаны фрагментами `alt`: ручной маршрут
+  (3а), недоступность внешней системы (4а), отмена создания (8а). Сообщения системы актору —
+  асинхронные.
+- **Logical View, UC-32 «Создать организацию».** Участники — логические компоненты слоёв диаграммы
+  пакетов: «Интерфейс управления организациями» (`presentation`), «Создание организации»
+  (`application`), «Организация», «Учётная запись», «Событие аудита» (`domain`), «Хранение данных»,
+  «Журнал аудита» (`infrastructure`). Проверки названия и логина — фрагменты `break` (альт. 4а),
+  назначение первого диспетчера — фрагмент `alt` (альт. 6а).
+- **Implementation View, UC-2 «Управлять статусами заявки».** `StatusModal.apply()` →
+  `api.changeStatus()` → `POST /api/requests/{id}/status` → `RequestStatusController` →
+  `RequestService.getById()` → `RequestStatusService.changeStatus()` → `RequestStatusMachine.find()`,
+  `RequestReadinessGuard.blockerFor()` → сохранение заявки, записи истории и события аудита. Отказы
+  HTTP 400 / 409 — фрагменты `break`. После ответа клиент асинхронно перезагружает реестр
+  (`getRegistry`), статус и историю переходов (`getStatusInfo`, `getStatusHistory`).
 
-- **Use-Case View.** Аналитические объекты прецедента (`<<boundary>>`, `<<control>>`, `<<entity>>`)
-  и пронумерованные сообщения между ними; альтернативные потоки 4а (неуникальное название) и 6а
-  (диспетчер не назначается) описаны заметкой.
-- **Logical View.** Логические компоненты в слоях диаграммы пакетов: «Интерфейс управления
-  организациями» (`presentation`), «Создание организации» (`application`), «Организация», «Учётная
-  запись», «Событие аудита» (`domain`), «Хранение данных» и «Журнал аудита» (`infrastructure`).
-  Иерархическая нумерация сообщений (1, 1.1, 1.1.1, …) и сторожевые условия
-  (`[название и логин свободны]`, `[диспетчер задан]`); предусловия вынесены в заметку.
-- **Implementation View.** Объекты — экземпляры реальных классов (`page:Organizations.tsx`,
-  `c:OrganizationController`, `s:OrganizationService`, `oRepo:OrganizationRepository`,
-  `aRepo:AuditEventRepository`, …), сообщения — вызовы методов с сигнатурами и SQL/Mongo-операции;
-  сторожевые условия на сообщениях (`[findByNameIgnoreCase(name).isEmpty()]`,
-  `[firstDispatcher != null]`). Отдельно описаны предусловия и их двойная проверка (в приложении и
-  уникальными индексами `uq_organization_name_ci`, `uq_app_user_login_ci`), а также обработка
-  ошибок (`IllegalArgumentException`, `DataIntegrityViolationException` → HTTP 400).
+### Cooperative (Communication) Diagram
+
+- **Use-Case View, UC-32 «Создать организацию».** Аналитические объекты прецедента (`<<boundary>>`,
+  `<<control>>`, `<<entity>>`) и пронумерованные сообщения между ними; альтернативные потоки 4а
+  (неуникальное название) и 6а (диспетчер не назначается) описаны заметкой.
+- **Logical View, UC-2 «Управлять статусами заявки».** Компоненты слоёв диаграммы пакетов:
+  «Интерфейс заявок» (`presentation`), «Управление статусами» (`application`), «Заявка», «Статусная
+  модель заявки», «Запись истории статусов», «Событие аудита» (`domain`), «Хранение данных»,
+  «Журнал аудита» (`infrastructure`). Иерархическая нумерация сообщений 1 → 1.1 → 1.1.1…1.1.9 и
+  сторожевое условие `[переход допустим]`.
+- **Implementation View, UC-1 «Создать заявку на перевозку».** Объекты — экземпляры классов
+  (`form:RequestForm.tsx`, `c:RequestController`, `s:RequestService`, `eta:EtaService`,
+  `risk:RiskService`, `intel:WastelandIntelClient`, репозитории заявок, организаций, маршрутов,
+  контрольных точек и оценки риска), сообщения — вызовы методов с сигнатурами и запросы к
+  PostgreSQL, MongoDB и Wasteland Intel. Шаблонный и ручной маршрут различаются сторожевыми
+  условиями, перезагрузка реестра после создания — асинхронное сообщение.
 
 ### Timeline Diagram — процессы системы
 
@@ -264,7 +267,8 @@ Implementation View для них был бы проектным. Их сущн�
 
 - **Проверка готовности рейса перед выходом на маршрут (FR-10).** `RequestReadinessGuard.blockerFor(...)`
   сейчас возвращает `null` для всех переходов; сама проверка появится вместе с моделью команды рейса
-  (UC-9). На диаграммах показана как сторожевое условие перехода `READY → EN_ROUTE`; в модели базы
+  (UC-9). На диаграмме последовательности UC-2 (Implementation View) это вызов
+  `RequestReadinessGuard.blockerFor(...)`; в модели базы
   данных правило обязательности ролей задано полями `role.crew_required` и
   `role.crew_required_from_risk_score`.
 - **Источник роли актора.** Роль приходит в теле запроса (`actorRole`), а не из сессии — до
@@ -273,11 +277,11 @@ Implementation View для них был бы проектным. Их сущн�
   организации заявки не проверяется — статус может сменить любой клиент, знающий `id` заявки.
   UC-1: существование организации проверяет только backend (`loadOrganization` → HTTP 400), форма
   отображается и при неизвестном `?org=`. UC-32: аутентификация суперпользователя не проверяется,
-  актор `SUPERUSER` в audit-событии задан константой. Всё это отмечено на Implementation View.
+  актор `SUPERUSER` в audit-событии задан константой.
 - **Автоматический переход `EN_ROUTE → DELAYED` ролью `SYSTEM`** разрешён статусной моделью, но
   вызывающий его код (UC-19) ещё не реализован.
 - **Audit-событие `REQUEST_CREATED`** для UC-1 в MongoDB не пишется (известный пробел,
-  см. [ImplementationPlan](ImplementationPlan.md)); на диаграмме последовательности отмечено заметкой.
+  см. [ImplementationPlan](ImplementationPlan.md)).
 - **Ветка `STALE`** в расчёте risk_score реализована, но не воспроизводится на WireMock-заглушке,
   отдающей фиксированную дату актуальности; признак вычисляется только в момент расчёта, фоновой
   переоценки нет (Timeline, календарные процессы).

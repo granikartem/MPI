@@ -1,0 +1,55 @@
+@startuml SM_UC32_ImplementationView
+!pragma layout smetana
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #F5F5F5
+  BorderColor #333333
+  FontName Courier
+}
+
+title UC-32 «Создать организацию» — State Machine Diagram (Implementation View)\nСостояния OrganizationService.create(...) в одной транзакции: методы, классы и HTTP-контракт
+
+state "Команда принята" as Received
+Received : cmd : CreateOrganizationCommand
+Received : name = required(cmd.name(), ...)
+Received : tier = normalizeTier(cmd.subscriptionTier())
+
+state "Данные проверены" as Validated
+Validated : organizationRepository.findByNameIgnoreCase(name) — пусто
+Validated : [firstDispatcher != null] validateDispatcher(cmd):
+Validated : userRepository.findByLoginIgnoreCase(login) — пусто
+
+state "Организация ACTIVE" as Active
+Active : org : Organization
+Active : tenantKey = generateTenantKey()
+Active : status = "ACTIVE"
+
+state "Диспетчер назначен" as Dispatcher
+Dispatcher : usr : AppUser
+Dispatcher : role = "DISPATCHER"
+
+state "Событие записано" as Audited
+Audited : evt : AuditEvent
+Audited : type = "ORGANIZATION_CREATED"
+
+state "Отклонено" as Rejected #MistyRose
+Rejected : @Transactional — откат
+
+[*] --> Received : POST /api/organizations\n→ OrganizationController.create(CreateOrganization body)\n→ OrganizationService.create(cmd)
+Received --> Validated : [name, tier заданы и корректны,\nимя и логин свободны]
+Received --> Rejected : [name пусто || tier ∉ {BASIC, STANDARD, PRO}\n|| findByNameIgnoreCase(name).isPresent()\n|| findByLoginIgnoreCase(login).isPresent()]\n/ throw IllegalArgumentException(message)
+Validated --> Active : / organizationRepository.save(new Organization(\ngenerateTenantKey(), name, tier, legalAddress,\nprimaryContact, contactChannel, region))\nINSERT INTO organization
+Active --> Dispatcher : [cmd.firstDispatcher() != null]\n/ userRepository.save(new AppUser(org, fullName, login,\npasswordHash(initialPassword), "DISPATCHER", contactChannel))\nINSERT INTO app_user
+Active --> Audited : [cmd.firstDispatcher() == null] (альт. 6а)\n/ auditEventRepository.save(\nAuditEvent.organizationCreated(orgId, null, name, tier, null))
+Dispatcher --> Audited : / auditEventRepository.save(\nAuditEvent.organizationCreated(orgId, usr.getId(), name, tier, login))\ndb.audit_event.insertOne(...)
+Active --> Rejected : DataIntegrityViolationException\n(uq_organization_name_ci)
+Dispatcher --> Rejected : DataIntegrityViolationException\n(uq_app_user_login_ci)
+Audited --> [*] : commit → OrganizationResponse.from(result)\n→ HTTP 201 Created
+Rejected --> [*] : handleBadRequest / handleConflict\n→ HTTP 400 ErrorResponse(message)
+
+legend right
+  Подпись перехода: событие [сторожевое условие] / эффект.
+  Все состояния проходятся внутри одного вызова
+  OrganizationService.create(...) с @Transactional.
+endlegend
+@enduml
