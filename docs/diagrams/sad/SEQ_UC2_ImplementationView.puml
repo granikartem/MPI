@@ -35,72 +35,73 @@ box "хранилища" #FDFDFD
   database "MongoDB 7" as MG
 end box
 
-autonumber "<b>0."
-U -> MODAL : apply(t: StatusTransition)
+U -> MODAL : 1: apply(t: StatusTransition)
 activate MODAL
-MODAL -> API : updated = await changeStatus(id,\n{targetStatus, actorRole, actorName, reason})
+MODAL -> API : 1.1: updated = await changeStatus(id, body)
 activate API
-API -> C : POST /api/requests/{id}/status : HTTP 200 | 400 | 409
+API -> C : 1.1.1: POST /api/requests/{id}/status : HTTP 200 | 400 | 409
 activate C
 
-C -> RS : request = getById(id)
+C -> RS : 1.1.1.1: request = getById(id)
 activate RS
-RS -> REPO : findById(id) : Optional<CaravanRequest>
+RS -> REPO : 1.1.1.1.1: findById(id) : Optional<CaravanRequest>
 activate REPO
-REPO -> PG : SELECT * FROM caravan_request WHERE id = ?
+REPO -> PG : 1.1.1.1.1.1: SELECT * FROM caravan_request WHERE id = ?
 deactivate REPO
 deactivate RS
 break Optional.empty() → IllegalArgumentException
-  C -> C : handleBadRequest(e) : HTTP 400
-  MODAL -> MODAL : setError(message)
+  C -> C : 1.1.1.2: handleBadRequest(e) : HTTP 400
+  MODAL -> MODAL : 1.2: setError(message)
 end
 
-C -> C : target = RequestStatus.parse(body.targetStatus())\nrole = ActorRole.parse(body.actorRole())
-C -> ST : updated = changeStatus(request, target, role,\nactorName, reason)  // @Transactional
+C -> C : 1.1.1.2: target = RequestStatus.parse(...)\nrole = ActorRole.parse(...)
+C -> ST : 1.1.1.3: updated = changeStatus(request, target, role,\nactorName, reason)  // @Transactional
 activate ST
-ST -> SM : transition = find(current, target) : Optional<Transition>
+ST -> SM : 1.1.1.3.1: transition = find(current, target) : Optional<Transition>
 break current == target || transition пусто || !transition.roles().contains(role)\n|| transition.reasonRequired() && reason == null
-  ST -> ST : throw StatusTransitionException(message)
-  C -> C : handleConflict(e) : HTTP 409
-  MODAL -> MODAL : setError(message)
+  ST -> ST : 1.1.1.3.2: throw StatusTransitionException(message)
+  C -> C : 1.1.1.4: handleConflict(e) : HTTP 409
+  MODAL -> MODAL : 1.2: setError(message)
 end
-ST -> G : blocker = blockerFor(request, target) : String
+ST -> G : 1.1.1.3.2: blocker = blockerFor(request, target) : String
 break blocker != null
-  C -> C : handleConflict(e) : HTTP 409
-  MODAL -> MODAL : setError(blocker)
+  C -> C : 1.1.1.4: handleConflict(e) : HTTP 409
+  MODAL -> MODAL : 1.2: setError(blocker)
 end
 
-ST -> ST : request.changeStatus(target)
-ST -> REPO : saved = save(request)
+ST -> ST : 1.1.1.3.3: request.changeStatus(target)
+ST -> REPO : 1.1.1.3.4: saved = save(request)
 activate REPO
-REPO -> PG : UPDATE caravan_request SET status = ?
+REPO -> PG : 1.1.1.3.4.1: UPDATE caravan_request SET status = ?
 deactivate REPO
-ST -> HREPO : save(new RequestStatusHistory(saved, current,\ntarget, role, actorName, reason))
+ST -> HREPO : 1.1.1.3.5: save(statusHistory)
 activate HREPO
-HREPO -> PG : INSERT INTO request_status_history
+HREPO -> PG : 1.1.1.3.5.1: INSERT INTO request_status_history
 deactivate HREPO
-ST -> AREPO : save(AuditEvent.requestStatusChanged(orgId,\nrequestId, from, to, role, actorName, reason))
+ST -> AREPO : 1.1.1.3.6: save(auditEvent)
 activate AREPO
-AREPO -> MG : db.audit_event.insertOne({type: "REQUEST_STATUS_CHANGED", ...})
+AREPO -> MG : 1.1.1.3.6.1: db.audit_event.insertOne({type: "REQUEST_STATUS_CHANGED", ...})
 deactivate AREPO
 deactivate ST
-C -> C : RequestResponse.from(updated) : HTTP 200
+C -> C : 1.1.1.4: RequestResponse.from(updated) : HTTP 200
 deactivate C
 deactivate API
 
-MODAL -> LIST : onUpdated(updated)
+MODAL -> LIST : 1.2: onUpdated(updated)
 activate LIST
-LIST -> REG : onChanged() → load()
+LIST -> REG : 1.2.1: onChanged() → load()
 activate REG
-REG ->> API : getRegistry(organizationId, query)\nGET /api/requests/registry
+REG ->> API : 1.2.1.1: getRegistry(organizationId, query)\nGET /api/requests/registry
 deactivate REG
 deactivate LIST
-MODAL ->> API : getStatusInfo(id)\nGET /api/requests/{id}/status
-MODAL ->> API : getStatusHistory(id)\nGET /api/requests/{id}/status-history
-MODAL ->> U : показать новый статус и историю переходов
+MODAL ->> API : 1.3: getStatusInfo(id)\nGET /api/requests/{id}/status
+MODAL ->> API : 1.4: getStatusHistory(id)\nGET /api/requests/{id}/status-history
+MODAL ->> U : 1.5: показать новый статус и историю переходов
 deactivate MODAL
 
 legend right
+  Нумерация иерархическая: целое число — действие актора,
+  вложенные вызовы — 1.1, 1.1.1, …
   Сплошная линия, закрашенная стрелка — синхронный вызов;
   результат вызова — в подписи: «результат = операция(...)».
   Сплошная линия, открытая стрелка — асинхронный вызов:
