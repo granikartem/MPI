@@ -15,537 +15,325 @@ skinparam enum {
   BorderColor #333333
   FontName Arial
 }
+skinparam classFontSize 12
+skinparam classAttributeFontSize 11
 hide circle
 hide empty members
 
-' точка в имени пакета — часть имени слоя, а не разделитель вложенности
-set separator none
+title ИС «Караваны» — Class Diagram (Logical View)\nЛогические компоненты по слоям диаграммы пакетов и доменная модель; без классов реализации, аннотаций и хранилищ
 
-title ИС «Караваны» — Class Diagram (Logical View)\nОписание по слоям: основные классы и интерфейсы их взаимодействия; уровни совпадают с перечнем уровней взаимодействия раздела 5 SAD
-
-package "frontend" #FDFDFD {
-
-  package "frontend (корневые модули)" #FDFDFD {
-    class "main.tsx" as MAIN <<корень src>> #F5F5F5 {
-      .. монтирует App в DOM ..
-    }
-    class "App.tsx" as APP <<корень src>> #F5F5F5 {
-      + App()
-    }
-    class "router.ts" as ROUTER <<корень src>> #F5F5F5 {
-      + currentPath()
-      + navigate()
-      + subscribeRouter()
-    }
+package "presentation" as PRES #FDFDFD {
+  class "Интерфейс заявок" as P_REQ <<компонент>> #F5F5F5 {
+    форма создания заявки
+    реестр рейсов и карточка рейса
+    смена статуса и пересчёт риска
   }
-
-  package "frontend.pages" #FDFDFD {
-    class "Landing.tsx" as LANDING <<pages>> #F5F5F5 {
-      + Landing()
-    }
-    class "Console.tsx" as CONSOLE <<pages>> #F5F5F5 {
-      + Console()
-      - OrgPicker()
-      - OrgDispatch()
-      - selectedOrgId()
-    }
-    class "Organizations.tsx" as ORGPAGE <<pages>> #F5F5F5 {
-      + Organizations()
-      - tierPrice()
-    }
+  class "Интерфейс управления\nорганизациями" as P_ORG <<компонент>> #F5F5F5 {
+    форма создания организации
+    список организаций
   }
-
-  package "frontend.components" #FDFDFD {
-    class "RequestForm.tsx" as FORM <<components>> #F5F5F5 {
-      + RequestForm()
-      - submit()
-      - addSegment()
-      - updateSegment()
-      - removeSegment()
-    }
-    class "RequestRegistry.tsx" as REG <<components>> #F5F5F5 {
-      + RequestRegistry()
-      - load()
-      - changeScope()
-      - changeQuery()
-    }
-    class "RegistryFilters.tsx" as FILTERS <<components>> #F5F5F5 {
-      + RegistryFilters()
-      - toggled()
-    }
-    class "RegistrySummary.tsx" as SUMMARY <<components>> #F5F5F5 {
-      + STATUS_ORDER : порядок статусов
-      + RISK_LEVEL_ORDER : порядок уровней риска
-      + RegistrySummary()
-      + riskLevelColor()
-      + riskLevelLabel()
-    }
-    class "RequestList.tsx" as LIST <<components>> #F5F5F5 {
-      + RequestList()
-      - recalc()
-      - toRequest()
-      - actorOf()
-    }
-    class "StatusModal.tsx" as SMODAL <<components>> #F5F5F5 {
-      + StatusModal()
-      - apply()
-      - blockerFor()
-    }
-    class "RiskModal.tsx" as RMODAL <<components>> #F5F5F5 {
-      + RiskModal()
-      - onDelete()
-      - cargoTier()
-      - statusNote()
-    }
-    class "StatusBadge.tsx" as SBADGE <<components>> #F5F5F5 {
-      + StatusBadge()
-      + statusLabel()
-      + statusColor()
-    }
-    class "RiskBadge.tsx" as RBADGE <<components>> #F5F5F5 {
-      + RiskBadge()
-      - color()
-      - label()
-    }
+  class "HTTP-клиент" as P_HTTP <<компонент>> #F5F5F5 {
+    обращения к контракту слоя
   }
-
-  package "frontend.api" #FDFDFD {
-    class "api.ts\n{frontend/src/api.ts}" as API <<api>> #F5F5F5 {
-      + getRequests() / createRequest()
-      + getRegistry()
-      + getStatusInfo() / changeStatus()
-      + getStatusHistory()
-      + recalcRisk() / getRisk() / deleteRisk()
-      + getOrganizations() / createOrganization()
-      + getRoutes() / getCheckpoints()
-      + getHealth()
-    }
+  class "API заявок,\nстатусов и реестра" as P_API_REQ <<контракт>> #F5F5F5 {
+    приём команд и запросов
+    границы транзакции, результат или отказ
+  }
+  class "API организаций" as P_API_ORG <<контракт>> #F5F5F5 {
+    приём команд и запросов
+  }
+  class "API справочников\nмаршрутов" as P_API_REF <<контракт>> #F5F5F5 {
+    чтение маршрутов\nи контрольных точек
   }
 }
 
-package "backend" #FDFDFD {
-
-  package "backend.web" #FDFDFD {
-    class RequestController <<@RestController>> #F5F5F5 {
-      + list()
-      + create() : UC-1
-      + recalculateRisk() : UC-7
-      + clearRisk()
-      + risk()
-      + handleBadRequest()
-    }
-    class RequestStatusController <<@RestController>> #F5F5F5 {
-      + status()
-      + changeStatus() : UC-2
-      + history()
-      + handleConflict()
-      + handleBadRequest()
-    }
-    class RequestRegistryController <<@RestController>> #F5F5F5 {
-      + registry() : UC-3
-      + handleTypeMismatch()
-      + handleBadRequest()
-    }
-    class OrganizationController <<@RestController>> #F5F5F5 {
-      + list()
-      + create() : UC-32
-      + handleConflict()
-      + handleBadRequest()
-    }
-    class RouteController <<@RestController>> #F5F5F5 {
-      + templates()
-    }
-    class CheckpointController <<@RestController>> #F5F5F5 {
-      + list()
-    }
-    class HealthController <<@RestController>> #F5F5F5 {
-      + health()
-    }
+package "application" as APP #FDFDFD {
+  class "Создание заявки" as A_REQ <<компонент>> #F5F5F5 {
+    UC-1
+    собирает рейс: маршрут, время в пути,
+    оценка риска, стартовая история
   }
-
-  package "backend.service" #FDFDFD {
-    class RequestService <<@Service>> #F5F5F5 {
-      + create()
-      + createWithManualRoute()
-      + recalculateRisk()
-      + clearRisk()
-      + findByOrganization()
-      + getById()
-    }
-    class RequestStatusService <<@Service>> #F5F5F5 {
-      + recordCreation()
-      + changeStatus()
-      + availableTransitions()
-      + history()
-    }
-    class RequestRegistryService <<@Service>> #F5F5F5 {
-      + load()
-    }
-    class EtaService <<@Service>> #F5F5F5 {
-      + computeHours()
-    }
-    class RiskService <<@Service>> #F5F5F5 {
-      + calculate()
-      + saveAssessment()
-      + latestAssessment()
-      + deleteAssessments()
-    }
-    class OrganizationService <<@Service>> #F5F5F5 {
-      + create()
-      + findAll()
-    }
-    class WastelandIntelClient <<@Component>> #F5F5F5 {
-      + fetchThreats()
-    }
-    class RequestReadinessGuard <<утилита>> #F5F5F5 {
-      + blockerFor()
-    }
-    class StatusTransitionException <<исключение>> #F5F5F5 {
-      .. extends RuntimeException ..
-    }
+  class "Управление статусами" as A_STATUS <<компонент>> #F5F5F5 {
+    UC-2
+    проверяет допустимость перехода
+    и записывает историю
   }
-
-  package "backend.repository" #FDFDFD {
-    interface CaravanRequestRepository <<JpaRepository>> #F5F5F5 {
-      + findAllByOrderByCreatedAtDesc()
-      + findByOrganization_Id…()
-    }
-    interface RequestStatusHistoryRepository <<JpaRepository>> #F5F5F5 {
-      + findByRequest_Id…()
-      + findByRequest_IdIn…()
-    }
-    interface OrganizationRepository <<JpaRepository>> #F5F5F5 {
-      + findAllByOrderByCreatedAtDesc()
-      + findByNameIgnoreCase()
-    }
-    interface AppUserRepository <<JpaRepository>> #F5F5F5 {
-      + findByLoginIgnoreCase()
-      + countByOrganization_Id()
-    }
-    interface RouteRepository <<JpaRepository>> #F5F5F5 {
-      + findByTemplateTrue()
-    }
-    interface RouteSegmentRepository <<JpaRepository>> #F5F5F5 {
-      + saveAll() {унаследован}
-    }
-    interface CheckpointRepository <<JpaRepository>> #F5F5F5 {
-      + findByCode()
-    }
-    interface RiskAssessmentRepository <<MongoRepository>> #F5F5F5 {
-      + findFirstByRequestId…()
-      + deleteByRequestId()
-    }
-    interface AuditEventRepository <<MongoRepository>> #F5F5F5 {
-      + save() {унаследован}
-    }
+  class "Реестр рейсов" as A_REG <<компонент>> #F5F5F5 {
+    UC-3
+    срезы, фильтры, сортировка,
+    признаки внимания
   }
-
-  package "backend.domain" #FDFDFD {
-    class CaravanRequest <<PostgreSQL>> #F5F5F5 {
-      + applyEta()
-      + applyRisk()
-      + changeStatus()
-    }
-    class RequestStatusHistory <<PostgreSQL>> #F5F5F5 {
-      .. поля и геттеры ..
-    }
-    class Organization <<PostgreSQL>> #F5F5F5 {
-      .. поля и геттеры ..
-    }
-    class AppUser <<PostgreSQL>> #F5F5F5 {
-      .. поля и геттеры, кроме passwordHash ..
-    }
-    class Route <<PostgreSQL>> #F5F5F5 {
-      + getSegments()
-      + isTemplate()
-    }
-    class RouteSegment <<PostgreSQL>> #F5F5F5 {
-      + segmentKey()
-    }
-    class Checkpoint <<PostgreSQL>> #F5F5F5 {
-      + getCode()
-      + getName()
-    }
-    class RequestStatusMachine <<не хранится>> #EDE7F6 {
-      + all()
-      + from()
-      + find()
-      + isTerminal()
-    }
-    class RequestRegistry <<не хранится>> #EDE7F6 {
-      + attentionFor()
-      + matches()
-      + rows()
-      + truncated()
-      + summarize()
-      + validateLimit()
-      + parseStatuses()
-      + parseRiskLevels()
-    }
-    class RegistryEntry <<не хранится>> #EDE7F6 {
-      .. record: 19 полей строки реестра ..
-    }
-    class RiskResult <<не хранится>> #EDE7F6 {
-      + unavailable()
-    }
-    class RiskAssessment <<MongoDB>> #E8F5E9 {
-      .. поля снимка расчёта и геттеры ..
-    }
-    class AuditEvent <<MongoDB>> #E8F5E9 {
-      + organizationCreated()
-      + requestStatusChanged()
-    }
-    enum RequestStatus <<перечисление>> #F5F5F5 {
-      + label()
-      + parse()
-    }
-    enum ActorRole <<перечисление>> #F5F5F5 {
-      + label()
-      + parse()
-    }
-    enum RiskLevel <<перечисление>> #F5F5F5 {
-      + label()
-      + parse()
-      + of()
-    }
-    enum RegistryScope <<перечисление>> #F5F5F5 {
-      + label()
-      + parse()
-      + contains()
-      + statuses()
-    }
-    enum RegistrySort <<перечисление>> #F5F5F5 {
-      + parse()
-      + comparator()
-    }
-    enum AttentionFlag <<перечисление>> #F5F5F5 {
-      + label()
-    }
+  class "Расчёт ETA" as A_ETA <<компонент>> #F5F5F5 {
+    UC-6
+    время в пути по длинам участков
+  }
+  class "Оценка риска" as A_RISK <<компонент>> #F5F5F5 {
+    UC-7, UC-8
+    сводит угрозы участков и ценность груза
+    в оценку и рекомендацию
+  }
+  class "Создание организации" as A_ORG <<компонент>> #F5F5F5 {
+    UC-32
+    провижининг организации
+    и первого диспетчера
   }
 }
 
-package "инфраструктура" #FDFDFD {
-  class "PostgreSQL 16" as PG <<database>> #F5F5F5 {
-    .. оперативные данные: заявки, история статусов, ..
-    .. организации, пользователи, маршруты (DC-4) ..
+package "domain" as DOM #FDFDFD {
+  class "Организация" as ORG #F5F5F5 {
+    ключ пространства данных : текст
+    название : текст {уникально}
+    уровень подписки : текст {базовый / стандартный / расширенный}
+    состояние : текст {активна при создании}
+    создана : момент времени
   }
-  class "MongoDB 7" as MG <<database>> #F5F5F5 {
-    .. коллекции risk_assessment и audit_event (DC-5) ..
+
+  class "Учётная запись" as USER #F5F5F5 {
+    имя : текст
+    логин : текст {уникален}
+    пароль : не хранится в открытом виде
+    роль : Роль участника
+    канал связи : текст
+    активна : признак
   }
-  class "Wasteland Intel" as WI <<внешняя система>> #F5F5F5 {
-    .. HTTP-источник данных об угрозах ..
-    .. по участкам маршрута (FR-6) ..
+
+  class "Заявка" as REQ #F5F5F5 {
+    пункт отправления : текст
+    пункт назначения : текст
+    дата отправки : дата
+    описание груза : текст
+    ценность груза : число {крышки}
+    время в пути : число {часы, FR-5}
+    значение риска : число {0..100, может быть не задано}
+    актуальность риска : текст {актуальна / на устаревших данных /
+    не рассчитана}
+    рекомендация : текст {FR-8}
+    статус : Статус рейса
+    создана : момент времени
+  }
+
+  class "История статусов" as HIST #F5F5F5 {
+    из какого статуса : Статус рейса {не задан у стартовой записи}
+    в какой статус : Статус рейса
+    роль инициатора : Роль участника
+    имя инициатора : текст
+    причина : текст {обязательна при фиксации задержки}
+    когда произошло : момент времени
+  }
+
+  class "Статусная модель" as SM #F5F5F5 {
+    разрешённые переходы : список
+    роли, которым переход доступен
+    когда причина обязательна
+    какие статусы финальные
+  }
+
+  enum "Статус рейса" as STATUS #F5F5F5 {
+    Черновик
+    Готов к отправке
+    В пути
+    Задержка
+    Доставлен
+    Закрыт
+    Отменён
+  }
+
+  enum "Роль участника" as ROLE #F5F5F5 {
+    Диспетчер караванов
+    Караван-мастер
+    Система
+  }
+
+  class "Маршрут" as ROUTE #F5F5F5 {
+    код : текст {уникален}
+    название : текст
+    шаблон : признак {общий для платформы}
+  }
+
+  class "Участок маршрута" as SEG #F5F5F5 {
+    порядок в маршруте : число
+    протяжённость : число {км}
+    /ключ участка : текст {«откуда — куда», производное}
+  }
+
+  class "Контрольная точка" as CP #F5F5F5 {
+    код : текст {уникален}
+    название : текст
+  }
+
+  class "Снимок оценки риска" as RISK #F5F5F5 {
+    значение : число {не задано, если оценка не рассчитана}
+    актуальность : текст {актуальна / на устаревших данных /
+    не рассчитана}
+    рекомендация : текст
+    дата сведений об угрозах : момент времени
+    сумма уровней угроз : число
+    базовая оценка маршрута : число
+    надбавка за ценность груза : число
+    разбор по участкам : список
+    рассчитан : момент времени
+  }
+
+  enum "Уровень риска" as LEVEL #F5F5F5 {
+    Н/Д
+    Низкий
+    Средний
+    Высокий
+    Критический
+  }
+
+  class "Срез реестра" as REG #F5F5F5 {
+    область среза : текст
+    сортировка : текст
+    предел выдачи : число
+    показано : число
+    срез усечён : признак
+    сводка по статусам и рискам
+  }
+
+  class "Событие аудита" as AUDIT #F5F5F5 {
+    тип : текст {создание организации / смена статуса}
+    инициатор : текст
+    организация
+    учётная запись
+    подробности : набор значений
+    когда произошло : момент времени
   }
 }
 
-' ─── frontend: корень src → страницы → компоненты → клиент REST API ──
-MAIN ..> APP
-APP ..> ROUTER
-APP ..> LANDING
-APP ..> CONSOLE
-APP ..> ORGPAGE
-LANDING ..> ROUTER
-CONSOLE ..> ROUTER
-ORGPAGE ..> ROUTER
-CONSOLE ..> FORM
-CONSOLE ..> REG
-REG ..> FILTERS
-REG ..> SUMMARY
-REG ..> LIST
-FILTERS ..> SUMMARY
-FILTERS ..> SBADGE
-SUMMARY ..> SBADGE
-LIST ..> SMODAL
-LIST ..> RMODAL
-LIST ..> SBADGE
-LIST ..> RBADGE
-SMODAL ..> SBADGE
-CONSOLE ..> API
-ORGPAGE ..> API
-FORM ..> API
-REG ..> API
-LIST ..> API : recalcRisk()
-SMODAL ..> API
-RMODAL ..> API
-FILTERS ..> API : типы контракта
-SUMMARY ..> API : типы контракта
+package "infrastructure" as INFRA #FDFDFD {
+  class "Хранение данных" as I_PG <<компонент>> #F5F5F5 {
+    оперативные данные организаций,
+    рейсов, маршрутов и истории
+  }
+  class "Хранение снимков риска" as I_RISK <<компонент>> #F5F5F5 {
+    снимок каждого расчёта риска
+  }
+  class "Журнал аудита" as I_AUDIT <<компонент>> #F5F5F5 {
+    события изменения данных (RL-4, RL-5)
+  }
+  class "Адаптер\nWasteland Intel" as I_WI <<компонент>> #F5F5F5 {
+    запрос угроз по ключам участков
+    таймауты и отказ источника
+  }
 
-' ─── frontend → backend: только через REST-контракт слоя web ──────────
-API ..> RequestController : REST-контракт
-API ..> RequestStatusController
-API ..> RequestRegistryController
-API ..> OrganizationController
-API ..> RouteController
-API ..> CheckpointController
-API ..> HealthController
+  class "Отчёт об угрозах" as REPORT <<контракт источника>> #EDE7F6 {
+    дата актуальности : момент времени
+  }
 
-' ─── web → service ───────────────────────────────────────────────────
-RequestController ..> RequestService
-RequestStatusController ..> RequestService
-RequestStatusController ..> RequestStatusService
-RequestRegistryController ..> RequestRegistryService
-OrganizationController ..> OrganizationService
+  class "Угроза участка" as THREAT <<контракт источника>> #EDE7F6 {
+    ключ участка : текст
+    уровень опасности : число
+    виды угроз : список текстов
+  }
+}
 
-' ─── web → domain: фактические обращения к доменным правилам ─────────
-RequestRegistryController ..> RequestRegistry : attentionFor()
-RequestRegistryController ..> RequestStatusMachine : isTerminal()
-RequestStatusController ..> RequestStatusMachine : isTerminal()
-RequestStatusController ..> RequestStatus : parse()
-RequestStatusController ..> ActorRole : parse()
+package "внешние системы" as EXT #FDFDFD {
+  class "Wasteland Intel" as WI <<внешняя система>> #EDE7F6 {
+  }
+}
 
-' ─── фактические отступления от DC-6 (см. заметку) ───────────────────
-RouteController ..> RouteRepository : в обход слоя service
-CheckpointController ..> CheckpointRepository : в обход слоя service
+' ─── Правила взаимодействия слоёв (DC-6) ─────────────────────────────
+P_HTTP ..> P_API_REQ : REST / JSON
+P_HTTP ..> P_API_ORG : REST / JSON
+P_HTTP ..> P_API_REF : REST / JSON
+P_REQ ..> P_HTTP
+P_ORG ..> P_HTTP
 
-' ─── service → service ──────────────────────────────────────────────
-RequestService ..> EtaService
-RequestService ..> RiskService
-RequestService ..> RequestStatusService
-RiskService ..> WastelandIntelClient
-RequestStatusService ..> RequestReadinessGuard : готовность рейса (FR-10)
-RequestStatusService ..> StatusTransitionException : отказ в переходе
+P_API_REQ ..> A_REQ
+P_API_REQ ..> A_STATUS
+P_API_REQ ..> A_REG
+P_API_ORG ..> A_ORG
+P_API_REF ..> I_PG : <<отступление от DC-6>>\nчтение справочников в обход application
 
-' ─── service → repository ───────────────────────────────────────────
-RequestService ..> CaravanRequestRepository
-RequestService ..> OrganizationRepository
-RequestService ..> RouteRepository
-RequestService ..> RouteSegmentRepository
-RequestService ..> CheckpointRepository
-RequestStatusService ..> CaravanRequestRepository
-RequestStatusService ..> RequestStatusHistoryRepository
-RequestStatusService ..> AuditEventRepository
-RequestRegistryService ..> CaravanRequestRepository
-RequestRegistryService ..> RequestStatusHistoryRepository
-RequestRegistryService ..> OrganizationRepository
-RiskService ..> RiskAssessmentRepository
-OrganizationService ..> OrganizationRepository
-OrganizationService ..> AppUserRepository
-OrganizationService ..> AuditEventRepository
+A_REQ ..> A_ETA
+A_REQ ..> A_RISK
+A_REQ ..> A_STATUS
 
-' ─── service → domain ───────────────────────────────────────────────
-RequestService ..> CaravanRequest : заявка в статусе DRAFT
-RequestStatusService ..> RequestStatusMachine : допустимость перехода
-RequestStatusService ..> AuditEvent : событие смены статуса
-OrganizationService ..> AuditEvent : событие создания организации
-RequestRegistryService ..> RequestRegistry : отбор, сортировка, сводка
-RequestRegistryService ..> RegistryEntry : строки реестра
-RequestRegistryService ..> RiskLevel : уровень риска по score
-RiskService ..> RiskResult : результат расчёта
-RiskService ..> RiskAssessment : снимок расчёта
-RiskService ..> RouteSegment : ключи участков
-EtaService ..> Route : длина маршрута
+' ─── application → domain ────────────────────────────────────────────
+A_REQ ..> REQ : собирает рейс
+A_STATUS ..> SM : проверяет переход
+A_STATUS ..> HIST : пишет историю
+A_REG ..> REG : формирует срез
+A_ETA ..> ROUTE : суммирует участки
+A_RISK ..> RISK : формирует снимок оценки
+A_RISK ..> LEVEL : выводит уровень риска
+A_ORG ..> ORG : создаёт организацию
+A_ORG ..> USER : создаёт первого диспетчера
 
-' ─── связи доменных сущностей (кратности — на обоих концах) ─────────
-Organization "1" o-- "0..*" AppUser
-Organization "1" o-- "0..*" CaravanRequest
-CaravanRequest "0..*" --> "0..1" Route
-CaravanRequest "1" *-- "1..*" RequestStatusHistory
-Route "1" *-- "1..*" RouteSegment
-RouteSegment "0..*" --> "1" Checkpoint
+' ─── application → infrastructure ────────────────────────────────────
+A_REQ ..> I_PG : <<access>>
+A_STATUS ..> I_PG : <<access>>
+A_STATUS ..> I_AUDIT : <<access>>
+A_REG ..> I_PG : <<access>>
+A_RISK ..> I_RISK : <<access>>
+A_RISK ..> I_WI : <<access>>
+A_ORG ..> I_PG : <<access>>
+A_ORG ..> I_AUDIT : <<access>>
 
-' ─── repository → инфраструктура ────────────────────────────────────
-CaravanRequestRepository ..> PG
-RequestStatusHistoryRepository ..> PG
-OrganizationRepository ..> PG
-AppUserRepository ..> PG
-RouteRepository ..> PG
-RouteSegmentRepository ..> PG
-CheckpointRepository ..> PG
-RiskAssessmentRepository ..> MG
-AuditEventRepository ..> MG
-WastelandIntelClient ..> WI : HTTP, таймауты 2 с
+' ─── infrastructure → domain и внешние системы ───────────────────────
+I_PG ..> REQ : хранит сущности
+I_RISK ..> RISK : хранит снимки
+I_AUDIT ..> AUDIT : хранит события
+I_WI ..> WI : REST / HTTPS
+I_WI ..> REPORT : разбирает ответ
+REPORT "1" o-- "1..*" THREAT : угрозы по участкам
+THREAT ..> SEG : сопоставляется по ключу участка
+REPORT ..> RISK : сведения об угрозах\nучаствуют в расчёте (FR-6, FR-7)
 
-' ─── компоновка: слой domain — под слоем repository, в две колонки ───
-CaravanRequestRepository -[hidden]down- Organization
-RequestStatusMachine -[hidden]down- RequestStatus
-RequestStatus -[hidden]down- ActorRole
-RequestRegistry -[hidden]down- RegistryEntry
-RegistryEntry -[hidden]down- RegistryScope
-RegistryScope -[hidden]down- RegistrySort
-RegistrySort -[hidden]down- AttentionFlag
-RiskResult -[hidden]down- RiskLevel
-RiskAssessment -[hidden]down- AuditEvent
+' ─── Доменная модель ─────────────────────────────────────────────────
+ORG "1" o-- "0..*" USER : сотрудники организации
+ORG "1" o-- "0..*" REQ : рейсы организации (FR-23, FR-24)
+REQ "0..*" --> "0..1" ROUTE : выполняется по маршруту
+ROUTE "1" *-- "1..*" SEG : участки в порядке следования
+SEG "0..*" --> "1" CP : начало участка
+SEG "0..*" --> "1" CP : конец участка
+REQ "1" *-- "1..*" HIST : история переходов (FR-3)
+REQ ..> STATUS : текущий статус
+HIST ..> STATUS : из какого в какой
+HIST ..> ROLE : роль инициатора
+SM ..> STATUS : область определения переходов
+SM ..> ROLE : кому переход доступен
+REQ "1" .. "0..*" RISK : снимок каждого расчёта
+REQ ..> LEVEL : уровень выводится из значения\nи актуальности при чтении (UC-3)
+REG "1" o-- "0..*" REQ : строки среза
+ORG "1" .. "0..*" AUDIT : события организации
+HIST "0..1" .. "0..1" AUDIT : переход дублируется событием журнала
 
-note as N_Layers
-  **Правила взаимодействия слоёв (DC-6: Controller → Service → Repository)**
-  • frontend обращается к backend только через REST-контракт слоя **web**;
-  • слой **web** прецеденты не считает: разбор тела запроса, коды ответов,
-    обработчики исключений (@ExceptionHandler) — но именно он открывает
-    транзакцию и обращается к отдельным доменным правилам напрямую
-    (см. «Фактические отступления от DC-6»);
-  • вся логика прецедентов — в слое **service**;
-  • слой **domain** хранит состояние сущностей и правила предметной области:
-    статусная модель, правила реестра, слагаемые оценки риска;
-  • слой **repository** скрывает выбор хранилища за интерфейсами Spring Data;
-  • взаимодействие только сверху вниз: ссылок из domain в service нет.
+note as N_LAYERS
+  **Правила взаимодействия слоёв (DC-6)**
+  • presentation обращается к application только
+    через контракт API; риск и статусы сам не считает
+  • application держит сценарии прецедентов, работает
+    с domain и обращается к infrastructure как <<access>>
+  • domain не знает ни о слоях выше, ни о хранилищах
+  • infrastructure скрывает выбор хранилища и протокол
+    обращения к внешним системам
+  **Отступление:** API справочников маршрутов читает
+  хранилище напрямую, минуя application.
 end note
 
-note as N_Deviations
-  **Фактические отступления от DC-6 в текущем коде**
-  • транзакция открывается в слое **web**: @Transactional стоит на методах
-    RequestController, RequestStatusController, OrganizationController,
-    RouteController и CheckpointController (у чтения — readOnly = true),
-    а @Transactional сервисов присоединяется к уже открытой транзакции;
-    исключение — RequestRegistryController: у него @Transactional нет,
-    границу задаёт RequestRegistryService.load();
-  • слой **web** обращается к слою **domain** напрямую при разборе параметров
-    и сборке DTO: RequestStatus.parse(), ActorRole.parse(),
-    RequestStatusMachine.isTerminal(), RequestRegistry.attentionFor();
-  • RouteController и CheckpointController внедряют репозитории напрямую:
-    сервисного слоя для справочников маршрутов и точек нет;
-  • HealthController обращается к JdbcTemplate и MongoTemplate, минуя слои
-    service и repository (проверка готовности PostgreSQL и MongoDB);
-  • WastelandIntelClient помечен @Component и лежит в пакете com.karavany.risk:
-    по роли это адаптер внешней системы, вызывается только из RiskService.
-end note
-
-note as N_Gaps
-  **Что на этом виде отсутствует и почему**
-  • классов прецедентов UC-16 «Зафиксировать прохождение этапа рейса»
-    и UC-19 «Сообщить об инциденте в рейсе» нет ни в одном слое —
-    их сущности показаны как «проект» на CLS_UseCaseView;
-  • RequestReadinessGuard.blockerFor() возвращает null для всех переходов:
-    проверка укомплектованности рейса (FR-10) появится вместе с UC-9;
-  • слоя аутентификации нет — роль актора приходит в теле запроса,
-    а выбранная организация хранится в строке адреса (до UC-25);
-  • событие создания заявки в журнал аудита не пишется: единственная точка
-    записи audit-события по заявке — RequestStatusService.changeStatus()
-    (пробел по RL-4).
-end note
 
 legend right
   |= Обозначение |= Значение |
-  | <#F5F5F5> | «PostgreSQL» — хранится в PostgreSQL (DC-4) |
-  | <#E8F5E9> | «MongoDB» — хранится в MongoDB (DC-5) |
-  | <#EDE7F6> | «не хранится» — в БД не сохраняется |
-  | <#FFF2CC> | «проект» — ещё не реализовано |
-  **Один цвет — несколько стереотипов:** фон #F5F5F5 несут также
-  «перечисление» (enum-класс, в БД varchar), «database», «внешняя система»
-  и классы слоёв frontend, web, service и repository — их различает
-  стереотип, а не цвет. Цвет «проект» на этом виде не встречается.
-  **Стереотипы слоёв:** «корень src», «pages», «components», «api» —
-  frontend; «@RestController» — backend.web; «@Service», «@Component»,
-  «утилита», «исключение» — backend.service; «JpaRepository»,
-  «MongoRepository» — backend.repository; «PostgreSQL», «MongoDB»,
-  «не хранится», «перечисление» — backend.domain; «database»
-  и «внешняя система» — инфраструктура.
-  **Имена пакетов** приведены дословно (""set separator none""), внешние
-  рамки ""frontend"" и ""backend"" — только группировка слоёв.
-  **frontend.api — слой, а не каталог:** файл лежит в корне frontend/src.
-  **Типы связей:** ""-->"" направленная ассоциация с кратностями
-  на обоих концах, ""*--"" композиция, ""o--"" агрегация,
-  ""..>"" зависимость: вызов, внедрение зависимости через конструктор,
-  импорт модуля или обращение к хранилищу (кратности на зависимостях
-  не указываются).
-  **Методы приведены без полных сигнатур;** ""{унаследован}"" — метод
-  не объявлен в интерфейсе, а получен от Spring Data; ""+"" — экспортируемый
-  (public) член, ""-"" — внутренний (у frontend-модулей — функция,
-  которая не экспортируется), многоточие в имени — сокращение длинного
-  производного метода Spring Data, ""..текст.."" — разделитель-пояснение,
-  а не член класса. Полные сигнатуры, поля, аннотации, таблицы
-  и коллекции — на CLS_ImplementationView; пакет com.karavany.route
-  в контур того вида не вошёл (см. там заметку «Контур диаграммы»),
-  поэтому полей и сигнатур Route, RouteSegment, Checkpoint
-  и их репозиториев там нет.
+  | <#F5F5F5> | логический компонент слоя или класс домена |
+  | <#EDE7F6> | «внешняя система» и контракт её данных |
+  **Уровень описания.** Слои и компоненты, их зоны ответственности
+  и правила взаимодействия; классы домена — со свойствами в деловых
+  типах. Фактические классы, сигнатуры, аннотации и хранилища —
+  на CLS_ImplementationView.
+  **Имена слоёв и компонентов** дословно совпадают с диаграммой
+  пакетов PKG_LogicalView и с участниками диаграмм Sequence,
+  Cooperative и State Machine в Logical View.
+  **Деловые типы полей:** ""текст"", ""число"", ""дата"",
+  ""момент времени"", ""признак"", ""список"".
+  Производное поле помечено ""/"".
+  **Типы связей:** ""*--"" композиция, ""o--"" агрегация,
+  ""-->"" ассоциация, "".."" связь по значению,
+  ""..>"" зависимость (кратности не указываются).
+  **Трассировка:** FR-3 (история), FR-5 (ETA), FR-6 (Wasteland Intel),
+  FR-7 (risk_score), FR-8 (рекомендация), FR-23 и FR-24 (организация
+  и изоляция её данных), RL-4 и RL-5 (журнал аудита),
+  DC-6 (слоистая архитектура).
 endlegend
 @enduml

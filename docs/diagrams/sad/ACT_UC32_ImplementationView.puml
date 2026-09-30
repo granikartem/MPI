@@ -42,7 +42,7 @@ start
 
 |application\nOrganizationService|
 if (название свободно?) then (да)
-  :validateDispatcher(...): required(fullName),\nrequired(login), required(initialPassword)\n— если диспетчер задан;
+  :generateTenantKey() =\n"tnt_" + 8 символов UUID;
 else (нет — альт. поток 4а)
   :throw new IllegalArgumentException\n«Организация с таким названием уже существует»;<<#MistyRose>>
   |presentation\nOrganizationController|
@@ -50,17 +50,23 @@ else (нет — альт. поток 4а)
   stop
 endif
 
-|infrastructure\nХранение данных\n(PostgreSQL)|
-:если диспетчер задан — userRepository\n    .findByLoginIgnoreCase(login);
-
 |application\nOrganizationService|
-if (логин свободен\nили диспетчер не задан?) then (да)
-  :generateTenantKey() =\n"tnt_" + 8 символов UUID;
-else (нет — логин занят)
-  :throw new IllegalArgumentException\n«Пользователь с таким логином уже существует»;<<#MistyRose>>
-  |presentation\nOrganizationController|
-  :@ExceptionHandler(IllegalArgumentException)\n→ HTTP 400 ErrorResponse(message);<<#MistyRose>>
-  stop
+if (command.firstDispatcher() != null?) then (да — проверить диспетчера)
+  |infrastructure\nХранение данных\n(PostgreSQL)|
+  :userRepository\n    .findByLoginIgnoreCase(login);
+  |application\nOrganizationService|
+  if (логин уже занят?) then (да)
+    :throw new IllegalArgumentException\n«Пользователь с таким логином уже существует»;<<#MistyRose>>
+    |presentation\nOrganizationController|
+    :@ExceptionHandler(IllegalArgumentException)\n→ HTTP 400 ErrorResponse(message);<<#MistyRose>>
+    stop
+  else (нет)
+    |application\nOrganizationService|
+    :required(fullName), required(login),\nrequired(initialPassword)\n— validateDispatcher пройдена;
+  endif
+else (нет — альт. поток 6а)
+  |application\nOrganizationService|
+  :проверять нечего — диспетчер не назначается;
 endif
 
 |infrastructure\nХранение данных\n(PostgreSQL)|
@@ -100,12 +106,9 @@ endif
 stop
 
 floating note left
-  **Ограничение реализации:** аутентификация
-  суперпользователя не проверяется, актор
-  в audit-событии задан константой SUPERUSER.
-  Уникальность названия и логина продублирована
+  **Уникальность названия и логина** продублирована
   индексами uq_organization_name_ci
-  и uq_app_user_login_ci; их нарушение даёт
+  и uq_app_user_login_ci: их нарушение даёт
   DataIntegrityViolationException → HTTP 400.
 end note
 

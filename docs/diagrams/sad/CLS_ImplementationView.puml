@@ -27,7 +27,107 @@ hide empty members
 ' слои вложены явно
 set separator none
 
-title ИС «Караваны» — Class Diagram (Implementation View)\nПолное описание классов: поля, сигнатуры методов, аннотации JPA и MongoDB, таблицы PostgreSQL и коллекции MongoDB
+title ИС «Караваны» — Class Diagram (Implementation View)\nФактические классы реализации: пакеты, поля, сигнатуры методов и аннотации; схема хранения — на диаграммах базы данных
+
+package "frontend/src" #FDFDFD {
+
+  package "корневые модули" #FDFDFD {
+    class "main.tsx" as MAIN <<корень src>> #F5F5F5 {
+      .. монтирует App в DOM ..
+    }
+    class "App.tsx" as APP <<корень src>> #F5F5F5 {
+      + App()
+    }
+    class "router.ts" as ROUTER <<корень src>> #F5F5F5 {
+      + currentPath()
+      + navigate()
+      + subscribeRouter()
+    }
+  }
+
+  package "pages" as fe_pages #FDFDFD {
+    class "Landing.tsx" as LANDING <<pages>> #F5F5F5 {
+      + Landing()
+    }
+    class "Console.tsx" as CONSOLE <<pages>> #F5F5F5 {
+      + Console()
+      - OrgPicker()
+      - OrgDispatch()
+      - selectedOrgId()
+    }
+    class "Organizations.tsx" as ORGPAGE <<pages>> #F5F5F5 {
+      + Organizations()
+      - tierPrice()
+    }
+  }
+
+  package "components" as fe_comp #FDFDFD {
+    class "RequestForm.tsx" as FORM <<components>> #F5F5F5 {
+      + RequestForm()
+      - submit()
+      - addSegment()
+      - updateSegment()
+      - removeSegment()
+    }
+    class "RequestRegistry.tsx" as REG <<components>> #F5F5F5 {
+      + RequestRegistry()
+      - load()
+      - changeScope()
+      - changeQuery()
+    }
+    class "RegistryFilters.tsx" as FILTERS <<components>> #F5F5F5 {
+      + RegistryFilters()
+      - toggled()
+    }
+    class "RegistrySummary.tsx" as SUMMARY <<components>> #F5F5F5 {
+      + STATUS_ORDER : порядок статусов
+      + RISK_LEVEL_ORDER : порядок уровней риска
+      + RegistrySummary()
+      + riskLevelColor()
+      + riskLevelLabel()
+    }
+    class "RequestList.tsx" as LIST <<components>> #F5F5F5 {
+      + RequestList()
+      - recalc()
+      - toRequest()
+      - actorOf()
+    }
+    class "StatusModal.tsx" as SMODAL <<components>> #F5F5F5 {
+      + StatusModal()
+      - apply()
+      - blockerFor()
+    }
+    class "RiskModal.tsx" as RMODAL <<components>> #F5F5F5 {
+      + RiskModal()
+      - onDelete()
+      - cargoTier()
+      - statusNote()
+    }
+    class "StatusBadge.tsx" as SBADGE <<components>> #F5F5F5 {
+      + StatusBadge()
+      + statusLabel()
+      + statusColor()
+    }
+    class "RiskBadge.tsx" as RBADGE <<components>> #F5F5F5 {
+      + RiskBadge()
+      - color()
+      - label()
+    }
+  }
+
+  package "api" as fe_api #FDFDFD {
+    class "api.ts" as API <<api>> #F5F5F5 {
+      + getRequests() / createRequest()
+      + getRegistry()
+      + getStatusInfo() / changeStatus()
+      + getStatusHistory()
+      + recalcRisk() / getRisk() / deleteRisk()
+      + getOrganizations() / createOrganization()
+      + getRoutes() / getCheckpoints()
+      + getHealth()
+    }
+  }
+}
 
 package "com.karavany.request" #FDFDFD {
   package "web" as req_web #FDFDFD {
@@ -194,22 +294,22 @@ package "com.karavany.request" #FDFDFD {
   }
 
   package "domain" as req_domain #FDFDFD {
-    class CaravanRequest <<PostgreSQL>> #F5F5F5 {
-      .. @Entity @Table("caravan_request") ..
+    class CaravanRequest <<@Entity>> #F5F5F5 {
+      .. @Entity ..
       - id : UUID {@Id @GeneratedValue(UUID)}
-      - organization : Organization {@ManyToOne(EAGER) @JoinColumn("organization_id")}
+      - organization : Organization {@ManyToOne(EAGER)}
       - origin : String
       - destination : String
-      - departureDate : LocalDate {@Column("departure_date")}
-      - cargoDescription : String {@Column("cargo_description")}
-      - cargoValueCaps : int {@Column("cargo_value_caps")}
-      - route : Route {@ManyToOne(EAGER) @JoinColumn("route_id")}
-      - etaHours : Double {@Column("eta_hours")}
-      - riskScore : Integer {@Column("risk_score")}
-      - riskStatus : String = "NA" {@Column("risk_status")}
+      - departureDate : LocalDate
+      - cargoDescription : String
+      - cargoValueCaps : int
+      - route : Route {@ManyToOne(EAGER)}
+      - etaHours : Double
+      - riskScore : Integer
+      - riskStatus : String = "NA"
       - recommendation : String
       - status : RequestStatus = DRAFT {@Enumerated(STRING)}
-      - createdAt : OffsetDateTime {@Column(insertable=false, updatable=false)}
+      - createdAt : OffsetDateTime
       -- методы --
       + applyEta(etaHours : Double) : void
       + applyRisk(score : Integer, status : String, recommendation : String) : void
@@ -217,16 +317,16 @@ package "com.karavany.request" #FDFDFD {
       .. плюс геттеры всех полей ..
     }
 
-    class RequestStatusHistory <<PostgreSQL>> #F5F5F5 {
-      .. @Entity @Table("request_status_history") ..
+    class RequestStatusHistory <<@Entity>> #F5F5F5 {
+      .. @Entity ..
       - id : UUID {@Id @GeneratedValue(UUID)}
-      - request : CaravanRequest {@ManyToOne(LAZY, optional=false) @JoinColumn("request_id")}
-      - fromStatus : RequestStatus {@Enumerated(STRING) @Column("from_status")}
-      - toStatus : RequestStatus {@Enumerated(STRING) @Column("to_status", nullable=false)}
-      - actorRole : ActorRole {@Enumerated(STRING) @Column("actor_role", nullable=false)}
-      - actorName : String {@Column("actor_name")}
+      - request : CaravanRequest {@ManyToOne(LAZY, optional=false)}
+      - fromStatus : RequestStatus {@Enumerated(STRING)}
+      - toStatus : RequestStatus {@Enumerated(STRING)}
+      - actorRole : ActorRole {@Enumerated(STRING)}
+      - actorName : String
       - reason : String
-      - occurredAt : OffsetDateTime = now() {@Column("occurred_at", nullable=false)}
+      - occurredAt : OffsetDateTime = now()
       -- методы --
       + RequestStatusHistory(request, fromStatus, toStatus, actorRole, actorName, reason)
       .. плюс геттеры всех полей ..
@@ -439,34 +539,34 @@ package "com.karavany.organization" #FDFDFD {
   }
 
   package "domain" as org_domain #FDFDFD {
-    class Organization <<PostgreSQL>> #F5F5F5 {
-      .. @Entity @Table("organization") ..
+    class Organization <<@Entity>> #F5F5F5 {
+      .. @Entity ..
       - id : UUID {@Id @GeneratedValue(UUID)}
-      - tenantKey : String {@Column("tenant_key")}
+      - tenantKey : String
       - name : String
-      - subscriptionTier : String {@Column("subscription_tier")}
-      - legalAddress : String {@Column("legal_address")}
-      - primaryContact : String {@Column("primary_contact")}
-      - contactChannel : String {@Column("contact_channel")}
+      - subscriptionTier : String
+      - legalAddress : String
+      - primaryContact : String
+      - contactChannel : String
       - region : String
       - status : String = "ACTIVE"
-      - createdAt : OffsetDateTime = now() {@Column("created_at", updatable=false)}
+      - createdAt : OffsetDateTime = now()
       -- методы --
       + Organization(tenantKey, name, subscriptionTier, legalAddress, primaryContact, contactChannel, region)
       .. плюс геттеры всех полей ..
     }
 
-    class AppUser <<PostgreSQL>> #F5F5F5 {
-      .. @Entity @Table("app_user") ..
+    class AppUser <<@Entity>> #F5F5F5 {
+      .. @Entity ..
       - id : UUID {@Id @GeneratedValue(UUID)}
-      - organization : Organization {@ManyToOne(LAZY) @JoinColumn("organization_id")}
-      - fullName : String {@Column("full_name")}
+      - organization : Organization {@ManyToOne(LAZY)}
+      - fullName : String
       - login : String
-      - passwordHash : String {@Column("password_hash")}
+      - passwordHash : String
       - role : String {приложение пишет только "DISPATCHER"}
-      - contactChannel : String {@Column("contact_channel")}
+      - contactChannel : String
       - active : boolean = true
-      - createdAt : OffsetDateTime = now() {@Column("created_at", updatable=false)}
+      - createdAt : OffsetDateTime = now()
       -- методы --
       + AppUser(organization, fullName, login, passwordHash, role, contactChannel)
       .. плюс геттеры всех полей, кроме passwordHash ..
@@ -524,10 +624,10 @@ package "com.karavany.risk" #FDFDFD {
     + threats : List<String>
   }
 
-  class RiskAssessment <<MongoDB>> #E8F5E9 {
-    .. @Document("risk_assessment") ..
+  class RiskAssessment <<@Document>> #F5F5F5 {
+    .. @Document ..
     - id : String {@Id}
-    - requestId : UUID {без внешнего ключа}
+    - requestId : UUID
     - score : Integer
     - status : String
     - recommendation : String
@@ -542,7 +642,7 @@ package "com.karavany.risk" #FDFDFD {
     .. плюс геттеры всех полей ..
   }
 
-  class "RiskAssessment.Segment" as AssessmentSegment <<MongoDB>> #E8F5E9 {
+  class "RiskAssessment.Segment" as AssessmentSegment <<@Document>> #F5F5F5 {
     .. record ..
     + segment : String
     + threatLevel : int
@@ -589,12 +689,12 @@ package "com.karavany.risk" #FDFDFD {
 }
 
 package "com.karavany.audit" #FDFDFD {
-  class AuditEvent <<MongoDB>> #E8F5E9 {
-    .. @Document("audit_event") ..
+  class AuditEvent <<@Document>> #F5F5F5 {
+    .. @Document ..
     - id : String {@Id}
     - type : String {ORGANIZATION_CREATED / REQUEST_STATUS_CHANGED}
     - actor : String
-    - organizationId : UUID {без внешнего ключа}
+    - organizationId : UUID
     - userId : UUID
     - details : Map<String, Object>
     - occurredAt : Instant
@@ -610,18 +710,8 @@ package "com.karavany.audit" #FDFDFD {
   }
 }
 
-package "инфраструктура" #FDFDFD {
-  class "PostgreSQL 16" as PG <<database>> #F5F5F5 {
-    .. схема создаётся Flyway, миграции V1…V6 ..
-    .. таблицы, индексы и ограничения — в заметке «Схема хранения» ..
-  }
-
-  class "MongoDB 7" as MG <<database>> #F5F5F5 {
-    .. коллекции Spring Data MongoDB ..
-    .. risk_assessment, audit_event — в заметке «Схема хранения» ..
-  }
-
-  class "Wasteland Intel" as WI <<внешняя система>> #F5F5F5 {
+package "внешние системы" #FDFDFD {
+  class "Wasteland Intel" as WI <<внешняя система>> #EDE7F6 {
     .. HTTP, в dev — WireMock ..
     .. GET /threats?segments=КОД_ОТ-КОД_ДО,… ..
     .. ответ: {asOf, segments[{segment, threatLevel, threats[]}]} ..
@@ -659,8 +749,7 @@ AssessmentSegment -[hidden]down- WastelandIntelClient
 SegmentThreat -[hidden]down- RiskLevel
 RiskLevel -[hidden]down- RiskAssessmentRepository
 AuditEvent -[hidden]down- AuditEventRepository
-PG -[hidden]down- MG
-MG -[hidden]down- WI
+AuditEventRepository -[hidden]down- WI
 
 ' слои друг под другом, а не рядом: service → domain → repository
 StatusTransitionException -[hidden]down- CaravanRequest
@@ -669,11 +758,11 @@ Provisioning -[hidden]down- AppUser
 Organization -[hidden]down- OrganizationRepository
 
 ' ─── связи сущностей: фактические JPA-отображения ────────────────────
-CaravanRequest "0..*" --> "1" Organization : @ManyToOne(EAGER)\norganization_id (not null с V4)
-AppUser "0..*" --> "1" Organization : @ManyToOne(LAZY)\norganization_id (not null с V3)
+CaravanRequest "0..*" --> "1" Organization : @ManyToOne(EAGER)
+AppUser "0..*" --> "1" Organization : @ManyToOne(LAZY)
 RequestStatusHistory "1..*" --> "1" CaravanRequest : @ManyToOne(LAZY, optional=false)\nrequest_id
-CaravanRequest "1" .. "0..*" RiskAssessment : по requestId, без внешнего ключа
-Organization "1" .. "0..*" AuditEvent : по organizationId, без внешнего ключа
+CaravanRequest "1" .. "0..*" RiskAssessment : по значению requestId
+Organization "1" .. "0..*" AuditEvent : по значению organizationId
 
 ' ─── вложенные типы (композиция объявлений) ──────────────────────────
 RequestStatusMachine +-- Transition
@@ -695,6 +784,44 @@ RequestController +-- SegmentInput
 CreateRequest "1" o-- "0..*" SegmentInput
 RequestStatusController +-- ChangeStatusRequest
 OrganizationController +-- CreateOrganization
+
+'  ─── frontend: композиция страниц и компонентов ─────────────────────
+MAIN ..> APP
+APP ..> ROUTER
+APP ..> LANDING
+APP ..> CONSOLE
+APP ..> ORGPAGE
+LANDING ..> ROUTER
+CONSOLE ..> ROUTER
+ORGPAGE ..> ROUTER
+CONSOLE ..> FORM
+CONSOLE ..> REG
+REG ..> FILTERS
+REG ..> SUMMARY
+REG ..> LIST
+FILTERS ..> SUMMARY
+FILTERS ..> SBADGE
+SUMMARY ..> SBADGE
+LIST ..> SMODAL
+LIST ..> RMODAL
+LIST ..> SBADGE
+LIST ..> RBADGE
+SMODAL ..> SBADGE
+CONSOLE ..> API
+ORGPAGE ..> API
+FORM ..> API
+REG ..> API
+LIST ..> API : recalcRisk()
+SMODAL ..> API
+RMODAL ..> API
+FILTERS ..> API : типы контракта
+SUMMARY ..> API : типы контракта
+
+' ─── frontend → web: REST-контракт ──────────────────────────────────
+API ..> RequestController : REST / JSON
+API ..> RequestStatusController
+API ..> RequestRegistryController
+API ..> OrganizationController
 
 ' ─── web → service: внедрение через конструктор ──────────────────────
 RequestController ..> RequestService
@@ -721,13 +848,7 @@ RequestStatusService ..> StatusTransitionException : throws
 RequestRegistryService ..> RequestRegistry : rows(), summarize()
 RequestRegistryService ..> RiskLevel : of()
 
-' ─── repository → хранилище ─────────────────────────────────────────
-CaravanRequestRepository ..> PG : caravan_request
-RequestStatusHistoryRepository ..> PG : request_status_history
-OrganizationRepository ..> PG : organization
-AppUserRepository ..> PG : app_user
-RiskAssessmentRepository ..> MG : risk_assessment
-AuditEventRepository ..> MG : audit_event
+' ─── обращение к внешней системе ────────────────────────────────────
 WastelandIntelClient ..> WI : RestClient.get()
 
 note as N_Scope
@@ -736,40 +857,11 @@ note as N_Scope
     UC-1, UC-2, UC-3, UC-7 и UC-32;
   • вне контура, чтобы диаграмма читалась по ширине
     страницы: пакет com.karavany.route целиком,
-    HealthController и frontend (они есть
-    на CLS_LogicalView), а также KaravanyApplication;
-  • классов UC-16 и UC-19 в коде нет: их проектируемые
-    сущности показаны как «проект» на CLS_UseCaseView.
-end note
-
-note bottom of PG
-  **Схема хранения**
-  **PostgreSQL 16** (схема создаётся Flyway, V1…V6):
-  • checkpoint — V1; 5 строк справочника поставляет V2
-  • route — V1; code varchar(32) not null unique — V4
-  • route.organization_id — V3, nullable,
-    приложением не заполняется
-  • route_segment — V1; ord, from_checkpoint_id,
-    to_checkpoint_id, distance_km
-  • caravan_request — V1; organization_id not null — V4;
-    risk_score integer, risk_status varchar(16)
-    not null default 'NA' (OK / STALE / NA),
-    recommendation varchar(2000)
-  • ck_caravan_request_status — V5; 7 значений статуса
-  • ix_caravan_request_org_created — V6;
-    (organization_id, created_at desc)
-  • request_status_history — V5;
-    ix_request_status_history_request; той же миграцией
-    восстановлена стартовая запись «— → DRAFT»
-    для заявок, созданных до UC-2
-  • organization — V3; uq_organization_name_ci
-    по lower(name)
-  • app_user — V3; organization_id not null,
-    uq_app_user_login_ci по lower(login)
-  **MongoDB 7** (коллекции Spring Data MongoDB):
-  • risk_assessment — снимок каждого расчёта risk_score
-  • audit_event — ORGANIZATION_CREATED,
-    REQUEST_STATUS_CHANGED
+    HealthController и KaravanyApplication;
+  • схема хранения — таблицы, колонки, индексы
+    и коллекции — на диаграммах базы данных
+    (DB_ER_ImplementationView
+    и DB_Datalogical_ImplementationView);
 end note
 
 note as N_DTO
@@ -815,29 +907,12 @@ note bottom of RequestStatusMachine
 end note
 
 note as N_Limits
-  **Ограничения текущей реализации**
-  • GET /api/requests: organizationId объявлен как
-    @RequestParam(required = false); без него
-    RequestService.findAll() возвращает заявки всех
-    организаций — пробел по FR-24, правка отложена
-    до UC-25/UC-26 (docs/ImplementationPlan.md);
-  • RequestReadinessGuard.blockerFor(request, target)
-    возвращает null для всех переходов: проверка
-    укомплектованности рейса (FR-10) появится
-    вместе с UC-9;
-  • AppUser.role — varchar(32) без constraint,
-    приложение пишет только литерал "DISPATCHER"
-    (OrganizationService.create);
-  • событие создания заявки в audit_event не пишется:
-    AuditEvent имеет только фабрики
-    organizationCreated() и requestStatusChanged() —
-    пробел по RL-4 (журнал аудита всех операций
-    изменения данных);
+  **Особенности реализации**
   • транзакция открывается в слое web: @Transactional
     стоит на методах контроллеров, кроме
-    RequestRegistryController, — отступление от DC-6
-    отмечено в строках аннотаций и в заметке
-    CLS_LogicalView;
+    RequestRegistryController, — отступление от DC-6;
+    на CLS_LogicalView границы транзакции показаны
+    зоной ответственности контракта API;
   • RequestStatusService.changeStatus() выполняет
     проверки в порядке: current == target → find() →
     roles().contains() → reasonRequired → blockerFor();
@@ -846,27 +921,27 @@ end note
 
 legend right
   |= Обозначение |= Значение |
-  | <#F5F5F5> | «PostgreSQL» — @Entity, хранится в PostgreSQL (DC-4) |
-  | <#E8F5E9> | «MongoDB» — @Document, хранится в MongoDB (DC-5) |
-  | <#EDE7F6> | «не хранится» — record или утилита, в БД не сохраняется |
-  | <#FFF2CC> | «проект» — ещё не реализовано |
-  **Один цвет — несколько стереотипов:** фон #F5F5F5 несут также
-  «перечисление» (enum Java, в БД varchar), «@RestController», «@Service»,
-  «@Component», «утилита», «исключение», «JpaRepository»,
-  «MongoRepository», «database» и «внешняя система» — их различает
-  стереотип, а не цвет. Цвет «проект» на этом виде не встречается:
-  проектируемые сущности — на CLS_UseCaseView.
+  | <#F5F5F5> | класс, интерфейс или enum реализации |
+  | <#EDE7F6> | record-DTO и внешняя система |
+  **Стереотип, а не цвет, несёт смысл:** «@RestController», «@Service»,
+  «@Component», «@Entity» (хранится в PostgreSQL, DC-4), «@Document»
+  (хранится в MongoDB, DC-5), «JpaRepository», «MongoRepository»,
+  «перечисление», «утилита», «исключение», «не хранится», «pages»,
+  «components», «api», «внешняя система».
+  **Хранилища на диаграмме не показаны:** принадлежность класса
+  к PostgreSQL или MongoDB видна по аннотации, а сама схема —
+  на диаграммах базы данных Implementation View.
   **Нотация:** ""-"" private, ""+"" public, ""{static}"" статический член;
   ""имя : Тип"" для полей, ""имя(параметр : Тип) : Возврат"" для методов;
   ""..текст.."" — разделитель-пояснение (аннотации класса, вид объявления,
   контракт внешней системы, сноска), а не член класса.
   У методов с пятью и более параметрами показаны только имена параметров —
   их типы совпадают с полями соответствующего record-DTO.
-  В фигурных скобках — аннотации, имена колонок, коды ответов и пояснения.
+  В фигурных скобках — аннотации и пояснения.
   **Типы связей:** ""-->"" направленная ассоциация — фактическое
   JPA-отображение, кратности на обоих концах; ""*--"" композиция,
   ""o--"" агрегация, ""+--"" вложенный тип (объявление, не ассоциация),
-  "".."" связь по значению без внешнего ключа, ""..>"" зависимость: вызов
+  "".."" связь по значению, ""..>"" зависимость: вызов
   или обращение к хранилищу (на зависимостях и на вложенности кратности
   не указываются).
   **Внедрённые зависимости** показаны полями класса

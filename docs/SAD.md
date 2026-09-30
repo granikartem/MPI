@@ -88,16 +88,16 @@ Pip-Boy, серверную часть, хранилища PostgreSQL и MongoDB
 
 | Diagram \ View | Use Case View | Logical View | Implementation view | Process view** | Deployment View |
 |---|---|---|---|---|---|
-| Use Case Diagram | + | − | − | | − |
-| Class Diagram | + (Взаимодействие сущностей) | + (Описание основных классов и интерфейсов их взаимодействия) | + (Полное описание классов с указанием их методов/полей, указать типы связей между классами) | | − |
-| Activity Diagram | + (Абстрактное описание) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов) | | − |
-| State Machine Diagram | + (Абстрактное описание) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов) | | − |
-| Sequence Diagram | + (Абстрактное описание) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов) | | − |
-| Cooperative Diagram | + (Абстрактное описание) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов) | | − |
-| Package Diagram | − | + | − | | − |
-| Data Base Diagram | − | − | + (Полная ER модель базы данных + её даталогическая модель) | | − |
-| Deployment Diagram | − | − | − | | + (Подробная диаграмма развертывания с указанием характеристик машин и интерфейсов взаимодействия) |
-| Timeline diagramm | | | | + | |
+| Use Case Diagram | +<br>[UCD_UseCaseView](diagrams/out/UCD_UseCaseView.png) | − | − | | − |
+| Class Diagram | + (Взаимодействие сущностей)<br>[CLS_UseCaseView](diagrams/out/CLS_UseCaseView.png) | + (Описание основных классов и интерфейсов их взаимодействия)<br>[CLS_LogicalView](diagrams/out/CLS_LogicalView.png) | + (Полное описание классов с указанием их методов/полей, указать типы связей между классами)<br>[CLS_ImplementationView](diagrams/out/CLS_ImplementationView.png) | | − |
+| Activity Diagram | + (Абстрактное описание)<br>[ACT_UC7_UseCaseView](diagrams/out/ACT_UC7_UseCaseView.png) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов)<br>[ACT_UC1_LogicalView](diagrams/out/ACT_UC1_LogicalView.png) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов)<br>[ACT_UC32_ImplementationView](diagrams/out/ACT_UC32_ImplementationView.png) | | − |
+| State Machine Diagram | + (Абстрактное описание)<br>[SM_UC2_UseCaseView](diagrams/out/SM_UC2_UseCaseView.png) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов)<br>[SM_UC1_LogicalView](diagrams/out/SM_UC1_LogicalView.png) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов)<br>[SM_UC32_ImplementationView](diagrams/out/SM_UC32_ImplementationView.png) | | − |
+| Sequence Diagram | + (Абстрактное описание)<br>[SEQ_UC1_UseCaseView](diagrams/out/SEQ_UC1_UseCaseView.png) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов)<br>[SEQ_UC32_LogicalView](diagrams/out/SEQ_UC32_LogicalView.png) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов)<br>[SEQ_UC2_ImplementationView](diagrams/out/SEQ_UC2_ImplementationView.png) | | − |
+| Cooperative Diagram | + (Абстрактное описание)<br>[COL_UC32_UseCaseView](diagrams/out/COL_UC32_UseCaseView.png) | + (Более подробное описание, уровни взаимодействия должны совпадать с диаграммой пакетов)<br>[COL_UC2_LogicalView](diagrams/out/COL_UC2_LogicalView.png) | + (Полное описание прецедента с указанием вызываемых методов, используемых классов и объектов)<br>[COL_UC1_ImplementationView](diagrams/out/COL_UC1_ImplementationView.png) | | − |
+| Package Diagram | − | +<br>[PKG_LogicalView](diagrams/out/PKG_LogicalView.png) | − | | − |
+| Data Base Diagram | − | − | + (Полная ER модель базы данных + её даталогическая модель)<br>[DB_ER_ImplementationView](diagrams/out/DB_ER_ImplementationView.png) · [DB_Datalogical_ImplementationView](diagrams/out/DB_Datalogical_ImplementationView.png) | | − |
+| Deployment Diagram | − | − | − | | + (Подробная диаграмма развертывания с указанием характеристик машин и интерфейсов взаимодействия)<br>[DEP_DeploymentView](diagrams/out/DEP_DeploymentView.png) |
+| Timeline diagramm | | | | +<br>[TL_Calendar_ProcessView](diagrams/out/TL_Calendar_ProcessView.png) · [TL_Field_ProcessView](diagrams/out/TL_Field_ProcessView.png) · [TL_UC1_ProcessView](diagrams/out/TL_UC1_ProcessView.png) | |
 
 \* Activity, Sequence, Cooperative и State Machine диаграммы составляются на основе одного
 прецедента (каждый тип диаграмм - на основе своего).
@@ -111,23 +111,78 @@ UC-1, UC-2 и UC-32 встречается в строке и в столбце 
 
 | Тип диаграммы | Use-Case View | Logical View | Implementation View |
 |---|---|---|---|
-| Activity Diagram | UC-7 «Рассчитать risk_score» | UC-1 «Создать заявку на перевозку» | UC-32 «Создать организацию» |
-| State Machine Diagram | UC-2 «Управлять статусами заявки» | UC-1 «Создать заявку на перевозку» | UC-32 «Создать организацию» |
-| Sequence Diagram | UC-1 «Создать заявку на перевозку» | UC-32 «Создать организацию» | UC-2 «Управлять статусами заявки» |
-| Cooperative (Communication) Diagram | UC-32 «Создать организацию» | UC-2 «Управлять статусами заявки» | UC-1 «Создать заявку на перевозку» |
+| Activity Diagram | UC-7 «Рассчитать risk_score»<br>[ACT_UC7_UseCaseView](diagrams/out/ACT_UC7_UseCaseView.png) | UC-1 «Создать заявку на перевозку»<br>[ACT_UC1_LogicalView](diagrams/out/ACT_UC1_LogicalView.png) | UC-32 «Создать организацию»<br>[ACT_UC32_ImplementationView](diagrams/out/ACT_UC32_ImplementationView.png) |
+| State Machine Diagram | UC-2 «Управлять статусами заявки»<br>[SM_UC2_UseCaseView](diagrams/out/SM_UC2_UseCaseView.png) | UC-1 «Создать заявку на перевозку»<br>[SM_UC1_LogicalView](diagrams/out/SM_UC1_LogicalView.png) | UC-32 «Создать организацию»<br>[SM_UC32_ImplementationView](diagrams/out/SM_UC32_ImplementationView.png) |
+| Sequence Diagram | UC-1 «Создать заявку на перевозку»<br>[SEQ_UC1_UseCaseView](diagrams/out/SEQ_UC1_UseCaseView.png) | UC-32 «Создать организацию»<br>[SEQ_UC32_LogicalView](diagrams/out/SEQ_UC32_LogicalView.png) | UC-2 «Управлять статусами заявки»<br>[SEQ_UC2_ImplementationView](diagrams/out/SEQ_UC2_ImplementationView.png) |
+| Cooperative (Communication) Diagram | UC-32 «Создать организацию»<br>[COL_UC32_UseCaseView](diagrams/out/COL_UC32_UseCaseView.png) | UC-2 «Управлять статусами заявки»<br>[COL_UC2_LogicalView](diagrams/out/COL_UC2_LogicalView.png) | UC-1 «Создать заявку на перевозку»<br>[COL_UC1_ImplementationView](diagrams/out/COL_UC1_ImplementationView.png) |
 
 Use Case Diagram и Class Diagram сноской не ограничены и построены на систему целиком.
 
 ## 3. Architectural Goals and Constraints (Цели и ограничения архитектуры)
 
-_Не заполнено._
+Раздел собирает требования и условия, которые определили структуру системы: что архитектура обязана
+обеспечить, чем она ограничена и какие отступления от ограничений зафиксированы на сегодня.
+Значения показателей и способы их проверки не дублируются здесь — они в разделах
+[9](#9-size-and-performance-производительность) и [10](#10-quality-качество).
+
+### 3.1 Архитектурные цели
+
+| Цель | Основание | Как обеспечивается | Где показано |
+|---|---|---|---|
+| Изоляция данных организации-арендатора | FR-23, FR-24 | Каждая организация получает собственное пространство данных: при создании ей выдаётся ключ арендатора, все сущности рейсов и учётные записи ссылаются на организацию | [CLS_LogicalView](diagrams/out/CLS_LogicalView.png) · [ACT_UC32_ImplementationView](diagrams/out/ACT_UC32_ImplementationView.png) |
+| Работа полевого клиента без связи | RL-1, RL-3, SRS 2.4 | Полевые события фиксируются в локальной очереди Pip-Boy и передаются на сервер при появлении связи; сервер принимает их тем же REST-контрактом | [DEP_DeploymentView](diagrams/out/DEP_DeploymentView.png) · [TL_Field_ProcessView](diagrams/out/TL_Field_ProcessView.png) |
+| Рейс планируется даже при отказе внешней разведки | FR-6, FR-7, альт. потоки UC-1 и UC-7 | Обращение к Wasteland Intel вынесено в адаптер с таймаутами; отказ источника не срывает создание заявки, оценка получает значение «Н/Д» и пометку «требует пересчёта» | [ACT_UC7_UseCaseView](diagrams/out/ACT_UC7_UseCaseView.png) · [ACT_UC1_LogicalView](diagrams/out/ACT_UC1_LogicalView.png) |
+| Прослеживаемость изменений данных | RL-4, RL-5 | Два независимых следа: история переходов статуса в оперативном хранилище и журнал событий в хранилище документов со сроком хранения | [CLS_ImplementationView](diagrams/out/CLS_ImplementationView.png) · [TL_Calendar_ProcessView](diagrams/out/TL_Calendar_ProcessView.png) |
+| Замена хранилища и внешней системы без переписывания логики | DC-6 | Слой доступа к данным скрыт за интерфейсами репозиториев, внешняя разведка — за адаптером; сценарии прецедентов о выборе хранилища и протокола не знают | [PKG_LogicalView](diagrams/out/PKG_LogicalView.png) · [CLS_LogicalView](diagrams/out/CLS_LogicalView.png) |
+| Читаемость на устаревшем оборудовании Пустоши | SRS 2.3, US-1, US-2 | Интерфейс рассчитан на низкое разрешение и два цвета: минимум одновременно показываемых данных, ключевое действие — не более чем за 5 шагов | [UCD_UseCaseView](diagrams/out/UCD_UseCaseView.png) |
+
+### 3.2 Ограничения, заданные требованиями
+
+| Ограничение | Требование | Архитектурное следствие |
+|---|---|---|
+| Клиент-серверная архитектура | DC-1 | Вся логика прецедентов — на сервере; клиенты обращаются только к REST-контракту и собственной логики принятия решений не содержат |
+| Web-клиент на React 18 | DC-2, DC-7 | Разделение на страницы, презентационные компоненты и сервисный слой HTTP-клиента; состояние живёт в контейнерах страниц |
+| Серверная часть на Java 21 | DC-3 | Spring Boot, доступ к оперативному хранилищу через JPA, версионирование схемы миграциями |
+| Оперативные данные и пользователи — PostgreSQL 16 | DC-4 | Заявки, маршруты, участки, контрольные точки, организации, учётные записи и история статусов хранятся реляционно |
+| События — MongoDB 7 | DC-5 | Снимки оценки риска и журнал аудита хранятся документами: состав полей снимка меняется вместе с формулой, схема заранее не фиксируется |
+| Layered: Controller → Service → Repository | DC-6 | Слои `presentation` → `application` → `domain` с доступом `application` → `infrastructure`; обращения только сверху вниз |
+| Готовая UI-библиотека и библиотека графиков | DC-8 | Экраны диспетчера и отчёты собираются из готовых компонентов и графиков; собственные компоненты допускаются только при отсутствии подходящего аналога |
+| Отклик не более 1 секунды | PF-4 | Реестр рейсов читается одним запросом с ограничением выдачи; тяжёлые обращения к внешней разведке вынесены из чтения реестра в отдельную операцию пересчёта |
+| До 200 одновременных пользователей, 500 рейсов и 10 000 событий в день | PF-1 — PF-3 | Один сервер приложений без горизонтального масштабирования; нагрузка удерживается индексами и ограничением выдачи |
+| Доступность не менее 99,0 % | RL-2 | Внешние интеграции не критичны для основного потока: их отказ деградирует функцию, но не сервис |
+| Проприетарная лицензия, подписка | SRS 3.7, Vision 4.4 | Уровень подписки — свойство организации; по истечении оплаченного периода доступ ограничивается чтением на 30 дней grace-периода |
+
+### 3.3 Ограничения окружения и эксплуатации
+
+- **Один центральный сервер** (16 ядер Intel Xeon E5-2643, 128 ГБ, 26 ТБ) под FreeBSD 14.3-STABLE
+  ([Vision](Vision.md), раздел 9.2). Резервирования сервера нет, отказоустойчивость обеспечивается
+  резервным копированием, а не кластером.
+- **Все серверные компоненты ставятся из пакетов FreeBSD и работают как службы rc.d**, контейнеров
+  в целевой эксплуатации нет. Backend и базы данных слушают только петлевой интерфейс, наружу
+  сетевой фильтр пропускает единственный порт HTTPS.
+- **Резервные копии выгружаются на голотейп** — носитель, доступный в предметной области;
+  восстановление ручное.
+- **Терминал активируется API-ключом** с сроком действия, равным оплаченному периоду подписки
+  ([Vision](Vision.md), раздел 9.4); архитектура должна допускать выпуск нового ключа без
+  переустановки клиента.
+
+### 3.4 Безопасность, разграничение доступа и приватность
+
+- **Граница изоляции — организация.** Данные рейсов и учётные записи принадлежат организации;
+  запросы к реестру и заявкам выполняются в её пространстве (FR-23, FR-24).
+- **Ролевая модель.** Диспетчер, кладовщик, караван-мастер, капитан охраны и медик видят разные
+  наборы данных; сведения о спецгрузах, составе груза, медицинских обстоятельствах и угрозах
+  не должны быть доступны всем ролям одинаково (SRS 2.4).
+- **Пароли не хранятся в открытом виде** — только необратимый хеш.
+- **Журнал аудита** фиксирует автора, время и содержание изменения и хранится не менее 3 месяцев
+  (RL-4, RL-5).
 
 ## 4. Use-Case View
 
 | Диаграмма | Что показывает | Исходник | Изображение |
 |---|---|---|---|
 | Use Case, система целиком | Акторы, граница системы и архитектурно значимые прецеденты | [UCD_UseCaseView.puml](diagrams/sad/UCD_UseCaseView.puml) | [png](diagrams/out/UCD_UseCaseView.png) |
-| Class, система целиком | Сущности предметной области и связи между ними, без методов и слоёв | [CLS_UseCaseView.puml](diagrams/sad/CLS_UseCaseView.puml) | [png](diagrams/out/CLS_UseCaseView.png) |
+| Class, система целиком | Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ | [CLS_UseCaseView.puml](diagrams/sad/CLS_UseCaseView.puml) | [png](diagrams/out/CLS_UseCaseView.png) |
 | Activity, UC-7 | Шаги предметной области; дорожки - актор, система как единое целое и внешняя система | [ACT_UC7_UseCaseView.puml](diagrams/sad/ACT_UC7_UseCaseView.puml) | [png](diagrams/out/ACT_UC7_UseCaseView.png) |
 | State Machine, UC-2 | Состояния заявки и действия акторов | [SM_UC2_UseCaseView.puml](diagrams/sad/SM_UC2_UseCaseView.puml) | [png](diagrams/out/SM_UC2_UseCaseView.png) |
 | Sequence, UC-1 | Обмен между актором, системой и внешней системой | [SEQ_UC1_UseCaseView.puml](diagrams/sad/SEQ_UC1_UseCaseView.puml) | [png](diagrams/out/SEQ_UC1_UseCaseView.png) |
@@ -137,17 +192,19 @@ _Не заполнено._
 
 ## 5. Logical View
 
-Уровни взаимодействия (на диаграммах классов Logical и Implementation View имена
-приведены как имена пакетов; на диаграммах активности - как дорожки логических компонентов;
-на диаграммах последовательности и кооперации - как стереотипы участников и вложенные пакеты;
-на диаграмме состояний - как компоненты в эффектах переходов и в легенде):
-`frontend.pages` / `frontend.components` / `frontend.api` → `backend.web` → `backend.service` →
-`backend.domain` / `backend.repository` → инфраструктура (PostgreSQL, MongoDB, Wasteland Intel).
+Уровни взаимодействия задаёт [диаграмма пакетов](diagrams/sad/PKG_LogicalView.puml):
+`presentation` → `application` → `domain`, `application` → `infrastructure` (`<<access>>`),
+внешние системы — через адаптеры `infrastructure`. Все диаграммы Logical View используют эти же
+слои и имена компонентов: диаграмма классов — как пакеты и компоненты, диаграмма активности —
+как дорожки, диаграммы последовательности и кооперации — как участников, диаграмма состояний —
+как компоненты в эффектах переходов. Фактические пакеты кода
+(`com.karavany.request`, `.organization`, `.route`, `.risk`, `.audit` и `frontend/src`)
+показаны только на диаграмме классов Implementation View.
 
 | Диаграмма | Что показывает | Исходник | Изображение |
 |---|---|---|---|
 | Package, система целиком | Логические пакеты слоёв, их компоненты, внешние системы и зависимости; соответствие пакетам кода | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
-| Class, система целиком | Основные классы и интерфейсы их взаимодействия по слоям | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
+| Class, система целиком | Логические компоненты по слоям диаграммы пакетов и доменная модель в деловых типах | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
 | Activity, UC-1 | Шаги создания заявки в дорожках логических компонентов слоёв | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [png](diagrams/out/ACT_UC1_LogicalView.png) |
 | State Machine, UC-1 | Состояния заявки при создании; эффекты переходов выполняют компоненты слоёв | [SM_UC1_LogicalView.puml](diagrams/sad/SM_UC1_LogicalView.puml) | [png](diagrams/out/SM_UC1_LogicalView.png) |
 | Sequence, UC-32 | Взаимодействие компонентов слоёв при создании организации | [SEQ_UC32_LogicalView.puml](diagrams/sad/SEQ_UC32_LogicalView.puml) | [png](diagrams/out/SEQ_UC32_LogicalView.png) |
@@ -214,7 +271,7 @@ REST через HTTPS.
 
 | Диаграмма | Что показывает | Исходник | Изображение |
 |---|---|---|---|
-| Class, система целиком | Поля, сигнатуры методов, аннотации JPA и MongoDB, таблицы PostgreSQL и коллекции MongoDB | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
+| Class, система целиком | Фактические классы реализации: пакеты, поля, сигнатуры методов и аннотации | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
 | Activity, UC-32 | Те же дорожки логических компонентов, в узлах - классы, методы, эндпоинты и хранилища | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [png](diagrams/out/ACT_UC32_ImplementationView.png) |
 | State Machine, UC-32 | Состояния `OrganizationService.create(...)`: методы, классы и HTTP-контракт | [SM_UC32_ImplementationView.puml](diagrams/sad/SM_UC32_ImplementationView.puml) | [png](diagrams/out/SM_UC32_ImplementationView.png) |
 | Sequence, UC-2 | Реальные классы, методы и HTTP-контракт перехода статуса, асинхронная перезагрузка данных | [SEQ_UC2_ImplementationView.puml](diagrams/sad/SEQ_UC2_ImplementationView.puml) | [png](diagrams/out/SEQ_UC2_ImplementationView.png) |
