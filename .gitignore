@@ -7,3 +7,7 @@ backend/.gradle/
 # Frontend (Node)
 frontend/node_modules/
 frontend/dist/
+
+# Python (генераторы диаграмм)
+__pycache__/
+*.pyc

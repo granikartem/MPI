@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="ClassDemoExt" umlVersion="2.x" exporterVersion="16.1">
+ <Models>
+  <!-- ===== примитивные типы ===== -->
+  <Model modelType="DataType" id="DTint___________" name="int"><ModelProperties><StringProperty name="name" value="int"/></ModelProperties></Model>
+  <Model modelType="DataType" id="DTString________" name="String"><ModelProperties><StringProperty name="name" value="String"/></ModelProperties></Model>
+  <Model modelType="DataType" id="DTboolean_______" name="boolean"><ModelProperties><StringProperty name="name" value="boolean"/></ModelProperties></Model>
+  <Model modelType="DataType" id="DTvoid__________" name="void"><ModelProperties><StringProperty name="name" value="void"/></ModelProperties></Model>
+
+  <!-- ===== стереотипы (кириллица в имени стереотипа тоже работает) ===== -->
+  <Model modelType="Stereotype" id="STEntity________" name="Сущность"><ModelProperties><StringProperty name="name" value="Сущность"/><StringProperty name="baseType" value="Class"/></ModelProperties></Model>
+  <Model modelType="Stereotype" id="STenum__________" name="enumeration"><ModelProperties><StringProperty name="name" value="enumeration"/><StringProperty name="baseType" value="Class"/></ModelProperties></Model>
+  <Model modelType="Stereotype" id="STiface_________" name="interface"><ModelProperties><StringProperty name="name" value="interface"/><StringProperty name="baseType" value="Class"/></ModelProperties></Model>
+
+  <!-- ===== корневой контейнер модели (аналог Logical View) ===== -->
+  <Model modelType="Model" id="MDlogical_______" name="Логическое представление">
+    <ModelProperties><StringProperty name="name" value="Логическое представление"/></ModelProperties>
+    <ChildModels>
+      <Model modelType="Class" id="CLKlient________" name="Клиент">
+        <ModelProperties>
+          <StringProperty name="name" value="Клиент"/>
+          <StringProperty name="visibility" value="public"/>
+          <ModelRefsProperty name="stereotypes"><ModelRef id="STEntity________"/></ModelRefsProperty>
+        </ModelProperties>
+        <ChildModels>
+          <Model modelType="Attribute" id="ATmail__________" name="электроннаяПочта">
+            <ModelProperties>
+              <StringProperty name="name" value="электроннаяПочта"/>
+              <StringProperty name="visibility" value="private"/>
+              <TextModelProperty name="type"><ModelRef id="DTString________"/></TextModelProperty>
+            </ModelProperties>
+          </Model>
+          <Model modelType="Operation" id="OPpereim________" name="переименовать">
+            <ModelProperties>
+              <StringProperty name="name" value="переименовать"/>
+              <StringProperty name="visibility" value="public"/>
+              <TextModelProperty name="returnType"><ModelRef id="DTvoid__________"/></TextModelProperty>
+            </ModelProperties>
+            <ChildModels>
+              <Model modelType="Parameter" id="PAnovoe_________" name="новоеИмя">
+                <ModelProperties>
+                  <StringProperty name="name" value="новоеИмя"/>
+                  <TextModelProperty name="type"><ModelRef id="DTString________"/></TextModelProperty>
+                </ModelProperties>
+              </Model>
+            </ChildModels>
+          </Model>
+        </ChildModels>
+      </Model>
+    </ChildModels>
+  </Model>
+
+  <!-- ===== абстрактный класс + статический атрибут + абстрактная и статическая операции ===== -->
+  <Model modelType="Class" id="CLOrder_________" name="Order">
+    <ModelProperties>
+      <StringProperty name="name" value="Order"/>
+      <StringProperty name="visibility" value="public"/>
+      <BooleanProperty name="abstract" value="true"/>
+    </ModelProperties>
+    <ChildModels>
+      <Model modelType="Attribute" id="ATid____________" name="id">
+        <ModelProperties>
+          <StringProperty name="name" value="id"/>
+          <StringProperty name="visibility" value="private"/>
+          <TextModelProperty name="type"><ModelRef id="DTint___________"/></TextModelProperty>
+        </ModelProperties>
+      </Model>
+      <Model modelType="Attribute" id="ATcount_________" name="count">
+        <ModelProperties>
+          <StringProperty name="name" value="count"/>
+          <StringProperty name="visibility" value="protected"/>
+          <StringProperty name="scope" value="classifier"/>
+          <TextModelProperty name="type"><ModelRef id="DTint___________"/></TextModelProperty>
+        </ModelProperties>
+      </Model>
+      <Model modelType="Attribute" id="ATtotal_________" name="total">
+        <ModelProperties>
+          <StringProperty name="name" value="total"/>
+          <StringProperty name="visibility" value="private"/>
+          <StringProperty name="multiplicity" value="0..1"/>
+          <TextModelProperty name="type"><StringValue value="BigDecimal"/></TextModelProperty>
+        </ModelProperties>
+      </Model>
+      <Model modelType="Operation" id="OPsubmit________" name="submit">
+        <ModelProperties>
+          <StringProperty name="name" value="submit"/>
+          <StringProperty name="visibility" value="public"/>
+          <TextModelProperty name="returnType"><ModelRef id="DTboolean_______"/></TextModelProperty>
+        </ModelProperties>
+        <ChildModels>
+          <Model modelType="Parameter" id="PAqty___________" name="qty">
+            <ModelProperties>
+              <StringProperty name="name" value="qty"/>
+              <TextModelProperty name="type"><ModelRef id="DTint___________"/></TextModelProperty>
+            </ModelProperties>
+          </Model>
+          <Model modelType="Parameter" id="PAcomment_______" name="comment">
+            <ModelProperties>
+              <StringProperty name="name" value="comment"/>
+              <TextModelProperty name="type"><ModelRef id="DTString________"/></TextModelProperty>
+            </ModelProperties>
+          </Model>
+        </ChildModels>
+      </Model>
+      <Model modelType="Operation" id="OPcalc__________" name="calcTotal">
+        <ModelProperties>
+          <StringProperty name="name" value="calcTotal"/>
+          <StringProperty name="visibility" value="protected"/>
+          <BooleanProperty name="abstract" value="true"/>
+          <TextModelProperty name="returnType"><StringValue value="BigDecimal"/></TextModelProperty>
+        </ModelProperties>
+      </Model>
+      <Model modelType="Operation" id="OPnewId_________" name="newId">
+        <ModelProperties>
+          <StringProperty name="name" value="newId"/>
+          <StringProperty name="visibility" value="public"/>
+          <StringProperty name="scope" value="classifier"/>
+          <TextModelProperty name="returnType"><ModelRef id="DTint___________"/></TextModelProperty>
+        </ModelProperties>
+      </Model>
+    </ChildModels>
+  </Model>
+
+  <!-- ===== наследник ===== -->
+  <Model modelType="Class" id="CLOnline________" name="OnlineOrder"><ModelProperties><StringProperty name="name" value="OnlineOrder"/></ModelProperties></Model>
+
+  <!-- ===== интерфейс: Class + стереотип «interface» (modelType="Interface" НЕ умеет ChildModels) ===== -->
+  <Model modelType="Class" id="IFPayable_______" name="IPayable">
+    <ModelProperties>
+      <StringProperty name="name" value="IPayable"/>
+      <StringProperty name="visibility" value="public"/>
+      <ModelRefsProperty name="stereotypes"><ModelRef id="STiface_________"/></ModelRefsProperty>
+    </ModelProperties>
+    <ChildModels>
+      <Model modelType="Operation" id="OPpay___________" name="pay">
+        <ModelProperties>
+          <StringProperty name="name" value="pay"/>
+          <StringProperty name="visibility" value="public"/>
+          <TextModelProperty name="returnType"><ModelRef id="DTboolean_______"/></TextModelProperty>
+        </ModelProperties>
+        <ChildModels>
+          <Model modelType="Parameter" id="PAamount________" name="amount">
+            <ModelProperties>
+              <StringProperty name="name" value="amount"/>
+              <TextModelProperty name="type"><StringValue value="BigDecimal"/></TextModelProperty>
+            </ModelProperties>
+          </Model>
+        </ChildModels>
+      </Model>
+    </ChildModels>
+  </Model>
+
+  <!-- ===== настоящий modelType="Interface" без членов (для служебной диаграммы) ===== -->
+  <Model modelType="Interface" id="IFreal__________" name="IRealInterface">
+    <ModelProperties><StringProperty name="name" value="IRealInterface"/></ModelProperties>
+  </Model>
+
+  <Model modelType="Class" id="CLOrderItem_____" name="OrderItem"><ModelProperties><StringProperty name="name" value="OrderItem"/></ModelProperties></Model>
+  <Model modelType="Class" id="CLRepo__________" name="OrderRepository"><ModelProperties><StringProperty name="name" value="OrderRepository"/></ModelProperties></Model>
+
+  <!-- ===== перечисление ===== -->
+  <Model modelType="Class" id="ENStatus________" name="OrderStatus">
+    <ModelProperties>
+      <StringProperty name="name" value="OrderStatus"/>
+      <ModelRefsProperty name="stereotypes"><ModelRef id="STenum__________"/></ModelRefsProperty>
+    </ModelProperties>
+    <ChildModels>
+      <Model modelType="EnumerationLiteral" id="ELnew___________" name="NEW"><ModelProperties><StringProperty name="name" value="NEW"/></ModelProperties></Model>
+      <Model modelType="EnumerationLiteral" id="ELpaid__________" name="PAID"><ModelProperties><StringProperty name="name" value="PAID"/></ModelProperties></Model>
+      <Model modelType="EnumerationLiteral" id="ELship__________" name="SHIPPED"><ModelProperties><StringProperty name="name" value="SHIPPED"/></ModelProperties></Model>
+    </ChildModels>
+  </Model>
+
+  <Model modelType="Package" id="PKdomain________" name="домен.заказы">
+    <ModelProperties><StringProperty name="name" value="домен.заказы"/></ModelProperties>
+  </Model>
+
+  <!-- ===== заметка: многострочный русский текст ===== -->
+  <Model modelType="NOTE" id="NOnote1_________"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Order — корень агрегата.&#10;Инвариант: total &gt;= 0&#10;См. раздел 4.2 спецификации.&#10;Ёжик, «кавычки», тире — всё в UTF-8."/></ModelProperties></Model>
+
+  <!-- ===== связи ===== -->
+  <Model modelType="Association" id="RLassoc_________" name="оформляет заказ через веб-интерфейс магазина">
+    <ModelProperties>
+      <StringProperty name="name" value="оформляет заказ через веб-интерфейс магазина"/>
+      <ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CLKlient________"/></ModelRefProperty>
+      <ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+    </ModelProperties>
+    <FromEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLassoc_____EndA" name="покупатель">
+        <ModelProperties>
+          <StringProperty name="name" value="покупатель"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLKlient________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="1"/>
+          <StringProperty name="aggregationKind" value="None"/>
+          <StringProperty name="visibility" value="private"/>
+        </ModelProperties>
+      </Model>
+    </FromEnd>
+    <ToEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLassoc_____EndB" name="оформленныеЗаказы">
+        <ModelProperties>
+          <StringProperty name="name" value="оформленныеЗаказы"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="0..*"/>
+          <StringProperty name="aggregationKind" value="None"/>
+          <StringProperty name="visibility" value="private"/>
+        </ModelProperties>
+      </Model>
+    </ToEnd>
+  </Model>
+
+  <Model modelType="Association" id="RLcompos________" name="">
+    <ModelProperties>
+      <StringProperty name="name" value=""/>
+      <ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+      <ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CLOrderItem_____"/></ModelRefProperty>
+    </ModelProperties>
+    <FromEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLcompos____EndA" name="">
+        <ModelProperties>
+          <StringProperty name="name" value=""/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="1"/>
+          <StringProperty name="aggregationKind" value="Composited"/>
+        </ModelProperties>
+      </Model>
+    </FromEnd>
+    <ToEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLcompos____EndB" name="позиции">
+        <ModelProperties>
+          <StringProperty name="name" value="позиции"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLOrderItem_____"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="1..*"/>
+          <StringProperty name="aggregationKind" value="None"/>
+        </ModelProperties>
+      </Model>
+    </ToEnd>
+  </Model>
+
+  <Model modelType="Association" id="RLaggreg________" name="">
+    <ModelProperties>
+      <StringProperty name="name" value=""/>
+      <ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+      <ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="ENStatus________"/></ModelRefProperty>
+    </ModelProperties>
+    <FromEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLaggreg____EndA" name="">
+        <ModelProperties>
+          <StringProperty name="name" value=""/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="0..*"/>
+          <StringProperty name="aggregationKind" value="Aggregation"/>
+        </ModelProperties>
+      </Model>
+    </FromEnd>
+    <ToEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLaggreg____EndB" name="">
+        <ModelProperties>
+          <StringProperty name="name" value=""/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="ENStatus________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="1"/>
+          <StringProperty name="aggregationKind" value="None"/>
+        </ModelProperties>
+      </Model>
+    </ToEnd>
+  </Model>
+
+  <Model modelType="Dependency" id="RLdepend________" name="&lt;&lt;use&gt;&gt; загружает агрегат заказа из базы данных">
+    <ModelProperties>
+      <StringProperty name="name" value="&lt;&lt;use&gt;&gt; загружает агрегат заказа из базы данных"/>
+      <ModelRefProperty name="from"><ModelRef id="CLRepo__________"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+    </ModelProperties>
+  </Model>
+
+  <Model modelType="Generalization" id="RLgener_________" name="">
+    <ModelProperties>
+      <StringProperty name="name" value=""/>
+      <ModelRefProperty name="from"><ModelRef id="CLOnline________"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+    </ModelProperties>
+  </Model>
+
+  <Model modelType="Realization" id="RLrealiz________" name="">
+    <ModelProperties>
+      <StringProperty name="name" value=""/>
+      <ModelRefProperty name="from"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="IFPayable_______"/></ModelRefProperty>
+    </ModelProperties>
+  </Model>
+
+  <Model modelType="Usage" id="RLusage_________" name="вызывает">
+    <ModelProperties>
+      <StringProperty name="name" value="вызывает"/>
+      <ModelRefProperty name="from"><ModelRef id="CLRepo__________"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="IFPayable_______"/></ModelRefProperty>
+    </ModelProperties>
+  </Model>
+
+  <Model modelType="Anchor" id="RLanchor________">
+    <ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="NOnote1_________"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="CLOrder_________"/></ModelRefProperty>
+    </ModelProperties>
+  </Model>
+
+  <!-- ===== модели для служебной диаграммы (эксперимент с Caption) ===== -->
+  <Model modelType="Class" id="CLcapA__________" name="CapA_OnlyCaption"><ModelProperties><StringProperty name="name" value="CapA_OnlyCaption"/></ModelProperties></Model>
+  <Model modelType="Class" id="CLcapB__________" name="CapB_Reset"><ModelProperties><StringProperty name="name" value="CapB_Reset"/></ModelProperties></Model>
+  <Model modelType="Class" id="CLcapC__________" name="CapC_Both"><ModelProperties><StringProperty name="name" value="CapC_Both"/></ModelProperties></Model>
+  <Model modelType="Class" id="CLcapD__________" name="CapD_Manual"><ModelProperties><StringProperty name="name" value="CapD_Manual"/></ModelProperties></Model>
+  <Model modelType="Association" id="RLcap2__________" name="ручная подпись">
+    <ModelProperties>
+      <StringProperty name="name" value="ручная подпись"/>
+      <ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CLcapC__________"/></ModelRefProperty>
+      <ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CLcapD__________"/></ModelRefProperty>
+    </ModelProperties>
+    <FromEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLcap2______EndA" name="слева">
+        <ModelProperties>
+          <StringProperty name="name" value="слева"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLcapC__________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="1"/>
+          <StringProperty name="aggregationKind" value="None"/>
+        </ModelProperties>
+      </Model>
+    </FromEnd>
+    <ToEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLcap2______EndB" name="справа">
+        <ModelProperties>
+          <StringProperty name="name" value="справа"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLcapD__________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="0..*"/>
+          <StringProperty name="aggregationKind" value="None"/>
+        </ModelProperties>
+      </Model>
+    </ToEnd>
+  </Model>
+  <Model modelType="Association" id="RLcap___________" name="связь">
+    <ModelProperties>
+      <StringProperty name="name" value="связь"/>
+      <ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CLcapA__________"/></ModelRefProperty>
+      <ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CLcapB__________"/></ModelRefProperty>
+    </ModelProperties>
+    <FromEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLcap_______EndA" name="левый">
+        <ModelProperties>
+          <StringProperty name="name" value="левый"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLcapA__________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="1"/>
+          <StringProperty name="aggregationKind" value="None"/>
+        </ModelProperties>
+      </Model>
+    </FromEnd>
+    <ToEnd>
+      <Model composite="true" modelType="AssociationEnd" id="RLcap_______EndB" name="правый">
+        <ModelProperties>
+          <StringProperty name="name" value="правый"/>
+          <ModelRefProperty name="EndModelElement"><ModelRef id="CLcapB__________"/></ModelRefProperty>
+          <StringProperty name="multiplicity" value="0..*"/>
+          <StringProperty name="aggregationKind" value="None"/>
+        </ModelProperties>
+      </Model>
+    </ToEnd>
+  </Model>
+ </Models>
+
+ <Diagrams>
+  <Diagram id="DGext___________" name="Ext Class Diagram" diagramType="ClassDiagram" connectorStyle="Rectlinear">
+   <Shapes>
+    <Shape id="SHKlient________" shapeType="Class" model="CLKlient________" name="Клиент" x="40" y="40" width="300" height="110">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <FillColor color="Cr:255,214,153,255" style="1" transparency="0" type="1"/>
+    </Shape>
+    <Shape id="SHOrder_________" shapeType="Class" model="CLOrder_________" name="Order" x="840" y="40" width="340" height="190">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+    </Shape>
+    <Shape id="SHIface_________" shapeType="Class" model="IFPayable_______" name="IPayable" x="1320" y="40" width="320" height="90">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <FillColor color="Cr:204,255,204,255" style="1" transparency="0" type="1"/>
+    </Shape>
+    <Shape id="SHRepo__________" shapeType="Class" model="CLRepo__________" name="OrderRepository" x="1320" y="280" width="260" height="60">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <ElementFont name="Dialog" color="Cr:0,0,180,255" size="16" style="2"/>
+    </Shape>
+    <Shape id="SHOnline________" shapeType="Class" model="CLOnline________" name="OnlineOrder" x="860" y="360" width="260" height="60">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+    </Shape>
+    <Shape id="SHStatus________" shapeType="Class" model="ENStatus________" name="OrderStatus" x="1320" y="470" width="220" height="120">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+    </Shape>
+    <Shape id="SHnote1_________" shapeType="NOTE" model="NOnote1_________" name="" x="40" y="270" width="380" height="110">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+    </Shape>
+    <Shape id="SHdomain________" shapeType="Package" model="PKdomain________" name="домен.заказы" x="60" y="440" width="380" height="200">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <ChildShapes>
+        <Shape id="SHOrderItem_____" shapeType="Class" model="CLOrderItem_____" name="OrderItem" x="120" y="530" width="260" height="70">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true"/>
+            <BooleanProperty name="requestResetCaptionSize" value="true"/>
+          </DiagramElementProperties>
+        </Shape>
+      </ChildShapes>
+    </Shape>
+   </Shapes>
+   <Connectors>
+    <Connector id="CNassoc_________" shapeType="Association" model="RLassoc_________" from="SHKlient________" to="SHOrder_________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNcompos________" shapeType="Association" model="RLcompos________" from="SHOrder_________" to="SHOrderItem_____">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNaggreg________" shapeType="Association" model="RLaggreg________" from="SHOrder_________" to="SHStatus________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNdepend________" shapeType="Dependency" model="RLdepend________" from="SHRepo__________" to="SHOrder_________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNgener_________" shapeType="Generalization" model="RLgener_________" from="SHOrder_________" to="SHOnline________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNrealiz________" shapeType="Realization" model="RLrealiz________" from="SHIface_________" to="SHOrder_________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNusage_________" shapeType="Usage" model="RLusage_________" from="SHRepo__________" to="SHIface_________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNanchor________" shapeType="Anchor" model="RLanchor________" from="SHnote1_________" to="SHOrder_________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+   </Connectors>
+  </Diagram>
+
+  <Diagram id="DGcap___________" name="Caption Test" diagramType="ClassDiagram" connectorStyle="Rectlinear">
+   <Shapes>
+    <Shape id="SHcapA__________" shapeType="Class" model="CLcapA__________" name="CapA_OnlyCaption" x="40" y="40" width="220" height="60">
+      <Caption visible="true" side="Center" x="40" y="40" width="220" height="20" internalWidth="220" internalHeight="20"/>
+    </Shape>
+    <Shape id="SHcapB__________" shapeType="Class" model="CLcapB__________" name="CapB_Reset" x="400" y="40" width="220" height="60">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+    </Shape>
+    <Shape id="SHcapC__________" shapeType="Class" model="CLcapC__________" name="CapC_Both" x="40" y="240" width="220" height="60">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Caption visible="true" side="Center" x="40" y="240" width="220" height="20" internalWidth="220" internalHeight="20"/>
+    </Shape>
+    <Shape id="SHcapD__________" shapeType="Class" model="CLcapD__________" name="CapD_Manual" x="440" y="240" width="220" height="60">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+    </Shape>
+   </Shapes>
+   <Connectors>
+    <Connector id="CNcap___________" shapeType="Association" model="RLcap___________" from="SHcapA__________" to="SHcapB__________">
+      <DiagramElementProperties>
+        <BooleanProperty name="requestResetCaption" value="true"/>
+        <BooleanProperty name="requestResetCaptionSize" value="true"/>
+      </DiagramElementProperties>
+      <Points/>
+    </Connector>
+    <Connector id="CNcap2__________" shapeType="Association" model="RLcap2__________" from="SHcapC__________" to="SHcapD__________">
+      <Caption visible="true" side="Center" x="300" y="300" width="80" height="16"/>
+      <RoleA>
+        <NameCaption x="270" y="250" width="60" height="16"/>
+        <MultiplicityCaption x="270" y="330" width="40" height="16"/>
+      </RoleA>
+      <RoleB>
+        <NameCaption x="500" y="250" width="60" height="16"/>
+        <MultiplicityCaption x="500" y="330" width="40" height="16"/>
+      </RoleB>
+      <Points/>
+    </Connector>
+   </Connectors>
+  </Diagram>
+ </Diagrams>
+</Project>

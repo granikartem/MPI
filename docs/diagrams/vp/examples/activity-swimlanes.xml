@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter"
+         name="ActFull" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <!-- ================= ВЕРТИКАЛЬНЫЕ ДОРОЖКИ ================= -->
+    <Model id="Msw_v00000000000" modelType="ActivitySwimlane2" name="Swimlane">
+      <ModelProperties>
+        <ModelsProperty name="verticalPartitions">
+          <Model id="Mpart_v100000000" modelType="ActivityPartition" name="Клиент">
+            <ModelProperties><StringProperty name="name" value="Клиент"/></ModelProperties>
+          </Model>
+          <Model id="Mpart_v200000000" modelType="ActivityPartition" name="Система (подсистема обработки)">
+            <ModelProperties><StringProperty name="name" value="Система (подсистема обработки)"/></ModelProperties>
+          </Model>
+        </ModelsProperty>
+      </ModelProperties>
+    </Model>
+
+    <!-- ================= УЗЛЫ ================= -->
+    <Model id="Minit00000000000" modelType="InitialNode"/>
+    <Model id="Ma10000000000000" modelType="ActivityAction" name="Отправить заявку&#10;в систему">
+      <ModelProperties><StringProperty name="name" value="Отправить заявку&#10;в систему"/></ModelProperties>
+    </Model>
+    <Model id="Mobj000000000000" modelType="ObjectNode" name="Заявка&#10;[создана]">
+      <ModelProperties><StringProperty name="name" value="Заявка&#10;[создана]"/></ModelProperties>
+    </Model>
+    <Model id="Mfork00000000000" modelType="ForkNode"/>
+    <Model id="Ma20000000000000" modelType="ActivityAction" name="Проверить&#10;данные">
+      <ModelProperties><StringProperty name="name" value="Проверить&#10;данные"/></ModelProperties>
+    </Model>
+    <Model id="Ma30000000000000" modelType="ActivityAction" name="Записать&#10;в журнал">
+      <ModelProperties><StringProperty name="name" value="Записать&#10;в журнал"/></ModelProperties>
+    </Model>
+    <Model id="Mjoin00000000000" modelType="JoinNode"/>
+    <Model id="Mdec000000000000" modelType="DecisionNode"/>
+    <Model id="Ma40000000000000" modelType="ActivityAction" name="Обработать заявку">
+      <ModelProperties><StringProperty name="name" value="Обработать заявку"/></ModelProperties>
+    </Model>
+    <Model id="Ma50000000000000" modelType="ActivityAction" name="Отклонить&#10;(альтернативный&#10;поток)">
+      <ModelProperties><StringProperty name="name" value="Отклонить&#10;(альтернативный&#10;поток)"/></ModelProperties>
+    </Model>
+    <Model id="Mmerge0000000000" modelType="MergeNode"/>
+    <Model id="Mflowfin00000000" modelType="FlowFinalNode"/>
+    <Model id="Msend00000000000" modelType="SendSignalAction" name="Уведомить&#10;клиента">
+      <ModelProperties><StringProperty name="name" value="Уведомить&#10;клиента"/></ModelProperties>
+    </Model>
+    <Model id="Maccept000000000" modelType="AcceptEventAction" name="Получить&#10;уведомление">
+      <ModelProperties><StringProperty name="name" value="Получить&#10;уведомление"/></ModelProperties>
+    </Model>
+    <Model id="Mfinal0000000000" modelType="ActivityFinalNode"/>
+    <Model id="Mnote00000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Примечание:&#10;русский текст в UTF-8&#10;третья строка — тире, «ёлочки»"/>
+      </ModelProperties>
+    </Model>
+
+    <!-- ================= СВЯЗИ ================= -->
+    <Model id="Manch00000000000" modelType="Anchor"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mnote00000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Ma10000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+
+    <Model id="Mf01000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Minit00000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Ma10000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf02000000000000" modelType="ActivityObjectFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Ma10000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mobj000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf03000000000000" modelType="ActivityObjectFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mobj000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mfork00000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf04000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mfork00000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Ma20000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf05000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mfork00000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Ma30000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf06000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Ma20000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mjoin00000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf07000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Ma30000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mjoin00000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf08000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mjoin00000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mdec000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf09000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mdec000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Ma40000000000000"/></ModelRefProperty>
+      <StringProperty name="guard" value="данные корректны"/>
+    </ModelProperties></Model>
+    <Model id="Mf10000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mdec000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Ma50000000000000"/></ModelRefProperty>
+      <StringProperty name="guard" value="нет"/>
+    </ModelProperties></Model>
+    <Model id="Mf11000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Ma40000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mmerge0000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf12000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Ma50000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mflowfin00000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <!-- длинная подпись задана как ИМЯ связи (проверяем, рисуется ли name) -->
+    <Model id="Mf13000000000000" modelType="ControlFlow" name="асинхронное уведомление клиента по e-mail и push">
+      <ModelProperties>
+      <StringProperty name="name" value="асинхронное уведомление клиента по e-mail и push"/>
+      <ModelRefProperty name="from"><ModelRef id="Mmerge0000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Msend00000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf14000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Msend00000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Maccept000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mf15000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Maccept000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mfinal0000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+
+    <!-- ================= ГОРИЗОНТАЛЬНЫЕ ДОРОЖКИ (вторая диаграмма) ================= -->
+    <Model id="Msw_h00000000000" modelType="ActivitySwimlane2" name="SwimlaneH">
+      <ModelProperties>
+        <ModelsProperty name="horizontalPartitions">
+          <Model id="Mpart_h100000000" modelType="ActivityPartition" name="Пользователь">
+            <ModelProperties><StringProperty name="name" value="Пользователь"/></ModelProperties>
+          </Model>
+          <Model id="Mpart_h200000000" modelType="ActivityPartition" name="Сервер">
+            <ModelProperties><StringProperty name="name" value="Сервер"/></ModelProperties>
+          </Model>
+        </ModelsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mhinit0000000000" modelType="InitialNode"/>
+    <Model id="Mhb1000000000000" modelType="ActivityAction" name="Ввести&#10;запрос">
+      <ModelProperties><StringProperty name="name" value="Ввести&#10;запрос"/></ModelProperties>
+    </Model>
+    <Model id="Mhb2000000000000" modelType="ActivityAction" name="Обработать&#10;запрос">
+      <ModelProperties><StringProperty name="name" value="Обработать&#10;запрос"/></ModelProperties>
+    </Model>
+    <Model id="Mhfin00000000000" modelType="ActivityFinalNode"/>
+    <Model id="Mhds000000000000" modelType="DataStoreNode" name="БД заявок">
+      <ModelProperties><StringProperty name="name" value="БД заявок"/></ModelProperties>
+    </Model>
+    <Model id="Mhf4000000000000" modelType="ActivityObjectFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mhb2000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mhds000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mhf1000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mhinit0000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mhb1000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mhf2000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mhb1000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mhb2000000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+    <Model id="Mhf3000000000000" modelType="ControlFlow"><ModelProperties>
+      <ModelRefProperty name="from"><ModelRef id="Mhb2000000000000"/></ModelRefProperty>
+      <ModelRefProperty name="to"><ModelRef id="Mhfin00000000000"/></ModelRefProperty>
+    </ModelProperties></Model>
+  </Models>
+
+  <Diagrams>
+    <!-- ============ ДИАГРАММА 1: вертикальные дорожки ============ -->
+    <Diagram id="Dvert00000000000" name="AVertical" diagramType="ActivityDiagram">
+      <Shapes>
+        <Shape id="Ssw_v00000000000" shapeType="ActivitySwimlane2" model="Msw_v00000000000"
+               x="40" y="40" width="660" height="820">
+          <DiagramElementProperties>
+            <StringArrayProperty name="verticalPartitionIds">
+              <Values><Value value="Shd_v10000000000"/><Value value="Shd_v20000000000"/></Values>
+            </StringArrayProperty>
+            <StringArrayProperty name="compartmentIds">
+              <Values><Value value="Scm_v10000000000"/><Value value="Scm_v20000000000"/></Values>
+            </StringArrayProperty>
+          </DiagramElementProperties>
+          <ChildShapes>
+            <Shape id="Shd_v10000000000" shapeType="ActivityPartitionHeader" model="Mpart_v100000000"
+                   name="Клиент" x="40" y="40" width="260" height="30">
+              <DiagramElementProperties><BooleanProperty name="horizontal" value="false"/></DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="260" height="30"/>
+            </Shape>
+            <Shape id="Shd_v20000000000" shapeType="ActivityPartitionHeader" model="Mpart_v200000000"
+                   name="Система (подсистема обработки)" x="300" y="40" width="400" height="30">
+              <DiagramElementProperties><BooleanProperty name="horizontal" value="false"/></DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="400" height="30"/>
+            </Shape>
+            <Shape id="Scm_v10000000000" shapeType="ActivitySwimlane2Compartment" x="40" y="70" width="260" height="790">
+              <DiagramElementProperties><StringProperty name="verticalPartitionId" value="Shd_v10000000000"/></DiagramElementProperties>
+            </Shape>
+            <Shape id="Scm_v20000000000" shapeType="ActivitySwimlane2Compartment" x="300" y="70" width="400" height="790">
+              <DiagramElementProperties><StringProperty name="verticalPartitionId" value="Shd_v20000000000"/></DiagramElementProperties>
+            </Shape>
+          </ChildShapes>
+        </Shape>
+
+        <Shape id="Sinit00000000000" shapeType="InitialNode" model="Minit00000000000" x="155" y="90" width="30" height="30"/>
+        <Shape id="Sa10000000000000" shapeType="ActivityAction" model="Ma10000000000000" name="Отправить заявку&#10;в систему"
+               x="100" y="150" width="140" height="55">
+          <Caption visible="true" side="Center" x="0" y="0" width="140" height="55"/>
+        </Shape>
+        <Shape id="Sobj000000000000" shapeType="ObjectNode" model="Mobj000000000000" name="Заявка&#10;[создана]"
+               x="100" y="240" width="140" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="140" height="50"/>
+          <FillColor type="1" color="Cr:255,235,150,255" transparency="0" style="0"/>
+        </Shape>
+        <Shape id="Sfork00000000000" shapeType="ForkNode" model="Mfork00000000000" x="340" y="310" width="320" height="10"/>
+        <Shape id="Sa20000000000000" shapeType="ActivityAction" model="Ma20000000000000" name="Проверить&#10;данные"
+               x="350" y="345" width="130" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="130" height="50"/>
+        </Shape>
+        <Shape id="Sa30000000000000" shapeType="ActivityAction" model="Ma30000000000000" name="Записать&#10;в журнал"
+               x="520" y="345" width="130" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="130" height="50"/>
+          <FillColor type="1" color="Cr:255,190,190,255" transparency="0" style="0"/>
+        </Shape>
+        <Shape id="Sjoin00000000000" shapeType="JoinNode" model="Mjoin00000000000" x="340" y="425" width="320" height="10"/>
+        <Shape id="Sdec000000000000" shapeType="DecisionNode" model="Mdec000000000000" x="480" y="460" width="40" height="40"/>
+        <Shape id="Sa40000000000000" shapeType="ActivityAction" model="Ma40000000000000" name="Обработать заявку"
+               x="330" y="540" width="140" height="45">
+          <Caption visible="true" side="Center" x="0" y="0" width="140" height="45"/>
+        </Shape>
+        <Shape id="Sa50000000000000" shapeType="ActivityAction" model="Ma50000000000000" name="Отклонить&#10;(альтернативный&#10;поток)"
+               x="530" y="530" width="150" height="65">
+          <Caption visible="true" side="Center" x="0" y="0" width="150" height="65"/>
+          <FillColor type="1" color="Cr:190,255,190,255" transparency="0" style="0"/>
+        </Shape>
+        <Shape id="Smerge0000000000" shapeType="MergeNode" model="Mmerge0000000000" x="460" y="620" width="40" height="40"/>
+        <Shape id="Sflowfin00000000" shapeType="FlowFinalNode" model="Mflowfin00000000" x="590" y="625" width="30" height="30"/>
+        <Shape id="Ssend00000000000" shapeType="SendSignalAction" model="Msend00000000000" name="Уведомить&#10;клиента"
+               x="390" y="690" width="140" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="140" height="50"/>
+        </Shape>
+        <Shape id="Saccept000000000" shapeType="AcceptEventAction" model="Maccept000000000" name="Получить&#10;уведомление"
+               x="100" y="760" width="150" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="150" height="50"/>
+        </Shape>
+        <Shape id="Sfinal0000000000" shapeType="ActivityFinalNode" model="Mfinal0000000000" x="155" y="825" width="30" height="30"/>
+        <Shape id="Snote00000000000" shapeType="NOTE" model="Mnote00000000000" x="740" y="120" width="240" height="90"/>
+      </Shapes>
+
+      <Connectors>
+        <Connector id="Cf01000000000000" shapeType="ControlFlow" model="Mf01000000000000" from="Sinit00000000000" to="Sa10000000000000"/>
+        <Connector id="Cf02000000000000" shapeType="ActivityObjectFlow" model="Mf02000000000000" from="Sa10000000000000" to="Sobj000000000000"/>
+        <Connector id="Cf03000000000000" shapeType="ActivityObjectFlow" model="Mf03000000000000" from="Sobj000000000000" to="Sfork00000000000"/>
+        <Connector id="Cf04000000000000" shapeType="ControlFlow" model="Mf04000000000000" from="Sfork00000000000" to="Sa20000000000000"/>
+        <Connector id="Cf05000000000000" shapeType="ControlFlow" model="Mf05000000000000" from="Sfork00000000000" to="Sa30000000000000"/>
+        <Connector id="Cf06000000000000" shapeType="ControlFlow" model="Mf06000000000000" from="Sa20000000000000" to="Sjoin00000000000"/>
+        <Connector id="Cf07000000000000" shapeType="ControlFlow" model="Mf07000000000000" from="Sa30000000000000" to="Sjoin00000000000"/>
+        <Connector id="Cf08000000000000" shapeType="ControlFlow" model="Mf08000000000000" from="Sjoin00000000000" to="Sdec000000000000"/>
+        <Connector id="Cf09000000000000" shapeType="ControlFlow" model="Mf09000000000000" from="Sdec000000000000" to="Sa40000000000000">
+          <Caption visible="true" side="None" x="330" y="505" width="140" height="18"/>
+        </Connector>
+        <Connector id="Cf10000000000000" shapeType="ControlFlow" model="Mf10000000000000" from="Sdec000000000000" to="Sa50000000000000">
+          <Caption visible="true" side="None" x="545" y="500" width="50" height="18"/>
+        </Connector>
+        <Connector id="Cf11000000000000" shapeType="ControlFlow" model="Mf11000000000000" from="Sa40000000000000" to="Smerge0000000000"/>
+        <Connector id="Cf12000000000000" shapeType="ControlFlow" model="Mf12000000000000" from="Sa50000000000000" to="Sflowfin00000000"/>
+        <!-- длинная подпись = name связи -->
+        <Connector id="Cf13000000000000" shapeType="ControlFlow" model="Mf13000000000000" from="Smerge0000000000" to="Ssend00000000000">
+          <Caption visible="true" side="None" x="60" y="660" width="330" height="18"/>
+        </Connector>
+        <!-- ортогональная маршрутизация с точками излома -->
+        <Connector id="Cf14000000000000" shapeType="ControlFlow" model="Mf14000000000000" from="Ssend00000000000" to="Saccept000000000"
+                   connectorStyle="Rectlinear">
+          <Points>
+            <Point x="460" y="740"/>
+            <Point x="460" y="750"/>
+            <Point x="175" y="750"/>
+            <Point x="175" y="760"/>
+          </Points>
+        </Connector>
+        <Connector id="Cf15000000000000" shapeType="ControlFlow" model="Mf15000000000000" from="Saccept000000000" to="Sfinal0000000000"/>
+        <Connector id="Canch00000000000" shapeType="Anchor" model="Manch00000000000" from="Snote00000000000" to="Sa10000000000000"/>
+      </Connectors>
+    </Diagram>
+
+    <!-- ============ ДИАГРАММА 2: горизонтальные дорожки ============ -->
+    <Diagram id="Dhor000000000000" name="BHorizontal" diagramType="ActivityDiagram">
+      <Shapes>
+        <Shape id="Ssw_h00000000000" shapeType="ActivitySwimlane2" model="Msw_h00000000000"
+               x="40" y="40" width="560" height="280">
+          <DiagramElementProperties>
+            <StringArrayProperty name="horizontalPartitionIds">
+              <Values><Value value="Shd_h10000000000"/><Value value="Shd_h20000000000"/></Values>
+            </StringArrayProperty>
+            <StringArrayProperty name="compartmentIds">
+              <Values><Value value="Scm_h10000000000"/><Value value="Scm_h20000000000"/></Values>
+            </StringArrayProperty>
+          </DiagramElementProperties>
+          <ChildShapes>
+            <Shape id="Shd_h10000000000" shapeType="ActivityPartitionHeader" model="Mpart_h100000000"
+                   name="Пользователь" x="40" y="40" width="30" height="140">
+              <DiagramElementProperties><BooleanProperty name="horizontal" value="true"/></DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="30" height="140"/>
+            </Shape>
+            <Shape id="Shd_h20000000000" shapeType="ActivityPartitionHeader" model="Mpart_h200000000"
+                   name="Сервер" x="40" y="180" width="30" height="140">
+              <DiagramElementProperties><BooleanProperty name="horizontal" value="true"/></DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="30" height="140"/>
+            </Shape>
+            <Shape id="Scm_h10000000000" shapeType="ActivitySwimlane2Compartment" x="70" y="40" width="530" height="140">
+              <DiagramElementProperties><StringProperty name="horizontalPartitionId" value="Shd_h10000000000"/></DiagramElementProperties>
+            </Shape>
+            <Shape id="Scm_h20000000000" shapeType="ActivitySwimlane2Compartment" x="70" y="180" width="530" height="140">
+              <DiagramElementProperties><StringProperty name="horizontalPartitionId" value="Shd_h20000000000"/></DiagramElementProperties>
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="Shinit0000000000" shapeType="InitialNode" model="Mhinit0000000000" x="110" y="95" width="30" height="30"/>
+        <Shape id="Shb1000000000000" shapeType="ActivityAction" model="Mhb1000000000000" name="Ввести&#10;запрос"
+               x="190" y="85" width="140" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="140" height="50"/>
+        </Shape>
+        <Shape id="Shb2000000000000" shapeType="ActivityAction" model="Mhb2000000000000" name="Обработать&#10;запрос"
+               x="230" y="225" width="150" height="50">
+          <Caption visible="true" side="Center" x="0" y="0" width="150" height="50"/>
+        </Shape>
+        <Shape id="Shfin00000000000" shapeType="ActivityFinalNode" model="Mhfin00000000000" x="545" y="235" width="30" height="30"/>
+        <Shape id="Shds000000000000" shapeType="DataStoreNode" model="Mhds000000000000" name="БД заявок"
+               x="400" y="230" width="120" height="40">
+          <Caption visible="true" side="Center" x="0" y="0" width="120" height="40"/>
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="Chf1000000000000" shapeType="ControlFlow" model="Mhf1000000000000" from="Shinit0000000000" to="Shb1000000000000"/>
+        <Connector id="Chf2000000000000" shapeType="ControlFlow" model="Mhf2000000000000" from="Shb1000000000000" to="Shb2000000000000"/>
+        <Connector id="Chf3000000000000" shapeType="ControlFlow" model="Mhf3000000000000" from="Shb2000000000000" to="Shfin00000000000"/>
+        <Connector id="Chf4000000000000" shapeType="ActivityObjectFlow" model="Mhf4000000000000" from="Shb2000000000000" to="Shds000000000000"/>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>
