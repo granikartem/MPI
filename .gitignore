@@ -11,3 +11,7 @@ frontend/dist/
 # Python (генераторы диаграмм)
 __pycache__/
 *.pyc
+
+# Промежуточное при сборке диаграмм Visual Paradigm
+docs/diagrams/vp/out/svg/
+docs/diagrams/vp/.build/
