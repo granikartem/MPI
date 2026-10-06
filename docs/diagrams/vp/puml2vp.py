@@ -848,6 +848,226 @@ def convert_er(name):
     return c.write()
 
 
+# ======================================================================
+#  Временная диаграмма
+# ======================================================================
+
+RE_TL_LINE = re.compile(r'^(?P<kw>concise|robust|binary|clock)\s+"(?P<label>.+?)"\s+as\s+(?P<alias>\w+)')
+RE_TL_AT = re.compile(r'^@(?P<t>-?\d+)\s*$')
+RE_TL_IS = re.compile(r'^(?P<alias>\w+)\s+is\s+(?P<state>".*"|\{-\}|\S+)\s*$')
+RE_TL_DUR = re.compile(r'^(?P<alias>\w+)@(?P<t1>-?\d+)\s*<->\s*@(?P<t2>-?\d+)\s*'
+                       r'(?::\s*(?P<label>.+))?$')
+RE_TL_MSG = re.compile(r'^(?P<a>\w+)@(?P<t1>-?\d+)\s*->\s*(?P<b>\w+)@(?P<t2>-?\d+)\s*'
+                       r'(?::\s*(?P<label>.+))?$')
+
+
+def parse_timing(src):
+    """Линии жизни, смены состояний, ограничения длительности и сообщения."""
+    lines, events, durs, msgs, now = {}, [], [], [], 0
+    order = []
+    for raw in src.splitlines():
+        s = raw.strip()
+        if not s or s.startswith("'") or s.startswith('skinparam') or s.startswith('scale'):
+            continue
+        m = RE_TL_LINE.match(s)
+        if m:
+            lines[m.group('alias')] = {'kw': m.group('kw'),
+                                       'label': m.group('label').replace('\\n', '\n')}
+            order.append(m.group('alias'))
+            continue
+        m = RE_TL_AT.match(s)
+        if m:
+            now = int(m.group('t'))
+            continue
+        m = RE_TL_DUR.match(s)
+        if m and m.group('alias') in lines:
+            durs.append((m.group('alias'), int(m.group('t1')), int(m.group('t2')),
+                         (m.group('label') or '').strip()))
+            continue
+        m = RE_TL_MSG.match(s)
+        if m and m.group('a') in lines and m.group('b') in lines:
+            msgs.append((m.group('a'), int(m.group('t1')), m.group('b'), int(m.group('t2')),
+                         (m.group('label') or '').strip()))
+            continue
+        m = RE_TL_IS.match(s)
+        if m and m.group('alias') in lines:
+            st = m.group('state')
+            # {-} означает «состояния нет»: отрезок обрывается
+            events.append((m.group('alias'), now,
+                           None if st == '{-}' else st.strip('"')))
+    return lines, order, events, durs, msgs
+
+
+def convert_timing(name):
+    """Временная диаграмма: такты, состояния линий жизни и ход времени.
+
+    Строение подтверждено эталоном, собранным официальным примером Visual
+    Paradigm через Open API и выгруженным обратно через ExportXML: фигура
+    ровно одна — рамка, а всё содержание лежит в дереве моделей. Отрезок
+    состояния — не объект, а серия подряд идущих TimeInstance с одной и той же
+    ссылкой на StateCondition; на такте смены состояния их два.
+    """
+    c = Conv(name, 'TimingDiagram')
+    lines, order, events, durs, msgs = parse_timing(c.src)
+    if not lines:
+        raise SystemExit('%s: линий жизни не найдено' % name)
+
+    # такты: все упомянутые моменты, включая концы ограничений и сообщений
+    ticks = sorted({t for _a, t, _s in events}
+                   | {t for _a, t1, t2, _l in durs for t in (t1, t2)}
+                   | {t for _a, t1, _b, t2, _l in msgs for t in (t1, t2)})
+    idx = {t: i for i, t in enumerate(ticks)}
+
+    # имя рамки по соглашению UML — `sd <сценарий>`; существо берём из второй
+    # строки заголовка, иначе оно дословно повторяло бы сам заголовок
+    sub = (c.title.split('\n') + [''])[1] or c.title.split('\n')[0] or name
+    frame_name = 'sd ' + re.split(r'(?<=[^.])[.:]\s', sub)[0].strip()
+    mframe = c.p.model('TimingFrame', name=frame_name, hint='MTF')
+    fkids = c.p.children(mframe)
+    tunits = []
+    for t in ticks:
+        tunits.append(c.p.model('TimeUnit', name=str(t), hint='MTU%d' % c._bump(),
+                                parent=fkids))
+
+    inst = {}                     # (псевдоним, номер такта) -> модели по порядку
+    for alias in order:
+        ml = c.p.model('LifeLine', name=clean_label(lines[alias]['label'])[0],
+                       hint='MLL%d' % c._bump(), parent=fkids)
+        lkids = c.p.children(ml)
+        lines[alias]['model'] = ml
+
+        own = sorted((t, s) for a, t, s in events if a == alias)
+        states = {}
+        for _t, s in own:
+            if s and s not in states:
+                states[s] = c.p.model('StateCondition', name=s,
+                                      hint='MSC%d' % c._bump(), parent=lkids)
+        lines[alias]['states'] = states
+
+        # ограничения длительности — дети линии жизни, как в эталоне
+        lines[alias]['durs'] = [
+            (c.p.model('DurationConstraint', name=label or None,
+                       hint='MDC%d' % c._bump(), parent=lkids), t1, t2)
+            for a, t1, t2, label in durs if a == alias]
+
+        # отрезок тянется от своей смены состояния до следующей; границы
+        # включающие, поэтому на такте смены возникает два момента
+        for k, (t0, s) in enumerate(own):
+            if s is None:
+                continue
+            t1 = own[k + 1][0] if k + 1 < len(own) else ticks[-1]
+            for i in range(idx[t0], idx[t1] + 1):
+                ti = c.p.model('TimeInstance', hint='MTI%d' % c._bump(), parent=lkids)
+                c.p.ref_prop(ti, 'timeUnit', tunits[i].id)
+                c.p.ref_prop(ti, 'stateCondition', states[s].id)
+                inst.setdefault((alias, i), []).append(ti)
+
+    def at(alias, t, first):
+        """Момент на такте: начало отрезка — последний, конец — первый.
+
+        Если на этом такте у линии жизни состояния нет (в исходнике `{-}`),
+        ограничение подрезается до ближайшего такта, где состояние есть.
+        Завести момент без ссылки на состояние нельзя: проверено отрисовкой —
+        от такого момента Visual Paradigm пропускает рамку целиком, не рисуя
+        ни содержимого, ни границы.
+        """
+        i = idx.get(t, -1)
+        if i < 0:
+            return None
+        have = sorted(k[1] for k in inst if k[0] == alias)
+        if not have:
+            return None
+        if i not in have:
+            i = min(have, key=lambda j: (abs(j - i), j))
+            print('  %s: такт %d вне отрезка, ограничение подрезано до %d'
+                  % (alias, t, ticks[i]), file=sys.stderr)
+        got = inst[(alias, i)]
+        return got[0] if first else got[-1]
+
+    for alias in order:
+        for md, t1, t2 in lines[alias]['durs']:
+            a, b = at(alias, t1, False), at(alias, t2, True)
+            if a is None or b is None:
+                print('  ограничение %s@%d..%d без моментов' % (alias, t1, t2),
+                      file=sys.stderr)
+                continue
+            c.p.ref_prop(md, 'startTime', a.id)
+            c.p.ref_prop(md, 'endTime', b.id)
+
+    for a, t1, b, t2, label in msgs:
+        sa, sb = at(a, t1, False), at(b, t2, True)
+        if sa is None or sb is None:
+            print('  сообщение %s@%d -> %s@%d без моментов' % (a, t1, b, t2),
+                  file=sys.stderr)
+            continue
+        mm = c.p.model('TimeMessage', name=label or None, hint='MTM%d' % c._bump(),
+                       parent=fkids)
+        c.p.ref_prop(mm, 'startTime', sa.id)
+        c.p.ref_prop(mm, 'endTime', sb.id)
+
+    # Ширины колонок подписей обязательны: без них обе колонки нулевой ширины,
+    # и рамка не рисуется совсем — ни границы, ни содержимого. Имена свойств
+    # сняты с эталона: `1StCdW` — колонка состояний, `lifeLineWidth` — колонка
+    # имён линий жизни, `0vm` — режим показа.
+    name_w = max([len(clean_label(lines[a]['label'])[0]) for a in order] + [8])
+    state_w = max([len(s) for a in order for s in lines[a]['states']] + [8])
+    ll_w = min(max(name_w * 8 + 20, 90), 320)
+    sc_w = min(max(state_w * 7 + 20, 100), 420)
+
+    # ширина такта пропорциональна промежутку времени — иначе Visual Paradigm
+    # разносит все такты поровну и шкала перестаёт отражать длительности
+    span = (ticks[-1] - ticks[0]) or 1
+    widths = []
+    for i, t in enumerate(ticks):
+        gap = (ticks[i + 1] - t) if i + 1 < len(ticks) else span // max(len(ticks), 1)
+        widths.append(max(46, min(260, int(gap / span * 1100) or 46)))
+
+    row_h = 40
+    w = ll_w + sc_w + sum(widths) + 50
+    h = sum(len(lines[a]['states']) * row_h + 44 for a in order) + 70
+    # без caption=False Visual Paradigm рисует имя рамки ещё раз по её центру,
+    # поверх содержимого: в ярлычке оно и так есть
+    s = c.d.shape('TimingFrame', mframe, PAD, c.top, w, h,
+                  name=mframe.el.get('name'), caption=False,
+                  fill=fill_of('#F5F5F5'), hint='STF')
+    for prop, val in (('0vm', 0), ('1StCdW', sc_w), ('lifeLineWidth', ll_w)):
+        ET.SubElement(s.dep, _q('IntegerProperty'), {'name': prop, 'value': str(val)})
+
+    # порядок детей <Shape> задан схемой: DiagramElementProperties, затем
+    # Lifelines и TimeUnits, и только потом Caption
+    lls = ET.Element(_q('Lifelines'))
+    for alias in order:
+        el = ET.SubElement(lls, _q('Lifeline'), {'id': lines[alias]['model'].id})
+        scs = ET.SubElement(el, _q('StateConditions'))
+        for st in lines[alias]['states'].values():
+            ET.SubElement(scs, _q('StateCondition'),
+                          {'id': st.id, 'height': str(row_h)})
+    tus = ET.Element(_q('TimeUnits'))
+    for u, wd in zip(tunits, widths):
+        ET.SubElement(tus, _q('TimeUnit'), {'id': u.id, 'width': str(wd)})
+    s.el.insert(1, tus)
+    s.el.insert(1, lls)
+    c._fills.append(s)
+
+    c.notes()
+
+    # Раскладка PlantUML тут не подходит: у него ось пропорциональна времени,
+    # а рамка Visual Paradigm имеет совсем другие пропорции. Поэтому заголовок,
+    # рамка и заметки просто ставятся столбцом.
+    y = PAD
+    title = c.d.shapes.find("./*[@shapeType='TextBox']")
+    if title is not None:
+        title.set('x', str(PAD)); title.set('y', str(y))
+        y += int(title.get('height')) + 24
+    s.el.set('y', str(y))
+    y += h + 30
+    for note in c.d.shapes.findall("./*[@shapeType='NOTE']"):
+        note.set('x', str(PAD)); note.set('y', str(y))
+        y += int(note.get('height')) + 20
+
+    return c.write()
+
+
 def _set_diagram_prop(d, name, value):
     """Логическое свойство диаграммы (настройки показа)."""
     props = d.el.find(_q('DiagramProperties'))
@@ -870,6 +1090,7 @@ CONVERTERS = {
     'SEQ': convert_sequence,
     'COL': convert_communication,
     'DB': convert_er,
+    'TL': convert_timing,
     'PKG': lambda n: convert_containers(n, 'PackageDiagram'),
     'DEP': lambda n: convert_containers(n, 'DeploymentDiagram'),
 }
