@@ -37,33 +37,35 @@ Implementation View для них был бы проектным. Их сущн�
 
 ## Состав комплекта
 
-Исходники — `diagrams/sad/*.puml`, отрендеренные изображения — `diagrams/out/*.png`.
+Исходники — `diagrams/sad/*.puml`. Изображения существуют в двух наборах: действующий
+в формате Visual Paradigm — `diagrams/vp/out/png/*.png`, прежний рендер PlantUML —
+`diagrams/out/*.png`. В таблице первая ссылка ведёт на действующий набор, вторая — на прежний.
 
-| Раздел SAD | Диаграмма | Исходник | Изображение |
+| Раздел SAD | Диаграмма | Исходник | Изображения |
 |---|---|---|---|
-| 4. Use-Case View | Use Case, система целиком | [UCD_UseCaseView.puml](diagrams/sad/UCD_UseCaseView.puml) | [png](diagrams/out/UCD_UseCaseView.png) |
-| 4. Use-Case View | Class, система целиком | [CLS_UseCaseView.puml](diagrams/sad/CLS_UseCaseView.puml) | [png](diagrams/out/CLS_UseCaseView.png) |
-| 4. Use-Case View | Activity, UC-7 | [ACT_UC7_UseCaseView.puml](diagrams/sad/ACT_UC7_UseCaseView.puml) | [png](diagrams/out/ACT_UC7_UseCaseView.png) |
-| 4. Use-Case View | State Machine, UC-2 | [SM_UC2_UseCaseView.puml](diagrams/sad/SM_UC2_UseCaseView.puml) | [png](diagrams/out/SM_UC2_UseCaseView.png) |
-| 4. Use-Case View | Sequence, UC-1 | [SEQ_UC1_UseCaseView.puml](diagrams/sad/SEQ_UC1_UseCaseView.puml) | [png](diagrams/out/SEQ_UC1_UseCaseView.png) |
-| 4. Use-Case View | Cooperative, UC-32 | [COL_UC32_UseCaseView.puml](diagrams/sad/COL_UC32_UseCaseView.puml) | [png](diagrams/out/COL_UC32_UseCaseView.png) |
-| 5. Logical View | Package, система целиком | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [png](diagrams/out/PKG_LogicalView.png) |
-| 5. Logical View | Class, система целиком | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [png](diagrams/out/CLS_LogicalView.png) |
-| 5. Logical View | Activity, UC-1 | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [png](diagrams/out/ACT_UC1_LogicalView.png) |
-| 5. Logical View | State Machine, UC-1 | [SM_UC1_LogicalView.puml](diagrams/sad/SM_UC1_LogicalView.puml) | [png](diagrams/out/SM_UC1_LogicalView.png) |
-| 5. Logical View | Sequence, UC-32 | [SEQ_UC32_LogicalView.puml](diagrams/sad/SEQ_UC32_LogicalView.puml) | [png](diagrams/out/SEQ_UC32_LogicalView.png) |
-| 5. Logical View | Cooperative, UC-2 | [COL_UC2_LogicalView.puml](diagrams/sad/COL_UC2_LogicalView.puml) | [png](diagrams/out/COL_UC2_LogicalView.png) |
-| 6. Process View | Timeline, календарные процессы | [TL_Calendar_ProcessView.puml](diagrams/sad/TL_Calendar_ProcessView.puml) | [png](diagrams/out/TL_Calendar_ProcessView.png) |
-| 6. Process View | Timeline, полевая синхронизация | [TL_Field_ProcessView.puml](diagrams/sad/TL_Field_ProcessView.puml) | [png](diagrams/out/TL_Field_ProcessView.png) |
-| 6. Process View | Timeline, UC-1 | [TL_UC1_ProcessView.puml](diagrams/sad/TL_UC1_ProcessView.puml) | [png](diagrams/out/TL_UC1_ProcessView.png) |
-| 7. Deployment View | Deployment, система целиком | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [png](diagrams/out/DEP_DeploymentView.png) |
-| 8. Implementation View | Class, система целиком | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [png](diagrams/out/CLS_ImplementationView.png) |
-| 8. Implementation View | Activity, UC-32 | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [png](diagrams/out/ACT_UC32_ImplementationView.png) |
-| 8. Implementation View | State Machine, UC-32 | [SM_UC32_ImplementationView.puml](diagrams/sad/SM_UC32_ImplementationView.puml) | [png](diagrams/out/SM_UC32_ImplementationView.png) |
-| 8. Implementation View | Sequence, UC-2 | [SEQ_UC2_ImplementationView.puml](diagrams/sad/SEQ_UC2_ImplementationView.puml) | [png](diagrams/out/SEQ_UC2_ImplementationView.png) |
-| 8. Implementation View | Cooperative, UC-1 | [COL_UC1_ImplementationView.puml](diagrams/sad/COL_UC1_ImplementationView.puml) | [png](diagrams/out/COL_UC1_ImplementationView.png) |
-| 8. Implementation View | Data Base, часть 1: ER-модель | [DB_ER_ImplementationView.puml](diagrams/sad/DB_ER_ImplementationView.puml) | [png](diagrams/out/DB_ER_ImplementationView.png) |
-| 8. Implementation View | Data Base, часть 2: даталогическая модель | [DB_Datalogical_ImplementationView.puml](diagrams/sad/DB_Datalogical_ImplementationView.puml) | [png](diagrams/out/DB_Datalogical_ImplementationView.png) |
+| 4. Use-Case View | Use Case, система целиком | [UCD_UseCaseView.puml](diagrams/sad/UCD_UseCaseView.puml) | [VP](diagrams/vp/out/png/UCD_UseCaseView.png) · [PlantUML](diagrams/out/UCD_UseCaseView.png) |
+| 4. Use-Case View | Class, система целиком | [CLS_UseCaseView.puml](diagrams/sad/CLS_UseCaseView.puml) | [VP](diagrams/vp/out/png/CLS_UseCaseView.png) · [PlantUML](diagrams/out/CLS_UseCaseView.png) |
+| 4. Use-Case View | Activity, UC-7 | [ACT_UC7_UseCaseView.puml](diagrams/sad/ACT_UC7_UseCaseView.puml) | [VP](diagrams/vp/out/png/ACT_UC7_UseCaseView.png) · [PlantUML](diagrams/out/ACT_UC7_UseCaseView.png) |
+| 4. Use-Case View | State Machine, UC-2 | [SM_UC2_UseCaseView.puml](diagrams/sad/SM_UC2_UseCaseView.puml) | [VP](diagrams/vp/out/png/SM_UC2_UseCaseView.png) · [PlantUML](diagrams/out/SM_UC2_UseCaseView.png) |
+| 4. Use-Case View | Sequence, UC-1 | [SEQ_UC1_UseCaseView.puml](diagrams/sad/SEQ_UC1_UseCaseView.puml) | [VP](diagrams/vp/out/png/SEQ_UC1_UseCaseView.png) · [PlantUML](diagrams/out/SEQ_UC1_UseCaseView.png) |
+| 4. Use-Case View | Cooperative, UC-32 | [COL_UC32_UseCaseView.puml](diagrams/sad/COL_UC32_UseCaseView.puml) | [VP](diagrams/vp/out/png/COL_UC32_UseCaseView.png) · [PlantUML](diagrams/out/COL_UC32_UseCaseView.png) |
+| 5. Logical View | Package, система целиком | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [VP](diagrams/vp/out/png/PKG_LogicalView.png) · [PlantUML](diagrams/out/PKG_LogicalView.png) |
+| 5. Logical View | Class, система целиком | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [VP](diagrams/vp/out/png/CLS_LogicalView.png) · [PlantUML](diagrams/out/CLS_LogicalView.png) |
+| 5. Logical View | Activity, UC-1 | [ACT_UC1_LogicalView.puml](diagrams/sad/ACT_UC1_LogicalView.puml) | [VP](diagrams/vp/out/png/ACT_UC1_LogicalView.png) · [PlantUML](diagrams/out/ACT_UC1_LogicalView.png) |
+| 5. Logical View | State Machine, UC-1 | [SM_UC1_LogicalView.puml](diagrams/sad/SM_UC1_LogicalView.puml) | [VP](diagrams/vp/out/png/SM_UC1_LogicalView.png) · [PlantUML](diagrams/out/SM_UC1_LogicalView.png) |
+| 5. Logical View | Sequence, UC-32 | [SEQ_UC32_LogicalView.puml](diagrams/sad/SEQ_UC32_LogicalView.puml) | [VP](diagrams/vp/out/png/SEQ_UC32_LogicalView.png) · [PlantUML](diagrams/out/SEQ_UC32_LogicalView.png) |
+| 5. Logical View | Cooperative, UC-2 | [COL_UC2_LogicalView.puml](diagrams/sad/COL_UC2_LogicalView.puml) | [VP](diagrams/vp/out/png/COL_UC2_LogicalView.png) · [PlantUML](diagrams/out/COL_UC2_LogicalView.png) |
+| 6. Process View | Timeline, календарные процессы | [TL_Calendar_ProcessView.puml](diagrams/sad/TL_Calendar_ProcessView.puml) | [VP](diagrams/vp/out/png/TL_Calendar_ProcessView.png) · [PlantUML](diagrams/out/TL_Calendar_ProcessView.png) |
+| 6. Process View | Timeline, полевая синхронизация | [TL_Field_ProcessView.puml](diagrams/sad/TL_Field_ProcessView.puml) | [VP](diagrams/vp/out/png/TL_Field_ProcessView.png) · [PlantUML](diagrams/out/TL_Field_ProcessView.png) |
+| 6. Process View | Timeline, UC-1 | [TL_UC1_ProcessView.puml](diagrams/sad/TL_UC1_ProcessView.puml) | [VP](diagrams/vp/out/png/TL_UC1_ProcessView.png) · [PlantUML](diagrams/out/TL_UC1_ProcessView.png) |
+| 7. Deployment View | Deployment, система целиком | [DEP_DeploymentView.puml](diagrams/sad/DEP_DeploymentView.puml) | [VP](diagrams/vp/out/png/DEP_DeploymentView.png) · [PlantUML](diagrams/out/DEP_DeploymentView.png) |
+| 8. Implementation View | Class, система целиком | [CLS_ImplementationView.puml](diagrams/sad/CLS_ImplementationView.puml) | [VP](diagrams/vp/out/png/CLS_ImplementationView.png) · [PlantUML](diagrams/out/CLS_ImplementationView.png) |
+| 8. Implementation View | Activity, UC-32 | [ACT_UC32_ImplementationView.puml](diagrams/sad/ACT_UC32_ImplementationView.puml) | [VP](diagrams/vp/out/png/ACT_UC32_ImplementationView.png) · [PlantUML](diagrams/out/ACT_UC32_ImplementationView.png) |
+| 8. Implementation View | State Machine, UC-32 | [SM_UC32_ImplementationView.puml](diagrams/sad/SM_UC32_ImplementationView.puml) | [VP](diagrams/vp/out/png/SM_UC32_ImplementationView.png) · [PlantUML](diagrams/out/SM_UC32_ImplementationView.png) |
+| 8. Implementation View | Sequence, UC-2 | [SEQ_UC2_ImplementationView.puml](diagrams/sad/SEQ_UC2_ImplementationView.puml) | [VP](diagrams/vp/out/png/SEQ_UC2_ImplementationView.png) · [PlantUML](diagrams/out/SEQ_UC2_ImplementationView.png) |
+| 8. Implementation View | Cooperative, UC-1 | [COL_UC1_ImplementationView.puml](diagrams/sad/COL_UC1_ImplementationView.puml) | [VP](diagrams/vp/out/png/COL_UC1_ImplementationView.png) · [PlantUML](diagrams/out/COL_UC1_ImplementationView.png) |
+| 8. Implementation View | Data Base, часть 1: ER-модель | [DB_ER_ImplementationView.puml](diagrams/sad/DB_ER_ImplementationView.puml) | [VP](diagrams/vp/out/png/DB_ER_ImplementationView.png) · [PlantUML](diagrams/out/DB_ER_ImplementationView.png) |
+| 8. Implementation View | Data Base, часть 2: даталогическая модель | [DB_Datalogical_ImplementationView.puml](diagrams/sad/DB_Datalogical_ImplementationView.puml) | [VP](diagrams/vp/out/png/DB_Datalogical_ImplementationView.png) · [PlantUML](diagrams/out/DB_Datalogical_ImplementationView.png) |
 
 Итого 23 диаграммы: Use Case, Package и Deployment — по одной, Data Base — две (ER-модель и
 даталогическая модель), Timeline — три, Class, Activity, State Machine, Sequence и Cooperative — по три.
