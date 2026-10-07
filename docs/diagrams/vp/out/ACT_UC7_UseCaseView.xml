@@ -699,13 +699,13 @@
           </DiagramElementProperties>
           <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
         </Shape>
-        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="848" height="60" zorder="29" model="F17ced0da9d3aadf" name="UC-7 «Рассчитать risk_score» — Activity Diagram (Use-Case View)&#10;Абстрактное описание: шаги предметной области; дорожки — актор, система как единое целое и внешняя система">
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="1100" height="64" zorder="29" model="F17ced0da9d3aadf" name="UC-7 «Рассчитать risk_score» — Activity Diagram (Use-Case View)&#10;Абстрактное описание: шаги предметной области; дорожки — актор, система как единое целое и внешняя система">
           <DiagramElementProperties>
             <BooleanProperty name="requestResetCaption" value="true" />
             <BooleanProperty name="requestResetCaptionSize" value="true" />
           </DiagramElementProperties>
           <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
-          <Caption visible="true" side="Center" x="0" y="0" width="848" height="60" />
+          <Caption visible="true" side="Center" x="0" y="0" width="1100" height="64" />
           <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
         </Shape>
       </Shapes>

@@ -1146,13 +1146,13 @@
           </DiagramElementProperties>
           <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
         </Shape>
-        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="808" height="60" zorder="48" model="F17ced0da9d3aadf" name="UC-1 «Создать заявку на перевозку» — Activity Diagram (Logical View)&#10;Дорожки — логические компоненты диаграммы пакетов; порядок шагов по docs/CoreUseCases.md, раздел UC-1">
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="1029" height="64" zorder="48" model="F17ced0da9d3aadf" name="UC-1 «Создать заявку на перевозку» — Activity Diagram (Logical View)&#10;Дорожки — логические компоненты диаграммы пакетов; порядок шагов по docs/CoreUseCases.md, раздел UC-1">
           <DiagramElementProperties>
             <BooleanProperty name="requestResetCaption" value="true" />
             <BooleanProperty name="requestResetCaptionSize" value="true" />
           </DiagramElementProperties>
           <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
-          <Caption visible="true" side="Center" x="0" y="0" width="808" height="60" />
+          <Caption visible="true" side="Center" x="0" y="0" width="1029" height="64" />
           <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
         </Shape>
       </Shapes>

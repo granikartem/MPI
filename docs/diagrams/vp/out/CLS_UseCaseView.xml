@@ -1612,13 +1612,13 @@
           <Caption visible="true" side="Center" x="0" y="0" width="245" height="34" />
           <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
         </Shape>
-        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="800" height="60" zorder="25" model="F17ced0da9d3aadf" name="ИС «Караваны» — Class Diagram (Use-Case View)&#10;Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ">
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="870" height="64" zorder="25" model="F17ced0da9d3aadf" name="ИС «Караваны» — Class Diagram (Use-Case View)&#10;Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ">
           <DiagramElementProperties>
             <BooleanProperty name="requestResetCaption" value="true" />
             <BooleanProperty name="requestResetCaptionSize" value="true" />
           </DiagramElementProperties>
           <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
-          <Caption visible="true" side="Center" x="0" y="0" width="800" height="60" />
+          <Caption visible="true" side="Center" x="0" y="0" width="870" height="64" />
           <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
         </Shape>
       </Shapes>
