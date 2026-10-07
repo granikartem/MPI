@@ -103,11 +103,6 @@
                 </Model>
               </ChildModels>
             </Model>
-            <Model id="M140000000000000" modelType="Artifact" name="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов">
-              <ModelProperties>
-                <StringProperty name="name" value="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов" />
-              </ModelProperties>
-            </Model>
           </ChildModels>
         </Model>
       </ChildModels>
@@ -116,14 +111,6 @@
       <ModelProperties>
         <StringProperty name="name" value="device" />
         <StringProperty name="baseType" value="Node" />
-      </ModelProperties>
-    </Model>
-    <Model id="M200000000000000" modelType="Node" name="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу">
-      <ModelProperties>
-        <StringProperty name="name" value="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу" />
-        <ModelRefProperty name="stereotypes">
-          <ModelRef id="STdevice00000000" />
-        </ModelRefProperty>
       </ModelProperties>
     </Model>
     <Model id="M300000000000000" modelType="Node" name="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с">
@@ -306,39 +293,6 @@
         </ModelRefProperty>
       </ModelProperties>
     </Model>
-    <Model id="F320000000000000" modelType="Dependency" name="pg_dump">
-      <ModelProperties>
-        <StringProperty name="name" value="pg_dump" />
-        <ModelRefProperty name="from">
-          <ModelRef id="M120000000000000" />
-        </ModelRefProperty>
-        <ModelRefProperty name="to">
-          <ModelRef id="M140000000000000" />
-        </ModelRefProperty>
-      </ModelProperties>
-    </Model>
-    <Model id="F330000000000000" modelType="Dependency" name="mongodump">
-      <ModelProperties>
-        <StringProperty name="name" value="mongodump" />
-        <ModelRefProperty name="from">
-          <ModelRef id="M130000000000000" />
-        </ModelRefProperty>
-        <ModelRefProperty name="to">
-          <ModelRef id="M140000000000000" />
-        </ModelRefProperty>
-      </ModelProperties>
-    </Model>
-    <Model id="F340000000000000" modelType="Association" name="запись резервной копии">
-      <ModelProperties>
-        <StringProperty name="name" value="запись резервной копии" />
-        <ModelRefProperty name="from">
-          <ModelRef id="M140000000000000" />
-        </ModelRefProperty>
-        <ModelRefProperty name="to">
-          <ModelRef id="M200000000000000" />
-        </ModelRefProperty>
-      </ModelProperties>
-    </Model>
     <Model id="F350000000000000" modelType="Dependency" name="установка PWA через RobCo-интерфейс&#10;терминала или с голотейпа (Vision 4.5)">
       <ModelProperties>
         <StringProperty name="name" value="установка PWA через RobCo-интерфейс&#10;терминала или с голотейпа (Vision 4.5)" />
@@ -485,26 +439,10 @@
                   </ChildShapes>
                   <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
                 </Shape>
-                <Shape id="S140000000000000" shapeType="Artifact" x="311" y="2089" width="233" height="88" zorder="5" model="M140000000000000" name="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов">
-                  <DiagramElementProperties>
-                    <BooleanProperty name="requestResetCaption" value="true" />
-                    <BooleanProperty name="requestResetCaptionSize" value="true" />
-                  </DiagramElementProperties>
-                  <Caption visible="true" side="Center" x="0" y="0" width="233" height="88" />
-                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
-                </Shape>
               </ChildShapes>
               <FillColor type="1" color="Cr:238,238,238,255" transparency="0" style="0" />
             </Shape>
           </ChildShapes>
-          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
-        </Shape>
-        <Shape id="S200000000000000" shapeType="Node" x="247" y="2261" width="361" height="80" zorder="10" model="M200000000000000" name="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу">
-          <DiagramElementProperties>
-            <BooleanProperty name="requestResetCaption" value="true" />
-            <BooleanProperty name="requestResetCaptionSize" value="true" />
-          </DiagramElementProperties>
-          <Caption visible="true" side="Center" x="0" y="0" width="361" height="80" />
           <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
         </Shape>
         <Shape id="S300000000000000" shapeType="Node" x="177" y="134" width="503" height="247" zorder="19" model="M300000000000000" name="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с">
@@ -643,22 +581,6 @@
         </Connector>
         <Connector id="C310000000000000" shapeType="Association" model="F310000000000000" from="S230000000000000" to="S600000000000000" connectorStyle="Rectlinear">
           <Caption visible="true" side="None" x="1314" y="1795" width="233" height="41" />
-          <Points />
-        </Connector>
-        <Connector id="C320000000000000" shapeType="Dependency" model="F320000000000000" from="S120000000000000" to="S140000000000000" connectorStyle="Rectlinear">
-          <DiagramElementProperties>
-            <BooleanProperty name="requestResetCaption" value="false" />
-          </DiagramElementProperties>
-          <Points />
-        </Connector>
-        <Connector id="C330000000000000" shapeType="Dependency" model="F330000000000000" from="S130000000000000" to="S140000000000000" connectorStyle="Rectlinear">
-          <DiagramElementProperties>
-            <BooleanProperty name="requestResetCaption" value="false" />
-          </DiagramElementProperties>
-          <Points />
-        </Connector>
-        <Connector id="C340000000000000" shapeType="Association" model="F340000000000000" from="S140000000000000" to="S200000000000000" connectorStyle="Rectlinear">
-          <Caption visible="true" side="None" x="431" y="2212" width="223" height="23" />
           <Points />
         </Connector>
         <Connector id="C350000000000000" shapeType="Dependency" model="F350000000000000" from="S300000000000000" to="S400000000000000" connectorStyle="Rectlinear">
