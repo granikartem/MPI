@@ -1,2 +1,591 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="TL_Field_ProcessView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="ИС «Караваны» — Timeline Diagram (Process View)&#10;Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды"><ModelProperties><StringProperty name="name" value="ИС «Караваны» — Timeline Diagram (Process View)&#10;Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды" /></ModelProperties></Model><Model id="MTF0000000000000" modelType="TimingFrame" name="sd Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3)"><ModelProperties><StringProperty name="name" value="sd Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3)" /></ModelProperties><ChildModels><Model id="MTU1000000000000" modelType="TimeUnit" name="0"><ModelProperties><StringProperty name="name" value="0" /></ModelProperties></Model><Model id="MTU2000000000000" modelType="TimeUnit" name="30"><ModelProperties><StringProperty name="name" value="30" /></ModelProperties></Model><Model id="MTU3000000000000" modelType="TimeUnit" name="120"><ModelProperties><StringProperty name="name" value="120" /></ModelProperties></Model><Model id="MTU4000000000000" modelType="TimeUnit" name="150"><ModelProperties><StringProperty name="name" value="150" /></ModelProperties></Model><Model id="MTU5000000000000" modelType="TimeUnit" name="180"><ModelProperties><StringProperty name="name" value="180" /></ModelProperties></Model><Model id="MTU6000000000000" modelType="TimeUnit" name="300"><ModelProperties><StringProperty name="name" value="300" /></ModelProperties></Model><Model id="MTU7000000000000" modelType="TimeUnit" name="450"><ModelProperties><StringProperty name="name" value="450" /></ModelProperties></Model><Model id="MLL8000000000000" modelType="LifeLine" name="Связь"><ModelProperties><StringProperty name="name" value="Связь" /></ModelProperties><ChildModels><Model id="MSC9000000000000" modelType="StateCondition" name="нет связи"><ModelProperties><StringProperty name="name" value="нет связи" /></ModelProperties></Model><Model id="MSC1000000000000" modelType="StateCondition" name="связь есть"><ModelProperties><StringProperty name="name" value="связь есть" /></ModelProperties></Model><Model id="MDC1100000000000" modelType="DurationConstraint" name="{≤ 60 с (RL-3)}"><ModelProperties><StringProperty name="name" value="{≤ 60 с (RL-3)}" /><ModelRefProperty name="startTime"><ModelRef id="MTI1500000000000" /></ModelRefProperty><ModelRefProperty name="endTime"><ModelRef id="MTI1700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1200000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU1000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC9000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1300000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU2000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC9000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1400000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU3000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC9000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1500000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU3000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1600000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1700000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU5000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1800000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU6000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI1900000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU7000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC1000000000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="MLL2000000000000" modelType="LifeLine" name="Pip-Boy (PWA)"><ModelProperties><StringProperty name="name" value="Pip-Boy (PWA)" /></ModelProperties><ChildModels><Model id="MSC2100000000000" modelType="StateCondition" name="LOCAL — карточка в очереди на устройстве"><ModelProperties><StringProperty name="name" value="LOCAL — карточка в очереди на устройстве" /></ModelProperties></Model><Model id="MSC2200000000000" modelType="StateCondition" name="SYNCED"><ModelProperties><StringProperty name="name" value="SYNCED" /></ModelProperties></Model><Model id="MTI2300000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU2000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI2400000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU3000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI2500000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI2600000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2200000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI2700000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU5000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2200000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI2800000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU6000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2200000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI2900000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU7000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC2200000000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="MLL3000000000000" modelType="LifeLine" name="Сервер"><ModelProperties><StringProperty name="name" value="Сервер" /></ModelProperties><ChildModels><Model id="MSC3100000000000" modelType="StateCondition" name="инцидент принят"><ModelProperties><StringProperty name="name" value="инцидент принят" /></ModelProperties></Model><Model id="MTI3200000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI3300000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU5000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI3400000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU6000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI3500000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU7000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3100000000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="MLL3600000000000" modelType="LifeLine" name="Статус рейса"><ModelProperties><StringProperty name="name" value="Статус рейса" /></ModelProperties><ChildModels><Model id="MSC3700000000000" modelType="StateCondition" name="EN_ROUTE"><ModelProperties><StringProperty name="name" value="EN_ROUTE" /></ModelProperties></Model><Model id="MSC3800000000000" modelType="StateCondition" name="DELAYED (актор SYSTEM)"><ModelProperties><StringProperty name="name" value="DELAYED (актор SYSTEM)" /></ModelProperties></Model><Model id="MTI3900000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU1000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4000000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU2000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4100000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU3000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4200000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4300000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4400000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU5000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4500000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU6000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI4600000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU7000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC3800000000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="MLL4700000000000" modelType="LifeLine" name="Диспетчер"><ModelProperties><StringProperty name="name" value="Диспетчер" /></ModelProperties><ChildModels><Model id="MSC4800000000000" modelType="StateCondition" name="уведомление формируется"><ModelProperties><StringProperty name="name" value="уведомление формируется" /></ModelProperties></Model><Model id="MSC4900000000000" modelType="StateCondition" name="уведомление доставлено"><ModelProperties><StringProperty name="name" value="уведомление доставлено" /></ModelProperties></Model><Model id="MDC5000000000000" modelType="DurationConstraint" name="{≤ 5 мин (Vision)}"><ModelProperties><StringProperty name="name" value="{≤ 5 мин (Vision)}" /><ModelRefProperty name="startTime"><ModelRef id="MTI5100000000000" /></ModelRefProperty><ModelRefProperty name="endTime"><ModelRef id="MTI5500000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI5100000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU4000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC4800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI5200000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU5000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC4800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI5300000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU6000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC4800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI5400000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU6000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC4900000000000" /></ModelRefProperty></ModelProperties></Model><Model id="MTI5500000000000" modelType="TimeInstance"><ModelProperties><ModelRefProperty name="timeUnit"><ModelRef id="MTU7000000000000" /></ModelRefProperty><ModelRefProperty name="stateCondition"><ModelRef id="MSC4900000000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="MTM5600000000000" modelType="TimeMessage"><ModelProperties><ModelRefProperty name="startTime"><ModelRef id="MTI2600000000000" /></ModelRefProperty><ModelRefProperty name="endTime"><ModelRef id="MTI3200000000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="Mnote57000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Серая зона — связи нет; на практике это до 3 ч и дольше (Vision 7.2),&#10;  на оси промежуток сжат. Очередь событий хранится в IndexedDB устройства." /></ModelProperties></Model><Model id="Mnote58000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Время и координаты подставляются в момент фиксации (@30), а не синхронизации.&#10;  После появления связи PWA отправляет очередь в REST API; clientEventId делает&#10;  повторную отправку идемпотентной (UNIQUE INDEX в коллекции incident)." /></ModelProperties></Model><Model id="Mnote59000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="При тяжести HIGH / CRITICAL сервер сразу после приёма выполняет переход&#10;  EN_ROUTE → DELAYED ролью SYSTEM (переход разрешён RequestStatusMachine)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_TL_Field_Proce" name="TL_Field_ProcessView" diagramType="TimingDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="40" y="40" width="826" height="52" zorder="2" model="Mtitle0000000000" name="ИС «Караваны» — Timeline Diagram (Process View)&#10;Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="826" height="52" /></Shape><Shape id="STF0000000000000" shapeType="TimingFrame" x="40" y="116" width="1589" height="650" zorder="5" model="MTF0000000000000" name="sd Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="0vm" value="0" /><IntegerProperty name="1StCdW" value="300" /><IntegerProperty name="lifeLineWidth" value="124" /></DiagramElementProperties><Lifelines><Lifeline id="MLL8000000000000"><StateConditions><StateCondition id="MSC9000000000000" height="40" /><StateCondition id="MSC1000000000000" height="40" /></StateConditions></Lifeline><Lifeline id="MLL2000000000000"><StateConditions><StateCondition id="MSC2100000000000" height="40" /><StateCondition id="MSC2200000000000" height="40" /></StateConditions></Lifeline><Lifeline id="MLL3000000000000"><StateConditions><StateCondition id="MSC3100000000000" height="40" /></StateConditions></Lifeline><Lifeline id="MLL3600000000000"><StateConditions><StateCondition id="MSC3700000000000" height="40" /><StateCondition id="MSC3800000000000" height="40" /></StateConditions></Lifeline><Lifeline id="MLL4700000000000"><StateConditions><StateCondition id="MSC4800000000000" height="40" /><StateCondition id="MSC4900000000000" height="40" /></StateConditions></Lifeline></Lifelines><TimeUnits><TimeUnit id="MTU1000000000000" width="73" /><TimeUnit id="MTU2000000000000" width="220" /><TimeUnit id="MTU3000000000000" width="73" /><TimeUnit id="MTU4000000000000" width="73" /><TimeUnit id="MTU5000000000000" width="260" /><TimeUnit id="MTU6000000000000" width="260" /><TimeUnit id="MTU7000000000000" width="156" /></TimeUnits><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="Snote57000000000" shapeType="NOTE" x="40" y="796" width="709" height="60" zorder="1" model="Mnote57000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote58000000000" shapeType="NOTE" x="40" y="876" width="769" height="74" zorder="4" model="Mnote58000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote59000000000" shapeType="NOTE" x="40" y="970" width="752" height="60" zorder="3" model="Mnote59000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors /></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="TL_Field_ProcessView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="Mtitle0000000000" modelType="NOTE" name="ИС «Караваны» — Timeline Diagram (Process View)&#10;Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды">
+      <ModelProperties>
+        <StringProperty name="name" value="ИС «Караваны» — Timeline Diagram (Process View)&#10;Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды" />
+      </ModelProperties>
+    </Model>
+    <Model id="MTF0000000000000" modelType="TimingFrame" name="sd Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3)">
+      <ModelProperties>
+        <StringProperty name="name" value="sd Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3)" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="MTU1000000000000" modelType="TimeUnit" name="0">
+          <ModelProperties>
+            <StringProperty name="name" value="0" />
+          </ModelProperties>
+        </Model>
+        <Model id="MTU2000000000000" modelType="TimeUnit" name="30">
+          <ModelProperties>
+            <StringProperty name="name" value="30" />
+          </ModelProperties>
+        </Model>
+        <Model id="MTU3000000000000" modelType="TimeUnit" name="120">
+          <ModelProperties>
+            <StringProperty name="name" value="120" />
+          </ModelProperties>
+        </Model>
+        <Model id="MTU4000000000000" modelType="TimeUnit" name="150">
+          <ModelProperties>
+            <StringProperty name="name" value="150" />
+          </ModelProperties>
+        </Model>
+        <Model id="MTU5000000000000" modelType="TimeUnit" name="180">
+          <ModelProperties>
+            <StringProperty name="name" value="180" />
+          </ModelProperties>
+        </Model>
+        <Model id="MTU6000000000000" modelType="TimeUnit" name="300">
+          <ModelProperties>
+            <StringProperty name="name" value="300" />
+          </ModelProperties>
+        </Model>
+        <Model id="MTU7000000000000" modelType="TimeUnit" name="450">
+          <ModelProperties>
+            <StringProperty name="name" value="450" />
+          </ModelProperties>
+        </Model>
+        <Model id="MLL8000000000000" modelType="LifeLine" name="Связь">
+          <ModelProperties>
+            <StringProperty name="name" value="Связь" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="MSC9000000000000" modelType="StateCondition" name="нет связи">
+              <ModelProperties>
+                <StringProperty name="name" value="нет связи" />
+              </ModelProperties>
+            </Model>
+            <Model id="MSC1000000000000" modelType="StateCondition" name="связь есть">
+              <ModelProperties>
+                <StringProperty name="name" value="связь есть" />
+              </ModelProperties>
+            </Model>
+            <Model id="MDC1100000000000" modelType="DurationConstraint" name="{≤ 60 с (RL-3)}">
+              <ModelProperties>
+                <StringProperty name="name" value="{≤ 60 с (RL-3)}" />
+                <ModelRefProperty name="startTime">
+                  <ModelRef id="MTI1500000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endTime">
+                  <ModelRef id="MTI1700000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1200000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU1000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC9000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1300000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU2000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC9000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1400000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU3000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC9000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1500000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU3000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC1000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1600000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC1000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1700000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU5000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC1000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1800000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU6000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC1000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI1900000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU7000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC1000000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+        <Model id="MLL2000000000000" modelType="LifeLine" name="Pip-Boy (PWA)">
+          <ModelProperties>
+            <StringProperty name="name" value="Pip-Boy (PWA)" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="MSC2100000000000" modelType="StateCondition" name="LOCAL — карточка в очереди на устройстве">
+              <ModelProperties>
+                <StringProperty name="name" value="LOCAL — карточка в очереди на устройстве" />
+              </ModelProperties>
+            </Model>
+            <Model id="MSC2200000000000" modelType="StateCondition" name="SYNCED">
+              <ModelProperties>
+                <StringProperty name="name" value="SYNCED" />
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2300000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU2000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2400000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU3000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2500000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2600000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2200000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2700000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU5000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2200000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2800000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU6000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2200000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI2900000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU7000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC2200000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+        <Model id="MLL3000000000000" modelType="LifeLine" name="Сервер">
+          <ModelProperties>
+            <StringProperty name="name" value="Сервер" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="MSC3100000000000" modelType="StateCondition" name="инцидент принят">
+              <ModelProperties>
+                <StringProperty name="name" value="инцидент принят" />
+              </ModelProperties>
+            </Model>
+            <Model id="MTI3200000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI3300000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU5000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI3400000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU6000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI3500000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU7000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3100000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+        <Model id="MLL3600000000000" modelType="LifeLine" name="Статус рейса">
+          <ModelProperties>
+            <StringProperty name="name" value="Статус рейса" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="MSC3700000000000" modelType="StateCondition" name="EN_ROUTE">
+              <ModelProperties>
+                <StringProperty name="name" value="EN_ROUTE" />
+              </ModelProperties>
+            </Model>
+            <Model id="MSC3800000000000" modelType="StateCondition" name="DELAYED (актор SYSTEM)">
+              <ModelProperties>
+                <StringProperty name="name" value="DELAYED (актор SYSTEM)" />
+              </ModelProperties>
+            </Model>
+            <Model id="MTI3900000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU1000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3700000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4000000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU2000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3700000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4100000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU3000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3700000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4200000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3700000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4300000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4400000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU5000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4500000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU6000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI4600000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU7000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC3800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+        <Model id="MLL4700000000000" modelType="LifeLine" name="Диспетчер">
+          <ModelProperties>
+            <StringProperty name="name" value="Диспетчер" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="MSC4800000000000" modelType="StateCondition" name="уведомление формируется">
+              <ModelProperties>
+                <StringProperty name="name" value="уведомление формируется" />
+              </ModelProperties>
+            </Model>
+            <Model id="MSC4900000000000" modelType="StateCondition" name="уведомление доставлено">
+              <ModelProperties>
+                <StringProperty name="name" value="уведомление доставлено" />
+              </ModelProperties>
+            </Model>
+            <Model id="MDC5000000000000" modelType="DurationConstraint" name="{≤ 5 мин (Vision)}">
+              <ModelProperties>
+                <StringProperty name="name" value="{≤ 5 мин (Vision)}" />
+                <ModelRefProperty name="startTime">
+                  <ModelRef id="MTI5100000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endTime">
+                  <ModelRef id="MTI5500000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI5100000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU4000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC4800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI5200000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU5000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC4800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI5300000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU6000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC4800000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI5400000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU6000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC4900000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+            <Model id="MTI5500000000000" modelType="TimeInstance">
+              <ModelProperties>
+                <ModelRefProperty name="timeUnit">
+                  <ModelRef id="MTU7000000000000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="stateCondition">
+                  <ModelRef id="MSC4900000000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+        <Model id="MTM5600000000000" modelType="TimeMessage">
+          <ModelProperties>
+            <ModelRefProperty name="startTime">
+              <ModelRef id="MTI2600000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endTime">
+              <ModelRef id="MTI3200000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Mnote57000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Серая зона — связи нет; на практике это до 3 ч и дольше (Vision 7.2),&#10;  на оси промежуток сжат. Очередь событий хранится в IndexedDB устройства." />
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote58000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Время и координаты подставляются в момент фиксации (@30), а не синхронизации.&#10;  После появления связи PWA отправляет очередь в REST API; clientEventId делает&#10;  повторную отправку идемпотентной (UNIQUE INDEX в коллекции incident)." />
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote59000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="При тяжести HIGH / CRITICAL сервер сразу после приёма выполняет переход&#10;  EN_ROUTE → DELAYED ролью SYSTEM (переход разрешён RequestStatusMachine)." />
+      </ModelProperties>
+    </Model>
+    <Model id="F0b6b3e9bb2dc9d9" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_TL_Field_Proce" name="TL_Field_ProcessView" diagramType="TimingDiagram">
+      <Shapes>
+        <Shape id="Stitle0000000000" shapeType="TextBox" x="40" y="40" width="826" height="52" zorder="2" model="Mtitle0000000000" name="ИС «Караваны» — Timeline Diagram (Process View)&#10;Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3). Ось — секунды">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="826" height="52" />
+        </Shape>
+        <Shape id="STF0000000000000" shapeType="TimingFrame" x="40" y="116" width="1774" height="650" zorder="999" model="MTF0000000000000" name="sd Фиксация инцидента без связи и синхронизация Pip-Boy (UC-19, RL-1, RL-3)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="0vm" value="0" />
+            <IntegerProperty name="1StCdW" value="300" />
+            <IntegerProperty name="lifeLineWidth" value="124" />
+          </DiagramElementProperties>
+          <Lifelines>
+            <Lifeline id="MLL8000000000000">
+              <StateConditions>
+                <StateCondition id="MSC9000000000000" height="40" />
+                <StateCondition id="MSC1000000000000" height="40" />
+              </StateConditions>
+            </Lifeline>
+            <Lifeline id="MLL2000000000000">
+              <StateConditions>
+                <StateCondition id="MSC2100000000000" height="40" />
+                <StateCondition id="MSC2200000000000" height="40" />
+              </StateConditions>
+            </Lifeline>
+            <Lifeline id="MLL3000000000000">
+              <StateConditions>
+                <StateCondition id="MSC3100000000000" height="40" />
+              </StateConditions>
+            </Lifeline>
+            <Lifeline id="MLL3600000000000">
+              <StateConditions>
+                <StateCondition id="MSC3700000000000" height="40" />
+                <StateCondition id="MSC3800000000000" height="40" />
+              </StateConditions>
+            </Lifeline>
+            <Lifeline id="MLL4700000000000">
+              <StateConditions>
+                <StateCondition id="MSC4800000000000" height="40" />
+                <StateCondition id="MSC4900000000000" height="40" />
+              </StateConditions>
+            </Lifeline>
+          </Lifelines>
+          <TimeUnits>
+            <TimeUnit id="MTU1000000000000" width="80" />
+            <TimeUnit id="MTU2000000000000" width="240" />
+            <TimeUnit id="MTU3000000000000" width="80" />
+            <TimeUnit id="MTU4000000000000" width="80" />
+            <TimeUnit id="MTU5000000000000" width="320" />
+            <TimeUnit id="MTU6000000000000" width="400" />
+            <TimeUnit id="MTU7000000000000" width="120" />
+          </TimeUnits>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="100" style="0" />
+        </Shape>
+        <Shape id="Snote57000000000" shapeType="NOTE" x="40" y="796" width="709" height="60" zorder="1" model="Mnote57000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote58000000000" shapeType="NOTE" x="40" y="876" width="769" height="74" zorder="4" model="Mnote58000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote59000000000" shapeType="NOTE" x="40" y="970" width="752" height="60" zorder="3" model="Mnote59000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F3995430eb312c5d" shapeType="Rectangle" x="464" y="141" width="320" height="625" zorder="1000" model="F0b6b3e9bb2dc9d9">
+          <FillColor type="1" color="Cr:238,238,238,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+    </Diagram>
+  </Diagrams>
+</Project>

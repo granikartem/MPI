@@ -1,2 +1,1070 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="COL_UC1_ImplementationView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)&#10;Объекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе"><ModelProperties><StringProperty name="name" value="UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)&#10;Объекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе" /></ModelProperties></Model><Model id="M100000000000000" modelType="InteractionActor" name="d:Диспетчер"><ModelProperties><StringProperty name="name" value="d:Диспетчер" /></ModelProperties></Model><Model id="M200000000000000" modelType="InteractionLifeLine" name="form:RequestForm.tsx"><ModelProperties><StringProperty name="name" value="form:RequestForm.tsx" /></ModelProperties></Model><Model id="M300000000000000" modelType="InteractionLifeLine" name="console:Console.tsx"><ModelProperties><StringProperty name="name" value="console:Console.tsx" /></ModelProperties></Model><Model id="M400000000000000" modelType="InteractionLifeLine" name="api:api.ts (axios)"><ModelProperties><StringProperty name="name" value="api:api.ts (axios)" /></ModelProperties></Model><Model id="M500000000000000" modelType="InteractionLifeLine" name="«@RestController»&#10;c:RequestController"><ModelProperties><StringProperty name="name" value="«@RestController»&#10;c:RequestController" /></ModelProperties></Model><Model id="M600000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;s:RequestService"><ModelProperties><StringProperty name="name" value="«@Service»&#10;s:RequestService" /></ModelProperties></Model><Model id="M700000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;eta:EtaService"><ModelProperties><StringProperty name="name" value="«@Service»&#10;eta:EtaService" /></ModelProperties></Model><Model id="M800000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;st:RequestStatusService"><ModelProperties><StringProperty name="name" value="«@Service»&#10;st:RequestStatusService" /></ModelProperties></Model><Model id="M900000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;repo:CaravanRequestRepository"><ModelProperties><StringProperty name="name" value="«JpaRepository»&#10;repo:CaravanRequestRepository" /></ModelProperties></Model><Model id="M10x100000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;hRepo:RequestStatusHistoryRepository"><ModelProperties><StringProperty name="name" value="«JpaRepository»&#10;hRepo:RequestStatusHistoryRepository" /></ModelProperties></Model><Model id="M110000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;orgRepo:OrganizationRepository"><ModelProperties><StringProperty name="name" value="«JpaRepository»&#10;orgRepo:OrganizationRepository" /></ModelProperties></Model><Model id="M120000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;routeRepo:RouteRepository"><ModelProperties><StringProperty name="name" value="«JpaRepository»&#10;routeRepo:RouteRepository" /></ModelProperties></Model><Model id="M130000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;cpRepo:CheckpointRepository"><ModelProperties><StringProperty name="name" value="«JpaRepository»&#10;cpRepo:CheckpointRepository" /></ModelProperties></Model><Model id="M140000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;segRepo:RouteSegmentRepository"><ModelProperties><StringProperty name="name" value="«JpaRepository»&#10;segRepo:RouteSegmentRepository" /></ModelProperties></Model><Model id="M150000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;risk:RiskService"><ModelProperties><StringProperty name="name" value="«@Service»&#10;risk:RiskService" /></ModelProperties></Model><Model id="M160000000000000" modelType="InteractionLifeLine" name="«@Component»&#10;intel:WastelandIntelClient"><ModelProperties><StringProperty name="name" value="«@Component»&#10;intel:WastelandIntelClient" /></ModelProperties></Model><Model id="M170000000000000" modelType="InteractionLifeLine" name="«MongoRepository»&#10;raRepo:RiskAssessmentRepository"><ModelProperties><StringProperty name="name" value="«MongoRepository»&#10;raRepo:RiskAssessmentRepository" /></ModelProperties></Model><Model id="M180000000000000" modelType="InteractionLifeLine" name="«database»&#10;pg:PostgreSQL 16"><ModelProperties><StringProperty name="name" value="«database»&#10;pg:PostgreSQL 16" /></ModelProperties></Model><Model id="M190000000000000" modelType="InteractionLifeLine" name="«database»&#10;mg:MongoDB 7"><ModelProperties><StringProperty name="name" value="«database»&#10;mg:MongoDB 7" /></ModelProperties></Model><Model id="M20x300000000000" modelType="InteractionLifeLine" name="«external system»&#10;wi:Wasteland Intel"><ModelProperties><StringProperty name="name" value="«external system»&#10;wi:Wasteland Intel" /></ModelProperties></Model><Model id="Ml21000000000000" modelType="InteractionLifeLineLink" name="1: submit(e: FormEvent)"><ModelProperties><StringProperty name="name" value="1: submit(e: FormEvent)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml22000000000000" modelType="InteractionLifeLineLink" name="1.1: created = createRequest(body: CreateRequestBody)"><ModelProperties><StringProperty name="name" value="1.1: created = createRequest(body: CreateRequestBody)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml23000000000000" modelType="InteractionLifeLineLink" name="1.1.1: POST /api/requests : HTTP 201 | 400"><ModelProperties><StringProperty name="name" value="1.1.1: POST /api/requests : HTTP 201 | 400" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml24000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1 [routeId != null]: create(organizationId, origin, destination,&#10;departureDate, cargoDescription, cargoValueCaps, routeId)&#10;1.1.1.1 [segments != null]: createWithManualRoute(..., routeName, specs)"><ModelProperties><StringProperty name="name" value="1.1.1.1 [routeId != null]: create(organizationId, origin, destination,&#10;departureDate, cargoDescription, cargoValueCaps, routeId)&#10;1.1.1.1 [segments != null]: createWithManualRoute(..., routeName, specs)" /><ModelRefProperty name="from"><ModelRef id="M500000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml25000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.1: findById(organizationId) : Optional&lt;Organization&gt;"><ModelProperties><StringProperty name="name" value="1.1.1.1.1: findById(organizationId) : Optional&lt;Organization&gt;" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M110000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml26000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.2 [шаблон]: findById(routeId) : Optional&lt;Route&gt;&#10;1.1.1.1.2 [ручной]: save(new Route(nextRouteCode(), name, false))"><ModelProperties><StringProperty name="name" value="1.1.1.1.2 [шаблон]: findById(routeId) : Optional&lt;Route&gt;&#10;1.1.1.1.2 [ручной]: save(new Route(nextRouteCode(), name, false))" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M120000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml27000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.3 [ручной] *[для каждого участка]:&#10;findByCode(code) : Optional&lt;Checkpoint&gt;"><ModelProperties><StringProperty name="name" value="1.1.1.1.3 [ручной] *[для каждого участка]:&#10;findByCode(code) : Optional&lt;Checkpoint&gt;" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M130000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml28000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.4 [ручной]: saveAll(segments)"><ModelProperties><StringProperty name="name" value="1.1.1.1.4 [ручной]: saveAll(segments)" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M140000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml29000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.5: etaHours = computeHours(route)"><ModelProperties><StringProperty name="name" value="1.1.1.1.5: etaHours = computeHours(route)" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml30000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.6: risk = calculate(route, cargoValueCaps)&#10;1.1.1.1.8: saveAssessment(saved.getId(), risk)"><ModelProperties><StringProperty name="name" value="1.1.1.1.6: risk = calculate(route, cargoValueCaps)&#10;1.1.1.1.8: saveAssessment(saved.getId(), risk)" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M150000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml31000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.6.1: report = fetchThreats(segmentKeys)"><ModelProperties><StringProperty name="name" value="1.1.1.1.6.1: report = fetchThreats(segmentKeys)" /><ModelRefProperty name="from"><ModelRef id="M150000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M160000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml32000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.6.1.1: GET /threats?segments=…&#10;(connect / read timeout 2000 мс)"><ModelProperties><StringProperty name="name" value="1.1.1.1.6.1.1: GET /threats?segments=…&#10;(connect / read timeout 2000 мс)" /><ModelRefProperty name="from"><ModelRef id="M160000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M20x300000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml33000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.7: saved = save(request)  // status = DRAFT"><ModelProperties><StringProperty name="name" value="1.1.1.1.7: saved = save(request)  // status = DRAFT" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M900000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml34000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.8.1: save(new RiskAssessment(requestId, risk, now))"><ModelProperties><StringProperty name="name" value="1.1.1.1.8.1: save(new RiskAssessment(requestId, risk, now))" /><ModelRefProperty name="from"><ModelRef id="M150000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M170000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml35000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.9: recordCreation(saved)"><ModelProperties><StringProperty name="name" value="1.1.1.1.9: recordCreation(saved)" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml36000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.9.1: save(new RequestStatusHistory(saved, null,&#10;DRAFT, DISPATCHER, null, &quot;Заявка создана&quot;))"><ModelProperties><StringProperty name="name" value="1.1.1.1.9.1: save(new RequestStatusHistory(saved, null,&#10;DRAFT, DISPATCHER, null, &quot;Заявка создана&quot;))" /><ModelRefProperty name="from"><ModelRef id="M800000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M10x100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml37000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.1.1: SELECT … FROM organization WHERE id = ?"><ModelProperties><StringProperty name="name" value="1.1.1.1.1.1: SELECT … FROM organization WHERE id = ?" /><ModelRefProperty name="from"><ModelRef id="M110000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M180000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml38000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.2.1: SELECT … FROM route, route_segment&#10;| INSERT INTO route"><ModelProperties><StringProperty name="name" value="1.1.1.1.2.1: SELECT … FROM route, route_segment&#10;| INSERT INTO route" /><ModelRefProperty name="from"><ModelRef id="M120000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M180000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml39000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.3.1: SELECT … FROM checkpoint WHERE code = ?"><ModelProperties><StringProperty name="name" value="1.1.1.1.3.1: SELECT … FROM checkpoint WHERE code = ?" /><ModelRefProperty name="from"><ModelRef id="M130000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M180000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml40000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.4.1: INSERT INTO route_segment"><ModelProperties><StringProperty name="name" value="1.1.1.1.4.1: INSERT INTO route_segment" /><ModelRefProperty name="from"><ModelRef id="M140000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M180000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml41000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.7.1: INSERT INTO caravan_request"><ModelProperties><StringProperty name="name" value="1.1.1.1.7.1: INSERT INTO caravan_request" /><ModelRefProperty name="from"><ModelRef id="M900000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M180000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml42000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.8.1.1: db.risk_assessment.insertOne(...)"><ModelProperties><StringProperty name="name" value="1.1.1.1.8.1.1: db.risk_assessment.insertOne(...)" /><ModelRefProperty name="from"><ModelRef id="M170000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M190000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml43000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.9.1.1: INSERT INTO request_status_history"><ModelProperties><StringProperty name="name" value="1.1.1.1.9.1.1: INSERT INTO request_status_history" /><ModelRefProperty name="from"><ModelRef id="M10x100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M180000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml44000000000000" modelType="InteractionLifeLineLink" name="1.2: onCreated(created)"><ModelProperties><StringProperty name="name" value="1.2: onCreated(created)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml45000000000000" modelType="InteractionLifeLineLink" name="1.2.1 (асинхронно): getRegistry(organizationId, query)&#10;GET /api/requests/registry"><ModelProperties><StringProperty name="name" value="1.2.1 (асинхронно): getRegistry(organizationId, query)&#10;GET /api/requests/registry" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote46000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="[организация, маршрут или контрольная точка не найдены] →&#10;  IllegalArgumentException → handleBadRequest → HTTP 400,&#10;  @Transactional откатывает INSERT.&#10;  [Wasteland Intel не ответил] → RiskResult.unavailable(): risk_status = NA" /></ModelProperties></Model><Model id="Anote46000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote46000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model></Models><Diagrams><Diagram id="D_COL_UC1_Implem" name="COL_UC1_ImplementationView" diagramType="CommunicationDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="1669" y="58" width="893" height="52" zorder="21" model="Mtitle0000000000" name="UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)&#10;Объекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="893" height="52" /></Shape><Shape id="S100000000000000" shapeType="CommunicationActor" x="446" y="127" width="160" height="76" zorder="4" model="M100000000000000" name="d:Диспетчер"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="160" height="76" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="CommunicationLifeLine" x="405" y="311" width="221" height="60" zorder="7" model="M200000000000000" name="form:RequestForm.tsx"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="221" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="CommunicationLifeLine" x="333" y="447" width="201" height="60" zorder="2" model="M300000000000000" name="console:Console.tsx"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="201" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="CommunicationLifeLine" x="538" y="607" width="168" height="60" zorder="1" model="M400000000000000" name="api:api.ts (axios)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="168" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="CommunicationLifeLine" x="522" y="769" width="199" height="76" zorder="11" model="M500000000000000" name="«@RestController»&#10;c:RequestController"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="199" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="CommunicationLifeLine" x="1063" y="975" width="179" height="76" zorder="8" model="M600000000000000" name="«@Service»&#10;s:RequestService"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="179" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="CommunicationLifeLine" x="72" y="1182" width="160" height="76" zorder="3" model="M700000000000000" name="«@Service»&#10;eta:EtaService"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="160" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S800000000000000" shapeType="CommunicationLifeLine" x="443" y="1182" width="242" height="76" zorder="12" model="M800000000000000" name="«@Service»&#10;st:RequestStatusService"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="242" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S900000000000000" shapeType="CommunicationLifeLine" x="921" y="1182" width="315" height="76" zorder="17" model="M900000000000000" name="«JpaRepository»&#10;repo:CaravanRequestRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="315" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S10x200000000000" shapeType="CommunicationLifeLine" x="722" y="1380" width="379" height="76" zorder="20" model="M10x100000000000" name="«JpaRepository»&#10;hRepo:RequestStatusHistoryRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="379" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S110000000000000" shapeType="CommunicationLifeLine" x="2953" y="1182" width="315" height="76" zorder="16" model="M110000000000000" name="«JpaRepository»&#10;orgRepo:OrganizationRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="315" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S120000000000000" shapeType="CommunicationLifeLine" x="3340" y="1182" width="271" height="76" zorder="14" model="M120000000000000" name="«JpaRepository»&#10;routeRepo:RouteRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="271" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S130000000000000" shapeType="CommunicationLifeLine" x="3639" y="1182" width="294" height="76" zorder="15" model="M130000000000000" name="«JpaRepository»&#10;cpRepo:CheckpointRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="294" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S140000000000000" shapeType="CommunicationLifeLine" x="3960" y="1182" width="339" height="76" zorder="19" model="M140000000000000" name="«JpaRepository»&#10;segRepo:RouteSegmentRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="339" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S150000000000000" shapeType="CommunicationLifeLine" x="1942" y="1182" width="164" height="76" zorder="6" model="M150000000000000" name="«@Service»&#10;risk:RiskService"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="164" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S160000000000000" shapeType="CommunicationLifeLine" x="1940" y="1380" width="249" height="76" zorder="13" model="M160000000000000" name="«@Component»&#10;intel:WastelandIntelClient"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="249" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S170000000000000" shapeType="CommunicationLifeLine" x="2304" y="1380" width="339" height="76" zorder="18" model="M170000000000000" name="«MongoRepository»&#10;raRepo:RiskAssessmentRepository"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="339" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S180000000000000" shapeType="CommunicationLifeLine" x="2762" y="1587" width="187" height="76" zorder="10" model="M180000000000000" name="«database»&#10;pg:PostgreSQL 16"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="187" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S190000000000000" shapeType="CommunicationLifeLine" x="2575" y="1587" width="161" height="76" zorder="5" model="M190000000000000" name="«database»&#10;mg:MongoDB 7"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="161" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S20x400000000000" shapeType="CommunicationLifeLine" x="2362" y="1587" width="185" height="76" zorder="9" model="M20x300000000000" name="«external system»&#10;wi:Wasteland Intel"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="185" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="Snote46000000000" shapeType="NOTE" x="1243" y="1016" width="673" height="259" zorder="22" model="Mnote46000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="Cl21000000000000" shapeType="InteractionLifeLineLink" model="Ml21000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="518" y="235" width="233" height="23" /></Connector><Connector id="Cl22000000000000" shapeType="InteractionLifeLineLink" model="Ml22000000000000" from="S200000000000000" to="S400000000000000"><Caption visible="true" side="None" x="807" y="465" width="537" height="23" /></Connector><Connector id="Cl23000000000000" shapeType="InteractionLifeLineLink" model="Ml23000000000000" from="S400000000000000" to="S500000000000000"><Caption visible="true" side="None" x="625" y="693" width="426" height="23" /></Connector><Connector id="Cl24000000000000" shapeType="InteractionLifeLineLink" model="Ml24000000000000" from="S500000000000000" to="S600000000000000"><Caption visible="true" side="None" x="985" y="877" width="730" height="70" /></Connector><Connector id="Cl25000000000000" shapeType="InteractionLifeLineLink" model="Ml25000000000000" from="S600000000000000" to="S110000000000000"><Caption visible="true" side="None" x="2519" y="1095" width="609" height="23" /></Connector><Connector id="Cl26000000000000" shapeType="InteractionLifeLineLink" model="Ml26000000000000" from="S600000000000000" to="S120000000000000"><Caption visible="true" side="None" x="3093" y="1083" width="659" height="46" /></Connector><Connector id="Cl27000000000000" shapeType="InteractionLifeLineLink" model="Ml27000000000000" from="S600000000000000" to="S130000000000000"><Caption visible="true" side="None" x="3714" y="1083" width="426" height="46" /></Connector><Connector id="Cl28000000000000" shapeType="InteractionLifeLineLink" model="Ml28000000000000" from="S600000000000000" to="S140000000000000"><Caption visible="true" side="None" x="4117" y="1095" width="375" height="23" /></Connector><Connector id="Cl29000000000000" shapeType="InteractionLifeLineLink" model="Ml29000000000000" from="S600000000000000" to="S700000000000000"><Caption visible="true" side="None" x="350" y="1095" width="416" height="23" /></Connector><Connector id="Cl30000000000000" shapeType="InteractionLifeLineLink" model="Ml30000000000000" from="S600000000000000" to="S150000000000000" /><Connector id="Cl31000000000000" shapeType="InteractionLifeLineLink" model="Ml31000000000000" from="S150000000000000" to="S160000000000000"><Caption visible="true" side="None" x="1969" y="1318" width="477" height="23" /></Connector><Connector id="Cl32000000000000" shapeType="InteractionLifeLineLink" model="Ml32000000000000" from="S160000000000000" to="S20x400000000000"><Caption visible="true" side="None" x="715" y="1488" width="385" height="46" /></Connector><Connector id="Cl33000000000000" shapeType="InteractionLifeLineLink" model="Ml33000000000000" from="S600000000000000" to="S900000000000000"><Caption visible="true" side="None" x="1133" y="1095" width="517" height="23" /></Connector><Connector id="Cl34000000000000" shapeType="InteractionLifeLineLink" model="Ml34000000000000" from="S150000000000000" to="S170000000000000"><Caption visible="true" side="None" x="2433" y="1318" width="598" height="23" /></Connector><Connector id="Cl35000000000000" shapeType="InteractionLifeLineLink" model="Ml35000000000000" from="S600000000000000" to="S800000000000000"><Caption visible="true" side="None" x="833" y="1095" width="324" height="23" /></Connector><Connector id="Cl36000000000000" shapeType="InteractionLifeLineLink" model="Ml36000000000000" from="S800000000000000" to="S10x200000000000"><Caption visible="true" side="None" x="792" y="1306" width="558" height="46" /></Connector><Connector id="Cl37000000000000" shapeType="InteractionLifeLineLink" model="Ml37000000000000" from="S110000000000000" to="S180000000000000"><Caption visible="true" side="None" x="2990" y="1409" width="527" height="23" /></Connector><Connector id="Cl38000000000000" shapeType="InteractionLifeLineLink" model="Ml38000000000000" from="S120000000000000" to="S180000000000000"><Caption visible="true" side="None" x="3511" y="1397" width="477" height="46" /></Connector><Connector id="Cl39000000000000" shapeType="InteractionLifeLineLink" model="Ml39000000000000" from="S130000000000000" to="S180000000000000"><Caption visible="true" side="None" x="3976" y="1409" width="527" height="23" /></Connector><Connector id="Cl40000000000000" shapeType="InteractionLifeLineLink" model="Ml40000000000000" from="S140000000000000" to="S180000000000000"><Caption visible="true" side="None" x="4508" y="1409" width="385" height="23" /></Connector><Connector id="Cl41000000000000" shapeType="InteractionLifeLineLink" model="Ml41000000000000" from="S900000000000000" to="S180000000000000"><Caption visible="true" side="None" x="1555" y="1409" width="406" height="23" /></Connector><Connector id="Cl42000000000000" shapeType="InteractionLifeLineLink" model="Ml42000000000000" from="S170000000000000" to="S190000000000000"><Caption visible="true" side="None" x="2548" y="1499" width="487" height="23" /></Connector><Connector id="Cl43000000000000" shapeType="InteractionLifeLineLink" model="Ml43000000000000" from="S10x200000000000" to="S180000000000000"><Caption visible="true" side="None" x="1092" y="1499" width="497" height="23" /></Connector><Connector id="Cl44000000000000" shapeType="InteractionLifeLineLink" model="Ml44000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="377" y="397" width="233" height="23" /></Connector><Connector id="Cl45000000000000" shapeType="InteractionLifeLineLink" model="Ml45000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="363" y="534" width="548" height="46" /></Connector><Connector id="CAnote4600000000" shapeType="Anchor" model="Anote46000000000" from="Snote46000000000" to="S600000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="COL_UC1_ImplementationView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="Mtitle0000000000" modelType="NOTE" name="UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)&#10;Объекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)&#10;Объекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе" />
+      </ModelProperties>
+    </Model>
+    <Model id="M100000000000000" modelType="InteractionActor" name="d:Диспетчер">
+      <ModelProperties>
+        <StringProperty name="name" value="d:Диспетчер" />
+      </ModelProperties>
+    </Model>
+    <Model id="M200000000000000" modelType="InteractionLifeLine" name="form:RequestForm.tsx">
+      <ModelProperties>
+        <StringProperty name="name" value="form:RequestForm.tsx" />
+      </ModelProperties>
+    </Model>
+    <Model id="M300000000000000" modelType="InteractionLifeLine" name="console:Console.tsx">
+      <ModelProperties>
+        <StringProperty name="name" value="console:Console.tsx" />
+      </ModelProperties>
+    </Model>
+    <Model id="M400000000000000" modelType="InteractionLifeLine" name="api:api.ts (axios)">
+      <ModelProperties>
+        <StringProperty name="name" value="api:api.ts (axios)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M500000000000000" modelType="InteractionLifeLine" name="«@RestController»&#10;c:RequestController">
+      <ModelProperties>
+        <StringProperty name="name" value="«@RestController»&#10;c:RequestController" />
+      </ModelProperties>
+    </Model>
+    <Model id="M600000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;s:RequestService">
+      <ModelProperties>
+        <StringProperty name="name" value="«@Service»&#10;s:RequestService" />
+      </ModelProperties>
+    </Model>
+    <Model id="M700000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;eta:EtaService">
+      <ModelProperties>
+        <StringProperty name="name" value="«@Service»&#10;eta:EtaService" />
+      </ModelProperties>
+    </Model>
+    <Model id="M800000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;st:RequestStatusService">
+      <ModelProperties>
+        <StringProperty name="name" value="«@Service»&#10;st:RequestStatusService" />
+      </ModelProperties>
+    </Model>
+    <Model id="M900000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;repo:CaravanRequestRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«JpaRepository»&#10;repo:CaravanRequestRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2d88ef3749d75ca" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M10x100000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;hRepo:RequestStatusHistoryRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«JpaRepository»&#10;hRepo:RequestStatusHistoryRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2d88ef3749d75ca" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M110000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;orgRepo:OrganizationRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«JpaRepository»&#10;orgRepo:OrganizationRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2d88ef3749d75ca" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M120000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;routeRepo:RouteRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«JpaRepository»&#10;routeRepo:RouteRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2d88ef3749d75ca" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M130000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;cpRepo:CheckpointRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«JpaRepository»&#10;cpRepo:CheckpointRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2d88ef3749d75ca" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M140000000000000" modelType="InteractionLifeLine" name="«JpaRepository»&#10;segRepo:RouteSegmentRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«JpaRepository»&#10;segRepo:RouteSegmentRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2d88ef3749d75ca" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M150000000000000" modelType="InteractionLifeLine" name="«@Service»&#10;risk:RiskService">
+      <ModelProperties>
+        <StringProperty name="name" value="«@Service»&#10;risk:RiskService" />
+      </ModelProperties>
+    </Model>
+    <Model id="M160000000000000" modelType="InteractionLifeLine" name="«@Component»&#10;intel:WastelandIntelClient">
+      <ModelProperties>
+        <StringProperty name="name" value="«@Component»&#10;intel:WastelandIntelClient" />
+      </ModelProperties>
+    </Model>
+    <Model id="M170000000000000" modelType="InteractionLifeLine" name="«MongoRepository»&#10;raRepo:RiskAssessmentRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="«MongoRepository»&#10;raRepo:RiskAssessmentRepository" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F2fdfa432c1ac849" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M180000000000000" modelType="InteractionLifeLine" name="«database»&#10;pg:PostgreSQL 16">
+      <ModelProperties>
+        <StringProperty name="name" value="«database»&#10;pg:PostgreSQL 16" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F027b6dfb3811e9e" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M190000000000000" modelType="InteractionLifeLine" name="«database»&#10;mg:MongoDB 7">
+      <ModelProperties>
+        <StringProperty name="name" value="«database»&#10;mg:MongoDB 7" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="F027b6dfb3811e9e" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M20x300000000000" modelType="InteractionLifeLine" name="«external system»&#10;wi:Wasteland Intel">
+      <ModelProperties>
+        <StringProperty name="name" value="«external system»&#10;wi:Wasteland Intel" />
+      </ModelProperties>
+    </Model>
+    <Model id="Ml21000000000000" modelType="InteractionLifeLineLink" name="1: submit(e: FormEvent)">
+      <ModelProperties>
+        <StringProperty name="name" value="1: submit(e: FormEvent)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fc9643c515f046d5" modelType="Message" name="submit(e: FormEvent)">
+          <ModelProperties>
+            <StringProperty name="name" value="submit(e: FormEvent)" />
+            <StringProperty name="sequenceNumber" value="1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M100000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M200000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml22000000000000" modelType="InteractionLifeLineLink" name="1.1: created = createRequest(body: CreateRequestBody)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1: created = createRequest(body: CreateRequestBody)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F20397b86af4e887" modelType="Message" name="created = createRequest(body: CreateRequestBody)">
+          <ModelProperties>
+            <StringProperty name="name" value="created = createRequest(body: CreateRequestBody)" />
+            <StringProperty name="sequenceNumber" value="1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M200000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M400000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml23000000000000" modelType="InteractionLifeLineLink" name="1.1.1: POST /api/requests : HTTP 201 | 400">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1: POST /api/requests : HTTP 201 | 400" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F7a7c72b8589f6cd" modelType="Message" name="POST /api/requests : HTTP 201 | 400">
+          <ModelProperties>
+            <StringProperty name="name" value="POST /api/requests : HTTP 201 | 400" />
+            <StringProperty name="sequenceNumber" value="1.1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M400000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M500000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml24000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1 [routeId != null]: create(organizationId, origin, destination,&#10;departureDate, cargoDescription, cargoValueCaps, routeId)&#10;1.1.1.1 [segments != null]: createWithManualRoute(..., routeName, specs)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1 [routeId != null]: create(organizationId, origin, destination,&#10;departureDate, cargoDescription, cargoValueCaps, routeId)&#10;1.1.1.1 [segments != null]: createWithManualRoute(..., routeName, specs)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels />
+    </Model>
+    <Model id="Ml25000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.1: findById(organizationId) : Optional&lt;Organization&gt;">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.1: findById(organizationId) : Optional&lt;Organization&gt;" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M110000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Ffe1c0214bf2a12b" modelType="Message" name="findById(organizationId) : Optional&lt;Organization&gt;">
+          <ModelProperties>
+            <StringProperty name="name" value="findById(organizationId) : Optional&lt;Organization&gt;" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M600000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M110000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml26000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.2 [шаблон]: findById(routeId) : Optional&lt;Route&gt;&#10;1.1.1.1.2 [ручной]: save(new Route(nextRouteCode(), name, false))">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.2 [шаблон]: findById(routeId) : Optional&lt;Route&gt;&#10;1.1.1.1.2 [ручной]: save(new Route(nextRouteCode(), name, false))" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M120000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels />
+    </Model>
+    <Model id="Ml27000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.3 [ручной] *[для каждого участка]:&#10;findByCode(code) : Optional&lt;Checkpoint&gt;">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.3 [ручной] *[для каждого участка]:&#10;findByCode(code) : Optional&lt;Checkpoint&gt;" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M130000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels />
+    </Model>
+    <Model id="Ml28000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.4 [ручной]: saveAll(segments)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.4 [ручной]: saveAll(segments)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M140000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels />
+    </Model>
+    <Model id="Ml29000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.5: etaHours = computeHours(route)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.5: etaHours = computeHours(route)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F3cca4ba64eaf3a5" modelType="Message" name="etaHours = computeHours(route)">
+          <ModelProperties>
+            <StringProperty name="name" value="etaHours = computeHours(route)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.5" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M600000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M700000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml30000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.6: risk = calculate(route, cargoValueCaps)&#10;1.1.1.1.8: saveAssessment(saved.getId(), risk)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.6: risk = calculate(route, cargoValueCaps)&#10;1.1.1.1.8: saveAssessment(saved.getId(), risk)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M150000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fc1f8dcb891354e9" modelType="Message" name="risk = calculate(route, cargoValueCaps)">
+          <ModelProperties>
+            <StringProperty name="name" value="risk = calculate(route, cargoValueCaps)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.6" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M600000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M150000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+        <Model id="F409e6f3a2ab67da" modelType="Message" name="saveAssessment(saved.getId(), risk)">
+          <ModelProperties>
+            <StringProperty name="name" value="saveAssessment(saved.getId(), risk)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.8" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M600000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M150000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml31000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.6.1: report = fetchThreats(segmentKeys)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.6.1: report = fetchThreats(segmentKeys)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M150000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M160000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F9f624617ecd2850" modelType="Message" name="report = fetchThreats(segmentKeys)">
+          <ModelProperties>
+            <StringProperty name="name" value="report = fetchThreats(segmentKeys)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.6.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M150000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M160000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml32000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.6.1.1: GET /threats?segments=…&#10;(connect / read timeout 2000 мс)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.6.1.1: GET /threats?segments=…&#10;(connect / read timeout 2000 мс)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M160000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M20x300000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F4ad39435ed27a14" modelType="Message" name="GET /threats?segments=…&#10;(connect / read timeout 2000 мс)">
+          <ModelProperties>
+            <StringProperty name="name" value="GET /threats?segments=…&#10;(connect / read timeout 2000 мс)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.6.1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M160000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M20x300000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml33000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.7: saved = save(request)  // status = DRAFT">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.7: saved = save(request)  // status = DRAFT" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M900000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F0d02ccdfd2f0d1b" modelType="Message" name="saved = save(request)  // status = DRAFT">
+          <ModelProperties>
+            <StringProperty name="name" value="saved = save(request)  // status = DRAFT" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.7" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M600000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M900000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml34000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.8.1: save(new RiskAssessment(requestId, risk, now))">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.8.1: save(new RiskAssessment(requestId, risk, now))" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M150000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M170000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fb7a3ac9a1c330f8" modelType="Message" name="save(new RiskAssessment(requestId, risk, now))">
+          <ModelProperties>
+            <StringProperty name="name" value="save(new RiskAssessment(requestId, risk, now))" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.8.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M150000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M170000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml35000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.9: recordCreation(saved)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.9: recordCreation(saved)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F019d265b0008621" modelType="Message" name="recordCreation(saved)">
+          <ModelProperties>
+            <StringProperty name="name" value="recordCreation(saved)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.9" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M600000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M800000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml36000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.9.1: save(new RequestStatusHistory(saved, null,&#10;DRAFT, DISPATCHER, null, &quot;Заявка создана&quot;))">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.9.1: save(new RequestStatusHistory(saved, null,&#10;DRAFT, DISPATCHER, null, &quot;Заявка создана&quot;))" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M10x100000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F3b9652c06b19cf3" modelType="Message" name="save(new RequestStatusHistory(saved, null,&#10;DRAFT, DISPATCHER, null, &quot;Заявка создана&quot;))">
+          <ModelProperties>
+            <StringProperty name="name" value="save(new RequestStatusHistory(saved, null,&#10;DRAFT, DISPATCHER, null, &quot;Заявка создана&quot;))" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.9.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M800000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M10x100000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml37000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.1.1: SELECT … FROM organization WHERE id = ?">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.1.1: SELECT … FROM organization WHERE id = ?" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M110000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M180000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fbd9ed29db7d5d5d" modelType="Message" name="SELECT … FROM organization WHERE id = ?">
+          <ModelProperties>
+            <StringProperty name="name" value="SELECT … FROM organization WHERE id = ?" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M110000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M180000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml38000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.2.1: SELECT … FROM route, route_segment&#10;| INSERT INTO route">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.2.1: SELECT … FROM route, route_segment&#10;| INSERT INTO route" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M120000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M180000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F48de2c42f64fc2e" modelType="Message" name="SELECT … FROM route, route_segment&#10;| INSERT INTO route">
+          <ModelProperties>
+            <StringProperty name="name" value="SELECT … FROM route, route_segment&#10;| INSERT INTO route" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.2.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M120000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M180000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml39000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.3.1: SELECT … FROM checkpoint WHERE code = ?">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.3.1: SELECT … FROM checkpoint WHERE code = ?" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M130000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M180000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fdc45d94593f3568" modelType="Message" name="SELECT … FROM checkpoint WHERE code = ?">
+          <ModelProperties>
+            <StringProperty name="name" value="SELECT … FROM checkpoint WHERE code = ?" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.3.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M130000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M180000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml40000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.4.1: INSERT INTO route_segment">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.4.1: INSERT INTO route_segment" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M140000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M180000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fcdf0e0fffcee489" modelType="Message" name="INSERT INTO route_segment">
+          <ModelProperties>
+            <StringProperty name="name" value="INSERT INTO route_segment" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.4.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M140000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M180000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml41000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.7.1: INSERT INTO caravan_request">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.7.1: INSERT INTO caravan_request" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M900000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M180000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F73b647185b24460" modelType="Message" name="INSERT INTO caravan_request">
+          <ModelProperties>
+            <StringProperty name="name" value="INSERT INTO caravan_request" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.7.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M900000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M180000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml42000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.8.1.1: db.risk_assessment.insertOne(...)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.8.1.1: db.risk_assessment.insertOne(...)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M170000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M190000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fd971a4b5846bace" modelType="Message" name="db.risk_assessment.insertOne(...)">
+          <ModelProperties>
+            <StringProperty name="name" value="db.risk_assessment.insertOne(...)" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.8.1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M170000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M190000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml43000000000000" modelType="InteractionLifeLineLink" name="1.1.1.1.9.1.1: INSERT INTO request_status_history">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1.1.9.1.1: INSERT INTO request_status_history" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M10x100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M180000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="F49452df2e8b1be9" modelType="Message" name="INSERT INTO request_status_history">
+          <ModelProperties>
+            <StringProperty name="name" value="INSERT INTO request_status_history" />
+            <StringProperty name="sequenceNumber" value="1.1.1.1.9.1.1" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M10x100000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M180000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml44000000000000" modelType="InteractionLifeLineLink" name="1.2: onCreated(created)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.2: onCreated(created)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="Fe8d9404b7e3f68c" modelType="Message" name="onCreated(created)">
+          <ModelProperties>
+            <StringProperty name="name" value="onCreated(created)" />
+            <StringProperty name="sequenceNumber" value="1.2" />
+            <ModelRefProperty name="from">
+              <ModelRef id="M200000000000000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="to">
+              <ModelRef id="M300000000000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="Ml45000000000000" modelType="InteractionLifeLineLink" name="1.2.1 (асинхронно): getRegistry(organizationId, query)&#10;GET /api/requests/registry">
+      <ModelProperties>
+        <StringProperty name="name" value="1.2.1 (асинхронно): getRegistry(organizationId, query)&#10;GET /api/requests/registry" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels />
+    </Model>
+    <Model id="Mnote46000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="[организация, маршрут или контрольная точка не найдены] →&#10;  IllegalArgumentException → handleBadRequest → HTTP 400,&#10;  @Transactional откатывает INSERT.&#10;  [Wasteland Intel не ответил] → RiskResult.unavailable(): risk_status = NA" />
+      </ModelProperties>
+    </Model>
+    <Model id="Anote46000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="Mnote46000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F2d88ef3749d75ca" modelType="Stereotype" name="JpaRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="JpaRepository" />
+        <StringProperty name="baseType" value="InteractionLifeLine" />
+      </ModelProperties>
+    </Model>
+    <Model id="F2fdfa432c1ac849" modelType="Stereotype" name="MongoRepository">
+      <ModelProperties>
+        <StringProperty name="name" value="MongoRepository" />
+        <StringProperty name="baseType" value="InteractionLifeLine" />
+      </ModelProperties>
+    </Model>
+    <Model id="F027b6dfb3811e9e" modelType="Stereotype" name="database">
+      <ModelProperties>
+        <StringProperty name="name" value="database" />
+        <StringProperty name="baseType" value="InteractionLifeLine" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_COL_UC1_Implem" name="COL_UC1_ImplementationView" diagramType="CommunicationDiagram">
+      <Shapes>
+        <Shape id="Stitle0000000000" shapeType="TextBox" x="1669" y="58" width="893" height="52" zorder="21" model="Mtitle0000000000" name="UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)&#10;Объекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="893" height="52" />
+        </Shape>
+        <Shape id="S100000000000000" shapeType="CommunicationActor" x="446" y="127" width="160" height="76" zorder="3" model="M100000000000000" name="d:Диспетчер">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="160" height="76" />
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S200000000000000" shapeType="CommunicationLifeLine" x="405" y="311" width="221" height="60" zorder="7" model="M200000000000000" name="form:RequestForm.tsx">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="221" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S300000000000000" shapeType="CommunicationLifeLine" x="333" y="447" width="201" height="60" zorder="2" model="M300000000000000" name="console:Console.tsx">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="201" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S400000000000000" shapeType="CommunicationLifeLine" x="538" y="607" width="168" height="60" zorder="1" model="M400000000000000" name="api:api.ts (axios)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="168" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S500000000000000" shapeType="CommunicationLifeLine" x="522" y="769" width="199" height="76" zorder="11" model="M500000000000000" name="«@RestController»&#10;c:RequestController">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="199" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S600000000000000" shapeType="CommunicationLifeLine" x="1063" y="975" width="179" height="76" zorder="8" model="M600000000000000" name="«@Service»&#10;s:RequestService">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="179" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S700000000000000" shapeType="CommunicationLifeLine" x="72" y="1182" width="160" height="76" zorder="4" model="M700000000000000" name="«@Service»&#10;eta:EtaService">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="160" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S800000000000000" shapeType="CommunicationLifeLine" x="443" y="1182" width="242" height="76" zorder="12" model="M800000000000000" name="«@Service»&#10;st:RequestStatusService">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="242" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S900000000000000" shapeType="CommunicationLifeLine" x="921" y="1182" width="315" height="76" zorder="16" model="M900000000000000" name="«JpaRepository»&#10;repo:CaravanRequestRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="315" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S10x200000000000" shapeType="CommunicationLifeLine" x="722" y="1380" width="379" height="76" zorder="20" model="M10x100000000000" name="«JpaRepository»&#10;hRepo:RequestStatusHistoryRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="379" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S110000000000000" shapeType="CommunicationLifeLine" x="2953" y="1182" width="315" height="76" zorder="17" model="M110000000000000" name="«JpaRepository»&#10;orgRepo:OrganizationRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="315" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S120000000000000" shapeType="CommunicationLifeLine" x="3340" y="1182" width="271" height="76" zorder="14" model="M120000000000000" name="«JpaRepository»&#10;routeRepo:RouteRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="271" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S130000000000000" shapeType="CommunicationLifeLine" x="3639" y="1182" width="294" height="76" zorder="15" model="M130000000000000" name="«JpaRepository»&#10;cpRepo:CheckpointRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="294" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S140000000000000" shapeType="CommunicationLifeLine" x="3960" y="1182" width="339" height="76" zorder="18" model="M140000000000000" name="«JpaRepository»&#10;segRepo:RouteSegmentRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="339" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S150000000000000" shapeType="CommunicationLifeLine" x="1942" y="1182" width="164" height="76" zorder="6" model="M150000000000000" name="«@Service»&#10;risk:RiskService">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="164" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S160000000000000" shapeType="CommunicationLifeLine" x="1940" y="1380" width="249" height="76" zorder="13" model="M160000000000000" name="«@Component»&#10;intel:WastelandIntelClient">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="249" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S170000000000000" shapeType="CommunicationLifeLine" x="2304" y="1380" width="339" height="76" zorder="19" model="M170000000000000" name="«MongoRepository»&#10;raRepo:RiskAssessmentRepository">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="339" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S180000000000000" shapeType="CommunicationLifeLine" x="2762" y="1587" width="187" height="76" zorder="10" model="M180000000000000" name="«database»&#10;pg:PostgreSQL 16">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="187" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S190000000000000" shapeType="CommunicationLifeLine" x="2575" y="1587" width="161" height="76" zorder="5" model="M190000000000000" name="«database»&#10;mg:MongoDB 7">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="161" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S20x400000000000" shapeType="CommunicationLifeLine" x="2362" y="1587" width="185" height="76" zorder="9" model="M20x300000000000" name="«external system»&#10;wi:Wasteland Intel">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="presentationOption" value="0" />
+            <BooleanProperty name="overrideAppearanceWithStereotypeIcon" value="false" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="185" height="76" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote46000000000" shapeType="NOTE" x="40" y="1723" width="673" height="259" zorder="22" model="Mnote46000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="Cl21000000000000" shapeType="InteractionLifeLineLink" model="Ml21000000000000" from="S100000000000000" to="S200000000000000">
+          <Caption visible="true" side="None" x="518" y="235" width="233" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl22000000000000" shapeType="InteractionLifeLineLink" model="Ml22000000000000" from="S200000000000000" to="S400000000000000">
+          <Caption visible="true" side="None" x="807" y="465" width="537" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl23000000000000" shapeType="InteractionLifeLineLink" model="Ml23000000000000" from="S400000000000000" to="S500000000000000">
+          <Caption visible="true" side="None" x="625" y="693" width="426" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl24000000000000" shapeType="InteractionLifeLineLink" model="Ml24000000000000" from="S500000000000000" to="S600000000000000">
+          <Caption visible="true" side="None" x="985" y="877" width="730" height="70" />
+          <Points />
+        </Connector>
+        <Connector id="Cl25000000000000" shapeType="InteractionLifeLineLink" model="Ml25000000000000" from="S600000000000000" to="S110000000000000">
+          <Caption visible="true" side="None" x="2519" y="1095" width="609" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl26000000000000" shapeType="InteractionLifeLineLink" model="Ml26000000000000" from="S600000000000000" to="S120000000000000">
+          <Caption visible="true" side="None" x="3093" y="1083" width="659" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="Cl27000000000000" shapeType="InteractionLifeLineLink" model="Ml27000000000000" from="S600000000000000" to="S130000000000000">
+          <Caption visible="true" side="None" x="3714" y="1083" width="426" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="Cl28000000000000" shapeType="InteractionLifeLineLink" model="Ml28000000000000" from="S600000000000000" to="S140000000000000">
+          <Caption visible="true" side="None" x="4117" y="1095" width="375" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl29000000000000" shapeType="InteractionLifeLineLink" model="Ml29000000000000" from="S600000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="350" y="1095" width="416" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl30000000000000" shapeType="InteractionLifeLineLink" model="Ml30000000000000" from="S600000000000000" to="S150000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="Cl31000000000000" shapeType="InteractionLifeLineLink" model="Ml31000000000000" from="S150000000000000" to="S160000000000000">
+          <Caption visible="true" side="None" x="1969" y="1318" width="477" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl32000000000000" shapeType="InteractionLifeLineLink" model="Ml32000000000000" from="S160000000000000" to="S20x400000000000">
+          <Caption visible="true" side="None" x="715" y="1488" width="385" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="Cl33000000000000" shapeType="InteractionLifeLineLink" model="Ml33000000000000" from="S600000000000000" to="S900000000000000">
+          <Caption visible="true" side="None" x="1133" y="1095" width="517" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl34000000000000" shapeType="InteractionLifeLineLink" model="Ml34000000000000" from="S150000000000000" to="S170000000000000">
+          <Caption visible="true" side="None" x="2433" y="1318" width="598" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl35000000000000" shapeType="InteractionLifeLineLink" model="Ml35000000000000" from="S600000000000000" to="S800000000000000">
+          <Caption visible="true" side="None" x="833" y="1095" width="324" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl36000000000000" shapeType="InteractionLifeLineLink" model="Ml36000000000000" from="S800000000000000" to="S10x200000000000">
+          <Caption visible="true" side="None" x="792" y="1306" width="558" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="Cl37000000000000" shapeType="InteractionLifeLineLink" model="Ml37000000000000" from="S110000000000000" to="S180000000000000">
+          <Caption visible="true" side="None" x="2990" y="1409" width="527" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl38000000000000" shapeType="InteractionLifeLineLink" model="Ml38000000000000" from="S120000000000000" to="S180000000000000">
+          <Caption visible="true" side="None" x="3511" y="1397" width="477" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="Cl39000000000000" shapeType="InteractionLifeLineLink" model="Ml39000000000000" from="S130000000000000" to="S180000000000000">
+          <Caption visible="true" side="None" x="3976" y="1409" width="527" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl40000000000000" shapeType="InteractionLifeLineLink" model="Ml40000000000000" from="S140000000000000" to="S180000000000000">
+          <Caption visible="true" side="None" x="4508" y="1409" width="385" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl41000000000000" shapeType="InteractionLifeLineLink" model="Ml41000000000000" from="S900000000000000" to="S180000000000000">
+          <Caption visible="true" side="None" x="1555" y="1409" width="406" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl42000000000000" shapeType="InteractionLifeLineLink" model="Ml42000000000000" from="S170000000000000" to="S190000000000000">
+          <Caption visible="true" side="None" x="2548" y="1499" width="487" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl43000000000000" shapeType="InteractionLifeLineLink" model="Ml43000000000000" from="S10x200000000000" to="S180000000000000">
+          <Caption visible="true" side="None" x="1092" y="1499" width="497" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl44000000000000" shapeType="InteractionLifeLineLink" model="Ml44000000000000" from="S200000000000000" to="S300000000000000">
+          <Caption visible="true" side="None" x="377" y="397" width="233" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="Cl45000000000000" shapeType="InteractionLifeLineLink" model="Ml45000000000000" from="S300000000000000" to="S400000000000000">
+          <Caption visible="true" side="None" x="363" y="534" width="548" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="CAnote4600000000" shapeType="Anchor" model="Anote46000000000" from="Snote46000000000" to="S600000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

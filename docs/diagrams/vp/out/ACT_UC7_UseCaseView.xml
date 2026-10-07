@@ -1,2 +1,877 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="ACT_UC7_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="M_swimlane000000" modelType="ActivitySwimlane2" name="Swimlane"><ModelProperties><StringProperty name="name" value="Swimlane" /><ModelsProperty name="verticalPartitions"><Model id="M_part_000000000" modelType="ActivityPartition" name="Диспетчер караванов"><ModelProperties><StringProperty name="name" value="Диспетчер караванов" /></ModelProperties></Model><Model id="M_part_010000000" modelType="ActivityPartition" name="ИС «Караваны»"><ModelProperties><StringProperty name="name" value="ИС «Караваны»" /></ModelProperties></Model><Model id="M_part_020000000" modelType="ActivityPartition" name="«внешняя система»&#10;Wasteland Intel"><ModelProperties><StringProperty name="name" value="«внешняя система»&#10;Wasteland Intel" /></ModelProperties></Model></ModelsProperty></ModelProperties></Model><Model id="M_start000000000" modelType="InitialNode"><ModelProperties /></Model><Model id="M_ask00000000000" modelType="ActivityAction" name="Запросить оценку риска маршрута"><ModelProperties><StringProperty name="name" value="Запросить оценку риска маршрута" /></ModelProperties></Model><Model id="M_take0000000000" modelType="ActivityAction" name="Взять маршрут заявки&#10;и оценочную ценность груза"><ModelProperties><StringProperty name="name" value="Взять маршрут заявки&#10;и оценочную ценность груза" /></ModelProperties></Model><Model id="M_req00000000000" modelType="ActivityAction" name="Сформировать запрос об угрозах,&#10;перечислив контрольные точки маршрута"><ModelProperties><StringProperty name="name" value="Сформировать запрос об угрозах,&#10;перечислив контрольные точки маршрута" /></ModelProperties></Model><Model id="M_ext00000000000" modelType="ActivityAction" name="Обработать запрос об угрозах&#10;по участкам маршрута"><ModelProperties><StringProperty name="name" value="Обработать запрос об угрозах&#10;по участкам маршрута" /></ModelProperties></Model><Model id="M_d1000000000000" modelType="DecisionNode" name="данные об угрозах получены?"><ModelProperties><StringProperty name="name" value="данные об угрозах получены?" /></ModelProperties></Model><Model id="M_accept00000000" modelType="ActivityAction" name="Принять угрозы по каждому участку&#10;(тип угрозы, уровень опасности)&#10;и дату актуальности данных"><ModelProperties><StringProperty name="name" value="Принять угрозы по каждому участку&#10;(тип угрозы, уровень опасности)&#10;и дату актуальности данных" /></ModelProperties></Model><Model id="M_aggr0000000000" modelType="ActivityAction" name="Агрегировать угрозы участков&#10;и вычислить базовый risk_score маршрута"><ModelProperties><StringProperty name="name" value="Агрегировать угрозы участков&#10;и вычислить базовый risk_score маршрута" /></ModelProperties></Model><Model id="M_cargo000000000" modelType="ActivityAction" name="Применить корректирующий коэффициент&#10;ценности груза: чем дороже груз,&#10;тем выше итоговый risk_score"><ModelProperties><StringProperty name="name" value="Применить корректирующий коэффициент&#10;ценности груза: чем дороже груз,&#10;тем выше итоговый risk_score" /></ModelProperties></Model><Model id="M_d2000000000000" modelType="DecisionNode" name="дата актуальности&#10;свежее 24 часов?"><ModelProperties><StringProperty name="name" value="дата актуальности&#10;свежее 24 часов?" /></ModelProperties></Model><Model id="M_fresh000000000" modelType="ActivityAction" name="Признать оценку полученной&#10;на актуальных данных"><ModelProperties><StringProperty name="name" value="Признать оценку полученной&#10;на актуальных данных" /></ModelProperties></Model><Model id="M_stale100000000" modelType="ActivityAction" name="Пометить оценку&#10;«На основе устаревших данных»"><ModelProperties><StringProperty name="name" value="Пометить оценку&#10;«На основе устаревших данных»" /></ModelProperties></Model><Model id="M_stale200000000" modelType="ActivityAction" name="Предупредить диспетчера&#10;об устаревших данных"><ModelProperties><StringProperty name="name" value="Предупредить диспетчера&#10;об устаревших данных" /></ModelProperties></Model><Model id="M_m2000000000000" modelType="MergeNode"><ModelProperties /></Model><Model id="M_save0000000000" modelType="ActivityAction" name="Сохранить итоговый risk_score&#10;в заявке и отобразить его диспетчеру"><ModelProperties><StringProperty name="name" value="Сохранить итоговый risk_score&#10;в заявке и отобразить его диспетчеру" /></ModelProperties></Model><Model id="M_reco0000000000" modelType="ActivityAction" name="Сформировать рекомендацию по минимальному&#10;составу охраны и объёму припасов (UC-8)"><ModelProperties><StringProperty name="name" value="Сформировать рекомендацию по минимальному&#10;составу охраны и объёму припасов (UC-8)" /></ModelProperties></Model><Model id="M_na000000000000" modelType="ActivityAction" name="Установить risk_score = «Н/Д»"><ModelProperties><StringProperty name="name" value="Установить risk_score = «Н/Д»" /></ModelProperties></Model><Model id="M_mark0000000000" modelType="ActivityAction" name="Пометить заявку&#10;«risk_score требует пересчёта»"><ModelProperties><StringProperty name="name" value="Пометить заявку&#10;«risk_score требует пересчёта»" /></ModelProperties></Model><Model id="M_notify00000000" modelType="ActivityAction" name="Уведомить диспетчера о недоступности&#10;внешней системы разведки"><ModelProperties><StringProperty name="name" value="Уведомить диспетчера о недоступности&#10;внешней системы разведки" /></ModelProperties></Model><Model id="M_m1000000000000" modelType="MergeNode"><ModelProperties /></Model><Model id="M_explain0000000" modelType="ActivityAction" name="Сохранить разбор оценки&#10;для показа диспетчеру"><ModelProperties><StringProperty name="name" value="Сохранить разбор оценки&#10;для показа диспетчеру" /></ModelProperties></Model><Model id="M_see00000000000" modelType="ActivityAction" name="Увидеть в карточке заявки risk_score&#10;или «Н/Д», уровень риска, пометки&#10;и рекомендацию (если оценка получена)"><ModelProperties><StringProperty name="name" value="Увидеть в карточке заявки risk_score&#10;или «Н/Д», уровень риска, пометки&#10;и рекомендацию (если оценка получена)" /></ModelProperties></Model><Model id="M_stop0000000000" modelType="ActivityFinalNode"><ModelProperties /></Model><Model id="F_f1000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_start000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_ask00000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_ask00000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_take0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_take0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_req00000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f4000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_req00000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_ext00000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f5000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_ext00000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_d1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f6000000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="да" /><ModelRefProperty name="from"><ModelRef id="M_d1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_accept00000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f7000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_accept00000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_aggr0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f8000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_aggr0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_cargo000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f9000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_cargo000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_d2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f10x1000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="да" /><ModelRefProperty name="from"><ModelRef id="M_d2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_fresh000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1100000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="нет — альт. поток 2б" /><ModelRefProperty name="from"><ModelRef id="M_d2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_stale100000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1200000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_stale100000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_stale200000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1300000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_fresh000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1400000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_stale200000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1500000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_m2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_save0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1600000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_save0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_reco0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1700000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="нет — альт. поток 2а" /><ModelRefProperty name="from"><ModelRef id="M_d1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_na000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1800000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_na000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_mark0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1900000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_mark0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_notify00000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f20x3000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_reco0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2100000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_notify00000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2200000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_m1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_explain0000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2300000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_explain0000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_see00000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2400000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_see00000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_stop0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_pre00000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Предусловия прецедента&#10;• для заявки выбран или сформирован маршрут (UC-5)&#10;• указана оценочная ценность груза или её значение по умолчанию" /></ModelProperties></Model><Model id="A_pre00000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_pre00000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_take0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_post0000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Постусловия&#10;• основной поток и 2б: заявка содержит risk_score и рекомендацию&#10;• альт. поток 2а: расчёт можно повторить позднее" /></ModelProperties></Model><Model id="A_post0000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_post0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_explain0000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_legend00000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• дорожки: инициатор расчёта, система как единое целое,&#10;  внешняя система-поставщик данных об угрозах&#10;• сиреневым выделена дорожка внешней системы&#10;• розовым выделен альт. поток 2а (источник недоступен),&#10;  песочным — альт. поток 2б (данные старше 24 часов)&#10;&#10;Требования (docs/SRS.md)&#10;• FR-6 — интеграция с Wasteland Intel&#10;• FR-7 — автоматический расчёт risk_score&#10;• FR-8 — рекомендация по охране и припасам&#10;• FR-14 — учёт ценности груза" /></ModelProperties></Model></Models><Diagrams><Diagram id="D_ACT_UC7_UseCas" name="ACT_UC7_UseCaseView" diagramType="ActivityDiagram"><Shapes><Shape id="S_swimlane000000" shapeType="ActivitySwimlane2" x="40" y="40" width="1580" height="1946" zorder="1" model="M_swimlane000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringArrayProperty name="verticalPartitionIds"><Values><Value value="S_hdr_0000000000" /><Value value="S_hdr_0100000000" /><Value value="S_hdr_0200000000" /></Values></StringArrayProperty><StringArrayProperty name="compartmentIds"><Values><Value value="S_cmp_0000000000" /><Value value="S_cmp_0100000000" /><Value value="S_cmp_0200000000" /></Values></StringArrayProperty></DiagramElementProperties><ChildShapes><Shape id="S_hdr_0000000000" shapeType="ActivityPartitionHeader" x="40" y="40" width="340" height="46" zorder="2" model="M_part_000000000" name="Диспетчер караванов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="46" /></Shape><Shape id="S_cmp_0000000000" shapeType="ActivitySwimlane2Compartment" x="40" y="86" width="340" height="1900" zorder="3"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0000000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0100000000" shapeType="ActivityPartitionHeader" x="380" y="40" width="900" height="46" zorder="4" model="M_part_010000000" name="ИС «Караваны»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="900" height="46" /></Shape><Shape id="S_cmp_0100000000" shapeType="ActivitySwimlane2Compartment" x="380" y="86" width="900" height="1900" zorder="5"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0100000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0200000000" shapeType="ActivityPartitionHeader" x="1280" y="40" width="340" height="46" zorder="6" model="M_part_020000000" name="«внешняя система»&#10;Wasteland Intel"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="46" /></Shape><Shape id="S_cmp_0200000000" shapeType="ActivitySwimlane2Compartment" x="1280" y="86" width="340" height="1900" zorder="7"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0200000000" /></DiagramElementProperties></Shape></ChildShapes></Shape><Shape id="S_start000000000" shapeType="InitialNode" x="195" y="110" width="30" height="30" zorder="8" model="M_start000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S_ask00000000000" shapeType="ActivityAction" x="60" y="175" width="300" height="50" zorder="9" model="M_ask00000000000" name="Запросить оценку риска маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="50" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_take0000000000" shapeType="ActivityAction" x="490" y="260" width="420" height="60" zorder="10" model="M_take0000000000" name="Взять маршрут заявки&#10;и оценочную ценность груза"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_req00000000000" shapeType="ActivityAction" x="490" y="350" width="420" height="60" zorder="11" model="M_req00000000000" name="Сформировать запрос об угрозах,&#10;перечислив контрольные точки маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_ext00000000000" shapeType="ActivityAction" x="1300" y="445" width="300" height="60" zorder="12" model="M_ext00000000000" name="Обработать запрос об угрозах&#10;по участкам маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_d1000000000000" shapeType="DecisionNode" x="550" y="545" width="300" height="54" zorder="13" model="M_d1000000000000" name="данные об угрозах получены?"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="54" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_accept00000000" shapeType="ActivityAction" x="490" y="690" width="420" height="78" zorder="14" model="M_accept00000000" name="Принять угрозы по каждому участку&#10;(тип угрозы, уровень опасности)&#10;и дату актуальности данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="78" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_aggr0000000000" shapeType="ActivityAction" x="490" y="800" width="420" height="60" zorder="15" model="M_aggr0000000000" name="Агрегировать угрозы участков&#10;и вычислить базовый risk_score маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_cargo000000000" shapeType="ActivityAction" x="490" y="890" width="420" height="78" zorder="16" model="M_cargo000000000" name="Применить корректирующий коэффициент&#10;ценности груза: чем дороже груз,&#10;тем выше итоговый risk_score"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="78" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_d2000000000000" shapeType="DecisionNode" x="550" y="1000" width="300" height="54" zorder="17" model="M_d2000000000000" name="дата актуальности&#10;свежее 24 часов?"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="54" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_fresh000000000" shapeType="ActivityAction" x="455" y="1145" width="280" height="60" zorder="18" model="M_fresh000000000" name="Признать оценку полученной&#10;на актуальных данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_stale100000000" shapeType="ActivityAction" x="760" y="1145" width="280" height="60" zorder="19" model="M_stale100000000" name="Пометить оценку&#10;«На основе устаревших данных»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="60" /><FillColor type="1" color="Cr:253,245,230,255" transparency="0" style="0" /></Shape><Shape id="S_stale200000000" shapeType="ActivityAction" x="760" y="1235" width="280" height="60" zorder="20" model="M_stale200000000" name="Предупредить диспетчера&#10;об устаревших данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="60" /><FillColor type="1" color="Cr:253,245,230,255" transparency="0" style="0" /></Shape><Shape id="S_m2000000000000" shapeType="MergeNode" x="680" y="1335" width="40" height="40" zorder="21" model="M_m2000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_save0000000000" shapeType="ActivityAction" x="490" y="1415" width="420" height="60" zorder="22" model="M_save0000000000" name="Сохранить итоговый risk_score&#10;в заявке и отобразить его диспетчеру"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_reco0000000000" shapeType="ActivityAction" x="490" y="1505" width="420" height="60" zorder="23" model="M_reco0000000000" name="Сформировать рекомендацию по минимальному&#10;составу охраны и объёму припасов (UC-8)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_na000000000000" shapeType="ActivityAction" x="1000" y="690" width="265" height="52" zorder="24" model="M_na000000000000" name="Установить risk_score = «Н/Д»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="265" height="52" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S_mark0000000000" shapeType="ActivityAction" x="1000" y="780" width="265" height="60" zorder="25" model="M_mark0000000000" name="Пометить заявку&#10;«risk_score требует пересчёта»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="265" height="60" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S_notify00000000" shapeType="ActivityAction" x="1000" y="870" width="265" height="60" zorder="26" model="M_notify00000000" name="Уведомить диспетчера о недоступности&#10;внешней системы разведки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="265" height="60" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S_m1000000000000" shapeType="MergeNode" x="680" y="1605" width="40" height="40" zorder="27" model="M_m1000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_explain0000000" shapeType="ActivityAction" x="490" y="1685" width="420" height="60" zorder="28" model="M_explain0000000" name="Сохранить разбор оценки&#10;для показа диспетчеру"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="420" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_see00000000000" shapeType="ActivityAction" x="50" y="1775" width="320" height="78" zorder="29" model="M_see00000000000" name="Увидеть в карточке заявки risk_score&#10;или «Н/Д», уровень риска, пометки&#10;и рекомендацию (если оценка получена)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="320" height="78" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_stop0000000000" shapeType="ActivityFinalNode" x="195" y="1890" width="30" height="30" zorder="30" model="M_stop0000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S_pre00000000000" shapeType="NOTE" x="1660" y="250" width="400" height="110" zorder="31" model="M_pre00000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_post0000000000" shapeType="NOTE" x="1660" y="1685" width="400" height="110" zorder="32" model="M_post0000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_legend00000000" shapeType="NOTE" x="1660" y="700" width="400" height="230" zorder="33" model="M_legend00000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C_f1000000000000" shapeType="ControlFlow" model="F_f1000000000000" from="S_start000000000" to="S_ask00000000000" connectorStyle="Rectlinear" /><Connector id="C_f2000000000000" shapeType="ControlFlow" model="F_f2000000000000" from="S_ask00000000000" to="S_take0000000000" connectorStyle="Rectlinear" /><Connector id="C_f3000000000000" shapeType="ControlFlow" model="F_f3000000000000" from="S_take0000000000" to="S_req00000000000" connectorStyle="Rectlinear" /><Connector id="C_f4000000000000" shapeType="ControlFlow" model="F_f4000000000000" from="S_req00000000000" to="S_ext00000000000" connectorStyle="Rectlinear" /><Connector id="C_f5000000000000" shapeType="ControlFlow" model="F_f5000000000000" from="S_ext00000000000" to="S_d1000000000000" connectorStyle="Rectlinear" /><Connector id="C_f6000000000000" shapeType="ControlFlow" model="F_f6000000000000" from="S_d1000000000000" to="S_accept00000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="545" y="630" width="230" height="34" /></Connector><Connector id="C_f7000000000000" shapeType="ControlFlow" model="F_f7000000000000" from="S_accept00000000" to="S_aggr0000000000" connectorStyle="Rectlinear" /><Connector id="C_f8000000000000" shapeType="ControlFlow" model="F_f8000000000000" from="S_aggr0000000000" to="S_cargo000000000" connectorStyle="Rectlinear" /><Connector id="C_f9000000000000" shapeType="ControlFlow" model="F_f9000000000000" from="S_cargo000000000" to="S_d2000000000000" connectorStyle="Rectlinear" /><Connector id="C_f10x2000000000" shapeType="ControlFlow" model="F_f10x1000000000" from="S_d2000000000000" to="S_fresh000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="470" y="1055" width="230" height="34" /></Connector><Connector id="C_f1100000000000" shapeType="ControlFlow" model="F_f1100000000000" from="S_d2000000000000" to="S_stale100000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="755" y="1055" width="230" height="34" /><Points><Point x="850" y="1027" /><Point x="900" y="1027" /><Point x="900" y="1145" /></Points></Connector><Connector id="C_f1200000000000" shapeType="ControlFlow" model="F_f1200000000000" from="S_stale100000000" to="S_stale200000000" connectorStyle="Rectlinear" /><Connector id="C_f1300000000000" shapeType="ControlFlow" model="F_f1300000000000" from="S_fresh000000000" to="S_m2000000000000" connectorStyle="Rectlinear" /><Connector id="C_f1400000000000" shapeType="ControlFlow" model="F_f1400000000000" from="S_stale200000000" to="S_m2000000000000" connectorStyle="Rectlinear" /><Connector id="C_f1500000000000" shapeType="ControlFlow" model="F_f1500000000000" from="S_m2000000000000" to="S_save0000000000" connectorStyle="Rectlinear" /><Connector id="C_f1600000000000" shapeType="ControlFlow" model="F_f1600000000000" from="S_save0000000000" to="S_reco0000000000" connectorStyle="Rectlinear" /><Connector id="C_f1700000000000" shapeType="ControlFlow" model="F_f1700000000000" from="S_d1000000000000" to="S_na000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="905" y="598" width="230" height="34" /><Points><Point x="850" y="572" /><Point x="1132" y="572" /><Point x="1132" y="690" /></Points></Connector><Connector id="C_f1800000000000" shapeType="ControlFlow" model="F_f1800000000000" from="S_na000000000000" to="S_mark0000000000" connectorStyle="Rectlinear" /><Connector id="C_f1900000000000" shapeType="ControlFlow" model="F_f1900000000000" from="S_mark0000000000" to="S_notify00000000" connectorStyle="Rectlinear" /><Connector id="C_f20x4000000000" shapeType="ControlFlow" model="F_f20x3000000000" from="S_reco0000000000" to="S_m1000000000000" connectorStyle="Rectlinear" /><Connector id="C_f2100000000000" shapeType="ControlFlow" model="F_f2100000000000" from="S_notify00000000" to="S_m1000000000000" connectorStyle="Rectlinear"><Points><Point x="1132" y="930" /><Point x="1132" y="1580" /><Point x="700" y="1580" /><Point x="700" y="1605" /></Points></Connector><Connector id="C_f2200000000000" shapeType="ControlFlow" model="F_f2200000000000" from="S_m1000000000000" to="S_explain0000000" connectorStyle="Rectlinear" /><Connector id="C_f2300000000000" shapeType="ControlFlow" model="F_f2300000000000" from="S_explain0000000" to="S_see00000000000" connectorStyle="Rectlinear" /><Connector id="C_f2400000000000" shapeType="ControlFlow" model="F_f2400000000000" from="S_see00000000000" to="S_stop0000000000" connectorStyle="Rectlinear" /><Connector id="CA_pre0000000000" shapeType="Anchor" model="A_pre00000000000" from="S_pre00000000000" to="S_take0000000000" /><Connector id="CA_post000000000" shapeType="Anchor" model="A_post0000000000" from="S_post0000000000" to="S_explain0000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="ACT_UC7_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="M_swimlane000000" modelType="ActivitySwimlane2" name="Swimlane">
+      <ModelProperties>
+        <StringProperty name="name" value="Swimlane" />
+        <ModelsProperty name="verticalPartitions">
+          <Model id="M_part_000000000" modelType="ActivityPartition" name="Диспетчер караванов">
+            <ModelProperties>
+              <StringProperty name="name" value="Диспетчер караванов" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_010000000" modelType="ActivityPartition" name="ИС «Караваны»">
+            <ModelProperties>
+              <StringProperty name="name" value="ИС «Караваны»" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_020000000" modelType="ActivityPartition" name="«внешняя система»&#10;Wasteland Intel">
+            <ModelProperties>
+              <StringProperty name="name" value="«внешняя система»&#10;Wasteland Intel" />
+            </ModelProperties>
+          </Model>
+        </ModelsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_start000000000" modelType="InitialNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_ask00000000000" modelType="ActivityAction" name="Запросить оценку риска маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Запросить оценку риска маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_take0000000000" modelType="ActivityAction" name="Взять маршрут заявки&#10;и оценочную ценность груза">
+      <ModelProperties>
+        <StringProperty name="name" value="Взять маршрут заявки&#10;и оценочную ценность груза" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_req00000000000" modelType="ActivityAction" name="Сформировать запрос об угрозах,&#10;перечислив контрольные точки маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Сформировать запрос об угрозах,&#10;перечислив контрольные точки маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_ext00000000000" modelType="ActivityAction" name="Обработать запрос об угрозах&#10;по участкам маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Обработать запрос об угрозах&#10;по участкам маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_d1000000000000" modelType="DecisionNode" name="данные об угрозах получены?">
+      <ModelProperties>
+        <StringProperty name="name" value="данные об угрозах получены?" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_accept00000000" modelType="ActivityAction" name="Принять угрозы по каждому участку&#10;(тип угрозы, уровень опасности)&#10;и дату актуальности данных">
+      <ModelProperties>
+        <StringProperty name="name" value="Принять угрозы по каждому участку&#10;(тип угрозы, уровень опасности)&#10;и дату актуальности данных" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_aggr0000000000" modelType="ActivityAction" name="Агрегировать угрозы участков&#10;и вычислить базовый risk_score маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Агрегировать угрозы участков&#10;и вычислить базовый risk_score маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_cargo000000000" modelType="ActivityAction" name="Применить корректирующий коэффициент&#10;ценности груза: чем дороже груз,&#10;тем выше итоговый risk_score">
+      <ModelProperties>
+        <StringProperty name="name" value="Применить корректирующий коэффициент&#10;ценности груза: чем дороже груз,&#10;тем выше итоговый risk_score" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_d2000000000000" modelType="DecisionNode" name="дата актуальности&#10;свежее 24 часов?">
+      <ModelProperties>
+        <StringProperty name="name" value="дата актуальности&#10;свежее 24 часов?" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_fresh000000000" modelType="ActivityAction" name="Признать оценку полученной&#10;на актуальных данных">
+      <ModelProperties>
+        <StringProperty name="name" value="Признать оценку полученной&#10;на актуальных данных" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_stale100000000" modelType="ActivityAction" name="Пометить оценку&#10;«На основе устаревших данных»">
+      <ModelProperties>
+        <StringProperty name="name" value="Пометить оценку&#10;«На основе устаревших данных»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_stale200000000" modelType="ActivityAction" name="Предупредить диспетчера&#10;об устаревших данных">
+      <ModelProperties>
+        <StringProperty name="name" value="Предупредить диспетчера&#10;об устаревших данных" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_m2000000000000" modelType="MergeNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_save0000000000" modelType="ActivityAction" name="Сохранить итоговый risk_score&#10;в заявке и отобразить его диспетчеру">
+      <ModelProperties>
+        <StringProperty name="name" value="Сохранить итоговый risk_score&#10;в заявке и отобразить его диспетчеру" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_reco0000000000" modelType="ActivityAction" name="Сформировать рекомендацию по минимальному&#10;составу охраны и объёму припасов (UC-8)">
+      <ModelProperties>
+        <StringProperty name="name" value="Сформировать рекомендацию по минимальному&#10;составу охраны и объёму припасов (UC-8)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_na000000000000" modelType="ActivityAction" name="Установить risk_score = «Н/Д»">
+      <ModelProperties>
+        <StringProperty name="name" value="Установить risk_score = «Н/Д»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_mark0000000000" modelType="ActivityAction" name="Пометить заявку&#10;«risk_score требует пересчёта»">
+      <ModelProperties>
+        <StringProperty name="name" value="Пометить заявку&#10;«risk_score требует пересчёта»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_notify00000000" modelType="ActivityAction" name="Уведомить диспетчера о недоступности&#10;внешней системы разведки">
+      <ModelProperties>
+        <StringProperty name="name" value="Уведомить диспетчера о недоступности&#10;внешней системы разведки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_m1000000000000" modelType="MergeNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_explain0000000" modelType="ActivityAction" name="Сохранить разбор оценки&#10;для показа диспетчеру">
+      <ModelProperties>
+        <StringProperty name="name" value="Сохранить разбор оценки&#10;для показа диспетчеру" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_see00000000000" modelType="ActivityAction" name="Увидеть в карточке заявки risk_score&#10;или «Н/Д», уровень риска, пометки&#10;и рекомендацию (если оценка получена)">
+      <ModelProperties>
+        <StringProperty name="name" value="Увидеть в карточке заявки risk_score&#10;или «Н/Д», уровень риска, пометки&#10;и рекомендацию (если оценка получена)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_stop0000000000" modelType="ActivityFinalNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_start000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_ask00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_ask00000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_take0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_take0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_req00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f4000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_req00000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_ext00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f5000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_ext00000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_d1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f6000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="да" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_accept00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f7000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_accept00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_aggr0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f8000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_aggr0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_cargo000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f9000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_cargo000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_d2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f10x1000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="да" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_fresh000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1100000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="нет — альт. поток 2б" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_stale100000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1200000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_stale100000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_stale200000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1300000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_fresh000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1400000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_stale200000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1500000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_m2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_save0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1600000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_save0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_reco0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1700000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="нет — альт. поток 2а" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_na000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1800000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_na000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_mark0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1900000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_mark0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_notify00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f20x3000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_reco0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2100000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_notify00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2200000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_m1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_explain0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2300000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_explain0000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_see00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2400000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_see00000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_stop0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_pre00000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Предусловия прецедента&#10;• для заявки выбран или сформирован маршрут (UC-5)&#10;• указана оценочная ценность груза или её значение по умолчанию" />
+      </ModelProperties>
+    </Model>
+    <Model id="A_pre00000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_pre00000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_take0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_post0000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Постусловия&#10;• основной поток и 2б: заявка содержит risk_score и рекомендацию&#10;• альт. поток 2а: расчёт можно повторить позднее" />
+      </ModelProperties>
+    </Model>
+    <Model id="A_post0000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_post0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_explain0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_legend00000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• дорожки: инициатор расчёта, система как единое целое,&#10;  внешняя система-поставщик данных об угрозах&#10;• сиреневым выделена дорожка внешней системы&#10;• розовым выделен альт. поток 2а (источник недоступен),&#10;  песочным — альт. поток 2б (данные старше 24 часов)&#10;&#10;Требования (docs/SRS.md)&#10;• FR-6 — интеграция с Wasteland Intel&#10;• FR-7 — автоматический расчёт risk_score&#10;• FR-8 — рекомендация по охране и припасам&#10;• FR-14 — учёт ценности груза" />
+      </ModelProperties>
+    </Model>
+    <Model id="F17ced0da9d3aadf" modelType="NOTE" name="UC-7 «Рассчитать risk_score» — Activity Diagram (Use-Case View)&#10;Абстрактное описание: шаги предметной области; дорожки — актор, система как единое целое и внешняя система">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-7 «Рассчитать risk_score» — Activity Diagram (Use-Case View)&#10;Абстрактное описание: шаги предметной области; дорожки — актор, система как единое целое и внешняя система" />
+        <HTMLProperty name="documentation" plainTextValue="UC-7 «Рассчитать risk_score» — Activity Diagram (Use-Case View)&#10;Абстрактное описание: шаги предметной области; дорожки — актор, система как единое целое и внешняя система" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_ACT_UC7_UseCas" name="ACT_UC7_UseCaseView" diagramType="ActivityDiagram">
+      <Shapes>
+        <Shape id="S_swimlane000000" shapeType="ActivitySwimlane2" x="40" y="140" width="1580" height="1946" zorder="34" model="M_swimlane000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <StringArrayProperty name="verticalPartitionIds">
+              <Values>
+                <Value value="S_hdr_0000000000" />
+                <Value value="S_hdr_0100000000" />
+                <Value value="S_hdr_0200000000" />
+              </Values>
+            </StringArrayProperty>
+            <StringArrayProperty name="compartmentIds">
+              <Values>
+                <Value value="S_cmp_0000000000" />
+                <Value value="S_cmp_0100000000" />
+                <Value value="S_cmp_0200000000" />
+              </Values>
+            </StringArrayProperty>
+          </DiagramElementProperties>
+          <ChildShapes>
+            <Shape id="S_hdr_0000000000" shapeType="ActivityPartitionHeader" x="40" y="140" width="340" height="46" zorder="7" model="M_part_000000000" name="Диспетчер караванов">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="340" height="46" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0000000000" shapeType="ActivitySwimlane2Compartment" x="40" y="186" width="340" height="1900" zorder="31">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0000000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0100000000" shapeType="ActivityPartitionHeader" x="380" y="140" width="900" height="46" zorder="26" model="M_part_010000000" name="ИС «Караваны»">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="900" height="46" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0100000000" shapeType="ActivitySwimlane2Compartment" x="380" y="186" width="900" height="1900" zorder="33">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0100000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0200000000" shapeType="ActivityPartitionHeader" x="1280" y="140" width="340" height="46" zorder="8" model="M_part_020000000" name="«внешняя система»&#10;Wasteland Intel">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="340" height="46" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0200000000" shapeType="ActivitySwimlane2Compartment" x="1280" y="186" width="340" height="1900" zorder="32">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0200000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="S_start000000000" shapeType="InitialNode" x="195" y="210" width="30" height="30" zorder="1" model="M_start000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S_ask00000000000" shapeType="ActivityAction" x="60" y="275" width="300" height="50" zorder="6" model="M_ask00000000000" name="Запросить оценку риска маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="50" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_take0000000000" shapeType="ActivityAction" x="490" y="360" width="420" height="60" zorder="18" model="M_take0000000000" name="Взять маршрут заявки&#10;и оценочную ценность груза">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_req00000000000" shapeType="ActivityAction" x="490" y="450" width="420" height="60" zorder="19" model="M_req00000000000" name="Сформировать запрос об угрозах,&#10;перечислив контрольные точки маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_ext00000000000" shapeType="ActivityAction" x="1300" y="545" width="300" height="60" zorder="16" model="M_ext00000000000" name="Обработать запрос об угрозах&#10;по участкам маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_d1000000000000" shapeType="DecisionNode" x="550" y="645" width="300" height="54" zorder="11" model="M_d1000000000000" name="данные об угрозах получены?">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="54" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_accept00000000" shapeType="ActivityAction" x="490" y="790" width="420" height="78" zorder="24" model="M_accept00000000" name="Принять угрозы по каждому участку&#10;(тип угрозы, уровень опасности)&#10;и дату актуальности данных">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="78" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_aggr0000000000" shapeType="ActivityAction" x="490" y="900" width="420" height="60" zorder="20" model="M_aggr0000000000" name="Агрегировать угрозы участков&#10;и вычислить базовый risk_score маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_cargo000000000" shapeType="ActivityAction" x="490" y="990" width="420" height="78" zorder="25" model="M_cargo000000000" name="Применить корректирующий коэффициент&#10;ценности груза: чем дороже груз,&#10;тем выше итоговый risk_score">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="78" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_d2000000000000" shapeType="DecisionNode" x="550" y="1100" width="300" height="54" zorder="12" model="M_d2000000000000" name="дата актуальности&#10;свежее 24 часов?">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="54" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_fresh000000000" shapeType="ActivityAction" x="455" y="1245" width="280" height="60" zorder="13" model="M_fresh000000000" name="Признать оценку полученной&#10;на актуальных данных">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_stale100000000" shapeType="ActivityAction" x="760" y="1245" width="280" height="60" zorder="14" model="M_stale100000000" name="Пометить оценку&#10;«На основе устаревших данных»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="60" />
+          <FillColor type="1" color="Cr:253,245,230,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_stale200000000" shapeType="ActivityAction" x="760" y="1335" width="280" height="60" zorder="15" model="M_stale200000000" name="Предупредить диспетчера&#10;об устаревших данных">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="60" />
+          <FillColor type="1" color="Cr:253,245,230,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_m2000000000000" shapeType="MergeNode" x="680" y="1435" width="40" height="40" zorder="3" model="M_m2000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_save0000000000" shapeType="ActivityAction" x="490" y="1515" width="420" height="60" zorder="21" model="M_save0000000000" name="Сохранить итоговый risk_score&#10;в заявке и отобразить его диспетчеру">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_reco0000000000" shapeType="ActivityAction" x="490" y="1605" width="420" height="60" zorder="22" model="M_reco0000000000" name="Сформировать рекомендацию по минимальному&#10;составу охраны и объёму припасов (UC-8)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_na000000000000" shapeType="ActivityAction" x="1000" y="790" width="265" height="52" zorder="5" model="M_na000000000000" name="Установить risk_score = «Н/Д»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="265" height="52" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_mark0000000000" shapeType="ActivityAction" x="1000" y="880" width="265" height="60" zorder="9" model="M_mark0000000000" name="Пометить заявку&#10;«risk_score требует пересчёта»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="265" height="60" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_notify00000000" shapeType="ActivityAction" x="1000" y="970" width="265" height="60" zorder="10" model="M_notify00000000" name="Уведомить диспетчера о недоступности&#10;внешней системы разведки">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="265" height="60" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_m1000000000000" shapeType="MergeNode" x="680" y="1705" width="40" height="40" zorder="4" model="M_m1000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_explain0000000" shapeType="ActivityAction" x="490" y="1785" width="420" height="60" zorder="23" model="M_explain0000000" name="Сохранить разбор оценки&#10;для показа диспетчеру">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="420" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_see00000000000" shapeType="ActivityAction" x="50" y="1875" width="320" height="78" zorder="17" model="M_see00000000000" name="Увидеть в карточке заявки risk_score&#10;или «Н/Д», уровень риска, пометки&#10;и рекомендацию (если оценка получена)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="320" height="78" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_stop0000000000" shapeType="ActivityFinalNode" x="195" y="1990" width="30" height="30" zorder="2" model="M_stop0000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S_pre00000000000" shapeType="NOTE" x="1660" y="350" width="400" height="110" zorder="27" model="M_pre00000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_post0000000000" shapeType="NOTE" x="1660" y="1785" width="400" height="110" zorder="28" model="M_post0000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_legend00000000" shapeType="NOTE" x="1660" y="800" width="400" height="230" zorder="30" model="M_legend00000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="848" height="60" zorder="29" model="F17ced0da9d3aadf" name="UC-7 «Рассчитать risk_score» — Activity Diagram (Use-Case View)&#10;Абстрактное описание: шаги предметной области; дорожки — актор, система как единое целое и внешняя система">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="848" height="60" />
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="C_f1000000000000" shapeType="ControlFlow" model="F_f1000000000000" from="S_start000000000" to="S_ask00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2000000000000" shapeType="ControlFlow" model="F_f2000000000000" from="S_ask00000000000" to="S_take0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3000000000000" shapeType="ControlFlow" model="F_f3000000000000" from="S_take0000000000" to="S_req00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f4000000000000" shapeType="ControlFlow" model="F_f4000000000000" from="S_req00000000000" to="S_ext00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f5000000000000" shapeType="ControlFlow" model="F_f5000000000000" from="S_ext00000000000" to="S_d1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f6000000000000" shapeType="ControlFlow" model="F_f6000000000000" from="S_d1000000000000" to="S_accept00000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="545" y="730" width="230" height="34" />
+          <Points />
+        </Connector>
+        <Connector id="C_f7000000000000" shapeType="ControlFlow" model="F_f7000000000000" from="S_accept00000000" to="S_aggr0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f8000000000000" shapeType="ControlFlow" model="F_f8000000000000" from="S_aggr0000000000" to="S_cargo000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f9000000000000" shapeType="ControlFlow" model="F_f9000000000000" from="S_cargo000000000" to="S_d2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f10x2000000000" shapeType="ControlFlow" model="F_f10x1000000000" from="S_d2000000000000" to="S_fresh000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="470" y="1155" width="230" height="34" />
+          <Points />
+        </Connector>
+        <Connector id="C_f1100000000000" shapeType="ControlFlow" model="F_f1100000000000" from="S_d2000000000000" to="S_stale100000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="755" y="1155" width="230" height="34" />
+          <Points>
+            <Point x="850" y="1127" />
+            <Point x="900" y="1127" />
+            <Point x="900" y="1245" />
+          </Points>
+        </Connector>
+        <Connector id="C_f1200000000000" shapeType="ControlFlow" model="F_f1200000000000" from="S_stale100000000" to="S_stale200000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1300000000000" shapeType="ControlFlow" model="F_f1300000000000" from="S_fresh000000000" to="S_m2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1400000000000" shapeType="ControlFlow" model="F_f1400000000000" from="S_stale200000000" to="S_m2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1500000000000" shapeType="ControlFlow" model="F_f1500000000000" from="S_m2000000000000" to="S_save0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1600000000000" shapeType="ControlFlow" model="F_f1600000000000" from="S_save0000000000" to="S_reco0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1700000000000" shapeType="ControlFlow" model="F_f1700000000000" from="S_d1000000000000" to="S_na000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="905" y="698" width="230" height="34" />
+          <Points>
+            <Point x="850" y="672" />
+            <Point x="1132" y="672" />
+            <Point x="1132" y="790" />
+          </Points>
+        </Connector>
+        <Connector id="C_f1800000000000" shapeType="ControlFlow" model="F_f1800000000000" from="S_na000000000000" to="S_mark0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1900000000000" shapeType="ControlFlow" model="F_f1900000000000" from="S_mark0000000000" to="S_notify00000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f20x4000000000" shapeType="ControlFlow" model="F_f20x3000000000" from="S_reco0000000000" to="S_m1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2100000000000" shapeType="ControlFlow" model="F_f2100000000000" from="S_notify00000000" to="S_m1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1132" y="1030" />
+            <Point x="1132" y="1680" />
+            <Point x="700" y="1680" />
+            <Point x="700" y="1705" />
+          </Points>
+        </Connector>
+        <Connector id="C_f2200000000000" shapeType="ControlFlow" model="F_f2200000000000" from="S_m1000000000000" to="S_explain0000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2300000000000" shapeType="ControlFlow" model="F_f2300000000000" from="S_explain0000000" to="S_see00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2400000000000" shapeType="ControlFlow" model="F_f2400000000000" from="S_see00000000000" to="S_stop0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="CA_pre0000000000" shapeType="Anchor" model="A_pre00000000000" from="S_pre00000000000" to="S_take0000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="CA_post000000000" shapeType="Anchor" model="A_post0000000000" from="S_post0000000000" to="S_explain0000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

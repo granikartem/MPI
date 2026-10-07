@@ -1,2 +1,470 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC32_ImplementationView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт"><ModelProperties><StringProperty name="name" value="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт" /></ModelProperties></Model><Model id="M100000000000000" modelType="State2" name="Команда принята&#10;command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)"><ModelProperties><StringProperty name="name" value="Команда принята&#10;command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" /></ModelProperties></Model><Model id="M200000000000000" modelType="State2" name="Данные проверены&#10;organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)"><ModelProperties><StringProperty name="name" value="Данные проверены&#10;organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" /></ModelProperties></Model><Model id="M300000000000000" modelType="State2" name="Организация ACTIVE&#10;organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;"><ModelProperties><StringProperty name="name" value="Организация ACTIVE&#10;organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" /></ModelProperties></Model><Model id="M400000000000000" modelType="State2" name="Диспетчер назначен&#10;dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;"><ModelProperties><StringProperty name="name" value="Диспетчер назначен&#10;dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" /></ModelProperties></Model><Model id="M500000000000000" modelType="State2" name="Событие записано&#10;event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;"><ModelProperties><StringProperty name="name" value="Событие записано&#10;event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" /></ModelProperties></Model><Model id="M600000000000000" modelType="State2" name="Отклонено&#10;@Transactional — откат"><ModelProperties><StringProperty name="name" value="Отклонено&#10;@Transactional — откат" /></ModelProperties></Model><Model id="M700000000000000" modelType="FinalState2"><ModelProperties /></Model><Model id="M800000000000000" modelType="InitialPseudoState"><ModelProperties /></Model><Model id="F900000000000000" modelType="Transition2" name="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)"><ModelProperties><StringProperty name="name" value="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)" /><ModelRefProperty name="from"><ModelRef id="M800000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F100000000000000" modelType="Transition2" name="[название и логин свободны,&#10;уровень подписки известен]"><ModelProperties><StringProperty name="name" value="[название и логин свободны,&#10;уровень подписки известен]" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F110000000000000" modelType="Transition2" name="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException"><ModelProperties><StringProperty name="name" value="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F120000000000000" modelType="Transition2" name="/ organizationRepository.save(organization)&#10;INSERT INTO organization"><ModelProperties><StringProperty name="name" value="/ organizationRepository.save(organization)&#10;INSERT INTO organization" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F130000000000000" modelType="Transition2" name="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user"><ModelProperties><StringProperty name="name" value="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F140000000000000" modelType="Transition2" name="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)"><ModelProperties><StringProperty name="name" value="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F150000000000000" modelType="Transition2" name="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)"><ModelProperties><StringProperty name="name" value="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F160000000000000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_organization_name_ci)"><ModelProperties><StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_organization_name_ci)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F170000000000000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_app_user_login_ci)"><ModelProperties><StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_app_user_login_ci)" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F180000000000000" modelType="Transition2" name="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created"><ModelProperties><StringProperty name="name" value="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created" /><ModelRefProperty name="from"><ModelRef id="M500000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F190000000000000" modelType="Transition2" name="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse"><ModelProperties><StringProperty name="name" value="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote20000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Подпись перехода: событие [сторожевое условие] / эффект.&#10;  Указаны классы, методы и имена аргументов; полные списки&#10;  параметров конструкторов и запросов не приводятся.&#10;  Все состояния проходятся внутри одного вызова&#10;  OrganizationService.create(...) с @Transactional." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SM_UC32_Implem" name="SM_UC32_ImplementationView" diagramType="StateDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="183" y="58" width="874" height="52" zorder="8" model="Mtitle0000000000" name="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="874" height="52" /></Shape><Shape id="S100000000000000" shapeType="State2" x="966" y="302" width="351" height="98" zorder="6" model="M100000000000000" name="Команда принята&#10;command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="351" height="98" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="State2" x="455" y="505" width="451" height="120" zorder="9" model="M200000000000000" name="Данные проверены&#10;organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="451" height="120" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="State2" x="418" y="730" width="291" height="120" zorder="7" model="M300000000000000" name="Организация ACTIVE&#10;organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="291" height="120" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="State2" x="430" y="979" width="271" height="120" zorder="5" model="M400000000000000" name="Диспетчер назначен&#10;dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="271" height="120" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="State2" x="74" y="1204" width="319" height="98" zorder="4" model="M500000000000000" name="Событие записано&#10;event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="319" height="98" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="State2" x="718" y="1215" width="221" height="76" zorder="3" model="M600000000000000" name="Отклонено&#10;@Transactional — откат"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="221" height="76" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="FinalState2" x="490" y="1407" width="34" height="34" zorder="2" model="M700000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S800000000000000" shapeType="InitialPseudoState" x="1127" y="138" width="30" height="30" zorder="1" model="M800000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="Snote20000000000" shapeType="NOTE" x="676" y="1451" width="596" height="142" zorder="10" model="Mnote20000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C900000000000000" shapeType="Transition2" model="F900000000000000" from="S800000000000000" to="S100000000000000"><Caption visible="true" side="None" x="1144" y="204" width="375" height="70" /></Connector><Connector id="C100000000000000" shapeType="Transition2" model="F100000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="886" y="432" width="274" height="46" /></Connector><Connector id="C110000000000000" shapeType="Transition2" model="F110000000000000" from="S100000000000000" to="S600000000000000"><Caption visible="true" side="None" x="1164" y="745" width="324" height="94" /></Connector><Connector id="C120000000000000" shapeType="Transition2" model="F120000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="637" y="657" width="436" height="46" /></Connector><Connector id="C130000000000000" shapeType="Transition2" model="F130000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="550" y="882" width="334" height="70" /></Connector><Connector id="C140000000000000" shapeType="Transition2" model="F140000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="71" y="1019" width="385" height="46" /></Connector><Connector id="C150000000000000" shapeType="Transition2" model="F150000000000000" from="S400000000000000" to="S500000000000000"><Caption visible="true" side="None" x="249" y="1131" width="345" height="46" /></Connector><Connector id="C160000000000000" shapeType="Transition2" model="F160000000000000" from="S300000000000000" to="S600000000000000"><Caption visible="true" side="None" x="858" y="1019" width="314" height="46" /></Connector><Connector id="C170000000000000" shapeType="Transition2" model="F170000000000000" from="S400000000000000" to="S600000000000000"><Caption visible="true" side="None" x="570" y="1131" width="314" height="46" /></Connector><Connector id="C180000000000000" shapeType="Transition2" model="F180000000000000" from="S500000000000000" to="S700000000000000"><Caption visible="true" side="None" x="313" y="1334" width="426" height="46" /></Connector><Connector id="C190000000000000" shapeType="Transition2" model="F190000000000000" from="S600000000000000" to="S700000000000000"><Caption visible="true" side="None" x="767" y="1334" width="334" height="46" /></Connector></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC32_ImplementationView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт" />
+      </ModelProperties>
+    </Model>
+    <Model id="M100000000000000" modelType="State2" name="Команда принята">
+      <ModelProperties>
+        <StringProperty name="name" value="Команда принята" />
+        <HTMLProperty name="documentation" plainTextValue="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M200000000000000" modelType="State2" name="Данные проверены">
+      <ModelProperties>
+        <StringProperty name="name" value="Данные проверены" />
+        <HTMLProperty name="documentation" plainTextValue="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M300000000000000" modelType="State2" name="Организация ACTIVE">
+      <ModelProperties>
+        <StringProperty name="name" value="Организация ACTIVE" />
+        <HTMLProperty name="documentation" plainTextValue="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" />
+      </ModelProperties>
+    </Model>
+    <Model id="M400000000000000" modelType="State2" name="Диспетчер назначен">
+      <ModelProperties>
+        <StringProperty name="name" value="Диспетчер назначен" />
+        <HTMLProperty name="documentation" plainTextValue="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" />
+      </ModelProperties>
+    </Model>
+    <Model id="M500000000000000" modelType="State2" name="Событие записано">
+      <ModelProperties>
+        <StringProperty name="name" value="Событие записано" />
+        <HTMLProperty name="documentation" plainTextValue="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" />
+      </ModelProperties>
+    </Model>
+    <Model id="M600000000000000" modelType="State2" name="Отклонено">
+      <ModelProperties>
+        <StringProperty name="name" value="Отклонено" />
+        <HTMLProperty name="documentation" plainTextValue="@Transactional — откат" />
+      </ModelProperties>
+    </Model>
+    <Model id="M700000000000000" modelType="FinalState2">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M800000000000000" modelType="InitialPseudoState">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F900000000000000" modelType="Transition2" name="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)">
+      <ModelProperties>
+        <StringProperty name="name" value="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F100000000000000" modelType="Transition2" name="[название и логин свободны,&#10;уровень подписки известен]">
+      <ModelProperties>
+        <StringProperty name="name" value="[название и логин свободны,&#10;уровень подписки известен]" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F110000000000000" modelType="Transition2" name="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException">
+      <ModelProperties>
+        <StringProperty name="name" value="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F120000000000000" modelType="Transition2" name="/ organizationRepository.save(organization)&#10;INSERT INTO organization">
+      <ModelProperties>
+        <StringProperty name="name" value="/ organizationRepository.save(organization)&#10;INSERT INTO organization" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F130000000000000" modelType="Transition2" name="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user">
+      <ModelProperties>
+        <StringProperty name="name" value="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F140000000000000" modelType="Transition2" name="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)">
+      <ModelProperties>
+        <StringProperty name="name" value="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F150000000000000" modelType="Transition2" name="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)">
+      <ModelProperties>
+        <StringProperty name="name" value="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F160000000000000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_organization_name_ci)">
+      <ModelProperties>
+        <StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_organization_name_ci)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F170000000000000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_app_user_login_ci)">
+      <ModelProperties>
+        <StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_app_user_login_ci)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F180000000000000" modelType="Transition2" name="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created">
+      <ModelProperties>
+        <StringProperty name="name" value="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F190000000000000" modelType="Transition2" name="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse">
+      <ModelProperties>
+        <StringProperty name="name" value="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote20000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Подпись перехода: событие [сторожевое условие] / эффект.&#10;  Указаны классы, методы и имена аргументов; полные списки&#10;  параметров конструкторов и запросов не приводятся.&#10;  Все состояния проходятся внутри одного вызова&#10;  OrganizationService.create(...) с @Transactional." />
+      </ModelProperties>
+    </Model>
+    <Model id="F7b6d5a1dd29d460" modelType="NOTE" name="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)">
+      <ModelProperties>
+        <StringProperty name="name" value="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" />
+        <HTMLProperty name="documentation" plainTextValue="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" />
+      </ModelProperties>
+    </Model>
+    <Model id="Fdfda333e6660933" modelType="NOTE" name="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)">
+      <ModelProperties>
+        <StringProperty name="name" value="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" />
+        <HTMLProperty name="documentation" plainTextValue="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" />
+      </ModelProperties>
+    </Model>
+    <Model id="Fe9ecc45b320f2af" modelType="NOTE" name="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;">
+      <ModelProperties>
+        <StringProperty name="name" value="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" />
+        <HTMLProperty name="documentation" plainTextValue="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" />
+      </ModelProperties>
+    </Model>
+    <Model id="F2834ecefbdd41a4" modelType="NOTE" name="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;">
+      <ModelProperties>
+        <StringProperty name="name" value="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" />
+        <HTMLProperty name="documentation" plainTextValue="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" />
+      </ModelProperties>
+    </Model>
+    <Model id="F958c78de02f49ec" modelType="NOTE" name="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;">
+      <ModelProperties>
+        <StringProperty name="name" value="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" />
+        <HTMLProperty name="documentation" plainTextValue="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" />
+      </ModelProperties>
+    </Model>
+    <Model id="F611711cddd4d15a" modelType="NOTE" name="@Transactional — откат">
+      <ModelProperties>
+        <StringProperty name="name" value="@Transactional — откат" />
+        <HTMLProperty name="documentation" plainTextValue="@Transactional — откат" />
+      </ModelProperties>
+    </Model>
+    <Model id="Fb1a616702a66130" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F38fd512ab651e44" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F0144ca430374cc2" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F3a43663729d3704" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F9267fd35ee7f1f6" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="Fb3064e8fcacb6d5" modelType="Rectangle" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_SM_UC32_Implem" name="SM_UC32_ImplementationView" diagramType="StateDiagram">
+      <Shapes>
+        <Shape id="Stitle0000000000" shapeType="TextBox" x="183" y="58" width="874" height="52" zorder="20" model="Mtitle0000000000" name="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="874" height="52" />
+        </Shape>
+        <Shape id="S100000000000000" shapeType="State2" x="966" y="302" width="351" height="98" zorder="18" model="M100000000000000" name="Команда принята">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="centerCaptionVertically" value="2" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="351" height="98" />
+          <ChildShapes>
+            <Shape id="Fe2b873f16b31574" shapeType="TextBox" x="970" y="330" width="343" height="36" zorder="11" model="F7b6d5a1dd29d460" name="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:0,0,0,255" />
+              <Line cap="0" color="Cr:0,0,0,255" transparency="0" weight="1" />
+              <Caption visible="true" side="Center" x="0" y="0" width="343" height="36" />
+            </Shape>
+            <Shape id="Fde4e393c4d9fecf" shapeType="Rectangle" x="966" y="328" width="351" height="1" zorder="5" model="Fb1a616702a66130">
+              <FillColor type="1" color="Cr:80,80,80,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S200000000000000" shapeType="State2" x="455" y="505" width="451" height="120" zorder="21" model="M200000000000000" name="Данные проверены">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="centerCaptionVertically" value="2" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="451" height="120" />
+          <ChildShapes>
+            <Shape id="Fd5e600d2abd4241" shapeType="TextBox" x="459" y="533" width="443" height="50" zorder="15" model="Fdfda333e6660933" name="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:0,0,0,255" />
+              <Line cap="0" color="Cr:0,0,0,255" transparency="0" weight="1" />
+              <Caption visible="true" side="Center" x="0" y="0" width="443" height="50" />
+            </Shape>
+            <Shape id="F5c9a4b4c282a42d" shapeType="Rectangle" x="455" y="531" width="451" height="1" zorder="6" model="F38fd512ab651e44">
+              <FillColor type="1" color="Cr:80,80,80,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S300000000000000" shapeType="State2" x="418" y="730" width="291" height="120" zorder="19" model="M300000000000000" name="Организация ACTIVE">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="centerCaptionVertically" value="2" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="291" height="120" />
+          <ChildShapes>
+            <Shape id="F715c7df45867675" shapeType="TextBox" x="422" y="758" width="283" height="50" zorder="13" model="Fe9ecc45b320f2af" name="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:0,0,0,255" />
+              <Line cap="0" color="Cr:0,0,0,255" transparency="0" weight="1" />
+              <Caption visible="true" side="Center" x="0" y="0" width="283" height="50" />
+            </Shape>
+            <Shape id="Fdef0d4ea42c7330" shapeType="Rectangle" x="418" y="756" width="291" height="1" zorder="3" model="F0144ca430374cc2">
+              <FillColor type="1" color="Cr:80,80,80,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S400000000000000" shapeType="State2" x="430" y="979" width="271" height="120" zorder="17" model="M400000000000000" name="Диспетчер назначен">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="centerCaptionVertically" value="2" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="271" height="120" />
+          <ChildShapes>
+            <Shape id="Fcf36e4684cb7caf" shapeType="TextBox" x="434" y="1007" width="263" height="50" zorder="12" model="F2834ecefbdd41a4" name="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:0,0,0,255" />
+              <Line cap="0" color="Cr:0,0,0,255" transparency="0" weight="1" />
+              <Caption visible="true" side="Center" x="0" y="0" width="263" height="50" />
+            </Shape>
+            <Shape id="Fa5d20c0a3e45b44" shapeType="Rectangle" x="430" y="1005" width="271" height="1" zorder="2" model="F3a43663729d3704">
+              <FillColor type="1" color="Cr:80,80,80,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S500000000000000" shapeType="State2" x="74" y="1204" width="319" height="98" zorder="16" model="M500000000000000" name="Событие записано">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="centerCaptionVertically" value="2" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="319" height="98" />
+          <ChildShapes>
+            <Shape id="Fc217238e91f1e1e" shapeType="TextBox" x="78" y="1232" width="311" height="36" zorder="10" model="F958c78de02f49ec" name="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:0,0,0,255" />
+              <Line cap="0" color="Cr:0,0,0,255" transparency="0" weight="1" />
+              <Caption visible="true" side="Center" x="0" y="0" width="311" height="36" />
+            </Shape>
+            <Shape id="F836c03e5d995e81" shapeType="Rectangle" x="74" y="1230" width="319" height="1" zorder="4" model="F9267fd35ee7f1f6">
+              <FillColor type="1" color="Cr:80,80,80,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S600000000000000" shapeType="State2" x="718" y="1215" width="221" height="76" zorder="14" model="M600000000000000" name="Отклонено">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="centerCaptionVertically" value="2" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="221" height="76" />
+          <ChildShapes>
+            <Shape id="Fc1ec80bf9847b3e" shapeType="TextBox" x="722" y="1243" width="213" height="22" zorder="9" model="F611711cddd4d15a" name="@Transactional — откат">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:0,0,0,255" />
+              <Line cap="0" color="Cr:0,0,0,255" transparency="0" weight="1" />
+              <Caption visible="true" side="Center" x="0" y="0" width="213" height="22" />
+            </Shape>
+            <Shape id="F64db47579bef0a4" shapeType="Rectangle" x="718" y="1241" width="221" height="1" zorder="1" model="Fb3064e8fcacb6d5">
+              <FillColor type="1" color="Cr:80,80,80,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S700000000000000" shapeType="FinalState2" x="490" y="1407" width="34" height="34" zorder="8" model="M700000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S800000000000000" shapeType="InitialPseudoState" x="1127" y="138" width="30" height="30" zorder="7" model="M800000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="Snote20000000000" shapeType="NOTE" x="676" y="1451" width="596" height="142" zorder="22" model="Mnote20000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="C900000000000000" shapeType="Transition2" model="F900000000000000" from="S800000000000000" to="S100000000000000">
+          <Caption visible="true" side="None" x="1144" y="204" width="375" height="70" />
+          <Points />
+        </Connector>
+        <Connector id="C100000000000000" shapeType="Transition2" model="F100000000000000" from="S100000000000000" to="S200000000000000">
+          <Caption visible="true" side="None" x="886" y="432" width="274" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C110000000000000" shapeType="Transition2" model="F110000000000000" from="S100000000000000" to="S600000000000000">
+          <Caption visible="true" side="None" x="1164" y="745" width="324" height="94" />
+          <Points />
+        </Connector>
+        <Connector id="C120000000000000" shapeType="Transition2" model="F120000000000000" from="S200000000000000" to="S300000000000000">
+          <Caption visible="true" side="None" x="637" y="657" width="436" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C130000000000000" shapeType="Transition2" model="F130000000000000" from="S300000000000000" to="S400000000000000">
+          <Caption visible="true" side="None" x="550" y="882" width="334" height="70" />
+          <Points />
+        </Connector>
+        <Connector id="C140000000000000" shapeType="Transition2" model="F140000000000000" from="S300000000000000" to="S500000000000000">
+          <Caption visible="true" side="None" x="71" y="1019" width="385" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C150000000000000" shapeType="Transition2" model="F150000000000000" from="S400000000000000" to="S500000000000000">
+          <Caption visible="true" side="None" x="249" y="1131" width="345" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C160000000000000" shapeType="Transition2" model="F160000000000000" from="S300000000000000" to="S600000000000000">
+          <Caption visible="true" side="None" x="858" y="1019" width="314" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C170000000000000" shapeType="Transition2" model="F170000000000000" from="S400000000000000" to="S600000000000000">
+          <Caption visible="true" side="None" x="570" y="1131" width="314" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C180000000000000" shapeType="Transition2" model="F180000000000000" from="S500000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="313" y="1334" width="426" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C190000000000000" shapeType="Transition2" model="F190000000000000" from="S600000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="767" y="1334" width="334" height="46" />
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

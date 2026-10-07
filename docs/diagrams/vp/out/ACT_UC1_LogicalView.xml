@@ -1,2 +1,1445 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="ACT_UC1_LogicalView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="M_swimlane000000" modelType="ActivitySwimlane2" name="Swimlane"><ModelProperties><StringProperty name="name" value="Swimlane" /><ModelsProperty name="verticalPartitions"><Model id="M_part_000000000" modelType="ActivityPartition" name="Диспетчер&#10;караванов"><ModelProperties><StringProperty name="name" value="Диспетчер&#10;караванов" /></ModelProperties></Model><Model id="M_part_010000000" modelType="ActivityPartition" name="presentation&#10;Интерфейс заявок"><ModelProperties><StringProperty name="name" value="presentation&#10;Интерфейс заявок" /></ModelProperties></Model><Model id="M_part_020000000" modelType="ActivityPartition" name="application&#10;Создание заявки"><ModelProperties><StringProperty name="name" value="application&#10;Создание заявки" /></ModelProperties></Model><Model id="M_part_030000000" modelType="ActivityPartition" name="application&#10;Расчёт ETA"><ModelProperties><StringProperty name="name" value="application&#10;Расчёт ETA" /></ModelProperties></Model><Model id="M_part_040000000" modelType="ActivityPartition" name="application&#10;Оценка риска"><ModelProperties><StringProperty name="name" value="application&#10;Оценка риска" /></ModelProperties></Model><Model id="M_part_050000000" modelType="ActivityPartition" name="domain&#10;Маршрут, Заявка"><ModelProperties><StringProperty name="name" value="domain&#10;Маршрут, Заявка" /></ModelProperties></Model><Model id="M_part_060000000" modelType="ActivityPartition" name="infrastructure&#10;Хранение данных"><ModelProperties><StringProperty name="name" value="infrastructure&#10;Хранение данных" /></ModelProperties></Model><Model id="M_part_070000000" modelType="ActivityPartition" name="infrastructure&#10;Адаптер&#10;Wasteland Intel"><ModelProperties><StringProperty name="name" value="infrastructure&#10;Адаптер&#10;Wasteland Intel" /></ModelProperties></Model><Model id="M_part_080000000" modelType="ActivityPartition" name="«внешняя система»&#10;Wasteland Intel"><ModelProperties><StringProperty name="name" value="«внешняя система»&#10;Wasteland Intel" /></ModelProperties></Model></ModelsProperty></ModelProperties></Model><Model id="M_start000000000" modelType="InitialNode"><ModelProperties /></Model><Model id="M_a1000000000000" modelType="ActivityAction" name="Открыть форму создания заявки"><ModelProperties><StringProperty name="name" value="Открыть форму создания заявки" /></ModelProperties></Model><Model id="M_a2000000000000" modelType="ActivityAction" name="Заполнить пункт отправления и назначения,&#10;дату отправки и описание груза"><ModelProperties><StringProperty name="name" value="Заполнить пункт отправления и назначения,&#10;дату отправки и описание груза" /></ModelProperties></Model><Model id="M_a3000000000000" modelType="ActivityAction" name="Передать данные заявки&#10;и выбранный способ задания маршрута"><ModelProperties><StringProperty name="name" value="Передать данные заявки&#10;и выбранный способ задания маршрута" /></ModelProperties></Model><Model id="M_a4000000000000" modelType="ActivityAction" name="Определить организацию заявки"><ModelProperties><StringProperty name="name" value="Определить организацию заявки" /></ModelProperties></Model><Model id="M_a5000000000000" modelType="ActivityAction" name="Выдать организацию&#10;или сообщить, что её нет"><ModelProperties><StringProperty name="name" value="Выдать организацию&#10;или сообщить, что её нет" /></ModelProperties></Model><Model id="M_d1000000000000" modelType="DecisionNode" name="организация существует?"><ModelProperties><StringProperty name="name" value="организация существует?" /></ModelProperties></Model><Model id="M_a6000000000000" modelType="ActivityAction" name="Привязать заявку к организации:&#10;все её данные живут в изолированном&#10;пространстве организации (FR-24)"><ModelProperties><StringProperty name="name" value="Привязать заявку к организации:&#10;все её данные живут в изолированном&#10;пространстве организации (FR-24)" /></ModelProperties></Model><Model id="M_a7000000000000" modelType="ActivityAction" name="Отказать: организация не найдена"><ModelProperties><StringProperty name="name" value="Отказать: организация не найдена" /></ModelProperties></Model><Model id="M_stop1000000000" modelType="ActivityFinalNode"><ModelProperties /></Model><Model id="M_d2000000000000" modelType="DecisionNode" name="способ задания маршрута"><ModelProperties><StringProperty name="name" value="способ задания маршрута" /></ModelProperties></Model><Model id="M_a8000000000000" modelType="ActivityAction" name="Выдать шаблон маршрута&#10;с участками и контрольными точками"><ModelProperties><StringProperty name="name" value="Выдать шаблон маршрута&#10;с участками и контрольными точками" /></ModelProperties></Model><Model id="M_a9000000000000" modelType="ActivityAction" name="Задать контрольные точки маршрута вручную"><ModelProperties><StringProperty name="name" value="Задать контрольные точки маршрута вручную" /></ModelProperties></Model><Model id="M_a10x1000000000" modelType="ActivityAction" name="Сформировать новый маршрут по участкам (UC-5)"><ModelProperties><StringProperty name="name" value="Сформировать новый маршрут по участкам (UC-5)" /></ModelProperties></Model><Model id="M_a1100000000000" modelType="ActivityAction" name="Сохранить маршрут, участки&#10;и новые контрольные точки"><ModelProperties><StringProperty name="name" value="Сохранить маршрут, участки&#10;и новые контрольные точки" /></ModelProperties></Model><Model id="M_m1000000000000" modelType="MergeNode"><ModelProperties /></Model><Model id="M_a1200000000000" modelType="ActivityAction" name="Маршрут: выдать участки в порядке следования&#10;и ключи участков «откуда — куда»"><ModelProperties><StringProperty name="name" value="Маршрут: выдать участки в порядке следования&#10;и ключи участков «откуда — куда»" /></ModelProperties></Model><Model id="M_a1300000000000" modelType="ActivityAction" name="Запросить данные об угрозах&#10;по участкам маршрута (UC-7)"><ModelProperties><StringProperty name="name" value="Запросить данные об угрозах&#10;по участкам маршрута (UC-7)" /></ModelProperties></Model><Model id="M_a1400000000000" modelType="ActivityAction" name="Обратиться к внешней системе разведки"><ModelProperties><StringProperty name="name" value="Обратиться к внешней системе разведки" /></ModelProperties></Model><Model id="M_a1500000000000" modelType="ActivityAction" name="Вернуть угрозы по участкам&#10;и дату актуальности&#10;либо не ответить"><ModelProperties><StringProperty name="name" value="Вернуть угрозы по участкам&#10;и дату актуальности&#10;либо не ответить" /></ModelProperties></Model><Model id="M_d3000000000000" modelType="DecisionNode" name="данные об угрозах получены?"><ModelProperties><StringProperty name="name" value="данные об угрозах получены?" /></ModelProperties></Model><Model id="M_a1600000000000" modelType="ActivityAction" name="Вычислить базовый risk_score маршрута&#10;по уровням угроз участков"><ModelProperties><StringProperty name="name" value="Вычислить базовый risk_score маршрута&#10;по уровням угроз участков" /></ModelProperties></Model><Model id="M_a1700000000000" modelType="ActivityAction" name="Установить risk_score «Н/Д»&#10;и пометку «требует пересчёта»"><ModelProperties><StringProperty name="name" value="Установить risk_score «Н/Д»&#10;и пометку «требует пересчёта»" /></ModelProperties></Model><Model id="M_m2000000000000" modelType="MergeNode"><ModelProperties /></Model><Model id="M_a1800000000000" modelType="ActivityAction" name="Сложить длины участков маршрута"><ModelProperties><StringProperty name="name" value="Сложить длины участков маршрута" /></ModelProperties></Model><Model id="M_a1900000000000" modelType="ActivityAction" name="Разделить на среднюю скорость каравана&#10;и получить расчётное время в пути (UC-6)"><ModelProperties><StringProperty name="name" value="Разделить на среднюю скорость каравана&#10;и получить расчётное время в пути (UC-6)" /></ModelProperties></Model><Model id="M_a20x3000000000" modelType="ActivityAction" name="Указать оценочную ценность груза&#10;в крышках (UC-12)"><ModelProperties><StringProperty name="name" value="Указать оценочную ценность груза&#10;в крышках (UC-12)" /></ModelProperties></Model><Model id="M_a2100000000000" modelType="ActivityAction" name="Пересчитать risk_score с учётом ценности груза&#10;и сформировать рекомендацию по составу&#10;охраны и объёму припасов (UC-8)"><ModelProperties><StringProperty name="name" value="Пересчитать risk_score с учётом ценности груза&#10;и сформировать рекомендацию по составу&#10;охраны и объёму припасов (UC-8)" /></ModelProperties></Model><Model id="M_a2200000000000" modelType="ActivityAction" name="Показать сводку заявки: маршрут, ETA,&#10;risk_score и рекомендацию"><ModelProperties><StringProperty name="name" value="Показать сводку заявки: маршрут, ETA,&#10;risk_score и рекомендацию" /></ModelProperties></Model><Model id="M_d4000000000000" modelType="DecisionNode" name="создание подтверждено?"><ModelProperties><StringProperty name="name" value="создание подтверждено?" /></ModelProperties></Model><Model id="M_a2300000000000" modelType="ActivityAction" name="Подтвердить создание заявки"><ModelProperties><StringProperty name="name" value="Подтвердить создание заявки" /></ModelProperties></Model><Model id="M_a2400000000000" modelType="ActivityAction" name="Закрыть форму, заявка не сохранена"><ModelProperties><StringProperty name="name" value="Закрыть форму, заявка не сохранена" /></ModelProperties></Model><Model id="M_stop2000000000" modelType="ActivityFinalNode"><ModelProperties /></Model><Model id="M_a2500000000000" modelType="ActivityAction" name="Заявка: собрать заявку в статусе «Черновик»&#10;с маршрутом, ETA, risk_score и рекомендацией"><ModelProperties><StringProperty name="name" value="Заявка: собрать заявку в статусе «Черновик»&#10;с маршрутом, ETA, risk_score и рекомендацией" /></ModelProperties></Model><Model id="M_a2600000000000" modelType="ActivityAction" name="Сохранить заявку и стартовую запись&#10;истории статусов"><ModelProperties><StringProperty name="name" value="Сохранить заявку и стартовую запись&#10;истории статусов" /></ModelProperties></Model><Model id="M_a2700000000000" modelType="ActivityAction" name="Показать созданную заявку в реестре"><ModelProperties><StringProperty name="name" value="Показать созданную заявку в реестре" /></ModelProperties></Model><Model id="M_a2800000000000" modelType="ActivityAction" name="Увидеть заявку со статусом «Черновик»"><ModelProperties><StringProperty name="name" value="Увидеть заявку со статусом «Черновик»" /></ModelProperties></Model><Model id="M_stop3000000000" modelType="ActivityFinalNode"><ModelProperties /></Model><Model id="F_f1000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_start000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a3000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f4000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a3000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a4000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f5000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a4000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a5000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f6000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a5000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_d1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f7000000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="да" /><ModelRefProperty name="from"><ModelRef id="M_d1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a6000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f8000000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="нет" /><ModelRefProperty name="from"><ModelRef id="M_d1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a7000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f9000000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a7000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_stop1000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f10x5000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a6000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_d2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1100000000000" modelType="ControlFlow" name="[шаблон] основной поток"><ModelProperties><StringProperty name="name" value="[шаблон] основной поток" /><ModelRefProperty name="from"><ModelRef id="M_d2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a8000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1200000000000" modelType="ControlFlow" name="[вручную] альт. поток 3а"><ModelProperties><StringProperty name="name" value="[вручную] альт. поток 3а" /><ModelRefProperty name="from"><ModelRef id="M_d2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a9000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1300000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a9000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a10x1000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1400000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a10x1000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1500000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a8000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1600000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m1000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1700000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_m1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1200000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1800000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1200000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1300000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f1900000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1300000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1400000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f20x7000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1400000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1500000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2100000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1500000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_d3000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2200000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="да" /><ModelRefProperty name="from"><ModelRef id="M_d3000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1600000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2300000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="нет — альт. поток 4а" /><ModelRefProperty name="from"><ModelRef id="M_d3000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2400000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1600000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2500000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1700000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_m2000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2600000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_m2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2700000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1800000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a1900000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2800000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a1900000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a20x3000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f2900000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a20x3000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f30x9000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2200000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3100000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2200000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_d4000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3200000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="да" /><ModelRefProperty name="from"><ModelRef id="M_d4000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2300000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3300000000000" modelType="ControlFlow"><ModelProperties><StringProperty name="guard" value="нет — альт. поток 8а" /><ModelRefProperty name="from"><ModelRef id="M_d4000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2400000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3400000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2400000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_stop2000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3500000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2300000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2500000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3600000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2500000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2600000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3700000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2600000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3800000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2700000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_a2800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F_f3900000000000" modelType="ControlFlow"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_a2800000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_stop3000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_legend00000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• дорожки — логические компоненты диаграммы пакетов&#10;  PKG_LogicalView; имена совпадают с участниками&#10;  Sequence, Cooperative и State Machine (Logical View)&#10;• розовым выделены альт. потоки 4а и 8а и отказы,&#10;  сиреневым — дорожка внешней системы&#10;&#10;Требования (docs/SRS.md)&#10;• FR-1, FR-5, FR-6, FR-7, FR-8, FR-14, FR-24&#10;• DC-6 (слои)" /></ModelProperties></Model></Models><Diagrams><Diagram id="D_ACT_UC1_Logica" name="ACT_UC1_LogicalView" diagramType="ActivityDiagram"><Shapes><Shape id="S_swimlane000000" shapeType="ActivitySwimlane2" x="40" y="40" width="3550" height="3280" zorder="1" model="M_swimlane000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringArrayProperty name="verticalPartitionIds"><Values><Value value="S_hdr_0000000000" /><Value value="S_hdr_0100000000" /><Value value="S_hdr_0200000000" /><Value value="S_hdr_0300000000" /><Value value="S_hdr_0400000000" /><Value value="S_hdr_0500000000" /><Value value="S_hdr_0600000000" /><Value value="S_hdr_0700000000" /><Value value="S_hdr_0800000000" /></Values></StringArrayProperty><StringArrayProperty name="compartmentIds"><Values><Value value="S_cmp_0000000000" /><Value value="S_cmp_0100000000" /><Value value="S_cmp_0200000000" /><Value value="S_cmp_0300000000" /><Value value="S_cmp_0400000000" /><Value value="S_cmp_0500000000" /><Value value="S_cmp_0600000000" /><Value value="S_cmp_0700000000" /><Value value="S_cmp_0800000000" /></Values></StringArrayProperty></DiagramElementProperties><ChildShapes><Shape id="S_hdr_0000000000" shapeType="ActivityPartitionHeader" x="40" y="40" width="340" height="70" zorder="2" model="M_part_000000000" name="Диспетчер&#10;караванов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="70" /></Shape><Shape id="S_cmp_0000000000" shapeType="ActivitySwimlane2Compartment" x="40" y="110" width="340" height="3210" zorder="3"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0000000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0100000000" shapeType="ActivityPartitionHeader" x="380" y="40" width="340" height="70" zorder="4" model="M_part_010000000" name="presentation&#10;Интерфейс заявок"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="70" /></Shape><Shape id="S_cmp_0100000000" shapeType="ActivitySwimlane2Compartment" x="380" y="110" width="340" height="3210" zorder="5"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0100000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0200000000" shapeType="ActivityPartitionHeader" x="720" y="40" width="620" height="70" zorder="6" model="M_part_020000000" name="application&#10;Создание заявки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="620" height="70" /></Shape><Shape id="S_cmp_0200000000" shapeType="ActivitySwimlane2Compartment" x="720" y="110" width="620" height="3210" zorder="7"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0200000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0300000000" shapeType="ActivityPartitionHeader" x="1340" y="40" width="370" height="70" zorder="8" model="M_part_030000000" name="application&#10;Расчёт ETA"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="370" height="70" /></Shape><Shape id="S_cmp_0300000000" shapeType="ActivitySwimlane2Compartment" x="1340" y="110" width="370" height="3210" zorder="9"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0300000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0400000000" shapeType="ActivityPartitionHeader" x="1710" y="40" width="560" height="70" zorder="10" model="M_part_040000000" name="application&#10;Оценка риска"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="560" height="70" /></Shape><Shape id="S_cmp_0400000000" shapeType="ActivitySwimlane2Compartment" x="1710" y="110" width="560" height="3210" zorder="11"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0400000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0500000000" shapeType="ActivityPartitionHeader" x="2270" y="40" width="360" height="70" zorder="12" model="M_part_050000000" name="domain&#10;Маршрут, Заявка"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="360" height="70" /></Shape><Shape id="S_cmp_0500000000" shapeType="ActivitySwimlane2Compartment" x="2270" y="110" width="360" height="3210" zorder="13"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0500000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0600000000" shapeType="ActivityPartitionHeader" x="2630" y="40" width="340" height="70" zorder="14" model="M_part_060000000" name="infrastructure&#10;Хранение данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="70" /></Shape><Shape id="S_cmp_0600000000" shapeType="ActivitySwimlane2Compartment" x="2630" y="110" width="340" height="3210" zorder="15"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0600000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0700000000" shapeType="ActivityPartitionHeader" x="2970" y="40" width="320" height="70" zorder="16" model="M_part_070000000" name="infrastructure&#10;Адаптер&#10;Wasteland Intel"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="320" height="70" /></Shape><Shape id="S_cmp_0700000000" shapeType="ActivitySwimlane2Compartment" x="2970" y="110" width="320" height="3210" zorder="17"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0700000000" /></DiagramElementProperties></Shape><Shape id="S_hdr_0800000000" shapeType="ActivityPartitionHeader" x="3290" y="40" width="300" height="70" zorder="18" model="M_part_080000000" name="«внешняя система»&#10;Wasteland Intel"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><BooleanProperty name="horizontal" value="false" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="70" /><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape><Shape id="S_cmp_0800000000" shapeType="ActivitySwimlane2Compartment" x="3290" y="110" width="300" height="3210" zorder="19"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><StringProperty name="verticalPartitionId" value="S_hdr_0800000000" /></DiagramElementProperties><ChildShapes><Shape id="S_a1500000000000" shapeType="ActivityAction" x="3310" y="1730" width="260" height="78" zorder="39" model="M_a1500000000000" name="Вернуть угрозы по участкам&#10;и дату актуальности&#10;либо не ответить"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="260" height="78" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape></ChildShapes></Shape><Shape id="S_start000000000" shapeType="InitialNode" x="195" y="160" width="30" height="30" zorder="20" model="M_start000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S_a1000000000000" shapeType="ActivityAction" x="60" y="230" width="300" height="46" zorder="21" model="M_a1000000000000" name="Открыть форму создания заявки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2000000000000" shapeType="ActivityAction" x="60" y="320" width="300" height="60" zorder="22" model="M_a2000000000000" name="Заполнить пункт отправления и назначения,&#10;дату отправки и описание груза"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a3000000000000" shapeType="ActivityAction" x="400" y="420" width="300" height="60" zorder="23" model="M_a3000000000000" name="Передать данные заявки&#10;и выбранный способ задания маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a4000000000000" shapeType="ActivityAction" x="750" y="520" width="300" height="46" zorder="24" model="M_a4000000000000" name="Определить организацию заявки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a5000000000000" shapeType="ActivityAction" x="2650" y="610" width="300" height="60" zorder="25" model="M_a5000000000000" name="Выдать организацию&#10;или сообщить, что её нет"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_d1000000000000" shapeType="DecisionNode" x="760" y="700" width="280" height="54" zorder="26" model="M_d1000000000000" name="организация существует?"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="54" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a6000000000000" shapeType="ActivityAction" x="750" y="820" width="300" height="78" zorder="27" model="M_a6000000000000" name="Привязать заявку к организации:&#10;все её данные живут в изолированном&#10;пространстве организации (FR-24)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="78" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a7000000000000" shapeType="ActivityAction" x="1070" y="820" width="250" height="50" zorder="28" model="M_a7000000000000" name="Отказать: организация не найдена"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="250" height="50" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S_stop1000000000" shapeType="ActivityFinalNode" x="1180" y="920" width="30" height="30" zorder="29" model="M_stop1000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S_d2000000000000" shapeType="DecisionNode" x="760" y="950" width="280" height="54" zorder="30" model="M_d2000000000000" name="способ задания маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="54" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a8000000000000" shapeType="ActivityAction" x="2650" y="1070" width="300" height="60" zorder="31" model="M_a8000000000000" name="Выдать шаблон маршрута&#10;с участками и контрольными точками"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a9000000000000" shapeType="ActivityAction" x="60" y="1070" width="300" height="46" zorder="32" model="M_a9000000000000" name="Задать контрольные точки маршрута вручную"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a10x2000000000" shapeType="ActivityAction" x="740" y="1160" width="320" height="46" zorder="33" model="M_a10x1000000000" name="Сформировать новый маршрут по участкам (UC-5)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="320" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1100000000000" shapeType="ActivityAction" x="2650" y="1250" width="300" height="60" zorder="34" model="M_a1100000000000" name="Сохранить маршрут, участки&#10;и новые контрольные точки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_m1000000000000" shapeType="MergeNode" x="2430" y="1360" width="40" height="40" zorder="35" model="M_m1000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1200000000000" shapeType="ActivityAction" x="2280" y="1440" width="340" height="60" zorder="36" model="M_a1200000000000" name="Маршрут: выдать участки в порядке следования&#10;и ключи участков «откуда — куда»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1300000000000" shapeType="ActivityAction" x="1840" y="1540" width="300" height="60" zorder="37" model="M_a1300000000000" name="Запросить данные об угрозах&#10;по участкам маршрута (UC-7)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1400000000000" shapeType="ActivityAction" x="2985" y="1640" width="290" height="46" zorder="38" model="M_a1400000000000" name="Обратиться к внешней системе разведки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="290" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_d3000000000000" shapeType="DecisionNode" x="1850" y="1840" width="280" height="54" zorder="40" model="M_d3000000000000" name="данные об угрозах получены?"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="54" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1600000000000" shapeType="ActivityAction" x="1713" y="1965" width="274" height="60" zorder="41" model="M_a1600000000000" name="Вычислить базовый risk_score маршрута&#10;по уровням угроз участков"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="274" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1700000000000" shapeType="ActivityAction" x="2020" y="1965" width="240" height="60" zorder="42" model="M_a1700000000000" name="Установить risk_score «Н/Д»&#10;и пометку «требует пересчёта»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="240" height="60" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S_m2000000000000" shapeType="MergeNode" x="1970" y="2090" width="40" height="40" zorder="43" model="M_m2000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1800000000000" shapeType="ActivityAction" x="1375" y="2170" width="300" height="46" zorder="44" model="M_a1800000000000" name="Сложить длины участков маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a1900000000000" shapeType="ActivityAction" x="1355" y="2230" width="340" height="60" zorder="45" model="M_a1900000000000" name="Разделить на среднюю скорость каравана&#10;и получить расчётное время в пути (UC-6)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a20x4000000000" shapeType="ActivityAction" x="60" y="2330" width="300" height="60" zorder="46" model="M_a20x3000000000" name="Указать оценочную ценность груза&#10;в крышках (UC-12)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2100000000000" shapeType="ActivityAction" x="1815" y="2430" width="350" height="78" zorder="47" model="M_a2100000000000" name="Пересчитать risk_score с учётом ценности груза&#10;и сформировать рекомендацию по составу&#10;охраны и объёму припасов (UC-8)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="350" height="78" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2200000000000" shapeType="ActivityAction" x="400" y="2540" width="300" height="60" zorder="48" model="M_a2200000000000" name="Показать сводку заявки: маршрут, ETA,&#10;risk_score и рекомендацию"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_d4000000000000" shapeType="DecisionNode" x="70" y="2630" width="280" height="54" zorder="49" model="M_d4000000000000" name="создание подтверждено?"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="280" height="54" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2300000000000" shapeType="ActivityAction" x="60" y="2750" width="300" height="46" zorder="50" model="M_a2300000000000" name="Подтвердить создание заявки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2400000000000" shapeType="ActivityAction" x="400" y="2750" width="300" height="46" zorder="51" model="M_a2400000000000" name="Закрыть форму, заявка не сохранена"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S_stop2000000000" shapeType="ActivityFinalNode" x="535" y="2830" width="30" height="30" zorder="52" model="M_stop2000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S_a2500000000000" shapeType="ActivityAction" x="2280" y="2910" width="340" height="60" zorder="53" model="M_a2500000000000" name="Заявка: собрать заявку в статусе «Черновик»&#10;с маршрутом, ETA, risk_score и рекомендацией"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="340" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2600000000000" shapeType="ActivityAction" x="2650" y="3000" width="300" height="60" zorder="54" model="M_a2600000000000" name="Сохранить заявку и стартовую запись&#10;истории статусов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2700000000000" shapeType="ActivityAction" x="400" y="3090" width="300" height="46" zorder="55" model="M_a2700000000000" name="Показать созданную заявку в реестре"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_a2800000000000" shapeType="ActivityAction" x="60" y="3170" width="300" height="46" zorder="56" model="M_a2800000000000" name="Увидеть заявку со статусом «Черновик»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="300" height="46" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_stop3000000000" shapeType="ActivityFinalNode" x="195" y="3250" width="30" height="30" zorder="57" model="M_stop3000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S_legend00000000" shapeType="NOTE" x="3650" y="1500" width="430" height="170" zorder="58" model="M_legend00000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C_f1000000000000" shapeType="ControlFlow" model="F_f1000000000000" from="S_start000000000" to="S_a1000000000000" connectorStyle="Rectlinear" /><Connector id="C_f2000000000000" shapeType="ControlFlow" model="F_f2000000000000" from="S_a1000000000000" to="S_a2000000000000" connectorStyle="Rectlinear" /><Connector id="C_f3000000000000" shapeType="ControlFlow" model="F_f3000000000000" from="S_a2000000000000" to="S_a3000000000000" connectorStyle="Rectlinear" /><Connector id="C_f4000000000000" shapeType="ControlFlow" model="F_f4000000000000" from="S_a3000000000000" to="S_a4000000000000" connectorStyle="Rectlinear" /><Connector id="C_f5000000000000" shapeType="ControlFlow" model="F_f5000000000000" from="S_a4000000000000" to="S_a5000000000000" connectorStyle="Rectlinear" /><Connector id="C_f6000000000000" shapeType="ControlFlow" model="F_f6000000000000" from="S_a5000000000000" to="S_d1000000000000" connectorStyle="Rectlinear"><Points><Point x="2800" y="670" /><Point x="2800" y="685" /><Point x="900" y="685" /><Point x="900" y="700" /></Points></Connector><Connector id="C_f7000000000000" shapeType="ControlFlow" model="F_f7000000000000" from="S_d1000000000000" to="S_a6000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="818" y="768" width="70" height="34" /></Connector><Connector id="C_f8000000000000" shapeType="ControlFlow" model="F_f8000000000000" from="S_d1000000000000" to="S_a7000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="1080" y="690" width="80" height="34" /><Points><Point x="1040" y="727" /><Point x="1195" y="727" /><Point x="1195" y="820" /></Points></Connector><Connector id="C_f9000000000000" shapeType="ControlFlow" model="F_f9000000000000" from="S_a7000000000000" to="S_stop1000000000" connectorStyle="Rectlinear" /><Connector id="C_f10x6000000000" shapeType="ControlFlow" model="F_f10x5000000000" from="S_a6000000000000" to="S_d2000000000000" connectorStyle="Rectlinear" /><Connector id="C_f1100000000000" shapeType="ControlFlow" model="F_f1100000000000" from="S_d2000000000000" to="S_a8000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="1405" y="938" width="240" height="34" /><Points><Point x="1040" y="977" /><Point x="2800" y="977" /><Point x="2800" y="1070" /></Points></Connector><Connector id="C_f1200000000000" shapeType="ControlFlow" model="F_f1200000000000" from="S_d2000000000000" to="S_a9000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="430" y="938" width="240" height="34" /><Points><Point x="760" y="977" /><Point x="210" y="977" /><Point x="210" y="1070" /></Points></Connector><Connector id="C_f1300000000000" shapeType="ControlFlow" model="F_f1300000000000" from="S_a9000000000000" to="S_a10x2000000000" connectorStyle="Rectlinear" /><Connector id="C_f1400000000000" shapeType="ControlFlow" model="F_f1400000000000" from="S_a10x2000000000" to="S_a1100000000000" connectorStyle="Rectlinear" /><Connector id="C_f1500000000000" shapeType="ControlFlow" model="F_f1500000000000" from="S_a8000000000000" to="S_m1000000000000" connectorStyle="Rectlinear"><Points><Point x="2650" y="1100" /><Point x="2450" y="1100" /><Point x="2450" y="1360" /></Points></Connector><Connector id="C_f1600000000000" shapeType="ControlFlow" model="F_f1600000000000" from="S_a1100000000000" to="S_m1000000000000" connectorStyle="Rectlinear"><Points><Point x="2800" y="1310" /><Point x="2800" y="1335" /><Point x="2450" y="1335" /><Point x="2450" y="1360" /></Points></Connector><Connector id="C_f1700000000000" shapeType="ControlFlow" model="F_f1700000000000" from="S_m1000000000000" to="S_a1200000000000" connectorStyle="Rectlinear" /><Connector id="C_f1800000000000" shapeType="ControlFlow" model="F_f1800000000000" from="S_a1200000000000" to="S_a1300000000000" connectorStyle="Rectlinear" /><Connector id="C_f1900000000000" shapeType="ControlFlow" model="F_f1900000000000" from="S_a1300000000000" to="S_a1400000000000" connectorStyle="Rectlinear" /><Connector id="C_f20x8000000000" shapeType="ControlFlow" model="F_f20x7000000000" from="S_a1400000000000" to="S_a1500000000000" connectorStyle="Rectlinear" /><Connector id="C_f2100000000000" shapeType="ControlFlow" model="F_f2100000000000" from="S_a1500000000000" to="S_d3000000000000" connectorStyle="Rectlinear"><Points><Point x="3440" y="1808" /><Point x="3440" y="1823" /><Point x="1990" y="1823" /><Point x="1990" y="1840" /></Points></Connector><Connector id="C_f2200000000000" shapeType="ControlFlow" model="F_f2200000000000" from="S_d3000000000000" to="S_a1600000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="1760" y="1918" width="70" height="34" /><Points><Point x="1990" y="1894" /><Point x="1990" y="1914" /><Point x="1850" y="1914" /><Point x="1850" y="1965" /></Points></Connector><Connector id="C_f2300000000000" shapeType="ControlFlow" model="F_f2300000000000" from="S_d3000000000000" to="S_a1700000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="1900" y="1922" width="240" height="34" /><Points><Point x="2130" y="1867" /><Point x="2140" y="1867" /><Point x="2140" y="1965" /></Points></Connector><Connector id="C_f2400000000000" shapeType="ControlFlow" model="F_f2400000000000" from="S_a1600000000000" to="S_m2000000000000" connectorStyle="Rectlinear"><Points><Point x="1850" y="2025" /><Point x="1850" y="2060" /><Point x="1990" y="2060" /><Point x="1990" y="2090" /></Points></Connector><Connector id="C_f2500000000000" shapeType="ControlFlow" model="F_f2500000000000" from="S_a1700000000000" to="S_m2000000000000" connectorStyle="Rectlinear"><Points><Point x="2140" y="2025" /><Point x="2140" y="2060" /><Point x="1990" y="2060" /><Point x="1990" y="2090" /></Points></Connector><Connector id="C_f2600000000000" shapeType="ControlFlow" model="F_f2600000000000" from="S_m2000000000000" to="S_a1800000000000" connectorStyle="Rectlinear" /><Connector id="C_f2700000000000" shapeType="ControlFlow" model="F_f2700000000000" from="S_a1800000000000" to="S_a1900000000000" connectorStyle="Rectlinear" /><Connector id="C_f2800000000000" shapeType="ControlFlow" model="F_f2800000000000" from="S_a1900000000000" to="S_a20x4000000000" connectorStyle="Rectlinear" /><Connector id="C_f2900000000000" shapeType="ControlFlow" model="F_f2900000000000" from="S_a20x4000000000" to="S_a2100000000000" connectorStyle="Rectlinear" /><Connector id="C_f30x1000000000" shapeType="ControlFlow" model="F_f30x9000000000" from="S_a2100000000000" to="S_a2200000000000" connectorStyle="Rectlinear" /><Connector id="C_f3100000000000" shapeType="ControlFlow" model="F_f3100000000000" from="S_a2200000000000" to="S_d4000000000000" connectorStyle="Rectlinear"><Points><Point x="550" y="2600" /><Point x="550" y="2615" /><Point x="210" y="2615" /><Point x="210" y="2630" /></Points></Connector><Connector id="C_f3200000000000" shapeType="ControlFlow" model="F_f3200000000000" from="S_d4000000000000" to="S_a2300000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="128" y="2700" width="70" height="34" /></Connector><Connector id="C_f3300000000000" shapeType="ControlFlow" model="F_f3300000000000" from="S_d4000000000000" to="S_a2400000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="395" y="2698" width="220" height="34" /><Points><Point x="350" y="2657" /><Point x="650" y="2657" /><Point x="650" y="2750" /></Points></Connector><Connector id="C_f3400000000000" shapeType="ControlFlow" model="F_f3400000000000" from="S_a2400000000000" to="S_stop2000000000" connectorStyle="Rectlinear" /><Connector id="C_f3500000000000" shapeType="ControlFlow" model="F_f3500000000000" from="S_a2300000000000" to="S_a2500000000000" connectorStyle="Rectlinear"><Points><Point x="210" y="2796" /><Point x="210" y="2885" /><Point x="2450" y="2885" /><Point x="2450" y="2910" /></Points></Connector><Connector id="C_f3600000000000" shapeType="ControlFlow" model="F_f3600000000000" from="S_a2500000000000" to="S_a2600000000000" connectorStyle="Rectlinear" /><Connector id="C_f3700000000000" shapeType="ControlFlow" model="F_f3700000000000" from="S_a2600000000000" to="S_a2700000000000" connectorStyle="Rectlinear" /><Connector id="C_f3800000000000" shapeType="ControlFlow" model="F_f3800000000000" from="S_a2700000000000" to="S_a2800000000000" connectorStyle="Rectlinear" /><Connector id="C_f3900000000000" shapeType="ControlFlow" model="F_f3900000000000" from="S_a2800000000000" to="S_stop3000000000" connectorStyle="Rectlinear" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="ACT_UC1_LogicalView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="M_swimlane000000" modelType="ActivitySwimlane2" name="Swimlane">
+      <ModelProperties>
+        <StringProperty name="name" value="Swimlane" />
+        <ModelsProperty name="verticalPartitions">
+          <Model id="M_part_000000000" modelType="ActivityPartition" name="Диспетчер&#10;караванов">
+            <ModelProperties>
+              <StringProperty name="name" value="Диспетчер&#10;караванов" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_010000000" modelType="ActivityPartition" name="presentation&#10;Интерфейс заявок">
+            <ModelProperties>
+              <StringProperty name="name" value="presentation&#10;Интерфейс заявок" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_020000000" modelType="ActivityPartition" name="application&#10;Создание заявки">
+            <ModelProperties>
+              <StringProperty name="name" value="application&#10;Создание заявки" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_030000000" modelType="ActivityPartition" name="application&#10;Расчёт ETA">
+            <ModelProperties>
+              <StringProperty name="name" value="application&#10;Расчёт ETA" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_040000000" modelType="ActivityPartition" name="application&#10;Оценка риска">
+            <ModelProperties>
+              <StringProperty name="name" value="application&#10;Оценка риска" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_050000000" modelType="ActivityPartition" name="domain&#10;Маршрут, Заявка">
+            <ModelProperties>
+              <StringProperty name="name" value="domain&#10;Маршрут, Заявка" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_060000000" modelType="ActivityPartition" name="infrastructure&#10;Хранение данных">
+            <ModelProperties>
+              <StringProperty name="name" value="infrastructure&#10;Хранение данных" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_070000000" modelType="ActivityPartition" name="infrastructure&#10;Адаптер&#10;Wasteland Intel">
+            <ModelProperties>
+              <StringProperty name="name" value="infrastructure&#10;Адаптер&#10;Wasteland Intel" />
+            </ModelProperties>
+          </Model>
+          <Model id="M_part_080000000" modelType="ActivityPartition" name="«внешняя система»&#10;Wasteland Intel">
+            <ModelProperties>
+              <StringProperty name="name" value="«внешняя система»&#10;Wasteland Intel" />
+            </ModelProperties>
+          </Model>
+        </ModelsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_start000000000" modelType="InitialNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1000000000000" modelType="ActivityAction" name="Открыть форму создания заявки">
+      <ModelProperties>
+        <StringProperty name="name" value="Открыть форму создания заявки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2000000000000" modelType="ActivityAction" name="Заполнить пункт отправления и назначения,&#10;дату отправки и описание груза">
+      <ModelProperties>
+        <StringProperty name="name" value="Заполнить пункт отправления и назначения,&#10;дату отправки и описание груза" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a3000000000000" modelType="ActivityAction" name="Передать данные заявки&#10;и выбранный способ задания маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Передать данные заявки&#10;и выбранный способ задания маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a4000000000000" modelType="ActivityAction" name="Определить организацию заявки">
+      <ModelProperties>
+        <StringProperty name="name" value="Определить организацию заявки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a5000000000000" modelType="ActivityAction" name="Выдать организацию&#10;или сообщить, что её нет">
+      <ModelProperties>
+        <StringProperty name="name" value="Выдать организацию&#10;или сообщить, что её нет" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_d1000000000000" modelType="DecisionNode" name="организация существует?">
+      <ModelProperties>
+        <StringProperty name="name" value="организация существует?" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a6000000000000" modelType="ActivityAction" name="Привязать заявку к организации:&#10;все её данные живут в изолированном&#10;пространстве организации (FR-24)">
+      <ModelProperties>
+        <StringProperty name="name" value="Привязать заявку к организации:&#10;все её данные живут в изолированном&#10;пространстве организации (FR-24)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a7000000000000" modelType="ActivityAction" name="Отказать: организация не найдена">
+      <ModelProperties>
+        <StringProperty name="name" value="Отказать: организация не найдена" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_stop1000000000" modelType="ActivityFinalNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_d2000000000000" modelType="DecisionNode" name="способ задания маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="способ задания маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a8000000000000" modelType="ActivityAction" name="Выдать шаблон маршрута&#10;с участками и контрольными точками">
+      <ModelProperties>
+        <StringProperty name="name" value="Выдать шаблон маршрута&#10;с участками и контрольными точками" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a9000000000000" modelType="ActivityAction" name="Задать контрольные точки маршрута вручную">
+      <ModelProperties>
+        <StringProperty name="name" value="Задать контрольные точки маршрута вручную" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a10x1000000000" modelType="ActivityAction" name="Сформировать новый маршрут по участкам (UC-5)">
+      <ModelProperties>
+        <StringProperty name="name" value="Сформировать новый маршрут по участкам (UC-5)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1100000000000" modelType="ActivityAction" name="Сохранить маршрут, участки&#10;и новые контрольные точки">
+      <ModelProperties>
+        <StringProperty name="name" value="Сохранить маршрут, участки&#10;и новые контрольные точки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_m1000000000000" modelType="MergeNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1200000000000" modelType="ActivityAction" name="Маршрут: выдать участки в порядке следования&#10;и ключи участков «откуда — куда»">
+      <ModelProperties>
+        <StringProperty name="name" value="Маршрут: выдать участки в порядке следования&#10;и ключи участков «откуда — куда»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1300000000000" modelType="ActivityAction" name="Запросить данные об угрозах&#10;по участкам маршрута (UC-7)">
+      <ModelProperties>
+        <StringProperty name="name" value="Запросить данные об угрозах&#10;по участкам маршрута (UC-7)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1400000000000" modelType="ActivityAction" name="Обратиться к внешней системе разведки">
+      <ModelProperties>
+        <StringProperty name="name" value="Обратиться к внешней системе разведки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1500000000000" modelType="ActivityAction" name="Вернуть угрозы по участкам&#10;и дату актуальности&#10;либо не ответить">
+      <ModelProperties>
+        <StringProperty name="name" value="Вернуть угрозы по участкам&#10;и дату актуальности&#10;либо не ответить" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_d3000000000000" modelType="DecisionNode" name="данные об угрозах получены?">
+      <ModelProperties>
+        <StringProperty name="name" value="данные об угрозах получены?" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1600000000000" modelType="ActivityAction" name="Вычислить базовый risk_score маршрута&#10;по уровням угроз участков">
+      <ModelProperties>
+        <StringProperty name="name" value="Вычислить базовый risk_score маршрута&#10;по уровням угроз участков" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1700000000000" modelType="ActivityAction" name="Установить risk_score «Н/Д»&#10;и пометку «требует пересчёта»">
+      <ModelProperties>
+        <StringProperty name="name" value="Установить risk_score «Н/Д»&#10;и пометку «требует пересчёта»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_m2000000000000" modelType="MergeNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1800000000000" modelType="ActivityAction" name="Сложить длины участков маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Сложить длины участков маршрута" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1900000000000" modelType="ActivityAction" name="Разделить на среднюю скорость каравана&#10;и получить расчётное время в пути (UC-6)">
+      <ModelProperties>
+        <StringProperty name="name" value="Разделить на среднюю скорость каравана&#10;и получить расчётное время в пути (UC-6)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a20x3000000000" modelType="ActivityAction" name="Указать оценочную ценность груза&#10;в крышках (UC-12)">
+      <ModelProperties>
+        <StringProperty name="name" value="Указать оценочную ценность груза&#10;в крышках (UC-12)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2100000000000" modelType="ActivityAction" name="Пересчитать risk_score с учётом ценности груза&#10;и сформировать рекомендацию по составу&#10;охраны и объёму припасов (UC-8)">
+      <ModelProperties>
+        <StringProperty name="name" value="Пересчитать risk_score с учётом ценности груза&#10;и сформировать рекомендацию по составу&#10;охраны и объёму припасов (UC-8)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2200000000000" modelType="ActivityAction" name="Показать сводку заявки: маршрут, ETA,&#10;risk_score и рекомендацию">
+      <ModelProperties>
+        <StringProperty name="name" value="Показать сводку заявки: маршрут, ETA,&#10;risk_score и рекомендацию" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_d4000000000000" modelType="DecisionNode" name="создание подтверждено?">
+      <ModelProperties>
+        <StringProperty name="name" value="создание подтверждено?" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2300000000000" modelType="ActivityAction" name="Подтвердить создание заявки">
+      <ModelProperties>
+        <StringProperty name="name" value="Подтвердить создание заявки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2400000000000" modelType="ActivityAction" name="Закрыть форму, заявка не сохранена">
+      <ModelProperties>
+        <StringProperty name="name" value="Закрыть форму, заявка не сохранена" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_stop2000000000" modelType="ActivityFinalNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2500000000000" modelType="ActivityAction" name="Заявка: собрать заявку в статусе «Черновик»&#10;с маршрутом, ETA, risk_score и рекомендацией">
+      <ModelProperties>
+        <StringProperty name="name" value="Заявка: собрать заявку в статусе «Черновик»&#10;с маршрутом, ETA, risk_score и рекомендацией" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2600000000000" modelType="ActivityAction" name="Сохранить заявку и стартовую запись&#10;истории статусов">
+      <ModelProperties>
+        <StringProperty name="name" value="Сохранить заявку и стартовую запись&#10;истории статусов" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2700000000000" modelType="ActivityAction" name="Показать созданную заявку в реестре">
+      <ModelProperties>
+        <StringProperty name="name" value="Показать созданную заявку в реестре" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_a2800000000000" modelType="ActivityAction" name="Увидеть заявку со статусом «Черновик»">
+      <ModelProperties>
+        <StringProperty name="name" value="Увидеть заявку со статусом «Черновик»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_stop3000000000" modelType="ActivityFinalNode">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_start000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a3000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f4000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a3000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a4000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f5000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a4000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a5000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f6000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a5000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_d1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f7000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="да" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a6000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f8000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="нет" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a7000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f9000000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a7000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_stop1000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f10x5000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a6000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_d2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1100000000000" modelType="ControlFlow" name="[шаблон] основной поток">
+      <ModelProperties>
+        <StringProperty name="name" value="[шаблон] основной поток" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a8000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1200000000000" modelType="ControlFlow" name="[вручную] альт. поток 3а">
+      <ModelProperties>
+        <StringProperty name="name" value="[вручную] альт. поток 3а" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a9000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1300000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a9000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a10x1000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1400000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a10x1000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1100000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1500000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a8000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1600000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m1000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1700000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_m1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1200000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1800000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1200000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1300000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f1900000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1300000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1400000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f20x7000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1400000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1500000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2100000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1500000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_d3000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2200000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="да" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d3000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1600000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2300000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="нет — альт. поток 4а" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d3000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1700000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2400000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1600000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2500000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1700000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_m2000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2600000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_m2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1800000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2700000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1800000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a1900000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2800000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a1900000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a20x3000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f2900000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a20x3000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2100000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f30x9000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2200000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3100000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2200000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_d4000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3200000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="да" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d4000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2300000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3300000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <StringProperty name="guard" value="нет — альт. поток 8а" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M_d4000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2400000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3400000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2400000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_stop2000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3500000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2300000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2500000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3600000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2500000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2600000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3700000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2600000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2700000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3800000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2700000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_a2800000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F_f3900000000000" modelType="ControlFlow">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_a2800000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_stop3000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_legend00000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• дорожки — логические компоненты диаграммы пакетов&#10;  PKG_LogicalView; имена совпадают с участниками&#10;  Sequence, Cooperative и State Machine (Logical View)&#10;• розовым выделены альт. потоки 4а и 8а и отказы,&#10;  сиреневым — дорожка внешней системы&#10;&#10;Требования (docs/SRS.md)&#10;• FR-1, FR-5, FR-6, FR-7, FR-8, FR-14, FR-24&#10;• DC-6 (слои)" />
+      </ModelProperties>
+    </Model>
+    <Model id="F17ced0da9d3aadf" modelType="NOTE" name="UC-1 «Создать заявку на перевозку» — Activity Diagram (Logical View)&#10;Дорожки — логические компоненты диаграммы пакетов; порядок шагов по docs/CoreUseCases.md, раздел UC-1">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-1 «Создать заявку на перевозку» — Activity Diagram (Logical View)&#10;Дорожки — логические компоненты диаграммы пакетов; порядок шагов по docs/CoreUseCases.md, раздел UC-1" />
+        <HTMLProperty name="documentation" plainTextValue="UC-1 «Создать заявку на перевозку» — Activity Diagram (Logical View)&#10;Дорожки — логические компоненты диаграммы пакетов; порядок шагов по docs/CoreUseCases.md, раздел UC-1" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_ACT_UC1_Logica" name="ACT_UC1_LogicalView" diagramType="ActivityDiagram">
+      <Shapes>
+        <Shape id="S_swimlane000000" shapeType="ActivitySwimlane2" x="40" y="140" width="3550" height="3225" zorder="59" model="M_swimlane000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <StringArrayProperty name="verticalPartitionIds">
+              <Values>
+                <Value value="S_hdr_0000000000" />
+                <Value value="S_hdr_0100000000" />
+                <Value value="S_hdr_0200000000" />
+                <Value value="S_hdr_0300000000" />
+                <Value value="S_hdr_0400000000" />
+                <Value value="S_hdr_0500000000" />
+                <Value value="S_hdr_0600000000" />
+                <Value value="S_hdr_0700000000" />
+                <Value value="S_hdr_0800000000" />
+              </Values>
+            </StringArrayProperty>
+            <StringArrayProperty name="compartmentIds">
+              <Values>
+                <Value value="S_cmp_0000000000" />
+                <Value value="S_cmp_0100000000" />
+                <Value value="S_cmp_0200000000" />
+                <Value value="S_cmp_0300000000" />
+                <Value value="S_cmp_0400000000" />
+                <Value value="S_cmp_0500000000" />
+                <Value value="S_cmp_0600000000" />
+                <Value value="S_cmp_0700000000" />
+                <Value value="S_cmp_0800000000" />
+              </Values>
+            </StringArrayProperty>
+          </DiagramElementProperties>
+          <ChildShapes>
+            <Shape id="S_hdr_0000000000" shapeType="ActivityPartitionHeader" x="40" y="140" width="340" height="70" zorder="40" model="M_part_000000000" name="Диспетчер&#10;караванов">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="340" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0000000000" shapeType="ActivitySwimlane2Compartment" x="40" y="210" width="340" height="3155" zorder="52">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0000000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0100000000" shapeType="ActivityPartitionHeader" x="380" y="140" width="340" height="70" zorder="41" model="M_part_010000000" name="presentation&#10;Интерфейс заявок">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="340" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0100000000" shapeType="ActivitySwimlane2Compartment" x="380" y="210" width="340" height="3155" zorder="53">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0100000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0200000000" shapeType="ActivityPartitionHeader" x="720" y="140" width="620" height="70" zorder="47" model="M_part_020000000" name="application&#10;Создание заявки">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="620" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0200000000" shapeType="ActivitySwimlane2Compartment" x="720" y="210" width="620" height="3155" zorder="58">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0200000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0300000000" shapeType="ActivityPartitionHeader" x="1340" y="140" width="370" height="70" zorder="44" model="M_part_030000000" name="application&#10;Расчёт ETA">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="370" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0300000000" shapeType="ActivitySwimlane2Compartment" x="1340" y="210" width="370" height="3155" zorder="56">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0300000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0400000000" shapeType="ActivityPartitionHeader" x="1710" y="140" width="560" height="70" zorder="46" model="M_part_040000000" name="application&#10;Оценка риска">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="560" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0400000000" shapeType="ActivitySwimlane2Compartment" x="1710" y="210" width="560" height="3155" zorder="57">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0400000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0500000000" shapeType="ActivityPartitionHeader" x="2270" y="140" width="360" height="70" zorder="43" model="M_part_050000000" name="domain&#10;Маршрут, Заявка">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="360" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0500000000" shapeType="ActivitySwimlane2Compartment" x="2270" y="210" width="360" height="3155" zorder="55">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0500000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0600000000" shapeType="ActivityPartitionHeader" x="2630" y="140" width="340" height="70" zorder="42" model="M_part_060000000" name="infrastructure&#10;Хранение данных">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="340" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0600000000" shapeType="ActivitySwimlane2Compartment" x="2630" y="210" width="340" height="3155" zorder="54">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0600000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0700000000" shapeType="ActivityPartitionHeader" x="2970" y="140" width="320" height="70" zorder="38" model="M_part_070000000" name="infrastructure&#10;Адаптер&#10;Wasteland Intel">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="320" height="70" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0700000000" shapeType="ActivitySwimlane2Compartment" x="2970" y="210" width="320" height="3155" zorder="51">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0700000000" />
+              </DiagramElementProperties>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_hdr_0800000000" shapeType="ActivityPartitionHeader" x="3290" y="140" width="300" height="70" zorder="37" model="M_part_080000000" name="«внешняя система»&#10;Wasteland Intel">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <BooleanProperty name="horizontal" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="300" height="70" />
+              <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_cmp_0800000000" shapeType="ActivitySwimlane2Compartment" x="3290" y="210" width="300" height="3155" zorder="50">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+                <StringProperty name="verticalPartitionId" value="S_hdr_0800000000" />
+              </DiagramElementProperties>
+              <ChildShapes>
+                <Shape id="S_a1500000000000" shapeType="ActivityAction" x="3310" y="1802" width="260" height="78" zorder="33" model="M_a1500000000000" name="Вернуть угрозы по участкам&#10;и дату актуальности&#10;либо не ответить">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="260" height="78" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="S_start000000000" shapeType="InitialNode" x="195" y="260" width="30" height="30" zorder="1" model="M_start000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S_a1000000000000" shapeType="ActivityAction" x="60" y="330" width="300" height="46" zorder="9" model="M_a1000000000000" name="Открыть форму создания заявки">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2000000000000" shapeType="ActivityAction" x="60" y="420" width="300" height="60" zorder="24" model="M_a2000000000000" name="Заполнить пункт отправления и назначения,&#10;дату отправки и описание груза">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a3000000000000" shapeType="ActivityAction" x="400" y="520" width="300" height="60" zorder="25" model="M_a3000000000000" name="Передать данные заявки&#10;и выбранный способ задания маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a4000000000000" shapeType="ActivityAction" x="750" y="620" width="300" height="46" zorder="10" model="M_a4000000000000" name="Определить организацию заявки">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a5000000000000" shapeType="ActivityAction" x="2650" y="710" width="300" height="60" zorder="26" model="M_a5000000000000" name="Выдать организацию&#10;или сообщить, что её нет">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_d1000000000000" shapeType="DecisionNode" x="760" y="800" width="280" height="54" zorder="19" model="M_d1000000000000" name="организация существует?">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="54" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a6000000000000" shapeType="ActivityAction" x="750" y="920" width="300" height="78" zorder="39" model="M_a6000000000000" name="Привязать заявку к организации:&#10;все её данные живут в изолированном&#10;пространстве организации (FR-24)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="78" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a7000000000000" shapeType="ActivityAction" x="1070" y="920" width="250" height="50" zorder="7" model="M_a7000000000000" name="Отказать: организация не найдена">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="250" height="50" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_stop1000000000" shapeType="ActivityFinalNode" x="1180" y="1020" width="30" height="30" zorder="2" model="M_stop1000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S_d2000000000000" shapeType="DecisionNode" x="760" y="1050" width="280" height="54" zorder="20" model="M_d2000000000000" name="способ задания маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="54" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a8000000000000" shapeType="ActivityAction" x="2650" y="1148" width="300" height="60" zorder="27" model="M_a8000000000000" name="Выдать шаблон маршрута&#10;с участками и контрольными точками">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a9000000000000" shapeType="ActivityAction" x="60" y="1148" width="300" height="46" zorder="11" model="M_a9000000000000" name="Задать контрольные точки маршрута вручную">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a10x2000000000" shapeType="ActivityAction" x="740" y="1238" width="320" height="46" zorder="18" model="M_a10x1000000000" name="Сформировать новый маршрут по участкам (UC-5)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="320" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1100000000000" shapeType="ActivityAction" x="2650" y="1328" width="300" height="60" zorder="28" model="M_a1100000000000" name="Сохранить маршрут, участки&#10;и новые контрольные точки">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_m1000000000000" shapeType="MergeNode" x="2430" y="1432" width="40" height="40" zorder="5" model="M_m1000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1200000000000" shapeType="ActivityAction" x="2280" y="1512" width="340" height="60" zorder="34" model="M_a1200000000000" name="Маршрут: выдать участки в порядке следования&#10;и ключи участков «откуда — куда»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="340" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1300000000000" shapeType="ActivityAction" x="1840" y="1612" width="300" height="60" zorder="29" model="M_a1300000000000" name="Запросить данные об угрозах&#10;по участкам маршрута (UC-7)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1400000000000" shapeType="ActivityAction" x="2985" y="1712" width="290" height="46" zorder="8" model="M_a1400000000000" name="Обратиться к внешней системе разведки">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="290" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_d3000000000000" shapeType="DecisionNode" x="1850" y="1912" width="280" height="54" zorder="21" model="M_d3000000000000" name="данные об угрозах получены?">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="54" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1600000000000" shapeType="ActivityAction" x="1713" y="2037" width="274" height="60" zorder="23" model="M_a1600000000000" name="Вычислить базовый risk_score маршрута&#10;по уровням угроз участков">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="274" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1700000000000" shapeType="ActivityAction" x="2020" y="2037" width="240" height="60" zorder="17" model="M_a1700000000000" name="Установить risk_score «Н/Д»&#10;и пометку «требует пересчёта»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="240" height="60" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_m2000000000000" shapeType="MergeNode" x="1970" y="2141" width="40" height="40" zorder="6" model="M_m2000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1800000000000" shapeType="ActivityAction" x="1375" y="2221" width="300" height="46" zorder="12" model="M_a1800000000000" name="Сложить длины участков маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a1900000000000" shapeType="ActivityAction" x="1355" y="2281" width="340" height="60" zorder="35" model="M_a1900000000000" name="Разделить на среднюю скорость каравана&#10;и получить расчётное время в пути (UC-6)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="340" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a20x4000000000" shapeType="ActivityAction" x="60" y="2381" width="300" height="60" zorder="30" model="M_a20x3000000000" name="Указать оценочную ценность груза&#10;в крышках (UC-12)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2100000000000" shapeType="ActivityAction" x="1815" y="2481" width="350" height="78" zorder="45" model="M_a2100000000000" name="Пересчитать risk_score с учётом ценности груза&#10;и сформировать рекомендацию по составу&#10;охраны и объёму припасов (UC-8)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="350" height="78" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2200000000000" shapeType="ActivityAction" x="400" y="2591" width="300" height="60" zorder="31" model="M_a2200000000000" name="Показать сводку заявки: маршрут, ETA,&#10;risk_score и рекомендацию">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_d4000000000000" shapeType="DecisionNode" x="70" y="2681" width="280" height="54" zorder="22" model="M_d4000000000000" name="создание подтверждено?">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="280" height="54" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2300000000000" shapeType="ActivityAction" x="60" y="2801" width="300" height="46" zorder="13" model="M_a2300000000000" name="Подтвердить создание заявки">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2400000000000" shapeType="ActivityAction" x="400" y="2801" width="300" height="46" zorder="14" model="M_a2400000000000" name="Закрыть форму, заявка не сохранена">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_stop2000000000" shapeType="ActivityFinalNode" x="535" y="2881" width="30" height="30" zorder="3" model="M_stop2000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S_a2500000000000" shapeType="ActivityAction" x="2280" y="2955" width="340" height="60" zorder="36" model="M_a2500000000000" name="Заявка: собрать заявку в статусе «Черновик»&#10;с маршрутом, ETA, risk_score и рекомендацией">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="340" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2600000000000" shapeType="ActivityAction" x="2650" y="3045" width="300" height="60" zorder="32" model="M_a2600000000000" name="Сохранить заявку и стартовую запись&#10;истории статусов">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="60" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2700000000000" shapeType="ActivityAction" x="400" y="3135" width="300" height="46" zorder="15" model="M_a2700000000000" name="Показать созданную заявку в реестре">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_a2800000000000" shapeType="ActivityAction" x="60" y="3215" width="300" height="46" zorder="16" model="M_a2800000000000" name="Увидеть заявку со статусом «Черновик»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="300" height="46" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_stop3000000000" shapeType="ActivityFinalNode" x="195" y="3295" width="30" height="30" zorder="4" model="M_stop3000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S_legend00000000" shapeType="NOTE" x="3650" y="1572" width="430" height="170" zorder="49" model="M_legend00000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="808" height="60" zorder="48" model="F17ced0da9d3aadf" name="UC-1 «Создать заявку на перевозку» — Activity Diagram (Logical View)&#10;Дорожки — логические компоненты диаграммы пакетов; порядок шагов по docs/CoreUseCases.md, раздел UC-1">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="808" height="60" />
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="C_f1000000000000" shapeType="ControlFlow" model="F_f1000000000000" from="S_start000000000" to="S_a1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2000000000000" shapeType="ControlFlow" model="F_f2000000000000" from="S_a1000000000000" to="S_a2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3000000000000" shapeType="ControlFlow" model="F_f3000000000000" from="S_a2000000000000" to="S_a3000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f4000000000000" shapeType="ControlFlow" model="F_f4000000000000" from="S_a3000000000000" to="S_a4000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f5000000000000" shapeType="ControlFlow" model="F_f5000000000000" from="S_a4000000000000" to="S_a5000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f6000000000000" shapeType="ControlFlow" model="F_f6000000000000" from="S_a5000000000000" to="S_d1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2800" y="770" />
+            <Point x="2800" y="785" />
+            <Point x="900" y="785" />
+            <Point x="900" y="800" />
+          </Points>
+        </Connector>
+        <Connector id="C_f7000000000000" shapeType="ControlFlow" model="F_f7000000000000" from="S_d1000000000000" to="S_a6000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="818" y="868" width="70" height="34" />
+          <Points />
+        </Connector>
+        <Connector id="C_f8000000000000" shapeType="ControlFlow" model="F_f8000000000000" from="S_d1000000000000" to="S_a7000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="1080" y="790" width="80" height="34" />
+          <Points>
+            <Point x="1040" y="827" />
+            <Point x="1195" y="827" />
+            <Point x="1195" y="920" />
+          </Points>
+        </Connector>
+        <Connector id="C_f9000000000000" shapeType="ControlFlow" model="F_f9000000000000" from="S_a7000000000000" to="S_stop1000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f10x6000000000" shapeType="ControlFlow" model="F_f10x5000000000" from="S_a6000000000000" to="S_d2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1100000000000" shapeType="ControlFlow" model="F_f1100000000000" from="S_d2000000000000" to="S_a8000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="1405" y="1038" width="240" height="34" />
+          <Points>
+            <Point x="1040" y="1077" />
+            <Point x="2800" y="1077" />
+            <Point x="2800" y="1148" />
+          </Points>
+        </Connector>
+        <Connector id="C_f1200000000000" shapeType="ControlFlow" model="F_f1200000000000" from="S_d2000000000000" to="S_a9000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="430" y="1038" width="240" height="34" />
+          <Points>
+            <Point x="760" y="1077" />
+            <Point x="210" y="1077" />
+            <Point x="210" y="1148" />
+          </Points>
+        </Connector>
+        <Connector id="C_f1300000000000" shapeType="ControlFlow" model="F_f1300000000000" from="S_a9000000000000" to="S_a10x2000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1400000000000" shapeType="ControlFlow" model="F_f1400000000000" from="S_a10x2000000000" to="S_a1100000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1500000000000" shapeType="ControlFlow" model="F_f1500000000000" from="S_a8000000000000" to="S_m1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2650" y="1178" />
+            <Point x="2450" y="1178" />
+            <Point x="2450" y="1432" />
+          </Points>
+        </Connector>
+        <Connector id="C_f1600000000000" shapeType="ControlFlow" model="F_f1600000000000" from="S_a1100000000000" to="S_m1000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2800" y="1388" />
+            <Point x="2800" y="1410" />
+            <Point x="2450" y="1410" />
+            <Point x="2450" y="1432" />
+          </Points>
+        </Connector>
+        <Connector id="C_f1700000000000" shapeType="ControlFlow" model="F_f1700000000000" from="S_m1000000000000" to="S_a1200000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1800000000000" shapeType="ControlFlow" model="F_f1800000000000" from="S_a1200000000000" to="S_a1300000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f1900000000000" shapeType="ControlFlow" model="F_f1900000000000" from="S_a1300000000000" to="S_a1400000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f20x8000000000" shapeType="ControlFlow" model="F_f20x7000000000" from="S_a1400000000000" to="S_a1500000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2100000000000" shapeType="ControlFlow" model="F_f2100000000000" from="S_a1500000000000" to="S_d3000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="3440" y="1880" />
+            <Point x="3440" y="1895" />
+            <Point x="1990" y="1895" />
+            <Point x="1990" y="1912" />
+          </Points>
+        </Connector>
+        <Connector id="C_f2200000000000" shapeType="ControlFlow" model="F_f2200000000000" from="S_d3000000000000" to="S_a1600000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="1760" y="1990" width="70" height="34" />
+          <Points>
+            <Point x="1990" y="1966" />
+            <Point x="1990" y="1986" />
+            <Point x="1850" y="1986" />
+            <Point x="1850" y="2037" />
+          </Points>
+        </Connector>
+        <Connector id="C_f2300000000000" shapeType="ControlFlow" model="F_f2300000000000" from="S_d3000000000000" to="S_a1700000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="1900" y="1994" width="240" height="34" />
+          <Points>
+            <Point x="2130" y="1939" />
+            <Point x="2140" y="1939" />
+            <Point x="2140" y="2037" />
+          </Points>
+        </Connector>
+        <Connector id="C_f2400000000000" shapeType="ControlFlow" model="F_f2400000000000" from="S_a1600000000000" to="S_m2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1850" y="2097" />
+            <Point x="1850" y="2120" />
+            <Point x="1990" y="2120" />
+            <Point x="1990" y="2141" />
+          </Points>
+        </Connector>
+        <Connector id="C_f2500000000000" shapeType="ControlFlow" model="F_f2500000000000" from="S_a1700000000000" to="S_m2000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2140" y="2097" />
+            <Point x="2140" y="2120" />
+            <Point x="1990" y="2120" />
+            <Point x="1990" y="2141" />
+          </Points>
+        </Connector>
+        <Connector id="C_f2600000000000" shapeType="ControlFlow" model="F_f2600000000000" from="S_m2000000000000" to="S_a1800000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2700000000000" shapeType="ControlFlow" model="F_f2700000000000" from="S_a1800000000000" to="S_a1900000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2800000000000" shapeType="ControlFlow" model="F_f2800000000000" from="S_a1900000000000" to="S_a20x4000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f2900000000000" shapeType="ControlFlow" model="F_f2900000000000" from="S_a20x4000000000" to="S_a2100000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f30x1000000000" shapeType="ControlFlow" model="F_f30x9000000000" from="S_a2100000000000" to="S_a2200000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3100000000000" shapeType="ControlFlow" model="F_f3100000000000" from="S_a2200000000000" to="S_d4000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="550" y="2651" />
+            <Point x="550" y="2666" />
+            <Point x="210" y="2666" />
+            <Point x="210" y="2681" />
+          </Points>
+        </Connector>
+        <Connector id="C_f3200000000000" shapeType="ControlFlow" model="F_f3200000000000" from="S_d4000000000000" to="S_a2300000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="128" y="2751" width="70" height="34" />
+          <Points />
+        </Connector>
+        <Connector id="C_f3300000000000" shapeType="ControlFlow" model="F_f3300000000000" from="S_d4000000000000" to="S_a2400000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="395" y="2749" width="220" height="34" />
+          <Points>
+            <Point x="350" y="2708" />
+            <Point x="650" y="2708" />
+            <Point x="650" y="2801" />
+          </Points>
+        </Connector>
+        <Connector id="C_f3400000000000" shapeType="ControlFlow" model="F_f3400000000000" from="S_a2400000000000" to="S_stop2000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3500000000000" shapeType="ControlFlow" model="F_f3500000000000" from="S_a2300000000000" to="S_a2500000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="210" y="2847" />
+            <Point x="210" y="2933" />
+            <Point x="2450" y="2933" />
+            <Point x="2450" y="2955" />
+          </Points>
+        </Connector>
+        <Connector id="C_f3600000000000" shapeType="ControlFlow" model="F_f3600000000000" from="S_a2500000000000" to="S_a2600000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3700000000000" shapeType="ControlFlow" model="F_f3700000000000" from="S_a2600000000000" to="S_a2700000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3800000000000" shapeType="ControlFlow" model="F_f3800000000000" from="S_a2700000000000" to="S_a2800000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C_f3900000000000" shapeType="ControlFlow" model="F_f3900000000000" from="S_a2800000000000" to="S_stop3000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

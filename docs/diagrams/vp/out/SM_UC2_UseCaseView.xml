@@ -1,2 +1,373 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC2_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов"><ModelProperties><StringProperty name="name" value="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов" /></ModelProperties></Model><Model id="M100000000000000" modelType="State2" name="Черновик&#10;(Draft)"><ModelProperties><StringProperty name="name" value="Черновик&#10;(Draft)" /></ModelProperties></Model><Model id="M200000000000000" modelType="State2" name="Готов к отправке&#10;(Ready)"><ModelProperties><StringProperty name="name" value="Готов к отправке&#10;(Ready)" /></ModelProperties></Model><Model id="M300000000000000" modelType="State2" name="В пути&#10;(En Route)"><ModelProperties><StringProperty name="name" value="В пути&#10;(En Route)" /></ModelProperties></Model><Model id="M400000000000000" modelType="State2" name="Задержка&#10;(Delayed)"><ModelProperties><StringProperty name="name" value="Задержка&#10;(Delayed)" /></ModelProperties></Model><Model id="M500000000000000" modelType="State2" name="Доставлен&#10;(Delivered)"><ModelProperties><StringProperty name="name" value="Доставлен&#10;(Delivered)" /></ModelProperties></Model><Model id="M600000000000000" modelType="State2" name="Закрыт&#10;(Closed)"><ModelProperties><StringProperty name="name" value="Закрыт&#10;(Closed)" /></ModelProperties></Model><Model id="M700000000000000" modelType="State2" name="Отменён&#10;(Cancelled)"><ModelProperties><StringProperty name="name" value="Отменён&#10;(Cancelled)" /></ModelProperties></Model><Model id="M800000000000000" modelType="FinalState2"><ModelProperties /></Model><Model id="M900000000000000" modelType="InitialPseudoState"><ModelProperties /></Model><Model id="F100000000000000" modelType="Transition2" name="UC-1: диспетчер создал&#10;заявку на перевозку"><ModelProperties><StringProperty name="name" value="UC-1: диспетчер создал&#10;заявку на перевозку" /><ModelRefProperty name="from"><ModelRef id="M900000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F110000000000000" modelType="Transition2" name="Укомплектовать рейс&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Укомплектовать рейс&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F120000000000000" modelType="Transition2" name="Отменить заявку&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Отменить заявку&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F130000000000000" modelType="Transition2" name="Караван вышел на маршрут&#10;(Караван-мастер)"><ModelProperties><StringProperty name="name" value="Караван вышел на маршрут&#10;(Караван-мастер)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F140000000000000" modelType="Transition2" name="Отменить рейс до выхода&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Отменить рейс до выхода&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F150000000000000" modelType="Transition2" name="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]"><ModelProperties><StringProperty name="name" value="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F160000000000000" modelType="Transition2" name="Движение возобновлено&#10;(Караван-мастер / Диспетчер)"><ModelProperties><StringProperty name="name" value="Движение возобновлено&#10;(Караван-мастер / Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F170000000000000" modelType="Transition2" name="Груз доставлен&#10;(Караван-мастер)"><ModelProperties><StringProperty name="name" value="Груз доставлен&#10;(Караван-мастер)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F180000000000000" modelType="Transition2" name="Закрыть рейс&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Закрыть рейс&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M500000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F190000000000000" modelType="Transition2"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F200000000000000" modelType="Transition2"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M700000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote21000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="UC-19: инцидент высокой или&#10;  критической тяжести переводит&#10;  рейс в «Задержку» автоматически&#10;  (актор Система)" /></ModelProperties></Model><Model id="Anote21000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote21000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote22000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Отмена возможна только&#10;  до выхода каравана на маршрут.&#10;  «Закрыт» и «Отменён» — финальные" /></ModelProperties></Model><Model id="Anote22000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote22000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote23000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Переход инициирует актор, указанный в скобках.&#10;  Каждый переход попадает в историю статусов (FR-3)&#10;  и в журнал аудита (FR-35)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SM_UC2_UseCase" name="SM_UC2_UseCaseView" diagramType="StateDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="279" y="58" width="693" height="52" zorder="10" model="Mtitle0000000000" name="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="693" height="52" /></Shape><Shape id="S100000000000000" shapeType="State2" x="828" y="278" width="120" height="75" zorder="5" model="M100000000000000" name="Черновик&#10;(Draft)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="State2" x="645" y="457" width="187" height="75" zorder="9" model="M200000000000000" name="Готов к отправке&#10;(Ready)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="187" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="State2" x="390" y="637" width="127" height="75" zorder="6" model="M300000000000000" name="В пути&#10;(En Route)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="127" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="State2" x="85" y="858" width="120" height="75" zorder="4" model="M400000000000000" name="Задержка&#10;(Delayed)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="State2" x="700" y="858" width="129" height="75" zorder="7" model="M500000000000000" name="Доставлен&#10;(Delivered)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="129" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="State2" x="760" y="1055" width="120" height="75" zorder="3" model="M600000000000000" name="Закрыт&#10;(Closed)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="75" /><FillColor type="1" color="Cr:144,238,144,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="State2" x="899" y="637" width="132" height="75" zorder="8" model="M700000000000000" name="Отменён&#10;(Cancelled)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="132" height="75" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S800000000000000" shapeType="FinalState2" x="880" y="1184" width="34" height="34" zorder="2" model="M800000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S900000000000000" shapeType="InitialPseudoState" x="873" y="138" width="30" height="30" zorder="1" model="M900000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="Snote21000000000" shapeType="NOTE" x="205" y="842" width="359" height="109" zorder="11" model="Mnote21000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote22000000000" shapeType="NOTE" x="977" y="713" width="365" height="226" zorder="13" model="Mnote22000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote23000000000" shapeType="NOTE" x="766" y="1227" width="520" height="91" zorder="12" model="Mnote23000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C100000000000000" shapeType="Transition2" model="F100000000000000" from="S900000000000000" to="S100000000000000"><Caption visible="true" side="None" x="890" y="204" width="223" height="46" /></Connector><Connector id="C110000000000000" shapeType="Transition2" model="F110000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="786" y="384" width="192" height="46" /></Connector><Connector id="C120000000000000" shapeType="Transition2" model="F120000000000000" from="S100000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1003" y="474" width="152" height="46" /></Connector><Connector id="C130000000000000" shapeType="Transition2" model="F130000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="472" y="564" width="243" height="46" /></Connector><Connector id="C140000000000000" shapeType="Transition2" model="F140000000000000" from="S200000000000000" to="S700000000000000"><Caption visible="true" side="None" x="744" y="564" width="233" height="46" /></Connector><Connector id="C150000000000000" shapeType="Transition2" model="F150000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="65" y="744" width="385" height="70" /></Connector><Connector id="C160000000000000" shapeType="Transition2" model="F160000000000000" from="S400000000000000" to="S300000000000000"><Caption visible="true" side="None" x="458" y="756" width="284" height="46" /></Connector><Connector id="C170000000000000" shapeType="Transition2" model="F170000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="755" y="756" width="162" height="46" /></Connector><Connector id="C180000000000000" shapeType="Transition2" model="F180000000000000" from="S500000000000000" to="S600000000000000"><Caption visible="true" side="None" x="796" y="982" width="121" height="46" /></Connector><Connector id="C190000000000000" shapeType="Transition2" model="F190000000000000" from="S600000000000000" to="S800000000000000" /><Connector id="C200000000000000" shapeType="Transition2" model="F200000000000000" from="S700000000000000" to="S800000000000000" /><Connector id="CAnote2100000000" shapeType="Anchor" model="Anote21000000000" from="Snote21000000000" to="S400000000000000" /><Connector id="CAnote2200000000" shapeType="Anchor" model="Anote22000000000" from="Snote22000000000" to="S700000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC2_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="Mtitle0000000000" modelType="NOTE" name="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов" />
+      </ModelProperties>
+    </Model>
+    <Model id="M100000000000000" modelType="State2" name="Черновик&#10;(Draft)">
+      <ModelProperties>
+        <StringProperty name="name" value="Черновик&#10;(Draft)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M200000000000000" modelType="State2" name="Готов к отправке&#10;(Ready)">
+      <ModelProperties>
+        <StringProperty name="name" value="Готов к отправке&#10;(Ready)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M300000000000000" modelType="State2" name="В пути&#10;(En Route)">
+      <ModelProperties>
+        <StringProperty name="name" value="В пути&#10;(En Route)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M400000000000000" modelType="State2" name="Задержка&#10;(Delayed)">
+      <ModelProperties>
+        <StringProperty name="name" value="Задержка&#10;(Delayed)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M500000000000000" modelType="State2" name="Доставлен&#10;(Delivered)">
+      <ModelProperties>
+        <StringProperty name="name" value="Доставлен&#10;(Delivered)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M600000000000000" modelType="State2" name="Закрыт&#10;(Closed)">
+      <ModelProperties>
+        <StringProperty name="name" value="Закрыт&#10;(Closed)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M700000000000000" modelType="State2" name="Отменён&#10;(Cancelled)">
+      <ModelProperties>
+        <StringProperty name="name" value="Отменён&#10;(Cancelled)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M800000000000000" modelType="FinalState2">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="M900000000000000" modelType="InitialPseudoState">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F100000000000000" modelType="Transition2" name="UC-1: диспетчер создал&#10;заявку на перевозку">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-1: диспетчер создал&#10;заявку на перевозку" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M900000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F110000000000000" modelType="Transition2" name="Укомплектовать рейс&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Укомплектовать рейс&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F120000000000000" modelType="Transition2" name="Отменить заявку&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Отменить заявку&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F130000000000000" modelType="Transition2" name="Караван вышел на маршрут&#10;(Караван-мастер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Караван вышел на маршрут&#10;(Караван-мастер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F140000000000000" modelType="Transition2" name="Отменить рейс до выхода&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Отменить рейс до выхода&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F150000000000000" modelType="Transition2" name="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]">
+      <ModelProperties>
+        <StringProperty name="name" value="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F160000000000000" modelType="Transition2" name="Движение возобновлено&#10;(Караван-мастер / Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Движение возобновлено&#10;(Караван-мастер / Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F170000000000000" modelType="Transition2" name="Груз доставлен&#10;(Караван-мастер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Груз доставлен&#10;(Караван-мастер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F180000000000000" modelType="Transition2" name="Закрыть рейс&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Закрыть рейс&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F190000000000000" modelType="Transition2">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F200000000000000" modelType="Transition2">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote21000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="UC-19: инцидент высокой или&#10;  критической тяжести переводит&#10;  рейс в «Задержку» автоматически&#10;  (актор Система)" />
+      </ModelProperties>
+    </Model>
+    <Model id="Anote21000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="Mnote21000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote22000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Отмена возможна только&#10;  до выхода каравана на маршрут.&#10;  «Закрыт» и «Отменён» — финальные" />
+      </ModelProperties>
+    </Model>
+    <Model id="Anote22000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="Mnote22000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote23000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Переход инициирует актор, указанный в скобках.&#10;  Каждый переход попадает в историю статусов (FR-3)&#10;  и в журнал аудита (FR-35)." />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_SM_UC2_UseCase" name="SM_UC2_UseCaseView" diagramType="StateDiagram">
+      <Shapes>
+        <Shape id="Stitle0000000000" shapeType="TextBox" x="279" y="58" width="693" height="52" zorder="10" model="Mtitle0000000000" name="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="693" height="52" />
+        </Shape>
+        <Shape id="S100000000000000" shapeType="State2" x="828" y="278" width="120" height="75" zorder="3" model="M100000000000000" name="Черновик&#10;(Draft)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="120" height="75" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S200000000000000" shapeType="State2" x="645" y="457" width="187" height="75" zorder="9" model="M200000000000000" name="Готов к отправке&#10;(Ready)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="187" height="75" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S300000000000000" shapeType="State2" x="390" y="637" width="127" height="75" zorder="6" model="M300000000000000" name="В пути&#10;(En Route)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="127" height="75" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S400000000000000" shapeType="State2" x="85" y="858" width="120" height="75" zorder="4" model="M400000000000000" name="Задержка&#10;(Delayed)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="120" height="75" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S500000000000000" shapeType="State2" x="700" y="858" width="129" height="75" zorder="7" model="M500000000000000" name="Доставлен&#10;(Delivered)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="129" height="75" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S600000000000000" shapeType="State2" x="760" y="1055" width="120" height="75" zorder="5" model="M600000000000000" name="Закрыт&#10;(Closed)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="120" height="75" />
+          <FillColor type="1" color="Cr:144,238,144,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S700000000000000" shapeType="State2" x="899" y="637" width="132" height="75" zorder="8" model="M700000000000000" name="Отменён&#10;(Cancelled)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="132" height="75" />
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S800000000000000" shapeType="FinalState2" x="880" y="1184" width="34" height="34" zorder="2" model="M800000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="S900000000000000" shapeType="InitialPseudoState" x="873" y="138" width="30" height="30" zorder="1" model="M900000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+        </Shape>
+        <Shape id="Snote21000000000" shapeType="NOTE" x="205" y="842" width="359" height="109" zorder="11" model="Mnote21000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote22000000000" shapeType="NOTE" x="977" y="713" width="365" height="226" zorder="13" model="Mnote22000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote23000000000" shapeType="NOTE" x="766" y="1227" width="520" height="91" zorder="12" model="Mnote23000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="C100000000000000" shapeType="Transition2" model="F100000000000000" from="S900000000000000" to="S100000000000000">
+          <Caption visible="true" side="None" x="890" y="204" width="223" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C110000000000000" shapeType="Transition2" model="F110000000000000" from="S100000000000000" to="S200000000000000">
+          <Caption visible="true" side="None" x="786" y="384" width="192" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C120000000000000" shapeType="Transition2" model="F120000000000000" from="S100000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="1003" y="474" width="152" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C130000000000000" shapeType="Transition2" model="F130000000000000" from="S200000000000000" to="S300000000000000">
+          <Caption visible="true" side="None" x="472" y="564" width="243" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C140000000000000" shapeType="Transition2" model="F140000000000000" from="S200000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="744" y="564" width="233" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C150000000000000" shapeType="Transition2" model="F150000000000000" from="S300000000000000" to="S400000000000000">
+          <Caption visible="true" side="None" x="65" y="744" width="385" height="70" />
+          <Points />
+        </Connector>
+        <Connector id="C160000000000000" shapeType="Transition2" model="F160000000000000" from="S400000000000000" to="S300000000000000">
+          <Caption visible="true" side="None" x="458" y="756" width="284" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C170000000000000" shapeType="Transition2" model="F170000000000000" from="S300000000000000" to="S500000000000000">
+          <Caption visible="true" side="None" x="755" y="756" width="162" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C180000000000000" shapeType="Transition2" model="F180000000000000" from="S500000000000000" to="S600000000000000">
+          <Caption visible="true" side="None" x="796" y="982" width="121" height="46" />
+          <Points />
+        </Connector>
+        <Connector id="C190000000000000" shapeType="Transition2" model="F190000000000000" from="S600000000000000" to="S800000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C200000000000000" shapeType="Transition2" model="F200000000000000" from="S700000000000000" to="S800000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="CAnote2100000000" shapeType="Anchor" model="Anote21000000000" from="Snote21000000000" to="S400000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="CAnote2200000000" shapeType="Anchor" model="Anote22000000000" from="Snote22000000000" to="S700000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

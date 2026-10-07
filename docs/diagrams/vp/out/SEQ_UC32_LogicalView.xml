@@ -1,2 +1,623 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SEQ_UC32_LogicalView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов"><ModelProperties><StringProperty name="name" value="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов" /></ModelProperties></Model><Model id="M100000000000000" modelType="InteractionActor" name="Суперпользователь"><ModelProperties><StringProperty name="name" value="Суперпользователь" /></ModelProperties></Model><Model id="M200000000000000" modelType="InteractionLifeLine" name="Интерфейс управления&#10;организациями"><ModelProperties><StringProperty name="name" value="Интерфейс управления&#10;организациями" /></ModelProperties></Model><Model id="M300000000000000" modelType="InteractionLifeLine" name="Создание организации&#10;(UC-32)"><ModelProperties><StringProperty name="name" value="Создание организации&#10;(UC-32)" /></ModelProperties></Model><Model id="M400000000000000" modelType="InteractionLifeLine" name="Организация"><ModelProperties><StringProperty name="name" value="Организация" /></ModelProperties></Model><Model id="M500000000000000" modelType="InteractionLifeLine" name="Учётная запись"><ModelProperties><StringProperty name="name" value="Учётная запись" /></ModelProperties></Model><Model id="M600000000000000" modelType="InteractionLifeLine" name="Событие аудита"><ModelProperties><StringProperty name="name" value="Событие аудита" /></ModelProperties></Model><Model id="M700000000000000" modelType="InteractionLifeLine" name="Хранение&#10;данных"><ModelProperties><StringProperty name="name" value="Хранение&#10;данных" /></ModelProperties></Model><Model id="M800000000000000" modelType="InteractionLifeLine" name="Журнал&#10;аудита"><ModelProperties><StringProperty name="name" value="Журнал&#10;аудита" /></ModelProperties></Model><Model id="M900000000000000" modelType="CombinedFragment" name="break"><ModelProperties><StringProperty name="name" value="break" /><StringProperty name="interactionOperator" value="break" /></ModelProperties></Model><Model id="Mo10000000000000" modelType="InteractionOperand" name="название занято (альт. 4а)"><ModelProperties><StringProperty name="name" value="название занято (альт. 4а)" /></ModelProperties></Model><Model id="M110000000000000" modelType="CombinedFragment" name="opt"><ModelProperties><StringProperty name="name" value="opt" /><StringProperty name="interactionOperator" value="opt" /></ModelProperties></Model><Model id="Mo12000000000000" modelType="InteractionOperand" name="первый диспетчер задан"><ModelProperties><StringProperty name="name" value="первый диспетчер задан" /></ModelProperties></Model><Model id="M130000000000000" modelType="CombinedFragment" name="break"><ModelProperties><StringProperty name="name" value="break" /><StringProperty name="interactionOperator" value="break" /></ModelProperties></Model><Model id="Mo14000000000000" modelType="InteractionOperand" name="логин занят"><ModelProperties><StringProperty name="name" value="логин занят" /></ModelProperties></Model><Model id="M150000000000000" modelType="CombinedFragment" name="alt"><ModelProperties><StringProperty name="name" value="alt" /><StringProperty name="interactionOperator" value="alt" /></ModelProperties></Model><Model id="Mo16000000000000" modelType="InteractionOperand" name="первый диспетчер задан"><ModelProperties><StringProperty name="name" value="первый диспетчер задан" /></ModelProperties></Model><Model id="Mo17000000000000" modelType="InteractionOperand" name="альт. 6а: назначение пропущено"><ModelProperties><StringProperty name="name" value="альт. 6а: назначение пропущено" /></ModelProperties></Model><Model id="Mm18000000000000" modelType="Message" name="1: заполнить данные организации&#10;и первого диспетчера, подтвердить"><ModelProperties><StringProperty name="name" value="1: заполнить данные организации&#10;и первого диспетчера, подтвердить" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm19000000000000" modelType="Message" name="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)"><ModelProperties><StringProperty name="name" value="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm20000000000000" modelType="Message" name="1.1.1: занято = найти организацию по названию"><ModelProperties><StringProperty name="name" value="1.1.1: занято = найти организацию по названию" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm21000000000000" modelType="Message" name="1.2: показать ошибку «Организация&#10;с таким названием уже существует»"><ModelProperties><StringProperty name="name" value="1.2: показать ошибку «Организация&#10;с таким названием уже существует»" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm22000000000000" modelType="Message" name="1.1.2: занят = найти пользователя по логину"><ModelProperties><StringProperty name="name" value="1.1.2: занят = найти пользователя по логину" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm23000000000000" modelType="Message" name="1.2: показать ошибку «Пользователь&#10;с таким логином уже существует»"><ModelProperties><StringProperty name="name" value="1.2: показать ошибку «Пользователь&#10;с таким логином уже существует»" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm24000000000000" modelType="Message" name="1.1.3: организация = создать(ключ арендатора, название,&#10;уровень подписки, контакты)"><ModelProperties><StringProperty name="name" value="1.1.3: организация = создать(ключ арендатора, название,&#10;уровень подписки, контакты)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm25000000000000" modelType="Message" name="1.1.4: сохранить организацию"><ModelProperties><StringProperty name="name" value="1.1.4: сохранить организацию" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm26000000000000" modelType="Message" name="1.1.5: учётная запись = создать(организация, ФИО, логин,&#10;хеш начального пароля, роль «Диспетчер»)"><ModelProperties><StringProperty name="name" value="1.1.5: учётная запись = создать(организация, ФИО, логин,&#10;хеш начального пароля, роль «Диспетчер»)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm27000000000000" modelType="Message" name="1.1.6: сохранить учётную запись"><ModelProperties><StringProperty name="name" value="1.1.6: сохранить учётную запись" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm28000000000000" modelType="Message" name="1.1.7: событие = сформировать «организация создана»"><ModelProperties><StringProperty name="name" value="1.1.7: событие = сформировать «организация создана»" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm29000000000000" modelType="Message" name="1.1.8: записать событие"><ModelProperties><StringProperty name="name" value="1.1.8: записать событие" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm30000000000000" modelType="Message" name="1.2: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера"><ModelProperties><StringProperty name="name" value="1.2: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote31000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Нумерация иерархическая: целое число — действие актора,&#10;  вложенные вызовы — 1.1, 1.1.1, …&#10;  Сплошная линия, закрашенная стрелка — синхронный вызов;&#10;  результат вызова — в подписи: «результат = операция(...)».&#10;  Сплошная линия, открытая стрелка — асинхронное сообщение." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SEQ_UC32_Logic" name="SEQ_UC32_LogicalView" diagramType="InteractionDiagram"><DiagramProperties><BooleanProperty name="showSequenceNumbers" value="false" /></DiagramProperties><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="783" y="65" width="722" height="52" zorder="1" model="Mtitle0000000000" name="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="722" height="52" /></Shape><Shape id="S100000000000000" shapeType="InteractionActor" x="83" y="168" width="172" height="1196" zorder="12" model="M100000000000000" name="Суперпользователь"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="172" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="InteractionLifeLine" x="431" y="168" width="244" height="1196" zorder="15" model="M200000000000000" name="Интерфейс управления&#10;организациями"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="244" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="InteractionLifeLine" x="1002" y="168" width="236" height="1196" zorder="14" model="M300000000000000" name="Создание организации&#10;(UC-32)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="236" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="InteractionLifeLine" x="1598" y="168" width="143" height="1196" zorder="10" model="M400000000000000" name="Организация"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="143" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="InteractionLifeLine" x="1756" y="168" width="167" height="1196" zorder="11" model="M500000000000000" name="Учётная запись"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="167" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="InteractionLifeLine" x="1938" y="168" width="175" height="1196" zorder="13" model="M600000000000000" name="Событие аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="175" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="InteractionLifeLine" x="2151" y="168" width="120" height="1196" zorder="8" model="M700000000000000" name="Хранение&#10;данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S800000000000000" shapeType="InteractionLifeLine" x="2278" y="168" width="120" height="1196" zorder="7" model="M800000000000000" name="Журнал&#10;аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="1196" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S900000000000000" shapeType="CombinedFragment" x="69" y="445" width="620" height="94" zorder="5" model="M900000000000000" name="break"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="620" height="94" /><ChildShapes><Shape id="So10000000000000" shapeType="InteractionOperand" x="69" y="445" width="620" height="94" zorder="4" model="Mo10000000000000" name="название занято (альт. 4а)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="620" height="94" /></Shape></ChildShapes></Shape><Shape id="S110000000000000" shapeType="CombinedFragment" x="54" y="560" width="2224" height="185" zorder="19" model="M110000000000000" name="opt"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="2224" height="185" /><ChildShapes><Shape id="So12000000000000" shapeType="InteractionOperand" x="54" y="560" width="2224" height="185" zorder="18" model="Mo12000000000000" name="первый диспетчер задан"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="2224" height="185" /></Shape></ChildShapes></Shape><Shape id="S130000000000000" shapeType="CombinedFragment" x="69" y="640" width="620" height="94" zorder="3" model="M130000000000000" name="break"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="620" height="94" /><ChildShapes><Shape id="So14000000000000" shapeType="InteractionOperand" x="69" y="640" width="620" height="94" zorder="2" model="Mo14000000000000" name="логин занят"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="620" height="94" /></Shape></ChildShapes></Shape><Shape id="S150000000000000" shapeType="CombinedFragment" x="899" y="877" width="1378" height="237" zorder="17" model="M150000000000000" name="alt"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1378" height="237" /><ChildShapes><Shape id="So16000000000000" shapeType="InteractionOperand" x="899" y="877" width="1378" height="237" zorder="16" model="Mo16000000000000" name="первый диспетчер задан"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1378" height="237" /></Shape><Shape id="So17000000000000" shapeType="InteractionOperand" x="899" y="995" width="1378" height="119" zorder="9" model="Mo17000000000000" name="альт. 6а: назначение пропущено"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1378" height="119" /></Shape></ChildShapes></Shape><Shape id="Snote31000000000" shapeType="NOTE" x="1749" y="1431" width="624" height="142" zorder="6" model="Mnote31000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="Cm18000000000000" shapeType="Message" model="Mm18000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="181" y="286" width="360" height="22" /><Points><Point x="169" y="310" /><Point x="553" y="310" /></Points></Connector><Connector id="Cm19000000000000" shapeType="Message" model="Mm19000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="565" y="354" width="543" height="22" /><Points><Point x="553" y="378" /><Point x="1120" y="378" /></Points></Connector><Connector id="Cm20000000000000" shapeType="Message" model="Mm20000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1132" y="398" width="1067" height="22" /><Points><Point x="1120" y="422" /><Point x="2211" y="422" /></Points></Connector><Connector id="Cm21000000000000" shapeType="Message" model="Mm21000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="181" y="502" width="360" height="22" /><Points><Point x="553" y="526" /><Point x="169" y="526" /></Points></Connector><Connector id="Cm22000000000000" shapeType="Message" model="Mm22000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1132" y="593" width="1067" height="22" /><Points><Point x="1120" y="617" /><Point x="2211" y="617" /></Points></Connector><Connector id="Cm23000000000000" shapeType="Message" model="Mm23000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="181" y="698" width="360" height="22" /><Points><Point x="553" y="722" /><Point x="169" y="722" /></Points></Connector><Connector id="Cm24000000000000" shapeType="Message" model="Mm24000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="1132" y="786" width="525" height="22" /><Points><Point x="1120" y="810" /><Point x="1669" y="810" /></Points></Connector><Connector id="Cm25000000000000" shapeType="Message" model="Mm25000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1132" y="830" width="1067" height="22" /><Points><Point x="1120" y="854" /><Point x="2211" y="854" /></Points></Connector><Connector id="Cm26000000000000" shapeType="Message" model="Mm26000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="1132" y="934" width="695" height="22" /><Points><Point x="1120" y="958" /><Point x="1839" y="958" /></Points></Connector><Connector id="Cm27000000000000" shapeType="Message" model="Mm27000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1132" y="978" width="1067" height="22" /><Points><Point x="1120" y="1002" /><Point x="2211" y="1002" /></Points></Connector><Connector id="Cm28000000000000" shapeType="Message" model="Mm28000000000000" from="S300000000000000" to="S600000000000000"><Caption visible="true" side="None" x="1132" y="1132" width="881" height="22" /><Points><Point x="1120" y="1156" /><Point x="2025" y="1156" /></Points></Connector><Connector id="Cm29000000000000" shapeType="Message" model="Mm29000000000000" from="S300000000000000" to="S800000000000000"><Caption visible="true" side="None" x="1132" y="1176" width="1194" height="22" /><Points><Point x="1120" y="1200" /><Point x="2338" y="1200" /></Points></Connector><Connector id="Cm30000000000000" shapeType="Message" model="Mm30000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="181" y="1244" width="360" height="22" /><Points><Point x="553" y="1268" /><Point x="169" y="1268" /></Points></Connector></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SEQ_UC32_LogicalView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов" />
+      </ModelProperties>
+    </Model>
+    <Model id="M100000000000000" modelType="InteractionActor" name="Суперпользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Суперпользователь" />
+      </ModelProperties>
+    </Model>
+    <Model id="M200000000000000" modelType="InteractionLifeLine" name="Интерфейс управления&#10;организациями">
+      <ModelProperties>
+        <StringProperty name="name" value="Интерфейс управления&#10;организациями" />
+        <ModelRefsProperty name="activations">
+          <ModelRef id="F53b3b7129b0e371" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M300000000000000" modelType="InteractionLifeLine" name="Создание организации&#10;(UC-32)">
+      <ModelProperties>
+        <StringProperty name="name" value="Создание организации&#10;(UC-32)" />
+        <ModelRefsProperty name="activations">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M400000000000000" modelType="InteractionLifeLine" name="Организация">
+      <ModelProperties>
+        <StringProperty name="name" value="Организация" />
+      </ModelProperties>
+    </Model>
+    <Model id="M500000000000000" modelType="InteractionLifeLine" name="Учётная запись">
+      <ModelProperties>
+        <StringProperty name="name" value="Учётная запись" />
+      </ModelProperties>
+    </Model>
+    <Model id="M600000000000000" modelType="InteractionLifeLine" name="Событие аудита">
+      <ModelProperties>
+        <StringProperty name="name" value="Событие аудита" />
+      </ModelProperties>
+    </Model>
+    <Model id="M700000000000000" modelType="InteractionLifeLine" name="Хранение&#10;данных">
+      <ModelProperties>
+        <StringProperty name="name" value="Хранение&#10;данных" />
+      </ModelProperties>
+    </Model>
+    <Model id="M800000000000000" modelType="InteractionLifeLine" name="Журнал&#10;аудита">
+      <ModelProperties>
+        <StringProperty name="name" value="Журнал&#10;аудита" />
+      </ModelProperties>
+    </Model>
+    <Model id="M900000000000000" modelType="CombinedFragment" name="break">
+      <ModelProperties>
+        <StringProperty name="name" value="break" />
+        <StringProperty name="interactionOperator" value="break" />
+      </ModelProperties>
+    </Model>
+    <Model id="Mo10000000000000" modelType="InteractionOperand" name="название занято (альт. 4а)">
+      <ModelProperties>
+        <StringProperty name="name" value="название занято (альт. 4а)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M110000000000000" modelType="CombinedFragment" name="opt">
+      <ModelProperties>
+        <StringProperty name="name" value="opt" />
+        <StringProperty name="interactionOperator" value="opt" />
+      </ModelProperties>
+    </Model>
+    <Model id="Mo12000000000000" modelType="InteractionOperand" name="первый диспетчер задан">
+      <ModelProperties>
+        <StringProperty name="name" value="первый диспетчер задан" />
+      </ModelProperties>
+    </Model>
+    <Model id="M130000000000000" modelType="CombinedFragment" name="break">
+      <ModelProperties>
+        <StringProperty name="name" value="break" />
+        <StringProperty name="interactionOperator" value="break" />
+      </ModelProperties>
+    </Model>
+    <Model id="Mo14000000000000" modelType="InteractionOperand" name="логин занят">
+      <ModelProperties>
+        <StringProperty name="name" value="логин занят" />
+      </ModelProperties>
+    </Model>
+    <Model id="M150000000000000" modelType="CombinedFragment" name="alt">
+      <ModelProperties>
+        <StringProperty name="name" value="alt" />
+        <StringProperty name="interactionOperator" value="alt" />
+      </ModelProperties>
+    </Model>
+    <Model id="Mo16000000000000" modelType="InteractionOperand" name="первый диспетчер задан">
+      <ModelProperties>
+        <StringProperty name="name" value="первый диспетчер задан" />
+      </ModelProperties>
+    </Model>
+    <Model id="Mo17000000000000" modelType="InteractionOperand" name="альт. 6а: назначение пропущено">
+      <ModelProperties>
+        <StringProperty name="name" value="альт. 6а: назначение пропущено" />
+      </ModelProperties>
+    </Model>
+    <Model id="Mm18000000000000" modelType="Message" name="1: заполнить данные организации&#10;и первого диспетчера, подтвердить">
+      <ModelProperties>
+        <StringProperty name="name" value="1: заполнить данные организации&#10;и первого диспетчера, подтвердить" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="toActivation">
+          <ModelRef id="F53b3b7129b0e371" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm19000000000000" modelType="Message" name="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="toActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F53b3b7129b0e371" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm20000000000000" modelType="Message" name="1.1.1: занято = найти организацию по названию">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1: занято = найти организацию по названию" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm21000000000000" modelType="Message" name="1.2: показать ошибку «Организация&#10;с таким названием уже существует»">
+      <ModelProperties>
+        <StringProperty name="name" value="1.2: показать ошибку «Организация&#10;с таким названием уже существует»" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F53b3b7129b0e371" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm22000000000000" modelType="Message" name="1.1.2: занят = найти пользователя по логину">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.2: занят = найти пользователя по логину" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm23000000000000" modelType="Message" name="1.2: показать ошибку «Пользователь&#10;с таким логином уже существует»">
+      <ModelProperties>
+        <StringProperty name="name" value="1.2: показать ошибку «Пользователь&#10;с таким логином уже существует»" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F53b3b7129b0e371" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm24000000000000" modelType="Message" name="1.1.3: организация = создать(ключ арендатора, название,&#10;уровень подписки, контакты)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.3: организация = создать(ключ арендатора, название,&#10;уровень подписки, контакты)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm25000000000000" modelType="Message" name="1.1.4: сохранить организацию">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.4: сохранить организацию" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm26000000000000" modelType="Message" name="1.1.5: учётная запись = создать(организация, ФИО, логин,&#10;хеш начального пароля, роль «Диспетчер»)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.5: учётная запись = создать(организация, ФИО, логин,&#10;хеш начального пароля, роль «Диспетчер»)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm27000000000000" modelType="Message" name="1.1.6: сохранить учётную запись">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.6: сохранить учётную запись" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm28000000000000" modelType="Message" name="1.1.7: событие = сформировать «организация создана»">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.7: событие = сформировать «организация создана»" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm29000000000000" modelType="Message" name="1.1.8: записать событие">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.8: записать событие" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F61b439d23ebfe86" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mm30000000000000" modelType="Message" name="1.2: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера">
+      <ModelProperties>
+        <StringProperty name="name" value="1.2: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M100000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="fromActivation">
+          <ModelRef id="F53b3b7129b0e371" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote31000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Нумерация иерархическая: целое число — действие актора,&#10;  вложенные вызовы — 1.1, 1.1.1, …&#10;  Сплошная линия, закрашенная стрелка — синхронный вызов;&#10;  результат вызова — в подписи: «результат = операция(...)».&#10;  Сплошная линия, открытая стрелка — асинхронное сообщение." />
+      </ModelProperties>
+    </Model>
+    <Model id="F61289b52a45aa54" modelType="Frame" name="presentation">
+      <ModelProperties>
+        <StringProperty name="name" value="presentation" />
+      </ModelProperties>
+    </Model>
+    <Model id="Ffd383c2d32c0679" modelType="Frame" name="application">
+      <ModelProperties>
+        <StringProperty name="name" value="application" />
+      </ModelProperties>
+    </Model>
+    <Model id="Fc583e91afb20dca" modelType="Frame" name="domain">
+      <ModelProperties>
+        <StringProperty name="name" value="domain" />
+      </ModelProperties>
+    </Model>
+    <Model id="Fc8aa75f0b38331a" modelType="Frame" name="infrastructure">
+      <ModelProperties>
+        <StringProperty name="name" value="infrastructure" />
+      </ModelProperties>
+    </Model>
+    <Model id="F61b439d23ebfe86" modelType="Activation" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="F53b3b7129b0e371" modelType="Activation" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_SEQ_UC32_Logic" name="SEQ_UC32_LogicalView" diagramType="InteractionDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="Stitle0000000000" shapeType="TextBox" x="783" y="65" width="722" height="52" zorder="3" model="Mtitle0000000000" name="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="722" height="52" />
+        </Shape>
+        <Shape id="S100000000000000" shapeType="InteractionActor" x="83" y="168" width="172" height="1196" zorder="14" model="M100000000000000" name="Суперпользователь">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="172" height="1196" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S200000000000000" shapeType="InteractionLifeLine" x="431" y="168" width="244" height="1196" zorder="17" model="M200000000000000" name="Интерфейс управления&#10;организациями">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="244" height="1196" />
+          <ChildShapes>
+            <Shape id="F71ef6bc73d67d76" shapeType="Activation" x="549" y="310" width="8" height="968" zorder="2" model="F53b3b7129b0e371">
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S300000000000000" shapeType="InteractionLifeLine" x="1002" y="168" width="236" height="1196" zorder="16" model="M300000000000000" name="Создание организации&#10;(UC-32)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="236" height="1196" />
+          <ChildShapes>
+            <Shape id="F2101ed9ea4272c6" shapeType="Activation" x="1116" y="378" width="8" height="832" zorder="1" model="F61b439d23ebfe86">
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S400000000000000" shapeType="InteractionLifeLine" x="1598" y="168" width="143" height="1196" zorder="12" model="M400000000000000" name="Организация">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="143" height="1196" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S500000000000000" shapeType="InteractionLifeLine" x="1756" y="168" width="167" height="1196" zorder="13" model="M500000000000000" name="Учётная запись">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="167" height="1196" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S600000000000000" shapeType="InteractionLifeLine" x="1938" y="168" width="175" height="1196" zorder="15" model="M600000000000000" name="Событие аудита">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="175" height="1196" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S700000000000000" shapeType="InteractionLifeLine" x="2151" y="168" width="120" height="1196" zorder="9" model="M700000000000000" name="Хранение&#10;данных">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="120" height="1196" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S800000000000000" shapeType="InteractionLifeLine" x="2278" y="168" width="120" height="1196" zorder="10" model="M800000000000000" name="Журнал&#10;аудита">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="120" height="1196" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S900000000000000" shapeType="CombinedFragment" x="69" y="445" width="620" height="94" zorder="4" model="M900000000000000" name="break">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="620" height="94" />
+          <ChildShapes>
+            <Shape id="So10000000000000" shapeType="InteractionOperand" x="69" y="445" width="620" height="94" zorder="5" model="Mo10000000000000" name="название занято (альт. 4а)">
+              <DiagramElementProperties>
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="134" y="453" width="545" height="26" />
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="S110000000000000" shapeType="CombinedFragment" x="54" y="560" width="2224" height="185" zorder="23" model="M110000000000000" name="opt">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="2224" height="185" />
+          <ChildShapes>
+            <Shape id="So12000000000000" shapeType="InteractionOperand" x="54" y="560" width="2224" height="185" zorder="24" model="Mo12000000000000" name="первый диспетчер задан">
+              <DiagramElementProperties>
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="119" y="568" width="2149" height="26" />
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="S130000000000000" shapeType="CombinedFragment" x="69" y="640" width="620" height="94" zorder="6" model="M130000000000000" name="break">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="620" height="94" />
+          <ChildShapes>
+            <Shape id="So14000000000000" shapeType="InteractionOperand" x="69" y="640" width="620" height="94" zorder="7" model="Mo14000000000000" name="логин занят">
+              <DiagramElementProperties>
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="134" y="648" width="545" height="26" />
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="S150000000000000" shapeType="CombinedFragment" x="899" y="877" width="1378" height="237" zorder="18" model="M150000000000000" name="alt">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="1378" height="237" />
+          <ChildShapes>
+            <Shape id="So16000000000000" shapeType="InteractionOperand" x="899" y="877" width="1378" height="237" zorder="19" model="Mo16000000000000" name="первый диспетчер задан">
+              <DiagramElementProperties>
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="964" y="885" width="1303" height="26" />
+            </Shape>
+            <Shape id="So17000000000000" shapeType="InteractionOperand" x="899" y="995" width="1378" height="119" zorder="11" model="Mo17000000000000" name="альт. 6а: назначение пропущено">
+              <DiagramElementProperties>
+                <IntegerProperty name="modelElementNameAlignment" value="0" />
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="964" y="1003" width="1303" height="26" />
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="Snote31000000000" shapeType="NOTE" x="1749" y="1431" width="624" height="142" zorder="8" model="Mnote31000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F680ea3ed4fc2c3b" shapeType="Frame" x="415" y="130" width="276" height="1244" zorder="21" model="F61289b52a45aa54" name="presentation">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="modelElementNameAlignment" value="0" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="276" height="1244" />
+        </Shape>
+        <Shape id="Feb4ae5ace50dfac" shapeType="Frame" x="986" y="130" width="268" height="1244" zorder="20" model="Ffd383c2d32c0679" name="application">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="modelElementNameAlignment" value="0" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="268" height="1244" />
+        </Shape>
+        <Shape id="Fb29ea054dd47fc2" shapeType="Frame" x="1582" y="130" width="547" height="1244" zorder="25" model="Fc583e91afb20dca" name="domain">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="modelElementNameAlignment" value="0" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="547" height="1244" />
+        </Shape>
+        <Shape id="Fb920bbe556a97b2" shapeType="Frame" x="2135" y="130" width="279" height="1244" zorder="22" model="Fc8aa75f0b38331a" name="infrastructure">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="modelElementNameAlignment" value="0" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="279" height="1244" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="Cm18000000000000" shapeType="Message" model="Mm18000000000000" from="S100000000000000" to="S200000000000000">
+          <Caption visible="true" side="None" x="181" y="286" width="360" height="22" />
+          <Points>
+            <Point x="169" y="310" />
+            <Point x="553" y="310" />
+          </Points>
+        </Connector>
+        <Connector id="Cm19000000000000" shapeType="Message" model="Mm19000000000000" from="S200000000000000" to="S300000000000000">
+          <Caption visible="true" side="None" x="565" y="354" width="543" height="22" />
+          <Points>
+            <Point x="553" y="378" />
+            <Point x="1120" y="378" />
+          </Points>
+        </Connector>
+        <Connector id="Cm20000000000000" shapeType="Message" model="Mm20000000000000" from="S300000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="1132" y="398" width="1067" height="22" />
+          <Points>
+            <Point x="1120" y="422" />
+            <Point x="2211" y="422" />
+          </Points>
+        </Connector>
+        <Connector id="Cm21000000000000" shapeType="Message" model="Mm21000000000000" from="S200000000000000" to="S100000000000000">
+          <Caption visible="true" side="None" x="181" y="502" width="360" height="22" />
+          <Points>
+            <Point x="553" y="526" />
+            <Point x="169" y="526" />
+          </Points>
+        </Connector>
+        <Connector id="Cm22000000000000" shapeType="Message" model="Mm22000000000000" from="S300000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="1132" y="593" width="1067" height="22" />
+          <Points>
+            <Point x="1120" y="617" />
+            <Point x="2211" y="617" />
+          </Points>
+        </Connector>
+        <Connector id="Cm23000000000000" shapeType="Message" model="Mm23000000000000" from="S200000000000000" to="S100000000000000">
+          <Caption visible="true" side="None" x="181" y="698" width="360" height="22" />
+          <Points>
+            <Point x="553" y="722" />
+            <Point x="169" y="722" />
+          </Points>
+        </Connector>
+        <Connector id="Cm24000000000000" shapeType="Message" model="Mm24000000000000" from="S300000000000000" to="S400000000000000">
+          <Caption visible="true" side="None" x="1132" y="786" width="525" height="22" />
+          <Points>
+            <Point x="1120" y="810" />
+            <Point x="1669" y="810" />
+          </Points>
+        </Connector>
+        <Connector id="Cm25000000000000" shapeType="Message" model="Mm25000000000000" from="S300000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="1132" y="830" width="1067" height="22" />
+          <Points>
+            <Point x="1120" y="854" />
+            <Point x="2211" y="854" />
+          </Points>
+        </Connector>
+        <Connector id="Cm26000000000000" shapeType="Message" model="Mm26000000000000" from="S300000000000000" to="S500000000000000">
+          <Caption visible="true" side="None" x="1132" y="934" width="695" height="22" />
+          <Points>
+            <Point x="1120" y="958" />
+            <Point x="1839" y="958" />
+          </Points>
+        </Connector>
+        <Connector id="Cm27000000000000" shapeType="Message" model="Mm27000000000000" from="S300000000000000" to="S700000000000000">
+          <Caption visible="true" side="None" x="1132" y="978" width="1067" height="22" />
+          <Points>
+            <Point x="1120" y="1002" />
+            <Point x="2211" y="1002" />
+          </Points>
+        </Connector>
+        <Connector id="Cm28000000000000" shapeType="Message" model="Mm28000000000000" from="S300000000000000" to="S600000000000000">
+          <Caption visible="true" side="None" x="1132" y="1132" width="881" height="22" />
+          <Points>
+            <Point x="1120" y="1156" />
+            <Point x="2025" y="1156" />
+          </Points>
+        </Connector>
+        <Connector id="Cm29000000000000" shapeType="Message" model="Mm29000000000000" from="S300000000000000" to="S800000000000000">
+          <Caption visible="true" side="None" x="1132" y="1176" width="1194" height="22" />
+          <Points>
+            <Point x="1120" y="1200" />
+            <Point x="2338" y="1200" />
+          </Points>
+        </Connector>
+        <Connector id="Cm30000000000000" shapeType="Message" model="Mm30000000000000" from="S200000000000000" to="S100000000000000">
+          <Caption visible="true" side="None" x="181" y="1244" width="360" height="22" />
+          <Points>
+            <Point x="553" y="1268" />
+            <Point x="169" y="1268" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

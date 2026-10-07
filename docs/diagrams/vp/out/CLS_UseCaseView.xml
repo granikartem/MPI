@@ -1,2 +1,1946 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="CLS_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="CL_USER000000000" modelType="Class" name="Сотрудник"><ModelProperties><StringProperty name="name" value="Сотрудник" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_USER000000000" modelType="Attribute" name="имя"><ModelProperties><StringProperty name="name" value="имя" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_USERx10000000" modelType="Attribute" name="роль в организации"><ModelProperties><StringProperty name="name" value="роль в организации" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_USERx20000000" modelType="Attribute" name="канал связи"><ModelProperties><StringProperty name="name" value="канал связи" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="EN_ROLE000000000" modelType="Class" name="Роль участника"><ModelProperties><StringProperty name="name" value="Роль участника" /><StringProperty name="visibility" value="public" /><ModelRefsProperty name="stereotypes"><ModelRef id="STenumeration000" /></ModelRefsProperty></ModelProperties><ChildModels><Model id="EL_ROLE000000000" modelType="EnumerationLiteral" name="Диспетчер караванов"><ModelProperties><StringProperty name="name" value="Диспетчер караванов" /></ModelProperties></Model><Model id="EL_ROLEx30000000" modelType="EnumerationLiteral" name="Караван-мастер"><ModelProperties><StringProperty name="name" value="Караван-мастер" /></ModelProperties></Model><Model id="EL_ROLEx40000000" modelType="EnumerationLiteral" name="Система"><ModelProperties><StringProperty name="name" value="Система" /></ModelProperties></Model></ChildModels></Model><Model id="STenumeration000" modelType="Stereotype" name="enumeration"><ModelProperties><StringProperty name="name" value="enumeration" /><StringProperty name="baseType" value="Class" /></ModelProperties></Model><Model id="CL_ORG0000000000" modelType="Class" name="Организация"><ModelProperties><StringProperty name="name" value="Организация" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_ORG0000000000" modelType="Attribute" name="название"><ModelProperties><StringProperty name="name" value="название" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_ORGx500000000" modelType="Attribute" name="уровень подписки"><ModelProperties><StringProperty name="name" value="уровень подписки" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_ORGx600000000" modelType="Attribute" name="состояние"><ModelProperties><StringProperty name="name" value="состояние" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_REQ0000000000" modelType="Class" name="Заявка на перевозку"><ModelProperties><StringProperty name="name" value="Заявка на перевозку" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_REQ0000000000" modelType="Attribute" name="пункт отправления"><ModelProperties><StringProperty name="name" value="пункт отправления" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_REQx700000000" modelType="Attribute" name="пункт назначения"><ModelProperties><StringProperty name="name" value="пункт назначения" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_REQx800000000" modelType="Attribute" name="желаемая дата отправки"><ModelProperties><StringProperty name="name" value="желаемая дата отправки" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_REQx900000000" modelType="Attribute" name="описание груза"><ModelProperties><StringProperty name="name" value="описание груза" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_REQx100000000" modelType="Attribute" name="оценочная ценность груза"><ModelProperties><StringProperty name="name" value="оценочная ценность груза" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_REQx110000000" modelType="Attribute" name="расчётное время в пути"><ModelProperties><StringProperty name="name" value="расчётное время в пути" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_REQx120000000" modelType="Attribute" name="текущий статус"><ModelProperties><StringProperty name="name" value="текущий статус" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_HIST000000000" modelType="Class" name="Запись истории рейса"><ModelProperties><StringProperty name="name" value="Запись истории рейса" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_HIST000000000" modelType="Attribute" name="предыдущий статус"><ModelProperties><StringProperty name="name" value="предыдущий статус" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_HISTx13000000" modelType="Attribute" name="новый статус"><ModelProperties><StringProperty name="name" value="новый статус" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_HISTx14000000" modelType="Attribute" name="кто инициировал переход"><ModelProperties><StringProperty name="name" value="кто инициировал переход" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_HISTx15000000" modelType="Attribute" name="причина"><ModelProperties><StringProperty name="name" value="причина" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_HISTx16000000" modelType="Attribute" name="когда произошло"><ModelProperties><StringProperty name="name" value="когда произошло" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="EN_STATUS0000000" modelType="Class" name="Статус рейса"><ModelProperties><StringProperty name="name" value="Статус рейса" /><StringProperty name="visibility" value="public" /><ModelRefsProperty name="stereotypes"><ModelRef id="STenumeration000" /></ModelRefsProperty></ModelProperties><ChildModels><Model id="EL_STATUS0000000" modelType="EnumerationLiteral" name="Черновик"><ModelProperties><StringProperty name="name" value="Черновик" /></ModelProperties></Model><Model id="EL_STATUSx170000" modelType="EnumerationLiteral" name="Готов к отправке"><ModelProperties><StringProperty name="name" value="Готов к отправке" /></ModelProperties></Model><Model id="EL_STATUSx180000" modelType="EnumerationLiteral" name="В пути"><ModelProperties><StringProperty name="name" value="В пути" /></ModelProperties></Model><Model id="EL_STATUSx190000" modelType="EnumerationLiteral" name="Задержка"><ModelProperties><StringProperty name="name" value="Задержка" /></ModelProperties></Model><Model id="EL_STATUSx200000" modelType="EnumerationLiteral" name="Доставлен"><ModelProperties><StringProperty name="name" value="Доставлен" /></ModelProperties></Model><Model id="EL_STATUSx210000" modelType="EnumerationLiteral" name="Закрыт"><ModelProperties><StringProperty name="name" value="Закрыт" /></ModelProperties></Model><Model id="EL_STATUSx220000" modelType="EnumerationLiteral" name="Отменён"><ModelProperties><StringProperty name="name" value="Отменён" /></ModelProperties></Model></ChildModels></Model><Model id="CL_AUDIT00000000" modelType="Class" name="Событие аудита"><ModelProperties><StringProperty name="name" value="Событие аудита" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_AUDIT00000000" modelType="Attribute" name="что произошло"><ModelProperties><StringProperty name="name" value="что произошло" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_AUDITx2300000" modelType="Attribute" name="кто инициировал"><ModelProperties><StringProperty name="name" value="кто инициировал" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_AUDITx2400000" modelType="Attribute" name="когда произошло"><ModelProperties><StringProperty name="name" value="когда произошло" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_ROUTE00000000" modelType="Class" name="Маршрут"><ModelProperties><StringProperty name="name" value="Маршрут" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_ROUTE00000000" modelType="Attribute" name="название"><ModelProperties><StringProperty name="name" value="название" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_ROUTEx2500000" modelType="Attribute" name="готовый шаблон или задан вручную"><ModelProperties><StringProperty name="name" value="готовый шаблон или задан вручную" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_SEG0000000000" modelType="Class" name="Участок маршрута"><ModelProperties><StringProperty name="name" value="Участок маршрута" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_SEG0000000000" modelType="Attribute" name="порядок в маршруте"><ModelProperties><StringProperty name="name" value="порядок в маршруте" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_SEGx260000000" modelType="Attribute" name="протяжённость"><ModelProperties><StringProperty name="name" value="протяжённость" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_CP00000000000" modelType="Class" name="Контрольная точка"><ModelProperties><StringProperty name="name" value="Контрольная точка" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_CP00000000000" modelType="Attribute" name="название"><ModelProperties><StringProperty name="name" value="название" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_RISK000000000" modelType="Class" name="Оценка риска"><ModelProperties><StringProperty name="name" value="Оценка риска" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_RISK000000000" modelType="Attribute" name="значение риска"><ModelProperties><StringProperty name="name" value="значение риска" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_RISKx27000000" modelType="Attribute" name="актуальность оценки"><ModelProperties><StringProperty name="name" value="актуальность оценки" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_RISKx28000000" modelType="Attribute" name="рекомендация по охране и припасам"><ModelProperties><StringProperty name="name" value="рекомендация по охране и припасам" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_RISKx29000000" modelType="Attribute" name="когда получена"><ModelProperties><StringProperty name="name" value="когда получена" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="EN_LEVEL00000000" modelType="Class" name="Уровень риска"><ModelProperties><StringProperty name="name" value="Уровень риска" /><StringProperty name="visibility" value="public" /><ModelRefsProperty name="stereotypes"><ModelRef id="STenumeration000" /></ModelRefsProperty></ModelProperties><ChildModels><Model id="EL_LEVEL00000000" modelType="EnumerationLiteral" name="Н/Д"><ModelProperties><StringProperty name="name" value="Н/Д" /></ModelProperties></Model><Model id="EL_LEVELx3000000" modelType="EnumerationLiteral" name="Низкий"><ModelProperties><StringProperty name="name" value="Низкий" /></ModelProperties></Model><Model id="EL_LEVELx3100000" modelType="EnumerationLiteral" name="Средний"><ModelProperties><StringProperty name="name" value="Средний" /></ModelProperties></Model><Model id="EL_LEVELx3200000" modelType="EnumerationLiteral" name="Высокий"><ModelProperties><StringProperty name="name" value="Высокий" /></ModelProperties></Model><Model id="EL_LEVELx3300000" modelType="EnumerationLiteral" name="Критический"><ModelProperties><StringProperty name="name" value="Критический" /></ModelProperties></Model></ChildModels></Model><Model id="CL_WI00000000000" modelType="Class" name="Wasteland Intel"><ModelProperties><StringProperty name="name" value="Wasteland Intel" /><StringProperty name="visibility" value="public" /><ModelRefsProperty name="stereotypes"><ModelRef id="ST______________" /></ModelRefsProperty></ModelProperties></Model><Model id="ST______________" modelType="Stereotype" name="внешняя система"><ModelProperties><StringProperty name="name" value="внешняя система" /><StringProperty name="baseType" value="Class" /></ModelProperties></Model><Model id="CL_REPORT0000000" modelType="Class" name="Отчёт об угрозах"><ModelProperties><StringProperty name="name" value="Отчёт об угрозах" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_REPORT0000000" modelType="Attribute" name="дата актуальности сведений"><ModelProperties><StringProperty name="name" value="дата актуальности сведений" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_THREAT0000000" modelType="Class" name="Угроза участка"><ModelProperties><StringProperty name="name" value="Угроза участка" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_THREAT0000000" modelType="Attribute" name="участок маршрута"><ModelProperties><StringProperty name="name" value="участок маршрута" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_THREATx340000" modelType="Attribute" name="уровень опасности"><ModelProperties><StringProperty name="name" value="уровень опасности" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_THREATx350000" modelType="Attribute" name="виды угроз"><ModelProperties><StringProperty name="name" value="виды угроз" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_INC0000000000" modelType="Class" name="Инцидент"><ModelProperties><StringProperty name="name" value="Инцидент" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_INC0000000000" modelType="Attribute" name="вид инцидента"><ModelProperties><StringProperty name="name" value="вид инцидента" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_INCx360000000" modelType="Attribute" name="тяжесть"><ModelProperties><StringProperty name="name" value="тяжесть" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_INCx370000000" modelType="Attribute" name="время и место"><ModelProperties><StringProperty name="name" value="время и место" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_INCx380000000" modelType="Attribute" name="описание произошедшего"><ModelProperties><StringProperty name="name" value="описание произошедшего" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_STAGE00000000" modelType="Class" name="Этап рейса"><ModelProperties><StringProperty name="name" value="Этап рейса" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_STAGE00000000" modelType="Attribute" name="порядок этапа"><ModelProperties><StringProperty name="name" value="порядок этапа" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_STAGEx3900000" modelType="Attribute" name="вид этапа"><ModelProperties><StringProperty name="name" value="вид этапа" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_STAGEx4000000" modelType="Attribute" name="плановое время"><ModelProperties><StringProperty name="name" value="плановое время" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_STAGEx4100000" modelType="Attribute" name="подтверждён"><ModelProperties><StringProperty name="name" value="подтверждён" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_PART000000000" modelType="Class" name="Участник инцидента"><ModelProperties><StringProperty name="name" value="Участник инцидента" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_PART000000000" modelType="Attribute" name="роль в инциденте"><ModelProperties><StringProperty name="name" value="роль в инциденте" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_PARTx42000000" modelType="Attribute" name="пострадал"><ModelProperties><StringProperty name="name" value="пострадал" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_PARTx43000000" modelType="Attribute" name="состояние и оказанная помощь"><ModelProperties><StringProperty name="name" value="состояние и оказанная помощь" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_RECOVERY00000" modelType="Class" name="Запрос на реагирование"><ModelProperties><StringProperty name="name" value="Запрос на реагирование" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_RECOVERY00000" modelType="Attribute" name="что требуется"><ModelProperties><StringProperty name="name" value="что требуется" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_RECOVERYx4400" modelType="Attribute" name="состояние обработки"><ModelProperties><StringProperty name="name" value="состояние обработки" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="CL_LOG0000000000" modelType="Class" name="Отметка прохождения"><ModelProperties><StringProperty name="name" value="Отметка прохождения" /><StringProperty name="visibility" value="public" /></ModelProperties><ChildModels><Model id="AT_LOG0000000000" modelType="Attribute" name="фактическое время"><ModelProperties><StringProperty name="name" value="фактическое время" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_LOGx450000000" modelType="Attribute" name="место"><ModelProperties><StringProperty name="name" value="место" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_LOGx460000000" modelType="Attribute" name="результат"><ModelProperties><StringProperty name="name" value="результат" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model><Model id="AT_LOGx470000000" modelType="Attribute" name="причина задержки"><ModelProperties><StringProperty name="name" value="причина задержки" /><StringProperty name="visibility" value="Unspecified" /></ModelProperties></Model></ChildModels></Model><Model id="AS_org_user00000" modelType="Association" name="сотрудники организации"><ModelProperties><StringProperty name="name" value="сотрудники организации" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_ORG0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_USER000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_org_userFrom0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_ORG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Aggregation" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_org_userToEn0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_USER000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_org_req000000" modelType="Association" name="рейсы организации (FR-23, FR-24)"><ModelProperties><StringProperty name="name" value="рейсы организации (FR-23, FR-24)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_ORG0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_org_reqFrom00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_ORG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Aggregation" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_org_reqToEn00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_org_audit0000" modelType="Association" name="события организации (RL-4)"><ModelProperties><StringProperty name="name" value="события организации (RL-4)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_ORG0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_AUDIT00000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_org_auditFrom" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_ORG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Aggregation" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_org_auditToEn" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_AUDIT00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="DP_user_role0000" modelType="Dependency" name="роль сотрудника"><ModelProperties><StringProperty name="name" value="роль сотрудника" /><ModelRefProperty name="from"><ModelRef id="CL_USER000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="EN_ROLE000000000" /></ModelRefProperty></ModelProperties></Model><Model id="AS_req_hist00000" modelType="Association" name="история переходов (FR-3)"><ModelProperties><StringProperty name="name" value="история переходов (FR-3)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_HIST000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_histFrom0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Composited" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_histToEn0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_HIST000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="DP_req_status000" modelType="Dependency" name="текущий статус (FR-2)"><ModelProperties><StringProperty name="name" value="текущий статус (FR-2)" /><ModelRefProperty name="from"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="EN_STATUS0000000" /></ModelRefProperty></ModelProperties></Model><Model id="DP_hist_status00" modelType="Dependency" name="из какого в какой"><ModelProperties><StringProperty name="name" value="из какого в какой" /><ModelRefProperty name="from"><ModelRef id="CL_HIST000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="EN_STATUS0000000" /></ModelRefProperty></ModelProperties></Model><Model id="DP_hist_role0000" modelType="Dependency" name="кто инициировал"><ModelProperties><StringProperty name="name" value="кто инициировал" /><ModelRefProperty name="from"><ModelRef id="CL_HIST000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="EN_ROLE000000000" /></ModelRefProperty></ModelProperties></Model><Model id="AS_hist_audit000" modelType="Association" name="переход статуса попадает в журнал"><ModelProperties><StringProperty name="name" value="переход статуса попадает в журнал" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_HIST000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_AUDIT00000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_hist_auditFro" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_HIST000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..1" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_hist_auditToE" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_AUDIT00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..1" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_req_route0000" modelType="Association" name="выполняется по маршруту (FR-4)"><ModelProperties><StringProperty name="name" value="выполняется по маршруту (FR-4)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_ROUTE00000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_routeFrom" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="false" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_routeToEn" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_ROUTE00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..1" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="true" /></ModelProperties></Model></ToEnd></Model><Model id="AS_route_seg0000" modelType="Association" name="участки в порядке следования"><ModelProperties><StringProperty name="name" value="участки в порядке следования" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_ROUTE00000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_route_segFrom" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_ROUTE00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Composited" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_route_segToEn" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_seg_cp1000000" modelType="Association" name="начало участка"><ModelProperties><StringProperty name="name" value="начало участка" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_CP00000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_seg_cp1From00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="false" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_seg_cp1ToEn00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_CP00000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="true" /></ModelProperties></Model></ToEnd></Model><Model id="AS_seg_cp2000000" modelType="Association" name="конец участка"><ModelProperties><StringProperty name="name" value="конец участка" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_CP00000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_seg_cp2From00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="false" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_seg_cp2ToEn00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_CP00000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="true" /></ModelProperties></Model></ToEnd></Model><Model id="AS_req_risk00000" modelType="Association" name="оценки риска рейса; учитывают&#10;ценность груза (FR-7, FR-13, FR-14)"><ModelProperties><StringProperty name="name" value="оценки риска рейса; учитывают&#10;ценность груза (FR-7, FR-13, FR-14)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_RISK000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_riskFrom0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Aggregation" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_riskToEn0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_RISK000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="DP_risk_level000" modelType="Dependency" name="уровень риска для диспетчера (FR-8)"><ModelProperties><StringProperty name="name" value="уровень риска для диспетчера (FR-8)" /><ModelRefProperty name="from"><ModelRef id="CL_RISK000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="EN_LEVEL00000000" /></ModelRefProperty></ModelProperties></Model><Model id="DP_risk_report00" modelType="Dependency" name="рассчитана по сведениям об угрозах"><ModelProperties><StringProperty name="name" value="рассчитана по сведениям об угрозах" /><ModelRefProperty name="from"><ModelRef id="CL_RISK000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="CL_REPORT0000000" /></ModelRefProperty></ModelProperties></Model><Model id="AS_wi_report0000" modelType="Association" name="поставляет сведения об угрозах (FR-6)"><ModelProperties><StringProperty name="name" value="поставляет сведения об угрозах (FR-6)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_WI00000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_REPORT0000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_wi_reportFrom" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_WI00000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="false" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_wi_reportToEn" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REPORT0000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="true" /></ModelProperties></Model></ToEnd></Model><Model id="AS_report_threat" modelType="Association" name="угрозы по участкам маршрута"><ModelProperties><StringProperty name="name" value="угрозы по участкам маршрута" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_REPORT0000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_THREAT0000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_report_thrx48" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REPORT0000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Aggregation" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_report_thrx49" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_THREAT0000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="DP_threat_seg000" modelType="Dependency" name="относится к участку"><ModelProperties><StringProperty name="name" value="относится к участку" /><ModelRefProperty name="from"><ModelRef id="CL_THREAT0000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="CL_SEG0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="AS_req_stage0000" modelType="Association" name="план этапов рейса (FR-18)"><ModelProperties><StringProperty name="name" value="план этапов рейса (FR-18)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_STAGE00000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_stageFrom" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Composited" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_stageToEn" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_STAGE00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_stage_log0000" modelType="Association" name="отметка о прохождении"><ModelProperties><StringProperty name="name" value="отметка о прохождении" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_STAGE00000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_LOG0000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_stage_logFrom" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_STAGE00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Composited" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_stage_logToEn" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_LOG0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..1" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_stage_cp00000" modelType="Association" name="плановая контрольная точка"><ModelProperties><StringProperty name="name" value="плановая контрольная точка" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_STAGE00000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_CP00000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_stage_cpFrom0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_STAGE00000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="false" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_stage_cpToEn0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_CP00000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..1" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="true" /></ModelProperties></Model></ToEnd></Model><Model id="AS_req_inc000000" modelType="Association" name="инциденты рейса (FR-19)"><ModelProperties><StringProperty name="name" value="инциденты рейса (FR-19)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_incFrom00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Composited" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_req_incToEn00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_inc_part00000" modelType="Association" name="участники инцидента (FR-20)"><ModelProperties><StringProperty name="name" value="участники инцидента (FR-20)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_PART000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_inc_partFrom0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Composited" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_inc_partToEn0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_PART000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_inc_rec000000" modelType="Association" name="основание для реагирования (FR-21)"><ModelProperties><StringProperty name="name" value="основание для реагирования (FR-21)" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_RECOVERY00000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_inc_recFrom00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="Aggregation" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_inc_recToEn00" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_RECOVERY00000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="AS_inc_user00000" modelType="Association" name="кто сообщил об инциденте"><ModelProperties><StringProperty name="name" value="кто сообщил об инциденте" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="CL_USER000000000" /></ModelRefProperty></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="AS_inc_userFrom0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_INC0000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="0..*" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="false" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="AS_inc_userToEn0" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="CL_USER000000000" /></ModelRefProperty><StringProperty name="multiplicity" value="1" /><StringProperty name="aggregationKind" value="None" /><StringProperty name="navigable" value="true" /></ModelProperties></Model></ToEnd></Model><Model id="NO_n_req00000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Рейс — центральное понятие&#10;Диспетчер создаёт заявку (UC-1), система подбирает маршрут (UC-5),&#10;считает время в пути (UC-6) и риск (UC-7), даёт рекомендацию&#10;по охране и припасам (UC-8). Дальше рейс живёт статусной моделью&#10;(UC-2) и виден в реестре (UC-3)." /></ModelProperties></Model><Model id="AN_n_req00000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="NO_n_req00000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="CL_REQ0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="NO_n_risk0000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Оценка риска обновляется каждым расчётом&#10;Если внешняя система недоступна, оценка получает значение «Н/Д»&#10;и пометку «требует пересчёта»; если сведения старше суток —&#10;пометку «на основе устаревших данных»." /></ModelProperties></Model><Model id="AN_n_risk0000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="NO_n_risk0000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="CL_RISK000000000" /></ModelRefProperty></ModelProperties></Model><Model id="NO_n_inc00000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Полевые события рейса&#10;Отметки прохождения этапов и карточки инцидентов создаются&#10;на полевом устройстве и попадают в систему при появлении связи (RL-1)." /></ModelProperties></Model><Model id="AN_n_inc00000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="NO_n_inc00000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="CL_INC0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="NO_legend0000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• серый — понятие реализовано в системе&#10;• сиреневый — «внешняя система» и данные, которые она поставляет&#10;&#10;Уровень описания. Только предметная область: понятия, их деловые&#10;свойства и связи. Ни классов реализации, ни методов, ни типов данных,&#10;ни слоёв, ни хранилищ — это уровни Logical и Implementation View.&#10;Свойства перечислены деловыми именами, без типов: тип и формат&#10;появляются на CLS_LogicalView, фактическое объявление —&#10;на CLS_ImplementationView.&#10;Перечисления показаны там, где набор значений сам является&#10;понятием модели и обсуждается с заказчиком.&#10;Типы связей: *-- композиция (часть не существует без целого),&#10;o-- агрегация, --&gt; ассоциация, ..&gt; зависимость&#10;(на зависимостях кратности не указываются).&#10;Трассировка: FR-2 и FR-3 (статусы и история), FR-4 (маршрут),&#10;FR-6 (Wasteland Intel), FR-7 (risk_score), FR-8 (рекомендация),&#10;FR-13 и FR-14 (ценность груза), FR-18 (этапы рейса),&#10;FR-19 — FR-21 (инциденты и реагирование), FR-23 и FR-24&#10;(организация и изоляция её данных), RL-1 (офлайн-фиксация),&#10;RL-4 (журнал аудита). Перечень прецедентов — docs/UseCases.md." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_CLS_UseCaseVie" name="CLS_UseCaseView" diagramType="ClassDiagram"><Shapes><Shape id="SH_USER000000000" shapeType="Class" x="60" y="210" width="250" height="90" zorder="1" model="CL_USER000000000" name="Сотрудник"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_ROLE000000000" shapeType="Class" x="60" y="430" width="240" height="105" zorder="2" model="EN_ROLE000000000" name="Роль участника"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_ORG0000000000" shapeType="Class" x="520" y="40" width="240" height="90" zorder="3" model="CL_ORG0000000000" name="Организация"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_REQ0000000000" shapeType="Class" x="960" y="195" width="300" height="145" zorder="4" model="CL_REQ0000000000" name="Заявка на перевозку"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_HIST000000000" shapeType="Class" x="580" y="430" width="260" height="115" zorder="5" model="CL_HIST000000000" name="Запись истории рейса"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_STATUS0000000" shapeType="Class" x="980" y="430" width="230" height="160" zorder="6" model="EN_STATUS0000000" name="Статус рейса"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_AUDIT00000000" shapeType="Class" x="520" y="210" width="230" height="90" zorder="7" model="CL_AUDIT00000000" name="Событие аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_ROUTE00000000" shapeType="Class" x="1420" y="430" width="290" height="75" zorder="8" model="CL_ROUTE00000000" name="Маршрут"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_SEG0000000000" shapeType="Class" x="1430" y="670" width="240" height="75" zorder="9" model="CL_SEG0000000000" name="Участок маршрута"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_CP00000000000" shapeType="Class" x="1440" y="860" width="210" height="60" zorder="10" model="CL_CP00000000000" name="Контрольная точка"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_RISK000000000" shapeType="Class" x="1820" y="210" width="320" height="100" zorder="11" model="CL_RISK000000000" name="Оценка риска"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_LEVEL00000000" shapeType="Class" x="1820" y="430" width="210" height="128" zorder="12" model="EN_LEVEL00000000" name="Уровень риска"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_WI00000000000" shapeType="Class" x="2400" y="40" width="240" height="60" zorder="13" model="CL_WI00000000000" name="Wasteland Intel"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape><Shape id="SH_REPORT0000000" shapeType="Class" x="2400" y="210" width="250" height="60" zorder="14" model="CL_REPORT0000000" name="Отчёт об угрозах"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape><Shape id="SH_THREAT0000000" shapeType="Class" x="2400" y="400" width="240" height="90" zorder="15" model="CL_THREAT0000000" name="Угроза участка"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape><Shape id="SH_INC0000000000" shapeType="Class" x="520" y="670" width="260" height="100" zorder="16" model="CL_INC0000000000" name="Инцидент"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_STAGE00000000" shapeType="Class" x="980" y="670" width="240" height="100" zorder="17" model="CL_STAGE00000000" name="Этап рейса"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_PART000000000" shapeType="Class" x="60" y="860" width="280" height="90" zorder="18" model="CL_PART000000000" name="Участник инцидента"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_RECOVERY00000" shapeType="Class" x="520" y="860" width="250" height="75" zorder="19" model="CL_RECOVERY00000" name="Запрос на реагирование"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_LOG0000000000" shapeType="Class" x="980" y="860" width="240" height="100" zorder="20" model="CL_LOG0000000000" name="Отметка прохождения"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="SH_n_req00000000" shapeType="NOTE" x="1380" y="40" width="490" height="105" zorder="21" model="NO_n_req00000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="SH_n_risk0000000" shapeType="NOTE" x="1820" y="600" width="470" height="90" zorder="22" model="NO_n_risk0000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="SH_n_inc00000000" shapeType="NOTE" x="60" y="980" width="510" height="75" zorder="23" model="NO_n_inc00000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="SH_legend0000000" shapeType="NOTE" x="1800" y="760" width="520" height="355" zorder="24" model="NO_legend0000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="CN_org_user00000" shapeType="Association" model="AS_org_user00000" from="SH_ORG0000000000" to="SH_USER000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="520" y="85" /><Point x="390" y="85" /><Point x="390" y="265" /><Point x="310" y="265" /></Points></Connector><Connector id="CN_org_req000000" shapeType="Association" model="AS_org_req000000" from="SH_ORG0000000000" to="SH_REQ0000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="760" y="85" /><Point x="880" y="85" /><Point x="880" y="250" /><Point x="960" y="250" /></Points></Connector><Connector id="CN_org_audit0000" shapeType="Association" model="AS_org_audit0000" from="SH_ORG0000000000" to="SH_AUDIT00000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="640" y="130" /><Point x="640" y="210" /></Points></Connector><Connector id="CN_user_role0000" shapeType="Dependency" model="DP_user_role0000" from="SH_USER000000000" to="SH_ROLE000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="130" y="300" /><Point x="130" y="430" /></Points></Connector><Connector id="CN_req_hist00000" shapeType="Association" model="AS_req_hist00000" from="SH_REQ0000000000" to="SH_HIST000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="960" y="300" /><Point x="870" y="300" /><Point x="870" y="470" /><Point x="840" y="470" /></Points></Connector><Connector id="CN_req_status000" shapeType="Dependency" model="DP_req_status000" from="SH_REQ0000000000" to="SH_STATUS0000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1060" y="340" /><Point x="1060" y="430" /></Points></Connector><Connector id="CN_hist_status00" shapeType="Dependency" model="DP_hist_status00" from="SH_HIST000000000" to="SH_STATUS0000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="840" y="490" /><Point x="980" y="490" /></Points></Connector><Connector id="CN_hist_role0000" shapeType="Dependency" model="DP_hist_role0000" from="SH_HIST000000000" to="SH_ROLE000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="580" y="520" /><Point x="300" y="520" /></Points></Connector><Connector id="CN_hist_audit000" shapeType="Association" model="AS_hist_audit000" from="SH_HIST000000000" to="SH_AUDIT00000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="600" y="430" /><Point x="600" y="300" /></Points></Connector><Connector id="CN_req_route0000" shapeType="Association" model="AS_req_route0000" from="SH_REQ0000000000" to="SH_ROUTE00000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="showNavigationArrows" value="3" /></DiagramElementProperties><Points><Point x="1260" y="300" /><Point x="1500" y="300" /><Point x="1500" y="430" /></Points></Connector><Connector id="CN_route_seg0000" shapeType="Association" model="AS_route_seg0000" from="SH_ROUTE00000000" to="SH_SEG0000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1550" y="505" /><Point x="1550" y="670" /></Points></Connector><Connector id="CN_seg_cp1000000" shapeType="Association" model="AS_seg_cp1000000" from="SH_SEG0000000000" to="SH_CP00000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="showNavigationArrows" value="3" /></DiagramElementProperties><Points><Point x="1480" y="745" /><Point x="1480" y="860" /></Points></Connector><Connector id="CN_seg_cp2000000" shapeType="Association" model="AS_seg_cp2000000" from="SH_SEG0000000000" to="SH_CP00000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="showNavigationArrows" value="3" /></DiagramElementProperties><Points><Point x="1620" y="745" /><Point x="1620" y="860" /></Points></Connector><Connector id="CN_req_risk00000" shapeType="Association" model="AS_req_risk00000" from="SH_REQ0000000000" to="SH_RISK000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1260" y="240" /><Point x="1820" y="240" /></Points></Connector><Connector id="CN_risk_level000" shapeType="Dependency" model="DP_risk_level000" from="SH_RISK000000000" to="SH_LEVEL00000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1880" y="310" /><Point x="1880" y="430" /></Points></Connector><Connector id="CN_risk_report00" shapeType="Dependency" model="DP_risk_report00" from="SH_RISK000000000" to="SH_REPORT0000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="2140" y="260" /><Point x="2400" y="260" /></Points></Connector><Connector id="CN_wi_report0000" shapeType="Association" model="AS_wi_report0000" from="SH_WI00000000000" to="SH_REPORT0000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="showNavigationArrows" value="3" /></DiagramElementProperties><Points><Point x="2520" y="100" /><Point x="2520" y="210" /></Points></Connector><Connector id="CN_report_threat" shapeType="Association" model="AS_report_threat" from="SH_REPORT0000000" to="SH_THREAT0000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="2460" y="270" /><Point x="2460" y="400" /></Points></Connector><Connector id="CN_threat_seg000" shapeType="Dependency" model="DP_threat_seg000" from="SH_THREAT0000000" to="SH_SEG0000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="2520" y="490" /><Point x="2520" y="705" /><Point x="1670" y="705" /></Points></Connector><Connector id="CN_req_stage0000" shapeType="Association" model="AS_req_stage0000" from="SH_REQ0000000000" to="SH_STAGE00000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1260" y="320" /><Point x="1340" y="320" /><Point x="1340" y="630" /><Point x="1100" y="630" /><Point x="1100" y="670" /></Points></Connector><Connector id="CN_stage_log0000" shapeType="Association" model="AS_stage_log0000" from="SH_STAGE00000000" to="SH_LOG0000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1050" y="770" /><Point x="1050" y="860" /></Points></Connector><Connector id="CN_stage_cp00000" shapeType="Association" model="AS_stage_cp00000" from="SH_STAGE00000000" to="SH_CP00000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="showNavigationArrows" value="3" /></DiagramElementProperties><Points><Point x="1220" y="730" /><Point x="1330" y="730" /><Point x="1330" y="890" /><Point x="1440" y="890" /></Points></Connector><Connector id="CN_req_inc000000" shapeType="Association" model="AS_req_inc000000" from="SH_REQ0000000000" to="SH_INC0000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="960" y="335" /><Point x="930" y="335" /><Point x="930" y="640" /><Point x="620" y="640" /><Point x="620" y="670" /></Points></Connector><Connector id="CN_inc_part00000" shapeType="Association" model="AS_inc_part00000" from="SH_INC0000000000" to="SH_PART000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="560" y="770" /><Point x="560" y="810" /><Point x="180" y="810" /><Point x="180" y="860" /></Points></Connector><Connector id="CN_inc_rec000000" shapeType="Association" model="AS_inc_rec000000" from="SH_INC0000000000" to="SH_RECOVERY00000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="700" y="770" /><Point x="700" y="860" /></Points></Connector><Connector id="CN_inc_user00000" shapeType="Association" model="AS_inc_user00000" from="SH_INC0000000000" to="SH_USER000000000" connectorStyle="Rectlinear"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /><IntegerProperty name="showNavigationArrows" value="3" /></DiagramElementProperties><Points><Point x="520" y="720" /><Point x="360" y="720" /><Point x="360" y="290" /><Point x="310" y="290" /></Points></Connector><Connector id="CN_n_req00000000" shapeType="Anchor" model="AN_n_req00000000" from="SH_n_req00000000" to="SH_REQ0000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="1380" y="110" /><Point x="1260" y="230" /></Points></Connector><Connector id="CN_n_risk0000000" shapeType="Anchor" model="AN_n_risk0000000" from="SH_n_risk0000000" to="SH_RISK000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="2100" y="600" /><Point x="2100" y="310" /></Points></Connector><Connector id="CN_n_inc00000000" shapeType="Anchor" model="AN_n_inc00000000" from="SH_n_inc00000000" to="SH_INC0000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Points><Point x="420" y="980" /><Point x="420" y="745" /><Point x="520" y="745" /></Points></Connector></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="CLS_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="CL_USER000000000" modelType="Class" name="Сотрудник">
+      <ModelProperties>
+        <StringProperty name="name" value="Сотрудник" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_USER000000000" modelType="Attribute" name="имя">
+          <ModelProperties>
+            <StringProperty name="name" value="имя" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_USERx10000000" modelType="Attribute" name="роль в организации">
+          <ModelProperties>
+            <StringProperty name="name" value="роль в организации" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_USERx20000000" modelType="Attribute" name="канал связи">
+          <ModelProperties>
+            <StringProperty name="name" value="канал связи" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="EN_ROLE000000000" modelType="Class" name="Роль участника">
+      <ModelProperties>
+        <StringProperty name="name" value="Роль участника" />
+        <StringProperty name="visibility" value="public" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STenumeration000" />
+        </ModelRefsProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="EL_ROLE000000000" modelType="EnumerationLiteral" name="Диспетчер караванов">
+          <ModelProperties>
+            <StringProperty name="name" value="Диспетчер караванов" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_ROLEx30000000" modelType="EnumerationLiteral" name="Караван-мастер">
+          <ModelProperties>
+            <StringProperty name="name" value="Караван-мастер" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_ROLEx40000000" modelType="EnumerationLiteral" name="Система">
+          <ModelProperties>
+            <StringProperty name="name" value="Система" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="STenumeration000" modelType="Stereotype" name="enumeration">
+      <ModelProperties>
+        <StringProperty name="name" value="enumeration" />
+        <StringProperty name="baseType" value="Class" />
+      </ModelProperties>
+    </Model>
+    <Model id="CL_ORG0000000000" modelType="Class" name="Организация">
+      <ModelProperties>
+        <StringProperty name="name" value="Организация" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_ORG0000000000" modelType="Attribute" name="название">
+          <ModelProperties>
+            <StringProperty name="name" value="название" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_ORGx500000000" modelType="Attribute" name="уровень подписки">
+          <ModelProperties>
+            <StringProperty name="name" value="уровень подписки" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_ORGx600000000" modelType="Attribute" name="состояние">
+          <ModelProperties>
+            <StringProperty name="name" value="состояние" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_REQ0000000000" modelType="Class" name="Заявка на перевозку">
+      <ModelProperties>
+        <StringProperty name="name" value="Заявка на перевозку" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_REQ0000000000" modelType="Attribute" name="пункт отправления">
+          <ModelProperties>
+            <StringProperty name="name" value="пункт отправления" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_REQx700000000" modelType="Attribute" name="пункт назначения">
+          <ModelProperties>
+            <StringProperty name="name" value="пункт назначения" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_REQx800000000" modelType="Attribute" name="желаемая дата отправки">
+          <ModelProperties>
+            <StringProperty name="name" value="желаемая дата отправки" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_REQx900000000" modelType="Attribute" name="описание груза">
+          <ModelProperties>
+            <StringProperty name="name" value="описание груза" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_REQx100000000" modelType="Attribute" name="оценочная ценность груза">
+          <ModelProperties>
+            <StringProperty name="name" value="оценочная ценность груза" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_REQx110000000" modelType="Attribute" name="расчётное время в пути">
+          <ModelProperties>
+            <StringProperty name="name" value="расчётное время в пути" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_REQx120000000" modelType="Attribute" name="текущий статус">
+          <ModelProperties>
+            <StringProperty name="name" value="текущий статус" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_HIST000000000" modelType="Class" name="Запись истории рейса">
+      <ModelProperties>
+        <StringProperty name="name" value="Запись истории рейса" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_HIST000000000" modelType="Attribute" name="предыдущий статус">
+          <ModelProperties>
+            <StringProperty name="name" value="предыдущий статус" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_HISTx13000000" modelType="Attribute" name="новый статус">
+          <ModelProperties>
+            <StringProperty name="name" value="новый статус" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_HISTx14000000" modelType="Attribute" name="кто инициировал переход">
+          <ModelProperties>
+            <StringProperty name="name" value="кто инициировал переход" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_HISTx15000000" modelType="Attribute" name="причина">
+          <ModelProperties>
+            <StringProperty name="name" value="причина" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_HISTx16000000" modelType="Attribute" name="когда произошло">
+          <ModelProperties>
+            <StringProperty name="name" value="когда произошло" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="EN_STATUS0000000" modelType="Class" name="Статус рейса">
+      <ModelProperties>
+        <StringProperty name="name" value="Статус рейса" />
+        <StringProperty name="visibility" value="public" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STenumeration000" />
+        </ModelRefsProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="EL_STATUS0000000" modelType="EnumerationLiteral" name="Черновик">
+          <ModelProperties>
+            <StringProperty name="name" value="Черновик" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_STATUSx170000" modelType="EnumerationLiteral" name="Готов к отправке">
+          <ModelProperties>
+            <StringProperty name="name" value="Готов к отправке" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_STATUSx180000" modelType="EnumerationLiteral" name="В пути">
+          <ModelProperties>
+            <StringProperty name="name" value="В пути" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_STATUSx190000" modelType="EnumerationLiteral" name="Задержка">
+          <ModelProperties>
+            <StringProperty name="name" value="Задержка" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_STATUSx200000" modelType="EnumerationLiteral" name="Доставлен">
+          <ModelProperties>
+            <StringProperty name="name" value="Доставлен" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_STATUSx210000" modelType="EnumerationLiteral" name="Закрыт">
+          <ModelProperties>
+            <StringProperty name="name" value="Закрыт" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_STATUSx220000" modelType="EnumerationLiteral" name="Отменён">
+          <ModelProperties>
+            <StringProperty name="name" value="Отменён" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_AUDIT00000000" modelType="Class" name="Событие аудита">
+      <ModelProperties>
+        <StringProperty name="name" value="Событие аудита" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_AUDIT00000000" modelType="Attribute" name="что произошло">
+          <ModelProperties>
+            <StringProperty name="name" value="что произошло" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_AUDITx2300000" modelType="Attribute" name="кто инициировал">
+          <ModelProperties>
+            <StringProperty name="name" value="кто инициировал" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_AUDITx2400000" modelType="Attribute" name="когда произошло">
+          <ModelProperties>
+            <StringProperty name="name" value="когда произошло" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_ROUTE00000000" modelType="Class" name="Маршрут">
+      <ModelProperties>
+        <StringProperty name="name" value="Маршрут" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_ROUTE00000000" modelType="Attribute" name="название">
+          <ModelProperties>
+            <StringProperty name="name" value="название" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_ROUTEx2500000" modelType="Attribute" name="готовый шаблон или задан вручную">
+          <ModelProperties>
+            <StringProperty name="name" value="готовый шаблон или задан вручную" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_SEG0000000000" modelType="Class" name="Участок маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="Участок маршрута" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_SEG0000000000" modelType="Attribute" name="порядок в маршруте">
+          <ModelProperties>
+            <StringProperty name="name" value="порядок в маршруте" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_SEGx260000000" modelType="Attribute" name="протяжённость">
+          <ModelProperties>
+            <StringProperty name="name" value="протяжённость" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_CP00000000000" modelType="Class" name="Контрольная точка">
+      <ModelProperties>
+        <StringProperty name="name" value="Контрольная точка" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_CP00000000000" modelType="Attribute" name="название">
+          <ModelProperties>
+            <StringProperty name="name" value="название" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_RISK000000000" modelType="Class" name="Оценка риска">
+      <ModelProperties>
+        <StringProperty name="name" value="Оценка риска" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_RISK000000000" modelType="Attribute" name="значение риска">
+          <ModelProperties>
+            <StringProperty name="name" value="значение риска" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_RISKx27000000" modelType="Attribute" name="актуальность оценки">
+          <ModelProperties>
+            <StringProperty name="name" value="актуальность оценки" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_RISKx28000000" modelType="Attribute" name="рекомендация по охране и припасам">
+          <ModelProperties>
+            <StringProperty name="name" value="рекомендация по охране и припасам" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_RISKx29000000" modelType="Attribute" name="когда получена">
+          <ModelProperties>
+            <StringProperty name="name" value="когда получена" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="EN_LEVEL00000000" modelType="Class" name="Уровень риска">
+      <ModelProperties>
+        <StringProperty name="name" value="Уровень риска" />
+        <StringProperty name="visibility" value="public" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STenumeration000" />
+        </ModelRefsProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="EL_LEVEL00000000" modelType="EnumerationLiteral" name="Н/Д">
+          <ModelProperties>
+            <StringProperty name="name" value="Н/Д" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_LEVELx3000000" modelType="EnumerationLiteral" name="Низкий">
+          <ModelProperties>
+            <StringProperty name="name" value="Низкий" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_LEVELx3100000" modelType="EnumerationLiteral" name="Средний">
+          <ModelProperties>
+            <StringProperty name="name" value="Средний" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_LEVELx3200000" modelType="EnumerationLiteral" name="Высокий">
+          <ModelProperties>
+            <StringProperty name="name" value="Высокий" />
+          </ModelProperties>
+        </Model>
+        <Model id="EL_LEVELx3300000" modelType="EnumerationLiteral" name="Критический">
+          <ModelProperties>
+            <StringProperty name="name" value="Критический" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_WI00000000000" modelType="Class" name="Wasteland Intel">
+      <ModelProperties>
+        <StringProperty name="name" value="Wasteland Intel" />
+        <StringProperty name="visibility" value="public" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="ST______________" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="ST______________" modelType="Stereotype" name="внешняя система">
+      <ModelProperties>
+        <StringProperty name="name" value="внешняя система" />
+        <StringProperty name="baseType" value="Class" />
+      </ModelProperties>
+    </Model>
+    <Model id="CL_REPORT0000000" modelType="Class" name="Отчёт об угрозах">
+      <ModelProperties>
+        <StringProperty name="name" value="Отчёт об угрозах" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_REPORT0000000" modelType="Attribute" name="дата актуальности сведений">
+          <ModelProperties>
+            <StringProperty name="name" value="дата актуальности сведений" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_THREAT0000000" modelType="Class" name="Угроза участка">
+      <ModelProperties>
+        <StringProperty name="name" value="Угроза участка" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_THREAT0000000" modelType="Attribute" name="участок маршрута">
+          <ModelProperties>
+            <StringProperty name="name" value="участок маршрута" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_THREATx340000" modelType="Attribute" name="уровень опасности">
+          <ModelProperties>
+            <StringProperty name="name" value="уровень опасности" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_THREATx350000" modelType="Attribute" name="виды угроз">
+          <ModelProperties>
+            <StringProperty name="name" value="виды угроз" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_INC0000000000" modelType="Class" name="Инцидент">
+      <ModelProperties>
+        <StringProperty name="name" value="Инцидент" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_INC0000000000" modelType="Attribute" name="вид инцидента">
+          <ModelProperties>
+            <StringProperty name="name" value="вид инцидента" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_INCx360000000" modelType="Attribute" name="тяжесть">
+          <ModelProperties>
+            <StringProperty name="name" value="тяжесть" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_INCx370000000" modelType="Attribute" name="время и место">
+          <ModelProperties>
+            <StringProperty name="name" value="время и место" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_INCx380000000" modelType="Attribute" name="описание произошедшего">
+          <ModelProperties>
+            <StringProperty name="name" value="описание произошедшего" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_STAGE00000000" modelType="Class" name="Этап рейса">
+      <ModelProperties>
+        <StringProperty name="name" value="Этап рейса" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_STAGE00000000" modelType="Attribute" name="порядок этапа">
+          <ModelProperties>
+            <StringProperty name="name" value="порядок этапа" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_STAGEx3900000" modelType="Attribute" name="вид этапа">
+          <ModelProperties>
+            <StringProperty name="name" value="вид этапа" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_STAGEx4000000" modelType="Attribute" name="плановое время">
+          <ModelProperties>
+            <StringProperty name="name" value="плановое время" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_STAGEx4100000" modelType="Attribute" name="подтверждён">
+          <ModelProperties>
+            <StringProperty name="name" value="подтверждён" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_PART000000000" modelType="Class" name="Участник инцидента">
+      <ModelProperties>
+        <StringProperty name="name" value="Участник инцидента" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_PART000000000" modelType="Attribute" name="роль в инциденте">
+          <ModelProperties>
+            <StringProperty name="name" value="роль в инциденте" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_PARTx42000000" modelType="Attribute" name="пострадал">
+          <ModelProperties>
+            <StringProperty name="name" value="пострадал" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_PARTx43000000" modelType="Attribute" name="состояние и оказанная помощь">
+          <ModelProperties>
+            <StringProperty name="name" value="состояние и оказанная помощь" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_RECOVERY00000" modelType="Class" name="Запрос на реагирование">
+      <ModelProperties>
+        <StringProperty name="name" value="Запрос на реагирование" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_RECOVERY00000" modelType="Attribute" name="что требуется">
+          <ModelProperties>
+            <StringProperty name="name" value="что требуется" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_RECOVERYx4400" modelType="Attribute" name="состояние обработки">
+          <ModelProperties>
+            <StringProperty name="name" value="состояние обработки" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="CL_LOG0000000000" modelType="Class" name="Отметка прохождения">
+      <ModelProperties>
+        <StringProperty name="name" value="Отметка прохождения" />
+        <StringProperty name="visibility" value="public" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="AT_LOG0000000000" modelType="Attribute" name="фактическое время">
+          <ModelProperties>
+            <StringProperty name="name" value="фактическое время" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_LOGx450000000" modelType="Attribute" name="место">
+          <ModelProperties>
+            <StringProperty name="name" value="место" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_LOGx460000000" modelType="Attribute" name="результат">
+          <ModelProperties>
+            <StringProperty name="name" value="результат" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+        <Model id="AT_LOGx470000000" modelType="Attribute" name="причина задержки">
+          <ModelProperties>
+            <StringProperty name="name" value="причина задержки" />
+            <StringProperty name="visibility" value="Unspecified" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="AS_org_user00000" modelType="Association" name="сотрудники организации">
+      <ModelProperties>
+        <StringProperty name="name" value="сотрудники организации" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_ORG0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_USER000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_org_userFrom0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_ORG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Aggregation" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_org_userToEn0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_USER000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_org_req000000" modelType="Association" name="рейсы организации (FR-23, FR-24)">
+      <ModelProperties>
+        <StringProperty name="name" value="рейсы организации (FR-23, FR-24)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_ORG0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_org_reqFrom00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_ORG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Aggregation" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_org_reqToEn00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REQ0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_org_audit0000" modelType="Association" name="события организации (RL-4)">
+      <ModelProperties>
+        <StringProperty name="name" value="события организации (RL-4)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_ORG0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_AUDIT00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_org_auditFrom" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_ORG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Aggregation" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_org_auditToEn" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_AUDIT00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="DP_user_role0000" modelType="Dependency" name="роль сотрудника">
+      <ModelProperties>
+        <StringProperty name="name" value="роль сотрудника" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_USER000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="EN_ROLE000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="AS_req_hist00000" modelType="Association" name="история переходов (FR-3)">
+      <ModelProperties>
+        <StringProperty name="name" value="история переходов (FR-3)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_HIST000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_histFrom0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REQ0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Composited" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_histToEn0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_HIST000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="DP_req_status000" modelType="Dependency" name="текущий статус (FR-2)">
+      <ModelProperties>
+        <StringProperty name="name" value="текущий статус (FR-2)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="EN_STATUS0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="DP_hist_status00" modelType="Dependency" name="из какого в какой">
+      <ModelProperties>
+        <StringProperty name="name" value="из какого в какой" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_HIST000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="EN_STATUS0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="DP_hist_role0000" modelType="Dependency" name="кто инициировал">
+      <ModelProperties>
+        <StringProperty name="name" value="кто инициировал" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_HIST000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="EN_ROLE000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="AS_hist_audit000" modelType="Association" name="переход статуса попадает в журнал">
+      <ModelProperties>
+        <StringProperty name="name" value="переход статуса попадает в журнал" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_HIST000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_AUDIT00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_hist_auditFro" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_HIST000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..1" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_hist_auditToE" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_AUDIT00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..1" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_req_route0000" modelType="Association" name="выполняется по маршруту (FR-4)">
+      <ModelProperties>
+        <StringProperty name="name" value="выполняется по маршруту (FR-4)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_ROUTE00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_routeFrom" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REQ0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="false" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_routeToEn" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_ROUTE00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..1" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="true" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_route_seg0000" modelType="Association" name="участки в порядке следования">
+      <ModelProperties>
+        <StringProperty name="name" value="участки в порядке следования" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_ROUTE00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_SEG0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_route_segFrom" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_ROUTE00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Composited" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_route_segToEn" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_SEG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_seg_cp1000000" modelType="Association" name="начало участка">
+      <ModelProperties>
+        <StringProperty name="name" value="начало участка" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_SEG0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_CP00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_seg_cp1From00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_SEG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="false" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_seg_cp1ToEn00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_CP00000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="true" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_seg_cp2000000" modelType="Association" name="конец участка">
+      <ModelProperties>
+        <StringProperty name="name" value="конец участка" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_SEG0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_CP00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_seg_cp2From00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_SEG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="false" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_seg_cp2ToEn00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_CP00000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="true" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_req_risk00000" modelType="Association" name="оценки риска рейса; учитывают&#10;ценность груза (FR-7, FR-13, FR-14)">
+      <ModelProperties>
+        <StringProperty name="name" value="оценки риска рейса; учитывают&#10;ценность груза (FR-7, FR-13, FR-14)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_RISK000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_riskFrom0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REQ0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Aggregation" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_riskToEn0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_RISK000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="DP_risk_level000" modelType="Dependency" name="уровень риска для диспетчера (FR-8)">
+      <ModelProperties>
+        <StringProperty name="name" value="уровень риска для диспетчера (FR-8)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_RISK000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="EN_LEVEL00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="DP_risk_report00" modelType="Dependency" name="рассчитана по сведениям об угрозах">
+      <ModelProperties>
+        <StringProperty name="name" value="рассчитана по сведениям об угрозах" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_RISK000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="CL_REPORT0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="AS_wi_report0000" modelType="Association" name="поставляет сведения об угрозах (FR-6)">
+      <ModelProperties>
+        <StringProperty name="name" value="поставляет сведения об угрозах (FR-6)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_WI00000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_REPORT0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_wi_reportFrom" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_WI00000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="false" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_wi_reportToEn" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REPORT0000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="true" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_report_threat" modelType="Association" name="угрозы по участкам маршрута">
+      <ModelProperties>
+        <StringProperty name="name" value="угрозы по участкам маршрута" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_REPORT0000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_THREAT0000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_report_thrx48" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REPORT0000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Aggregation" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_report_thrx49" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_THREAT0000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="DP_threat_seg000" modelType="Dependency" name="относится к участку">
+      <ModelProperties>
+        <StringProperty name="name" value="относится к участку" />
+        <ModelRefProperty name="from">
+          <ModelRef id="CL_THREAT0000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="CL_SEG0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="AS_req_stage0000" modelType="Association" name="план этапов рейса (FR-18)">
+      <ModelProperties>
+        <StringProperty name="name" value="план этапов рейса (FR-18)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_STAGE00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_stageFrom" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REQ0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Composited" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_stageToEn" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_STAGE00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_stage_log0000" modelType="Association" name="отметка о прохождении">
+      <ModelProperties>
+        <StringProperty name="name" value="отметка о прохождении" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_STAGE00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_LOG0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_stage_logFrom" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_STAGE00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Composited" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_stage_logToEn" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_LOG0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..1" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_stage_cp00000" modelType="Association" name="плановая контрольная точка">
+      <ModelProperties>
+        <StringProperty name="name" value="плановая контрольная точка" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_STAGE00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_CP00000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_stage_cpFrom0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_STAGE00000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="false" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_stage_cpToEn0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_CP00000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..1" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="true" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_req_inc000000" modelType="Association" name="инциденты рейса (FR-19)">
+      <ModelProperties>
+        <StringProperty name="name" value="инциденты рейса (FR-19)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_INC0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_incFrom00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_REQ0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Composited" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_req_incToEn00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_INC0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_inc_part00000" modelType="Association" name="участники инцидента (FR-20)">
+      <ModelProperties>
+        <StringProperty name="name" value="участники инцидента (FR-20)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_INC0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_PART000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_inc_partFrom0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_INC0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Composited" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_inc_partToEn0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_PART000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_inc_rec000000" modelType="Association" name="основание для реагирования (FR-21)">
+      <ModelProperties>
+        <StringProperty name="name" value="основание для реагирования (FR-21)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_INC0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_RECOVERY00000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_inc_recFrom00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_INC0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="Aggregation" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_inc_recToEn00" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_RECOVERY00000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="AS_inc_user00000" modelType="Association" name="кто сообщил об инциденте">
+      <ModelProperties>
+        <StringProperty name="name" value="кто сообщил об инциденте" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="CL_INC0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="CL_USER000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_inc_userFrom0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_INC0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="0..*" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="false" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="AS_inc_userToEn0" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="CL_USER000000000" />
+            </ModelRefProperty>
+            <StringProperty name="multiplicity" value="1" />
+            <StringProperty name="aggregationKind" value="None" />
+            <StringProperty name="navigable" value="true" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="NO_n_req00000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Рейс — центральное понятие&#10;Диспетчер создаёт заявку (UC-1), система подбирает маршрут (UC-5),&#10;считает время в пути (UC-6) и риск (UC-7), даёт рекомендацию&#10;по охране и припасам (UC-8). Дальше рейс живёт статусной моделью&#10;(UC-2) и виден в реестре (UC-3)." />
+      </ModelProperties>
+    </Model>
+    <Model id="AN_n_req00000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="NO_n_req00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="CL_REQ0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="NO_n_risk0000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Оценка риска обновляется каждым расчётом&#10;Если внешняя система недоступна, оценка получает значение «Н/Д»&#10;и пометку «требует пересчёта»; если сведения старше суток —&#10;пометку «на основе устаревших данных»." />
+      </ModelProperties>
+    </Model>
+    <Model id="AN_n_risk0000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="NO_n_risk0000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="CL_RISK000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="NO_n_inc00000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Полевые события рейса&#10;Отметки прохождения этапов и карточки инцидентов создаются&#10;на полевом устройстве и попадают в систему при появлении связи (RL-1)." />
+      </ModelProperties>
+    </Model>
+    <Model id="AN_n_inc00000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="NO_n_inc00000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="CL_INC0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="NO_legend0000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• серый — понятие реализовано в системе&#10;• сиреневый — «внешняя система» и данные, которые она поставляет&#10;&#10;Уровень описания. Только предметная область: понятия, их деловые&#10;свойства и связи. Ни классов реализации, ни методов, ни типов данных,&#10;ни слоёв, ни хранилищ — это уровни Logical и Implementation View.&#10;Свойства перечислены деловыми именами, без типов: тип и формат&#10;появляются на CLS_LogicalView, фактическое объявление —&#10;на CLS_ImplementationView.&#10;Перечисления показаны там, где набор значений сам является&#10;понятием модели и обсуждается с заказчиком.&#10;Типы связей: *-- композиция (часть не существует без целого),&#10;o-- агрегация, --&gt; ассоциация, ..&gt; зависимость&#10;(на зависимостях кратности не указываются).&#10;Трассировка: FR-2 и FR-3 (статусы и история), FR-4 (маршрут),&#10;FR-6 (Wasteland Intel), FR-7 (risk_score), FR-8 (рекомендация),&#10;FR-13 и FR-14 (ценность груза), FR-18 (этапы рейса),&#10;FR-19 — FR-21 (инциденты и реагирование), FR-23 и FR-24&#10;(организация и изоляция её данных), RL-1 (офлайн-фиксация),&#10;RL-4 (журнал аудита). Перечень прецедентов — docs/UseCases.md." />
+      </ModelProperties>
+    </Model>
+    <Model id="Fd8e01182dfda777" modelType="Rectangle" name="Реализованные понятия">
+      <ModelProperties>
+        <StringProperty name="name" value="Реализованные понятия" />
+      </ModelProperties>
+    </Model>
+    <Model id="F72a6871e0f08ab2" modelType="Rectangle" name="Внешняя система и её данные">
+      <ModelProperties>
+        <StringProperty name="name" value="Внешняя система и её данные" />
+      </ModelProperties>
+    </Model>
+    <Model id="F17ced0da9d3aadf" modelType="NOTE" name="ИС «Караваны» — Class Diagram (Use-Case View)&#10;Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ">
+      <ModelProperties>
+        <StringProperty name="name" value="ИС «Караваны» — Class Diagram (Use-Case View)&#10;Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ" />
+        <HTMLProperty name="documentation" plainTextValue="ИС «Караваны» — Class Diagram (Use-Case View)&#10;Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_CLS_UseCaseVie" name="CLS_UseCaseView" diagramType="ClassDiagram">
+      <Shapes>
+        <Shape id="SH_USER000000000" shapeType="Class" x="60" y="310" width="250" height="90" zorder="12" model="CL_USER000000000" name="Сотрудник">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_ROLE000000000" shapeType="Class" x="60" y="530" width="240" height="105" zorder="15" model="EN_ROLE000000000" name="Роль участника">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_ORG0000000000" shapeType="Class" x="520" y="140" width="240" height="90" zorder="9" model="CL_ORG0000000000" name="Организация">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_REQ0000000000" shapeType="Class" x="960" y="295" width="300" height="145" zorder="24" model="CL_REQ0000000000" name="Заявка на перевозку">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_HIST000000000" shapeType="Class" x="580" y="530" width="260" height="115" zorder="19" model="CL_HIST000000000" name="Запись истории рейса">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_STATUS0000000" shapeType="Class" x="980" y="530" width="230" height="160" zorder="21" model="EN_STATUS0000000" name="Статус рейса">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_AUDIT00000000" shapeType="Class" x="520" y="310" width="230" height="90" zorder="8" model="CL_AUDIT00000000" name="Событие аудита">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_ROUTE00000000" shapeType="Class" x="1420" y="530" width="290" height="75" zorder="11" model="CL_ROUTE00000000" name="Маршрут">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_SEG0000000000" shapeType="Class" x="1430" y="770" width="240" height="75" zorder="6" model="CL_SEG0000000000" name="Участок маршрута">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_CP00000000000" shapeType="Class" x="1440" y="960" width="210" height="60" zorder="4" model="CL_CP00000000000" name="Контрольная точка">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_RISK000000000" shapeType="Class" x="1820" y="310" width="320" height="100" zorder="20" model="CL_RISK000000000" name="Оценка риска">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_LEVEL00000000" shapeType="Class" x="1820" y="530" width="210" height="128" zorder="18" model="EN_LEVEL00000000" name="Уровень риска">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_WI00000000000" shapeType="Class" x="2400" y="140" width="240" height="32" zorder="1" model="CL_WI00000000000" name="Wasteland Intel">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_REPORT0000000" shapeType="Class" x="2400" y="310" width="250" height="60" zorder="5" model="CL_REPORT0000000" name="Отчёт об угрозах">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_THREAT0000000" shapeType="Class" x="2400" y="500" width="240" height="90" zorder="10" model="CL_THREAT0000000" name="Угроза участка">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_INC0000000000" shapeType="Class" x="520" y="770" width="260" height="100" zorder="17" model="CL_INC0000000000" name="Инцидент">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_STAGE00000000" shapeType="Class" x="980" y="770" width="240" height="100" zorder="13" model="CL_STAGE00000000" name="Этап рейса">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_PART000000000" shapeType="Class" x="60" y="960" width="280" height="90" zorder="16" model="CL_PART000000000" name="Участник инцидента">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_RECOVERY00000" shapeType="Class" x="520" y="960" width="250" height="75" zorder="7" model="CL_RECOVERY00000" name="Запрос на реагирование">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_LOG0000000000" shapeType="Class" x="980" y="960" width="240" height="100" zorder="14" model="CL_LOG0000000000" name="Отметка прохождения">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showEmptyCompartments" value="2" />
+            <IntegerProperty name="showTypeOption" value="1" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_n_req00000000" shapeType="NOTE" x="1380" y="140" width="490" height="105" zorder="26" model="NO_n_req00000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_n_risk0000000" shapeType="NOTE" x="1820" y="700" width="470" height="90" zorder="23" model="NO_n_risk0000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_n_inc00000000" shapeType="NOTE" x="60" y="1080" width="510" height="75" zorder="22" model="NO_n_inc00000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="SH_legend0000000" shapeType="NOTE" x="1800" y="860" width="520" height="355" zorder="27" model="NO_legend0000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Fac14d84b604d611" shapeType="Rectangle" x="1800" y="1233" width="245" height="34" zorder="2" model="Fd8e01182dfda777" name="Реализованные понятия">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="245" height="34" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F52b22b90a636ef2" shapeType="Rectangle" x="2055" y="1233" width="245" height="34" zorder="3" model="F72a6871e0f08ab2" name="Внешняя система и её данные">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="245" height="34" />
+          <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="800" height="60" zorder="25" model="F17ced0da9d3aadf" name="ИС «Караваны» — Class Diagram (Use-Case View)&#10;Понятия предметной области и связи между ними: без слоёв, классов, типов и хранилищ">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="800" height="60" />
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="CN_org_user00000" shapeType="Association" model="AS_org_user00000" from="SH_ORG0000000000" to="SH_USER000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="520" y="185" />
+            <Point x="390" y="185" />
+            <Point x="390" y="365" />
+            <Point x="310" y="365" />
+          </Points>
+        </Connector>
+        <Connector id="CN_org_req000000" shapeType="Association" model="AS_org_req000000" from="SH_ORG0000000000" to="SH_REQ0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="760" y="185" />
+            <Point x="880" y="185" />
+            <Point x="880" y="350" />
+            <Point x="960" y="350" />
+          </Points>
+        </Connector>
+        <Connector id="CN_org_audit0000" shapeType="Association" model="AS_org_audit0000" from="SH_ORG0000000000" to="SH_AUDIT00000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="640" y="230" />
+            <Point x="640" y="310" />
+          </Points>
+        </Connector>
+        <Connector id="CN_user_role0000" shapeType="Dependency" model="DP_user_role0000" from="SH_USER000000000" to="SH_ROLE000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="130" y="400" />
+            <Point x="130" y="530" />
+          </Points>
+        </Connector>
+        <Connector id="CN_req_hist00000" shapeType="Association" model="AS_req_hist00000" from="SH_REQ0000000000" to="SH_HIST000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="960" y="400" />
+            <Point x="870" y="400" />
+            <Point x="870" y="570" />
+            <Point x="840" y="570" />
+          </Points>
+        </Connector>
+        <Connector id="CN_req_status000" shapeType="Dependency" model="DP_req_status000" from="SH_REQ0000000000" to="SH_STATUS0000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1060" y="440" />
+            <Point x="1060" y="530" />
+          </Points>
+        </Connector>
+        <Connector id="CN_hist_status00" shapeType="Dependency" model="DP_hist_status00" from="SH_HIST000000000" to="SH_STATUS0000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="840" y="590" />
+            <Point x="980" y="590" />
+          </Points>
+        </Connector>
+        <Connector id="CN_hist_role0000" shapeType="Dependency" model="DP_hist_role0000" from="SH_HIST000000000" to="SH_ROLE000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="580" y="620" />
+            <Point x="300" y="620" />
+          </Points>
+        </Connector>
+        <Connector id="CN_hist_audit000" shapeType="Association" model="AS_hist_audit000" from="SH_HIST000000000" to="SH_AUDIT00000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="600" y="530" />
+            <Point x="600" y="400" />
+          </Points>
+        </Connector>
+        <Connector id="CN_req_route0000" shapeType="Association" model="AS_req_route0000" from="SH_REQ0000000000" to="SH_ROUTE00000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showNavigationArrows" value="3" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1260" y="400" />
+            <Point x="1500" y="400" />
+            <Point x="1500" y="530" />
+          </Points>
+        </Connector>
+        <Connector id="CN_route_seg0000" shapeType="Association" model="AS_route_seg0000" from="SH_ROUTE00000000" to="SH_SEG0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1550" y="605" />
+            <Point x="1550" y="770" />
+          </Points>
+        </Connector>
+        <Connector id="CN_seg_cp1000000" shapeType="Association" model="AS_seg_cp1000000" from="SH_SEG0000000000" to="SH_CP00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showNavigationArrows" value="3" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1480" y="845" />
+            <Point x="1480" y="960" />
+          </Points>
+        </Connector>
+        <Connector id="CN_seg_cp2000000" shapeType="Association" model="AS_seg_cp2000000" from="SH_SEG0000000000" to="SH_CP00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showNavigationArrows" value="3" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1620" y="845" />
+            <Point x="1620" y="960" />
+          </Points>
+        </Connector>
+        <Connector id="CN_req_risk00000" shapeType="Association" model="AS_req_risk00000" from="SH_REQ0000000000" to="SH_RISK000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1260" y="340" />
+            <Point x="1820" y="340" />
+          </Points>
+        </Connector>
+        <Connector id="CN_risk_level000" shapeType="Dependency" model="DP_risk_level000" from="SH_RISK000000000" to="SH_LEVEL00000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1880" y="410" />
+            <Point x="1880" y="530" />
+          </Points>
+        </Connector>
+        <Connector id="CN_risk_report00" shapeType="Dependency" model="DP_risk_report00" from="SH_RISK000000000" to="SH_REPORT0000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2140" y="360" />
+            <Point x="2400" y="360" />
+          </Points>
+        </Connector>
+        <Connector id="CN_wi_report0000" shapeType="Association" model="AS_wi_report0000" from="SH_WI00000000000" to="SH_REPORT0000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showNavigationArrows" value="3" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2520" y="200" />
+            <Point x="2520" y="310" />
+          </Points>
+        </Connector>
+        <Connector id="CN_report_threat" shapeType="Association" model="AS_report_threat" from="SH_REPORT0000000" to="SH_THREAT0000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2460" y="370" />
+            <Point x="2460" y="500" />
+          </Points>
+        </Connector>
+        <Connector id="CN_threat_seg000" shapeType="Dependency" model="DP_threat_seg000" from="SH_THREAT0000000" to="SH_SEG0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2520" y="590" />
+            <Point x="2520" y="805" />
+            <Point x="1670" y="805" />
+          </Points>
+        </Connector>
+        <Connector id="CN_req_stage0000" shapeType="Association" model="AS_req_stage0000" from="SH_REQ0000000000" to="SH_STAGE00000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1260" y="420" />
+            <Point x="1340" y="420" />
+            <Point x="1340" y="730" />
+            <Point x="1100" y="730" />
+            <Point x="1100" y="770" />
+          </Points>
+        </Connector>
+        <Connector id="CN_stage_log0000" shapeType="Association" model="AS_stage_log0000" from="SH_STAGE00000000" to="SH_LOG0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1050" y="870" />
+            <Point x="1050" y="960" />
+          </Points>
+        </Connector>
+        <Connector id="CN_stage_cp00000" shapeType="Association" model="AS_stage_cp00000" from="SH_STAGE00000000" to="SH_CP00000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showNavigationArrows" value="3" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1220" y="830" />
+            <Point x="1330" y="830" />
+            <Point x="1330" y="990" />
+            <Point x="1440" y="990" />
+          </Points>
+        </Connector>
+        <Connector id="CN_req_inc000000" shapeType="Association" model="AS_req_inc000000" from="SH_REQ0000000000" to="SH_INC0000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="960" y="435" />
+            <Point x="930" y="435" />
+            <Point x="930" y="740" />
+            <Point x="620" y="740" />
+            <Point x="620" y="770" />
+          </Points>
+        </Connector>
+        <Connector id="CN_inc_part00000" shapeType="Association" model="AS_inc_part00000" from="SH_INC0000000000" to="SH_PART000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="560" y="870" />
+            <Point x="560" y="910" />
+            <Point x="180" y="910" />
+            <Point x="180" y="960" />
+          </Points>
+        </Connector>
+        <Connector id="CN_inc_rec000000" shapeType="Association" model="AS_inc_rec000000" from="SH_INC0000000000" to="SH_RECOVERY00000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="700" y="870" />
+            <Point x="700" y="960" />
+          </Points>
+        </Connector>
+        <Connector id="CN_inc_user00000" shapeType="Association" model="AS_inc_user00000" from="SH_INC0000000000" to="SH_USER000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+            <IntegerProperty name="showNavigationArrows" value="3" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="520" y="820" />
+            <Point x="360" y="820" />
+            <Point x="360" y="390" />
+            <Point x="310" y="390" />
+          </Points>
+        </Connector>
+        <Connector id="CN_n_req00000000" shapeType="Anchor" model="AN_n_req00000000" from="SH_n_req00000000" to="SH_REQ0000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="1380" y="210" />
+            <Point x="1260" y="330" />
+          </Points>
+        </Connector>
+        <Connector id="CN_n_risk0000000" shapeType="Anchor" model="AN_n_risk0000000" from="SH_n_risk0000000" to="SH_RISK000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="2100" y="700" />
+            <Point x="2100" y="410" />
+          </Points>
+        </Connector>
+        <Connector id="CN_n_inc00000000" shapeType="Anchor" model="AN_n_inc00000000" from="SH_n_inc00000000" to="SH_INC0000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Points>
+            <Point x="420" y="1080" />
+            <Point x="420" y="845" />
+            <Point x="520" y="845" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

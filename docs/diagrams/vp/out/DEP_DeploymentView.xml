@@ -1,2 +1,677 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="DEP_DeploymentView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="ИС «Караваны» — Deployment Diagram (Deployment View)&#10;Где развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия"><ModelProperties><StringProperty name="name" value="ИС «Караваны» — Deployment Diagram (Deployment View)&#10;Где развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия" /></ModelProperties></Model><Model id="M100000000000000" modelType="Node" name="Центральный сервер караванной конторы&#10;CPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64&#10;RAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется"><ModelProperties><StringProperty name="name" value="Центральный сервер караванной конторы&#10;CPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64&#10;RAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется" /><ModelRefProperty name="stereotypes"><ModelRef id="STdevice00000000" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M700000000000000" modelType="Node" name="FreeBSD 14.3-STABLE&#10;ZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)&#10;сетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d"><ModelProperties><StringProperty name="name" value="FreeBSD 14.3-STABLE&#10;ZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)&#10;сетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M10x100000000000" modelType="Node" name="nginx 1.30&#10;пакет www/nginx · служба nginx · TLS на :443"><ModelProperties><StringProperty name="name" value="nginx 1.30&#10;пакет www/nginx · служба nginx · TLS на :443" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M180000000000000" modelType="Artifact" name="web-клиент и PWA&#10;/usr/local/www/karavany&#10;(сборка vite build)"><ModelProperties><StringProperty name="name" value="web-клиент и PWA&#10;/usr/local/www/karavany&#10;(сборка vite build)" /></ModelProperties></Model><Model id="M190000000000000" modelType="Artifact" name="конфигурация сайта&#10;TLS, прокси /api/* → 127.0.0.1:8080"><ModelProperties><StringProperty name="name" value="конфигурация сайта&#10;TLS, прокси /api/* → 127.0.0.1:8080" /></ModelProperties></Model></ChildModels></Model><Model id="M110000000000000" modelType="Node" name="OpenJDK 21 (JVM)&#10;пакет java/openjdk21 · служба karavany (rc.d)&#10;запуск: java -jar karavany-0.1.0.jar&#10;Java heap: -Xms512m -Xmx2g (рекомендация)"><ModelProperties><StringProperty name="name" value="OpenJDK 21 (JVM)&#10;пакет java/openjdk21 · служба karavany (rc.d)&#10;запуск: java -jar karavany-0.1.0.jar&#10;Java heap: -Xms512m -Xmx2g (рекомендация)" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M20x300000000000" modelType="Node" name="Embedded Apache Tomcat 10.1.31&#10;встроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует&#10;Jakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080&#10;thread pool: 10–200 потоков (по умолчанию Spring Boot)"><ModelProperties><StringProperty name="name" value="Embedded Apache Tomcat 10.1.31&#10;встроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует&#10;Jakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080&#10;thread pool: 10–200 потоков (по умолчанию Spring Boot)" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M230000000000000" modelType="Artifact" name="karavany-0.1.0.jar&#10;Spring Boot 3.3.5:&#10;• Spring MVC — DispatcherServlet, REST-контроллеры /api/*&#10;• Spring Data JPA (Hibernate) → PostgreSQL&#10;• Spring Data MongoDB → MongoDB&#10;• Flyway — миграции схемы при старте&#10;• Spring Boot Actuator — /api/health, /api/info"><ModelProperties><StringProperty name="name" value="karavany-0.1.0.jar&#10;Spring Boot 3.3.5:&#10;• Spring MVC — DispatcherServlet, REST-контроллеры /api/*&#10;• Spring Data JPA (Hibernate) → PostgreSQL&#10;• Spring Data MongoDB → MongoDB&#10;• Flyway — миграции схемы при старте&#10;• Spring Boot Actuator — /api/health, /api/info" /></ModelProperties></Model></ChildModels></Model></ChildModels></Model><Model id="M120000000000000" modelType="Node" name="PostgreSQL 16&#10;пакет databases/postgresql16-server&#10;служба postgresql · слушает 127.0.0.1:5432"><ModelProperties><StringProperty name="name" value="PostgreSQL 16&#10;пакет databases/postgresql16-server&#10;служба postgresql · слушает 127.0.0.1:5432" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M210000000000000" modelType="Node" name="БД karavany&#10;оперативные данные"><ModelProperties><StringProperty name="name" value="БД karavany&#10;оперативные данные" /><ModelRefProperty name="stereotypes"><ModelRef id="STdatabase000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="M130000000000000" modelType="Node" name="MongoDB 7.0&#10;пакет databases/mongodb70&#10;служба mongod · слушает 127.0.0.1:27017"><ModelProperties><StringProperty name="name" value="MongoDB 7.0&#10;пакет databases/mongodb70&#10;служба mongod · слушает 127.0.0.1:27017" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M220000000000000" modelType="Node" name="БД karavany&#10;снимки риска, аудит, события"><ModelProperties><StringProperty name="name" value="БД karavany&#10;снимки риска, аудит, события" /><ModelRefProperty name="stereotypes"><ModelRef id="STdatabase000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model><Model id="M140000000000000" modelType="Artifact" name="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов"><ModelProperties><StringProperty name="name" value="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов" /></ModelProperties></Model></ChildModels></Model></ChildModels></Model><Model id="STdevice00000000" modelType="Stereotype" name="device"><ModelProperties><StringProperty name="name" value="device" /><StringProperty name="baseType" value="Node" /></ModelProperties></Model><Model id="M200000000000000" modelType="Node" name="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу"><ModelProperties><StringProperty name="name" value="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу" /><ModelRefProperty name="stereotypes"><ModelRef id="STdevice00000000" /></ModelRefProperty></ModelProperties></Model><Model id="M300000000000000" modelType="Node" name="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с"><ModelProperties><StringProperty name="name" value="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с" /><ModelRefProperty name="stereotypes"><ModelRef id="STdevice00000000" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M800000000000000" modelType="Node" name="Браузер Chrome / Firefox / Opera"><ModelProperties><StringProperty name="name" value="Браузер Chrome / Firefox / Opera" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M150000000000000" modelType="Artifact" name="web-клиент ИС «Караваны»&#10;диспетчер, кладовщик, суперпользователь"><ModelProperties><StringProperty name="name" value="web-клиент ИС «Караваны»&#10;диспетчер, кладовщик, суперпользователь" /></ModelProperties></Model></ChildModels></Model></ChildModels></Model><Model id="M400000000000000" modelType="Node" name="Pip-Boy 3000 или совместимое устройство × до 150&#10;ARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ&#10;Wi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч"><ModelProperties><StringProperty name="name" value="Pip-Boy 3000 или совместимое устройство × до 150&#10;ARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ&#10;Wi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч" /><ModelRefProperty name="stereotypes"><ModelRef id="STdevice00000000" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M900000000000000" modelType="Node" name="Браузер устройства"><ModelProperties><StringProperty name="name" value="Браузер устройства" /><ModelRefProperty name="stereotypes"><ModelRef id="STexecution_envi" /></ModelRefProperty></ModelProperties><ChildModels><Model id="M160000000000000" modelType="Artifact" name="PWA полевого клиента&#10;караван-мастер, капитан охраны, медик"><ModelProperties><StringProperty name="name" value="PWA полевого клиента&#10;караван-мастер, капитан охраны, медик" /></ModelProperties></Model><Model id="M170000000000000" modelType="Node" name="IndexedDB: очередь&#10;событий без связи ≥ 3 ч"><ModelProperties><StringProperty name="name" value="IndexedDB: очередь&#10;событий без связи ≥ 3 ч" /><ModelRefProperty name="stereotypes"><ModelRef id="STdatabase000000" /></ModelRefProperty></ModelProperties></Model></ChildModels></Model></ChildModels></Model><Model id="M500000000000000" modelType="Node" name="Wasteland Intel&#10;данные об угрозах по участкам"><ModelProperties><StringProperty name="name" value="Wasteland Intel&#10;данные об угрозах по участкам" /><ModelRefProperty name="stereotypes"><ModelRef id="STexternal_syste" /></ModelRefProperty></ModelProperties></Model><Model id="STexternal_syste" modelType="Stereotype" name="external system"><ModelProperties><StringProperty name="name" value="external system" /><StringProperty name="baseType" value="Node" /></ModelProperties></Model><Model id="M600000000000000" modelType="Node" name="NCR Checkpoint &amp; Tax Terminal&#10;прохождение КПП и пошлины"><ModelProperties><StringProperty name="name" value="NCR Checkpoint &amp; Tax Terminal&#10;прохождение КПП и пошлины" /><ModelRefProperty name="stereotypes"><ModelRef id="STexternal_syste" /></ModelRefProperty></ModelProperties></Model><Model id="STexecution_envi" modelType="Stereotype" name="execution environment"><ModelProperties><StringProperty name="name" value="execution environment" /><StringProperty name="baseType" value="Node" /></ModelProperties></Model><Model id="STdatabase000000" modelType="Stereotype" name="database"><ModelProperties><StringProperty name="name" value="database" /><StringProperty name="baseType" value="Node" /></ModelProperties></Model><Model id="F240000000000000" modelType="Association" name="HTTPS :443&#10;статика + REST / JSON"><ModelProperties><StringProperty name="name" value="HTTPS :443&#10;статика + REST / JSON" /><ModelRefProperty name="from"><ModelRef id="M800000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M10x100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F250000000000000" modelType="Association" name="HTTPS :443, REST / JSON&#10;синхронизация при появлении связи (≤ 60 с, RL-3)"><ModelProperties><StringProperty name="name" value="HTTPS :443, REST / JSON&#10;синхронизация при появлении связи (≤ 60 с, RL-3)" /><ModelRefProperty name="from"><ModelRef id="M900000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M10x100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F260000000000000" modelType="Association" name="HTTP, 127.0.0.1:8080&#10;NIO-коннектор принимает /api/*"><ModelProperties><StringProperty name="name" value="HTTP, 127.0.0.1:8080&#10;NIO-коннектор принимает /api/*" /><ModelRefProperty name="from"><ModelRef id="M10x100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M20x300000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F270000000000000" modelType="Association" name="Jakarta Servlet&#10;DispatcherServlet маршрутизирует запрос"><ModelProperties><StringProperty name="name" value="Jakarta Servlet&#10;DispatcherServlet маршрутизирует запрос" /><ModelRefProperty name="from"><ModelRef id="M20x300000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M230000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F280000000000000" modelType="Association" name="JDBC (PostgreSQL wire)&#10;127.0.0.1:5432"><ModelProperties><StringProperty name="name" value="JDBC (PostgreSQL wire)&#10;127.0.0.1:5432" /><ModelRefProperty name="from"><ModelRef id="M230000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M120000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F290000000000000" modelType="Association" name="MongoDB Wire Protocol&#10;127.0.0.1:27017"><ModelProperties><StringProperty name="name" value="MongoDB Wire Protocol&#10;127.0.0.1:27017" /><ModelRefProperty name="from"><ModelRef id="M230000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M130000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F300000000000000" modelType="Association" name="REST / HTTPS :443, JSON&#10;GET /threats?segments=…&#10;connect / read timeout 2 с"><ModelProperties><StringProperty name="name" value="REST / HTTPS :443, JSON&#10;GET /threats?segments=…&#10;connect / read timeout 2 с" /><ModelRefProperty name="from"><ModelRef id="M230000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F310000000000000" modelType="Association" name="REST / HTTPS :443, JSON&#10;(UC-24)"><ModelProperties><StringProperty name="name" value="REST / HTTPS :443, JSON&#10;(UC-24)" /><ModelRefProperty name="from"><ModelRef id="M230000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F320000000000000" modelType="Dependency" name="pg_dump"><ModelProperties><StringProperty name="name" value="pg_dump" /><ModelRefProperty name="from"><ModelRef id="M120000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M140000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F330000000000000" modelType="Dependency" name="mongodump"><ModelProperties><StringProperty name="name" value="mongodump" /><ModelRefProperty name="from"><ModelRef id="M130000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M140000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F340000000000000" modelType="Association" name="запись резервной копии"><ModelProperties><StringProperty name="name" value="запись резервной копии" /><ModelRefProperty name="from"><ModelRef id="M140000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F350000000000000" modelType="Dependency" name="установка PWA через RobCo-интерфейс&#10;терминала или с голотейпа (Vision 4.5)"><ModelProperties><StringProperty name="name" value="установка PWA через RobCo-интерфейс&#10;терминала или с голотейпа (Vision 4.5)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote36000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Размещение на сервере. Все компоненты работают&#10;  в одной ОС как отдельные службы rc.d под своими&#10;  системными пользователями. Наружу через pf доступен&#10;  только nginx на :443; backend, PostgreSQL и MongoDB&#10;  слушают только loopback-интерфейс 127.0.0.1.&#10;  Поставка артефактов. karavany-0.1.0.jar собирается&#10;  gradle bootJar (JDK 21), web-клиент — npm run build;&#10;  на сервер копируются готовые файлы.&#10;  Встроенный Tomcat. karavany-0.1.0.jar — исполняемый&#10;  fat-jar Spring Boot: HTTP-сервер не устанавливается и не&#10;  настраивается отдельно, а встроен в jar через&#10;  spring-boot-starter-tomcat (Apache Tomcat 10.1.31,&#10;  Jakarta Servlet 6.0) и поднимается той же командой&#10;  java -jar; отдельного WAR и внешнего сервера приложений&#10;  в проекте нет.&#10;  MongoDB. Порт databases/mongodb70 содержит&#10;  FreeBSD-специфичный патч, не проходивший QA MongoDB Inc.,&#10;  поэтому перед вводом в эксплуатацию — нагрузочная&#10;  проверка (PF-1…PF-3). AVX процессор поддерживает." /></ModelProperties></Model><Model id="Anote36000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote36000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote37000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="|= Цвет |= Значение |&#10;  | &lt;#F5F5F5&gt; | устройство или среда выполнения |&#10;  | &lt;#FFFFFF&gt; | артефакт |&#10;  | &lt;#E8F5E9&gt; | хранилище данных |&#10;  | &lt;#EDE7F6&gt; | внешняя система |&#10;  Характеристики сервера, терминала и Pip-Boy — Vision 9.2;&#10;  число устройств — Vision 9.3 и PF-1 (50 терминалов + 150 Pip-Boy).&#10;  Разрешение терминала: Vision 9.2 — от 1024×768, глоссарий — от 1280×720.&#10;  Интерфейсы: клиент — сервер только HTTPS (SRS 3.6.4),&#10;  внешние системы — REST по HTTPS, формат JSON.&#10;  Встроенный контейнер: Apache Tomcat 10.1.31 идёт внутри&#10;  spring-boot-starter-web (Spring Boot 3.3.5) — отдельно не&#10;  устанавливается." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_DEP_Deployment" name="DEP_DeploymentView" diagramType="DeploymentDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="418" y="56" width="807" height="52" zorder="12" model="Mtitle0000000000" name="ИС «Караваны» — Deployment Diagram (Deployment View)&#10;Где развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="807" height="52" /></Shape><Shape id="S100000000000000" shapeType="Node" x="60" y="750" width="941" height="1450" zorder="26" model="M100000000000000" name="Центральный сервер караванной конторы&#10;CPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64&#10;RAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="941" height="1450" /><ChildShapes><Shape id="S700000000000000" shapeType="Node" x="71" y="827" width="917" height="1361" zorder="25" model="M700000000000000" name="FreeBSD 14.3-STABLE&#10;ZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)&#10;сетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="917" height="1361" /><ChildShapes><Shape id="S10x200000000000" shapeType="Node" x="357" y="904" width="620" height="159" zorder="18" model="M10x100000000000" name="nginx 1.30&#10;пакет www/nginx · служба nginx · TLS на :443"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="620" height="159" /><ChildShapes><Shape id="S180000000000000" shapeType="Artifact" x="749" y="963" width="215" height="88" zorder="3" model="M180000000000000" name="web-клиент и PWA&#10;/usr/local/www/karavany&#10;(сборка vite build)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="215" height="88" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S190000000000000" shapeType="Artifact" x="418" y="973" width="303" height="70" zorder="6" model="M190000000000000" name="конфигурация сайта&#10;TLS, прокси /api/* → 127.0.0.1:8080"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="303" height="70" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S110000000000000" shapeType="Node" x="171" y="1269" width="745" height="506" zorder="24" model="M110000000000000" name="OpenJDK 21 (JVM)&#10;пакет java/openjdk21 · служба karavany (rc.d)&#10;запуск: java -jar karavany-0.1.0.jar&#10;Java heap: -Xms512m -Xmx2g (рекомендация)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="745" height="506" /><ChildShapes><Shape id="S20x400000000000" shapeType="Node" x="183" y="1364" width="722" height="398" zorder="23" model="M20x300000000000" name="Embedded Apache Tomcat 10.1.31&#10;встроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует&#10;Jakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080&#10;thread pool: 10–200 потоков (по умолчанию Spring Boot)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="722" height="398" /><ChildShapes><Shape id="S230000000000000" shapeType="Artifact" x="322" y="1589" width="485" height="161" zorder="16" model="M230000000000000" name="karavany-0.1.0.jar&#10;Spring Boot 3.3.5:&#10;• Spring MVC — DispatcherServlet, REST-контроллеры /api/*&#10;• Spring Data JPA (Hibernate) → PostgreSQL&#10;• Spring Data MongoDB → MongoDB&#10;• Flyway — миграции схемы при старте&#10;• Spring Boot Actuator — /api/health, /api/info"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="485" height="161" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S120000000000000" shapeType="Node" x="83" y="1857" width="446" height="166" zorder="15" model="M120000000000000" name="PostgreSQL 16&#10;пакет databases/postgresql16-server&#10;служба postgresql · слушает 127.0.0.1:5432"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="446" height="166" /><ChildShapes><Shape id="S210000000000000" shapeType="Node" x="330" y="1934" width="187" height="78" zorder="1" model="M210000000000000" name="БД karavany&#10;оперативные данные"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="187" height="78" /><FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S130000000000000" shapeType="Node" x="541" y="1857" width="436" height="166" zorder="14" model="M130000000000000" name="MongoDB 7.0&#10;пакет databases/mongodb70&#10;служба mongod · слушает 127.0.0.1:27017"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="436" height="166" /><ChildShapes><Shape id="S220000000000000" shapeType="Node" x="659" y="1934" width="249" height="78" zorder="4" model="M220000000000000" name="БД karavany&#10;снимки риска, аудит, события"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="249" height="78" /><FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S140000000000000" shapeType="Artifact" x="311" y="2089" width="233" height="88" zorder="5" model="M140000000000000" name="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="233" height="88" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:238,238,238,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="Node" x="247" y="2261" width="361" height="80" zorder="10" model="M200000000000000" name="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="361" height="80" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="Node" x="177" y="134" width="503" height="247" zorder="19" model="M300000000000000" name="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="503" height="247" /><ChildShapes><Shape id="S800000000000000" shapeType="Node" x="190" y="230" width="437" height="140" zorder="13" model="M800000000000000" name="Браузер Chrome / Firefox / Opera"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="437" height="140" /><ChildShapes><Shape id="S150000000000000" shapeType="Artifact" x="252" y="289" width="363" height="70" zorder="9" model="M150000000000000" name="web-клиент ИС «Караваны»&#10;диспетчер, кладовщик, суперпользователь"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="363" height="70" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="Node" x="546" y="447" width="707" height="237" zorder="20" model="M400000000000000" name="Pip-Boy 3000 или совместимое устройство × до 150&#10;ARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ&#10;Wi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="707" height="237" /><ChildShapes><Shape id="S900000000000000" shapeType="Node" x="595" y="524" width="646" height="149" zorder="17" model="M900000000000000" name="Браузер устройства"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="646" height="149" /><ChildShapes><Shape id="S160000000000000" shapeType="Artifact" x="888" y="588" width="341" height="70" zorder="7" model="M160000000000000" name="PWA полевого клиента&#10;караван-мастер, капитан охраны, медик"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="341" height="70" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S170000000000000" shapeType="Node" x="656" y="584" width="206" height="78" zorder="2" model="M170000000000000" name="IndexedDB: очередь&#10;событий без связи ≥ 3 ч"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="206" height="78" /><FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="Node" x="1013" y="1933" width="308" height="80" zorder="8" model="M500000000000000" name="Wasteland Intel&#10;данные об угрозах по участкам"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="308" height="80" /><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="Node" x="1348" y="1933" width="436" height="80" zorder="11" model="M600000000000000" name="NCR Checkpoint &amp; Tax Terminal&#10;прохождение КПП и пошлины"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="436" height="80" /><FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" /></Shape><Shape id="Snote36000000000" shapeType="NOTE" x="1012" y="826" width="510" height="362" zorder="21" model="Mnote36000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote37000000000" shapeType="NOTE" x="1002" y="2350" width="751" height="323" zorder="22" model="Mnote37000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C240000000000000" shapeType="Association" model="F240000000000000" from="S800000000000000" to="S10x200000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="348" y="602" width="213" height="41" /></Connector><Connector id="C250000000000000" shapeType="Association" model="F250000000000000" from="S900000000000000" to="S10x200000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="589" y="697" width="487" height="41" /></Connector><Connector id="C260000000000000" shapeType="Association" model="F260000000000000" from="S10x200000000000" to="S20x400000000000" connectorStyle="Rectlinear" /><Connector id="C270000000000000" shapeType="Association" model="F270000000000000" from="S20x400000000000" to="S230000000000000" connectorStyle="Rectlinear" /><Connector id="C280000000000000" shapeType="Association" model="F280000000000000" from="S230000000000000" to="S120000000000000" connectorStyle="Rectlinear" /><Connector id="C290000000000000" shapeType="Association" model="F290000000000000" from="S230000000000000" to="S130000000000000" connectorStyle="Rectlinear" /><Connector id="C300000000000000" shapeType="Association" model="F300000000000000" from="S230000000000000" to="S500000000000000" connectorStyle="Rectlinear" /><Connector id="C310000000000000" shapeType="Association" model="F310000000000000" from="S230000000000000" to="S600000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="1314" y="1795" width="233" height="41" /></Connector><Connector id="C320000000000000" shapeType="Dependency" model="F320000000000000" from="S120000000000000" to="S140000000000000" connectorStyle="Rectlinear" /><Connector id="C330000000000000" shapeType="Dependency" model="F330000000000000" from="S130000000000000" to="S140000000000000" connectorStyle="Rectlinear" /><Connector id="C340000000000000" shapeType="Association" model="F340000000000000" from="S140000000000000" to="S200000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="431" y="2212" width="223" height="23" /></Connector><Connector id="C350000000000000" shapeType="Dependency" model="F350000000000000" from="S300000000000000" to="S400000000000000" connectorStyle="Rectlinear"><Caption visible="true" side="None" x="630" y="394" width="385" height="41" /></Connector><Connector id="CAnote3600000000" shapeType="Anchor" model="Anote36000000000" from="Snote36000000000" to="S700000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="DEP_DeploymentView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="Mtitle0000000000" modelType="NOTE" name="ИС «Караваны» — Deployment Diagram (Deployment View)&#10;Где развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия">
+      <ModelProperties>
+        <StringProperty name="name" value="ИС «Караваны» — Deployment Diagram (Deployment View)&#10;Где развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия" />
+      </ModelProperties>
+    </Model>
+    <Model id="M100000000000000" modelType="Node" name="Центральный сервер караванной конторы&#10;CPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64&#10;RAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется">
+      <ModelProperties>
+        <StringProperty name="name" value="Центральный сервер караванной конторы&#10;CPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64&#10;RAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется" />
+        <ModelRefProperty name="stereotypes">
+          <ModelRef id="STdevice00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="M700000000000000" modelType="Node" name="FreeBSD 14.3-STABLE&#10;ZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)&#10;сетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d">
+          <ModelProperties>
+            <StringProperty name="name" value="FreeBSD 14.3-STABLE&#10;ZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)&#10;сетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d" />
+            <ModelRefProperty name="stereotypes">
+              <ModelRef id="STexecution_envi" />
+            </ModelRefProperty>
+          </ModelProperties>
+          <ChildModels>
+            <Model id="M10x100000000000" modelType="Node" name="nginx 1.30&#10;пакет www/nginx · служба nginx · TLS на :443">
+              <ModelProperties>
+                <StringProperty name="name" value="nginx 1.30&#10;пакет www/nginx · служба nginx · TLS на :443" />
+                <ModelRefProperty name="stereotypes">
+                  <ModelRef id="STexecution_envi" />
+                </ModelRefProperty>
+              </ModelProperties>
+              <ChildModels>
+                <Model id="M180000000000000" modelType="Artifact" name="web-клиент и PWA&#10;/usr/local/www/karavany&#10;(сборка vite build)">
+                  <ModelProperties>
+                    <StringProperty name="name" value="web-клиент и PWA&#10;/usr/local/www/karavany&#10;(сборка vite build)" />
+                  </ModelProperties>
+                </Model>
+                <Model id="M190000000000000" modelType="Artifact" name="конфигурация сайта&#10;TLS, прокси /api/* → 127.0.0.1:8080">
+                  <ModelProperties>
+                    <StringProperty name="name" value="конфигурация сайта&#10;TLS, прокси /api/* → 127.0.0.1:8080" />
+                  </ModelProperties>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="M110000000000000" modelType="Node" name="OpenJDK 21 (JVM)&#10;пакет java/openjdk21 · служба karavany (rc.d)&#10;запуск: java -jar karavany-0.1.0.jar&#10;Java heap: -Xms512m -Xmx2g (рекомендация)">
+              <ModelProperties>
+                <StringProperty name="name" value="OpenJDK 21 (JVM)&#10;пакет java/openjdk21 · служба karavany (rc.d)&#10;запуск: java -jar karavany-0.1.0.jar&#10;Java heap: -Xms512m -Xmx2g (рекомендация)" />
+                <ModelRefProperty name="stereotypes">
+                  <ModelRef id="STexecution_envi" />
+                </ModelRefProperty>
+              </ModelProperties>
+              <ChildModels>
+                <Model id="M20x300000000000" modelType="Node" name="Embedded Apache Tomcat 10.1.31&#10;встроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует&#10;Jakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080&#10;thread pool: 10–200 потоков (по умолчанию Spring Boot)">
+                  <ModelProperties>
+                    <StringProperty name="name" value="Embedded Apache Tomcat 10.1.31&#10;встроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует&#10;Jakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080&#10;thread pool: 10–200 потоков (по умолчанию Spring Boot)" />
+                    <ModelRefProperty name="stereotypes">
+                      <ModelRef id="STexecution_envi" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                  <ChildModels>
+                    <Model id="M230000000000000" modelType="Artifact" name="karavany-0.1.0.jar&#10;Spring Boot 3.3.5:&#10;• Spring MVC — DispatcherServlet, REST-контроллеры /api/*&#10;• Spring Data JPA (Hibernate) → PostgreSQL&#10;• Spring Data MongoDB → MongoDB&#10;• Flyway — миграции схемы при старте&#10;• Spring Boot Actuator — /api/health, /api/info">
+                      <ModelProperties>
+                        <StringProperty name="name" value="karavany-0.1.0.jar&#10;Spring Boot 3.3.5:&#10;• Spring MVC — DispatcherServlet, REST-контроллеры /api/*&#10;• Spring Data JPA (Hibernate) → PostgreSQL&#10;• Spring Data MongoDB → MongoDB&#10;• Flyway — миграции схемы при старте&#10;• Spring Boot Actuator — /api/health, /api/info" />
+                      </ModelProperties>
+                    </Model>
+                  </ChildModels>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="M120000000000000" modelType="Node" name="PostgreSQL 16&#10;пакет databases/postgresql16-server&#10;служба postgresql · слушает 127.0.0.1:5432">
+              <ModelProperties>
+                <StringProperty name="name" value="PostgreSQL 16&#10;пакет databases/postgresql16-server&#10;служба postgresql · слушает 127.0.0.1:5432" />
+                <ModelRefProperty name="stereotypes">
+                  <ModelRef id="STexecution_envi" />
+                </ModelRefProperty>
+              </ModelProperties>
+              <ChildModels>
+                <Model id="M210000000000000" modelType="Node" name="БД karavany&#10;оперативные данные">
+                  <ModelProperties>
+                    <StringProperty name="name" value="БД karavany&#10;оперативные данные" />
+                    <ModelRefProperty name="stereotypes">
+                      <ModelRef id="STdatabase000000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="M130000000000000" modelType="Node" name="MongoDB 7.0&#10;пакет databases/mongodb70&#10;служба mongod · слушает 127.0.0.1:27017">
+              <ModelProperties>
+                <StringProperty name="name" value="MongoDB 7.0&#10;пакет databases/mongodb70&#10;служба mongod · слушает 127.0.0.1:27017" />
+                <ModelRefProperty name="stereotypes">
+                  <ModelRef id="STexecution_envi" />
+                </ModelRefProperty>
+              </ModelProperties>
+              <ChildModels>
+                <Model id="M220000000000000" modelType="Node" name="БД karavany&#10;снимки риска, аудит, события">
+                  <ModelProperties>
+                    <StringProperty name="name" value="БД karavany&#10;снимки риска, аудит, события" />
+                    <ModelRefProperty name="stereotypes">
+                      <ModelRef id="STdatabase000000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="M140000000000000" modelType="Artifact" name="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов">
+              <ModelProperties>
+                <StringProperty name="name" value="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов" />
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="STdevice00000000" modelType="Stereotype" name="device">
+      <ModelProperties>
+        <StringProperty name="name" value="device" />
+        <StringProperty name="baseType" value="Node" />
+      </ModelProperties>
+    </Model>
+    <Model id="M200000000000000" modelType="Node" name="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу">
+      <ModelProperties>
+        <StringProperty name="name" value="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу" />
+        <ModelRefProperty name="stereotypes">
+          <ModelRef id="STdevice00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M300000000000000" modelType="Node" name="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с">
+      <ModelProperties>
+        <StringProperty name="name" value="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с" />
+        <ModelRefProperty name="stereotypes">
+          <ModelRef id="STdevice00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="M800000000000000" modelType="Node" name="Браузер Chrome / Firefox / Opera">
+          <ModelProperties>
+            <StringProperty name="name" value="Браузер Chrome / Firefox / Opera" />
+            <ModelRefProperty name="stereotypes">
+              <ModelRef id="STexecution_envi" />
+            </ModelRefProperty>
+          </ModelProperties>
+          <ChildModels>
+            <Model id="M150000000000000" modelType="Artifact" name="web-клиент ИС «Караваны»&#10;диспетчер, кладовщик, суперпользователь">
+              <ModelProperties>
+                <StringProperty name="name" value="web-клиент ИС «Караваны»&#10;диспетчер, кладовщик, суперпользователь" />
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="M400000000000000" modelType="Node" name="Pip-Boy 3000 или совместимое устройство × до 150&#10;ARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ&#10;Wi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч">
+      <ModelProperties>
+        <StringProperty name="name" value="Pip-Boy 3000 или совместимое устройство × до 150&#10;ARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ&#10;Wi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч" />
+        <ModelRefProperty name="stereotypes">
+          <ModelRef id="STdevice00000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <ChildModels>
+        <Model id="M900000000000000" modelType="Node" name="Браузер устройства">
+          <ModelProperties>
+            <StringProperty name="name" value="Браузер устройства" />
+            <ModelRefProperty name="stereotypes">
+              <ModelRef id="STexecution_envi" />
+            </ModelRefProperty>
+          </ModelProperties>
+          <ChildModels>
+            <Model id="M160000000000000" modelType="Artifact" name="PWA полевого клиента&#10;караван-мастер, капитан охраны, медик">
+              <ModelProperties>
+                <StringProperty name="name" value="PWA полевого клиента&#10;караван-мастер, капитан охраны, медик" />
+              </ModelProperties>
+            </Model>
+            <Model id="M170000000000000" modelType="Node" name="IndexedDB: очередь&#10;событий без связи ≥ 3 ч">
+              <ModelProperties>
+                <StringProperty name="name" value="IndexedDB: очередь&#10;событий без связи ≥ 3 ч" />
+                <ModelRefProperty name="stereotypes">
+                  <ModelRef id="STdatabase000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="M500000000000000" modelType="Node" name="Wasteland Intel&#10;данные об угрозах по участкам">
+      <ModelProperties>
+        <StringProperty name="name" value="Wasteland Intel&#10;данные об угрозах по участкам" />
+        <ModelRefProperty name="stereotypes">
+          <ModelRef id="STexternal_syste" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="STexternal_syste" modelType="Stereotype" name="external system">
+      <ModelProperties>
+        <StringProperty name="name" value="external system" />
+        <StringProperty name="baseType" value="Node" />
+      </ModelProperties>
+    </Model>
+    <Model id="M600000000000000" modelType="Node" name="NCR Checkpoint &amp; Tax Terminal&#10;прохождение КПП и пошлины">
+      <ModelProperties>
+        <StringProperty name="name" value="NCR Checkpoint &amp; Tax Terminal&#10;прохождение КПП и пошлины" />
+        <ModelRefProperty name="stereotypes">
+          <ModelRef id="STexternal_syste" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="STexecution_envi" modelType="Stereotype" name="execution environment">
+      <ModelProperties>
+        <StringProperty name="name" value="execution environment" />
+        <StringProperty name="baseType" value="Node" />
+      </ModelProperties>
+    </Model>
+    <Model id="STdatabase000000" modelType="Stereotype" name="database">
+      <ModelProperties>
+        <StringProperty name="name" value="database" />
+        <StringProperty name="baseType" value="Node" />
+      </ModelProperties>
+    </Model>
+    <Model id="F240000000000000" modelType="Association" name="HTTPS :443&#10;статика + REST / JSON">
+      <ModelProperties>
+        <StringProperty name="name" value="HTTPS :443&#10;статика + REST / JSON" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M800000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M10x100000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F250000000000000" modelType="Association" name="HTTPS :443, REST / JSON&#10;синхронизация при появлении связи (≤ 60 с, RL-3)">
+      <ModelProperties>
+        <StringProperty name="name" value="HTTPS :443, REST / JSON&#10;синхронизация при появлении связи (≤ 60 с, RL-3)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M900000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M10x100000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F260000000000000" modelType="Association" name="HTTP, 127.0.0.1:8080&#10;NIO-коннектор принимает /api/*">
+      <ModelProperties>
+        <StringProperty name="name" value="HTTP, 127.0.0.1:8080&#10;NIO-коннектор принимает /api/*" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M10x100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M20x300000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F270000000000000" modelType="Association" name="Jakarta Servlet&#10;DispatcherServlet маршрутизирует запрос">
+      <ModelProperties>
+        <StringProperty name="name" value="Jakarta Servlet&#10;DispatcherServlet маршрутизирует запрос" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M20x300000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M230000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F280000000000000" modelType="Association" name="JDBC (PostgreSQL wire)&#10;127.0.0.1:5432">
+      <ModelProperties>
+        <StringProperty name="name" value="JDBC (PostgreSQL wire)&#10;127.0.0.1:5432" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M230000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M120000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F290000000000000" modelType="Association" name="MongoDB Wire Protocol&#10;127.0.0.1:27017">
+      <ModelProperties>
+        <StringProperty name="name" value="MongoDB Wire Protocol&#10;127.0.0.1:27017" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M230000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M130000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F300000000000000" modelType="Association" name="REST / HTTPS :443, JSON&#10;GET /threats?segments=…&#10;connect / read timeout 2 с">
+      <ModelProperties>
+        <StringProperty name="name" value="REST / HTTPS :443, JSON&#10;GET /threats?segments=…&#10;connect / read timeout 2 с" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M230000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M500000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F310000000000000" modelType="Association" name="REST / HTTPS :443, JSON&#10;(UC-24)">
+      <ModelProperties>
+        <StringProperty name="name" value="REST / HTTPS :443, JSON&#10;(UC-24)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M230000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M600000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F320000000000000" modelType="Dependency" name="pg_dump">
+      <ModelProperties>
+        <StringProperty name="name" value="pg_dump" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M120000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M140000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F330000000000000" modelType="Dependency" name="mongodump">
+      <ModelProperties>
+        <StringProperty name="name" value="mongodump" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M130000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M140000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F340000000000000" modelType="Association" name="запись резервной копии">
+      <ModelProperties>
+        <StringProperty name="name" value="запись резервной копии" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M140000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M200000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="F350000000000000" modelType="Dependency" name="установка PWA через RobCo-интерфейс&#10;терминала или с голотейпа (Vision 4.5)">
+      <ModelProperties>
+        <StringProperty name="name" value="установка PWA через RobCo-интерфейс&#10;терминала или с голотейпа (Vision 4.5)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="M300000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M400000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote36000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Размещение на сервере. Все компоненты работают&#10;  в одной ОС как отдельные службы rc.d под своими&#10;  системными пользователями. Наружу через pf доступен&#10;  только nginx на :443; backend, PostgreSQL и MongoDB&#10;  слушают только loopback-интерфейс 127.0.0.1.&#10;  Поставка артефактов. karavany-0.1.0.jar собирается&#10;  gradle bootJar (JDK 21), web-клиент — npm run build;&#10;  на сервер копируются готовые файлы.&#10;  Встроенный Tomcat. karavany-0.1.0.jar — исполняемый&#10;  fat-jar Spring Boot: HTTP-сервер не устанавливается и не&#10;  настраивается отдельно, а встроен в jar через&#10;  spring-boot-starter-tomcat (Apache Tomcat 10.1.31,&#10;  Jakarta Servlet 6.0) и поднимается той же командой&#10;  java -jar; отдельного WAR и внешнего сервера приложений&#10;  в проекте нет.&#10;  MongoDB. Порт databases/mongodb70 содержит&#10;  FreeBSD-специфичный патч, не проходивший QA MongoDB Inc.,&#10;  поэтому перед вводом в эксплуатацию — нагрузочная&#10;  проверка (PF-1…PF-3). AVX процессор поддерживает." />
+      </ModelProperties>
+    </Model>
+    <Model id="Anote36000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="Mnote36000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M700000000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="Mnote37000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="|= Цвет |= Значение |&#10;  | &lt;#F5F5F5&gt; | устройство или среда выполнения |&#10;  | &lt;#FFFFFF&gt; | артефакт |&#10;  | &lt;#E8F5E9&gt; | хранилище данных |&#10;  | &lt;#EDE7F6&gt; | внешняя система |&#10;  Характеристики сервера, терминала и Pip-Boy — Vision 9.2;&#10;  число устройств — Vision 9.3 и PF-1 (50 терминалов + 150 Pip-Boy).&#10;  Разрешение терминала: Vision 9.2 — от 1024×768, глоссарий — от 1280×720.&#10;  Интерфейсы: клиент — сервер только HTTPS (SRS 3.6.4),&#10;  внешние системы — REST по HTTPS, формат JSON.&#10;  Встроенный контейнер: Apache Tomcat 10.1.31 идёт внутри&#10;  spring-boot-starter-web (Spring Boot 3.3.5) — отдельно не&#10;  устанавливается." />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_DEP_Deployment" name="DEP_DeploymentView" diagramType="DeploymentDiagram">
+      <Shapes>
+        <Shape id="Stitle0000000000" shapeType="TextBox" x="418" y="56" width="807" height="52" zorder="12" model="Mtitle0000000000" name="ИС «Караваны» — Deployment Diagram (Deployment View)&#10;Где развёртывается каждый компонент, характеристики машин и интерфейсы взаимодействия">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="807" height="52" />
+        </Shape>
+        <Shape id="S100000000000000" shapeType="Node" x="60" y="750" width="941" height="1450" zorder="26" model="M100000000000000" name="Центральный сервер караванной конторы&#10;CPU: Intel Xeon E5-2643, 16 ядер, 3,3 ГГц, x64&#10;RAM: 128 ГБ · диски: 26 ТБ · сеть: Ethernet 10 Гбит/с · ИБП: рекомендуется">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="941" height="1450" />
+          <ChildShapes>
+            <Shape id="S700000000000000" shapeType="Node" x="71" y="827" width="917" height="1361" zorder="25" model="M700000000000000" name="FreeBSD 14.3-STABLE&#10;ZFS-пул (отдельные датасеты под данные PostgreSQL, MongoDB и резервные копии)&#10;сетевой фильтр pf: извне открыт только TCP 443 · службы запускаются через rc.d">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="917" height="1361" />
+              <ChildShapes>
+                <Shape id="S10x200000000000" shapeType="Node" x="357" y="904" width="620" height="159" zorder="18" model="M10x100000000000" name="nginx 1.30&#10;пакет www/nginx · служба nginx · TLS на :443">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="620" height="159" />
+                  <ChildShapes>
+                    <Shape id="S180000000000000" shapeType="Artifact" x="749" y="963" width="215" height="88" zorder="3" model="M180000000000000" name="web-клиент и PWA&#10;/usr/local/www/karavany&#10;(сборка vite build)">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="true" />
+                        <BooleanProperty name="requestResetCaptionSize" value="true" />
+                      </DiagramElementProperties>
+                      <Caption visible="true" side="Center" x="0" y="0" width="215" height="88" />
+                      <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                    </Shape>
+                    <Shape id="S190000000000000" shapeType="Artifact" x="418" y="973" width="303" height="70" zorder="6" model="M190000000000000" name="конфигурация сайта&#10;TLS, прокси /api/* → 127.0.0.1:8080">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="true" />
+                        <BooleanProperty name="requestResetCaptionSize" value="true" />
+                      </DiagramElementProperties>
+                      <Caption visible="true" side="Center" x="0" y="0" width="303" height="70" />
+                      <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                    </Shape>
+                  </ChildShapes>
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S110000000000000" shapeType="Node" x="171" y="1269" width="745" height="506" zorder="24" model="M110000000000000" name="OpenJDK 21 (JVM)&#10;пакет java/openjdk21 · служба karavany (rc.d)&#10;запуск: java -jar karavany-0.1.0.jar&#10;Java heap: -Xms512m -Xmx2g (рекомендация)">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="745" height="506" />
+                  <ChildShapes>
+                    <Shape id="S20x400000000000" shapeType="Node" x="183" y="1364" width="722" height="398" zorder="23" model="M20x300000000000" name="Embedded Apache Tomcat 10.1.31&#10;встроен в fat-jar (spring-boot-starter-tomcat), отдельной установки не требует&#10;Jakarta Servlet 6.0 · HTTP/1.1 NIO-коннектор, слушает 127.0.0.1:8080&#10;thread pool: 10–200 потоков (по умолчанию Spring Boot)">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="true" />
+                        <BooleanProperty name="requestResetCaptionSize" value="true" />
+                      </DiagramElementProperties>
+                      <Caption visible="true" side="Center" x="0" y="0" width="722" height="398" />
+                      <ChildShapes>
+                        <Shape id="S230000000000000" shapeType="Artifact" x="322" y="1589" width="485" height="161" zorder="16" model="M230000000000000" name="karavany-0.1.0.jar&#10;Spring Boot 3.3.5:&#10;• Spring MVC — DispatcherServlet, REST-контроллеры /api/*&#10;• Spring Data JPA (Hibernate) → PostgreSQL&#10;• Spring Data MongoDB → MongoDB&#10;• Flyway — миграции схемы при старте&#10;• Spring Boot Actuator — /api/health, /api/info">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="true" />
+                            <BooleanProperty name="requestResetCaptionSize" value="true" />
+                          </DiagramElementProperties>
+                          <Caption visible="true" side="Center" x="0" y="0" width="485" height="161" />
+                          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                        </Shape>
+                      </ChildShapes>
+                      <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                    </Shape>
+                  </ChildShapes>
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S120000000000000" shapeType="Node" x="83" y="1857" width="446" height="166" zorder="15" model="M120000000000000" name="PostgreSQL 16&#10;пакет databases/postgresql16-server&#10;служба postgresql · слушает 127.0.0.1:5432">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="446" height="166" />
+                  <ChildShapes>
+                    <Shape id="S210000000000000" shapeType="Node" x="330" y="1934" width="187" height="78" zorder="1" model="M210000000000000" name="БД karavany&#10;оперативные данные">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="true" />
+                        <BooleanProperty name="requestResetCaptionSize" value="true" />
+                      </DiagramElementProperties>
+                      <Caption visible="true" side="Center" x="0" y="0" width="187" height="78" />
+                      <FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" />
+                    </Shape>
+                  </ChildShapes>
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S130000000000000" shapeType="Node" x="541" y="1857" width="436" height="166" zorder="14" model="M130000000000000" name="MongoDB 7.0&#10;пакет databases/mongodb70&#10;служба mongod · слушает 127.0.0.1:27017">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="436" height="166" />
+                  <ChildShapes>
+                    <Shape id="S220000000000000" shapeType="Node" x="659" y="1934" width="249" height="78" zorder="4" model="M220000000000000" name="БД karavany&#10;снимки риска, аудит, события">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="true" />
+                        <BooleanProperty name="requestResetCaptionSize" value="true" />
+                      </DiagramElementProperties>
+                      <Caption visible="true" side="Center" x="0" y="0" width="249" height="78" />
+                      <FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" />
+                    </Shape>
+                  </ChildShapes>
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S140000000000000" shapeType="Artifact" x="311" y="2089" width="233" height="88" zorder="5" model="M140000000000000" name="Резервные копии&#10;pg_dump, mongodump,&#10;ZFS-снапшоты датасетов">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="233" height="88" />
+                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:238,238,238,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S200000000000000" shapeType="Node" x="247" y="2261" width="361" height="80" zorder="10" model="M200000000000000" name="Резервная кассета (голотейп)&#10;накопитель, подключённый к серверу">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="361" height="80" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S300000000000000" shapeType="Node" x="177" y="134" width="503" height="247" zorder="19" model="M300000000000000" name="Офисный терминал × до 50&#10;CPU 2 ядра 1,5 ГГц · RAM 8 ГБ · экран от 1024×768&#10;ОС: Windows 10 / macOS 11 / Ubuntu 20.04+&#10;сеть: LAN или Wi-Fi, 10 Мбит/с">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="503" height="247" />
+          <ChildShapes>
+            <Shape id="S800000000000000" shapeType="Node" x="190" y="230" width="437" height="140" zorder="13" model="M800000000000000" name="Браузер Chrome / Firefox / Opera">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="437" height="140" />
+              <ChildShapes>
+                <Shape id="S150000000000000" shapeType="Artifact" x="252" y="289" width="363" height="70" zorder="9" model="M150000000000000" name="web-клиент ИС «Караваны»&#10;диспетчер, кладовщик, суперпользователь">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="363" height="70" />
+                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S400000000000000" shapeType="Node" x="546" y="447" width="707" height="237" zorder="20" model="M400000000000000" name="Pip-Boy 3000 или совместимое устройство × до 150&#10;ARM 1,0 ГГц · RAM 1 ГБ · экран от 256×128 · хранилище 64 ГБ&#10;Wi-Fi 802.11 b/g/n, 10 Мбит/с · автономность ≥ 72 ч">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="707" height="237" />
+          <ChildShapes>
+            <Shape id="S900000000000000" shapeType="Node" x="595" y="524" width="646" height="149" zorder="17" model="M900000000000000" name="Браузер устройства">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <Caption visible="true" side="Center" x="0" y="0" width="646" height="149" />
+              <ChildShapes>
+                <Shape id="S160000000000000" shapeType="Artifact" x="888" y="588" width="341" height="70" zorder="7" model="M160000000000000" name="PWA полевого клиента&#10;караван-мастер, капитан охраны, медик">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="341" height="70" />
+                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S170000000000000" shapeType="Node" x="656" y="584" width="206" height="78" zorder="2" model="M170000000000000" name="IndexedDB: очередь&#10;событий без связи ≥ 3 ч">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <Caption visible="true" side="Center" x="0" y="0" width="206" height="78" />
+                  <FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S500000000000000" shapeType="Node" x="1013" y="1933" width="308" height="80" zorder="8" model="M500000000000000" name="Wasteland Intel&#10;данные об угрозах по участкам">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="308" height="80" />
+          <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S600000000000000" shapeType="Node" x="1348" y="1933" width="436" height="80" zorder="11" model="M600000000000000" name="NCR Checkpoint &amp; Tax Terminal&#10;прохождение КПП и пошлины">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <Caption visible="true" side="Center" x="0" y="0" width="436" height="80" />
+          <FillColor type="1" color="Cr:237,231,246,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote36000000000" shapeType="NOTE" x="1012" y="826" width="510" height="362" zorder="21" model="Mnote36000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="Snote37000000000" shapeType="NOTE" x="1002" y="2350" width="751" height="323" zorder="22" model="Mnote37000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="C240000000000000" shapeType="Association" model="F240000000000000" from="S800000000000000" to="S10x200000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="348" y="602" width="213" height="41" />
+          <Points />
+        </Connector>
+        <Connector id="C250000000000000" shapeType="Association" model="F250000000000000" from="S900000000000000" to="S10x200000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="589" y="697" width="487" height="41" />
+          <Points />
+        </Connector>
+        <Connector id="C260000000000000" shapeType="Association" model="F260000000000000" from="S10x200000000000" to="S20x400000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C270000000000000" shapeType="Association" model="F270000000000000" from="S20x400000000000" to="S230000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C280000000000000" shapeType="Association" model="F280000000000000" from="S230000000000000" to="S120000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C290000000000000" shapeType="Association" model="F290000000000000" from="S230000000000000" to="S130000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C300000000000000" shapeType="Association" model="F300000000000000" from="S230000000000000" to="S500000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C310000000000000" shapeType="Association" model="F310000000000000" from="S230000000000000" to="S600000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="1314" y="1795" width="233" height="41" />
+          <Points />
+        </Connector>
+        <Connector id="C320000000000000" shapeType="Dependency" model="F320000000000000" from="S120000000000000" to="S140000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C330000000000000" shapeType="Dependency" model="F330000000000000" from="S130000000000000" to="S140000000000000" connectorStyle="Rectlinear">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+        <Connector id="C340000000000000" shapeType="Association" model="F340000000000000" from="S140000000000000" to="S200000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="431" y="2212" width="223" height="23" />
+          <Points />
+        </Connector>
+        <Connector id="C350000000000000" shapeType="Dependency" model="F350000000000000" from="S300000000000000" to="S400000000000000" connectorStyle="Rectlinear">
+          <Caption visible="true" side="None" x="630" y="394" width="385" height="41" />
+          <Points />
+        </Connector>
+        <Connector id="CAnote3600000000" shapeType="Anchor" model="Anote36000000000" from="Snote36000000000" to="S700000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

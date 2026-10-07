@@ -1,2 +1,1789 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="UCD_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="STinclude0000000" modelType="Stereotype" name="include"><ModelProperties><StringProperty name="name" value="include" /><StringProperty name="baseType" value="Include" /></ModelProperties></Model><Model id="ST______________" modelType="Stereotype" name="внешняя система"><ModelProperties><StringProperty name="name" value="внешняя система" /><StringProperty name="baseType" value="Actor" /></ModelProperties></Model><Model id="ST___________000" modelType="Stereotype" name="абстрактный"><ModelProperties><StringProperty name="name" value="абстрактный" /><StringProperty name="baseType" value="Actor" /></ModelProperties></Model><Model id="M_n1000000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="UC-1 создаёт заявку&#10;• статус «Черновик»&#10;• маршрут, ETA, risk_score&#10;  и рекомендация по охране&#10;  и припасам&#10;Пробел реализации&#10;• событие создания заявки&#10;  в журнал аудита не пишется&#10;  (пробел по RL-4)" /></ModelProperties></Model><Model id="M_n2000000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Переходы статуса&#10;• инициируют диспетчер&#10;  и караван-мастер&#10;• инцидент высокой или&#10;  критической тяжести (UC-19) —&#10;  актором фиксируется «Система»&#10;• фиксация этапа рейса (UC-16)&#10;  тоже меняет статус&#10;Пробел реализации&#10;• проверка готовности рейса&#10;  перед выходом на маршрут&#10;  (FR-10) не выполняется:&#10;  модель команды рейса (UC-9)&#10;  не реализована" /></ModelProperties></Model><Model id="M_n3000000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="UC-3 — точка входа диспетчера&#10;• пустой реестр ведёт к UC-1&#10;• карточка рейса — к UC-2 и UC-7&#10;• архивный срез — к UC-4&#10;• сам реестр данные только читает" /></ModelProperties></Model><Model id="M_disp0000000000" modelType="Actor" name="Диспетчер&#10;караванов"><ModelProperties><StringProperty name="name" value="Диспетчер&#10;караванов" /></ModelProperties></Model><Model id="M_cmst0000000000" modelType="Actor" name="Караван-&#10;мастер"><ModelProperties><StringProperty name="name" value="Караван-&#10;мастер" /></ModelProperties></Model><Model id="M_secu0000000000" modelType="Actor" name="Капитан&#10;охраны"><ModelProperties><StringProperty name="name" value="Капитан&#10;охраны" /></ModelProperties></Model><Model id="M_medic000000000" modelType="Actor" name="Полевой&#10;медик"><ModelProperties><StringProperty name="name" value="Полевой&#10;медик" /></ModelProperties></Model><Model id="M_field000000000" modelType="Actor" name="Полевой&#10;пользователь"><ModelProperties><StringProperty name="name" value="Полевой&#10;пользователь" /><ModelRefsProperty name="stereotypes"><ModelRef id="ST___________000" /></ModelRefsProperty></ModelProperties></Model><Model id="M_super000000000" modelType="Actor" name="Супер-&#10;пользователь"><ModelProperties><StringProperty name="name" value="Супер-&#10;пользователь" /></ModelProperties></Model><Model id="M_store000000000" modelType="Actor" name="Кладовщик"><ModelProperties><StringProperty name="name" value="Кладовщик" /></ModelProperties></Model><Model id="M_sys00000000000" modelType="System" name="ИС «Караваны»"><ModelProperties><StringProperty name="name" value="ИС «Караваны»" /></ModelProperties></Model><Model id="M_g1000000000000" modelType="System" name="Управление заявкой и рейсом"><ModelProperties><StringProperty name="name" value="Управление заявкой и рейсом" /></ModelProperties></Model><Model id="M_uc200000000000" modelType="UseCase" name="UC-2: Управлять&#10;статусами заявки"><ModelProperties><StringProperty name="name" value="UC-2: Управлять&#10;статусами заявки" /></ModelProperties></Model><Model id="M_uc300000000000" modelType="UseCase" name="UC-3: Просмотреть&#10;реестр рейсов"><ModelProperties><StringProperty name="name" value="UC-3: Просмотреть&#10;реестр рейсов" /></ModelProperties></Model><Model id="M_uc100000000000" modelType="UseCase" name="UC-1: Создать заявку&#10;на перевозку"><ModelProperties><StringProperty name="name" value="UC-1: Создать заявку&#10;на перевозку" /></ModelProperties></Model><Model id="M_g3000000000000" modelType="System" name="Груз и манифест"><ModelProperties><StringProperty name="name" value="Груз и манифест" /></ModelProperties></Model><Model id="M_uc120000000000" modelType="UseCase" name="UC-12: Указать&#10;ценность груза"><ModelProperties><StringProperty name="name" value="UC-12: Указать&#10;ценность груза" /></ModelProperties></Model><Model id="M_g2000000000000" modelType="System" name="Планирование маршрута&#10;и оценка рисков"><ModelProperties><StringProperty name="name" value="Планирование маршрута&#10;и оценка рисков" /></ModelProperties></Model><Model id="M_uc500000000000" modelType="UseCase" name="UC-5: Выбрать/&#10;спланировать маршрут"><ModelProperties><StringProperty name="name" value="UC-5: Выбрать/&#10;спланировать маршрут" /></ModelProperties></Model><Model id="M_uc600000000000" modelType="UseCase" name="UC-6: Рассчитать ETA"><ModelProperties><StringProperty name="name" value="UC-6: Рассчитать ETA" /></ModelProperties></Model><Model id="M_uc800000000000" modelType="UseCase" name="UC-8: Получить&#10;рекомендацию по охране&#10;и припасам"><ModelProperties><StringProperty name="name" value="UC-8: Получить&#10;рекомендацию по охране&#10;и припасам" /></ModelProperties></Model><Model id="M_uc700000000000" modelType="UseCase" name="UC-7: Рассчитать&#10;risk_score"><ModelProperties><StringProperty name="name" value="UC-7: Рассчитать&#10;risk_score" /></ModelProperties></Model><Model id="M_g4000000000000" modelType="System" name="Полевые операции"><ModelProperties><StringProperty name="name" value="Полевые операции" /></ModelProperties></Model><Model id="M_uc190000000000" modelType="UseCase" name="UC-19: Сообщить&#10;об инциденте в рейсе"><ModelProperties><StringProperty name="name" value="UC-19: Сообщить&#10;об инциденте в рейсе" /></ModelProperties></Model><Model id="M_uc160000000000" modelType="UseCase" name="UC-16: Зафиксировать&#10;прохождение&#10;этапа рейса"><ModelProperties><StringProperty name="name" value="UC-16: Зафиксировать&#10;прохождение&#10;этапа рейса" /></ModelProperties></Model><Model id="M_g5000000000000" modelType="System" name="Управление организациями"><ModelProperties><StringProperty name="name" value="Управление организациями" /></ModelProperties></Model><Model id="M_uc320000000000" modelType="UseCase" name="UC-32: Создать&#10;организацию"><ModelProperties><StringProperty name="name" value="UC-32: Создать&#10;организацию" /></ModelProperties></Model><Model id="M_g6000000000000" modelType="System" name="Остальные прецеденты —&#10;состав на диаграмме не раскрыт"><ModelProperties><StringProperty name="name" value="Остальные прецеденты —&#10;состав на диаграмме не раскрыт" /></ModelProperties></Model><Model id="M_rest0000000000" modelType="UseCase" name="23 прецедента:&#10;UC-4, UC-9…UC-11, UC-13…UC-15,&#10;UC-17, UC-18, UC-20…UC-31,&#10;UC-33, UC-34"><ModelProperties><StringProperty name="name" value="23 прецедента:&#10;UC-4, UC-9…UC-11, UC-13…UC-15,&#10;UC-17, UC-18, UC-20…UC-31,&#10;UC-33, UC-34" /></ModelProperties></Model><Model id="M_wi000000000000" modelType="Actor" name="Wasteland&#10;Intel"><ModelProperties><StringProperty name="name" value="Wasteland&#10;Intel" /><ModelRefsProperty name="stereotypes"><ModelRef id="ST______________" /></ModelRefsProperty></ModelProperties></Model><Model id="M_ncr00000000000" modelType="Actor" name="NCR Checkpoint&#10;&amp; Tax Terminal"><ModelProperties><StringProperty name="name" value="NCR Checkpoint&#10;&amp; Tax Terminal" /><ModelRefsProperty name="stereotypes"><ModelRef id="ST______________" /></ModelRefsProperty></ModelProperties></Model><Model id="M_g1x10000000000" modelType="Generalization"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_field000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_cmst0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_g2x20000000000" modelType="Generalization"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_field000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_secu0000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_g3x30000000000" modelType="Generalization"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_field000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_medic000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_a1000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc200000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a1From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a1ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc200000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a2000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc100000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a2From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a2ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc100000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a3000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc300000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a3From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a3ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc300000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a4000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc500000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a4From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a4ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc500000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a5000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc700000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a5From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a5ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc700000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a6000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc120000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a6From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a6ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc120000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a7000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a7From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_disp0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a7ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a8000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_cmst0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc200000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a8From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_cmst0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a8ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc200000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a9000000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_cmst0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc160000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a9From00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_cmst0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a9ToEn00000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc160000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a10x4000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_cmst0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a10From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_cmst0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a10ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1100000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_field000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc190000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a11From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_field000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a11ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc190000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1200000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_field000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a12From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_field000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a12ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1300000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_store000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a13From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_store000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a13ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1400000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_super000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_uc320000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a14From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_super000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a14ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc320000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1500000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_super000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a15From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_super000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a15ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1600000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_uc700000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_wi000000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a16From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_uc700000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a16ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_wi000000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1700000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_wi000000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a17From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a17ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_wi000000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_a1800000000000" modelType="Association" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="endRelationshipFromMetaModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><ModelRefProperty name="endRelationshipToMetaModelElement"><ModelRef id="M_ncr00000000000" /></ModelRefProperty><StringProperty name="direction" value="From-To" /></ModelProperties><FromEnd><Model composite="true" modelType="AssociationEnd" id="M_a18From0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_rest0000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></FromEnd><ToEnd><Model composite="true" modelType="AssociationEnd" id="M_a18ToEn0000000" name=""><ModelProperties><StringProperty name="name" value="" /><ModelRefProperty name="EndModelElement"><ModelRef id="M_ncr00000000000" /></ModelRefProperty><StringProperty name="aggregationKind" value="None" /></ModelProperties></Model></ToEnd></Model><Model id="M_i1000000000000" modelType="Include" name="«include»"><ModelProperties><StringProperty name="name" value="«include»" /><ModelRefsProperty name="stereotypes"><ModelRef id="STinclude0000000" /></ModelRefsProperty><ModelRefProperty name="from"><ModelRef id="M_uc100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc500000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_i2000000000000" modelType="Include" name="«include»"><ModelProperties><StringProperty name="name" value="«include»" /><ModelRefsProperty name="stereotypes"><ModelRef id="STinclude0000000" /></ModelRefsProperty><ModelRefProperty name="from"><ModelRef id="M_uc100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc600000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_i3000000000000" modelType="Include" name="«include»"><ModelProperties><StringProperty name="name" value="«include»" /><ModelRefsProperty name="stereotypes"><ModelRef id="STinclude0000000" /></ModelRefsProperty><ModelRefProperty name="from"><ModelRef id="M_uc100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_i4000000000000" modelType="Include" name="«include»"><ModelProperties><StringProperty name="name" value="«include»" /><ModelRefsProperty name="stereotypes"><ModelRef id="STinclude0000000" /></ModelRefsProperty><ModelRefProperty name="from"><ModelRef id="M_uc100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_i5000000000000" modelType="Include" name="«include»"><ModelProperties><StringProperty name="name" value="«include»" /><ModelRefsProperty name="stereotypes"><ModelRef id="STinclude0000000" /></ModelRefsProperty><ModelRefProperty name="from"><ModelRef id="M_uc100000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc120000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_i6000000000000" modelType="Include" name="«include»"><ModelProperties><StringProperty name="name" value="«include»" /><ModelRefsProperty name="stereotypes"><ModelRef id="STinclude0000000" /></ModelRefsProperty><ModelRefProperty name="from"><ModelRef id="M_uc700000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc800000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_An100000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_n1000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc100000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_An200000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_n2000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc200000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_An300000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_n3000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc300000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_n7000000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Внешние данные (FR-6)&#10;• нет ответа Wasteland Intel →&#10;  risk_score «Н/Д», пометка&#10;  «требует пересчёта» (альт. 2а)&#10;• данные старше 24 часов →&#10;  пометка «на основе устаревших&#10;  данных» (альт. 2б)&#10;Автоматические прецеденты&#10;• UC-6 и UC-8 актор не вызывает:&#10;  выполняются автоматически&#10;  в составе UC-1 и UC-7" /></ModelProperties></Model><Model id="M_An700000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_n7000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc700000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_n1600000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Спроектировано, но не реализовано&#10;• UC-16: этапы рейса, журнал контрольных&#10;  точек и офлайн-фиксация на полевом&#10;  устройстве в системе отсутствуют&#10;• UC-19: карточка инцидента, уведомление&#10;  диспетчера и автоперевод рейса&#10;  в «Задержку» в системе отсутствуют&#10;Точки расширения (CoreUseCases.md)&#10;• UC-16: EP-1 прибытие на КТ → UC-17;&#10;  EP-2 прохождение КПП → UC-18;&#10;  EP-3 подтверждение доставки → UC-14&#10;• UC-19: EP-1 критический инцидент →&#10;  UC-20 «Инициировать RecoveryRequest»" /></ModelProperties></Model><Model id="M_An160000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_n1600000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc160000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_n3200000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Основание мультитенантности&#10;• прецедент выделяет организации изолированное&#10;  пространство данных (FR-23, FR-24) —&#10;  на него опираются UC-1 и UC-3&#10;Точки расширения (CoreUseCases.md)&#10;• EP-1 → UC-33 «Назначить первого диспетчера&#10;  организации»: выполняется в том же шаге —&#10;  учётная запись создаётся вместе&#10;  с организацией и необязательна (альт. 6а)&#10;• EP-2 → UC-34 «Управлять подписками»:&#10;  уровень подписки только сохраняется,&#10;  управление подписками не реализовано" /></ModelProperties></Model><Model id="M_An320000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M_n3200000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M_uc320000000000" /></ModelRefProperty></ModelProperties></Model><Model id="M_legend00000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• рамка ИС «Караваны» — граница системы; акторы вне рамки&#10;• жирный шрифт — архитектурно значимый прецедент (CoreUseCases.md)&#10;• светло-серый фон #F5F5F5 — прецедент реализован в системе&#10;• кремовый фон #FFF2CC — спроектирован по документам, но не реализован&#10;• белый фон + пунктирная рамка — группа прецедентов: номера&#10;  перечислены, статус реализации не показан; какие из них&#10;  вызывает каждый актор — видно только в docs/UseCases.md&#10;• «абстрактный» — актор-обобщение: «Полевой пользователь»&#10;  обобщает караван-мастера, капитана охраны и полевого медика&#10;• «внешняя система» — актор-система за границей ИС «Караваны»&#10;&#10;Полный перечень 34 прецедентов — docs/UseCases.md&#10;и общая диаграмма diagrams/out/UC_0_General.png;&#10;детальные диаграммы — diagrams/usecases/UC_*_Detail.puml.&#10;&#10;Трассировка на SRS: UC-1 → FR-1; UC-2 → FR-2, FR-3;&#10;UC-3 → FR-2, FR-3, FR-7, FR-8, FR-24 (по docs/UC-3.md; FR-23 —&#10;предусловие, а не покрываемое требование); UC-6 → FR-5;&#10;UC-7 → FR-6, FR-7; UC-8 → FR-8; UC-12 → FR-13, FR-14;&#10;UC-16 → FR-18; UC-19 → FR-19, FR-20; UC-32 → FR-23, FR-24, FR-25.&#10;UC-5 отдельного требования не имеет и входит в FR-1.&#10;Журнал аудита по операциям с данными — RL-4 и RL-5&#10;(FR-35 относится только к управлению пользователями)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_UCD_UseCaseVie" name="UCD_UseCaseView" diagramType="UseCaseDiagram"><DiagramProperties><BooleanProperty name="showStereotypes" value="true" /><IntegerProperty name="showConnectorName" value="0" /><BooleanProperty name="showDiagramFrame" value="false" /></DiagramProperties><Shapes><Shape id="S_n1000000000000" shapeType="NOTE" x="30" y="60" width="330" height="175" zorder="1" model="M_n1000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_n2000000000000" shapeType="NOTE" x="440" y="60" width="330" height="245" zorder="2" model="M_n2000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_n3000000000000" shapeType="NOTE" x="820" y="60" width="310" height="115" zorder="3" model="M_n3000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_disp0000000000" shapeType="Actor" x="170" y="500" width="30" height="60" zorder="4" model="M_disp0000000000" name="Диспетчер&#10;караванов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="105" y="560" width="160" height="36" /></Shape><Shape id="S_cmst0000000000" shapeType="Actor" x="255" y="880" width="30" height="60" zorder="5" model="M_cmst0000000000" name="Караван-&#10;мастер"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="190" y="940" width="160" height="36" /></Shape><Shape id="S_secu0000000000" shapeType="Actor" x="255" y="1010" width="30" height="60" zorder="6" model="M_secu0000000000" name="Капитан&#10;охраны"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="190" y="1070" width="160" height="36" /></Shape><Shape id="S_medic000000000" shapeType="Actor" x="255" y="1140" width="30" height="60" zorder="7" model="M_medic000000000" name="Полевой&#10;медик"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="190" y="1200" width="160" height="36" /></Shape><Shape id="S_field000000000" shapeType="Actor" x="255" y="1270" width="30" height="60" zorder="8" model="M_field000000000" name="Полевой&#10;пользователь"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="190" y="1330" width="160" height="50" /></Shape><Shape id="S_super000000000" shapeType="Actor" x="170" y="1450" width="30" height="60" zorder="9" model="M_super000000000" name="Супер-&#10;пользователь"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="105" y="1510" width="160" height="36" /></Shape><Shape id="S_store000000000" shapeType="Actor" x="170" y="1650" width="30" height="60" zorder="10" model="M_store000000000" name="Кладовщик"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="105" y="1710" width="160" height="36" /></Shape><Shape id="S_sys00000000000" shapeType="System" x="460" y="350" width="680" height="1535" zorder="11" model="M_sys00000000000" name="ИС «Караваны»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="680" height="1535" /><ChildShapes><Shape id="S_g1000000000000" shapeType="System" x="490" y="420" width="560" height="260" zorder="12" model="M_g1000000000000" name="Управление заявкой и рейсом"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="560" height="260" /><ChildShapes><Shape id="S_uc200000000000" shapeType="UseCase" x="530" y="465" width="250" height="80" zorder="13" model="M_uc200000000000" name="UC-2: Управлять&#10;статусами заявки"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="250" height="80" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_uc300000000000" shapeType="UseCase" x="800" y="465" width="250" height="75" zorder="14" model="M_uc300000000000" name="UC-3: Просмотреть&#10;реестр рейсов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="250" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_uc100000000000" shapeType="UseCase" x="530" y="570" width="250" height="85" zorder="15" model="M_uc100000000000" name="UC-1: Создать заявку&#10;на перевозку"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="250" height="85" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S_g3000000000000" shapeType="System" x="790" y="720" width="260" height="140" zorder="16" model="M_g3000000000000" name="Груз и манифест"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="260" height="140" /><ChildShapes><Shape id="S_uc120000000000" shapeType="UseCase" x="805" y="765" width="230" height="75" zorder="17" model="M_uc120000000000" name="UC-12: Указать&#10;ценность груза"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="230" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S_g2000000000000" shapeType="System" x="490" y="900" width="560" height="300" zorder="18" model="M_g2000000000000" name="Планирование маршрута&#10;и оценка рисков"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="560" height="300" /><ChildShapes><Shape id="S_uc500000000000" shapeType="UseCase" x="520" y="965" width="230" height="80" zorder="19" model="M_uc500000000000" name="UC-5: Выбрать/&#10;спланировать маршрут"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="230" height="80" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_uc600000000000" shapeType="UseCase" x="820" y="965" width="230" height="75" zorder="20" model="M_uc600000000000" name="UC-6: Рассчитать ETA"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="230" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_uc800000000000" shapeType="UseCase" x="520" y="1070" width="230" height="95" zorder="21" model="M_uc800000000000" name="UC-8: Получить&#10;рекомендацию по охране&#10;и припасам"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="230" height="95" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S_uc700000000000" shapeType="UseCase" x="820" y="1075" width="230" height="85" zorder="22" model="M_uc700000000000" name="UC-7: Рассчитать&#10;risk_score"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="230" height="85" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S_g4000000000000" shapeType="System" x="490" y="1240" width="560" height="160" zorder="23" model="M_g4000000000000" name="Полевые операции"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="560" height="160" /><ChildShapes><Shape id="S_uc190000000000" shapeType="UseCase" x="530" y="1285" width="250" height="95" zorder="24" model="M_uc190000000000" name="UC-19: Сообщить&#10;об инциденте в рейсе"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="250" height="95" /><FillColor type="1" color="Cr:255,242,204,255" transparency="0" style="0" /></Shape><Shape id="S_uc160000000000" shapeType="UseCase" x="800" y="1285" width="250" height="95" zorder="25" model="M_uc160000000000" name="UC-16: Зафиксировать&#10;прохождение&#10;этапа рейса"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="250" height="95" /><FillColor type="1" color="Cr:255,242,204,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S_g5000000000000" shapeType="System" x="790" y="1440" width="260" height="150" zorder="26" model="M_g5000000000000" name="Управление организациями"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="260" height="150" /><ChildShapes><Shape id="S_uc320000000000" shapeType="UseCase" x="805" y="1485" width="230" height="85" zorder="27" model="M_uc320000000000" name="UC-32: Создать&#10;организацию"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="230" height="85" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S_g6000000000000" shapeType="System" x="490" y="1630" width="560" height="215" zorder="28" model="M_g6000000000000" name="Остальные прецеденты —&#10;состав на диаграмме не раскрыт"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="Center" x="0" y="0" width="560" height="215" /><ChildShapes><Shape id="S_rest0000000000" shapeType="UseCase" x="530" y="1690" width="480" height="140" zorder="29" model="M_rest0000000000" name="23 прецедента:&#10;UC-4, UC-9…UC-11, UC-13…UC-15,&#10;UC-17, UC-18, UC-20…UC-31,&#10;UC-33, UC-34"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke><Dashes><Dash value="6.0" /><Dash value="4.0" /></Dashes></Stroke></Line><Caption visible="true" side="Center" x="0" y="0" width="480" height="140" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape></ChildShapes><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S_wi000000000000" shapeType="Actor" x="1220" y="880" width="30" height="60" zorder="30" model="M_wi000000000000" name="Wasteland&#10;Intel"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="1145" y="940" width="180" height="50" /></Shape><Shape id="S_ncr00000000000" shapeType="Actor" x="1220" y="1690" width="30" height="60" zorder="31" model="M_ncr00000000000" name="NCR Checkpoint&#10;&amp; Tax Terminal"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="South" x="1150" y="1750" width="170" height="50" /></Shape><Shape id="S_n7000000000000" shapeType="NOTE" x="1340" y="950" width="420" height="200" zorder="32" model="M_n7000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_n1600000000000" shapeType="NOTE" x="1340" y="1260" width="420" height="235" zorder="33" model="M_n1600000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_n3200000000000" shapeType="NOTE" x="1340" y="1560" width="470" height="220" zorder="34" model="M_n3200000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="S_legend00000000" shapeType="NOTE" x="1340" y="300" width="530" height="420" zorder="35" model="M_legend00000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C_g1000000000000" shapeType="Generalization" model="M_g1x10000000000" from="S_field000000000" to="S_cmst0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="255" y="1290" /><Point x="135" y="1290" /><Point x="135" y="905" /><Point x="255" y="905" /></Points></Connector><Connector id="C_g2000000000000" shapeType="Generalization" model="M_g2x20000000000" from="S_field000000000" to="S_secu0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="255" y="1300" /><Point x="155" y="1300" /><Point x="155" y="1035" /><Point x="255" y="1035" /></Points></Connector><Connector id="C_g3000000000000" shapeType="Generalization" model="M_g3x30000000000" from="S_field000000000" to="S_medic000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="255" y="1312" /><Point x="175" y="1312" /><Point x="175" y="1165" /><Point x="255" y="1165" /></Points></Connector><Connector id="C_a1000000000000" shapeType="Association" model="M_a1000000000000" from="S_disp0000000000" to="S_uc200000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_a2000000000000" shapeType="Association" model="M_a2000000000000" from="S_disp0000000000" to="S_uc100000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_a3000000000000" shapeType="Association" model="M_a3000000000000" from="S_disp0000000000" to="S_uc300000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="200" y="515" /><Point x="480" y="515" /><Point x="480" y="400" /><Point x="1010" y="400" /><Point x="1010" y="465" /></Points></Connector><Connector id="C_a4000000000000" shapeType="Association" model="M_a4000000000000" from="S_disp0000000000" to="S_uc500000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="200" y="520" /><Point x="470" y="520" /><Point x="470" y="1005" /><Point x="520" y="1005" /></Points></Connector><Connector id="C_a5000000000000" shapeType="Association" model="M_a5000000000000" from="S_disp0000000000" to="S_uc700000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="200" y="540" /><Point x="365" y="540" /><Point x="365" y="1190" /><Point x="935" y="1190" /><Point x="935" y="1160" /></Points></Connector><Connector id="C_a6000000000000" shapeType="Association" model="M_a6000000000000" from="S_disp0000000000" to="S_uc120000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="200" y="558" /><Point x="300" y="558" /><Point x="300" y="700" /><Point x="760" y="700" /><Point x="760" y="802" /><Point x="805" y="802" /></Points></Connector><Connector id="C_a7000000000000" shapeType="Association" model="M_a7000000000000" from="S_disp0000000000" to="S_rest0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="200" y="550" /><Point x="385" y="550" /><Point x="385" y="1745" /><Point x="536" y="1745" /></Points></Connector><Connector id="C_a8000000000000" shapeType="Association" model="M_a8000000000000" from="S_cmst0000000000" to="S_uc200000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="285" y="898" /><Point x="435" y="898" /><Point x="435" y="510" /><Point x="531" y="510" /></Points></Connector><Connector id="C_a9000000000000" shapeType="Association" model="M_a9000000000000" from="S_cmst0000000000" to="S_uc160000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="285" y="910" /><Point x="410" y="910" /><Point x="410" y="1225" /><Point x="925" y="1225" /><Point x="925" y="1285" /></Points></Connector><Connector id="C_a10x5000000000" shapeType="Association" model="M_a10x4000000000" from="S_cmst0000000000" to="S_rest0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="285" y="922" /><Point x="450" y="922" /><Point x="450" y="1760" /><Point x="530" y="1760" /></Points></Connector><Connector id="C_a1100000000000" shapeType="Association" model="M_a1100000000000" from="S_field000000000" to="S_uc190000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="285" y="1300" /><Point x="440" y="1300" /><Point x="440" y="1332" /><Point x="530" y="1332" /></Points></Connector><Connector id="C_a1200000000000" shapeType="Association" model="M_a1200000000000" from="S_field000000000" to="S_rest0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="285" y="1320" /><Point x="430" y="1320" /><Point x="430" y="1790" /><Point x="553" y="1790" /></Points></Connector><Connector id="C_a1300000000000" shapeType="Association" model="M_a1300000000000" from="S_store000000000" to="S_rest0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_a1400000000000" shapeType="Association" model="M_a1400000000000" from="S_super000000000" to="S_uc320000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_a1500000000000" shapeType="Association" model="M_a1500000000000" from="S_super000000000" to="S_rest0000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_a1600000000000" shapeType="Association" model="M_a1600000000000" from="S_uc700000000000" to="S_wi000000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="1050" y="1117" /><Point x="1105" y="1117" /><Point x="1105" y="900" /><Point x="1220" y="900" /></Points></Connector><Connector id="C_a1700000000000" shapeType="Association" model="M_a1700000000000" from="S_rest0000000000" to="S_wi000000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="967" y="1720" /><Point x="1125" y="1720" /><Point x="1125" y="925" /><Point x="1220" y="925" /></Points></Connector><Connector id="C_a1800000000000" shapeType="Association" model="M_a1800000000000" from="S_rest0000000000" to="S_ncr00000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="1000" y="1740" /><Point x="1120" y="1740" /><Point x="1220" y="1740" /></Points></Connector><Connector id="C_i1000000000000" shapeType="Include" model="M_i1000000000000" from="S_uc100000000000" to="S_uc500000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="None" x="655" y="790" width="90" height="18" /><Points><Point x="655" y="655" /><Point x="645" y="810" /><Point x="635" y="965" /></Points></Connector><Connector id="C_i2000000000000" shapeType="Include" model="M_i2000000000000" from="S_uc100000000000" to="S_uc600000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="None" x="965" y="698" width="90" height="18" /><Points><Point x="775" y="600" /><Point x="1065" y="600" /><Point x="1065" y="1002" /><Point x="1050" y="1002" /></Points></Connector><Connector id="C_i3000000000000" shapeType="Include" model="M_i3000000000000" from="S_uc100000000000" to="S_uc700000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="None" x="995" y="940" width="90" height="18" /><Points><Point x="774" y="625" /><Point x="1090" y="625" /><Point x="1090" y="1117" /><Point x="1050" y="1117" /></Points></Connector><Connector id="C_i4000000000000" shapeType="Include" model="M_i4000000000000" from="S_uc100000000000" to="S_uc800000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="None" x="512" y="866" width="90" height="18" /><Points><Point x="532" y="620" /><Point x="505" y="620" /><Point x="505" y="1117" /><Point x="520" y="1117" /></Points></Connector><Connector id="C_i5000000000000" shapeType="Include" model="M_i5000000000000" from="S_uc100000000000" to="S_uc120000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="None" x="800" y="700" width="90" height="18" /></Connector><Connector id="C_i6000000000000" shapeType="Include" model="M_i6000000000000" from="S_uc700000000000" to="S_uc800000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Caption visible="true" side="None" x="740" y="1085" width="90" height="18" /></Connector><Connector id="C_An100000000000" shapeType="Anchor" model="M_An100000000000" from="S_n1000000000000" to="S_uc100000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line><Points><Point x="360" y="150" /><Point x="415" y="150" /><Point x="415" y="612" /><Point x="530" y="612" /></Points></Connector><Connector id="C_An200000000000" shapeType="Anchor" model="M_An200000000000" from="S_n2000000000000" to="S_uc200000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_An300000000000" shapeType="Anchor" model="M_An300000000000" from="S_n3000000000000" to="S_uc300000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_An700000000000" shapeType="Anchor" model="M_An700000000000" from="S_n7000000000000" to="S_uc700000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_An160000000000" shapeType="Anchor" model="M_An160000000000" from="S_n1600000000000" to="S_uc160000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector><Connector id="C_An320000000000" shapeType="Anchor" model="M_An320000000000" from="S_n3200000000000" to="S_uc320000000000" connectorStyle="Oblique"><ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" /><Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0"><Stroke /></Line></Connector></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="UCD_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="STinclude0000000" modelType="Stereotype" name="include">
+      <ModelProperties>
+        <StringProperty name="name" value="include" />
+        <StringProperty name="baseType" value="Include" />
+      </ModelProperties>
+    </Model>
+    <Model id="ST______________" modelType="Stereotype" name="внешняя система">
+      <ModelProperties>
+        <StringProperty name="name" value="внешняя система" />
+        <StringProperty name="baseType" value="Actor" />
+      </ModelProperties>
+    </Model>
+    <Model id="ST___________000" modelType="Stereotype" name="абстрактный">
+      <ModelProperties>
+        <StringProperty name="name" value="абстрактный" />
+        <StringProperty name="baseType" value="Actor" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_n1000000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="UC-1 создаёт заявку&#10;• статус «Черновик»&#10;• маршрут, ETA, risk_score&#10;  и рекомендация по охране&#10;  и припасам&#10;Пробел реализации&#10;• событие создания заявки&#10;  в журнал аудита не пишется&#10;  (пробел по RL-4)" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_n2000000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Переходы статуса&#10;• инициируют диспетчер&#10;  и караван-мастер&#10;• инцидент высокой или&#10;  критической тяжести (UC-19) —&#10;  актором фиксируется «Система»&#10;• фиксация этапа рейса (UC-16)&#10;  тоже меняет статус&#10;Пробел реализации&#10;• проверка готовности рейса&#10;  перед выходом на маршрут&#10;  (FR-10) не выполняется:&#10;  модель команды рейса (UC-9)&#10;  не реализована" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_n3000000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="UC-3 — точка входа диспетчера&#10;• пустой реестр ведёт к UC-1&#10;• карточка рейса — к UC-2 и UC-7&#10;• архивный срез — к UC-4&#10;• сам реестр данные только читает" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_disp0000000000" modelType="Actor" name="Диспетчер&#10;караванов">
+      <ModelProperties>
+        <StringProperty name="name" value="Диспетчер&#10;караванов" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_cmst0000000000" modelType="Actor" name="Караван-&#10;мастер">
+      <ModelProperties>
+        <StringProperty name="name" value="Караван-&#10;мастер" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_secu0000000000" modelType="Actor" name="Капитан&#10;охраны">
+      <ModelProperties>
+        <StringProperty name="name" value="Капитан&#10;охраны" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_medic000000000" modelType="Actor" name="Полевой&#10;медик">
+      <ModelProperties>
+        <StringProperty name="name" value="Полевой&#10;медик" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_field000000000" modelType="Actor" name="Полевой&#10;пользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Полевой&#10;пользователь" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="ST___________000" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_super000000000" modelType="Actor" name="Супер-&#10;пользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Супер-&#10;пользователь" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_store000000000" modelType="Actor" name="Кладовщик">
+      <ModelProperties>
+        <StringProperty name="name" value="Кладовщик" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_sys00000000000" modelType="System" name="ИС «Караваны»">
+      <ModelProperties>
+        <StringProperty name="name" value="ИС «Караваны»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_g1000000000000" modelType="System" name="Управление заявкой и рейсом">
+      <ModelProperties>
+        <StringProperty name="name" value="Управление заявкой и рейсом" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc200000000000" modelType="UseCase" name="UC-2: Управлять&#10;статусами заявки">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-2: Управлять&#10;статусами заявки" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc300000000000" modelType="UseCase" name="UC-3: Просмотреть&#10;реестр рейсов">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-3: Просмотреть&#10;реестр рейсов" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc100000000000" modelType="UseCase" name="UC-1: Создать заявку&#10;на перевозку">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-1: Создать заявку&#10;на перевозку" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_g3000000000000" modelType="System" name="Груз и манифест">
+      <ModelProperties>
+        <StringProperty name="name" value="Груз и манифест" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc120000000000" modelType="UseCase" name="UC-12: Указать&#10;ценность груза">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-12: Указать&#10;ценность груза" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_g2000000000000" modelType="System" name="Планирование маршрута&#10;и оценка рисков">
+      <ModelProperties>
+        <StringProperty name="name" value="Планирование маршрута&#10;и оценка рисков" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc500000000000" modelType="UseCase" name="UC-5: Выбрать/&#10;спланировать маршрут">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-5: Выбрать/&#10;спланировать маршрут" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc600000000000" modelType="UseCase" name="UC-6: Рассчитать ETA">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-6: Рассчитать ETA" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc800000000000" modelType="UseCase" name="UC-8: Получить&#10;рекомендацию по охране&#10;и припасам">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-8: Получить&#10;рекомендацию по охране&#10;и припасам" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc700000000000" modelType="UseCase" name="UC-7: Рассчитать&#10;risk_score">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-7: Рассчитать&#10;risk_score" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_g4000000000000" modelType="System" name="Полевые операции">
+      <ModelProperties>
+        <StringProperty name="name" value="Полевые операции" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc190000000000" modelType="UseCase" name="UC-19: Сообщить&#10;об инциденте в рейсе">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-19: Сообщить&#10;об инциденте в рейсе" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc160000000000" modelType="UseCase" name="UC-16: Зафиксировать&#10;прохождение&#10;этапа рейса">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-16: Зафиксировать&#10;прохождение&#10;этапа рейса" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_g5000000000000" modelType="System" name="Управление организациями">
+      <ModelProperties>
+        <StringProperty name="name" value="Управление организациями" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_uc320000000000" modelType="UseCase" name="UC-32: Создать&#10;организацию">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-32: Создать&#10;организацию" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_g6000000000000" modelType="System" name="Остальные прецеденты —&#10;состав на диаграмме не раскрыт">
+      <ModelProperties>
+        <StringProperty name="name" value="Остальные прецеденты —&#10;состав на диаграмме не раскрыт" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_rest0000000000" modelType="UseCase" name="23 прецедента:&#10;UC-4, UC-9…UC-11, UC-13…UC-15,&#10;UC-17, UC-18, UC-20…UC-31,&#10;UC-33, UC-34">
+      <ModelProperties>
+        <StringProperty name="name" value="23 прецедента:&#10;UC-4, UC-9…UC-11, UC-13…UC-15,&#10;UC-17, UC-18, UC-20…UC-31,&#10;UC-33, UC-34" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_wi000000000000" modelType="Actor" name="Wasteland&#10;Intel">
+      <ModelProperties>
+        <StringProperty name="name" value="Wasteland&#10;Intel" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="ST______________" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_ncr00000000000" modelType="Actor" name="NCR Checkpoint&#10;&amp; Tax Terminal">
+      <ModelProperties>
+        <StringProperty name="name" value="NCR Checkpoint&#10;&amp; Tax Terminal" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="ST______________" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_g1x10000000000" modelType="Generalization">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_field000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_cmst0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_g2x20000000000" modelType="Generalization">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_field000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_secu0000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_g3x30000000000" modelType="Generalization">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_field000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_medic000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_a1000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc200000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a1From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a1ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc200000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a2000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a2From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a2ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc100000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a3000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc300000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a3From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a3ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc300000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a4000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc500000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a4From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a4ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc500000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a5000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc700000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a5From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a5ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc700000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a6000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc120000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a6From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a6ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc120000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a7000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_disp0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a7From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_disp0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a7ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a8000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_cmst0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc200000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a8From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_cmst0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a8ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc200000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a9000000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_cmst0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc160000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a9From00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_cmst0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a9ToEn00000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc160000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a10x4000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_cmst0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a10From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_cmst0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a10ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1100000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_field000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc190000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a11From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_field000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a11ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc190000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1200000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_field000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a12From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_field000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a12ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1300000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_store000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a13From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_store000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a13ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1400000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_super000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_uc320000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a14From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_super000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a14ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc320000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1500000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_super000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a15From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_super000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a15ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1600000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_uc700000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_wi000000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a16From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_uc700000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a16ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_wi000000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1700000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_wi000000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a17From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a17ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_wi000000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_a1800000000000" modelType="Association" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="M_rest0000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="M_ncr00000000000" />
+        </ModelRefProperty>
+        <StringProperty name="direction" value="From-To" />
+      </ModelProperties>
+      <FromEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a18From0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_rest0000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model composite="true" modelType="AssociationEnd" id="M_a18ToEn0000000" name="">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="M_ncr00000000000" />
+            </ModelRefProperty>
+            <StringProperty name="aggregationKind" value="None" />
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="M_i1000000000000" modelType="Include" name="«include»">
+      <ModelProperties>
+        <StringProperty name="name" value="«include»" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STinclude0000000" />
+        </ModelRefsProperty>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc500000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_i2000000000000" modelType="Include" name="«include»">
+      <ModelProperties>
+        <StringProperty name="name" value="«include»" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STinclude0000000" />
+        </ModelRefsProperty>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc600000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_i3000000000000" modelType="Include" name="«include»">
+      <ModelProperties>
+        <StringProperty name="name" value="«include»" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STinclude0000000" />
+        </ModelRefsProperty>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc700000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_i4000000000000" modelType="Include" name="«include»">
+      <ModelProperties>
+        <StringProperty name="name" value="«include»" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STinclude0000000" />
+        </ModelRefsProperty>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc800000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_i5000000000000" modelType="Include" name="«include»">
+      <ModelProperties>
+        <StringProperty name="name" value="«include»" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STinclude0000000" />
+        </ModelRefsProperty>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc120000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_i6000000000000" modelType="Include" name="«include»">
+      <ModelProperties>
+        <StringProperty name="name" value="«include»" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="STinclude0000000" />
+        </ModelRefsProperty>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_uc700000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc800000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_An100000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_n1000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc100000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_An200000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_n2000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc200000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_An300000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_n3000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc300000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_n7000000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Внешние данные (FR-6)&#10;• нет ответа Wasteland Intel →&#10;  risk_score «Н/Д», пометка&#10;  «требует пересчёта» (альт. 2а)&#10;• данные старше 24 часов →&#10;  пометка «на основе устаревших&#10;  данных» (альт. 2б)&#10;Автоматические прецеденты&#10;• UC-6 и UC-8 актор не вызывает:&#10;  выполняются автоматически&#10;  в составе UC-1 и UC-7" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_An700000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_n7000000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc700000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_n1600000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Спроектировано, но не реализовано&#10;• UC-16: этапы рейса, журнал контрольных&#10;  точек и офлайн-фиксация на полевом&#10;  устройстве в системе отсутствуют&#10;• UC-19: карточка инцидента, уведомление&#10;  диспетчера и автоперевод рейса&#10;  в «Задержку» в системе отсутствуют&#10;Точки расширения (CoreUseCases.md)&#10;• UC-16: EP-1 прибытие на КТ → UC-17;&#10;  EP-2 прохождение КПП → UC-18;&#10;  EP-3 подтверждение доставки → UC-14&#10;• UC-19: EP-1 критический инцидент →&#10;  UC-20 «Инициировать RecoveryRequest»" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_An160000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_n1600000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc160000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_n3200000000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Основание мультитенантности&#10;• прецедент выделяет организации изолированное&#10;  пространство данных (FR-23, FR-24) —&#10;  на него опираются UC-1 и UC-3&#10;Точки расширения (CoreUseCases.md)&#10;• EP-1 → UC-33 «Назначить первого диспетчера&#10;  организации»: выполняется в том же шаге —&#10;  учётная запись создаётся вместе&#10;  с организацией и необязательна (альт. 6а)&#10;• EP-2 → UC-34 «Управлять подписками»:&#10;  уровень подписки только сохраняется,&#10;  управление подписками не реализовано" />
+      </ModelProperties>
+    </Model>
+    <Model id="M_An320000000000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="M_n3200000000000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="M_uc320000000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="M_legend00000000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Обозначения&#10;• рамка ИС «Караваны» — граница системы; акторы вне рамки&#10;• жирный шрифт — архитектурно значимый прецедент (CoreUseCases.md)&#10;• светло-серый фон #F5F5F5 — прецедент реализован в системе&#10;• кремовый фон #FFF2CC — спроектирован по документам, но не реализован&#10;• белый фон + пунктирная рамка — группа прецедентов: номера&#10;  перечислены, статус реализации не показан; какие из них&#10;  вызывает каждый актор — видно только в docs/UseCases.md&#10;• «абстрактный» — актор-обобщение: «Полевой пользователь»&#10;  обобщает караван-мастера, капитана охраны и полевого медика&#10;• «внешняя система» — актор-система за границей ИС «Караваны»&#10;&#10;Полный перечень 34 прецедентов — docs/UseCases.md&#10;и общая диаграмма diagrams/out/UC_0_General.png;&#10;детальные диаграммы — diagrams/usecases/UC_*_Detail.puml.&#10;&#10;Трассировка на SRS: UC-1 → FR-1; UC-2 → FR-2, FR-3;&#10;UC-3 → FR-2, FR-3, FR-7, FR-8, FR-24 (по docs/UC-3.md; FR-23 —&#10;предусловие, а не покрываемое требование); UC-6 → FR-5;&#10;UC-7 → FR-6, FR-7; UC-8 → FR-8; UC-12 → FR-13, FR-14;&#10;UC-16 → FR-18; UC-19 → FR-19, FR-20; UC-32 → FR-23, FR-24, FR-25.&#10;UC-5 отдельного требования не имеет и входит в FR-1.&#10;Журнал аудита по операциям с данными — RL-4 и RL-5&#10;(FR-35 относится только к управлению пользователями)." />
+      </ModelProperties>
+    </Model>
+    <Model id="F17ced0da9d3aadf" modelType="NOTE" name="ИС «Караваны» — Use Case Diagram (Use-Case View)&#10;Абстрактное описание: акторы, граница системы и архитектурно значимые прецеденты">
+      <ModelProperties>
+        <StringProperty name="name" value="ИС «Караваны» — Use Case Diagram (Use-Case View)&#10;Абстрактное описание: акторы, граница системы и архитектурно значимые прецеденты" />
+        <HTMLProperty name="documentation" plainTextValue="ИС «Караваны» — Use Case Diagram (Use-Case View)&#10;Абстрактное описание: акторы, граница системы и архитектурно значимые прецеденты" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="D_UCD_UseCaseVie" name="UCD_UseCaseView" diagramType="UseCaseDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showStereotypes" value="true" />
+        <IntegerProperty name="showConnectorName" value="0" />
+        <BooleanProperty name="showDiagramFrame" value="false" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="S_n1000000000000" shapeType="NOTE" x="30" y="160" width="330" height="175" zorder="25" model="M_n1000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_n2000000000000" shapeType="NOTE" x="440" y="160" width="330" height="245" zorder="27" model="M_n2000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_n3000000000000" shapeType="NOTE" x="820" y="160" width="310" height="115" zorder="21" model="M_n3000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_disp0000000000" shapeType="Actor" x="170" y="600" width="30" height="60" zorder="1" model="M_disp0000000000" name="Диспетчер&#10;караванов">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="105" y="560" width="160" height="36" />
+        </Shape>
+        <Shape id="S_cmst0000000000" shapeType="Actor" x="255" y="980" width="30" height="60" zorder="2" model="M_cmst0000000000" name="Караван-&#10;мастер">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="190" y="940" width="160" height="36" />
+        </Shape>
+        <Shape id="S_secu0000000000" shapeType="Actor" x="255" y="1110" width="30" height="60" zorder="3" model="M_secu0000000000" name="Капитан&#10;охраны">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="190" y="1070" width="160" height="36" />
+        </Shape>
+        <Shape id="S_medic000000000" shapeType="Actor" x="255" y="1240" width="30" height="60" zorder="4" model="M_medic000000000" name="Полевой&#10;медик">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="190" y="1200" width="160" height="36" />
+        </Shape>
+        <Shape id="S_field000000000" shapeType="Actor" x="255" y="1370" width="30" height="60" zorder="5" model="M_field000000000" name="Полевой&#10;пользователь">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="190" y="1330" width="160" height="50" />
+        </Shape>
+        <Shape id="S_super000000000" shapeType="Actor" x="170" y="1550" width="30" height="60" zorder="6" model="M_super000000000" name="Супер-&#10;пользователь">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="105" y="1510" width="160" height="36" />
+        </Shape>
+        <Shape id="S_store000000000" shapeType="Actor" x="170" y="1750" width="30" height="60" zorder="7" model="M_store000000000" name="Кладовщик">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="105" y="1710" width="160" height="36" />
+        </Shape>
+        <Shape id="S_sys00000000000" shapeType="System" x="460" y="450" width="680" height="1535" zorder="36" model="M_sys00000000000" name="ИС «Караваны»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="Center" x="0" y="0" width="680" height="1535" />
+          <ChildShapes>
+            <Shape id="S_g1000000000000" shapeType="System" x="490" y="520" width="560" height="260" zorder="33" model="M_g1000000000000" name="Управление заявкой и рейсом">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+              <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                <Stroke />
+              </Line>
+              <Caption visible="true" side="Center" x="0" y="0" width="560" height="260" />
+              <ChildShapes>
+                <Shape id="S_uc200000000000" shapeType="UseCase" x="530" y="565" width="250" height="80" zorder="16" model="M_uc200000000000" name="UC-2: Управлять&#10;статусами заявки">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="250" height="80" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S_uc300000000000" shapeType="UseCase" x="800" y="565" width="250" height="75" zorder="13" model="M_uc300000000000" name="UC-3: Просмотреть&#10;реестр рейсов">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="250" height="75" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S_uc100000000000" shapeType="UseCase" x="530" y="670" width="250" height="85" zorder="17" model="M_uc100000000000" name="UC-1: Создать заявку&#10;на перевозку">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="250" height="85" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_g3000000000000" shapeType="System" x="790" y="820" width="260" height="140" zorder="22" model="M_g3000000000000" name="Груз и манифест">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+              <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                <Stroke />
+              </Line>
+              <Caption visible="true" side="Center" x="0" y="0" width="260" height="140" />
+              <ChildShapes>
+                <Shape id="S_uc120000000000" shapeType="UseCase" x="805" y="865" width="230" height="75" zorder="10" model="M_uc120000000000" name="UC-12: Указать&#10;ценность груза">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="230" height="75" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_g2000000000000" shapeType="System" x="490" y="1000" width="560" height="300" zorder="34" model="M_g2000000000000" name="Планирование маршрута&#10;и оценка рисков">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+              <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                <Stroke />
+              </Line>
+              <Caption visible="true" side="Center" x="0" y="0" width="560" height="300" />
+              <ChildShapes>
+                <Shape id="S_uc500000000000" shapeType="UseCase" x="520" y="1065" width="230" height="80" zorder="12" model="M_uc500000000000" name="UC-5: Выбрать/&#10;спланировать маршрут">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="230" height="80" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S_uc600000000000" shapeType="UseCase" x="820" y="1065" width="230" height="75" zorder="11" model="M_uc600000000000" name="UC-6: Рассчитать ETA">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="230" height="75" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S_uc800000000000" shapeType="UseCase" x="520" y="1170" width="230" height="95" zorder="18" model="M_uc800000000000" name="UC-8: Получить&#10;рекомендацию по охране&#10;и припасам">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="230" height="95" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S_uc700000000000" shapeType="UseCase" x="820" y="1175" width="230" height="85" zorder="14" model="M_uc700000000000" name="UC-7: Рассчитать&#10;risk_score">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="230" height="85" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_g4000000000000" shapeType="System" x="490" y="1340" width="560" height="160" zorder="29" model="M_g4000000000000" name="Полевые операции">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+              <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                <Stroke />
+              </Line>
+              <Caption visible="true" side="Center" x="0" y="0" width="560" height="160" />
+              <ChildShapes>
+                <Shape id="S_uc190000000000" shapeType="UseCase" x="530" y="1385" width="250" height="95" zorder="19" model="M_uc190000000000" name="UC-19: Сообщить&#10;об инциденте в рейсе">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="250" height="95" />
+                  <FillColor type="1" color="Cr:255,242,204,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="S_uc160000000000" shapeType="UseCase" x="800" y="1385" width="250" height="95" zorder="20" model="M_uc160000000000" name="UC-16: Зафиксировать&#10;прохождение&#10;этапа рейса">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="250" height="95" />
+                  <FillColor type="1" color="Cr:255,242,204,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_g5000000000000" shapeType="System" x="790" y="1540" width="260" height="150" zorder="23" model="M_g5000000000000" name="Управление организациями">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+              <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                <Stroke />
+              </Line>
+              <Caption visible="true" side="Center" x="0" y="0" width="260" height="150" />
+              <ChildShapes>
+                <Shape id="S_uc320000000000" shapeType="UseCase" x="805" y="1585" width="230" height="85" zorder="15" model="M_uc320000000000" name="UC-32: Создать&#10;организацию">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="1" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke />
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="230" height="85" />
+                  <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="S_g6000000000000" shapeType="System" x="490" y="1730" width="560" height="215" zorder="32" model="M_g6000000000000" name="Остальные прецеденты —&#10;состав на диаграмме не раскрыт">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="true" />
+              </DiagramElementProperties>
+              <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+              <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                <Stroke />
+              </Line>
+              <Caption visible="true" side="Center" x="0" y="0" width="560" height="215" />
+              <ChildShapes>
+                <Shape id="S_rest0000000000" shapeType="UseCase" x="530" y="1790" width="480" height="140" zorder="26" model="M_rest0000000000" name="23 прецедента:&#10;UC-4, UC-9…UC-11, UC-13…UC-15,&#10;UC-17, UC-18, UC-20…UC-31,&#10;UC-33, UC-34">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="true" />
+                    <BooleanProperty name="requestResetCaptionSize" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+                  <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="6.0" />
+                        <Dash value="4.0" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <Caption visible="true" side="Center" x="0" y="0" width="480" height="140" />
+                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_wi000000000000" shapeType="Actor" x="1220" y="980" width="30" height="60" zorder="8" model="M_wi000000000000" name="Wasteland&#10;Intel">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="1145" y="940" width="180" height="50" />
+        </Shape>
+        <Shape id="S_ncr00000000000" shapeType="Actor" x="1220" y="1790" width="30" height="60" zorder="9" model="M_ncr00000000000" name="NCR Checkpoint&#10;&amp; Tax Terminal">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="South" x="1150" y="1750" width="170" height="50" />
+        </Shape>
+        <Shape id="S_n7000000000000" shapeType="NOTE" x="1340" y="1050" width="420" height="200" zorder="28" model="M_n7000000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_n1600000000000" shapeType="NOTE" x="1340" y="1360" width="420" height="235" zorder="30" model="M_n1600000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_n3200000000000" shapeType="NOTE" x="1340" y="1660" width="470" height="220" zorder="31" model="M_n3200000000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="S_legend00000000" shapeType="NOTE" x="1340" y="400" width="530" height="420" zorder="35" model="M_legend00000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="F1d4b99deedb22f4" shapeType="TextBox" x="40" y="35" width="800" height="60" zorder="24" model="F17ced0da9d3aadf" name="ИС «Караваны» — Use Case Diagram (Use-Case View)&#10;Абстрактное описание: акторы, граница системы и архитектурно значимые прецеденты">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="16" style="1" color="Cr:0,0,0,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="800" height="60" />
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="C_g1000000000000" shapeType="Generalization" model="M_g1x10000000000" from="S_field000000000" to="S_cmst0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="255" y="1390" />
+            <Point x="135" y="1390" />
+            <Point x="135" y="1005" />
+            <Point x="255" y="1005" />
+          </Points>
+        </Connector>
+        <Connector id="C_g2000000000000" shapeType="Generalization" model="M_g2x20000000000" from="S_field000000000" to="S_secu0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="255" y="1400" />
+            <Point x="155" y="1400" />
+            <Point x="155" y="1135" />
+            <Point x="255" y="1135" />
+          </Points>
+        </Connector>
+        <Connector id="C_g3000000000000" shapeType="Generalization" model="M_g3x30000000000" from="S_field000000000" to="S_medic000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="255" y="1412" />
+            <Point x="175" y="1412" />
+            <Point x="175" y="1265" />
+            <Point x="255" y="1265" />
+          </Points>
+        </Connector>
+        <Connector id="C_a1000000000000" shapeType="Association" model="M_a1000000000000" from="S_disp0000000000" to="S_uc200000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_a2000000000000" shapeType="Association" model="M_a2000000000000" from="S_disp0000000000" to="S_uc100000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_a3000000000000" shapeType="Association" model="M_a3000000000000" from="S_disp0000000000" to="S_uc300000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="200" y="615" />
+            <Point x="480" y="615" />
+            <Point x="480" y="500" />
+            <Point x="1010" y="500" />
+            <Point x="1010" y="565" />
+          </Points>
+        </Connector>
+        <Connector id="C_a4000000000000" shapeType="Association" model="M_a4000000000000" from="S_disp0000000000" to="S_uc500000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="200" y="620" />
+            <Point x="470" y="620" />
+            <Point x="470" y="1105" />
+            <Point x="520" y="1105" />
+          </Points>
+        </Connector>
+        <Connector id="C_a5000000000000" shapeType="Association" model="M_a5000000000000" from="S_disp0000000000" to="S_uc700000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="200" y="640" />
+            <Point x="365" y="640" />
+            <Point x="365" y="1290" />
+            <Point x="935" y="1290" />
+            <Point x="935" y="1260" />
+          </Points>
+        </Connector>
+        <Connector id="C_a6000000000000" shapeType="Association" model="M_a6000000000000" from="S_disp0000000000" to="S_uc120000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="200" y="658" />
+            <Point x="300" y="658" />
+            <Point x="300" y="800" />
+            <Point x="760" y="800" />
+            <Point x="760" y="902" />
+            <Point x="805" y="902" />
+          </Points>
+        </Connector>
+        <Connector id="C_a7000000000000" shapeType="Association" model="M_a7000000000000" from="S_disp0000000000" to="S_rest0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="200" y="650" />
+            <Point x="385" y="650" />
+            <Point x="385" y="1845" />
+            <Point x="536" y="1845" />
+          </Points>
+        </Connector>
+        <Connector id="C_a8000000000000" shapeType="Association" model="M_a8000000000000" from="S_cmst0000000000" to="S_uc200000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="285" y="998" />
+            <Point x="435" y="998" />
+            <Point x="435" y="610" />
+            <Point x="531" y="610" />
+          </Points>
+        </Connector>
+        <Connector id="C_a9000000000000" shapeType="Association" model="M_a9000000000000" from="S_cmst0000000000" to="S_uc160000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="285" y="1010" />
+            <Point x="410" y="1010" />
+            <Point x="410" y="1325" />
+            <Point x="925" y="1325" />
+            <Point x="925" y="1385" />
+          </Points>
+        </Connector>
+        <Connector id="C_a10x5000000000" shapeType="Association" model="M_a10x4000000000" from="S_cmst0000000000" to="S_rest0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="285" y="1022" />
+            <Point x="450" y="1022" />
+            <Point x="450" y="1860" />
+            <Point x="530" y="1860" />
+          </Points>
+        </Connector>
+        <Connector id="C_a1100000000000" shapeType="Association" model="M_a1100000000000" from="S_field000000000" to="S_uc190000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="285" y="1400" />
+            <Point x="440" y="1400" />
+            <Point x="440" y="1432" />
+            <Point x="530" y="1432" />
+          </Points>
+        </Connector>
+        <Connector id="C_a1200000000000" shapeType="Association" model="M_a1200000000000" from="S_field000000000" to="S_rest0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="285" y="1420" />
+            <Point x="430" y="1420" />
+            <Point x="430" y="1890" />
+            <Point x="553" y="1890" />
+          </Points>
+        </Connector>
+        <Connector id="C_a1300000000000" shapeType="Association" model="M_a1300000000000" from="S_store000000000" to="S_rest0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_a1400000000000" shapeType="Association" model="M_a1400000000000" from="S_super000000000" to="S_uc320000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_a1500000000000" shapeType="Association" model="M_a1500000000000" from="S_super000000000" to="S_rest0000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_a1600000000000" shapeType="Association" model="M_a1600000000000" from="S_uc700000000000" to="S_wi000000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="1050" y="1217" />
+            <Point x="1105" y="1217" />
+            <Point x="1105" y="1000" />
+            <Point x="1220" y="1000" />
+          </Points>
+        </Connector>
+        <Connector id="C_a1700000000000" shapeType="Association" model="M_a1700000000000" from="S_rest0000000000" to="S_wi000000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="967" y="1820" />
+            <Point x="1125" y="1820" />
+            <Point x="1125" y="1025" />
+            <Point x="1220" y="1025" />
+          </Points>
+        </Connector>
+        <Connector id="C_a1800000000000" shapeType="Association" model="M_a1800000000000" from="S_rest0000000000" to="S_ncr00000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="1000" y="1840" />
+            <Point x="1120" y="1840" />
+            <Point x="1220" y="1840" />
+          </Points>
+        </Connector>
+        <Connector id="C_i1000000000000" shapeType="Include" model="M_i1000000000000" from="S_uc100000000000" to="S_uc500000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="None" x="655" y="890" width="90" height="18" />
+          <Points>
+            <Point x="655" y="755" />
+            <Point x="645" y="910" />
+            <Point x="635" y="1065" />
+          </Points>
+        </Connector>
+        <Connector id="C_i2000000000000" shapeType="Include" model="M_i2000000000000" from="S_uc100000000000" to="S_uc600000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="None" x="965" y="798" width="90" height="18" />
+          <Points>
+            <Point x="775" y="700" />
+            <Point x="1065" y="700" />
+            <Point x="1065" y="1102" />
+            <Point x="1050" y="1102" />
+          </Points>
+        </Connector>
+        <Connector id="C_i3000000000000" shapeType="Include" model="M_i3000000000000" from="S_uc100000000000" to="S_uc700000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="None" x="995" y="1040" width="90" height="18" />
+          <Points>
+            <Point x="774" y="725" />
+            <Point x="1090" y="725" />
+            <Point x="1090" y="1217" />
+            <Point x="1050" y="1217" />
+          </Points>
+        </Connector>
+        <Connector id="C_i4000000000000" shapeType="Include" model="M_i4000000000000" from="S_uc100000000000" to="S_uc800000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="None" x="512" y="966" width="90" height="18" />
+          <Points>
+            <Point x="532" y="720" />
+            <Point x="505" y="720" />
+            <Point x="505" y="1217" />
+            <Point x="520" y="1217" />
+          </Points>
+        </Connector>
+        <Connector id="C_i5000000000000" shapeType="Include" model="M_i5000000000000" from="S_uc100000000000" to="S_uc120000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="None" x="800" y="800" width="90" height="18" />
+          <Points />
+        </Connector>
+        <Connector id="C_i6000000000000" shapeType="Include" model="M_i6000000000000" from="S_uc700000000000" to="S_uc800000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Caption visible="true" side="None" x="740" y="1185" width="90" height="18" />
+          <Points />
+        </Connector>
+        <Connector id="C_An100000000000" shapeType="Anchor" model="M_An100000000000" from="S_n1000000000000" to="S_uc100000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points>
+            <Point x="360" y="250" />
+            <Point x="415" y="250" />
+            <Point x="415" y="712" />
+            <Point x="530" y="712" />
+          </Points>
+        </Connector>
+        <Connector id="C_An200000000000" shapeType="Anchor" model="M_An200000000000" from="S_n2000000000000" to="S_uc200000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_An300000000000" shapeType="Anchor" model="M_An300000000000" from="S_n3000000000000" to="S_uc300000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_An700000000000" shapeType="Anchor" model="M_An700000000000" from="S_n7000000000000" to="S_uc700000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_An160000000000" shapeType="Anchor" model="M_An160000000000" from="S_n1600000000000" to="S_uc160000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+        <Connector id="C_An320000000000" shapeType="Anchor" model="M_An320000000000" from="S_n3200000000000" to="S_uc320000000000" connectorStyle="Oblique">
+          <ElementFont color="Cr:0,0,0,255" name="Dialog" size="11" style="0" />
+          <Line color="Cr:51,51,51,255" weight="1.0" transparency="0" cap="0">
+            <Stroke />
+          </Line>
+          <Points />
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>
