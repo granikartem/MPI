@@ -583,7 +583,7 @@
           <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
         </Shape>
         <Shape id="F3995430eb312c5d" shapeType="Rectangle" x="464" y="141" width="320" height="625" zorder="1000" model="F0b6b3e9bb2dc9d9">
-          <FillColor type="1" color="Cr:238,238,238,255" transparency="0" style="0" />
+          <FillColor type="1" color="Cr:238,238,238,255" transparency="65" style="0" />
         </Shape>
       </Shapes>
     </Diagram>
