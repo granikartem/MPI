@@ -9,17 +9,18 @@ Data Base Diagram — только Implementation View, для Deployment Diagra
 для Timeline Diagram — только Process View.
 
 Сноска матрицы относит к прецедентам четыре типа диаграмм: Activity, Sequence, Cooperative и
-State Machine. Каждый из них построен в трёх точках зрения на трёх разных прецедентах; для State
-Machine, Sequence и Cooperative прецеденты UC-1, UC-2 и UC-32 распределены так, что у каждого типа и
-в каждой точке зрения прецедент свой. Остальные типы в сноску не входят и построены на систему
-целиком.
+State Machine. Каждый из них построен в трёх точках зрения на трёх разных прецедентах, и внутри
+одной точки зрения прецеденты у разных типов не повторяются. Исключение по смыслу — Sequence
+уровня Use-Case: она построена на UC-15, потому что на этом виде нужен обмен сведениями между
+двумя акторами-людьми, а в UC-1, UC-2 и UC-32 обмен идёт через систему. Остальные типы в сноску
+не входят и построены на систему целиком.
 
 ## Распределение прецедентов по типам диаграмм
 
 | Тип диаграммы | Прецедент | Почему выбран |
 |---|---|---|
 | State Machine Diagram | **UC-2** (Use-Case View), **UC-1** (Logical View), **UC-32** (Implementation View) | UC-2: статусная модель заявки; UC-1: заявка проходит состояния формирования (маршрут, ETA, оценка риска) до «Черновика»; UC-32: создание организации — цепочка состояний внутри одной транзакции `OrganizationService.create(...)` |
-| Sequence Diagram | **UC-1** (Use-Case View), **UC-32** (Logical View), **UC-2** (Implementation View) | UC-1: обмен актора, системы и Wasteland Intel; UC-32: вызовы между слоями при создании организации; UC-2: полный HTTP-путь перехода статуса, включая асинхронную перезагрузку данных на клиенте |
+| Sequence Diagram | **UC-15** (Use-Case View), **UC-32** (Logical View), **UC-2** (Implementation View) | UC-15: обмен сведениями между караван-мастером и кладовщиком при передаче груза, без участия системы; UC-32: вызовы между слоями при создании организации; UC-2: полный HTTP-путь перехода статуса, включая асинхронную перезагрузку данных на клиенте |
 | Cooperative (Communication) Diagram | **UC-32** (Use-Case View), **UC-2** (Logical View), **UC-1** (Implementation View) | UC-32: аналитические объекты boundary / control / entity; UC-2: кооперация компонентов слоёв при смене статуса; UC-1: самый широкий набор объектов реализации — клиент, сервисы, репозитории, хранилища и внешняя система |
 | Activity Diagram | **UC-7 «Рассчитать risk_score»** (Use-Case View), **UC-1 «Создать заявку на перевозку»** (Logical View), **UC-32 «Создать организацию»** (Implementation View) | Один тип диаграмм покрывает разные прецеденты в разных точках зрения. Взяты все три реализованных коровых прецедента: UC-7 даёт ветвление по внешним данным, UC-1 — самый длинный поток через все логические компоненты, UC-32 — провижининг с двумя хранилищами и аудитом |
 | Use Case Diagram | — (система целиком) | Сноской не ограничена: показывает акторов, границу системы и архитектурно значимые прецеденты |
@@ -47,7 +48,7 @@ Implementation View для них был бы проектным. Их сущн�
 | 4. Use-Case View | Class, система целиком | [CLS_UseCaseView.puml](diagrams/sad/CLS_UseCaseView.puml) | [VP](diagrams/vp/out/png/CLS_UseCaseView.png) · [PlantUML](diagrams/out/CLS_UseCaseView.png) |
 | 4. Use-Case View | Activity, UC-7 | [ACT_UC7_UseCaseView.puml](diagrams/sad/ACT_UC7_UseCaseView.puml) | [VP](diagrams/vp/out/png/ACT_UC7_UseCaseView.png) · [PlantUML](diagrams/out/ACT_UC7_UseCaseView.png) |
 | 4. Use-Case View | State Machine, UC-2 | [SM_UC2_UseCaseView.puml](diagrams/sad/SM_UC2_UseCaseView.puml) | [VP](diagrams/vp/out/png/SM_UC2_UseCaseView.png) · [PlantUML](diagrams/out/SM_UC2_UseCaseView.png) |
-| 4. Use-Case View | Sequence, UC-1 | [SEQ_UC1_UseCaseView.puml](diagrams/sad/SEQ_UC1_UseCaseView.puml) | [VP](diagrams/vp/out/png/SEQ_UC1_UseCaseView.png) · [PlantUML](diagrams/out/SEQ_UC1_UseCaseView.png) |
+| 4. Use-Case View | Sequence, UC-15 | [SEQ_UC15_UseCaseView.puml](diagrams/sad/SEQ_UC15_UseCaseView.puml) | [PlantUML](diagrams/out/SEQ_UC15_UseCaseView.png) |
 | 4. Use-Case View | Cooperative, UC-32 | [COL_UC32_UseCaseView.puml](diagrams/sad/COL_UC32_UseCaseView.puml) | [VP](diagrams/vp/out/png/COL_UC32_UseCaseView.png) · [PlantUML](diagrams/out/COL_UC32_UseCaseView.png) |
 | 5. Logical View | Package, система целиком | [PKG_LogicalView.puml](diagrams/sad/PKG_LogicalView.puml) | [VP](diagrams/vp/out/png/PKG_LogicalView.png) · [PlantUML](diagrams/out/PKG_LogicalView.png) |
 | 5. Logical View | Class, система целиком | [CLS_LogicalView.puml](diagrams/sad/CLS_LogicalView.puml) | [VP](diagrams/vp/out/png/CLS_LogicalView.png) · [PlantUML](diagrams/out/CLS_LogicalView.png) |
@@ -94,10 +95,11 @@ Implementation View для них был бы проектным. Их сущн�
 - **Use-Case View.** Акторы из [UseCases.md](UseCases.md), включая абстрактного «Полевого
   пользователя», от которого наследуются Караван-мастер, Капитан охраны и Полевой медик, и внешние
   системы Wasteland Intel и NCR Checkpoint & Tax Terminal. Внутри границы «ИС «Караваны»» раскрыты
-  архитектурно значимые и реализованные прецеденты (UC-1, UC-2, UC-3, UC-5, UC-6, UC-7, UC-8,
-  UC-12, UC-32) и связи `<<include>>` между ними; UC-16 и UC-19 показаны как нереализованные.
-  Остальные 23 прецедента собраны в одну группу с пунктирной рамкой, полный перечень — в
-  [UseCases.md](UseCases.md) и на [UC_0_General.png](diagrams/out/UC_0_General.png).
+  архитектурно значимые прецеденты (UC-1, UC-2, UC-3, UC-5, UC-6, UC-7, UC-8, UC-12, UC-15,
+  UC-16, UC-18, UC-19, UC-32) и связи `<<include>>` между ними. Статус реализации на этом виде
+  не показан: он относится к Implementation View, а здесь описываются бизнес-процессы.
+  Полный перечень прецедентов — в [UseCases.md](UseCases.md) и на
+  [UC_0_General.png](diagrams/out/UC_0_General.png).
 
 ### Class Diagram — система целиком
 
@@ -105,7 +107,7 @@ Implementation View для них был бы проектным. Их сущн�
 
 - **Use-Case View.** Только понятия предметной области и связи между ними: организация и её
   сотрудники, рейс со статусом и историей переходов, маршрут с участками и контрольными точками,
-  оценка риска, событие аудита, внешняя система Wasteland Intel и её данные. Свойства перечислены
+  оценка риска, событие аудита, отчёт об угрозах и угрозы участков. Свойства перечислены
   деловыми именами **без типов**; ни слоёв, ни классов реализации, ни хранилищ на этом виде нет.
   Полевые события рейса — этап, отметка прохождения, инцидент, его участники и запрос
   на реагирование (UC-16, UC-19) — показаны наравне с остальными понятиями.
@@ -160,14 +162,17 @@ Implementation View для них был бы проектным. Их сущн�
   [CoreUseCases](CoreUseCases.md): маршрут из шаблона или вручную (альт. 3а), расчёт risk_score
   и ETA, ценность груза, подтверждение диспетчера (альт. 8а — отмена), сохранение в статусе
   «Черновик». Недоступность Wasteland Intel показана как альт. поток 4а.
-- **Implementation View — UC-32 «Создать организацию».** Те же дорожки логических компонентов,
-  в узлах — фактические классы и методы: `POST /api/organizations` →
+- **Implementation View — UC-32 «Создать организацию».** Дорожки — те же слои, что в Logical
+  View, но без доменной дорожки `Organization, AppUser`: эти сущности не имеют собственных шагов,
+  они создаются внутри выражений `repository.save(...)`, а хеш пароля и ключ арендатора считает
+  сам сервис. В узлах — фактические классы и методы: `POST /api/organizations` →
   `OrganizationController.create()` → `OrganizationService.create(CreateOrganizationCommand)` →
-  `organizationRepository.findByNameIgnoreCase()` → `save(new Organization(tenantKey, …))` →
-  `userRepository.save(new AppUser(…))` → `AuditEvent.organizationCreated()` → коллекция
-  `audit_event`. Показаны альт. поток 4а (название занято → HTTP 400), альт. поток 6а
-  (диспетчер не назначается), `tenantKey = "tnt_" + 8 символов UUID` как основа
-  мультитенантности (FR-23, FR-24) и хеш пароля `"sha256:" + hex(SHA-256("karavany:" + пароль))`.
+  `organizationRepository.findByNameIgnoreCase()` →
+  `save(new Organization(generateTenantKey(), …))` → `userRepository.save(new AppUser(…))` →
+  `AuditEvent.organizationCreated()` → коллекция `audit_event`. Показаны альт. поток 4а
+  (название занято → HTTP 400), альт. поток 6а (диспетчер не назначается),
+  `tenantKey = "tnt_" + 8 символов UUID` как основа мультитенантности (FR-23, FR-24)
+  и хеш пароля `"sha256:" + hex(SHA-256("karavany:" + пароль))`.
 
 ### Data Base Diagram — система целиком
 
