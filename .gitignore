@@ -15,3 +15,6 @@ __pycache__/
 # Промежуточное при сборке диаграмм Visual Paradigm
 docs/diagrams/vp/out/svg/
 docs/diagrams/vp/.build/
+
+# Резервные копии редактора Visual Paradigm
+*.vbak
