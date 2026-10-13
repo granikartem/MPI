@@ -373,8 +373,10 @@ def clean_note(text):
     return text.replace('**', '').strip('\n ')
 
 
+# `note over A, B` относится сразу к нескольким участникам: без списка через запятую
+# такая заметка не опознаётся и молча теряется при переносе
 RE_NOTE = re.compile(r'^note\s+(?:(?:left|right|top|bottom|over)'
-                     r'(?:\s+(?:of\s+)?(?P<alias>\w+))?)?\s*$', re.I)
+                     r'(?:\s+(?:of\s+)?(?P<alias>\w+)(?:\s*,\s*\w+)*)?)?\s*$', re.I)
 
 
 def source_notes(src):
