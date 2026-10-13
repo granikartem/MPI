@@ -4,9 +4,10 @@ skinparam sequenceMessageAlign left
 skinparam ParticipantBackgroundColor #F5F5F5
 skinparam ParticipantBorderColor #333333
 skinparam ActorBackgroundColor #F5F5F5
-skinparam DatabaseBackgroundColor #F5F5F5
 skinparam BoxPadding 8
 skinparam SequenceMessageFontName Courier
+skinparam NoteBackgroundColor #FFFDE7
+skinparam NoteBorderColor #8D6E63
 
 title UC-2 «Управлять статусами заявки» — Sequence Diagram (Implementation View)\nРеальные классы, методы и HTTP-контракт перехода статуса
 
@@ -14,9 +15,8 @@ actor "Диспетчер /\nкараван-мастер" as U
 
 box "frontend (React 18 + TypeScript)" #FDFDFD
   participant "modal:StatusModal.tsx" as MODAL
-  participant "list:RequestList.tsx" as LIST
   participant "reg:RequestRegistry.tsx" as REG
-  participant "api:api.ts (axios)" as API
+  participant "api:api.ts" as API
 end box
 
 box "backend (Spring Boot 3, Java 21)" #FDFDFD
@@ -24,88 +24,117 @@ box "backend (Spring Boot 3, Java 21)" #FDFDFD
   participant "rs:RequestService" as RS
   participant "st:RequestStatusService" as ST
   participant "RequestStatusMachine" as SM
-  participant "RequestReadinessGuard" as G
   participant "repo:CaravanRequestRepository" as REPO
   participant "hRepo:RequestStatusHistoryRepository" as HREPO
   participant "aRepo:AuditEventRepository" as AREPO
 end box
 
-box "хранилища" #FDFDFD
-  database "PostgreSQL 16" as PG
-  database "MongoDB 7" as MG
-end box
-
 U -> MODAL : 1: apply(t: StatusTransition)
 activate MODAL
-MODAL -> API : 1.1: updated = await changeStatus(id, body)
+MODAL -> API : 1.1: updated = await changeStatus(request.id, body)
 activate API
 API -> C : 1.1.1: POST /api/requests/{id}/status : HTTP 200 | 400 | 409
 activate C
 
-C -> RS : 1.1.1.1: request = getById(id)
-activate RS
-RS -> REPO : 1.1.1.1.1: findById(id) : Optional<CaravanRequest>
-activate REPO
-REPO -> PG : 1.1.1.1.1.1: SELECT * FROM caravan_request WHERE id = ?
-deactivate REPO
-deactivate RS
-break Optional.empty() → IllegalArgumentException
-  C -> C : 1.1.1.2: handleBadRequest(e) : HTTP 400
-  MODAL -> MODAL : 1.2: setError(message)
-end
+group граница транзакции: @Transactional на RequestStatusController.changeStatus() — транзакция открывается здесь;\nRequestService.getById() (@Transactional(readOnly = true)) и RequestStatusService.changeStatus() (@Transactional)\nсвоей транзакции не открывают — распространение по умолчанию присоединяет их к этой
 
-C -> C : 1.1.1.2: target = RequestStatus.parse(...)\nrole = ActorRole.parse(...)
-C -> ST : 1.1.1.3: updated = changeStatus(request, target, role,\nactorName, reason)  // @Transactional
-activate ST
-ST -> SM : 1.1.1.3.1: transition = find(current, target) : Optional<Transition>
-break current == target || transition пусто || !transition.roles().contains(role)\n|| transition.reasonRequired() && reason == null
-  ST -> ST : 1.1.1.3.2: throw StatusTransitionException(message)
-  C -> C : 1.1.1.4: handleConflict(e) : HTTP 409
-  MODAL -> MODAL : 1.2: setError(message)
-end
-ST -> G : 1.1.1.3.2: blocker = blockerFor(request, target) : String
-break blocker != null
-  C -> C : 1.1.1.4: handleConflict(e) : HTTP 409
-  MODAL -> MODAL : 1.2: setError(blocker)
-end
+  C -> RS : 1.1.1.1: request = getById(id)
+  activate RS
+  break заявка не найдена: findById(id) вернул пусто
+    RS -> RS : 1.1.1.1: throw IllegalArgumentException(«Заявка не найдена»)
+  end
+  deactivate RS
+  note over C, ST
+    **Получение заявки свёрнуто в одно сообщение**
+    getById() — это единственный вызов findById(id) у CaravanRequestRepository;
+    пусто → IllegalArgumentException «Заявка не найдена»,
+    @ExceptionHandler контроллера отдаёт HTTP 400 — уже вне транзакции.
+  end note
 
-ST -> ST : 1.1.1.3.3: request.changeStatus(target)
-ST -> REPO : 1.1.1.3.4: saved = save(request)
-activate REPO
-REPO -> PG : 1.1.1.3.4.1: UPDATE caravan_request SET status = ?
-deactivate REPO
-ST -> HREPO : 1.1.1.3.5: save(statusHistory)
-activate HREPO
-HREPO -> PG : 1.1.1.3.5.1: INSERT INTO request_status_history
-deactivate HREPO
-ST -> AREPO : 1.1.1.3.6: save(auditEvent)
-activate AREPO
-AREPO -> MG : 1.1.1.3.6.1: db.audit_event.insertOne({type: "REQUEST_STATUS_CHANGED", ...})
-deactivate AREPO
-deactivate ST
-C -> C : 1.1.1.4: RequestResponse.from(updated) : HTTP 200
+  C -> C : 1.1.1.2: target = RequestStatus.parse(body.targetStatus())\nrole = ActorRole.parse(body.actorRole())
+  break значение статуса или роли пусто либо не распознано parse()
+    C -> C : 1.1.1.2: throw IllegalArgumentException(«Не указан целевой статус» /\n«Неизвестный статус заявки» / «Не указана роль актора» / «Неизвестная роль актора»)
+  end
+
+  C -> ST : 1.1.1.3: updated = changeStatus(request, target, role,\nbody.actorName(), body.reason())
+  activate ST
+  ST -> SM : 1.1.1.3.1: transition = find(current, target) : Optional<Transition>
+  break отказ любой из проверок changeStatus() в порядке кода: current == target (проверено до find()) →\nfind() пусто → !transition.roles().contains(role) → transition.reasonRequired() и причина пуста →\nRequestReadinessGuard.blockerFor(request, target) != null
+    ST -> ST : 1.1.1.3.2: throw StatusTransitionException(message)
+  end
+  note over SM, AREPO
+    **RequestReadinessGuard отдельной линией жизни не показан**
+    blockerFor() сейчас возвращает null для любого перехода: единственная
+    заданная проверка (FR-10) требует модели команды рейса из UC-9,
+    поэтому блокировок нет ни для одного перехода. В сценарии класс
+    ничего не решает; как место для будущих проверок он есть
+    на CLS_ImplementationView.
+  end note
+
+  ST -> ST : 1.1.1.3.2: request.changeStatus(target)
+  ST -> REPO : 1.1.1.3.3: saved = save(request)
+  ST -> HREPO : 1.1.1.3.4: save(new RequestStatusHistory(saved, current,\ntarget, role, actorName, reason))
+  ST -> AREPO : 1.1.1.3.5: save(AuditEvent.requestStatusChanged(...))
+  deactivate ST
+
+  C -> C : 1.1.1.4: RequestResponse.from(updated) : HTTP 200
+end
+note over C, ST
+  Выход из changeStatus() контроллера — commit; исключение в любой из рамок break внутри этой группы — rollback.
+  Методы @ExceptionHandler выполняются уже вне транзакции — ниже рамки.
+end note
+
+break исключение из любого шага выше: транзакция откачена и закрыта,\n@ExceptionHandler отрабатывает уже вне неё
+  C -> C : 1.1.1.4: IllegalArgumentException (шаги 1.1.1.1, 1.1.1.2) → handleBadRequest(e) : HTTP 400\nлибо StatusTransitionException (шаг 1.1.1.3.2) → handleConflict(e) : HTTP 409
+  MODAL -> MODAL : 1.2: setError(errorText(e)) — текст из тела ответа
+end
 deactivate C
 deactivate API
 
-MODAL -> LIST : 1.2: onUpdated(updated)
-activate LIST
-LIST -> REG : 1.2.1: onChanged() → load()
+note over REPO, AREPO
+  **Хранилища отдельными линиями жизни не показаны** — как и на CLS_ImplementationView
+  • repo, hRepo — JpaRepository → PostgreSQL 16 (DC-4): UPDATE caravan_request,
+    INSERT INTO request_status_history;
+  • aRepo — MongoRepository → MongoDB 7 (DC-5): вставка документа
+    REQUEST_STATUS_CHANGED в коллекцию audit_event.
+  Запись в MongoDB в транзакцию не входит: менеджер транзакций Mongo не объявлен.
+  Схема хранения — на DB_ER_ImplementationView и DB_Datalogical_ImplementationView.
+end note
+
+MODAL -> REG : 1.2: onUpdated(updated) → onChanged() = load()
 activate REG
-REG ->> API : 1.2.1.1: getRegistry(organizationId, query)\nGET /api/requests/registry
+REG ->> API : 1.2.1: getRegistry(organizationId, query)\nGET /api/requests/registry
 deactivate REG
-deactivate LIST
-MODAL ->> API : 1.3: getStatusInfo(id)\nGET /api/requests/{id}/status
-MODAL ->> API : 1.4: getStatusHistory(id)\nGET /api/requests/{id}/status-history
+note over MODAL, API
+  **RequestList.tsx отдельной линией жизни не показан:**
+  он только пробрасывает колбэк. onUpdated у StatusModal —
+  это (updated) => { setStatusFor(updated); onChanged() },
+  а onChanged RequestList получает от RequestRegistry
+  как его же метод load().
+end note
+
+MODAL ->> API : 1.3: reload(): getStatusInfo(id)\nGET /api/requests/{id}/status
+MODAL ->> API : 1.4: reload(): getStatusHistory(id)\nGET /api/requests/{id}/status-history
 MODAL ->> U : 1.5: показать новый статус и историю переходов
 deactivate MODAL
 
 legend right
   Нумерация иерархическая: целое число — действие актора,
-  вложенные вызовы — 1.1, 1.1.1, …
+  вложенные вызовы — 1.1, 1.1.1, …, глубже пяти уровней не идёт.
+  Альтернативные исходы одного шага несут один номер:
+  1.1.1.1 — получение заявки (объект или исключение),
+  1.1.1.2 — разбор статуса и роли (значения или исключение),
+  1.1.1.3.2 — исход проверок перехода (смена статуса или исключение),
+  1.1.1.4 — ответ контроллера (200, 400 или 409),
+  1.2 — реакция модального окна (обновление реестра или текст ошибки).
   Сплошная линия, закрашенная стрелка — синхронный вызов;
   результат вызова — в подписи: «результат = операция(...)».
   Сплошная линия, открытая стрелка — асинхронный вызов:
   getRegistry, getStatusInfo, getStatusHistory запускаются
-  без ожидания результата (Promise без await).
+  без ожидания результата (Promise axios без await).
+  Рамка break — прерывающая ветка: если её условие сработало,
+  шаги ниже рамки в этом исходе не выполняются.
+  Рамка group — граница транзакции; break под этой рамкой —
+  то, что выполняется уже вне транзакции. Заметки — свёрнутые участники.
 endlegend
 @enduml

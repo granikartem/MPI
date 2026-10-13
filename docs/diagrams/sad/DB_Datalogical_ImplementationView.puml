@@ -19,7 +19,7 @@ title ИС «Караваны» — Data Base Diagram (Implementation View)\nЧ�
 package "PostgreSQL 16 — оперативные данные" <<Database>> {
 
   package "Организации и доступ" {
-    class role <<table>> {
+    class role <<table>> <<проект>> {
       {field} id : smallint NOT NULL <<PK>>
       {field} code : varchar(32) NOT NULL
       {field} name : varchar(64) NOT NULL
@@ -50,7 +50,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} UNIQUE INDEX uq_organization_name_ci (lower(name))
     }
 
-    class subscription <<table>> {
+    class subscription <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} organization_id : uuid NOT NULL <<FK>>
       {field} tier : varchar(16) NOT NULL
@@ -68,7 +68,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} INDEX ix_subscription_org_end (organization_id, period_end DESC)
     }
 
-    class terminal <<table>> {
+    class terminal <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} organization_id : uuid NOT NULL <<FK>>
       {field} subscription_id : uuid NOT NULL <<FK>>
@@ -104,7 +104,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} organization_id IS NULL только у роли SUPERUSER
     }
 
-    class employee_rate <<table>> {
+    class employee_rate <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} user_id : uuid NOT NULL <<FK>>
       {field} amount_caps : numeric(12,2) NOT NULL
@@ -130,7 +130,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} departure_date : date NOT NULL
       {field} cargo_description : varchar(2000)
       {field} cargo_value_caps : integer NOT NULL DEFAULT 0
-      {field} estimated_delivery_hours : double precision
+      {field} eta_hours : double precision
       {field} risk_score : integer
       {field} risk_status : varchar(16) NOT NULL DEFAULT 'NA'
       {field} recommendation : varchar(2000)
@@ -166,7 +166,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} INDEX ix_request_status_history_request (request_id, occurred_at)
     }
 
-    class escort_plan <<table>> {
+    class escort_plan <<table>> <<проект>> {
       {field} request_id : uuid NOT NULL <<PK, FK>>
       {field} recommended_guards : smallint NOT NULL
       {field} recommended_supply_level : varchar(16) NOT NULL
@@ -222,7 +222,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
   }
 
   package "Команда, груз и припасы" {
-    class trip_crew_member <<table>> {
+    class trip_crew_member <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} request_id : uuid NOT NULL <<FK>>
       {field} role_id : smallint NOT NULL <<FK>>
@@ -240,7 +240,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} INDEX ix_trip_crew_member_user (user_id)
     }
 
-    class cargo_manifest <<table>> {
+    class cargo_manifest <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} request_id : uuid NOT NULL <<FK>>
       {field} status : varchar(16) NOT NULL
@@ -254,7 +254,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} CHECK (status IN ('DRAFT', 'SEALED', 'RECONCILED'))
     }
 
-    class cargo_item <<table>> {
+    class cargo_item <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} manifest_id : uuid NOT NULL <<FK>>
       {field} ord : integer NOT NULL
@@ -271,7 +271,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} CHECK (quantity > 0)
     }
 
-    class cargo_seal <<table>> {
+    class cargo_seal <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} manifest_id : uuid NOT NULL <<FK>>
       {field} seal_number : varchar(64) NOT NULL
@@ -288,7 +288,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} UNIQUE (seal_number)
     }
 
-    class manifest_reconciliation <<table>> {
+    class manifest_reconciliation <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} manifest_id : uuid NOT NULL <<FK>>
       {field} performed_by : uuid NOT NULL <<FK>>
@@ -302,7 +302,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} CHECK (result IN ('MATCH', 'MISMATCH'))
     }
 
-    class reconciliation_discrepancy <<table>> {
+    class reconciliation_discrepancy <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} reconciliation_id : uuid NOT NULL <<FK>>
       {field} cargo_item_id : uuid NOT NULL <<FK>>
@@ -314,7 +314,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} FOREIGN KEY (cargo_item_id) REFERENCES cargo_item (id)
     }
 
-    class supply_reservation <<table>> {
+    class supply_reservation <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} request_id : uuid NOT NULL <<FK>>
       {field} supply_type : varchar(16) NOT NULL
@@ -333,7 +333,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
   }
 
   package "Полевые операции и финансы" {
-    class trip_stage <<table>> {
+    class trip_stage <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} request_id : uuid NOT NULL <<FK>>
       {field} ord : integer NOT NULL
@@ -352,7 +352,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field}     'CHECKPOINT_ARRIVAL', 'NCR_GATE', 'DELIVERY'))
     }
 
-    class recovery_request <<table>> {
+    class recovery_request <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} request_id : uuid NOT NULL <<FK>>
       {field} incident_id : char(24)
@@ -371,7 +371,7 @@ package "PostgreSQL 16 — оперативные данные" <<Database>> {
       {field} incident_id — ObjectId документа incident
     }
 
-    class financial_report <<table>> {
+    class financial_report <<table>> <<проект>> {
       {field} id : uuid NOT NULL <<PK>>
       {field} request_id : uuid NOT NULL <<FK>>
       {field} delivery_revenue_caps : numeric(14,2) NOT NULL
@@ -430,7 +430,7 @@ package "MongoDB 7 — события, снимки расчётов, аудит
     {field} TTL INDEX {occurredAt: 1}, expireAfterSeconds: 7948800 (92 сут, RL-5)
   }
 
-  class checkpoint_log <<collection>> {
+  class checkpoint_log <<collection>> <<проект>> {
     {field} _id : ObjectId <<PK>>
     {field} clientEventId : UUID
     {field} organizationId : UUID
@@ -440,19 +440,20 @@ package "MongoDB 7 — события, снимки расчётов, аудит
     {field} kind : String — CHECKPOINT | NCR_GATE
     {field} occurredAt : Date
     {field} location : {lat: Double, lon: Double}
-    {field} result : String
+    {field} result : String | null
     {field} delayReason : String | null
     {field} ncrFee : {amount: Decimal128, currency: String,
     {field}     rateToCaps: Decimal128, amountCaps: Decimal128} | null
     {field} recordedBy : UUID
     {field} deviceId : String
-    {field} syncedAt : Date
+    {field} syncState : String — LOCAL | SYNCED
+    {field} syncedAt : Date | null
     --
     {field} UNIQUE INDEX {clientEventId: 1}
     {field} INDEX {requestId: 1, occurredAt: 1}
   }
 
-  class incident <<collection>> {
+  class incident <<collection>> <<проект>> {
     {field} _id : ObjectId <<PK>>
     {field} clientEventId : UUID
     {field} organizationId : UUID
@@ -538,6 +539,61 @@ note bottom of trip_crew_member
   наличие строк для всех ролей с crew_required или с порогом ≤ risk_score.
 end note
 
+note bottom of audit_event
+  **organizationId в коллекциях — намеренная денормализация**
+  Организацию можно вывести через requestId → caravan_request.organization_id,
+  но в checkpoint_log, incident и audit_event она продублирована: изоляция данных
+  арендатора (FR-24) должна работать фильтром самого запроса к MongoDB, без
+  обращения к PostgreSQL; к тому же журнал аудита хранит и события без заявки —
+  создание организации и пользователя (RL-4).
+  В risk_assessment поля нет: снимок читается только по requestId уже проверенной
+  заявки (RiskAssessmentRepository.findFirstByRequestIdOrderByComputedAtDesc).
+end note
+
+note as N_MODEL_DIFF
+  **Чем даталогическая модель отличается от инфологической (часть 1)**
+  Часть 1 описывает сущности предметной области в терминах заказчика и от СУБД не зависит.
+  Здесь то же содержимое воплощено физически в двух хранилищах, отсюда отличия:
+  • **сущности только здесь** — служебные коллекции MongoDB: журнал аудита audit_event
+    (TTL-индекс, срок хранения 92 суток, RL-5) и снимок расчёта риска risk_assessment
+    с разложением оценки на слагаемые (base, cargoFactor, threatSum, segments);
+    к предметной области они не относятся и в части 1 не показаны;
+  • **атрибуты только здесь** — технические, обслуживающие механизм, а не предмет:
+    в checkpoint_log и incident — clientEventId с UNIQUE-индексом (ключ идемпотентности:
+    повторная отправка события с терминала не создаёт дубля, RL-1, RL-3), syncState
+    и syncedAt (состояние и момент синхронизации), deviceId; в checkpoint_log, incident
+    и audit_event — organizationId (денормализация ради фильтра арендатора, FR-24);
+  • **физические имена и типы** — русские имена части 1 заменены именами таблиц, колонок
+    и полей: uuid, smallint, timestamptz, numeric(14,2), char(24), ObjectId, Decimal128;
+  • **ограничения и индексы** — вместо пометки «*» и перечисления значений словами:
+    NOT NULL, DEFAULT, PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK, именованные индексы
+    (uq_…, ix_…, ck_…) и TTL-индекс;
+  • **производные атрибуты материализованы** — помеченные «/» в части 1 (окончание
+    grace-периода, расчётное время доставки, итого расходов, финансовый результат)
+    здесь хранятся колонками, а правило вычисления, где это возможно, закреплено
+    ограничением CHECK (grace_until, total_expense_caps, result_caps);
+  • **верхний уровень — хранилище, а не предметная область** — область части 1 «Полевые
+    операции и финансы» разделена: trip_stage, recovery_request и financial_report —
+    таблицы PostgreSQL 16, checkpoint_log и incident — коллекции MongoDB 7.
+end note
+
+note as N_IMPL
+  **Что уже есть в коде, а что спроектировано**
+  Миграциями Flyway V1…V6 и классами backend/ созданы: organization, app_user,
+  caravan_request, request_status_history, route, route_segment, checkpoint
+  и коллекции risk_assessment, audit_event. Таблицы и коллекции со стереотипом
+  «проект» предусмотрены моделью, но миграций и классов пока не имеют.
+  Проектные элементы внутри уже созданных таблиц:
+  • checkpoint.is_ncr_gate;
+  • app_user.must_change_password и NULL в app_user.organization_id;
+  • справочник role — в коде роль хранится строкой: app_user.role
+    и request_status_history.actor_role, а не ссылкой role_id;
+  • request_status_history.actor_user_id;
+  • audit_event.entityType и audit_event.entityId;
+  • индексы MongoDB и ограничения CHECK, кроме ck_caravan_request_status (V5)
+    и индекса ix_caravan_request_org_created (V6).
+end note
+
 legend right
   **Кратности:** 1..1 — ровно один, 0..1 — ноль или один,
   1..* — один или много, 0..* — ноль или много.
@@ -545,6 +601,8 @@ legend right
   пунктир — ссылка по значению идентификатора между PostgreSQL и MongoDB.
   Колонки *_by (составил, назначил, подтвердил …) ссылаются на app_user (id):
   ограничения перечислены в таблицах, линии не проведены.
+  Стереотип «проект» у таблицы или коллекции — спроектирована,
+  но в коде ещё не реализована (см. примечание).
   Служебная таблица Flyway flyway_schema_history не показана.
 endlegend
 @enduml

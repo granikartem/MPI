@@ -16,16 +16,16 @@ skinparam package {
 title ИС «Караваны» — Package Diagram (Logical View)\nЛогические пакеты по слоям (DC-1, DC-6, DC-7) и зависимости между ними
 
 package "presentation" as presentation {
-  package "Web-клиент (React 18)" as webclient {
+  package "Web-клиент" as webclient {
     rectangle "Интерфейс заявок\n<size:10>UC-1…UC-3, UC-7</size>" as P_REQ
     rectangle "Интерфейс управления\nорганизациями\n<size:10>UC-32</size>" as P_ORG
-    rectangle "HTTP-клиент\n<size:10>REST / JSON</size>" as P_HTTP
+    rectangle "Сервисный слой клиента\n<size:10>обращения к контракту слоя</size>" as P_HTTP
   }
-  package "Полевой клиент Pip-Boy (PWA)" as pwa {
+  package "Полевой клиент Pip-Boy" as pwa {
     rectangle "Полевые формы\n<size:10>UC-16…UC-19</size>" as P_FIELD
     rectangle "Локальная очередь\nсобытий\n<size:10>RL-1</size>" as P_QUEUE
   }
-  package "REST API" as restapi {
+  package "Приём запросов" as restapi {
     rectangle "API заявок,\nстатусов и реестра" as P_API_REQ
     rectangle "API организаций" as P_API_ORG
     rectangle "API справочников\nмаршрутов" as P_API_REF
@@ -57,7 +57,9 @@ package "application" as application {
 
 package "domain" as domain {
   package "Заявка и рейс" as DOM_REQUEST {
-    rectangle "Заявка\nстатусная модель, история" as D_REQ
+    rectangle "Заявка" as D_REQ
+    rectangle "Статусная модель" as D_SM
+    rectangle "История статусов" as D_HIST
     rectangle "Реестр\nсрезы, сортировка, флаги" as D_REG
   }
   package "Маршрут и риски" as DOM_ROUTE {
@@ -70,16 +72,16 @@ package "domain" as domain {
 }
 
 package "infrastructure" as infrastructure {
-  rectangle "Хранение данных\n<size:10>PostgreSQL 16, миграции Flyway</size>" as I_PG
-  package "Документные хранилища\n<size:10>MongoDB 7</size>" as INFRA_MONGO {
+  rectangle "Хранение данных\n<size:10>оперативные данные организаций,</size>\n<size:10>рейсов, маршрутов и истории</size>" as I_PG
+  package "Документные хранилища" as INFRA_MONGO {
     rectangle "Хранение снимков риска" as I_RISK
     rectangle "Журнал аудита" as I_AUDIT
   }
   package "Внешние адаптеры" as INFRA_EXT {
-    rectangle "Адаптер Wasteland Intel\n<size:10>REST, таймауты 2 с</size>" as I_WI
-    rectangle "Адаптер NCR Checkpoint\n<size:10>REST</size>" as I_NCR
+    rectangle "Адаптер Wasteland Intel\n<size:10>таймауты 2 с</size>" as I_WI
+    rectangle "Адаптер NCR Checkpoint" as I_NCR
   }
-  rectangle "Безопасность\n<size:10>аутентификация, JWT</size>" as I_SEC
+  rectangle "Безопасность\n<size:10>аутентификация и доступ</size>" as I_SEC
 }
 
 package "Внешние системы" as external {
@@ -87,15 +89,62 @@ package "Внешние системы" as external {
   rectangle "NCR Checkpoint &\nTax Terminal" as X_NCR #EDE7F6
 }
 
-presentation ..> application : вызывает сценарии
-application ..> domain : правила и сущности
-application ..> infrastructure : <<access>>
+presentation ..> application : \n\n**1** вызывает сценарии
+
+application ..> domain : **4, 6** правила и сущности
+' Пустые строки в начале подписи — отступ: без них подпись пересекают
+' линии связей, сходящиеся к infrastructure.
+application ..> infrastructure : \n\n**2, 3, 5, 7** <<access>>
+' Пустые строки в конце подписи 8 — отступ: без них линия связи проходит
+' по тексту «(обратный путь)».
+application .up.> presentation : **8** сводка заявки\n(обратный путь)\n\n\n
 infrastructure ..> domain : хранит сущности
-I_WI ..> X_WI : REST / HTTPS, JSON
-I_NCR ..> X_NCR : REST / HTTPS, JSON
-P_HTTP ..> restapi : HTTPS, JSON
+I_WI ..> X_WI : **5** запрос угроз по участкам
+I_NCR ..> X_NCR : прохождение КПП и пошлины
+P_HTTP ..> restapi : команды и запросы
 P_QUEUE ..> restapi : синхронизация\nпри появлении связи
 P_API_REF .[#CC0000].> I_PG : отступление от DC-6
+
+' ─── Компоненты каждого слоя — в одну строку. Две причины: подписи связей
+'     между пакетами («4, 6 правила и сущности») иначе ложатся внутрь
+'     прямоугольника пакета, а внутри пакетов остаются пустые провалы.
+'     Порядок цепочки задаёт и порядок компонентов слева направо.
+P_REQ -[hidden]r-> P_ORG
+P_ORG -[hidden]r-> P_HTTP
+P_HTTP -[hidden]r-> P_FIELD
+P_FIELD -[hidden]r-> P_QUEUE
+
+P_API_REQ -[hidden]r-> P_API_ORG
+P_API_ORG -[hidden]r-> P_API_REF
+P_API_REF -[hidden]r-> P_API_HEALTH
+P_API_HEALTH -[hidden]r-> P_API_NEXT
+
+A_REQ -[hidden]r-> A_STATUS
+A_STATUS -[hidden]r-> A_REG
+A_REG -[hidden]r-> A_ETA
+A_ETA -[hidden]r-> A_RISK
+A_RISK -[hidden]r-> A_ORG
+A_ORG -[hidden]r-> A_SUBS
+A_SUBS -[hidden]r-> A_CREW
+A_CREW -[hidden]r-> A_CARGO
+A_CARGO -[hidden]r-> A_FIELD
+A_FIELD -[hidden]r-> A_FIN
+A_FIN -[hidden]r-> A_USERS
+
+I_PG -[hidden]r-> I_RISK
+I_RISK -[hidden]r-> I_AUDIT
+I_AUDIT -[hidden]r-> I_WI
+I_WI -[hidden]r-> I_NCR
+I_NCR -[hidden]r-> I_SEC
+
+D_REQ -[hidden]r-> D_SM
+D_SM -[hidden]r-> D_HIST
+D_HIST -[hidden]r-> D_REG
+D_REG -[hidden]r-> D_ROUTE
+D_ROUTE -[hidden]r-> D_RISK
+D_RISK -[hidden]r-> D_ORG
+D_ORG -[hidden]r-> D_USER
+D_USER -[hidden]r-> D_AUDIT
 
 ' ─── Скрытые связи только для компоновки (без семантики) ─────────────
 presentation -[hidden]d-> application
@@ -114,17 +163,76 @@ note bottom of infrastructure
     WastelandIntelClient; audit.AuditEventRepository; resources/db/migration
 end note
 
+note left of application
+  **Сквозной путь запроса (UC-1 «Создать заявку на перевозку»)**
+  Номера стоят на связях между пакетами: цифра показывает, какой шаг
+  проходит по этой связи.
+  **1.** presentation → application: «Интерфейс заявок» отправляет команду
+  создания через «API заявок, статусов и реестра».
+  **2.** application → infrastructure: «Создание заявки» проверяет организацию
+  в «Хранении данных»; организация не указана или не найдена — отказ.
+  **3.** application → infrastructure: маршрут читается по шаблону либо
+  (альт. 3а) собирается из участков по контрольным точкам и сохраняется.
+  **4.** application → domain: «Расчёт ETA» суммирует длины участков «Маршрута».
+  **5.** application → infrastructure → внешняя система: «Оценка риска» через
+  «Адаптер Wasteland Intel» запрашивает угрозы участков; молчание источника
+  (таймауты 2 с) оставляет risk_score незаполненным.
+  **6.** application → domain: «Оценка риска» сводит угрозы и ценность груза
+  в risk_score и рекомендацию; «Заявка» создаётся в статусе Draft.
+  **7.** application → infrastructure: сохраняются заявка («Хранение данных»),
+  снимок оценки («Хранение снимков риска») и стартовая запись
+  «Истории статусов» («— → Draft»).
+  **8.** application → presentation, обратный путь: сводка заявки — время
+  в пути, risk_score, рекомендация и статус Draft — возвращается в интерфейс.
+end note
+
+note right of domain
+  **Указатель по комплекту: чем детализирован каждый слой**
+  • Все четыре слоя сразу — **CLS_LogicalView**: состав компонентов,
+    их зоны ответственности и доменная модель со свойствами.
+  • Поток UC-1 через все слои — **ACT_UC1_LogicalView**: дорожки совпадают
+    с компонентами этой диаграммы.
+  • Слой application изнутри — **SM_UC1_LogicalView**: состояния подсистем
+    «Создание заявки» и «Оценка риска» при обработке команды UC-1.
+  • Вызовы presentation → application → domain / infrastructure (UC-32) —
+    **SEQ_UC32_LogicalView**.
+  • Кооперация компонентов всех слоёв при смене статуса (UC-2) —
+    **COL_UC2_LogicalView**.
+  • Реализация тех же слоёв в коде — раздел 8 SAD: **CLS_ImplementationView**,
+    **ACT_UC32_ImplementationView**, **SM_UC32_ImplementationView**,
+    **SEQ_UC2_ImplementationView**, **COL_UC1_ImplementationView**.
+end note
+
+note right of infrastructure
+  **Технологии на этом виде не показаны.** Платформа web-клиента и полевого
+  клиента, протоколы и форматы обмена, СУБД и схема миграций,
+  документное хранилище и механизм аутентификации — это реализация:
+  классы и аннотации — на
+  **CLS_ImplementationView**, версии, пакеты и порты — на **DEP_DeploymentView**.
+  Исключение — таймауты «Адаптера Wasteland Intel» (2 с): на них опирается
+  переход «внешний источник недоступен» на **SM_UC1_LogicalView**.
+end note
+
 legend right
   |= Обозначение |= Значение |
   | <#F5F5F5> | компонент системы |
   | <#EDE7F6> | внешняя система |
   Зависимости только сверху вниз: presentation → application →
   domain; application обращается к infrastructure (<<access>>),
-  infrastructure зависит от domain.
+  infrastructure зависит от domain. Обратная связь **8** — не
+  нарушение DC-6, а возврат результата по тому же вызову.
+  «Приём запросов» и «Сервисный слой клиента» — подсистемы слоя
+  presentation, а не транспорт: первая держит прикладные
+  контракты («API …»), второй — единственная точка обращения
+  клиента к ним (DC-7). На **CLS_LogicalView** этот компонент
+  назван «HTTP-клиент».
   **Красная связь** — отступление от DC-6:
   RouteController и CheckpointController читают
   репозитории напрямую, минуя application.
   Имена логических компонентов совпадают с участниками
-  диаграмм Sequence, Cooperative и State Machine (Logical View).
+  диаграмм Sequence и Cooperative (Logical View); на диаграмме
+  State Machine (Logical View) те же компоненты — носители
+  состояний: показаны состояния подсистем слоя application,
+  а не статусы одной заявки.
 endlegend
 @enduml
