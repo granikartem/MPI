@@ -377,6 +377,8 @@ def check():
 if '--check' in sys.argv:
     sys.exit(1 if check() else 0)
 
+d.title()                 # заголовок из .puml; только последним — он опускает содержимое
+
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out', NAME + '.xml')
 os.makedirs(os.path.dirname(out), exist_ok=True)
 p.write(out)

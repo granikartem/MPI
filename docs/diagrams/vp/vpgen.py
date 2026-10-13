@@ -12,11 +12,29 @@
 
 Многострочный текст передаётся обычным "\n": ElementTree сам закодирует его в &#10;.
 """
+import io
+import os
 import re
 import xml.etree.ElementTree as ET
 
 NS = 'http://www.visual-paradigm.com/product/vpuml/modelexporter'
 ET.register_namespace('', NS)
+
+PUML_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sad')
+
+
+def puml_title(name):
+    """Заголовок из строки `title` одноимённого .puml.
+
+    Генераторы раскладку задают сами, но заголовок берут из исходника — иначе он
+    расходится с диаграммой PlantUML, как уже случалось: в коде его не было вовсе,
+    и он жил только правкой поверх готового XML, которую затирал следующий прогон.
+    """
+    path = os.path.join(PUML_DIR, name + '.puml')
+    if not os.path.exists(path):
+        return ''
+    m = re.search(r'^title[ \t]+(.+)$', io.open(path, encoding='utf-8').read(), re.M)
+    return m.group(1).strip().replace('\\n', '\n') if m else ''
 
 # Палитра, повторяющая цвета исходных .puml
 FILL_GREY = 'Cr:245,245,245,255'      # #F5F5F5 — обычный узел
@@ -259,6 +277,37 @@ class Diagram:
     def _next_z(self):
         self._z += 1
         return self._z
+
+    def title(self, text=None, x=40, y=35):
+        """Заголовок диаграммы надписью: своего свойства заголовка в формате нет.
+
+        Приём тот же, что в puml2vp._put_title: фигура `TextBox` поверх модели `NOTE`,
+        текст — атрибутом `name`. Модели с типом `TextBox` не существует, а текст из
+        documentation эта фигура не показывает — выходит пустая рамка.
+
+        Ширина 10.4 пикселя на символ самой длинной строки и 32 на строку — значения
+        подобраны по рамкам, выправленным вручную: при 7.9 текст обрезало.
+
+        Вызывать ПОСЛЕДНИМ, когда фигуры и связи уже созданы: метод опускает всё
+        содержимое, иначе надпись ложится поверх первых же фигур — генераторы
+        начинают раскладку с y=40, а заголовок стоит выше.
+        """
+        text = puml_title(self.el.get('name')) if text is None else text
+        if not text:
+            return None
+        lines = text.split('\n')
+        w = max(int(max(len(s) for s in lines) * 10.4), 400)
+        h = 32 * len(lines)
+        dy = h + 36
+        for el in ET.ElementTree(self.el).iter():
+            tag = el.tag.split('}')[-1]
+            # Caption трогать нельзя: его координаты отсчитываются от своей фигуры
+            if tag in ('Shape', 'Point'):
+                el.set('y', str(int(el.get('y')) + dy))
+        m = self.p.model('NOTE', name=text, hint='Mtitle')
+        s = self.shape('TextBox', m, x, y, w, h, name=text, hint='Stitle', zorder=0)
+        self.finish_fill(s)
+        return s
 
     def shape(self, shape_type, model, x, y, w, h, name=None, fill=None,
               caption=True, parent=None, hint=None, zorder=None):

@@ -175,6 +175,8 @@ for _m, _s in nodes.values():
     d.finish_fill(_s)
 d.finish_fill(sw.container)
 
+d.title()                 # заголовок из .puml; только последним — он опускает содержимое
+
 out = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'out', NAME + '.xml')
 os.makedirs(os.path.dirname(out), exist_ok=True)
 p.write(out)

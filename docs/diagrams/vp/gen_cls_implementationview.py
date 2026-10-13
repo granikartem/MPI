@@ -376,13 +376,10 @@ AU_W, AU_H = size(AUDIT)
 X3 = X2 + max(RK_W, EX_W, OR_W, AU_W)
 
 NY = Y0 + FR_H + 56
-# заголовка у диаграммы в VP нет (VisualParadigm.md, §6) —
-# текст title из .puml перенесён заметкой в левом верхнем углу
 # заметки занимают колонку целиком: их правый край совпадает с правым краем
 # пакета frontend/src, иначе под пакетом остаётся пустая полоса в 380 px
 NOTE_W = FR_W
 MACH_Y = cy('RequestStatusMachine') - 62
-NOTE_BOX['title'] = (X0, 88, 760, 74)
 NOTE_BOX['scope'] = (X0, NY, NOTE_W, 178)
 NOTE_BOX['limits'] = (X0, NY + 206, NOTE_W, 184)
 NOTE_BOX['dto'] = (X0, NY + 418, NOTE_W, 330)
@@ -935,7 +932,7 @@ N_TITLE = (
     'Фактические классы реализации: пакеты, поля, сигнатуры методов\n'
     'и аннотации; схема хранения — на диаграммах базы данных')
 
-NOTES = [('title', N_TITLE, None), ('scope', N_SCOPE, None),
+NOTES = [('scope', N_SCOPE, None),
          ('limits', N_LIMITS, None), ('dto', N_DTO, None),
          ('legend', LEGEND, None), ('risk', N_RISK, 'RiskService'),
          ('machine', N_MACHINE, 'RequestStatusMachine')]
@@ -1083,6 +1080,8 @@ for s in pkg_shapes:
     d.finish_fill(s)
 for _m, s, _a in note_shapes.values():
     d.finish_fill(s)
+
+d.title()                 # заголовок из .puml; только последним — он опускает содержимое
 
 out = os.path.join(HERE, 'out', NAME + '.xml')
 os.makedirs(os.path.dirname(out), exist_ok=True)
