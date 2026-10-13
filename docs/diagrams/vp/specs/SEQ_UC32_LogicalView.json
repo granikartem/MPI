@@ -1,0 +1,733 @@
+{
+  "name": "SEQ_UC32_LogicalView",
+  "type": "InteractionDiagram",
+  "canvas": [
+    1786,
+    1706
+  ],
+  "title": "UC-32 «Создать организацию» — Sequence Diagram (Logical View)\nВзаимодействие логических компонентов; уровни совпадают с диаграммой пакетов",
+  "nodes": [
+    {
+      "key": "SU",
+      "name": "Суперпользователь",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionActor",
+      "rect": [
+        40,
+        61,
+        137,
+        1307
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "PRES",
+      "name": "Интерфейс управления\nорганизациями",
+      "body": [],
+      "parent": "presentation",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        279,
+        88,
+        168,
+        1279
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "APP",
+      "name": "Создание организации\nUC-32",
+      "body": [],
+      "parent": "application",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        673,
+        88,
+        163,
+        1279
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "ORG",
+      "name": "Организация",
+      "body": [],
+      "parent": "domain",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1071,
+        645,
+        99,
+        723
+      ],
+      "fill": "Cr:245,245,245,255",
+      "created": true
+    },
+    {
+      "key": "USR",
+      "name": "Учётная запись",
+      "body": [],
+      "parent": "domain",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1179,
+        870,
+        115,
+        498
+      ],
+      "fill": "Cr:245,245,245,255",
+      "created": true
+    },
+    {
+      "key": "EVT",
+      "name": "Событие аудита",
+      "body": [],
+      "parent": "domain",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1305,
+        1128,
+        121,
+        240
+      ],
+      "fill": "Cr:245,245,245,255",
+      "created": true
+    },
+    {
+      "key": "STORE",
+      "name": "Хранение данных",
+      "body": [],
+      "parent": "infrastructure",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1452,
+        88,
+        130,
+        1279
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "AUDIT",
+      "name": "Журнал аудита",
+      "body": [],
+      "parent": "infrastructure",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1592,
+        88,
+        114,
+        1279
+      ],
+      "fill": "Cr:245,245,245,255"
+    }
+  ],
+  "edges": [
+    {
+      "from": "SU",
+      "to": "PRES",
+      "label": "1: заполнить данные организации\nи первого диспетчера, подтвердить",
+      "kind": "Message",
+      "points": [
+        [
+          99,
+          186
+        ],
+        [
+          363,
+          186
+        ]
+      ],
+      "caption": [
+        108,
+        152,
+        248,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "PRES",
+      "to": "APP",
+      "label": "1.1: результат = создатьОрганизацию(данные организации,\nданные первого диспетчера)",
+      "kind": "Message",
+      "points": [
+        [
+          363,
+          233
+        ],
+        [
+          754,
+          233
+        ]
+      ],
+      "caption": [
+        372,
+        199,
+        374,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.1: занято = найти организацию по названию",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          305
+        ],
+        [
+          1517,
+          305
+        ]
+      ],
+      "caption": [
+        763,
+        287,
+        746,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "PRES",
+      "to": "SU",
+      "label": "1.2: показать ошибку «Организация\nс таким названием уже существует»",
+      "kind": "Message",
+      "points": [
+        [
+          363,
+          430
+        ],
+        [
+          99,
+          430
+        ]
+      ],
+      "caption": [
+        108,
+        396,
+        248,
+        34
+      ],
+      "asynchronous": true
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.2: занят = найти пользователя по логину",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          492
+        ],
+        [
+          1517,
+          492
+        ]
+      ],
+      "caption": [
+        763,
+        474,
+        746,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "PRES",
+      "to": "SU",
+      "label": "1.3: показать ошибку «Пользователь\nс таким логином уже существует»",
+      "kind": "Message",
+      "points": [
+        [
+          363,
+          617
+        ],
+        [
+          99,
+          617
+        ]
+      ],
+      "caption": [
+        108,
+        583,
+        248,
+        34
+      ],
+      "asynchronous": true
+    },
+    {
+      "from": "APP",
+      "to": "ORG",
+      "label": "1.1.3: организация = создать(ключ арендатора,\nназвание, уровень подписки, контакты)",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          678
+        ],
+        [
+          1071,
+          678
+        ]
+      ],
+      "caption": [
+        763,
+        644,
+        349,
+        34
+      ],
+      "asynchronous": false,
+      "create": true
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.4: сохранить организацию",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          761
+        ],
+        [
+          1517,
+          761
+        ]
+      ],
+      "caption": [
+        763,
+        743,
+        746,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "APP",
+      "to": "USR",
+      "label": "1.1.5: учётная запись = создать(организация,\nФИО, логин, хеш начального пароля,\nроль «Диспетчер»)",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          902
+        ],
+        [
+          1179,
+          902
+        ]
+      ],
+      "caption": [
+        763,
+        852,
+        466,
+        50
+      ],
+      "asynchronous": false,
+      "create": true
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.6: сохранить учётную запись",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          986
+        ],
+        [
+          1517,
+          986
+        ]
+      ],
+      "caption": [
+        763,
+        968,
+        746,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "APP",
+      "to": "EVT",
+      "label": "1.1.7: событие = сформировать\n«организация создана»",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          1160
+        ],
+        [
+          1305,
+          1160
+        ]
+      ],
+      "caption": [
+        763,
+        1126,
+        594,
+        34
+      ],
+      "asynchronous": false,
+      "create": true
+    },
+    {
+      "from": "APP",
+      "to": "AUDIT",
+      "label": "1.1.8: записать событие",
+      "kind": "Message",
+      "points": [
+        [
+          754,
+          1243
+        ],
+        [
+          1648,
+          1243
+        ]
+      ],
+      "caption": [
+        763,
+        1225,
+        877,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "PRES",
+      "to": "SU",
+      "label": "1.4: показать организацию в реестре,\nключ арендатора и логин диспетчера",
+      "kind": "Message",
+      "points": [
+        [
+          363,
+          1350
+        ],
+        [
+          99,
+          1350
+        ]
+      ],
+      "caption": [
+        108,
+        1316,
+        248,
+        34
+      ],
+      "asynchronous": true
+    }
+  ],
+  "notes": [
+    {
+      "kind": "note",
+      "text": "не фиксируется ничего: доменный объект\nне создан, в хранилище записи нет",
+      "rect": [
+        618,
+        345,
+        275,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "не фиксируется ничего: доменный объект\nне создан, в хранилище записи нет",
+      "rect": [
+        618,
+        533,
+        275,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "домен: объект существует,\nв хранилище записи ещё нет",
+      "rect": [
+        1021,
+        693,
+        197,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "хранилище: запись существует,\nдомен и хранилище согласованы",
+      "rect": [
+        1407,
+        776,
+        223,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "домен: объект существует,\nв хранилище записи ещё нет",
+      "rect": [
+        1140,
+        917,
+        197,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "хранилище: запись существует,\nдомен и хранилище согласованы",
+      "rect": [
+        1407,
+        1000,
+        223,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "организация создаётся без пользователей,\nдиспетчер назначается позже (UC-33)",
+      "rect": [
+        614,
+        1067,
+        284,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "домен: объект существует,\nв хранилище записи ещё нет",
+      "rect": [
+        1266,
+        1174,
+        197,
+        42
+      ]
+    },
+    {
+      "kind": "note",
+      "text": "хранилище: запись существует,\nдомен и хранилище согласованы",
+      "rect": [
+        1539,
+        1257,
+        223,
+        42
+      ]
+    },
+    {
+      "text": "Нумерация иерархическая: целое число — действие актора,\nвложенные вызовы — 1.1, 1.1.1, …; ответы актору — 1.2, 1.3, 1.4.\nСплошная линия, закрашенная стрелка — синхронный вызов;\nрезультат вызова — в подписи: «результат = операция(...)».\nСплошная линия, открытая стрелка — асинхронное сообщение.\nОтветные сообщения (пунктир) не рисуются.\n|= Зона |= Значение |\n| <#E8F5E9> | **domain** — состояние домена: объект живёт в памяти слоя |\n| <#E3F2FD> | **infrastructure** — состояние хранения: запись в хранилище |\nУчастник слоя domain появляется на диаграмме в момент создания\n(конструкция «create»), а не с самого верха: до этого доменного\nобъекта не существует. Заметки фиксируют инвариант на каждом шаге.",
+      "kind": "legend",
+      "rect": [
+        1285,
+        1463,
+        483,
+        224
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "key": "presentation",
+      "name": "presentation",
+      "rect": [
+        275,
+        62,
+        177,
+        1388
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "PRES"
+      ]
+    },
+    {
+      "key": "application",
+      "name": "application",
+      "rect": [
+        669,
+        62,
+        172,
+        1388
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "APP"
+      ]
+    },
+    {
+      "key": "domain",
+      "name": "domain",
+      "rect": [
+        1068,
+        62,
+        363,
+        1388
+      ],
+      "fill": "Cr:232,245,233,255",
+      "children": [
+        "ORG",
+        "USR",
+        "EVT"
+      ]
+    },
+    {
+      "key": "infrastructure",
+      "name": "infrastructure",
+      "rect": [
+        1449,
+        62,
+        262,
+        1388
+      ],
+      "fill": "Cr:227,242,253,255",
+      "children": [
+        "STORE",
+        "AUDIT"
+      ]
+    }
+  ],
+  "fragments": [
+    {
+      "key": "fragment0",
+      "operator": "group",
+      "name": "одна транзакция слоя application\nшаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе",
+      "parent": null,
+      "guards": [
+        "одна транзакция слоя application\nшаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе"
+      ],
+      "rect": [
+        10,
+        249,
+        1760,
+        1057
+      ],
+      "operand_ys": [
+        249
+      ]
+    },
+    {
+      "key": "fragment1",
+      "operator": "break",
+      "name": "название занято (альт. 4а)",
+      "parent": "fragment0",
+      "guards": [
+        "название занято (альт. 4а)"
+      ],
+      "rect": [
+        30,
+        321,
+        872,
+        117
+      ],
+      "operand_ys": [
+        321
+      ]
+    },
+    {
+      "key": "fragment2",
+      "operator": "opt",
+      "name": "первый диспетчер задан",
+      "parent": "fragment0",
+      "guards": [
+        "первый диспетчер задан"
+      ],
+      "rect": [
+        20,
+        452,
+        1572,
+        180
+      ],
+      "operand_ys": [
+        452
+      ]
+    },
+    {
+      "key": "fragment3",
+      "operator": "break",
+      "name": "логин занят",
+      "parent": "fragment2",
+      "guards": [
+        "логин занят"
+      ],
+      "rect": [
+        30,
+        508,
+        872,
+        117
+      ],
+      "operand_ys": [
+        508
+      ]
+    },
+    {
+      "key": "fragment4",
+      "operator": "alt",
+      "name": "первый диспетчер задан",
+      "parent": "fragment0",
+      "guards": [
+        "первый диспетчер задан",
+        "альт. 6а: назначение пропущено"
+      ],
+      "rect": [
+        603,
+        830,
+        1034,
+        286
+      ],
+      "operand_ys": [
+        830,
+        1049
+      ]
+    }
+  ],
+  "tail_y": 1368,
+  "lifeline_bottom": 1367,
+  "activations": [
+    {
+      "owner": "PRES",
+      "rect": [
+        358,
+        188,
+        10,
+        1160
+      ]
+    },
+    {
+      "owner": "APP",
+      "rect": [
+        750,
+        235,
+        10,
+        1079
+      ]
+    }
+  ]
+}

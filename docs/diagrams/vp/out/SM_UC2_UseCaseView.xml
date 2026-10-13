@@ -1,2 +1,948 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC2_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов"><ModelProperties><StringProperty name="name" value="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов" /></ModelProperties></Model><Model id="M100000000000000" modelType="State2" name="Черновик&#10;(Draft)"><ModelProperties><StringProperty name="name" value="Черновик&#10;(Draft)" /></ModelProperties></Model><Model id="M200000000000000" modelType="State2" name="Готов к отправке&#10;(Ready)"><ModelProperties><StringProperty name="name" value="Готов к отправке&#10;(Ready)" /></ModelProperties></Model><Model id="M300000000000000" modelType="State2" name="В пути&#10;(En Route)"><ModelProperties><StringProperty name="name" value="В пути&#10;(En Route)" /></ModelProperties></Model><Model id="M400000000000000" modelType="State2" name="Задержка&#10;(Delayed)"><ModelProperties><StringProperty name="name" value="Задержка&#10;(Delayed)" /></ModelProperties></Model><Model id="M500000000000000" modelType="State2" name="Доставлен&#10;(Delivered)"><ModelProperties><StringProperty name="name" value="Доставлен&#10;(Delivered)" /></ModelProperties></Model><Model id="M600000000000000" modelType="State2" name="Закрыт&#10;(Closed)"><ModelProperties><StringProperty name="name" value="Закрыт&#10;(Closed)" /></ModelProperties></Model><Model id="M700000000000000" modelType="State2" name="Отменён&#10;(Cancelled)"><ModelProperties><StringProperty name="name" value="Отменён&#10;(Cancelled)" /></ModelProperties></Model><Model id="M800000000000000" modelType="FinalState2"><ModelProperties /></Model><Model id="M900000000000000" modelType="InitialPseudoState"><ModelProperties /></Model><Model id="F100000000000000" modelType="Transition2" name="UC-1: диспетчер создал&#10;заявку на перевозку"><ModelProperties><StringProperty name="name" value="UC-1: диспетчер создал&#10;заявку на перевозку" /><ModelRefProperty name="from"><ModelRef id="M900000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F110000000000000" modelType="Transition2" name="Укомплектовать рейс&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Укомплектовать рейс&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F120000000000000" modelType="Transition2" name="Отменить заявку&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Отменить заявку&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F130000000000000" modelType="Transition2" name="Караван вышел на маршрут&#10;(Караван-мастер)"><ModelProperties><StringProperty name="name" value="Караван вышел на маршрут&#10;(Караван-мастер)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F140000000000000" modelType="Transition2" name="Отменить рейс до выхода&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Отменить рейс до выхода&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F150000000000000" modelType="Transition2" name="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]"><ModelProperties><StringProperty name="name" value="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F160000000000000" modelType="Transition2" name="Движение возобновлено&#10;(Караван-мастер / Диспетчер)"><ModelProperties><StringProperty name="name" value="Движение возобновлено&#10;(Караван-мастер / Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F170000000000000" modelType="Transition2" name="Груз доставлен&#10;(Караван-мастер)"><ModelProperties><StringProperty name="name" value="Груз доставлен&#10;(Караван-мастер)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F180000000000000" modelType="Transition2" name="Закрыть рейс&#10;(Диспетчер)"><ModelProperties><StringProperty name="name" value="Закрыть рейс&#10;(Диспетчер)" /><ModelRefProperty name="from"><ModelRef id="M500000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F190000000000000" modelType="Transition2"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F200000000000000" modelType="Transition2"><ModelProperties><ModelRefProperty name="from"><ModelRef id="M700000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote21000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="UC-19: инцидент высокой или&#10;  критической тяжести переводит&#10;  рейс в «Задержку» автоматически&#10;  (актор Система)" /></ModelProperties></Model><Model id="Anote21000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote21000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote22000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Отмена возможна только&#10;  до выхода каравана на маршрут.&#10;  «Закрыт» и «Отменён» — финальные" /></ModelProperties></Model><Model id="Anote22000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote22000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote23000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Переход инициирует актор, указанный в скобках.&#10;  Каждый переход попадает в историю статусов (FR-3)&#10;  и в журнал аудита (RL-4)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SM_UC2_UseCase" name="SM_UC2_UseCaseView" diagramType="StateDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="279" y="58" width="693" height="52" zorder="10" model="Mtitle0000000000" name="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="693" height="52" /></Shape><Shape id="S100000000000000" shapeType="State2" x="828" y="278" width="120" height="75" zorder="5" model="M100000000000000" name="Черновик&#10;(Draft)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="State2" x="645" y="457" width="187" height="75" zorder="9" model="M200000000000000" name="Готов к отправке&#10;(Ready)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="187" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="State2" x="390" y="637" width="127" height="75" zorder="6" model="M300000000000000" name="В пути&#10;(En Route)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="127" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="State2" x="85" y="858" width="120" height="75" zorder="4" model="M400000000000000" name="Задержка&#10;(Delayed)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="State2" x="700" y="858" width="129" height="75" zorder="7" model="M500000000000000" name="Доставлен&#10;(Delivered)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="129" height="75" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="State2" x="760" y="1055" width="120" height="75" zorder="3" model="M600000000000000" name="Закрыт&#10;(Closed)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="75" /><FillColor type="1" color="Cr:144,238,144,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="State2" x="899" y="637" width="132" height="75" zorder="8" model="M700000000000000" name="Отменён&#10;(Cancelled)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="132" height="75" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S800000000000000" shapeType="FinalState2" x="880" y="1184" width="34" height="34" zorder="2" model="M800000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S900000000000000" shapeType="InitialPseudoState" x="873" y="138" width="30" height="30" zorder="1" model="M900000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="Snote21000000000" shapeType="NOTE" x="205" y="842" width="359" height="109" zorder="11" model="Mnote21000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote22000000000" shapeType="NOTE" x="977" y="713" width="365" height="226" zorder="13" model="Mnote22000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote23000000000" shapeType="NOTE" x="766" y="1227" width="520" height="91" zorder="12" model="Mnote23000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C100000000000000" shapeType="Transition2" model="F100000000000000" from="S900000000000000" to="S100000000000000"><Caption visible="true" side="None" x="890" y="204" width="223" height="46" /></Connector><Connector id="C110000000000000" shapeType="Transition2" model="F110000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="786" y="384" width="192" height="46" /></Connector><Connector id="C120000000000000" shapeType="Transition2" model="F120000000000000" from="S100000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1003" y="474" width="152" height="46" /></Connector><Connector id="C130000000000000" shapeType="Transition2" model="F130000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="472" y="564" width="243" height="46" /></Connector><Connector id="C140000000000000" shapeType="Transition2" model="F140000000000000" from="S200000000000000" to="S700000000000000"><Caption visible="true" side="None" x="744" y="564" width="233" height="46" /></Connector><Connector id="C150000000000000" shapeType="Transition2" model="F150000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="65" y="744" width="385" height="70" /></Connector><Connector id="C160000000000000" shapeType="Transition2" model="F160000000000000" from="S400000000000000" to="S300000000000000"><Caption visible="true" side="None" x="458" y="756" width="284" height="46" /></Connector><Connector id="C170000000000000" shapeType="Transition2" model="F170000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="755" y="756" width="162" height="46" /></Connector><Connector id="C180000000000000" shapeType="Transition2" model="F180000000000000" from="S500000000000000" to="S600000000000000"><Caption visible="true" side="None" x="796" y="982" width="121" height="46" /></Connector><Connector id="C190000000000000" shapeType="Transition2" model="F190000000000000" from="S600000000000000" to="S800000000000000" /><Connector id="C200000000000000" shapeType="Transition2" model="F200000000000000" from="S700000000000000" to="S800000000000000" /><Connector id="CAnote2100000000" shapeType="Anchor" model="Anote21000000000" from="Snote21000000000" to="S400000000000000" /><Connector id="CAnote2200000000" shapeType="Anchor" model="Anote22000000000" from="Snote22000000000" to="S700000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC2_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="780b3_MN00100000" modelType="State2" name="Черновик&#10;(Draft)">
+      <ModelProperties>
+        <StringProperty name="name" value="Черновик&#10;(Draft)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0040000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN00600000" modelType="State2" name="Готов к отправке&#10;(Ready)">
+      <ModelProperties>
+        <StringProperty name="name" value="Готов к отправке&#10;(Ready)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0090000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN01100000" modelType="State2" name="В пути&#10;(En Route)">
+      <ModelProperties>
+        <StringProperty name="name" value="В пути&#10;(En Route)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0140000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN01600000" modelType="State2" name="Задержка&#10;(Delayed)">
+      <ModelProperties>
+        <StringProperty name="name" value="Задержка&#10;(Delayed)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0190000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN02100000" modelType="State2" name="Доставлен&#10;(Delivered)">
+      <ModelProperties>
+        <StringProperty name="name" value="Доставлен&#10;(Delivered)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0240000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN02600000" modelType="State2" name="Закрыт&#10;(Closed)">
+      <ModelProperties>
+        <StringProperty name="name" value="Закрыт&#10;(Closed)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0290000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN03100000" modelType="State2" name="Отменён&#10;(Cancelled)">
+      <ModelProperties>
+        <StringProperty name="name" value="Отменён&#10;(Cancelled)" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_DIV0340000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN03600000" modelType="FinalState2">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_MN03800000" modelType="InitialPseudoState">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME04000000" modelType="Transition2" name="UC-1: диспетчер создал&#10;заявку на перевозку">
+      <ModelProperties>
+        <StringProperty name="name" value="UC-1: диспетчер создал&#10;заявку на перевозку" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN03800000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN00100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME04300000" modelType="Transition2" name="Укомплектовать рейс&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Укомплектовать рейс&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN00100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN00600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME04600000" modelType="Transition2" name="Отменить заявку&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Отменить заявку&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN00100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN03100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME04900000" modelType="Transition2" name="Караван вышел на маршрут&#10;(Караван-мастер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Караван вышел на маршрут&#10;(Караван-мастер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN00600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN01100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME05200000" modelType="Transition2" name="Отменить рейс до выхода&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Отменить рейс до выхода&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN00600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN03100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME05500000" modelType="Transition2" name="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]">
+      <ModelProperties>
+        <StringProperty name="name" value="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN01100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN01600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME05800000" modelType="Transition2" name="Движение возобновлено&#10;(Караван-мастер / Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Движение возобновлено&#10;(Караван-мастер / Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN01600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN01100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME06100000" modelType="Transition2" name="Груз доставлен&#10;(Караван-мастер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Груз доставлен&#10;(Караван-мастер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN01100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN02100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME06400000" modelType="Transition2" name="Закрыть рейс&#10;(Диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Закрыть рейс&#10;(Диспетчер)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN02100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN02600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME06700000" modelType="Transition2">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN02600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN03600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_ME06900000" modelType="Transition2">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_MN03100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN03600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_NOTE071000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="UC-19: инцидент высокой или&#10;критической тяжести переводит&#10;рейс в «Задержку» автоматически&#10;(актор Система)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;UC-19: инцидент высокой или&lt;br&gt;критической тяжести переводит&lt;br&gt;рейс в «Задержку» автоматически&lt;br&gt;(актор Система)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_AN07300000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_NOTE071000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN01600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_NOTE075000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Отмена возможна только&#10;до выхода каравана на маршрут.&#10;«Закрыт» и «Отменён» — финальные" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Отмена возможна только&lt;br&gt;до выхода каравана на маршрут.&lt;br&gt;«Закрыт» и «Отменён» — финальные&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_AN07700000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="780b3_NOTE075000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="780b3_MN03100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="780b3_NOTE079000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Переход инициирует актор, указанный в скобках.&#10;Каждый переход попадает в историю статусов (FR-3)&#10;и в журнал аудита (RL-4)." value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Переход инициирует актор, указанный в скобках.&lt;br&gt;Каждый переход попадает в историю статусов (FR-3)&lt;br&gt;и в журнал аудита (RL-4).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="780b3_D_SM_UC2_U" name="SM_UC2_UseCaseView" diagramType="StateDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+        <BooleanProperty name="autoFitShapesSize" value="false" />
+        <BooleanProperty name="alignToGrid" value="false" />
+        <BooleanProperty name="gridVisible" value="false" />
+        <BooleanProperty name="paintConnectorThroughLabel" value="true" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="780b3_S002000000" shapeType="State2" x="543" y="164" width="83" height="52" zorder="32" model="780b3_MN00100000" name="Черновик&#10;(Draft)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="83" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S003000000" shapeType="TextBox" x="546" y="167" width="77" height="39" zorder="3">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Черновик&#10;(Draft)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Черновик&lt;br&gt;(Draft)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S005000000" shapeType="Freehand" x="543" y="206" width="83" height="2" zorder="23" model="780b3_DIV0040000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:82.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S007000000" shapeType="State2" x="417" y="288" width="129" height="52" zorder="36" model="780b3_MN00600000" name="Готов к отправке&#10;(Ready)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="129" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S008000000" shapeType="TextBox" x="420" y="291" width="123" height="39" zorder="11">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Готов к отправке&#10;(Ready)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Готов к отправке&lt;br&gt;(Ready)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S010000000" shapeType="Freehand" x="417" y="330" width="129" height="2" zorder="27" model="780b3_DIV0090000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:128.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S012000000" shapeType="State2" x="241" y="412" width="88" height="52" zorder="33" model="780b3_MN01100000" name="В пути&#10;(En Route)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="88" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S013000000" shapeType="TextBox" x="244" y="415" width="82" height="39" zorder="5">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="В пути&#10;(En Route)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;В пути&lt;br&gt;(En Route)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S015000000" shapeType="Freehand" x="241" y="454" width="88" height="2" zorder="24" model="780b3_DIV0140000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:87.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S017000000" shapeType="State2" x="31" y="564" width="83" height="52" zorder="31" model="780b3_MN01600000" name="Задержка&#10;(Delayed)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="83" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S018000000" shapeType="TextBox" x="34" y="567" width="77" height="39" zorder="2">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Задержка&#10;(Delayed)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Задержка&lt;br&gt;(Delayed)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S020000000" shapeType="Freehand" x="31" y="606" width="83" height="2" zorder="22" model="780b3_DIV0190000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:82.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S022000000" shapeType="State2" x="455" y="564" width="89" height="52" zorder="34" model="780b3_MN02100000" name="Доставлен&#10;(Delivered)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="89" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S023000000" shapeType="TextBox" x="458" y="567" width="83" height="39" zorder="6">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Доставлен&#10;(Delivered)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Доставлен&lt;br&gt;(Delivered)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S025000000" shapeType="Freehand" x="455" y="606" width="89" height="2" zorder="25" model="780b3_DIV0240000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:88.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S027000000" shapeType="State2" x="497" y="700" width="83" height="52" zorder="30" model="780b3_MN02600000" name="Закрыт&#10;(Closed)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="83" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S028000000" shapeType="TextBox" x="500" y="703" width="77" height="39" zorder="1">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Закрыт&#10;(Closed)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Закрыт&lt;br&gt;(Closed)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S030000000" shapeType="Freehand" x="497" y="742" width="83" height="2" zorder="21" model="780b3_DIV0290000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:82.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:144,238,144,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S032000000" shapeType="State2" x="592" y="412" width="91" height="52" zorder="35" model="780b3_MN03100000" name="Отменён&#10;(Cancelled)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="91" height="52" />
+          <ChildShapes>
+            <Shape id="780b3_S033000000" shapeType="TextBox" x="595" y="415" width="85" height="39" zorder="7">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Отменён&#10;(Cancelled)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Отменён&lt;br&gt;(Cancelled)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="780b3_S035000000" shapeType="Freehand" x="592" y="454" width="91" height="2" zorder="26" model="780b3_DIV0340000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:90.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S037000000" shapeType="FinalState2" x="579" y="789" width="23" height="23" zorder="29" model="780b3_MN03600000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:51,51,51,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S039000000" shapeType="InitialPseudoState" x="574" y="68" width="21" height="21" zorder="28" model="780b3_MN03800000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:51,51,51,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S042000000" shapeType="TextBox" x="586" y="113" width="155" height="34" zorder="12">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-1: диспетчер создал&#10;заявку на перевозку" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;UC-1: диспетчер создал&lt;br&gt;заявку на перевозку&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S045000000" shapeType="TextBox" x="514" y="237" width="136" height="34" zorder="10">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Укомплектовать рейс&#10;(Диспетчер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Укомплектовать рейс&lt;br&gt;(Диспетчер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S048000000" shapeType="TextBox" x="664" y="299" width="110" height="34" zorder="8">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Отменить заявку&#10;(Диспетчер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Отменить заявку&lt;br&gt;(Диспетчер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S051000000" shapeType="TextBox" x="298" y="361" width="168" height="34" zorder="14">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Караван вышел на маршрут&#10;(Караван-мастер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Караван вышел на маршрут&lt;br&gt;(Караван-мастер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S054000000" shapeType="TextBox" x="486" y="361" width="162" height="34" zorder="13">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Отменить рейс до выхода&#10;(Диспетчер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Отменить рейс до выхода&lt;br&gt;(Диспетчер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S057000000" shapeType="TextBox" x="17" y="486" width="266" height="50" zorder="16">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Зафиксировать задержку&#10;(Караван-мастер / Диспетчер / Система)&#10;[указана причина]" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Зафиксировать задержку&lt;br&gt;(Караван-мастер / Диспетчер / Система)&lt;br&gt;[указана причина]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S060000000" shapeType="TextBox" x="288" y="494" width="196" height="34" zorder="15">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Движение возобновлено&#10;(Караван-мастер / Диспетчер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Движение возобновлено&lt;br&gt;(Караван-мастер / Диспетчер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S063000000" shapeType="TextBox" x="493" y="494" width="116" height="34" zorder="9">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Груз доставлен&#10;(Караван-мастер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Груз доставлен&lt;br&gt;(Караван-мастер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S066000000" shapeType="TextBox" x="521" y="650" width="90" height="34" zorder="4">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="Закрыть рейс&#10;(Диспетчер)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Закрыть рейс&lt;br&gt;(Диспетчер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="780b3_S072000000" shapeType="NOTE" x="132" y="553" width="230" height="76" zorder="19" model="780b3_NOTE071000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S076000000" shapeType="NOTE" x="647" y="562" width="251" height="59" zorder="18" model="780b3_NOTE075000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S080000000" shapeType="NOTE" x="501" y="819" width="359" height="64" zorder="20" model="780b3_NOTE079000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="2" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:221,221,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="780b3_S081000000" shapeType="TextBox" x="5" y="10" width="894" height="40" zorder="17">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&#10;Абстрактное описание: состояния заявки и действия акторов" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;&lt;b&gt;UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)&lt;/b&gt;&lt;br&gt;&lt;b&gt;Абстрактное описание: состояния заявки и действия акторов&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="14" style="1" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="780b3_C041000000" shapeType="Transition2" model="780b3_ME04000000" from="780b3_S039000000" to="780b3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="584" y="88" />
+            <Point x="584" y="164" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C044000000" shapeType="Transition2" model="780b3_ME04300000" from="780b3_S002000000" to="780b3_S007000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="551" y="216" />
+            <Point x="506" y="247" />
+            <Point x="486" y="289" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C047000000" shapeType="Transition2" model="780b3_ME04600000" from="780b3_S002000000" to="780b3_S032000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="625" y="207" />
+            <Point x="664" y="283" />
+            <Point x="647" y="413" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C050000000" shapeType="Transition2" model="780b3_ME04900000" from="780b3_S007000000" to="780b3_S012000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="418" y="322" />
+            <Point x="317" y="348" />
+            <Point x="282" y="414" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C053000000" shapeType="Transition2" model="780b3_ME05200000" from="780b3_S007000000" to="780b3_S032000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="476" y="341" />
+            <Point x="477" y="397" />
+            <Point x="592" y="429" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C056000000" shapeType="Transition2" model="780b3_ME05500000" from="780b3_S012000000" to="780b3_S017000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="242" y="439" />
+            <Point x="82" y="458" />
+            <Point x="6" y="502" />
+            <Point x="32" y="565" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C059000000" shapeType="Transition2" model="780b3_ME05800000" from="780b3_S017000000" to="780b3_S012000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="99" y="565" />
+            <Point x="250" y="546" />
+            <Point x="287" y="466" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C062000000" shapeType="Transition2" model="780b3_ME06100000" from="780b3_S012000000" to="780b3_S022000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="330" y="445" />
+            <Point x="472" y="482" />
+            <Point x="497" y="565" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C065000000" shapeType="Transition2" model="780b3_ME06400000" from="780b3_S022000000" to="780b3_S027000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="506" y="617" />
+            <Point x="526" y="701" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C068000000" shapeType="Transition2" model="780b3_ME06700000" from="780b3_S027000000" to="780b3_S037000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="554" y="753" />
+            <Point x="580" y="791" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_C070000000" shapeType="Transition2" model="780b3_ME06900000" from="780b3_S032000000" to="780b3_S037000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="637" y="465" />
+            <Point x="593" y="791" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_NA07400000" shapeType="Anchor" model="780b3_AN07300000" from="780b3_S072000000" to="780b3_S017000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="247" y="591" />
+            <Point x="72" y="590" />
+          </Points>
+        </Connector>
+        <Connector id="780b3_NA07800000" shapeType="Anchor" model="780b3_AN07700000" from="780b3_S076000000" to="780b3_S032000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="772" y="591" />
+            <Point x="637" y="438" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

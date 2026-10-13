@@ -1099,6 +1099,17 @@ CONVERTERS = {
 
 
 def convert(name):
+    # These nine diagrams have reviewed direct native definitions. Never overwrite
+    # their compartments, frames, endpoints, and routes with the lossy converter.
+    native_spec = os.path.join(HERE, 'specs', name + '.json')
+    if os.path.isfile(native_spec):
+        import json
+        from build_selected_native import build
+        with open(native_spec, encoding='utf-8') as source:
+            project = build(json.load(source))
+        path = os.path.join(OUT_DIR, name + '.xml')
+        ET.indent(project.root, space='  ')
+        return project.write(path)
     kind = name.split('_', 1)[0]
     fn = CONVERTERS.get(kind)
     if fn is None:

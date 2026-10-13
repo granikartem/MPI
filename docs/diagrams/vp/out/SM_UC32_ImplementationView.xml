@@ -1,2 +1,928 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC32_ImplementationView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт"><ModelProperties><StringProperty name="name" value="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт" /></ModelProperties></Model><Model id="M100000000000000" modelType="State2" name="Команда принята&#10;command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)"><ModelProperties><StringProperty name="name" value="Команда принята&#10;command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" /></ModelProperties></Model><Model id="M200000000000000" modelType="State2" name="Данные проверены&#10;organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)"><ModelProperties><StringProperty name="name" value="Данные проверены&#10;organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" /></ModelProperties></Model><Model id="M300000000000000" modelType="State2" name="Организация ACTIVE&#10;organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;"><ModelProperties><StringProperty name="name" value="Организация ACTIVE&#10;organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" /></ModelProperties></Model><Model id="M400000000000000" modelType="State2" name="Диспетчер назначен&#10;dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;"><ModelProperties><StringProperty name="name" value="Диспетчер назначен&#10;dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" /></ModelProperties></Model><Model id="M500000000000000" modelType="State2" name="Событие записано&#10;event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;"><ModelProperties><StringProperty name="name" value="Событие записано&#10;event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" /></ModelProperties></Model><Model id="M600000000000000" modelType="State2" name="Отклонено&#10;@Transactional — откат"><ModelProperties><StringProperty name="name" value="Отклонено&#10;@Transactional — откат" /></ModelProperties></Model><Model id="M700000000000000" modelType="FinalState2"><ModelProperties /></Model><Model id="M800000000000000" modelType="InitialPseudoState"><ModelProperties /></Model><Model id="F900000000000000" modelType="Transition2" name="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)"><ModelProperties><StringProperty name="name" value="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)" /><ModelRefProperty name="from"><ModelRef id="M800000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F100000000000000" modelType="Transition2" name="[название и логин свободны,&#10;уровень подписки известен]"><ModelProperties><StringProperty name="name" value="[название и логин свободны,&#10;уровень подписки известен]" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F110000000000000" modelType="Transition2" name="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException"><ModelProperties><StringProperty name="name" value="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F120000000000000" modelType="Transition2" name="/ organizationRepository.save(organization)&#10;INSERT INTO organization"><ModelProperties><StringProperty name="name" value="/ organizationRepository.save(organization)&#10;INSERT INTO organization" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F130000000000000" modelType="Transition2" name="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user"><ModelProperties><StringProperty name="name" value="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F140000000000000" modelType="Transition2" name="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)"><ModelProperties><StringProperty name="name" value="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F150000000000000" modelType="Transition2" name="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)"><ModelProperties><StringProperty name="name" value="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F160000000000000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_organization_name_ci)"><ModelProperties><StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_organization_name_ci)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F170000000000000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_app_user_login_ci)"><ModelProperties><StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_app_user_login_ci)" /><ModelRefProperty name="from"><ModelRef id="M400000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F180000000000000" modelType="Transition2" name="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created"><ModelProperties><StringProperty name="name" value="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created" /><ModelRefProperty name="from"><ModelRef id="M500000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="F190000000000000" modelType="Transition2" name="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse"><ModelProperties><StringProperty name="name" value="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse" /><ModelRefProperty name="from"><ModelRef id="M600000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote20000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Подпись перехода: событие [сторожевое условие] / эффект.&#10;  Указаны классы, методы и имена аргументов; полные списки&#10;  параметров конструкторов и запросов не приводятся.&#10;  Все состояния проходятся внутри одного вызова&#10;  OrganizationService.create(...) с @Transactional." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SM_UC32_Implem" name="SM_UC32_ImplementationView" diagramType="StateDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="183" y="58" width="874" height="52" zorder="8" model="Mtitle0000000000" name="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="874" height="52" /></Shape><Shape id="S100000000000000" shapeType="State2" x="966" y="302" width="351" height="98" zorder="6" model="M100000000000000" name="Команда принята&#10;command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="351" height="98" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="State2" x="455" y="505" width="451" height="120" zorder="9" model="M200000000000000" name="Данные проверены&#10;organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="451" height="120" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="State2" x="418" y="730" width="291" height="120" zorder="7" model="M300000000000000" name="Организация ACTIVE&#10;organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="291" height="120" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="State2" x="430" y="979" width="271" height="120" zorder="5" model="M400000000000000" name="Диспетчер назначен&#10;dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="271" height="120" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="State2" x="74" y="1204" width="319" height="98" zorder="4" model="M500000000000000" name="Событие записано&#10;event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="319" height="98" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="State2" x="718" y="1215" width="221" height="76" zorder="3" model="M600000000000000" name="Отклонено&#10;@Transactional — откат"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="221" height="76" /><FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="FinalState2" x="490" y="1407" width="34" height="34" zorder="2" model="M700000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="S800000000000000" shapeType="InitialPseudoState" x="1127" y="138" width="30" height="30" zorder="1" model="M800000000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties></Shape><Shape id="Snote20000000000" shapeType="NOTE" x="676" y="1451" width="596" height="142" zorder="10" model="Mnote20000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="C900000000000000" shapeType="Transition2" model="F900000000000000" from="S800000000000000" to="S100000000000000"><Caption visible="true" side="None" x="1144" y="204" width="375" height="70" /></Connector><Connector id="C100000000000000" shapeType="Transition2" model="F100000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="886" y="432" width="274" height="46" /></Connector><Connector id="C110000000000000" shapeType="Transition2" model="F110000000000000" from="S100000000000000" to="S600000000000000"><Caption visible="true" side="None" x="1164" y="745" width="324" height="94" /></Connector><Connector id="C120000000000000" shapeType="Transition2" model="F120000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="637" y="657" width="436" height="46" /></Connector><Connector id="C130000000000000" shapeType="Transition2" model="F130000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="550" y="882" width="334" height="70" /></Connector><Connector id="C140000000000000" shapeType="Transition2" model="F140000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="71" y="1019" width="385" height="46" /></Connector><Connector id="C150000000000000" shapeType="Transition2" model="F150000000000000" from="S400000000000000" to="S500000000000000"><Caption visible="true" side="None" x="249" y="1131" width="345" height="46" /></Connector><Connector id="C160000000000000" shapeType="Transition2" model="F160000000000000" from="S300000000000000" to="S600000000000000"><Caption visible="true" side="None" x="858" y="1019" width="314" height="46" /></Connector><Connector id="C170000000000000" shapeType="Transition2" model="F170000000000000" from="S400000000000000" to="S600000000000000"><Caption visible="true" side="None" x="570" y="1131" width="314" height="46" /></Connector><Connector id="C180000000000000" shapeType="Transition2" model="F180000000000000" from="S500000000000000" to="S700000000000000"><Caption visible="true" side="None" x="313" y="1334" width="426" height="46" /></Connector><Connector id="C190000000000000" shapeType="Transition2" model="F190000000000000" from="S600000000000000" to="S700000000000000"><Caption visible="true" side="None" x="767" y="1334" width="334" height="46" /></Connector></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SM_UC32_ImplementationView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="201cf_MN00100000" modelType="State2" name="Команда принята">
+      <ModelProperties>
+        <StringProperty name="name" value="Команда принята" />
+        <HTMLProperty name="documentation" plainTextValue="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;command : CreateOrganizationCommand&lt;br&gt;required(name), normalizeTier(tier)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_DIV0040000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN00700000" modelType="State2" name="Данные проверены">
+      <ModelProperties>
+        <StringProperty name="name" value="Данные проверены" />
+        <HTMLProperty name="documentation" plainTextValue="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;organizationRepository.findByNameIgnoreCase(name)&lt;br&gt;userRepository.findByLoginIgnoreCase(login)&lt;br&gt;validateDispatcher(command)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_DIV0100000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN01300000" modelType="State2" name="Организация ACTIVE">
+      <ModelProperties>
+        <StringProperty name="name" value="Организация ACTIVE" />
+        <HTMLProperty name="documentation" plainTextValue="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;organization : Organization&lt;br&gt;tenantKey = generateTenantKey()&lt;br&gt;status = &amp;quot;ACTIVE&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_DIV0160000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN01900000" modelType="State2" name="Диспетчер назначен">
+      <ModelProperties>
+        <StringProperty name="name" value="Диспетчер назначен" />
+        <HTMLProperty name="documentation" plainTextValue="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;dispatcher : AppUser&lt;br&gt;passwordHash(initialPassword)&lt;br&gt;role = &amp;quot;DISPATCHER&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_DIV0220000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN02500000" modelType="State2" name="Событие записано">
+      <ModelProperties>
+        <StringProperty name="name" value="Событие записано" />
+        <HTMLProperty name="documentation" plainTextValue="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;event : AuditEvent&lt;br&gt;type = &amp;quot;ORGANIZATION_CREATED&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_DIV0280000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN03100000" modelType="State2" name="Отклонено">
+      <ModelProperties>
+        <StringProperty name="name" value="Отклонено" />
+        <HTMLProperty name="documentation" plainTextValue="@Transactional — откат" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;@Transactional — откат&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_DIV0340000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN03700000" modelType="FinalState2">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_MN03900000" modelType="InitialPseudoState">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME04100000" modelType="Transition2" name="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)">
+      <ModelProperties>
+        <StringProperty name="name" value="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN03900000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN00100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME04400000" modelType="Transition2" name="[название и логин свободны,&#10;уровень подписки известен]">
+      <ModelProperties>
+        <StringProperty name="name" value="[название и логин свободны,&#10;уровень подписки известен]" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN00100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN00700000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME04700000" modelType="Transition2" name="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException">
+      <ModelProperties>
+        <StringProperty name="name" value="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN00100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN03100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME05000000" modelType="Transition2" name="/ organizationRepository.save(organization)&#10;INSERT INTO organization">
+      <ModelProperties>
+        <StringProperty name="name" value="/ organizationRepository.save(organization)&#10;INSERT INTO organization" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN00700000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN01300000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME05300000" modelType="Transition2" name="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user">
+      <ModelProperties>
+        <StringProperty name="name" value="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN01300000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN01900000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME05600000" modelType="Transition2" name="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)">
+      <ModelProperties>
+        <StringProperty name="name" value="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN01300000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN02500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME05900000" modelType="Transition2" name="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)">
+      <ModelProperties>
+        <StringProperty name="name" value="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN01900000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN02500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME06200000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_organization_name_ci)">
+      <ModelProperties>
+        <StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_organization_name_ci)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN01300000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN03100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME06500000" modelType="Transition2" name="DataIntegrityViolationException&#10;(uq_app_user_login_ci)">
+      <ModelProperties>
+        <StringProperty name="name" value="DataIntegrityViolationException&#10;(uq_app_user_login_ci)" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN01900000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN03100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME06800000" modelType="Transition2" name="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created">
+      <ModelProperties>
+        <StringProperty name="name" value="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN02500000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN03700000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_ME07100000" modelType="Transition2" name="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse">
+      <ModelProperties>
+        <StringProperty name="name" value="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse" />
+        <ModelRefProperty name="from">
+          <ModelRef id="201cf_MN03100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="201cf_MN03700000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="201cf_NOTE074000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Подпись перехода: событие [сторожевое условие] / эффект.&#10;Указаны классы, методы и имена аргументов; полные списки&#10;параметров конструкторов и запросов не приводятся.&#10;Все состояния проходятся внутри одного вызова&#10;OrganizationService.create(...) с @Transactional." value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Подпись перехода: событие [сторожевое условие] / эффект.&lt;br&gt;Указаны классы, методы и имена аргументов; полные списки&lt;br&gt;параметров конструкторов и запросов не приводятся.&lt;br&gt;Все состояния проходятся внутри одного вызова&lt;br&gt;OrganizationService.create(...) с @Transactional.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="201cf_D_SM_UC32_" name="SM_UC32_ImplementationView" diagramType="StateDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+        <BooleanProperty name="autoFitShapesSize" value="false" />
+        <BooleanProperty name="alignToGrid" value="false" />
+        <BooleanProperty name="gridVisible" value="false" />
+        <BooleanProperty name="paintConnectorThroughLabel" value="true" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="201cf_S002000000" shapeType="State2" x="639" y="181" width="242" height="68" zorder="37" model="201cf_MN00100000" name="Команда принята">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="242" height="68" />
+          <ChildShapes>
+            <Shape id="201cf_S003000000" shapeType="TextBox" x="642" y="184" width="236" height="23" zorder="6">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Команда принята" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Команда принята&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="201cf_S005000000" shapeType="Freehand" x="639" y="206" width="242" height="2" zorder="31" model="201cf_DIV0040000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:241.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="201cf_S006000000" shapeType="TextBox" x="644" y="210" width="232" height="40" zorder="15">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="command : CreateOrganizationCommand&#10;required(name), normalizeTier(tier)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:11px;font-weight:normal&quot;&gt;command : CreateOrganizationCommand&lt;br&gt;required(name), normalizeTier(tier)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S008000000" shapeType="State2" x="286" y="321" width="311" height="83" zorder="39" model="201cf_MN00700000" name="Данные проверены">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="311" height="83" />
+          <ChildShapes>
+            <Shape id="201cf_S009000000" shapeType="TextBox" x="289" y="324" width="305" height="23" zorder="8">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Данные проверены" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Данные проверены&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="201cf_S011000000" shapeType="Freehand" x="286" y="346" width="311" height="2" zorder="33" model="201cf_DIV0100000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:310.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="201cf_S012000000" shapeType="TextBox" x="291" y="350" width="301" height="55" zorder="23">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="organizationRepository.findByNameIgnoreCase(name)&#10;userRepository.findByLoginIgnoreCase(login)&#10;validateDispatcher(command)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:11px;font-weight:normal&quot;&gt;organizationRepository.findByNameIgnoreCase(name)&lt;br&gt;userRepository.findByLoginIgnoreCase(login)&lt;br&gt;validateDispatcher(command)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S014000000" shapeType="State2" x="261" y="476" width="201" height="83" zorder="38" model="201cf_MN01300000" name="Организация ACTIVE">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="201" height="83" />
+          <ChildShapes>
+            <Shape id="201cf_S015000000" shapeType="TextBox" x="264" y="479" width="195" height="23" zorder="4">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Организация ACTIVE" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Организация ACTIVE&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="201cf_S017000000" shapeType="Freehand" x="261" y="501" width="201" height="2" zorder="28" model="201cf_DIV0160000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:200.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="201cf_S018000000" shapeType="TextBox" x="266" y="505" width="191" height="55" zorder="19">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="organization : Organization&#10;tenantKey = generateTenantKey()&#10;status = &quot;ACTIVE&quot;" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:11px;font-weight:normal&quot;&gt;organization : Organization&lt;br&gt;tenantKey = generateTenantKey()&lt;br&gt;status = &amp;quot;ACTIVE&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S020000000" shapeType="State2" x="269" y="648" width="187" height="83" zorder="36" model="201cf_MN01900000" name="Диспетчер назначен">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="187" height="83" />
+          <ChildShapes>
+            <Shape id="201cf_S021000000" shapeType="TextBox" x="272" y="651" width="181" height="23" zorder="3">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Диспетчер назначен" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Диспетчер назначен&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="201cf_S023000000" shapeType="Freehand" x="269" y="673" width="187" height="2" zorder="27" model="201cf_DIV0220000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:186.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="201cf_S024000000" shapeType="TextBox" x="274" y="677" width="177" height="55" zorder="16">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="dispatcher : AppUser&#10;passwordHash(initialPassword)&#10;role = &quot;DISPATCHER&quot;" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:11px;font-weight:normal&quot;&gt;dispatcher : AppUser&lt;br&gt;passwordHash(initialPassword)&lt;br&gt;role = &amp;quot;DISPATCHER&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S026000000" shapeType="State2" x="23" y="803" width="220" height="68" zorder="35" model="201cf_MN02500000" name="Событие записано">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="220" height="68" />
+          <ChildShapes>
+            <Shape id="201cf_S027000000" shapeType="TextBox" x="26" y="806" width="214" height="23" zorder="5">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Событие записано" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Событие записано&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="201cf_S029000000" shapeType="Freehand" x="23" y="828" width="220" height="2" zorder="29" model="201cf_DIV0280000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:219.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="201cf_S030000000" shapeType="TextBox" x="28" y="832" width="210" height="40" zorder="13">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="event : AuditEvent&#10;type = &quot;ORGANIZATION_CREATED&quot;" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:11px;font-weight:normal&quot;&gt;event : AuditEvent&lt;br&gt;type = &amp;quot;ORGANIZATION_CREATED&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S032000000" shapeType="State2" x="468" y="810" width="152" height="52" zorder="34" model="201cf_MN03100000" name="Отклонено">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <BooleanProperty name="0SwIta" value="false" />
+            <BooleanProperty name="1SwItt" value="false" />
+            <BooleanProperty name="requestResetCaption" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="152" height="52" />
+          <ChildShapes>
+            <Shape id="201cf_S033000000" shapeType="TextBox" x="471" y="813" width="146" height="23" zorder="1">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Отклонено" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;Отклонено&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="14" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="201cf_S035000000" shapeType="Freehand" x="468" y="835" width="152" height="2" zorder="26" model="201cf_DIV0340000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:151.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="201cf_S036000000" shapeType="TextBox" x="473" y="839" width="142" height="25" zorder="2">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="@Transactional — откат" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:11px;font-weight:normal&quot;&gt;@Transactional — откат&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="11" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,228,225,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S038000000" shapeType="FinalState2" x="310" y="943" width="23" height="23" zorder="32" model="201cf_MN03700000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:51,51,51,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S040000000" shapeType="InitialPseudoState" x="750" y="68" width="21" height="21" zorder="30" model="201cf_MN03900000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:51,51,51,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S043000000" shapeType="TextBox" x="761" y="113" width="259" height="50" zorder="21">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="POST /api/organizations&#10;→ OrganizationController.create(body)&#10;→ OrganizationService.create(command)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;POST /api/organizations&lt;br&gt;→ OrganizationController.create(body)&lt;br&gt;→ OrganizationService.create(command)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S046000000" shapeType="TextBox" x="583" y="270" width="189" height="34" zorder="7">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="[название и логин свободны,&#10;уровень подписки известен]" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;[название и логин свободны,&lt;br&gt;уровень подписки известен]&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S049000000" shapeType="TextBox" x="775" y="486" width="223" height="66" zorder="22">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="[название или логин заняты,&#10;обязательное поле пусто,&#10;уровень подписки неизвестен]&#10;/ throw IllegalArgumentException" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;[название или логин заняты,&lt;br&gt;обязательное поле пусто,&lt;br&gt;уровень подписки неизвестен]&lt;br&gt;/ throw IllegalArgumentException&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S052000000" shapeType="TextBox" x="412" y="426" width="301" height="34" zorder="18">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="/ organizationRepository.save(organization)&#10;INSERT INTO organization" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;/ organizationRepository.save(organization)&lt;br&gt;INSERT INTO organization&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S055000000" shapeType="TextBox" x="352" y="581" width="230" height="50" zorder="20">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="[первый диспетчер задан]&#10;/ userRepository.save(dispatcher)&#10;INSERT INTO app_user" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;[первый диспетчер задан]&lt;br&gt;/ userRepository.save(dispatcher)&lt;br&gt;INSERT INTO app_user&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S058000000" shapeType="TextBox" x="21" y="675" width="266" height="34" zorder="14">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="[первый диспетчер не задан] (альт. 6а)&#10;/ auditEventRepository.save(event)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;[первый диспетчер не задан] (альт. 6а)&lt;br&gt;/ auditEventRepository.save(event)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S061000000" shapeType="TextBox" x="144" y="752" width="238" height="34" zorder="12">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="/ auditEventRepository.save(event)&#10;db.audit_event.insertOne(...)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;/ auditEventRepository.save(event)&lt;br&gt;db.audit_event.insertOne(...)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S064000000" shapeType="TextBox" x="564" y="675" width="217" height="34" zorder="10">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="DataIntegrityViolationException&#10;(uq_organization_name_ci)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;DataIntegrityViolationException&lt;br&gt;(uq_organization_name_ci)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S067000000" shapeType="TextBox" x="366" y="752" width="217" height="34" zorder="9">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="DataIntegrityViolationException&#10;(uq_app_user_login_ci)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;DataIntegrityViolationException&lt;br&gt;(uq_app_user_login_ci)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S070000000" shapeType="TextBox" x="188" y="892" width="294" height="34" zorder="17">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="commit → OrganizationResponse.from(result)&#10;→ HTTP 201 Created" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;commit → OrganizationResponse.from(result)&lt;br&gt;→ HTTP 201 Created&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S073000000" shapeType="TextBox" x="501" y="892" width="230" height="34" zorder="11">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="handleBadRequest / handleConflict&#10;→ HTTP 400 ErrorResponse" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;handleBadRequest / handleConflict&lt;br&gt;→ HTTP 400 ErrorResponse&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="201cf_S075000000" shapeType="NOTE" x="438" y="973" width="412" height="99" zorder="25" model="201cf_NOTE074000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="2" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:221,221,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="201cf_S076000000" shapeType="TextBox" x="5" y="10" width="997" height="40" zorder="24">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&#10;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;&lt;b&gt;UC-32 «Создать организацию» — State Machine Diagram (Implementation View)&lt;/b&gt;&lt;br&gt;&lt;b&gt;Состояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="14" style="1" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="201cf_C042000000" shapeType="Transition2" model="201cf_ME04100000" from="201cf_S040000000" to="201cf_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="759" y="88" />
+            <Point x="759" y="181" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C045000000" shapeType="Transition2" model="201cf_ME04400000" from="201cf_S002000000" to="201cf_S008000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="638" y="247" />
+            <Point x="552" y="282" />
+            <Point x="497" y="321" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C048000000" shapeType="Transition2" model="201cf_ME04700000" from="201cf_S002000000" to="201cf_S032000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="759" y="250" />
+            <Point x="774" y="411" />
+            <Point x="772" y="699" />
+            <Point x="735" y="782" />
+            <Point x="620" y="823" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C051000000" shapeType="Transition2" model="201cf_ME05000000" from="201cf_S008000000" to="201cf_S014000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="420" y="405" />
+            <Point x="382" y="477" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C054000000" shapeType="Transition2" model="201cf_ME05300000" from="201cf_S014000000" to="201cf_S020000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="357" y="560" />
+            <Point x="345" y="604" />
+            <Point x="350" y="649" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C057000000" shapeType="Transition2" model="201cf_ME05600000" from="201cf_S014000000" to="201cf_S026000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="262" y="526" />
+            <Point x="55" y="602" />
+            <Point x="6" y="690" />
+            <Point x="82" y="804" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C060000000" shapeType="Transition2" model="201cf_ME05900000" from="201cf_S020000000" to="201cf_S026000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="277" y="728" />
+            <Point x="144" y="745" />
+            <Point x="126" y="804" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C063000000" shapeType="Transition2" model="201cf_ME06200000" from="201cf_S014000000" to="201cf_S032000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="463" y="527" />
+            <Point x="548" y="586" />
+            <Point x="562" y="713" />
+            <Point x="547" y="811" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C066000000" shapeType="Transition2" model="201cf_ME06500000" from="201cf_S020000000" to="201cf_S032000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="352" y="732" />
+            <Point x="363" y="789" />
+            <Point x="467" y="823" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C069000000" shapeType="Transition2" model="201cf_ME06800000" from="201cf_S026000000" to="201cf_S038000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="146" y="872" />
+            <Point x="197" y="933" />
+            <Point x="310" y="954" />
+          </Points>
+        </Connector>
+        <Connector id="201cf_C072000000" shapeType="Transition2" model="201cf_ME07100000" from="201cf_S032000000" to="201cf_S038000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="525" y="863" />
+            <Point x="452" y="928" />
+            <Point x="333" y="954" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

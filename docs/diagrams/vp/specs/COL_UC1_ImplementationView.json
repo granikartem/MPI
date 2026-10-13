@@ -1,0 +1,1013 @@
+{
+  "name": "COL_UC1_ImplementationView",
+  "type": "CommunicationDiagram",
+  "canvas": [
+    3080,
+    1662
+  ],
+  "title": "UC-1 «Создать заявку на перевозку» — Cooperative (Communication) Diagram (Implementation View)\nОбъекты реализации: классы, вызываемые методы, запросы к хранилищам и внешней системе",
+  "nodes": [
+    {
+      "key": "D",
+      "name": "d:Диспетчер",
+      "body": [],
+      "parent": null,
+      "stereotype": "actor",
+      "color": "White",
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        227,
+        99,
+        110,
+        52
+      ],
+      "fill": "Cr:255,255,255,255"
+    },
+    {
+      "key": "FORM",
+      "name": "form:RequestForm.tsx",
+      "body": [],
+      "parent": "front_pages",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        505,
+        106,
+        152,
+        41
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "CON",
+      "name": "console:Console.tsx",
+      "body": [],
+      "parent": "front_pages",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        511,
+        324,
+        139,
+        41
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "REG",
+      "name": "reg:RequestRegistry.tsx",
+      "body": [],
+      "parent": "front_pages",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        502,
+        568,
+        163,
+        41
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "API",
+      "name": "api:api.ts — клиент REST (axios)",
+      "body": [],
+      "parent": "front_api",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        429,
+        697,
+        223,
+        41
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "WEB",
+      "name": "c:RequestController",
+      "body": [],
+      "parent": "request",
+      "stereotype": "@RestController",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        472,
+        808,
+        137,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "SVC",
+      "name": "s:RequestService",
+      "body": [],
+      "parent": "request",
+      "stereotype": "@Service",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        472,
+        982,
+        123,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "ETA",
+      "name": "eta:EtaService",
+      "body": [],
+      "parent": "request",
+      "stereotype": "@Service",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        786,
+        1201,
+        110,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "ST",
+      "name": "st:RequestStatusService",
+      "body": [],
+      "parent": "request",
+      "stereotype": "@Service",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        472,
+        1201,
+        167,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "REPO",
+      "name": "repo:CaravanRequestRepository",
+      "body": [],
+      "parent": "request",
+      "stereotype": "JpaRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1083,
+        982,
+        217,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "HREPO",
+      "name": "hRepo:RequestStatusHistoryRepository",
+      "body": [],
+      "parent": "request",
+      "stereotype": "JpaRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        472,
+        1453,
+        261,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "OREPO",
+      "name": "orgRepo:OrganizationRepository",
+      "body": [],
+      "parent": "organization",
+      "stereotype": "JpaRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        2150,
+        1201,
+        217,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "RREPO",
+      "name": "routeRepo:RouteRepository",
+      "body": [],
+      "parent": "route",
+      "stereotype": "JpaRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1430,
+        1453,
+        187,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "CPREPO",
+      "name": "cpRepo:CheckpointRepository",
+      "body": [],
+      "parent": "route",
+      "stereotype": "JpaRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1637,
+        1453,
+        203,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "SREPO",
+      "name": "segRepo:RouteSegmentRepository",
+      "body": [],
+      "parent": "route",
+      "stereotype": "JpaRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1859,
+        1453,
+        234,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "ROUTE",
+      "name": "route:Route",
+      "body": [],
+      "parent": "route",
+      "stereotype": "@Entity",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1325,
+        1453,
+        110,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "RISK",
+      "name": "risk:RiskService",
+      "body": [],
+      "parent": "risk",
+      "stereotype": "@Service",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        2392,
+        1201,
+        113,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "INTEL",
+      "name": "intel:WastelandIntelClient",
+      "body": [],
+      "parent": "risk",
+      "stereotype": "@Component",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        2392,
+        1453,
+        172,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "RAREPO",
+      "name": "raRepo:RiskAssessmentRepository",
+      "body": [],
+      "parent": "risk",
+      "stereotype": "MongoRepository",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        2605,
+        1453,
+        234,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "WI",
+      "name": "wi:Wasteland Intel",
+      "body": [],
+      "parent": "external",
+      "stereotype": "внешняя система",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        2536,
+        1597,
+        128,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    }
+  ],
+  "edges": [
+    {
+      "from": "D",
+      "to": "FORM",
+      "label": "1: submit(e: FormEvent)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          322,
+          125
+        ],
+        [
+          505,
+          125
+        ]
+      ],
+      "caption": [
+        344,
+        106,
+        161,
+        16
+      ]
+    },
+    {
+      "from": "FORM",
+      "to": "API",
+      "label": "1.1: created =\ncreateRequest(\nbody: CreateRequestBody)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          657,
+          136
+        ],
+        [
+          817,
+          234
+        ],
+        [
+          914,
+          546
+        ],
+        [
+          798,
+          673
+        ],
+        [
+          652,
+          710
+        ]
+      ],
+      "caption": [
+        916,
+        501,
+        168,
+        48
+      ]
+    },
+    {
+      "from": "API",
+      "to": "WEB",
+      "label": "1.1.1: POST /api/requests : HTTP 201 | 400",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          541,
+          743
+        ],
+        [
+          541,
+          808
+        ]
+      ],
+      "caption": [
+        543,
+        756,
+        294,
+        16
+      ]
+    },
+    {
+      "from": "WEB",
+      "to": "SVC",
+      "label": "1.1.1.1 [routeId != null]: create(organizationId,\norigin, destination, departureDate,\ncargoDescription, cargoValueCaps, routeId)\n1.1.1.1 [segments не пуст]:\ncreateWithManualRoute(..., routeName, specs)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          539,
+          861
+        ],
+        [
+          533,
+          982
+        ]
+      ],
+      "caption": [
+        541,
+        883,
+        343,
+        81
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "OREPO",
+      "label": "1.1.1.1.1: findById(organizationId) : Optional<Organization>",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          595,
+          1000
+        ],
+        [
+          1232,
+          1025
+        ],
+        [
+          2237,
+          1049
+        ],
+        [
+          2260,
+          1201
+        ]
+      ],
+      "caption": [
+        2048,
+        1065,
+        420,
+        16
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "RREPO",
+      "label": "1.1.1.1.2 [шаблон]: findById(routeId)\n: Optional<Route>\n1.1.1.1.2 [ручной]:\nsave(new Route(nextRouteCode(), name, false))",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          595,
+          1014
+        ],
+        [
+          1200,
+          1077
+        ],
+        [
+          1430,
+          1359
+        ],
+        [
+          1430,
+          1453
+        ]
+      ],
+      "caption": [
+        1321,
+        1196,
+        314,
+        65
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "CPREPO",
+      "label": "1.1.1.1.3 [ручной] *[для каждого участка]:\nfindByCode(code) : Optional<Checkpoint>",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          595,
+          1016
+        ],
+        [
+          1585,
+          1083
+        ],
+        [
+          1630,
+          1275
+        ],
+        [
+          1706,
+          1453
+        ]
+      ],
+      "caption": [
+        1641,
+        1212,
+        294,
+        32
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "SREPO",
+      "label": "1.1.1.1.4 [ручной]: saveAll(segments)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          595,
+          1016
+        ],
+        [
+          1806,
+          1083
+        ],
+        [
+          1870,
+          1335
+        ],
+        [
+          1942,
+          1453
+        ]
+      ],
+      "caption": [
+        1919,
+        1221,
+        259,
+        16
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "ETA",
+      "label": "1.1.1.1.5: etaHours = computeHours(route)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          535,
+          1034
+        ],
+        [
+          772,
+          1081
+        ],
+        [
+          833,
+          1201
+        ]
+      ],
+      "caption": [
+        774,
+        1065,
+        287,
+        16
+      ]
+    },
+    {
+      "from": "ETA",
+      "to": "ROUTE",
+      "label": "1.1.1.1.5.1: getSegments() : List<RouteSegment>\n[шаблон] ленивая загрузка связи Route.segments провайдером JPA:\nSELECT из route_segment WHERE route_id = ? ORDER BY ord",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          840,
+          1253
+        ],
+        [
+          859,
+          1417
+        ],
+        [
+          1268,
+          1427
+        ],
+        [
+          1348,
+          1453
+        ]
+      ],
+      "caption": [
+        876,
+        1368,
+        441,
+        48
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "RISK",
+      "label": "1.1.1.1.6: risk = calculate(route, cargoValueCaps)\n1.1.1.1.8: saveAssessment(saved.getId(), risk)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          595,
+          1015
+        ],
+        [
+          2107,
+          1045
+        ],
+        [
+          2393,
+          1050
+        ],
+        [
+          2450,
+          1201
+        ]
+      ],
+      "caption": [
+        2423,
+        1057,
+        350,
+        32
+      ]
+    },
+    {
+      "from": "RISK",
+      "to": "INTEL",
+      "label": "1.1.1.1.6.1: report = fetchThreats(segmentKeys)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          2417,
+          1253
+        ],
+        [
+          2384,
+          1374
+        ],
+        [
+          2422,
+          1453
+        ]
+      ],
+      "caption": [
+        2412,
+        1384,
+        329,
+        16
+      ]
+    },
+    {
+      "from": "INTEL",
+      "to": "WI",
+      "label": "1.1.1.1.6.1.1: GET /threats?segments=…\n(connect / read timeout 2000 мс)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          2475,
+          1506
+        ],
+        [
+          2469,
+          1572
+        ],
+        [
+          2535,
+          1623
+        ]
+      ],
+      "caption": [
+        2477,
+        1528,
+        266,
+        32
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "REPO",
+      "label": "1.1.1.1.7: saved = save(request) — INSERT в caravan_request, status = DRAFT",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          595,
+          1008
+        ],
+        [
+          1083,
+          1008
+        ]
+      ],
+      "caption": [
+        607,
+        990,
+        525,
+        16
+      ]
+    },
+    {
+      "from": "RISK",
+      "to": "RAREPO",
+      "label": "1.1.1.1.8.1: save(new RiskAssessment(requestId, risk, now))",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          2460,
+          1253
+        ],
+        [
+          2628,
+          1344
+        ],
+        [
+          2718,
+          1453
+        ]
+      ],
+      "caption": [
+        2718,
+        1384,
+        412,
+        16
+      ]
+    },
+    {
+      "from": "SVC",
+      "to": "ST",
+      "label": "1.1.1.1.9: recordCreation(saved)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          535,
+          1034
+        ],
+        [
+          541,
+          1201
+        ]
+      ],
+      "caption": [
+        543,
+        1065,
+        223,
+        16
+      ]
+    },
+    {
+      "from": "ST",
+      "to": "HREPO",
+      "label": "1.1.1.1.9.1: save(new RequestStatusHistory(saved, null,\nDRAFT, DISPATCHER, null, \"Заявка создана\"))",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          521,
+          1253
+        ],
+        [
+          514,
+          1367
+        ],
+        [
+          561,
+          1453
+        ]
+      ],
+      "caption": [
+        526,
+        1377,
+        385,
+        32
+      ]
+    },
+    {
+      "from": "FORM",
+      "to": "CON",
+      "label": "1.2: onCreated(created)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          581,
+          147
+        ],
+        [
+          581,
+          324
+        ]
+      ],
+      "caption": [
+        583,
+        173,
+        161,
+        16
+      ]
+    },
+    {
+      "from": "CON",
+      "to": "REG",
+      "label": "1.2.1: setCreated(n + 1)\n→ prop reloadToken",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          581,
+          365
+        ],
+        [
+          581,
+          568
+        ]
+      ],
+      "caption": [
+        586,
+        510,
+        168,
+        32
+      ]
+    },
+    {
+      "from": "REG",
+      "to": "API",
+      "label": "1.2.1.1 (асинхронно): load() = getRegistry(organizationId, query)\nGET /api/requests/registry",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          502,
+          603
+        ],
+        [
+          464,
+          645
+        ],
+        [
+          489,
+          683
+        ]
+      ],
+      "caption": [
+        470,
+        628,
+        454,
+        32
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "text": "**Куда идут обращения к хранилищам**\nСами СУБД объектами взаимодействия не показаны: к PostgreSQL\nобращаются репозитории Spring Data и — на шаге 1.1.1.1.5.1 —\nленивая загрузка связи Route.segments провайдером JPA.\n**PostgreSQL 16 (@Entity, JpaRepository):**\norgRepo → organization (SELECT), routeRepo → route (SELECT | INSERT),\ncpRepo → checkpoint (SELECT), repo → caravan_request (INSERT),\nhRepo → request_status_history (INSERT);\nroute_segment — SELECT ленивой загрузкой Route.segments,\nINSERT через segRepo.saveAll (только ручной маршрут).\n**MongoDB 7 (@Document, MongoRepository):**\nraRepo → коллекция risk_assessment (insertOne).\nНа шаге 1.1.1.1.6 RiskService берёт ключи участков из уже\nзагруженной коллекции — повторный SELECT не выполняется.\nСостав таблиц, колонок и индексов — на DB_ER_ImplementationView\nи DB_Datalogical_ImplementationView.",
+      "kind": "note",
+      "rect": [
+        22,
+        207,
+        463,
+        274
+      ],
+      "anchor": "D"
+    },
+    {
+      "text": "**Граница транзакции — в слое web:** @Transactional стоит\nна RequestController.create(), поэтому все обращения к PostgreSQL\nна шагах 1.1.1.1.1–1.1.1.1.9.1 идут в одной транзакции.\nЕдинственная запись этого диапазона вне неё — 1.1.1.1.8.1:\nMongoDB транзакцией не охвачена, запись при откате не отменяется.\n[не указаны ни routeId, ни segments] и\n[организация, маршрут или контрольная точка не найдены] →\nIllegalArgumentException → handleBadRequest → HTTP 400,\nтранзакция откатывает INSERT.\n[Wasteland Intel не ответил] → RiskResult.unavailable(): risk_status = NA\n**Событие аудита при создании заявки не пишется:** recordCreation()\nсохраняет только запись истории статусов. AuditEvent пишут\nchangeStatus() (UC-2) и OrganizationService.create() (UC-32) —\nэтим UC-1 и UC-32 различаются.",
+      "kind": "note",
+      "rect": [
+        6,
+        1108,
+        448,
+        237
+      ],
+      "anchor": "SVC"
+    }
+  ],
+  "frames": [
+    {
+      "key": "front_pages",
+      "name": "frontend/src: pages, components\n(React 18 + TypeScript)",
+      "rect": [
+        493,
+        60,
+        238,
+        556
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "FORM",
+        "CON",
+        "REG"
+      ]
+    },
+    {
+      "key": "front_api",
+      "name": "frontend/src",
+      "rect": [
+        421,
+        669,
+        240,
+        74
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "API"
+      ]
+    },
+    {
+      "key": "request",
+      "name": "com.karavany.request",
+      "rect": [
+        464,
+        782,
+        846,
+        733
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "WEB",
+        "SVC",
+        "ETA",
+        "ST",
+        "REPO",
+        "HREPO"
+      ]
+    },
+    {
+      "key": "organization",
+      "name": "com.karavany.organization",
+      "rect": [
+        2143,
+        1174,
+        234,
+        89
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "OREPO"
+      ]
+    },
+    {
+      "key": "route",
+      "name": "com.karavany.route",
+      "rect": [
+        1317,
+        1427,
+        784,
+        88
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "ROUTE",
+        "RREPO",
+        "CPREPO",
+        "SREPO"
+      ]
+    },
+    {
+      "key": "risk",
+      "name": "com.karavany.risk",
+      "rect": [
+        2385,
+        1174,
+        693,
+        341
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "RISK",
+        "INTEL",
+        "RAREPO"
+      ]
+    },
+    {
+      "key": "external",
+      "name": "внешние системы",
+      "rect": [
+        2528,
+        1569,
+        148,
+        90
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "WI"
+      ]
+    }
+  ]
+}

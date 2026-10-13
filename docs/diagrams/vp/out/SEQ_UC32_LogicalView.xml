@@ -1,2 +1,2821 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SEQ_UC32_LogicalView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов"><ModelProperties><StringProperty name="name" value="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов" /></ModelProperties></Model><Model id="M100000000000000" modelType="InteractionActor" name="Суперпользователь"><ModelProperties><StringProperty name="name" value="Суперпользователь" /></ModelProperties></Model><Model id="M200000000000000" modelType="InteractionLifeLine" name="Интерфейс управления&#10;организациями"><ModelProperties><StringProperty name="name" value="Интерфейс управления&#10;организациями" /></ModelProperties></Model><Model id="M300000000000000" modelType="InteractionLifeLine" name="Создание организации&#10;UC-32"><ModelProperties><StringProperty name="name" value="Создание организации&#10;UC-32" /></ModelProperties></Model><Model id="M400000000000000" modelType="InteractionLifeLine" name="Организация"><ModelProperties><StringProperty name="name" value="Организация" /></ModelProperties></Model><Model id="M500000000000000" modelType="InteractionLifeLine" name="Учётная запись"><ModelProperties><StringProperty name="name" value="Учётная запись" /></ModelProperties></Model><Model id="M600000000000000" modelType="InteractionLifeLine" name="Событие аудита"><ModelProperties><StringProperty name="name" value="Событие аудита" /></ModelProperties></Model><Model id="M700000000000000" modelType="InteractionLifeLine" name="Хранение данных"><ModelProperties><StringProperty name="name" value="Хранение данных" /></ModelProperties></Model><Model id="M800000000000000" modelType="InteractionLifeLine" name="Журнал аудита"><ModelProperties><StringProperty name="name" value="Журнал аудита" /></ModelProperties></Model><Model id="M900000000000000" modelType="CombinedFragment" name="break"><ModelProperties><StringProperty name="name" value="break" /><StringProperty name="interactionOperator" value="break" /></ModelProperties></Model><Model id="Mo10000000000000" modelType="InteractionOperand" name="название занято (альт. 4а)"><ModelProperties><StringProperty name="name" value="название занято (альт. 4а)" /></ModelProperties></Model><Model id="M110000000000000" modelType="CombinedFragment" name="opt"><ModelProperties><StringProperty name="name" value="opt" /><StringProperty name="interactionOperator" value="opt" /></ModelProperties></Model><Model id="Mo12000000000000" modelType="InteractionOperand" name="первый диспетчер задан"><ModelProperties><StringProperty name="name" value="первый диспетчер задан" /></ModelProperties></Model><Model id="M130000000000000" modelType="CombinedFragment" name="break"><ModelProperties><StringProperty name="name" value="break" /><StringProperty name="interactionOperator" value="break" /></ModelProperties></Model><Model id="Mo14000000000000" modelType="InteractionOperand" name="логин занят"><ModelProperties><StringProperty name="name" value="логин занят" /></ModelProperties></Model><Model id="M150000000000000" modelType="CombinedFragment" name="alt"><ModelProperties><StringProperty name="name" value="alt" /><StringProperty name="interactionOperator" value="alt" /></ModelProperties></Model><Model id="Mo16000000000000" modelType="InteractionOperand" name="первый диспетчер задан"><ModelProperties><StringProperty name="name" value="первый диспетчер задан" /></ModelProperties></Model><Model id="Mo17000000000000" modelType="InteractionOperand" name="альт. 6а: назначение пропущено"><ModelProperties><StringProperty name="name" value="альт. 6а: назначение пропущено" /></ModelProperties></Model><Model id="Mm18000000000000" modelType="Message" name="1: заполнить данные организации&#10;и первого диспетчера, подтвердить"><ModelProperties><StringProperty name="name" value="1: заполнить данные организации&#10;и первого диспетчера, подтвердить" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm19000000000000" modelType="Message" name="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)"><ModelProperties><StringProperty name="name" value="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm20000000000000" modelType="Message" name="1.1.1: занято = найти организацию по названию"><ModelProperties><StringProperty name="name" value="1.1.1: занято = найти организацию по названию" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm21000000000000" modelType="Message" name="1.2: показать ошибку «Организация&#10;с таким названием уже существует»"><ModelProperties><StringProperty name="name" value="1.2: показать ошибку «Организация&#10;с таким названием уже существует»" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm22000000000000" modelType="Message" name="1.1.2: занят = найти пользователя по логину"><ModelProperties><StringProperty name="name" value="1.1.2: занят = найти пользователя по логину" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm23000000000000" modelType="Message" name="1.3: показать ошибку «Пользователь&#10;с таким логином уже существует»"><ModelProperties><StringProperty name="name" value="1.3: показать ошибку «Пользователь&#10;с таким логином уже существует»" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm24000000000000" modelType="Message" name="1.1.3: организация = создать(ключ арендатора,&#10;название, уровень подписки, контакты)"><ModelProperties><StringProperty name="name" value="1.1.3: организация = создать(ключ арендатора,&#10;название, уровень подписки, контакты)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm25000000000000" modelType="Message" name="1.1.4: сохранить организацию"><ModelProperties><StringProperty name="name" value="1.1.4: сохранить организацию" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm26000000000000" modelType="Message" name="1.1.5: учётная запись = создать(организация,&#10;ФИО, логин, хеш начального пароля,&#10;роль «Диспетчер»)"><ModelProperties><StringProperty name="name" value="1.1.5: учётная запись = создать(организация,&#10;ФИО, логин, хеш начального пароля,&#10;роль «Диспетчер»)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm27000000000000" modelType="Message" name="1.1.6: сохранить учётную запись"><ModelProperties><StringProperty name="name" value="1.1.6: сохранить учётную запись" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm28000000000000" modelType="Message" name="1.1.7: событие = сформировать&#10;«организация создана»"><ModelProperties><StringProperty name="name" value="1.1.7: событие = сформировать&#10;«организация создана»" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm29000000000000" modelType="Message" name="1.1.8: записать событие"><ModelProperties><StringProperty name="name" value="1.1.8: записать событие" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm30000000000000" modelType="Message" name="1.4: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера"><ModelProperties><StringProperty name="name" value="1.4: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote31000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Нумерация иерархическая: целое число — действие актора,&#10;  вложенные вызовы — 1.1, 1.1.1, …; ответы актору — 1.2, 1.3, 1.4.&#10;  Сплошная линия, закрашенная стрелка — синхронный вызов;&#10;  результат вызова — в подписи: «результат = операция(...)».&#10;  Сплошная линия, открытая стрелка — асинхронное сообщение.&#10;  Ответные сообщения (пунктир) не рисуются.&#10;  |= Зона |= Значение |&#10;  | &lt;#E8F5E9&gt; | domain — состояние домена: объект живёт в памяти слоя |&#10;  | &lt;#E3F2FD&gt; | infrastructure — состояние хранения: запись в хранилище |&#10;  Участник слоя domain появляется на диаграмме в момент создания&#10;  (конструкция «create»), а не с самого верха: до этого доменного&#10;  объекта не существует. Заметки фиксируют инвариант на каждом шаге." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SEQ_UC32_Logic" name="SEQ_UC32_LogicalView" diagramType="InteractionDiagram"><DiagramProperties><BooleanProperty name="showSequenceNumbers" value="false" /></DiagramProperties><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="898" y="65" width="722" height="52" zorder="1" model="Mtitle0000000000" name="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="722" height="52" /></Shape><Shape id="S100000000000000" shapeType="InteractionActor" x="98" y="168" width="172" height="1926" zorder="11" model="M100000000000000" name="Суперпользователь"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="172" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="InteractionLifeLine" x="445" y="168" width="244" height="1926" zorder="15" model="M200000000000000" name="Интерфейс управления&#10;организациями"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="244" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="InteractionLifeLine" x="1016" y="168" width="236" height="1926" zorder="14" model="M300000000000000" name="Создание организации&#10;UC-32"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="236" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="InteractionLifeLine" x="1593" y="168" width="143" height="1926" zorder="7" model="M400000000000000" name="Организация"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="143" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="InteractionLifeLine" x="1750" y="168" width="167" height="1926" zorder="10" model="M500000000000000" name="Учётная запись"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="167" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="InteractionLifeLine" x="1932" y="168" width="175" height="1926" zorder="12" model="M600000000000000" name="Событие аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="175" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="InteractionLifeLine" x="2145" y="168" width="188" height="1926" zorder="13" model="M700000000000000" name="Хранение данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="188" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S800000000000000" shapeType="InteractionLifeLine" x="2348" y="168" width="165" height="1926" zorder="9" model="M800000000000000" name="Журнал аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="165" height="1926" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S900000000000000" shapeType="CombinedFragment" x="83" y="505" width="1264" height="170" zorder="5" model="M900000000000000" name="break"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1264" height="170" /><ChildShapes><Shape id="So10000000000000" shapeType="InteractionOperand" x="83" y="505" width="1264" height="170" zorder="4" model="Mo10000000000000" name="название занято (альт. 4а)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1264" height="170" /></Shape></ChildShapes></Shape><Shape id="S110000000000000" shapeType="CombinedFragment" x="69" y="696" width="2279" height="261" zorder="17" model="M110000000000000" name="opt"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="2279" height="261" /><ChildShapes><Shape id="So12000000000000" shapeType="InteractionOperand" x="69" y="696" width="2279" height="261" zorder="16" model="Mo12000000000000" name="первый диспетчер задан"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="2279" height="261" /></Shape></ChildShapes></Shape><Shape id="S130000000000000" shapeType="CombinedFragment" x="83" y="777" width="1264" height="170" zorder="3" model="M130000000000000" name="break"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1264" height="170" /><ChildShapes><Shape id="So14000000000000" shapeType="InteractionOperand" x="83" y="777" width="1264" height="170" zorder="2" model="Mo14000000000000" name="логин занят"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1264" height="170" /></Shape></ChildShapes></Shape><Shape id="S150000000000000" shapeType="CombinedFragment" x="914" y="1243" width="1500" height="414" zorder="19" model="M150000000000000" name="alt"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1500" height="414" /><ChildShapes><Shape id="So16000000000000" shapeType="InteractionOperand" x="914" y="1243" width="1500" height="414" zorder="18" model="Mo16000000000000" name="первый диспетчер задан"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1500" height="414" /></Shape><Shape id="So17000000000000" shapeType="InteractionOperand" x="914" y="1450" width="1500" height="207" zorder="8" model="Mo17000000000000" name="альт. 6а: назначение пропущено"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="1500" height="207" /></Shape></ChildShapes></Shape><Shape id="Snote31000000000" shapeType="NOTE" x="1901" y="2160" width="700" height="326" zorder="6" model="Mnote31000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="Cm18000000000000" shapeType="Message" model="Mm18000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="196" y="286" width="359" height="22" /><Points><Point x="184" y="310" /><Point x="567" y="310" /></Points></Connector><Connector id="Cm19000000000000" shapeType="Message" model="Mm19000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="579" y="354" width="543" height="22" /><Points><Point x="567" y="378" /><Point x="1134" y="378" /></Points></Connector><Connector id="Cm20000000000000" shapeType="Message" model="Mm20000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1146" y="458" width="1081" height="22" /><Points><Point x="1134" y="482" /><Point x="2239" y="482" /></Points></Connector><Connector id="Cm21000000000000" shapeType="Message" model="Mm21000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="196" y="639" width="359" height="22" /><Points><Point x="567" y="663" /><Point x="184" y="663" /></Points></Connector><Connector id="Cm22000000000000" shapeType="Message" model="Mm22000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1146" y="730" width="1081" height="22" /><Points><Point x="1134" y="754" /><Point x="2239" y="754" /></Points></Connector><Connector id="Cm23000000000000" shapeType="Message" model="Mm23000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="196" y="911" width="359" height="22" /><Points><Point x="567" y="935" /><Point x="184" y="935" /></Points></Connector><Connector id="Cm24000000000000" shapeType="Message" model="Mm24000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="1146" y="999" width="506" height="22" /><Points><Point x="1134" y="1023" /><Point x="1664" y="1023" /></Points></Connector><Connector id="Cm25000000000000" shapeType="Message" model="Mm25000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1146" y="1120" width="1081" height="22" /><Points><Point x="1134" y="1144" /><Point x="2239" y="1144" /></Points></Connector><Connector id="Cm26000000000000" shapeType="Message" model="Mm26000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="1146" y="1324" width="675" height="22" /><Points><Point x="1134" y="1348" /><Point x="1833" y="1348" /></Points></Connector><Connector id="Cm27000000000000" shapeType="Message" model="Mm27000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1146" y="1445" width="1081" height="22" /><Points><Point x="1134" y="1469" /><Point x="2239" y="1469" /></Points></Connector><Connector id="Cm28000000000000" shapeType="Message" model="Mm28000000000000" from="S300000000000000" to="S600000000000000"><Caption visible="true" side="None" x="1146" y="1698" width="861" height="22" /><Points><Point x="1134" y="1722" /><Point x="2019" y="1722" /></Points></Connector><Connector id="Cm29000000000000" shapeType="Message" model="Mm29000000000000" from="S300000000000000" to="S800000000000000"><Caption visible="true" side="None" x="1146" y="1819" width="1272" height="22" /><Points><Point x="1134" y="1843" /><Point x="2430" y="1843" /></Points></Connector><Connector id="Cm30000000000000" shapeType="Message" model="Mm30000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="196" y="1973" width="359" height="22" /><Points><Point x="567" y="1997" /><Point x="184" y="1997" /></Points></Connector></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SEQ_UC32_LogicalView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="b92bd_MP00100000" modelType="Package" name="presentation">
+      <ModelProperties>
+        <StringProperty name="name" value="presentation" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b92bd_MN02800000" modelType="InteractionLifeLine" name="Интерфейс управления&#10;организациями">
+          <ModelProperties>
+            <StringProperty name="name" value="Интерфейс управления&#10;организациями" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="b92bd_MA09800000" modelType="Activation">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b92bd_BORDER0030" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_MP00600000" modelType="Package" name="application">
+      <ModelProperties>
+        <StringProperty name="name" value="application" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b92bd_MN03400000" modelType="InteractionLifeLine" name="Создание организации&#10;UC-32">
+          <ModelProperties>
+            <StringProperty name="name" value="Создание организации&#10;UC-32" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="b92bd_MA10200000" modelType="Activation">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+              </ModelProperties>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b92bd_BORDER0080" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_MP01100000" modelType="Package" name="domain">
+      <ModelProperties>
+        <StringProperty name="name" value="domain" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b92bd_MN04000000" modelType="InteractionLifeLine" name="Организация">
+          <ModelProperties>
+            <StringProperty name="name" value="Организация" />
+          </ModelProperties>
+        </Model>
+        <Model id="b92bd_MN04600000" modelType="InteractionLifeLine" name="Учётная запись">
+          <ModelProperties>
+            <StringProperty name="name" value="Учётная запись" />
+          </ModelProperties>
+        </Model>
+        <Model id="b92bd_MN05200000" modelType="InteractionLifeLine" name="Событие аудита">
+          <ModelProperties>
+            <StringProperty name="name" value="Событие аудита" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b92bd_BORDER0130" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_MP01600000" modelType="Package" name="infrastructure">
+      <ModelProperties>
+        <StringProperty name="name" value="infrastructure" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b92bd_MN05800000" modelType="InteractionLifeLine" name="Хранение данных">
+          <ModelProperties>
+            <StringProperty name="name" value="Хранение данных" />
+          </ModelProperties>
+        </Model>
+        <Model id="b92bd_MN06400000" modelType="InteractionLifeLine" name="Журнал аудита">
+          <ModelProperties>
+            <StringProperty name="name" value="Журнал аудита" />
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b92bd_BORDER0180" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_MN02100000" modelType="InteractionActor" name="Суперпользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Суперпользователь" />
+        <ModelRefProperty name="referencedActor">
+          <ModelRef id="b92bd_ACTOR02300" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_ACTOR02300" modelType="Actor" name="Суперпользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Суперпользователь" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE026000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0300" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE032000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0360" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE038000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0420" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE044000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0480" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE050000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0540" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE056000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0600" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE062000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER0660" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_LIFE068000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_MF07000000" modelType="CombinedFragment" name="одна транзакция слоя application&#10;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе">
+      <ModelProperties>
+        <StringProperty name="name" value="одна транзакция слоя application&#10;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе" />
+        <StringProperty name="interactionOperator" value="critical" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b92bd_MO07200000" modelType="InteractionOperand" name="одна транзакция слоя application&#10;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе">
+          <ModelProperties>
+            <StringProperty name="name" value="одна транзакция слоя application&#10;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе" />
+            <StringProperty name="guard" value="одна транзакция слоя application&#10;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="b92bd_MF07500000" modelType="CombinedFragment" name="название занято (альт. 4а)">
+              <ModelProperties>
+                <StringProperty name="name" value="название занято (альт. 4а)" />
+                <StringProperty name="interactionOperator" value="break" />
+              </ModelProperties>
+              <ChildModels>
+                <Model id="b92bd_MO07700000" modelType="InteractionOperand" name="название занято (альт. 4а)">
+                  <ModelProperties>
+                    <StringProperty name="name" value="название занято (альт. 4а)" />
+                    <StringProperty name="guard" value="название занято (альт. 4а)" />
+                  </ModelProperties>
+                  <ChildModels>
+                    <Model id="b92bd_MM12100000" modelType="Message" name="1.2: показать ошибку «Организация&#10;с таким названием уже существует»">
+                      <ModelProperties>
+                        <StringProperty name="name" value="1.2: показать ошибку «Организация&#10;с таким названием уже существует»" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="b92bd_MN02800000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="b92bd_MN02100000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="true" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="b92bd_END1220000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN02800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="b92bd_END1230000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN02100000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                  </ChildModels>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="b92bd_MF08000000" modelType="CombinedFragment" name="первый диспетчер задан">
+              <ModelProperties>
+                <StringProperty name="name" value="первый диспетчер задан" />
+                <StringProperty name="interactionOperator" value="opt" />
+              </ModelProperties>
+              <ChildModels>
+                <Model id="b92bd_MO08200000" modelType="InteractionOperand" name="первый диспетчер задан">
+                  <ModelProperties>
+                    <StringProperty name="name" value="первый диспетчер задан" />
+                    <StringProperty name="guard" value="первый диспетчер задан" />
+                  </ModelProperties>
+                  <ChildModels>
+                    <Model id="b92bd_MF08500000" modelType="CombinedFragment" name="логин занят">
+                      <ModelProperties>
+                        <StringProperty name="name" value="логин занят" />
+                        <StringProperty name="interactionOperator" value="break" />
+                      </ModelProperties>
+                      <ChildModels>
+                        <Model id="b92bd_MO08700000" modelType="InteractionOperand" name="логин занят">
+                          <ModelProperties>
+                            <StringProperty name="name" value="логин занят" />
+                            <StringProperty name="guard" value="логин занят" />
+                          </ModelProperties>
+                          <ChildModels>
+                            <Model id="b92bd_MM13100000" modelType="Message" name="1.3: показать ошибку «Пользователь&#10;с таким логином уже существует»">
+                              <ModelProperties>
+                                <StringProperty name="name" value="1.3: показать ошибку «Пользователь&#10;с таким логином уже существует»" />
+                                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                                  <ModelRef id="b92bd_MN02800000" />
+                                </ModelRefProperty>
+                                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                                  <ModelRef id="b92bd_MN02100000" />
+                                </ModelRefProperty>
+                                <BooleanProperty name="asynchronous" value="true" />
+                                <IntegerProperty name="type" value="0" />
+                              </ModelProperties>
+                              <FromEnd>
+                                <Model id="b92bd_END1320000" modelType="MessageEnd" name="" composite="true">
+                                  <ModelProperties>
+                                    <StringProperty name="name" value="" />
+                                    <ModelRefProperty name="EndModelElement">
+                                      <ModelRef id="b92bd_MN02800000" />
+                                    </ModelRefProperty>
+                                  </ModelProperties>
+                                </Model>
+                              </FromEnd>
+                              <ToEnd>
+                                <Model id="b92bd_END1330000" modelType="MessageEnd" name="" composite="true">
+                                  <ModelProperties>
+                                    <StringProperty name="name" value="" />
+                                    <ModelRefProperty name="EndModelElement">
+                                      <ModelRef id="b92bd_MN02100000" />
+                                    </ModelRefProperty>
+                                  </ModelProperties>
+                                </Model>
+                              </ToEnd>
+                            </Model>
+                          </ChildModels>
+                        </Model>
+                      </ChildModels>
+                    </Model>
+                    <Model id="b92bd_MM12600000" modelType="Message" name="1.1.2: занят = найти пользователя по логину">
+                      <ModelProperties>
+                        <StringProperty name="name" value="1.1.2: занят = найти пользователя по логину" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="b92bd_MN03400000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="b92bd_MN05800000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="b92bd_END1270000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN03400000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="b92bd_END1280000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN05800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                  </ChildModels>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="b92bd_MF09000000" modelType="CombinedFragment" name="первый диспетчер задан">
+              <ModelProperties>
+                <StringProperty name="name" value="первый диспетчер задан" />
+                <StringProperty name="interactionOperator" value="alt" />
+              </ModelProperties>
+              <ChildModels>
+                <Model id="b92bd_MO09200000" modelType="InteractionOperand" name="первый диспетчер задан">
+                  <ModelProperties>
+                    <StringProperty name="name" value="первый диспетчер задан" />
+                    <StringProperty name="guard" value="первый диспетчер задан" />
+                  </ModelProperties>
+                  <ChildModels>
+                    <Model id="b92bd_MM14600000" modelType="Message" name="1.1.5: учётная запись = создать(организация,&#10;ФИО, логин, хеш начального пароля,&#10;роль «Диспетчер»)">
+                      <ModelProperties>
+                        <StringProperty name="name" value="1.1.5: учётная запись = создать(организация,&#10;ФИО, логин, хеш начального пароля,&#10;роль «Диспетчер»)" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="b92bd_MN03400000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="b92bd_MN04600000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="2" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="b92bd_END1470000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN03400000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="b92bd_END1480000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN04600000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                    <Model id="b92bd_MM15100000" modelType="Message" name="1.1.6: сохранить учётную запись">
+                      <ModelProperties>
+                        <StringProperty name="name" value="1.1.6: сохранить учётную запись" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="b92bd_MN03400000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="b92bd_MN05800000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="b92bd_END1520000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN03400000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="b92bd_END1530000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="b92bd_MN05800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                  </ChildModels>
+                </Model>
+                <Model id="b92bd_MO09500000" modelType="InteractionOperand" name="альт. 6а: назначение пропущено">
+                  <ModelProperties>
+                    <StringProperty name="name" value="альт. 6а: назначение пропущено" />
+                    <StringProperty name="guard" value="альт. 6а: назначение пропущено" />
+                  </ModelProperties>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="b92bd_MM11600000" modelType="Message" name="1.1.1: занято = найти организацию по названию">
+              <ModelProperties>
+                <StringProperty name="name" value="1.1.1: занято = найти организацию по названию" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="b92bd_MN03400000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="b92bd_MN05800000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="b92bd_END1170000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN03400000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="b92bd_END1180000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN05800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="b92bd_MM13600000" modelType="Message" name="1.1.3: организация = создать(ключ арендатора,&#10;название, уровень подписки, контакты)">
+              <ModelProperties>
+                <StringProperty name="name" value="1.1.3: организация = создать(ключ арендатора,&#10;название, уровень подписки, контакты)" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="b92bd_MN03400000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="b92bd_MN04000000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="2" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="b92bd_END1370000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN03400000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="b92bd_END1380000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN04000000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="b92bd_MM14100000" modelType="Message" name="1.1.4: сохранить организацию">
+              <ModelProperties>
+                <StringProperty name="name" value="1.1.4: сохранить организацию" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="b92bd_MN03400000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="b92bd_MN05800000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="b92bd_END1420000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN03400000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="b92bd_END1430000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN05800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="b92bd_MM15600000" modelType="Message" name="1.1.7: событие = сформировать&#10;«организация создана»">
+              <ModelProperties>
+                <StringProperty name="name" value="1.1.7: событие = сформировать&#10;«организация создана»" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="b92bd_MN03400000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="b92bd_MN05200000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="2" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="b92bd_END1570000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN03400000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="b92bd_END1580000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN05200000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="b92bd_MM16100000" modelType="Message" name="1.1.8: записать событие">
+              <ModelProperties>
+                <StringProperty name="name" value="1.1.8: записать событие" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="b92bd_MN03400000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="b92bd_MN06400000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="b92bd_END1620000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN03400000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="b92bd_END1630000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="b92bd_MN06400000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b92bd_BORDER1000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER1040" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_MM10600000" modelType="Message" name="1: заполнить данные организации&#10;и первого диспетчера, подтвердить">
+      <ModelProperties>
+        <StringProperty name="name" value="1: заполнить данные организации&#10;и первого диспетчера, подтвердить" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b92bd_MN02100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b92bd_MN02800000" />
+        </ModelRefProperty>
+        <BooleanProperty name="asynchronous" value="false" />
+        <IntegerProperty name="type" value="0" />
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b92bd_END1070000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b92bd_MN02100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b92bd_END1080000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b92bd_MN02800000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="b92bd_MM11100000" modelType="Message" name="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b92bd_MN02800000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b92bd_MN03400000" />
+        </ModelRefProperty>
+        <BooleanProperty name="asynchronous" value="false" />
+        <IntegerProperty name="type" value="0" />
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b92bd_END1120000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b92bd_MN02800000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b92bd_END1130000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b92bd_MN03400000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="b92bd_MM16600000" modelType="Message" name="1.4: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера">
+      <ModelProperties>
+        <StringProperty name="name" value="1.4: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b92bd_MN02800000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b92bd_MN02100000" />
+        </ModelRefProperty>
+        <BooleanProperty name="asynchronous" value="true" />
+        <IntegerProperty name="type" value="0" />
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b92bd_END1670000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b92bd_MN02800000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b92bd_END1680000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b92bd_MN02100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="b92bd_NOTE171000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="не фиксируется ничего: доменный объект&#10;не создан, в хранилище записи нет" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;не фиксируется ничего: доменный объект&lt;br&gt;не создан, в хранилище записи нет&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE173000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="не фиксируется ничего: доменный объект&#10;не создан, в хранилище записи нет" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;не фиксируется ничего: доменный объект&lt;br&gt;не создан, в хранилище записи нет&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE175000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="домен: объект существует,&#10;в хранилище записи ещё нет" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;домен: объект существует,&lt;br&gt;в хранилище записи ещё нет&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE177000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="хранилище: запись существует,&#10;домен и хранилище согласованы" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;хранилище: запись существует,&lt;br&gt;домен и хранилище согласованы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE179000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="домен: объект существует,&#10;в хранилище записи ещё нет" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;домен: объект существует,&lt;br&gt;в хранилище записи ещё нет&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE181000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="хранилище: запись существует,&#10;домен и хранилище согласованы" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;хранилище: запись существует,&lt;br&gt;домен и хранилище согласованы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE183000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="организация создаётся без пользователей,&#10;диспетчер назначается позже (UC-33)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;организация создаётся без пользователей,&lt;br&gt;диспетчер назначается позже (UC-33)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE185000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="домен: объект существует,&#10;в хранилище записи ещё нет" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;домен: объект существует,&lt;br&gt;в хранилище записи ещё нет&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE187000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="хранилище: запись существует,&#10;домен и хранилище согласованы" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;хранилище: запись существует,&lt;br&gt;домен и хранилище согласованы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_NOTE189000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Нумерация иерархическая: целое число — действие актора,&#10;вложенные вызовы — 1.1, 1.1.1, …; ответы актору — 1.2, 1.3, 1.4.&#10;Сплошная линия, закрашенная стрелка — синхронный вызов;&#10;результат вызова — в подписи: «результат = операция(...)».&#10;Сплошная линия, открытая стрелка — асинхронное сообщение.&#10;Ответные сообщения (пунктир) не рисуются.&#10;|= Зона |= Значение |&#10;| &lt;#E8F5E9&gt; | domain — состояние домена: объект живёт в памяти слоя |&#10;| &lt;#E3F2FD&gt; | infrastructure — состояние хранения: запись в хранилище |&#10;Участник слоя domain появляется на диаграмме в момент создания&#10;(конструкция «create»), а не с самого верха: до этого доменного&#10;объекта не существует. Заметки фиксируют инвариант на каждом шаге." value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Нумерация иерархическая: целое число — действие актора,&lt;br&gt;вложенные вызовы — 1.1, 1.1.1, …; ответы актору — 1.2, 1.3, 1.4.&lt;br&gt;Сплошная линия, закрашенная стрелка — синхронный вызов;&lt;br&gt;результат вызова — в подписи: «результат = операция(...)».&lt;br&gt;Сплошная линия, открытая стрелка — асинхронное сообщение.&lt;br&gt;Ответные сообщения (пунктир) не рисуются.&lt;table border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;1&quot;&gt;&lt;tr&gt;&lt;th&gt;Зона&lt;/th&gt;&lt;th&gt;Значение&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#E8F5E9&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;domain — состояние домена: объект живёт в памяти слоя&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td bgcolor=&quot;#E3F2FD&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;infrastructure — состояние хранения: запись в хранилище&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;Участник слоя domain появляется на диаграмме в момент создания&lt;br&gt;(конструкция «create»), а не с самого верха: до этого доменного&lt;br&gt;объекта не существует. Заметки фиксируют инвариант на каждом шаге.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_AT19100000" modelType="Actor" name="Суперпользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Суперпользователь" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER1940" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER1970" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER2000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER2030" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER2060" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER2090" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b92bd_BORDER2120" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="b92bd_D_SEQ_UC32" name="SEQ_UC32_LogicalView" diagramType="InteractionDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+        <BooleanProperty name="autoFitShapesSize" value="false" />
+        <BooleanProperty name="alignToGrid" value="false" />
+        <BooleanProperty name="gridVisible" value="false" />
+        <BooleanProperty name="paintConnectorThroughLabel" value="true" />
+        <BooleanProperty name="autoExtendActivations" value="false" />
+        <BooleanProperty name="showActivations" value="false" />
+        <BooleanProperty name="showMessageName" value="false" />
+        <IntegerProperty name="displayLifeLinesAsRobustnessAnalysisIcon" value="1" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="b92bd_S002000000" shapeType="Rectangle" x="275" y="62" width="177" height="1388" zorder="88" model="b92bd_MP00100000" name="presentation">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="177" height="1388" />
+          <ChildShapes>
+            <Shape id="b92bd_S004000000" shapeType="Freehand" x="275" y="62" width="177" height="1388" zorder="87" model="b92bd_BORDER0030">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:176.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:176.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S005000000" shapeType="TextBox" x="279" y="65" width="169" height="36" zorder="3">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="presentation" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;presentation&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b92bd_S029000000" shapeType="InteractionLifeLine" x="279" y="88" width="168" height="1279" zorder="83" model="b92bd_MN02800000" name="Интерфейс управления&#10;организациями">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="168" height="35" />
+              <ChildShapes>
+                <Shape id="b92bd_S031000000" shapeType="Freehand" x="279" y="88" width="168" height="36" zorder="65" model="b92bd_BORDER0300">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:167.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:167.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S033000000" shapeType="Freehand" x="363" y="124" width="2" height="1245" zorder="47" model="b92bd_LIFE032000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,1244.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S099000000" shapeType="Rectangle" x="358" y="188" width="10" height="1160" zorder="39" model="b92bd_MA09800000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <BooleanProperty name="activationGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <ChildShapes>
+                    <Shape id="b92bd_S101000000" shapeType="Freehand" x="358" y="188" width="10" height="1160" zorder="38" model="b92bd_BORDER1000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                        <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                        <BooleanProperty name="activationGraphic" value="true" />
+                      </DiagramElementProperties>
+                      <FreehandPoints>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:0.0,0.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:9.0,0.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:9.0,1159.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:0.0,1159.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:0.0,0.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                      </FreehandPoints>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                      <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                    </Shape>
+                  </ChildShapes>
+                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:253,253,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S007000000" shapeType="Rectangle" x="669" y="62" width="172" height="1388" zorder="86" model="b92bd_MP00600000" name="application">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="172" height="1388" />
+          <ChildShapes>
+            <Shape id="b92bd_S009000000" shapeType="Freehand" x="669" y="62" width="172" height="1388" zorder="85" model="b92bd_BORDER0080">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:171.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:171.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S010000000" shapeType="TextBox" x="673" y="65" width="164" height="36" zorder="2">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="application" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;application&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b92bd_S035000000" shapeType="InteractionLifeLine" x="673" y="88" width="163" height="1279" zorder="82" model="b92bd_MN03400000" name="Создание организации&#10;UC-32">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="163" height="35" />
+              <ChildShapes>
+                <Shape id="b92bd_S037000000" shapeType="Freehand" x="673" y="88" width="163" height="36" zorder="64" model="b92bd_BORDER0360">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:162.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:162.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S039000000" shapeType="Freehand" x="754" y="124" width="2" height="1245" zorder="46" model="b92bd_LIFE038000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,1244.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S103000000" shapeType="Rectangle" x="750" y="235" width="10" height="1079" zorder="37" model="b92bd_MA10200000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <BooleanProperty name="activationGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <ChildShapes>
+                    <Shape id="b92bd_S105000000" shapeType="Freehand" x="750" y="235" width="10" height="1079" zorder="36" model="b92bd_BORDER1040">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                        <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                        <BooleanProperty name="activationGraphic" value="true" />
+                      </DiagramElementProperties>
+                      <FreehandPoints>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:0.0,0.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:9.0,0.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:9.0,1078.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:0.0,1078.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                        <Point>
+                          <DiagramElementProperties>
+                            <PointProperty name="value" value="Pt:0.0,0.0" />
+                          </DiagramElementProperties>
+                        </Point>
+                      </FreehandPoints>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                      <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                    </Shape>
+                  </ChildShapes>
+                  <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:253,253,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S012000000" shapeType="Rectangle" x="1068" y="62" width="363" height="1388" zorder="95" model="b92bd_MP01100000" name="domain">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="363" height="1388" />
+          <ChildShapes>
+            <Shape id="b92bd_S014000000" shapeType="Freehand" x="1068" y="62" width="363" height="1388" zorder="94" model="b92bd_BORDER0130">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:362.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:362.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S015000000" shapeType="TextBox" x="1072" y="65" width="355" height="36" zorder="11">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="domain" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;domain&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b92bd_S041000000" shapeType="InteractionLifeLine" x="1071" y="645" width="99" height="723" zorder="74" model="b92bd_MN04000000" name="Организация">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <IntegerProperty name="requestSetSizeOption" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="99" height="27" />
+              <ChildShapes>
+                <Shape id="b92bd_S043000000" shapeType="Freehand" x="1071" y="645" width="99" height="36" zorder="53" model="b92bd_BORDER0420">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:98.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:98.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S045000000" shapeType="Freehand" x="1120" y="681" width="2" height="688" zorder="42" model="b92bd_LIFE044000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,687.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S047000000" shapeType="InteractionLifeLine" x="1179" y="870" width="115" height="498" zorder="72" model="b92bd_MN04600000" name="Учётная запись">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <IntegerProperty name="requestSetSizeOption" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="115" height="27" />
+              <ChildShapes>
+                <Shape id="b92bd_S049000000" shapeType="Freehand" x="1179" y="870" width="115" height="36" zorder="61" model="b92bd_BORDER0480">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:114.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:114.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S051000000" shapeType="Freehand" x="1236" y="906" width="2" height="463" zorder="41" model="b92bd_LIFE050000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,462.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S053000000" shapeType="InteractionLifeLine" x="1305" y="1128" width="121" height="240" zorder="71" model="b92bd_MN05200000" name="Событие аудита">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <IntegerProperty name="requestSetSizeOption" value="0" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="121" height="27" />
+              <ChildShapes>
+                <Shape id="b92bd_S055000000" shapeType="Freehand" x="1305" y="1128" width="121" height="36" zorder="62" model="b92bd_BORDER0540">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:120.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:120.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S057000000" shapeType="Freehand" x="1365" y="1164" width="2" height="205" zorder="40" model="b92bd_LIFE056000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,204.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:232,245,233,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S017000000" shapeType="Rectangle" x="1449" y="62" width="262" height="1388" zorder="93" model="b92bd_MP01600000" name="infrastructure">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="262" height="1388" />
+          <ChildShapes>
+            <Shape id="b92bd_S019000000" shapeType="Freehand" x="1449" y="62" width="262" height="1388" zorder="92" model="b92bd_BORDER0180">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:261.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:261.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,1387.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S020000000" shapeType="TextBox" x="1453" y="65" width="254" height="36" zorder="8">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="infrastructure" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;infrastructure&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b92bd_S059000000" shapeType="InteractionLifeLine" x="1452" y="88" width="130" height="1279" zorder="80" model="b92bd_MN05800000" name="Хранение данных">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="130" height="27" />
+              <ChildShapes>
+                <Shape id="b92bd_S061000000" shapeType="Freehand" x="1452" y="88" width="130" height="36" zorder="63" model="b92bd_BORDER0600">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:129.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:129.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S063000000" shapeType="Freehand" x="1517" y="124" width="2" height="1245" zorder="45" model="b92bd_LIFE062000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,1244.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S065000000" shapeType="InteractionLifeLine" x="1592" y="88" width="114" height="1279" zorder="79" model="b92bd_MN06400000" name="Журнал аудита">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+              <Caption visible="true" side="Center" x="0" y="0" width="114" height="27" />
+              <ChildShapes>
+                <Shape id="b92bd_S067000000" shapeType="Freehand" x="1592" y="88" width="114" height="36" zorder="60" model="b92bd_BORDER0660">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:113.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:113.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,35.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b92bd_S069000000" shapeType="Freehand" x="1649" y="124" width="2" height="1245" zorder="44" model="b92bd_LIFE068000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                    <BooleanProperty name="lifelineGraphic" value="true" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,1244.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                    <Stroke>
+                      <Dashes>
+                        <Dash value="4" />
+                        <Dash value="4" />
+                      </Dashes>
+                    </Stroke>
+                  </Line>
+                  <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:227,242,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S022000000" shapeType="InteractionActor" x="40" y="61" width="137" height="1307" zorder="81" model="b92bd_MN02100000" name="Суперпользователь">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+          <Caption visible="false" side="Center" x="0" y="0" width="137" height="27" />
+          <ChildShapes>
+            <Shape id="b92bd_S024000000" shapeType="Actor" x="93" y="61" width="30" height="60" zorder="48" model="b92bd_ACTOR02300">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b92bd_S025000000" shapeType="TextBox" x="40" y="126" width="137" height="22" zorder="1">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Суперпользователь" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Суперпользователь&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b92bd_S027000000" shapeType="Freehand" x="108" y="148" width="2" height="1221" zorder="43" model="b92bd_LIFE026000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                <BooleanProperty name="lifelineGraphic" value="true" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,1220.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                <Stroke>
+                  <Dashes>
+                    <Dash value="4" />
+                    <Dash value="4" />
+                  </Dashes>
+                </Stroke>
+              </Line>
+              <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,255,255,0" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S071000000" shapeType="CombinedFragment" x="10" y="249" width="1760" height="1057" zorder="97" model="b92bd_MF07000000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <ChildShapes>
+            <Shape id="b92bd_S073000000" shapeType="InteractionOperand" x="10" y="249" width="1760" height="1057" zorder="96" model="b92bd_MO07200000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <ChildShapes>
+                <Shape id="b92bd_S074000000" shapeType="TextBox" x="16" y="253" width="1644" height="30" zorder="24">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="одна транзакция слоя application&#10;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;одна транзакция слоя application&lt;/b&gt;&lt;br&gt;&lt;b&gt;шаги 1.1.1…1.1.8 фиксируются целиком или не фиксируются вовсе&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b92bd_S076000000" shapeType="CombinedFragment" x="30" y="321" width="872" height="117" zorder="78" model="b92bd_MF07500000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <ChildShapes>
+                    <Shape id="b92bd_S078000000" shapeType="InteractionOperand" x="30" y="321" width="872" height="117" zorder="77" model="b92bd_MO07700000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                      </DiagramElementProperties>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <ChildShapes>
+                        <Shape id="b92bd_S079000000" shapeType="TextBox" x="140" y="325" width="756" height="20" zorder="17">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                            <StringProperty name="plainText" value="[название занято (альт. 4а)]" />
+                            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[название занято (альт. 4а)]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                            <IntegerProperty name="modelElementNameAlignment" value="1" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                        </Shape>
+                      </ChildShapes>
+                    </Shape>
+                  </ChildShapes>
+                </Shape>
+                <Shape id="b92bd_S081000000" shapeType="CombinedFragment" x="20" y="452" width="1572" height="180" zorder="90" model="b92bd_MF08000000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <ChildShapes>
+                    <Shape id="b92bd_S083000000" shapeType="InteractionOperand" x="20" y="452" width="1572" height="180" zorder="89" model="b92bd_MO08200000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                      </DiagramElementProperties>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <ChildShapes>
+                        <Shape id="b92bd_S084000000" shapeType="TextBox" x="130" y="456" width="1456" height="20" zorder="23">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                            <StringProperty name="plainText" value="[первый диспетчер задан]" />
+                            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[первый диспетчер задан]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                            <IntegerProperty name="modelElementNameAlignment" value="1" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                        </Shape>
+                        <Shape id="b92bd_S086000000" shapeType="CombinedFragment" x="30" y="508" width="872" height="117" zorder="76" model="b92bd_MF08500000">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                          <ChildShapes>
+                            <Shape id="b92bd_S088000000" shapeType="InteractionOperand" x="30" y="508" width="872" height="117" zorder="75" model="b92bd_MO08700000">
+                              <DiagramElementProperties>
+                                <BooleanProperty name="requestResetCaption" value="false" />
+                                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                                <BooleanProperty name="requestFitSize" value="false" />
+                              </DiagramElementProperties>
+                              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                              <ChildShapes>
+                                <Shape id="b92bd_S089000000" shapeType="TextBox" x="140" y="512" width="756" height="20" zorder="16">
+                                  <DiagramElementProperties>
+                                    <BooleanProperty name="requestResetCaption" value="false" />
+                                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                                    <BooleanProperty name="requestFitSize" value="false" />
+                                    <StringProperty name="plainText" value="[логин занят]" />
+                                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[логин занят]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                                  </DiagramElementProperties>
+                                  <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                                </Shape>
+                              </ChildShapes>
+                            </Shape>
+                          </ChildShapes>
+                        </Shape>
+                      </ChildShapes>
+                    </Shape>
+                  </ChildShapes>
+                </Shape>
+                <Shape id="b92bd_S091000000" shapeType="CombinedFragment" x="603" y="830" width="1034" height="286" zorder="91" model="b92bd_MF09000000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <ChildShapes>
+                    <Shape id="b92bd_S093000000" shapeType="InteractionOperand" x="603" y="830" width="1034" height="219" zorder="84" model="b92bd_MO09200000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                      </DiagramElementProperties>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <ChildShapes>
+                        <Shape id="b92bd_S094000000" shapeType="TextBox" x="713" y="834" width="918" height="20" zorder="19">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                            <StringProperty name="plainText" value="[первый диспетчер задан]" />
+                            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[первый диспетчер задан]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                            <IntegerProperty name="modelElementNameAlignment" value="1" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                        </Shape>
+                      </ChildShapes>
+                    </Shape>
+                    <Shape id="b92bd_S096000000" shapeType="InteractionOperand" x="603" y="1049" width="1034" height="67" zorder="73" model="b92bd_MO09500000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                      </DiagramElementProperties>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <ChildShapes>
+                        <Shape id="b92bd_S097000000" shapeType="TextBox" x="609" y="1053" width="1022" height="20" zorder="21">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                            <StringProperty name="plainText" value="[альт. 6а: назначение пропущено]" />
+                            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[альт. 6а: назначение пропущено]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                            <IntegerProperty name="modelElementNameAlignment" value="1" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                        </Shape>
+                      </ChildShapes>
+                    </Shape>
+                  </ChildShapes>
+                </Shape>
+              </ChildShapes>
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="b92bd_S110000000" shapeType="TextBox" x="108" y="152" width="248" height="34" zorder="7">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1: заполнить данные организации&#10;и первого диспетчера, подтвердить" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1: заполнить данные организации&lt;br&gt;и первого диспетчера, подтвердить&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S115000000" shapeType="TextBox" x="372" y="199" width="374" height="34" zorder="10">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1: результат = создатьОрганизацию(данные организации,&#10;данные первого диспетчера)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1: результат = создатьОрганизацию(данные организации,&lt;br&gt;данные первого диспетчера)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S120000000" shapeType="TextBox" x="763" y="287" width="746" height="18" zorder="15">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.1: занято = найти организацию по названию" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.1: занято = найти организацию по названию&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S125000000" shapeType="TextBox" x="108" y="396" width="248" height="34" zorder="6">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.2: показать ошибку «Организация&#10;с таким названием уже существует»" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.2: показать ошибку «Организация&lt;br&gt;с таким названием уже существует»&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S130000000" shapeType="TextBox" x="763" y="474" width="746" height="18" zorder="14">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.2: занят = найти пользователя по логину" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.2: занят = найти пользователя по логину&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S135000000" shapeType="TextBox" x="108" y="583" width="248" height="34" zorder="5">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.3: показать ошибку «Пользователь&#10;с таким логином уже существует»" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.3: показать ошибку «Пользователь&lt;br&gt;с таким логином уже существует»&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S140000000" shapeType="TextBox" x="763" y="644" width="349" height="34" zorder="9">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.3: организация = создать(ключ арендатора,&#10;название, уровень подписки, контакты)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.3: организация = создать(ключ арендатора,&lt;br&gt;название, уровень подписки, контакты)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S145000000" shapeType="TextBox" x="763" y="743" width="746" height="18" zorder="13">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.4: сохранить организацию" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.4: сохранить организацию&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S150000000" shapeType="TextBox" x="763" y="852" width="466" height="50" zorder="22">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.5: учётная запись = создать(организация,&#10;ФИО, логин, хеш начального пароля,&#10;роль «Диспетчер»)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.5: учётная запись = создать(организация,&lt;br&gt;ФИО, логин, хеш начального пароля,&lt;br&gt;роль «Диспетчер»)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S155000000" shapeType="TextBox" x="763" y="968" width="746" height="18" zorder="12">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.6: сохранить учётную запись" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.6: сохранить учётную запись&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S160000000" shapeType="TextBox" x="763" y="1126" width="594" height="34" zorder="20">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.7: событие = сформировать&#10;«организация создана»" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.7: событие = сформировать&lt;br&gt;«организация создана»&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S165000000" shapeType="TextBox" x="763" y="1225" width="877" height="18" zorder="18">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.8: записать событие" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.1.8: записать событие&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S170000000" shapeType="TextBox" x="108" y="1316" width="248" height="34" zorder="4">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.4: показать организацию в реестре,&#10;ключ арендатора и логин диспетчера" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1.4: показать организацию в реестре,&lt;br&gt;ключ арендатора и логин диспетчера&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b92bd_S172000000" shapeType="NOTE" x="618" y="345" width="275" height="42" zorder="33" model="b92bd_NOTE171000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S174000000" shapeType="NOTE" x="618" y="533" width="275" height="42" zorder="32" model="b92bd_NOTE173000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S176000000" shapeType="NOTE" x="1021" y="693" width="197" height="42" zorder="28" model="b92bd_NOTE175000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S178000000" shapeType="NOTE" x="1407" y="776" width="223" height="42" zorder="31" model="b92bd_NOTE177000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S180000000" shapeType="NOTE" x="1140" y="917" width="197" height="42" zorder="27" model="b92bd_NOTE179000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S182000000" shapeType="NOTE" x="1407" y="1000" width="223" height="42" zorder="30" model="b92bd_NOTE181000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S184000000" shapeType="NOTE" x="614" y="1067" width="284" height="42" zorder="34" model="b92bd_NOTE183000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S186000000" shapeType="NOTE" x="1266" y="1174" width="197" height="42" zorder="26" model="b92bd_NOTE185000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S188000000" shapeType="NOTE" x="1539" y="1257" width="223" height="42" zorder="29" model="b92bd_NOTE187000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S190000000" shapeType="NOTE" x="1285" y="1463" width="483" height="224" zorder="35" model="b92bd_NOTE189000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="2" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:221,221,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S192000000" shapeType="Actor" x="40" y="1368" width="137" height="100" zorder="70" model="b92bd_AT19100000" name="Суперпользователь">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="137" height="100" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S193000000" shapeType="Rectangle" x="279" y="1368" width="168" height="50" zorder="69" model="b92bd_MN02800000" name="Интерфейс управления&#10;организациями">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="168" height="50" />
+          <ChildShapes>
+            <Shape id="b92bd_S195000000" shapeType="Freehand" x="279" y="1368" width="168" height="50" zorder="68" model="b92bd_BORDER1940">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:167.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:167.0,49.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,49.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S196000000" shapeType="Rectangle" x="673" y="1368" width="163" height="50" zorder="67" model="b92bd_MN03400000" name="Создание организации&#10;UC-32">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="163" height="50" />
+          <ChildShapes>
+            <Shape id="b92bd_S198000000" shapeType="Freehand" x="673" y="1368" width="163" height="50" zorder="66" model="b92bd_BORDER1970">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:162.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:162.0,49.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,49.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S199000000" shapeType="Rectangle" x="1071" y="1368" width="99" height="31" zorder="50" model="b92bd_MN04000000" name="Организация">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="99" height="31" />
+          <ChildShapes>
+            <Shape id="b92bd_S201000000" shapeType="Freehand" x="1071" y="1368" width="99" height="31" zorder="49" model="b92bd_BORDER2000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:98.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:98.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S202000000" shapeType="Rectangle" x="1179" y="1368" width="115" height="31" zorder="55" model="b92bd_MN04600000" name="Учётная запись">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="115" height="31" />
+          <ChildShapes>
+            <Shape id="b92bd_S204000000" shapeType="Freehand" x="1179" y="1368" width="115" height="31" zorder="54" model="b92bd_BORDER2030">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:114.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:114.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S205000000" shapeType="Rectangle" x="1305" y="1368" width="121" height="31" zorder="57" model="b92bd_MN05200000" name="Событие аудита">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="121" height="31" />
+          <ChildShapes>
+            <Shape id="b92bd_S207000000" shapeType="Freehand" x="1305" y="1368" width="121" height="31" zorder="56" model="b92bd_BORDER2060">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:120.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:120.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S208000000" shapeType="Rectangle" x="1452" y="1368" width="130" height="31" zorder="59" model="b92bd_MN05800000" name="Хранение данных">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="130" height="31" />
+          <ChildShapes>
+            <Shape id="b92bd_S210000000" shapeType="Freehand" x="1452" y="1368" width="130" height="31" zorder="58" model="b92bd_BORDER2090">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:129.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:129.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S211000000" shapeType="Rectangle" x="1592" y="1368" width="114" height="31" zorder="52" model="b92bd_MN06400000" name="Журнал аудита">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="true" side="Center" x="0" y="0" width="114" height="31" />
+          <ChildShapes>
+            <Shape id="b92bd_S213000000" shapeType="Freehand" x="1592" y="1368" width="114" height="31" zorder="51" model="b92bd_BORDER2120">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:113.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:113.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,30.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b92bd_S214000000" shapeType="TextBox" x="5" y="10" width="1776" height="40" zorder="25">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-32 «Создать организацию» — Sequence Diagram (Logical View)&#10;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;&lt;b&gt;UC-32 «Создать организацию» — Sequence Diagram (Logical View)&lt;/b&gt;&lt;br&gt;&lt;b&gt;Взаимодействие логических компонентов; уровни совпадают с диаграммой пакетов&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="14" style="1" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="b92bd_C109000000" shapeType="Message" model="b92bd_MM10600000" from="b92bd_S022000000" to="b92bd_S029000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="99" y="186" />
+            <Point x="363" y="186" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C114000000" shapeType="Message" model="b92bd_MM11100000" from="b92bd_S029000000" to="b92bd_S035000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="368" y="233" />
+            <Point x="754" y="233" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C119000000" shapeType="Message" model="b92bd_MM11600000" from="b92bd_S035000000" to="b92bd_S059000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="305" />
+            <Point x="1517" y="305" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C124000000" shapeType="Message" model="b92bd_MM12100000" from="b92bd_S029000000" to="b92bd_S022000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="358" y="430" />
+            <Point x="99" y="430" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C129000000" shapeType="Message" model="b92bd_MM12600000" from="b92bd_S035000000" to="b92bd_S059000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="492" />
+            <Point x="1517" y="492" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C134000000" shapeType="Message" model="b92bd_MM13100000" from="b92bd_S029000000" to="b92bd_S022000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="358" y="617" />
+            <Point x="99" y="617" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C139000000" shapeType="Message" model="b92bd_MM13600000" from="b92bd_S035000000" to="b92bd_S041000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="678" />
+            <Point x="1071" y="678" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C144000000" shapeType="Message" model="b92bd_MM14100000" from="b92bd_S035000000" to="b92bd_S059000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="761" />
+            <Point x="1517" y="761" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C149000000" shapeType="Message" model="b92bd_MM14600000" from="b92bd_S035000000" to="b92bd_S047000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="902" />
+            <Point x="1179" y="902" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C154000000" shapeType="Message" model="b92bd_MM15100000" from="b92bd_S035000000" to="b92bd_S059000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="986" />
+            <Point x="1517" y="986" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C159000000" shapeType="Message" model="b92bd_MM15600000" from="b92bd_S035000000" to="b92bd_S053000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="1160" />
+            <Point x="1305" y="1160" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C164000000" shapeType="Message" model="b92bd_MM16100000" from="b92bd_S035000000" to="b92bd_S065000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="760" y="1243" />
+            <Point x="1648" y="1243" />
+          </Points>
+        </Connector>
+        <Connector id="b92bd_C169000000" shapeType="Message" model="b92bd_MM16600000" from="b92bd_S029000000" to="b92bd_S022000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="363" y="1350" />
+            <Point x="99" y="1350" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

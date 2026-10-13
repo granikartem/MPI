@@ -1,2 +1,2409 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="COL_UC2_LogicalView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)&#10;Кооперация логических компонентов слоёв: параметры, результаты и сторожевые условия сообщений"><ModelProperties><StringProperty name="name" value="UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)&#10;Кооперация логических компонентов слоёв: параметры, результаты и сторожевые условия сообщений" /></ModelProperties></Model><Model id="M100000000000000" modelType="InteractionActor" name="Диспетчер /&#10;Караван-мастер"><ModelProperties><StringProperty name="name" value="Диспетчер /&#10;Караван-мастер" /></ModelProperties></Model><Model id="M200000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Интерфейс заявок"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Интерфейс заявок" /></ModelProperties></Model><Model id="M300000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Управление статусами&#10;UC-2"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Управление статусами&#10;UC-2" /></ModelProperties></Model><Model id="M400000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Заявка"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Заявка" /></ModelProperties></Model><Model id="M500000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Статусная модель"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Статусная модель" /></ModelProperties></Model><Model id="M600000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:История статусов"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:История статусов" /></ModelProperties></Model><Model id="M700000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Событие аудита"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Событие аудита" /></ModelProperties></Model><Model id="M800000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Хранение данных"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Хранение данных" /></ModelProperties></Model><Model id="M900000000000000" modelType="InteractionLifeLine" name="«компонент слоя»&#10;:Журнал аудита"><ModelProperties><StringProperty name="name" value="«компонент слоя»&#10;:Журнал аудита" /></ModelProperties></Model><Model id="Ml10000000000000" modelType="InteractionLifeLineLink" name="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)"><ModelProperties><StringProperty name="name" value="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml11000000000000" modelType="InteractionLifeLineLink" name="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)"><ModelProperties><StringProperty name="name" value="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml12000000000000" modelType="InteractionLifeLineLink" name="1.1.1: заявка =&#10;найти заявку(идентификатор)"><ModelProperties><StringProperty name="name" value="1.1.1: заявка =&#10;найти заявку(идентификатор)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml13000000000000" modelType="InteractionLifeLineLink" name="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)&#10;1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)"><ModelProperties><StringProperty name="name" value="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)&#10;1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml14000000000000" modelType="InteractionLifeLineLink" name="1.1.4 [допустим]:&#10;установить статус(целевой статус)"><ModelProperties><StringProperty name="name" value="1.1.4 [допустим]:&#10;установить статус(целевой статус)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M400000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml15000000000000" modelType="InteractionLifeLineLink" name="1.1.5: сохранить&#10;заявку(заявка)"><ModelProperties><StringProperty name="name" value="1.1.5: сохранить&#10;заявку(заявка)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml16000000000000" modelType="InteractionLifeLineLink" name="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)"><ModelProperties><StringProperty name="name" value="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M600000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml17000000000000" modelType="InteractionLifeLineLink" name="1.1.7: сохранить&#10;запись истории(запись)"><ModelProperties><StringProperty name="name" value="1.1.7: сохранить&#10;запись истории(запись)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M800000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml18000000000000" modelType="InteractionLifeLineLink" name="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)"><ModelProperties><StringProperty name="name" value="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M700000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml19000000000000" modelType="InteractionLifeLineLink" name="1.1.9: записать&#10;событие(событие)"><ModelProperties><StringProperty name="name" value="1.1.9: записать&#10;событие(событие)" /><ModelRefProperty name="from"><ModelRef id="M300000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M900000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Ml20000000000000" modelType="InteractionLifeLineLink" name="1.2: показать новый статус&#10;и историю переходов"><ModelProperties><StringProperty name="name" value="1.2: показать новый статус&#10;и историю переходов" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote21000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="[не допустим] — сообщения 1.1.4–1.1.9 не выполняются,&#10;  заявка остаётся в прежнем статусе, интерфейс показывает&#10;  причину отказа (роль, отсутствие причины, финальный статус)" /></ModelProperties></Model><Model id="Anote21000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote21000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M300000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote22000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Постусловия UC-2: заявка находится в новом статусе;&#10;  в истории изменений статуса зафиксирован переход с автором,&#10;  временем и причиной; в журнале аудита зафиксировано&#10;  событие изменения статуса" /></ModelProperties></Model><Model id="Anote22000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote22000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M900000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote23000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Нумерация иерархическая: целое число — действие актора,&#10;  вложенные вызовы — 1.1, 1.1.1, …&#10;  Отличие от Use-Case View: там система показана как единое&#10;  целое, одним участником; здесь она развёрнута в логические&#10;  компоненты слоёв диаграммы пакетов, а у сообщений указаны&#10;  параметры, результаты и сторожевые условия.&#10;  Порядок сообщений 1.1.4 → 1.1.5 показывает, что изменение&#10;  домена предшествует фиксации в хранилище.&#10;  Зависимости: presentation → application → domain;&#10;  application → infrastructure («access»)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_COL_UC2_Logica" name="COL_UC2_LogicalView" diagramType="CommunicationDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="1065" y="58" width="883" height="52" zorder="9" model="Mtitle0000000000" name="UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)&#10;Кооперация логических компонентов слоёв: параметры, результаты и сторожевые условия сообщений"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="883" height="52" /></Shape><Shape id="S100000000000000" shapeType="CommunicationActor" x="1516" y="138" width="173" height="101" zorder="5" model="M100000000000000" name="Диспетчер /&#10;Караван-мастер"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="173" height="101" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="CommunicationLifeLine" x="1417" y="370" width="370" height="115" zorder="7" model="M200000000000000" name="«компонент слоя»&#10;:Интерфейс заявок"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="370" height="115" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="CommunicationLifeLine" x="1406" y="617" width="393" height="141" zorder="11" model="M300000000000000" name="«компонент слоя»&#10;:Управление статусами&#10;UC-2"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="393" height="141" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="CommunicationLifeLine" x="115" y="950" width="232" height="90" zorder="6" model="M400000000000000" name="«компонент слоя»&#10;:Заявка"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="232" height="90" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="CommunicationLifeLine" x="373" y="937" width="391" height="115" zorder="8" model="M500000000000000" name="«компонент слоя»&#10;:Статусная модель"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="391" height="115" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S600000000000000" shapeType="CommunicationLifeLine" x="791" y="957" width="192" height="76" zorder="3" model="M600000000000000" name="«компонент слоя»&#10;:История статусов"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="192" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S700000000000000" shapeType="CommunicationLifeLine" x="1010" y="957" width="180" height="76" zorder="2" model="M700000000000000" name="«компонент слоя»&#10;:Событие аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="180" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S800000000000000" shapeType="CommunicationLifeLine" x="2138" y="957" width="194" height="76" zorder="4" model="M800000000000000" name="«компонент слоя»&#10;:Хранение данных"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="194" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S900000000000000" shapeType="CommunicationLifeLine" x="2358" y="957" width="171" height="76" zorder="1" model="M900000000000000" name="«компонент слоя»&#10;:Журнал аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="171" height="76" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="Snote21000000000" shapeType="NOTE" x="1799" y="645" width="610" height="85" zorder="10" model="Mnote21000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote22000000000" shapeType="NOTE" x="2529" y="941" width="621" height="109" zorder="12" model="Mnote22000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote23000000000" shapeType="NOTE" x="2519" y="1178" width="614" height="269" zorder="13" model="Mnote23000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="Cl10000000000000" shapeType="InteractionLifeLineLink" model="Ml10000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="1392" y="271" width="436" height="46" /></Connector><Connector id="Cl11000000000000" shapeType="InteractionLifeLineLink" model="Ml11000000000000" from="S200000000000000" to="S300000000000000"><Caption visible="true" side="None" x="1606" y="518" width="497" height="46" /></Connector><Connector id="Cl12000000000000" shapeType="InteractionLifeLineLink" model="Ml12000000000000" from="S300000000000000" to="S800000000000000"><Caption visible="true" side="None" x="1849" y="814" width="274" height="46" /></Connector><Connector id="Cl13000000000000" shapeType="InteractionLifeLineLink" model="Ml13000000000000" from="S300000000000000" to="S500000000000000"><Caption visible="true" side="None" x="519" y="790" width="426" height="94" /></Connector><Connector id="Cl14000000000000" shapeType="InteractionLifeLineLink" model="Ml14000000000000" from="S300000000000000" to="S400000000000000"><Caption visible="true" side="None" x="183" y="814" width="334" height="46" /></Connector><Connector id="Cl15000000000000" shapeType="InteractionLifeLineLink" model="Ml15000000000000" from="S300000000000000" to="S800000000000000"><Caption visible="true" side="None" x="2149" y="814" width="162" height="46" /></Connector><Connector id="Cl16000000000000" shapeType="InteractionLifeLineLink" model="Ml16000000000000" from="S300000000000000" to="S600000000000000"><Caption visible="true" side="None" x="937" y="814" width="456" height="46" /></Connector><Connector id="Cl17000000000000" shapeType="InteractionLifeLineLink" model="Ml17000000000000" from="S300000000000000" to="S800000000000000"><Caption visible="true" side="None" x="2316" y="814" width="223" height="46" /></Connector><Connector id="Cl18000000000000" shapeType="InteractionLifeLineLink" model="Ml18000000000000" from="S300000000000000" to="S700000000000000"><Caption visible="true" side="None" x="1366" y="814" width="477" height="46" /></Connector><Connector id="Cl19000000000000" shapeType="InteractionLifeLineLink" model="Ml19000000000000" from="S300000000000000" to="S900000000000000"><Caption visible="true" side="None" x="2551" y="814" width="162" height="46" /></Connector><Connector id="Cl20000000000000" shapeType="InteractionLifeLineLink" model="Ml20000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="1798" y="271" width="263" height="46" /></Connector><Connector id="CAnote2100000000" shapeType="Anchor" model="Anote21000000000" from="Snote21000000000" to="S300000000000000" /><Connector id="CAnote2200000000" shapeType="Anchor" model="Anote22000000000" from="Snote22000000000" to="S900000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="COL_UC2_LogicalView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="b2563_MP00100000" modelType="Package" name="presentation">
+      <ModelProperties>
+        <StringProperty name="name" value="presentation" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b2563_MN02600000" modelType="InteractionLifeLine" name=":Интерфейс заявок">
+          <ModelProperties>
+            <StringProperty name="name" value=":Интерфейс заявок" />
+            <HTMLProperty name="documentation" plainTextValue="принимает команду перехода&#10;показывает статус, историю и отказы" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;принимает команду перехода&lt;br&gt;показывает статус, историю и отказы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_BORDER0030" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_MP00600000" modelType="Package" name="application">
+      <ModelProperties>
+        <StringProperty name="name" value="application" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b2563_MN03200000" modelType="InteractionLifeLine" name=":Управление статусами&#10;UC-2">
+          <ModelProperties>
+            <StringProperty name="name" value=":Управление статусами&#10;UC-2" />
+            <HTMLProperty name="documentation" plainTextValue="сценарий перехода в одной транзакции&#10;обращается к infrastructure &lt;&lt;access&gt;&gt;" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;сценарий перехода в одной транзакции&lt;br&gt;обращается к infrastructure «access»&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_BORDER0080" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_MP01100000" modelType="Package" name="domain">
+      <ModelProperties>
+        <StringProperty name="name" value="domain" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b2563_MN03800000" modelType="InteractionLifeLine" name=":Заявка">
+          <ModelProperties>
+            <StringProperty name="name" value=":Заявка" />
+            <HTMLProperty name="documentation" plainTextValue="хранит текущий статус" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;хранит текущий статус&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+        <Model id="b2563_MN04400000" modelType="InteractionLifeLine" name=":Статусная модель">
+          <ModelProperties>
+            <StringProperty name="name" value=":Статусная модель" />
+            <HTMLProperty name="documentation" plainTextValue="допустимость перехода, роли,&#10;обязательность причины, финальность" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;допустимость перехода, роли,&lt;br&gt;обязательность причины, финальность&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+        <Model id="b2563_MN05000000" modelType="InteractionLifeLine" name=":История статусов">
+          <ModelProperties>
+            <StringProperty name="name" value=":История статусов" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+        <Model id="b2563_MN05500000" modelType="InteractionLifeLine" name=":Событие аудита">
+          <ModelProperties>
+            <StringProperty name="name" value=":Событие аудита" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_BORDER0130" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_MP01600000" modelType="Package" name="infrastructure">
+      <ModelProperties>
+        <StringProperty name="name" value="infrastructure" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="b2563_MN06000000" modelType="InteractionLifeLine" name=":Хранение данных">
+          <ModelProperties>
+            <StringProperty name="name" value=":Хранение данных" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+        <Model id="b2563_MN06500000" modelType="InteractionLifeLine" name=":Журнал аудита">
+          <ModelProperties>
+            <StringProperty name="name" value=":Журнал аудита" />
+            <ModelRefsProperty name="stereotypes">
+              <ModelRef id="b2563_ST________" />
+            </ModelRefsProperty>
+          </ModelProperties>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_BORDER0180" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_MN02100000" modelType="InteractionLifeLine" name="Диспетчер /&#10;Караван-мастер">
+      <ModelProperties>
+        <StringProperty name="name" value="Диспетчер /&#10;Караван-мастер" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="b2563_STactor000" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_STactor000" modelType="Stereotype" name="actor">
+      <ModelProperties>
+        <StringProperty name="name" value="actor" />
+        <StringProperty name="baseType" value="InteractionLifeLine" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0240000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ST________" modelType="Stereotype" name="компонент слоя">
+      <ModelProperties>
+        <StringProperty name="name" value="компонент слоя" />
+        <StringProperty name="baseType" value="InteractionLifeLine" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0290000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0350000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0410000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0470000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0530000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0580000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0630000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_DIV0680000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML07000000" modelType="InteractionLifeLineLink" name="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)">
+      <ModelProperties>
+        <StringProperty name="name" value="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN02100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN02600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END0710000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN02100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END0720000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN02600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC07300000" modelType="Message" name="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)">
+          <ModelProperties>
+            <StringProperty name="name" value="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN02100000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN02600000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END0740000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN02100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END0750000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN02600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA07800000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN02100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN02600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML08000000" modelType="InteractionLifeLineLink" name="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN02600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END0810000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN02600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END0820000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC08300000" modelType="Message" name="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN02600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END0840000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN02600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END0850000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA08800000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN02600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML09000000" modelType="InteractionLifeLineLink" name="1.1.1: заявка =&#10;найти заявку(идентификатор)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.1: заявка =&#10;найти заявку(идентификатор)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN06000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END0910000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END0920000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN06000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC09300000" modelType="Message" name="1.1.1: заявка =&#10;найти заявку(идентификатор)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.1: заявка =&#10;найти заявку(идентификатор)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN06000000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.1" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END0940000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END0950000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN06000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA09800000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN06000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML10000000" modelType="InteractionLifeLineLink" name="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)&#10;1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)&#10;1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN04400000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1010000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1020000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN04400000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC10300000" modelType="Message" name="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN04400000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.2" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1040000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1050000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN04400000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+        <Model id="b2563_MC10600000" modelType="Message" name="1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN04400000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.3" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1070000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1080000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN04400000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA11100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN04400000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML11300000" modelType="InteractionLifeLineLink" name="1.1.4 [допустим]:&#10;установить статус(целевой статус)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.4 [допустим]:&#10;установить статус(целевой статус)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN03800000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1140000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1150000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03800000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC11600000" modelType="Message" name="1.1.4 [допустим]:&#10;установить статус(целевой статус)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.4 [допустим]:&#10;установить статус(целевой статус)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN03800000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.4" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1170000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1180000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03800000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA12100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN03800000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML12300000" modelType="InteractionLifeLineLink" name="1.1.5: сохранить&#10;заявку(заявка)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.5: сохранить&#10;заявку(заявка)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN06000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1240000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1250000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN06000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC12600000" modelType="Message" name="1.1.5: сохранить&#10;заявку(заявка)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.5: сохранить&#10;заявку(заявка)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN06000000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.5" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1270000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1280000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN06000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA13100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN06000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML13300000" modelType="InteractionLifeLineLink" name="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN05000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1340000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1350000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN05000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC13600000" modelType="Message" name="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN05000000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.6" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1370000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1380000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN05000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA14100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN05000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML14300000" modelType="InteractionLifeLineLink" name="1.1.7: сохранить&#10;запись истории(запись)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.7: сохранить&#10;запись истории(запись)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN06000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1440000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1450000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN06000000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC14600000" modelType="Message" name="1.1.7: сохранить&#10;запись истории(запись)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.7: сохранить&#10;запись истории(запись)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN06000000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.7" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1470000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1480000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN06000000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA15100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN06000000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML15300000" modelType="InteractionLifeLineLink" name="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN05500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1540000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1550000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN05500000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC15600000" modelType="Message" name="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN05500000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.8" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1570000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1580000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN05500000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA16100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN05500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML16300000" modelType="InteractionLifeLineLink" name="1.1.9: записать&#10;событие(событие)">
+      <ModelProperties>
+        <StringProperty name="name" value="1.1.9: записать&#10;событие(событие)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN06500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1640000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1650000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN06500000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC16600000" modelType="Message" name="1.1.9: записать&#10;событие(событие)">
+          <ModelProperties>
+            <StringProperty name="name" value="1.1.9: записать&#10;событие(событие)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN03200000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN06500000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.1.9" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1670000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN03200000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1680000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN06500000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA17100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN06500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_ML17300000" modelType="InteractionLifeLineLink" name="1.2: показать новый статус&#10;и историю переходов">
+      <ModelProperties>
+        <StringProperty name="name" value="1.2: показать новый статус&#10;и историю переходов" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="b2563_MN02600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="b2563_MN02100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="b2563_END1740000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN02600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="b2563_END1750000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="b2563_MN02100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="b2563_MC17600000" modelType="Message" name="1.2: показать новый статус&#10;и историю переходов">
+          <ModelProperties>
+            <StringProperty name="name" value="1.2: показать новый статус&#10;и историю переходов" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="b2563_MN02600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="b2563_MN02100000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1.2" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="b2563_END1770000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN02600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="b2563_END1780000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="b2563_MN02100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="b2563_GA18100000" modelType="GenericConnector">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_MN02600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN02100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_NOTE183000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="между 1.1.4 и 1.1.5:&#10;домен изменён, в хранилище ещё нет" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;между 1.1.4 и 1.1.5:&lt;br&gt;домен изменён, в хранилище ещё нет&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_AN18500000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_NOTE183000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN03800000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_NOTE187000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="[не допустим] — сообщения 1.1.4–1.1.9 не выполняются,&#10;заявка остаётся в прежнем статусе, интерфейс показывает&#10;причину отказа (роль, отсутствие причины, финальный статус)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;[не допустим] — сообщения 1.1.4–1.1.9 не выполняются,&lt;br&gt;заявка остаётся в прежнем статусе, интерфейс показывает&lt;br&gt;причину отказа (роль, отсутствие причины, финальный статус)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_AN18900000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_NOTE187000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN03200000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_NOTE191000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Постусловия UC-2: заявка находится в новом статусе;&#10;в истории изменений статуса зафиксирован переход с автором,&#10;временем и причиной; в журнале аудита зафиксировано&#10;событие изменения статуса" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;Постусловия UC-2:&lt;/b&gt; заявка находится в новом статусе;&lt;br&gt;в истории изменений статуса зафиксирован переход с автором,&lt;br&gt;временем и причиной; в журнале аудита зафиксировано&lt;br&gt;событие изменения статуса&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_AN19300000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="b2563_NOTE191000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="b2563_MN06500000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="b2563_NOTE195000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Нумерация иерархическая: целое число — действие актора,&#10;вложенные вызовы — 1.1, 1.1.1, …&#10;Отличие от Use-Case View: там система показана как единое&#10;целое, одним участником; здесь она развёрнута в логические&#10;компоненты слоёв диаграммы пакетов, а у сообщений указаны&#10;параметры, результаты и сторожевые условия.&#10;Порядок сообщений 1.1.4 → 1.1.5 показывает, что изменение&#10;домена предшествует фиксации в хранилище.&#10;Зависимости: presentation → application → domain;&#10;application → infrastructure (&lt;&lt;access&gt;&gt;)." value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Нумерация иерархическая: целое число — действие актора,&lt;br&gt;вложенные вызовы — 1.1, 1.1.1, …&lt;br&gt;&lt;b&gt;Отличие от Use-Case View:&lt;/b&gt; там система показана как единое&lt;br&gt;целое, одним участником; здесь она развёрнута в логические&lt;br&gt;компоненты слоёв диаграммы пакетов, а у сообщений указаны&lt;br&gt;параметры, результаты и сторожевые условия.&lt;br&gt;Порядок сообщений 1.1.4 → 1.1.5 показывает, что изменение&lt;br&gt;домена предшествует фиксации в хранилище.&lt;br&gt;Зависимости: presentation → application → domain;&lt;br&gt;application → infrastructure («access»).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="b2563_D_COL_UC2_" name="COL_UC2_LogicalView" diagramType="CommunicationDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+        <BooleanProperty name="autoFitShapesSize" value="false" />
+        <BooleanProperty name="alignToGrid" value="false" />
+        <BooleanProperty name="gridVisible" value="false" />
+        <BooleanProperty name="paintConnectorThroughLabel" value="true" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="b2563_S002000000" shapeType="Rectangle" x="942" y="201" width="273" height="116" zorder="55" model="b2563_MP00100000" name="presentation">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="273" height="116" />
+          <ChildShapes>
+            <Shape id="b2563_S004000000" shapeType="Freehand" x="942" y="201" width="273" height="116" zorder="54" model="b2563_BORDER0030">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:272.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:272.0,115.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,115.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S005000000" shapeType="TextBox" x="946" y="204" width="265" height="36" zorder="16">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="presentation" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;presentation&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b2563_S027000000" shapeType="CommunicationLifeLine" x="950" y="228" width="255" height="79" zorder="49" model="b2563_MN02600000" name=":Интерфейс заявок">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="255" height="79" />
+              <ChildShapes>
+                <Shape id="b2563_S028000000" shapeType="TextBox" x="953" y="230" width="249" height="37" zorder="14">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Интерфейс заявок" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Интерфейс заявок&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S030000000" shapeType="Freehand" x="950" y="265" width="255" height="2" zorder="40" model="b2563_DIV0290000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:254.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b2563_S031000000" shapeType="TextBox" x="955" y="269" width="245" height="38" zorder="15">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="принимает команду перехода&#10;показывает статус, историю и отказы" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;принимает команду перехода&lt;br&gt;показывает статус, историю и отказы&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:253,253,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S007000000" shapeType="Rectangle" x="934" y="370" width="288" height="134" zorder="57" model="b2563_MP00600000" name="application">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="288" height="134" />
+          <ChildShapes>
+            <Shape id="b2563_S009000000" shapeType="Freehand" x="934" y="370" width="288" height="134" zorder="56" model="b2563_BORDER0080">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:287.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:287.0,133.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,133.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S010000000" shapeType="TextBox" x="938" y="373" width="280" height="36" zorder="20">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="application" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;application&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b2563_S033000000" shapeType="CommunicationLifeLine" x="942" y="398" width="271" height="97" zorder="53" model="b2563_MN03200000" name=":Управление статусами&#10;UC-2">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="271" height="97" />
+              <ChildShapes>
+                <Shape id="b2563_S034000000" shapeType="TextBox" x="945" y="400" width="265" height="53" zorder="26">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Управление статусами&#10;UC-2" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Управление статусами&lt;br&gt;UC-2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S036000000" shapeType="Freehand" x="942" y="451" width="271" height="2" zorder="42" model="b2563_DIV0350000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:270.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b2563_S037000000" shapeType="TextBox" x="947" y="455" width="261" height="40" zorder="22">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="сценарий перехода в одной транзакции&#10;обращается к infrastructure &lt;&lt;access&gt;&gt;" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;сценарий перехода в одной транзакции&lt;br&gt;обращается к infrastructure «access»&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:253,253,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S012000000" shapeType="Rectangle" x="44" y="591" width="759" height="117" zorder="59" model="b2563_MP01100000" name="domain">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="759" height="117" />
+          <ChildShapes>
+            <Shape id="b2563_S014000000" shapeType="Freehand" x="44" y="591" width="759" height="117" zorder="58" model="b2563_BORDER0130">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:758.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:758.0,116.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,116.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S015000000" shapeType="TextBox" x="48" y="594" width="751" height="36" zorder="28">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="domain" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;domain&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b2563_S039000000" shapeType="CommunicationLifeLine" x="52" y="628" width="160" height="62" zorder="48" model="b2563_MN03800000" name=":Заявка">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="160" height="62" />
+              <ChildShapes>
+                <Shape id="b2563_S040000000" shapeType="TextBox" x="55" y="630" width="154" height="37" zorder="9">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Заявка" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Заявка&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S042000000" shapeType="Freehand" x="52" y="665" width="160" height="2" zorder="39" model="b2563_DIV0410000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:159.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b2563_S043000000" shapeType="TextBox" x="57" y="669" width="150" height="21" zorder="1">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="хранит текущий статус" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;хранит текущий статус&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S045000000" shapeType="CommunicationLifeLine" x="230" y="619" width="270" height="79" zorder="50" model="b2563_MN04400000" name=":Статусная модель">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="270" height="79" />
+              <ChildShapes>
+                <Shape id="b2563_S046000000" shapeType="TextBox" x="233" y="621" width="264" height="37" zorder="17">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Статусная модель" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Статусная модель&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S048000000" shapeType="Freehand" x="230" y="656" width="270" height="2" zorder="41" model="b2563_DIV0470000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:269.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+                <Shape id="b2563_S049000000" shapeType="TextBox" x="235" y="660" width="260" height="38" zorder="18">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="допустимость перехода, роли,&#10;обязательность причины, финальность" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;допустимость перехода, роли,&lt;br&gt;обязательность причины, финальность&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S051000000" shapeType="CommunicationLifeLine" x="518" y="632" width="132" height="52" zorder="45" model="b2563_MN05000000" name=":История статусов">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="132" height="52" />
+              <ChildShapes>
+                <Shape id="b2563_S052000000" shapeType="TextBox" x="521" y="634" width="126" height="37" zorder="6">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:История статусов" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:История статусов&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S054000000" shapeType="Freehand" x="518" y="669" width="132" height="2" zorder="37" model="b2563_DIV0530000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:131.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S056000000" shapeType="CommunicationLifeLine" x="669" y="632" width="124" height="52" zorder="44" model="b2563_MN05500000" name=":Событие аудита">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="124" height="52" />
+              <ChildShapes>
+                <Shape id="b2563_S057000000" shapeType="TextBox" x="672" y="634" width="118" height="37" zorder="5">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Событие аудита" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Событие аудита&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S059000000" shapeType="Freehand" x="669" y="669" width="124" height="2" zorder="36" model="b2563_DIV0580000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:123.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:253,253,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S017000000" shapeType="Rectangle" x="1439" y="604" width="288" height="90" zorder="52" model="b2563_MP01600000" name="infrastructure">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+          <Caption visible="false" side="Center" x="0" y="0" width="288" height="90" />
+          <ChildShapes>
+            <Shape id="b2563_S019000000" shapeType="Freehand" x="1439" y="604" width="288" height="90" zorder="51" model="b2563_BORDER0180">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:0,0,0,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:287.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:287.0,89.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,89.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:0,0,0,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S020000000" shapeType="TextBox" x="1443" y="607" width="280" height="36" zorder="19">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="infrastructure" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;&lt;b&gt;infrastructure&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="1" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b2563_S061000000" shapeType="CommunicationLifeLine" x="1447" y="632" width="134" height="52" zorder="46" model="b2563_MN06000000" name=":Хранение данных">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="134" height="52" />
+              <ChildShapes>
+                <Shape id="b2563_S062000000" shapeType="TextBox" x="1450" y="634" width="128" height="37" zorder="7">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Хранение данных" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Хранение данных&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S064000000" shapeType="Freehand" x="1447" y="669" width="134" height="2" zorder="38" model="b2563_DIV0630000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:133.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="b2563_S066000000" shapeType="CommunicationLifeLine" x="1599" y="632" width="118" height="52" zorder="43" model="b2563_MN06500000" name=":Журнал аудита">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="true" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Caption visible="false" side="Center" x="0" y="0" width="118" height="52" />
+              <ChildShapes>
+                <Shape id="b2563_S067000000" shapeType="TextBox" x="1602" y="634" width="112" height="37" zorder="4">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="«компонент слоя»&#10;:Журнал аудита" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«компонент слоя»&lt;br&gt;:Журнал аудита&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="b2563_S069000000" shapeType="Freehand" x="1599" y="669" width="118" height="2" zorder="34" model="b2563_DIV0680000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+                  </DiagramElementProperties>
+                  <FreehandPoints>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:0.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                    <Point>
+                      <DiagramElementProperties>
+                        <PointProperty name="value" value="Pt:117.0,0.0" />
+                      </DiagramElementProperties>
+                    </Point>
+                  </FreehandPoints>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+                  <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+                </Shape>
+              </ChildShapes>
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:253,253,253,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S022000000" shapeType="CommunicationLifeLine" x="1018" y="68" width="119" height="70" zorder="47" model="b2563_MN02100000" name="Диспетчер /&#10;Караван-мастер">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="119" height="70" />
+          <ChildShapes>
+            <Shape id="b2563_S023000000" shapeType="TextBox" x="1021" y="70" width="113" height="53" zorder="10">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="«actor»&#10;Диспетчер /&#10;Караван-мастер" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«actor»&lt;br&gt;Диспетчер /&lt;br&gt;Караван-мастер&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="b2563_S025000000" shapeType="Freehand" x="1018" y="121" width="119" height="2" zorder="35" model="b2563_DIV0240000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:118.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S077000000" shapeType="TextBox" x="932" y="159" width="301" height="34" zorder="21">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1: выбрать действие перехода&#10;(целевой статус, роль, имя актора, причина)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1: выбрать действие перехода&lt;br&gt;(целевой статус, роль, имя актора, причина)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S087000000" shapeType="TextBox" x="1080" y="330" width="343" height="34" zorder="25">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1: заявка = сменитьСтатус(идентификатор заявки,&#10;целевой статус, роль, имя актора, причина)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1: заявка = сменитьСтатус(идентификатор заявки,&lt;br&gt;целевой статус, роль, имя актора, причина)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S097000000" shapeType="TextBox" x="1248" y="534" width="189" height="34" zorder="12">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.1: заявка =&#10;найти заявку(идентификатор)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.1: заявка =&lt;br&gt;найти заявку(идентификатор)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S110000000" shapeType="TextBox" x="330" y="517" width="294" height="66" zorder="27">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.2: переход = найти переход&#10;(текущий статус, целевой статус)&#10;1.1.3: допустим = проверить(переход, роль,&#10;причина, готовность рейса)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.2: переход = найти переход&lt;br&gt;(текущий статус, целевой статус)&lt;br&gt;1.1.3: допустим = проверить(переход, роль,&lt;br&gt;причина, готовность рейса)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S120000000" shapeType="TextBox" x="99" y="534" width="230" height="34" zorder="13">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.4 [допустим]:&#10;установить статус(целевой статус)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.4 [допустим]:&lt;br&gt;установить статус(целевой статус)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S130000000" shapeType="TextBox" x="1454" y="534" width="116" height="34" zorder="3">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.5: сохранить&#10;заявку(заявка)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.5: сохранить&lt;br&gt;заявку(заявка)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S140000000" shapeType="TextBox" x="619" y="534" width="314" height="34" zorder="23">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.6: запись = создать(из статуса, в статус,&#10;роль, имя актора, причина)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.6: запись = создать(из статуса, в статус,&lt;br&gt;роль, имя актора, причина)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S150000000" shapeType="TextBox" x="1570" y="534" width="155" height="34" zorder="8">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.7: сохранить&#10;запись истории(запись)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.7: сохранить&lt;br&gt;запись истории(запись)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S160000000" shapeType="TextBox" x="914" y="534" width="329" height="34" zorder="24">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.8: событие = сформировать(«статус изменён»,&#10;организация, заявка, переход, актор)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.8: событие = сформировать(«статус изменён»,&lt;br&gt;организация, заявка, переход, актор)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S170000000" shapeType="TextBox" x="1732" y="534" width="116" height="34" zorder="2">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.1.9: записать&#10;событие(событие)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.1.9: записать&lt;br&gt;событие(событие)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S180000000" shapeType="TextBox" x="1212" y="159" width="181" height="34" zorder="11">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1.2: показать новый статус&#10;и историю переходов" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1.2: показать новый статус&lt;br&gt;и историю переходов&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="b2563_S184000000" shapeType="NOTE" x="6" y="736" width="252" height="43" zorder="30" model="b2563_NOTE183000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S188000000" shapeType="NOTE" x="1232" y="417" width="404" height="59" zorder="31" model="b2563_NOTE187000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S192000000" shapeType="NOTE" x="1737" y="620" width="410" height="78" zorder="32" model="b2563_NOTE191000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S196000000" shapeType="NOTE" x="1709" y="785" width="425" height="186" zorder="33" model="b2563_NOTE195000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="2" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:221,221,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="b2563_S197000000" shapeType="TextBox" x="5" y="10" width="2142" height="40" zorder="29">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)&#10;Кооперация логических компонентов слоёв: параметры, результаты и сторожевые условия сообщений" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;&lt;b&gt;UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)&lt;/b&gt;&lt;br&gt;&lt;b&gt;Кооперация логических компонентов слоёв: параметры, результаты и сторожевые условия сообщений&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="14" style="1" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="b2563_C076000000" shapeType="InteractionLifeLineLink" model="b2563_ML07000000" from="b2563_S022000000" to="b2563_S027000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1018" y="110" />
+            <Point x="929" y="169" />
+            <Point x="967" y="228" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC07900000" shapeType="GenericConnector" model="b2563_GA07800000" from="b2563_S022000000" to="b2563_S027000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1018" y="110" />
+            <Point x="929" y="169" />
+            <Point x="967" y="228" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C086000000" shapeType="InteractionLifeLineLink" model="b2563_ML08000000" from="b2563_S027000000" to="b2563_S033000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1078" y="317" />
+            <Point x="1078" y="398" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC08900000" shapeType="GenericConnector" model="b2563_GA08800000" from="b2563_S027000000" to="b2563_S033000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1078" y="317" />
+            <Point x="1078" y="398" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C096000000" shapeType="InteractionLifeLineLink" model="b2563_ML09000000" from="b2563_S033000000" to="b2563_S061000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1192" y="497" />
+            <Point x="1250" y="604" />
+            <Point x="1448" y="655" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC09900000" shapeType="GenericConnector" model="b2563_GA09800000" from="b2563_S033000000" to="b2563_S061000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1192" y="497" />
+            <Point x="1250" y="604" />
+            <Point x="1448" y="655" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C109000000" shapeType="InteractionLifeLineLink" model="b2563_ML10000000" from="b2563_S033000000" to="b2563_S045000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="942" y="448" />
+            <Point x="598" y="478" />
+            <Point x="315" y="543" />
+            <Point x="334" y="617" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC11200000" shapeType="GenericConnector" model="b2563_GA11100000" from="b2563_S033000000" to="b2563_S045000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="942" y="448" />
+            <Point x="598" y="478" />
+            <Point x="315" y="543" />
+            <Point x="334" y="617" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C119000000" shapeType="InteractionLifeLineLink" model="b2563_ML11300000" from="b2563_S033000000" to="b2563_S039000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="942" y="448" />
+            <Point x="242" y="483" />
+            <Point x="89" y="561" />
+            <Point x="101" y="627" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC12200000" shapeType="GenericConnector" model="b2563_GA12100000" from="b2563_S033000000" to="b2563_S039000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="942" y="448" />
+            <Point x="242" y="483" />
+            <Point x="89" y="561" />
+            <Point x="101" y="627" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C129000000" shapeType="InteractionLifeLineLink" model="b2563_ML12300000" from="b2563_S033000000" to="b2563_S061000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1215" y="498" />
+            <Point x="1515" y="508" />
+            <Point x="1568" y="561" />
+            <Point x="1530" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC13200000" shapeType="GenericConnector" model="b2563_GA13100000" from="b2563_S033000000" to="b2563_S061000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1215" y="498" />
+            <Point x="1515" y="508" />
+            <Point x="1568" y="561" />
+            <Point x="1530" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C139000000" shapeType="InteractionLifeLineLink" model="b2563_ML13300000" from="b2563_S033000000" to="b2563_S051000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="939" y="448" />
+            <Point x="681" y="489" />
+            <Point x="596" y="553" />
+            <Point x="588" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC14200000" shapeType="GenericConnector" model="b2563_GA14100000" from="b2563_S033000000" to="b2563_S051000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="939" y="448" />
+            <Point x="681" y="489" />
+            <Point x="596" y="553" />
+            <Point x="588" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C149000000" shapeType="InteractionLifeLineLink" model="b2563_ML14300000" from="b2563_S033000000" to="b2563_S061000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1215" y="498" />
+            <Point x="1511" y="510" />
+            <Point x="1641" y="511" />
+            <Point x="1622" y="584" />
+            <Point x="1542" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC15200000" shapeType="GenericConnector" model="b2563_GA15100000" from="b2563_S033000000" to="b2563_S061000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1215" y="498" />
+            <Point x="1511" y="510" />
+            <Point x="1641" y="511" />
+            <Point x="1622" y="584" />
+            <Point x="1542" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C159000000" shapeType="InteractionLifeLineLink" model="b2563_ML15300000" from="b2563_S033000000" to="b2563_S056000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="948" y="449" />
+            <Point x="895" y="512" />
+            <Point x="884" y="577" />
+            <Point x="795" y="644" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC16200000" shapeType="GenericConnector" model="b2563_GA16100000" from="b2563_S033000000" to="b2563_S056000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="948" y="449" />
+            <Point x="895" y="512" />
+            <Point x="884" y="577" />
+            <Point x="795" y="644" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C169000000" shapeType="InteractionLifeLineLink" model="b2563_ML16300000" from="b2563_S033000000" to="b2563_S066000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1220" y="498" />
+            <Point x="1720" y="510" />
+            <Point x="1734" y="564" />
+            <Point x="1683" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC17200000" shapeType="GenericConnector" model="b2563_GA17100000" from="b2563_S033000000" to="b2563_S066000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1220" y="498" />
+            <Point x="1720" y="510" />
+            <Point x="1734" y="564" />
+            <Point x="1683" y="632" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_C179000000" shapeType="InteractionLifeLineLink" model="b2563_ML17300000" from="b2563_S027000000" to="b2563_S022000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1168" y="229" />
+            <Point x="1211" y="179" />
+            <Point x="1138" y="114" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_AC18200000" shapeType="GenericConnector" model="b2563_GA18100000" from="b2563_S027000000" to="b2563_S022000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <StringProperty name="toHeadname" value="Arrow1" />
+          </DiagramElementProperties>
+          <EndArrowHead>
+            <DiagramElementProperties>
+              <StringProperty name="name" value="Arrow1" />
+              <IntegerProperty name="size" value="1" />
+            </DiagramElementProperties>
+          </EndArrowHead>
+          <Points>
+            <Point x="1168" y="229" />
+            <Point x="1211" y="179" />
+            <Point x="1138" y="114" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_NA18600000" shapeType="Anchor" model="b2563_AN18500000" from="b2563_S184000000" to="b2563_S039000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="132" y="757" />
+            <Point x="132" y="659" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_NA19000000" shapeType="Anchor" model="b2563_AN18900000" from="b2563_S188000000" to="b2563_S033000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1434" y="446" />
+            <Point x="1077" y="446" />
+          </Points>
+        </Connector>
+        <Connector id="b2563_NA19400000" shapeType="Anchor" model="b2563_AN19300000" from="b2563_S192000000" to="b2563_S066000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="1942" y="659" />
+            <Point x="1658" y="658" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

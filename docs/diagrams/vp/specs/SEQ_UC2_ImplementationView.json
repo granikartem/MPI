@@ -1,0 +1,1020 @@
+{
+  "name": "SEQ_UC2_ImplementationView",
+  "type": "InteractionDiagram",
+  "canvas": [
+    3528,
+    2244
+  ],
+  "title": "UC-2 «Управлять статусами заявки» — Sequence Diagram (Implementation View)\nРеальные классы, методы и HTTP-контракт перехода статуса",
+  "nodes": [
+    {
+      "key": "U",
+      "name": "Диспетчер /\nкараван-мастер",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionActor",
+      "rect": [
+        6,
+        62,
+        106,
+        1742
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "MODAL",
+      "name": "modal:StatusModal.tsx",
+      "body": [],
+      "parent": "frontend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        306,
+        123,
+        155,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "REG",
+      "name": "reg:RequestRegistry.tsx",
+      "body": [],
+      "parent": "frontend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        629,
+        123,
+        163,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "API",
+      "name": "api:api.ts",
+      "body": [],
+      "parent": "frontend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        937,
+        123,
+        83,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "C",
+      "name": "c:RequestStatusController",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1257,
+        123,
+        177,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "RS",
+      "name": "rs:RequestService",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        1857,
+        123,
+        128,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "ST",
+      "name": "st:RequestStatusService",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        2239,
+        123,
+        167,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "SM",
+      "name": "RequestStatusMachine",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        2640,
+        123,
+        159,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "REPO",
+      "name": "repo:CaravanRequestRepository",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        2809,
+        123,
+        217,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "HREPO",
+      "name": "hRepo:RequestStatusHistoryRepository",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        3037,
+        123,
+        261,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "AREPO",
+      "name": "aRepo:AuditEventRepository",
+      "body": [],
+      "parent": "backend",
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "InteractionLifeLine",
+      "rect": [
+        3308,
+        123,
+        193,
+        1681
+      ],
+      "fill": "Cr:245,245,245,255"
+    }
+  ],
+  "edges": [
+    {
+      "from": "U",
+      "to": "MODAL",
+      "label": "1: apply(t: StatusTransition)",
+      "kind": "Message",
+      "points": [
+        [
+          54,
+          188
+        ],
+        [
+          383,
+          188
+        ]
+      ],
+      "caption": [
+        62,
+        170,
+        313,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "MODAL",
+      "to": "API",
+      "label": "1.1: updated = await changeStatus(request.id, body)",
+      "kind": "Message",
+      "points": [
+        [
+          383,
+          218
+        ],
+        [
+          979,
+          218
+        ]
+      ],
+      "caption": [
+        392,
+        200,
+        579,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "API",
+      "to": "C",
+      "label": "1.1.1: POST /api/requests/{id}/status : HTTP 200 | 400 | 409",
+      "kind": "Message",
+      "points": [
+        [
+          979,
+          248
+        ],
+        [
+          1346,
+          248
+        ]
+      ],
+      "caption": [
+        987,
+        230,
+        350,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "C",
+      "to": "RS",
+      "label": "1.1.1.1: request = getById(id)",
+      "kind": "Message",
+      "points": [
+        [
+          1346,
+          337
+        ],
+        [
+          1921,
+          337
+        ]
+      ],
+      "caption": [
+        1354,
+        319,
+        559,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "RS",
+      "to": "RS",
+      "label": "1.1.1.1: throw IllegalArgumentException(«Заявка не найдена»)",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          1921,
+          392
+        ],
+        [
+          1970,
+          392
+        ],
+        [
+          1970,
+          412
+        ],
+        [
+          1921,
+          412
+        ]
+      ],
+      "caption": [
+        1930,
+        374,
+        83,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "C",
+      "to": "C",
+      "label": "1.1.1.2: target = RequestStatus.parse(body.targetStatus())\nrole = ActorRole.parse(body.actorRole())",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          1346,
+          545
+        ],
+        [
+          1394,
+          545
+        ],
+        [
+          1394,
+          564
+        ],
+        [
+          1346,
+          564
+        ]
+      ],
+      "caption": [
+        1354,
+        511,
+        83,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "C",
+      "to": "C",
+      "label": "1.1.1.2: throw IllegalArgumentException(«Не указан целевой статус» /\n«Неизвестный статус заявки» / «Не указана роль актора» / «Неизвестная роль актора»)",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          1346,
+          630
+        ],
+        [
+          1394,
+          630
+        ],
+        [
+          1394,
+          649
+        ],
+        [
+          1346,
+          649
+        ]
+      ],
+      "caption": [
+        1354,
+        596,
+        83,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "C",
+      "to": "ST",
+      "label": "1.1.1.3: updated = changeStatus(request, target, role,\nbody.actorName(), body.reason())",
+      "kind": "Message",
+      "points": [
+        [
+          1346,
+          697
+        ],
+        [
+          2323,
+          697
+        ]
+      ],
+      "caption": [
+        1354,
+        663,
+        961,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "ST",
+      "to": "SM",
+      "label": "1.1.1.3.1: transition = find(current, target) : Optional<Transition>",
+      "kind": "Message",
+      "points": [
+        [
+          2323,
+          727
+        ],
+        [
+          2719,
+          727
+        ]
+      ],
+      "caption": [
+        2331,
+        709,
+        380,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "ST",
+      "to": "ST",
+      "label": "1.1.1.3.2: throw StatusTransitionException(message)",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          2323,
+          809
+        ],
+        [
+          2371,
+          809
+        ],
+        [
+          2371,
+          828
+        ],
+        [
+          2323,
+          828
+        ]
+      ],
+      "caption": [
+        2331,
+        791,
+        83,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "ST",
+      "to": "ST",
+      "label": "1.1.1.3.2: request.changeStatus(target)",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          2323,
+          977
+        ],
+        [
+          2371,
+          977
+        ],
+        [
+          2371,
+          997
+        ],
+        [
+          2323,
+          997
+        ]
+      ],
+      "caption": [
+        2331,
+        959,
+        83,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "ST",
+      "to": "REPO",
+      "label": "1.1.1.3.3: saved = save(request)",
+      "kind": "Message",
+      "points": [
+        [
+          2323,
+          1021
+        ],
+        [
+          2917,
+          1021
+        ]
+      ],
+      "caption": [
+        2331,
+        1003,
+        578,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "ST",
+      "to": "HREPO",
+      "label": "1.1.1.3.4: save(new RequestStatusHistory(saved, current,\ntarget, role, actorName, reason))",
+      "kind": "Message",
+      "points": [
+        [
+          2323,
+          1068
+        ],
+        [
+          3167,
+          1068
+        ]
+      ],
+      "caption": [
+        2331,
+        1034,
+        828,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "ST",
+      "to": "AREPO",
+      "label": "1.1.1.3.5: save(AuditEvent.requestStatusChanged(...))",
+      "kind": "Message",
+      "points": [
+        [
+          2323,
+          1098
+        ],
+        [
+          3405,
+          1098
+        ]
+      ],
+      "caption": [
+        2331,
+        1080,
+        1066,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "C",
+      "to": "C",
+      "label": "1.1.1.4: RequestResponse.from(updated) : HTTP 200",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          1346,
+          1128
+        ],
+        [
+          1394,
+          1128
+        ],
+        [
+          1394,
+          1148
+        ],
+        [
+          1346,
+          1148
+        ]
+      ],
+      "caption": [
+        1354,
+        1110,
+        83,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "C",
+      "to": "C",
+      "label": "1.1.1.4: IllegalArgumentException (шаги 1.1.1.1, 1.1.1.2) → handleBadRequest(e) : HTTP 400\nлибо StatusTransitionException (шаг 1.1.1.3.2) → handleConflict(e) : HTTP 409",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          1346,
+          1286
+        ],
+        [
+          1394,
+          1286
+        ],
+        [
+          1394,
+          1305
+        ],
+        [
+          1346,
+          1305
+        ]
+      ],
+      "caption": [
+        1354,
+        1252,
+        83,
+        34
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "MODAL",
+      "to": "MODAL",
+      "label": "1.2: setError(errorText(e)) — текст из тела ответа",
+      "kind": "SequenceSelfMessage",
+      "points": [
+        [
+          383,
+          1329
+        ],
+        [
+          432,
+          1329
+        ],
+        [
+          432,
+          1348
+        ],
+        [
+          383,
+          1348
+        ]
+      ],
+      "caption": [
+        392,
+        1311,
+        83,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "MODAL",
+      "to": "REG",
+      "label": "1.2: onUpdated(updated) → onChanged() = load()",
+      "kind": "Message",
+      "points": [
+        [
+          383,
+          1514
+        ],
+        [
+          710,
+          1514
+        ]
+      ],
+      "caption": [
+        392,
+        1496,
+        310,
+        18
+      ],
+      "asynchronous": false
+    },
+    {
+      "from": "REG",
+      "to": "API",
+      "label": "1.2.1: getRegistry(organizationId, query)\nGET /api/requests/registry",
+      "kind": "Message",
+      "points": [
+        [
+          710,
+          1561
+        ],
+        [
+          979,
+          1561
+        ]
+      ],
+      "caption": [
+        719,
+        1527,
+        252,
+        34
+      ],
+      "asynchronous": true
+    },
+    {
+      "from": "MODAL",
+      "to": "API",
+      "label": "1.3: reload(): getStatusInfo(id)\nGET /api/requests/{id}/status",
+      "kind": "Message",
+      "points": [
+        [
+          383,
+          1709
+        ],
+        [
+          979,
+          1709
+        ]
+      ],
+      "caption": [
+        392,
+        1675,
+        579,
+        34
+      ],
+      "asynchronous": true
+    },
+    {
+      "from": "MODAL",
+      "to": "API",
+      "label": "1.4: reload(): getStatusHistory(id)\nGET /api/requests/{id}/status-history",
+      "kind": "Message",
+      "points": [
+        [
+          383,
+          1755
+        ],
+        [
+          979,
+          1755
+        ]
+      ],
+      "caption": [
+        392,
+        1721,
+        579,
+        34
+      ],
+      "asynchronous": true
+    },
+    {
+      "from": "MODAL",
+      "to": "U",
+      "label": "1.5: показать новый статус и историю переходов",
+      "kind": "Message",
+      "points": [
+        [
+          383,
+          1786
+        ],
+        [
+          54,
+          1786
+        ]
+      ],
+      "caption": [
+        62,
+        1768,
+        313,
+        18
+      ],
+      "asynchronous": true
+    }
+  ],
+  "notes": [
+    {
+      "text": "**Получение заявки свёрнуто в одно сообщение**\ngetById() — это единственный вызов findById(id) у CaravanRequestRepository;\nпусто → IllegalArgumentException «Заявка не найдена»,\n@ExceptionHandler контроллера отдаёт HTTP 400 — уже вне транзакции.",
+      "kind": "note",
+      "rect": [
+        1262,
+        427,
+        1144,
+        76
+      ]
+    },
+    {
+      "text": "**RequestReadinessGuard отдельной линией жизни не показан**\nblockerFor() сейчас возвращает null для любого перехода: единственная\nзаданная проверка (FR-10) требует модели команды рейса из UC-9,\nпоэтому блокировок нет ни для одного перехода. В сценарии класс\nничего не решает; как место для будущих проверок он есть\nна CLS_ImplementationView.",
+      "kind": "note",
+      "rect": [
+        2634,
+        844,
+        856,
+        109
+      ]
+    },
+    {
+      "text": "Выход из changeStatus() контроллера — commit; исключение в любой из рамок break внутри этой группы — rollback.\nМетоды @ExceptionHandler выполняются уже вне транзакции — ниже рамки.",
+      "kind": "note",
+      "rect": [
+        1262,
+        1163,
+        1144,
+        42
+      ]
+    },
+    {
+      "text": "**Хранилища отдельными линиями жизни не показаны** — как и на CLS_ImplementationView\n• repo, hRepo — JpaRepository → PostgreSQL 16 (DC-4): UPDATE caravan_request,\nINSERT INTO request_status_history;\n• aRepo — MongoRepository → MongoDB 7 (DC-5): вставка документа\nREQUEST_STATUS_CHANGED в коллекцию audit_event.\nЗапись в MongoDB в транзакцию не входит: менеджер транзакций Mongo не объявлен.\nСхема хранения — на DB_ER_ImplementationView и DB_Datalogical_ImplementationView.",
+      "kind": "note",
+      "rect": [
+        2817,
+        1365,
+        686,
+        125
+      ]
+    },
+    {
+      "text": "**RequestList.tsx отдельной линией жизни не показан:**\nон только пробрасывает колбэк. onUpdated у StatusModal —\nэто (updated) => { setStatusFor(updated); onChanged() },\nа onChanged RequestList получает от RequestRegistry\nкак его же метод load().",
+      "kind": "note",
+      "rect": [
+        330,
+        1576,
+        695,
+        91
+      ]
+    },
+    {
+      "text": "Нумерация иерархическая: целое число — действие актора,\nвложенные вызовы — 1.1, 1.1.1, …, глубже пяти уровней не идёт.\nАльтернативные исходы одного шага несут один номер:\n1.1.1.1 — получение заявки (объект или исключение),\n1.1.1.2 — разбор статуса и роли (значения или исключение),\n1.1.1.3.2 — исход проверок перехода (смена статуса или исключение),\n1.1.1.4 — ответ контроллера (200, 400 или 409),\n1.2 — реакция модального окна (обновление реестра или текст ошибки).\nСплошная линия, закрашенная стрелка — синхронный вызов;\nрезультат вызова — в подписи: «результат = операция(...)».\nСплошная линия, открытая стрелка — асинхронный вызов:\ngetRegistry, getStatusInfo, getStatusHistory запускаются\nбез ожидания результата (Promise axios без await).\nРамка break — прерывающая ветка: если её условие сработало,\nшаги ниже рамки в этом исходе не выполняются.\nРамка group — граница транзакции; break под этой рамкой —\nто, что выполняется уже вне транзакции. Заметки — свёрнутые участники.",
+      "kind": "legend",
+      "rect": [
+        3009,
+        1917,
+        501,
+        310
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "key": "frontend",
+      "name": "frontend (React 18 + TypeScript)",
+      "rect": [
+        302,
+        62,
+        710,
+        1843
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "MODAL",
+        "REG",
+        "API"
+      ]
+    },
+    {
+      "key": "backend",
+      "name": "backend (Spring Boot 3, Java 21)",
+      "rect": [
+        1252,
+        62,
+        2255,
+        1843
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "C",
+        "RS",
+        "ST",
+        "SM",
+        "REPO",
+        "HREPO",
+        "AREPO"
+      ]
+    }
+  ],
+  "fragments": [
+    {
+      "key": "fragment0",
+      "operator": "group",
+      "name": "граница транзакции: @Transactional на RequestStatusController.changeStatus() — транзакция открывается здесь;\nRequestService.getById() (@Transactional(readOnly = true)) и RequestStatusService.changeStatus() (@Transactional)\nсвоей транзакции не открывают — распространение по умолчанию присоединяет их к этой",
+      "parent": null,
+      "guards": [
+        "граница транзакции: @Transactional на RequestStatusController.changeStatus() — транзакция открывается здесь;\nRequestService.getById() (@Transactional(readOnly = true)) и RequestStatusService.changeStatus() (@Transactional)\nсвоей транзакции не открывают — распространение по умолчанию присоединяет их к этой"
+      ],
+      "rect": [
+        1236,
+        264,
+        2276,
+        887
+      ],
+      "operand_ys": [
+        264
+      ]
+    },
+    {
+      "key": "fragment1",
+      "operator": "break",
+      "name": "заявка не найдена: findById(id) вернул пусто",
+      "parent": "fragment0",
+      "guards": [
+        "заявка не найдена: findById(id) вернул пусто"
+      ],
+      "rect": [
+        1848,
+        352,
+        475,
+        61
+      ],
+      "operand_ys": [
+        352
+      ]
+    },
+    {
+      "key": "fragment2",
+      "operator": "break",
+      "name": "значение статуса или роли пусто либо не распознано parse()",
+      "parent": "fragment0",
+      "guards": [
+        "значение статуса или роли пусто либо не распознано parse()"
+      ],
+      "rect": [
+        1247,
+        573,
+        666,
+        78
+      ],
+      "operand_ys": [
+        573
+      ]
+    },
+    {
+      "key": "fragment3",
+      "operator": "break",
+      "name": "отказ любой из проверок changeStatus() в порядке кода: current == target (проверено до find()) →\nfind() пусто → !transition.roles().contains(role) → transition.reasonRequired() и причина пуста →\nRequestReadinessGuard.blockerFor(request, target) != null",
+      "parent": "fragment0",
+      "guards": [
+        "отказ любой из проверок changeStatus() в порядке кода: current == target (проверено до find()) →\nfind() пусто → !transition.roles().contains(role) → transition.reasonRequired() и причина пуста →\nRequestReadinessGuard.blockerFor(request, target) != null"
+      ],
+      "rect": [
+        2229,
+        743,
+        635,
+        88
+      ],
+      "operand_ys": [
+        743
+      ]
+    },
+    {
+      "key": "fragment4",
+      "operator": "break",
+      "name": "исключение из любого шага выше: транзакция откачена и закрыта,\n@ExceptionHandler отрабатывает уже вне неё",
+      "parent": null,
+      "guards": [
+        "исключение из любого шага выше: транзакция откачена и закрыта,\n@ExceptionHandler отрабатывает уже вне неё"
+      ],
+      "rect": [
+        297,
+        1217,
+        1625,
+        134
+      ],
+      "operand_ys": [
+        1217
+      ]
+    }
+  ],
+  "tail_y": 1805,
+  "lifeline_bottom": 1804,
+  "activations": [
+    {
+      "owner": "MODAL",
+      "rect": [
+        379,
+        187,
+        10,
+        1390
+      ]
+    },
+    {
+      "owner": "API",
+      "rect": [
+        967,
+        219,
+        10,
+        1142
+      ]
+    },
+    {
+      "owner": "C",
+      "rect": [
+        1343,
+        250,
+        10,
+        1111
+      ]
+    },
+    {
+      "owner": "RS",
+      "rect": [
+        1919,
+        338,
+        10,
+        84
+      ]
+    },
+    {
+      "owner": "ST",
+      "rect": [
+        2321,
+        699,
+        10,
+        401
+      ]
+    },
+    {
+      "owner": "REG",
+      "rect": [
+        704,
+        1513,
+        10,
+        53
+      ]
+    }
+  ]
+}

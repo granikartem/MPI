@@ -1,2 +1,940 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="COL_UC32_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Use-Case View)&#10;Абстрактное описание: актор, система как единое целое, деловые объекты и порядок сообщений"><ModelProperties><StringProperty name="name" value="UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Use-Case View)&#10;Абстрактное описание: актор, система как единое целое, деловые объекты и порядок сообщений" /></ModelProperties></Model><Model id="M100000000000000" modelType="InteractionActor" name="Суперпользователь"><ModelProperties><StringProperty name="name" value="Суперпользователь" /></ModelProperties></Model><Model id="M200000000000000" modelType="InteractionLifeLine" name="ИС «Караваны»"><ModelProperties><StringProperty name="name" value="ИС «Караваны»" /></ModelProperties></Model><Model id="M300000000000000" modelType="InteractionLifeLine" name="Организация"><ModelProperties><StringProperty name="name" value="Организация" /></ModelProperties></Model><Model id="M400000000000000" modelType="InteractionLifeLine" name="Сотрудник&#10;(первый диспетчер)"><ModelProperties><StringProperty name="name" value="Сотрудник&#10;(первый диспетчер)" /></ModelProperties></Model><Model id="M500000000000000" modelType="InteractionLifeLine" name="Событие аудита"><ModelProperties><StringProperty name="name" value="Событие аудита" /></ModelProperties></Model><Model id="Mnote60000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Альт. поток 4а: название не уникально — организация&#10;  не создаётся, суперпользователь получает ошибку и вводит&#10;  другое название (шаги 5–9 не выполняются, сценарий&#10;  возвращается к шагу 3)&#10;  Альт. поток 6а: назначение первого диспетчера пропущено —&#10;  шаги 7 и 8 не выполняются, организация создаётся&#10;  без пользователей (диспетчер назначается позже, UC-33)" /></ModelProperties></Model><Model id="Anote60000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote60000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote70000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Постусловия: организация создана с изолированным&#10;  пространством данных, учётная запись первого диспетчера&#10;  привязана к организации, организация активна и готова&#10;  к использованию, события создания зафиксированы&#10;  в журнале аудита" /></ModelProperties></Model><Model id="Anote70000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote70000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M500000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote80000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Нумерация сплошная: номер — шаг основного потока UC-32&#10;  (девять шагов, docs/CoreUseCases.md). Стрелка в подписи задаёт&#10;  направление сообщения: «→» — от суперпользователя к системе&#10;  и от системы к деловому объекту, «←» — ответ системы&#10;  суперпользователю.&#10;  Система показана как единое целое: ни интерфейсов, ни классов,&#10;  ни методов — внутреннее устройство раскрывают Logical&#10;  и Implementation View.&#10;  Требования: FR-23 (организация), FR-24 (изоляция данных&#10;  между организациями), RL-4 (журнал аудита)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_COL_UC32_UseCa" name="COL_UC32_UseCaseView" diagramType="CommunicationDiagram"><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="304" y="58" width="855" height="52" zorder="6" model="Mtitle0000000000" name="UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Use-Case View)&#10;Абстрактное описание: актор, система как единое целое, деловые объекты и порядок сообщений"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="855" height="52" /></Shape><Shape id="S100000000000000" shapeType="CommunicationActor" x="393" y="190" width="209" height="76" zorder="4" model="M100000000000000" name="Суперпользователь"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="209" height="76" /><FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="CommunicationLifeLine" x="411" y="542" width="171" height="60" zorder="2" model="M200000000000000" name="ИС «Караваны»"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="171" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="CommunicationLifeLine" x="48" y="765" width="160" height="60" zorder="1" model="M300000000000000" name="Организация"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="160" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S400000000000000" shapeType="CommunicationLifeLine" x="393" y="752" width="207" height="80" zorder="5" model="M400000000000000" name="Сотрудник&#10;(первый диспетчер)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="207" height="80" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S500000000000000" shapeType="CommunicationLifeLine" x="808" y="765" width="175" height="60" zorder="3" model="M500000000000000" name="Событие аудита"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="175" height="60" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="Snote60000000000" shapeType="NOTE" x="602" y="138" width="614" height="180" zorder="8" model="Mnote60000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote70000000000" shapeType="NOTE" x="984" y="726" width="584" height="133" zorder="7" model="Mnote70000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote80000000000" shapeType="NOTE" x="902" y="868" width="646" height="269" zorder="9" model="Mnote80000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="CAnote6000000000" shapeType="Anchor" model="Anote60000000000" from="Snote60000000000" to="S100000000000000" /><Connector id="CAnote7000000000" shapeType="Anchor" model="Anote70000000000" from="Snote70000000000" to="S500000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="COL_UC32_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="6e8c4_MN00100000" modelType="InteractionLifeLine" name="Суперпользователь">
+      <ModelProperties>
+        <StringProperty name="name" value="Суперпользователь" />
+        <ModelRefsProperty name="stereotypes">
+          <ModelRef id="6e8c4_STactor000" />
+        </ModelRefsProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_STactor000" modelType="Stereotype" name="actor">
+      <ModelProperties>
+        <StringProperty name="name" value="actor" />
+        <StringProperty name="baseType" value="InteractionLifeLine" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_DIV0040000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_MN00600000" modelType="InteractionLifeLine" name="ИС «Караваны»">
+      <ModelProperties>
+        <StringProperty name="name" value="ИС «Караваны»" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_DIV0090000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_MN01100000" modelType="InteractionLifeLine" name="Организация">
+      <ModelProperties>
+        <StringProperty name="name" value="Организация" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_DIV0140000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_MN01600000" modelType="InteractionLifeLine" name="Сотрудник&#10;(первый диспетчер)">
+      <ModelProperties>
+        <StringProperty name="name" value="Сотрудник&#10;(первый диспетчер)" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_DIV0190000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_MN02100000" modelType="InteractionLifeLine" name="Событие аудита">
+      <ModelProperties>
+        <StringProperty name="name" value="Событие аудита" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_DIV0240000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_ML02600000" modelType="InteractionLifeLineLink" name="1 → открыть управление организациями&#10;2 → выбрать действие «Создать организацию»&#10;3 → ввести данные организации: название,&#10;уровень подписки, контактные данные&#10;6 ← предложить назначить первого диспетчера (UC-33)&#10;7 → ввести ФИО, логин и начальный пароль&#10;первого диспетчера">
+      <ModelProperties>
+        <StringProperty name="name" value="1 → открыть управление организациями&#10;2 → выбрать действие «Создать организацию»&#10;3 → ввести данные организации: название,&#10;уровень подписки, контактные данные&#10;6 ← предложить назначить первого диспетчера (UC-33)&#10;7 → ввести ФИО, логин и начальный пароль&#10;первого диспетчера" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="6e8c4_MN00100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="6e8c4_MN00600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="6e8c4_END0270000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN00100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="6e8c4_END0280000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="6e8c4_MC02900000" modelType="Message" name="1 → открыть управление организациями">
+          <ModelProperties>
+            <StringProperty name="name" value="1 → открыть управление организациями" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00100000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="1" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0300000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0310000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+        <Model id="6e8c4_MC03200000" modelType="Message" name="2 → выбрать действие «Создать организацию»">
+          <ModelProperties>
+            <StringProperty name="name" value="2 → выбрать действие «Создать организацию»" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00100000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="2" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0330000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0340000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+        <Model id="6e8c4_MC03500000" modelType="Message" name="3 → ввести данные организации: название,&#10;уровень подписки, контактные данные">
+          <ModelProperties>
+            <StringProperty name="name" value="3 → ввести данные организации: название,&#10;уровень подписки, контактные данные" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00100000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="3" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0360000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0370000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+        <Model id="6e8c4_MC03800000" modelType="Message" name="6 ← предложить назначить первого диспетчера (UC-33)">
+          <ModelProperties>
+            <StringProperty name="name" value="6 ← предложить назначить первого диспетчера (UC-33)" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN00100000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="6" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0390000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0400000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+        <Model id="6e8c4_MC04100000" modelType="Message" name="7 → ввести ФИО, логин и начальный пароль&#10;первого диспетчера">
+          <ModelProperties>
+            <StringProperty name="name" value="7 → ввести ФИО, логин и начальный пароль&#10;первого диспетчера" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00100000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="7" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0420000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0430000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="6e8c4_ML04600000" modelType="InteractionLifeLineLink" name="4 → проверить уникальность названия&#10;5 → создать организацию и выделить&#10;изолированное пространство данных">
+      <ModelProperties>
+        <StringProperty name="name" value="4 → проверить уникальность названия&#10;5 → создать организацию и выделить&#10;изолированное пространство данных" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="6e8c4_MN00600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="6e8c4_MN01100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="6e8c4_END0470000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="6e8c4_END0480000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN01100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="6e8c4_MC04900000" modelType="Message" name="4 → проверить уникальность названия">
+          <ModelProperties>
+            <StringProperty name="name" value="4 → проверить уникальность названия" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN01100000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="4" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0500000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0510000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN01100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+        <Model id="6e8c4_MC05200000" modelType="Message" name="5 → создать организацию и выделить&#10;изолированное пространство данных">
+          <ModelProperties>
+            <StringProperty name="name" value="5 → создать организацию и выделить&#10;изолированное пространство данных" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN01100000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="5" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0530000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0540000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN01100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="6e8c4_ML05700000" modelType="InteractionLifeLineLink" name="8 → создать учётную запись диспетчера,&#10;привязанную к организации">
+      <ModelProperties>
+        <StringProperty name="name" value="8 → создать учётную запись диспетчера,&#10;привязанную к организации" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="6e8c4_MN00600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="6e8c4_MN01600000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="6e8c4_END0580000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="6e8c4_END0590000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN01600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="6e8c4_MC06000000" modelType="Message" name="8 → создать учётную запись диспетчера,&#10;привязанную к организации">
+          <ModelProperties>
+            <StringProperty name="name" value="8 → создать учётную запись диспетчера,&#10;привязанную к организации" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN01600000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="8" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0610000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0620000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN01600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="6e8c4_ML06500000" modelType="InteractionLifeLineLink" name="9 → записать событие создания организации&#10;и назначения первого диспетчера">
+      <ModelProperties>
+        <StringProperty name="name" value="9 → записать событие создания организации&#10;и назначения первого диспетчера" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="6e8c4_MN00600000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="6e8c4_MN02100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+      <FromEnd>
+        <Model id="6e8c4_END0660000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="6e8c4_END0670000" modelType="InteractionLifeLineLinkEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="6e8c4_MN02100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+      <ChildModels>
+        <Model id="6e8c4_MC06800000" modelType="Message" name="9 → записать событие создания организации&#10;и назначения первого диспетчера">
+          <ModelProperties>
+            <StringProperty name="name" value="9 → записать событие создания организации&#10;и назначения первого диспетчера" />
+            <ModelRefProperty name="endRelationshipFromMetaModelElement">
+              <ModelRef id="6e8c4_MN00600000" />
+            </ModelRefProperty>
+            <ModelRefProperty name="endRelationshipToMetaModelElement">
+              <ModelRef id="6e8c4_MN02100000" />
+            </ModelRefProperty>
+            <StringProperty name="sequenceNumber" value="9" />
+          </ModelProperties>
+          <FromEnd>
+            <Model id="6e8c4_END0690000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN00600000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </FromEnd>
+          <ToEnd>
+            <Model id="6e8c4_END0700000" modelType="MessageEnd" name="" composite="true">
+              <ModelProperties>
+                <StringProperty name="name" value="" />
+                <ModelRefProperty name="EndModelElement">
+                  <ModelRef id="6e8c4_MN02100000" />
+                </ModelRefProperty>
+              </ModelProperties>
+            </Model>
+          </ToEnd>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="6e8c4_NOTE073000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Альт. поток 4а: название не уникально — организация&#10;не создаётся, суперпользователь получает ошибку и вводит&#10;другое название (шаги 5–9 не выполняются, сценарий&#10;возвращается к шагу 3)&#10;Альт. поток 6а: назначение первого диспетчера пропущено —&#10;шаги 7 и 8 не выполняются, организация создаётся&#10;без пользователей (диспетчер назначается позже, UC-33)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;Альт. поток 4а:&lt;/b&gt; название не уникально — организация&lt;br&gt;не создаётся, суперпользователь получает ошибку и вводит&lt;br&gt;другое название (шаги 5–9 не выполняются, сценарий&lt;br&gt;возвращается к шагу 3)&lt;br&gt;&lt;b&gt;Альт. поток 6а:&lt;/b&gt; назначение первого диспетчера пропущено —&lt;br&gt;шаги 7 и 8 не выполняются, организация создаётся&lt;br&gt;без пользователей (диспетчер назначается позже, UC-33)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_AN07500000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="6e8c4_NOTE073000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="6e8c4_MN00100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_NOTE077000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Постусловия: организация создана с изолированным&#10;пространством данных, учётная запись первого диспетчера&#10;привязана к организации, организация активна и готова&#10;к использованию, события создания зафиксированы&#10;в журнале аудита" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;Постусловия:&lt;/b&gt; организация создана с изолированным&lt;br&gt;пространством данных, учётная запись первого диспетчера&lt;br&gt;привязана к организации, организация активна и готова&lt;br&gt;к использованию, события создания зафиксированы&lt;br&gt;в журнале аудита&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_AN07900000" modelType="Anchor">
+      <ModelProperties>
+        <ModelRefProperty name="from">
+          <ModelRef id="6e8c4_NOTE077000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="to">
+          <ModelRef id="6e8c4_MN02100000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="6e8c4_NOTE081000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Нумерация сплошная: номер — шаг основного потока UC-32&#10;(девять шагов, docs/CoreUseCases.md). Стрелка в подписи задаёт&#10;направление сообщения: «→» — от суперпользователя к системе&#10;и от системы к деловому объекту, «←» — ответ системы&#10;суперпользователю.&#10;Система показана как единое целое: ни интерфейсов, ни классов,&#10;ни методов — внутреннее устройство раскрывают Logical&#10;и Implementation View.&#10;Требования: FR-23 (организация), FR-24 (изоляция данных&#10;между организациями), RL-4 (журнал аудита)." value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Нумерация сплошная: номер — шаг основного потока UC-32&lt;br&gt;(девять шагов, docs/CoreUseCases.md). Стрелка в подписи задаёт&lt;br&gt;направление сообщения: «→» — от суперпользователя к системе&lt;br&gt;и от системы к деловому объекту, «←» — ответ системы&lt;br&gt;суперпользователю.&lt;br&gt;Система показана как единое целое: ни интерфейсов, ни классов,&lt;br&gt;ни методов — внутреннее устройство раскрывают Logical&lt;br&gt;и Implementation View.&lt;br&gt;Требования: FR-23 (организация), FR-24 (изоляция данных&lt;br&gt;между организациями), RL-4 (журнал аудита).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="6e8c4_D_COL_UC32" name="COL_UC32_UseCaseView" diagramType="CommunicationDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+        <BooleanProperty name="autoFitShapesSize" value="false" />
+        <BooleanProperty name="alignToGrid" value="false" />
+        <BooleanProperty name="gridVisible" value="false" />
+        <BooleanProperty name="paintConnectorThroughLabel" value="true" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="6e8c4_S002000000" shapeType="CommunicationLifeLine" x="243" y="103" width="144" height="52" zorder="22" model="6e8c4_MN00100000" name="Суперпользователь">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="144" height="52" />
+          <ChildShapes>
+            <Shape id="6e8c4_S003000000" shapeType="TextBox" x="246" y="105" width="138" height="37" zorder="5">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="«actor»&#10;Суперпользователь" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;«actor»&lt;br&gt;Суперпользователь&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="6e8c4_S005000000" shapeType="Freehand" x="243" y="140" width="144" height="2" zorder="18" model="6e8c4_DIV0040000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:143.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,255,255,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S007000000" shapeType="CommunicationLifeLine" x="256" y="346" width="118" height="41" zorder="20" model="6e8c4_MN00600000" name="ИС «Караваны»">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="118" height="41" />
+          <ChildShapes>
+            <Shape id="6e8c4_S008000000" shapeType="TextBox" x="259" y="348" width="112" height="21" zorder="2">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="ИС «Караваны»" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;ИС «Караваны»&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="6e8c4_S010000000" shapeType="Freehand" x="256" y="367" width="118" height="2" zorder="15" model="6e8c4_DIV0090000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:117.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S012000000" shapeType="CommunicationLifeLine" x="6" y="500" width="110" height="41" zorder="19" model="6e8c4_MN01100000" name="Организация">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="110" height="41" />
+          <ChildShapes>
+            <Shape id="6e8c4_S013000000" shapeType="TextBox" x="9" y="502" width="104" height="21" zorder="1">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Организация" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Организация&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="6e8c4_S015000000" shapeType="Freehand" x="6" y="521" width="110" height="2" zorder="14" model="6e8c4_DIV0140000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:109.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S017000000" shapeType="CommunicationLifeLine" x="243" y="491" width="143" height="55" zorder="23" model="6e8c4_MN01600000" name="Сотрудник&#10;(первый диспетчер)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="143" height="55" />
+          <ChildShapes>
+            <Shape id="6e8c4_S018000000" shapeType="TextBox" x="246" y="493" width="137" height="37" zorder="4">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Сотрудник&#10;(первый диспетчер)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Сотрудник&lt;br&gt;(первый диспетчер)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="6e8c4_S020000000" shapeType="Freehand" x="243" y="528" width="143" height="2" zorder="17" model="6e8c4_DIV0190000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:142.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S022000000" shapeType="CommunicationLifeLine" x="530" y="500" width="121" height="41" zorder="21" model="6e8c4_MN02100000" name="Событие аудита">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="Center" x="0" y="0" width="121" height="41" />
+          <ChildShapes>
+            <Shape id="6e8c4_S023000000" shapeType="TextBox" x="533" y="502" width="115" height="21" zorder="3">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Событие аудита" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Событие аудита&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="6e8c4_S025000000" shapeType="Freehand" x="530" y="521" width="121" height="2" zorder="16" model="6e8c4_DIV0240000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:160,160,160,255" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:120.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:160,160,160,255" weight="1" transparency="0" />
+              <FillColor type="1" color="Cr:160,160,160,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S045000000" shapeType="TextBox" x="343" y="214" width="344" height="115" zorder="9">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1 → открыть управление организациями&#10;2 → выбрать действие «Создать организацию»&#10;3 → ввести данные организации: название,&#10;уровень подписки, контактные данные&#10;6 ← предложить назначить первого диспетчера (UC-33)&#10;7 → ввести ФИО, логин и начальный пароль&#10;первого диспетчера" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;1 → открыть управление организациями&lt;br&gt;2 → выбрать действие «Создать организацию»&lt;br&gt;3 → ввести данные организации: название,&lt;br&gt;уровень подписки, контактные данные&lt;br&gt;6 ← предложить назначить первого диспетчера (UC-33)&lt;br&gt;7 → ввести ФИО, логин и начальный пароль&lt;br&gt;первого диспетчера&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="6e8c4_S056000000" shapeType="TextBox" x="75" y="405" width="240" height="50" zorder="8">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="4 → проверить уникальность названия&#10;5 → создать организацию и выделить&#10;изолированное пространство данных" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;4 → проверить уникальность названия&lt;br&gt;5 → создать организацию и выделить&lt;br&gt;изолированное пространство данных&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="6e8c4_S064000000" shapeType="TextBox" x="315" y="415" width="259" height="38" zorder="6">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="8 → создать учётную запись диспетчера,&#10;привязанную к организации" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;8 → создать учётную запись диспетчера,&lt;br&gt;привязанную к организации&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="6e8c4_S072000000" shapeType="TextBox" x="593" y="416" width="278" height="38" zorder="7">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="9 → записать событие создания организации&#10;и назначения первого диспетчера" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;9 → записать событие создания организации&lt;br&gt;и назначения первого диспетчера&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="6e8c4_S074000000" shapeType="NOTE" x="405" y="69" width="407" height="123" zorder="12" model="6e8c4_NOTE073000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S078000000" shapeType="NOTE" x="669" y="473" width="385" height="92" zorder="11" model="6e8c4_NOTE077000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S082000000" shapeType="NOTE" x="595" y="571" width="447" height="187" zorder="13" model="6e8c4_NOTE081000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="2" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:221,221,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="6e8c4_S083000000" shapeType="TextBox" x="5" y="10" width="1050" height="40" zorder="10">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Use-Case View)&#10;Абстрактное описание: актор, система как единое целое, деловые объекты и порядок сообщений" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;&lt;b&gt;UC-32 «Создать организацию» — Cooperative (Communication) Diagram (Use-Case View)&lt;/b&gt;&lt;br&gt;&lt;b&gt;Абстрактное описание: актор, система как единое целое, деловые объекты и порядок сообщений&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="14" style="1" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="6e8c4_C044000000" shapeType="InteractionLifeLineLink" model="6e8c4_ML02600000" from="6e8c4_S002000000" to="6e8c4_S007000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="315" y="157" />
+            <Point x="315" y="346" />
+          </Points>
+        </Connector>
+        <Connector id="6e8c4_C055000000" shapeType="InteractionLifeLineLink" model="6e8c4_ML04600000" from="6e8c4_S007000000" to="6e8c4_S012000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="315" y="365" />
+            <Point x="76" y="373" />
+            <Point x="50" y="433" />
+            <Point x="50" y="501" />
+          </Points>
+        </Connector>
+        <Connector id="6e8c4_C063000000" shapeType="InteractionLifeLineLink" model="6e8c4_ML05700000" from="6e8c4_S007000000" to="6e8c4_S017000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="315" y="384" />
+            <Point x="315" y="491" />
+          </Points>
+        </Connector>
+        <Connector id="6e8c4_C071000000" shapeType="InteractionLifeLineLink" model="6e8c4_ML06500000" from="6e8c4_S007000000" to="6e8c4_S022000000" connectorStyle="Curve">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="375" y="365" />
+            <Point x="547" y="378" />
+            <Point x="593" y="434" />
+            <Point x="593" y="501" />
+          </Points>
+        </Connector>
+        <Connector id="6e8c4_NA07600000" shapeType="Anchor" model="6e8c4_AN07500000" from="6e8c4_S074000000" to="6e8c4_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="608" y="130" />
+            <Point x="315" y="129" />
+          </Points>
+        </Connector>
+        <Connector id="6e8c4_NA08000000" shapeType="Anchor" model="6e8c4_AN07900000" from="6e8c4_S078000000" to="6e8c4_S022000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="861" y="519" />
+            <Point x="590" y="520" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

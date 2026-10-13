@@ -1,0 +1,597 @@
+{
+  "name": "COL_UC2_LogicalView",
+  "type": "CommunicationDiagram",
+  "canvas": [
+    2152,
+    990
+  ],
+  "title": "UC-2 «Управлять статусами заявки» — Cooperative (Communication) Diagram (Logical View)\nКооперация логических компонентов слоёв: параметры, результаты и сторожевые условия сообщений",
+  "nodes": [
+    {
+      "key": "U",
+      "name": "Диспетчер /\nКараван-мастер",
+      "body": [],
+      "parent": null,
+      "stereotype": "actor",
+      "color": "White",
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1018,
+        68,
+        119,
+        70
+      ],
+      "fill": "Cr:255,255,255,255"
+    },
+    {
+      "key": "PRES",
+      "name": ":Интерфейс заявок",
+      "body": [
+        "принимает команду перехода",
+        "показывает статус, историю и отказы"
+      ],
+      "parent": "presentation",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        950,
+        228,
+        255,
+        79
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "APP",
+      "name": ":Управление статусами\nUC-2",
+      "body": [
+        "сценарий перехода в одной транзакции",
+        "обращается к infrastructure <<access>>"
+      ],
+      "parent": "application",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        942,
+        398,
+        271,
+        97
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "REQ",
+      "name": ":Заявка",
+      "body": [
+        "хранит текущий статус"
+      ],
+      "parent": "domain",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        52,
+        628,
+        160,
+        62
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "SM",
+      "name": ":Статусная модель",
+      "body": [
+        "допустимость перехода, роли,\nобязательность причины, финальность"
+      ],
+      "parent": "domain",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        230,
+        619,
+        270,
+        79
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "HIST",
+      "name": ":История статусов",
+      "body": [],
+      "parent": "domain",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        518,
+        632,
+        132,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "EVT",
+      "name": ":Событие аудита",
+      "body": [],
+      "parent": "domain",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        669,
+        632,
+        124,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "STORE",
+      "name": ":Хранение данных",
+      "body": [],
+      "parent": "infrastructure",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1447,
+        632,
+        134,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "AUDIT",
+      "name": ":Журнал аудита",
+      "body": [],
+      "parent": "infrastructure",
+      "stereotype": "компонент слоя",
+      "color": null,
+      "composite": false,
+      "kind": "CommunicationLifeLine",
+      "rect": [
+        1599,
+        632,
+        118,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    }
+  ],
+  "edges": [
+    {
+      "from": "U",
+      "to": "PRES",
+      "label": "1: выбрать действие перехода\n(целевой статус, роль, имя актора, причина)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1018,
+          110
+        ],
+        [
+          929,
+          169
+        ],
+        [
+          967,
+          228
+        ]
+      ],
+      "caption": [
+        932,
+        159,
+        301,
+        32
+      ]
+    },
+    {
+      "from": "PRES",
+      "to": "APP",
+      "label": "1.1: заявка = сменитьСтатус(идентификатор заявки,\nцелевой статус, роль, имя актора, причина)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1078,
+          317
+        ],
+        [
+          1078,
+          398
+        ]
+      ],
+      "caption": [
+        1080,
+        330,
+        343,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.1: заявка =\nнайти заявку(идентификатор)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1192,
+          497
+        ],
+        [
+          1250,
+          604
+        ],
+        [
+          1448,
+          655
+        ]
+      ],
+      "caption": [
+        1248,
+        534,
+        189,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "SM",
+      "label": "1.1.2: переход = найти переход\n(текущий статус, целевой статус)\n1.1.3: допустим = проверить(переход, роль,\nпричина, готовность рейса)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          942,
+          448
+        ],
+        [
+          598,
+          478
+        ],
+        [
+          315,
+          543
+        ],
+        [
+          334,
+          617
+        ]
+      ],
+      "caption": [
+        330,
+        517,
+        294,
+        65
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "REQ",
+      "label": "1.1.4 [допустим]:\nустановить статус(целевой статус)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          942,
+          448
+        ],
+        [
+          242,
+          483
+        ],
+        [
+          89,
+          561
+        ],
+        [
+          101,
+          627
+        ]
+      ],
+      "caption": [
+        99,
+        534,
+        230,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.5: сохранить\nзаявку(заявка)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1215,
+          498
+        ],
+        [
+          1515,
+          508
+        ],
+        [
+          1568,
+          561
+        ],
+        [
+          1530,
+          632
+        ]
+      ],
+      "caption": [
+        1454,
+        534,
+        112,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "HIST",
+      "label": "1.1.6: запись = создать(из статуса, в статус,\nроль, имя актора, причина)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          939,
+          448
+        ],
+        [
+          681,
+          489
+        ],
+        [
+          596,
+          553
+        ],
+        [
+          588,
+          632
+        ]
+      ],
+      "caption": [
+        619,
+        534,
+        314,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "STORE",
+      "label": "1.1.7: сохранить\nзапись истории(запись)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1215,
+          498
+        ],
+        [
+          1511,
+          510
+        ],
+        [
+          1641,
+          511
+        ],
+        [
+          1622,
+          584
+        ],
+        [
+          1542,
+          632
+        ]
+      ],
+      "caption": [
+        1570,
+        534,
+        154,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "EVT",
+      "label": "1.1.8: событие = сформировать(«статус изменён»,\nорганизация, заявка, переход, актор)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          948,
+          449
+        ],
+        [
+          895,
+          512
+        ],
+        [
+          884,
+          577
+        ],
+        [
+          795,
+          644
+        ]
+      ],
+      "caption": [
+        914,
+        534,
+        329,
+        32
+      ]
+    },
+    {
+      "from": "APP",
+      "to": "AUDIT",
+      "label": "1.1.9: записать\nсобытие(событие)",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1220,
+          498
+        ],
+        [
+          1720,
+          510
+        ],
+        [
+          1734,
+          564
+        ],
+        [
+          1683,
+          632
+        ]
+      ],
+      "caption": [
+        1732,
+        534,
+        112,
+        32
+      ]
+    },
+    {
+      "from": "PRES",
+      "to": "U",
+      "label": "1.2: показать новый статус\nи историю переходов",
+      "kind": "InteractionLifeLineLink",
+      "points": [
+        [
+          1168,
+          229
+        ],
+        [
+          1211,
+          179
+        ],
+        [
+          1138,
+          114
+        ]
+      ],
+      "caption": [
+        1212,
+        159,
+        181,
+        32
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "text": "между 1.1.4 и 1.1.5:\nдомен изменён, в хранилище ещё нет",
+      "kind": "note",
+      "rect": [
+        6,
+        736,
+        252,
+        43
+      ],
+      "anchor": "REQ"
+    },
+    {
+      "text": "[не допустим] — сообщения 1.1.4–1.1.9 не выполняются,\nзаявка остаётся в прежнем статусе, интерфейс показывает\nпричину отказа (роль, отсутствие причины, финальный статус)",
+      "kind": "note",
+      "rect": [
+        1232,
+        417,
+        404,
+        59
+      ],
+      "anchor": "APP"
+    },
+    {
+      "text": "**Постусловия UC-2:** заявка находится в новом статусе;\nв истории изменений статуса зафиксирован переход с автором,\nвременем и причиной; в журнале аудита зафиксировано\nсобытие изменения статуса",
+      "kind": "note",
+      "rect": [
+        1737,
+        620,
+        410,
+        78
+      ],
+      "anchor": "AUDIT"
+    },
+    {
+      "text": "Нумерация иерархическая: целое число — действие актора,\nвложенные вызовы — 1.1, 1.1.1, …\n**Отличие от Use-Case View:** там система показана как единое\nцелое, одним участником; здесь она развёрнута в логические\nкомпоненты слоёв диаграммы пакетов, а у сообщений указаны\nпараметры, результаты и сторожевые условия.\nПорядок сообщений 1.1.4 → 1.1.5 показывает, что изменение\nдомена предшествует фиксации в хранилище.\nЗависимости: presentation → application → domain;\napplication → infrastructure (<<access>>).",
+      "kind": "legend",
+      "rect": [
+        1709,
+        785,
+        425,
+        186
+      ]
+    }
+  ],
+  "frames": [
+    {
+      "key": "presentation",
+      "name": "presentation",
+      "rect": [
+        942,
+        201,
+        273,
+        116
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "PRES"
+      ]
+    },
+    {
+      "key": "application",
+      "name": "application",
+      "rect": [
+        934,
+        370,
+        288,
+        134
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "APP"
+      ]
+    },
+    {
+      "key": "domain",
+      "name": "domain",
+      "rect": [
+        44,
+        591,
+        759,
+        117
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "REQ",
+        "SM",
+        "HIST",
+        "EVT"
+      ]
+    },
+    {
+      "key": "infrastructure",
+      "name": "infrastructure",
+      "rect": [
+        1439,
+        604,
+        288,
+        90
+      ],
+      "fill": "Cr:253,253,253,255",
+      "children": [
+        "STORE",
+        "AUDIT"
+      ]
+    }
+  ]
+}

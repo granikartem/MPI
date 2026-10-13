@@ -1,2 +1,1095 @@
 <?xml version='1.0' encoding='utf-8'?>
-<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SEQ_UC15_UseCaseView" umlVersion="2.x" exporterVersion="18.1"><Models><Model id="Mtitle0000000000" modelType="NOTE" name="UC-15 «Выполнить сверку манифеста при приёмке» — Sequence Diagram (Use-Case View)&#10;Абстрактное описание: обмен сведениями между акторами при передаче груза; системы на этом виде нет"><ModelProperties><StringProperty name="name" value="UC-15 «Выполнить сверку манифеста при приёмке» — Sequence Diagram (Use-Case View)&#10;Абстрактное описание: обмен сведениями между акторами при передаче груза; системы на этом виде нет" /></ModelProperties></Model><Model id="M100000000000000" modelType="InteractionActor" name="Караван-&#10;мастер"><ModelProperties><StringProperty name="name" value="Караван-&#10;мастер" /></ModelProperties></Model><Model id="M200000000000000" modelType="InteractionActor" name="Кладовщик&#10;(принимающая сторона)"><ModelProperties><StringProperty name="name" value="Кладовщик&#10;(принимающая сторона)" /></ModelProperties></Model><Model id="M300000000000000" modelType="CombinedFragment" name="alt"><ModelProperties><StringProperty name="name" value="alt" /><StringProperty name="interactionOperator" value="alt" /></ModelProperties></Model><Model id="Mo40000000000000" modelType="InteractionOperand" name="пломба цела"><ModelProperties><StringProperty name="name" value="пломба цела" /></ModelProperties></Model><Model id="Mo50000000000000" modelType="InteractionOperand" name="альт. поток 2а: пломба нарушена"><ModelProperties><StringProperty name="name" value="альт. поток 2а: пломба нарушена" /></ModelProperties></Model><Model id="M600000000000000" modelType="CombinedFragment" name="alt"><ModelProperties><StringProperty name="name" value="alt" /><StringProperty name="interactionOperator" value="alt" /></ModelProperties></Model><Model id="Mo70000000000000" modelType="InteractionOperand" name="основной поток: сверка сошлась"><ModelProperties><StringProperty name="name" value="основной поток: сверка сошлась" /></ModelProperties></Model><Model id="Mo80000000000000" modelType="InteractionOperand" name="альт. поток 5а: расхождение по позициям"><ModelProperties><StringProperty name="name" value="альт. поток 5а: расхождение по позициям" /></ModelProperties></Model><Model id="Mm90000000000000" modelType="Message" name="1: предъявить груз и пломбу&#10;(номер пломбы, момент пломбирования)"><ModelProperties><StringProperty name="name" value="1: предъявить груз и пломбу&#10;(номер пломбы, момент пломбирования)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm10000000000000" modelType="Message" name="2: назвать результат осмотра пломбы&#10;(целостность подтверждена / нарушена)"><ModelProperties><StringProperty name="name" value="2: назвать результат осмотра пломбы&#10;(целостность подтверждена / нарушена)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm11000000000000" modelType="Message" name="3: передать груз-манифест&#10;(позиции и ожидаемые количества)"><ModelProperties><StringProperty name="name" value="3: передать груз-манифест&#10;(позиции и ожидаемые количества)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm12000000000000" modelType="Message" name="4: назвать фактические количества&#10;по позициям манифеста"><ModelProperties><StringProperty name="name" value="4: назвать фактические количества&#10;по позициям манифеста" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm13000000000000" modelType="Message" name="5: подтвердить приёмку&#10;(результат сверки — совпадение)"><ModelProperties><StringProperty name="name" value="5: подтвердить приёмку&#10;(результат сверки — совпадение)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm14000000000000" modelType="Message" name="5: перечислить расхождения&#10;(позиция, ожидалось, фактически)"><ModelProperties><StringProperty name="name" value="5: перечислить расхождения&#10;(позиция, ожидалось, фактически)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm15000000000000" modelType="Message" name="6: сообщить обстоятельства&#10;расхождения со своей стороны"><ModelProperties><StringProperty name="name" value="6: сообщить обстоятельства&#10;расхождения со своей стороны" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm16000000000000" modelType="Message" name="7: закрыть приёмку&#10;(результат сверки — расхождение, комментарий)"><ModelProperties><StringProperty name="name" value="7: закрыть приёмку&#10;(результат сверки — расхождение, комментарий)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm17000000000000" modelType="Message" name="3: заявить о нарушении пломбы&#10;и запросить объяснение"><ModelProperties><StringProperty name="name" value="3: заявить о нарушении пломбы&#10;и запросить объяснение" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm18000000000000" modelType="Message" name="4: сообщить обстоятельства рейса&#10;(инцидент в пути, UC-19)"><ModelProperties><StringProperty name="name" value="4: сообщить обстоятельства рейса&#10;(инцидент в пути, UC-19)" /><ModelRefProperty name="from"><ModelRef id="M100000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M200000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mm19000000000000" modelType="Message" name="5: закрыть приёмку&#10;(результат сверки — расхождение)"><ModelProperties><StringProperty name="name" value="5: закрыть приёмку&#10;(результат сверки — расхождение)" /><ModelRefProperty name="from"><ModelRef id="M200000000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote20000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Предусловия: рейс прибыл в точку назначения;&#10;  груз опломбирован при отправке, груз-манифест&#10;  оформлен кладовщиком отправляющей стороны (FR-12)" /></ModelProperties></Model><Model id="Anote20000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote20000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote21000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Постусловия: стороны согласовали результат сверки&#10;  (совпадение или расхождение) и состояние пломбы;&#10;  результат передаётся в систему отдельным прецедентом" /></ModelProperties></Model><Model id="Anote21000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote21000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote22000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Альт. поток 1а: кладовщика на принимающей стороне нет.&#10;  Приёмку закрывает караван-мастер единолично, второй актор&#10;  в обмене не участвует (FR-17)" /></ModelProperties></Model><Model id="Anote22000000000" modelType="Anchor"><ModelProperties><ModelRefProperty name="from"><ModelRef id="Mnote22000000000" /></ModelRefProperty><ModelRefProperty name="to"><ModelRef id="M100000000000000" /></ModelRefProperty></ModelProperties></Model><Model id="Mnote23000000000" modelType="NOTE"><ModelProperties><HTMLProperty name="documentation" plainTextValue="Оба участника — люди: на этом виде описывается передача груза&#10;  из рук в руки, системы в обмене нет. Караван-мастер отвечает&#10;  за доставку и пломбу, кладовщик принимающей стороны — за сверку.&#10;  Нумерация сплошная: номер — шаг обмена. Альтернативные исходы&#10;  одного шага несут один номер.&#10;  Требования: FR-12 (манифест), FR-15 (пломба и факт доставки),&#10;  FR-16 (сверка и её результат), FR-17 (приёмка без кладовщика)." /></ModelProperties></Model></Models><Diagrams><Diagram id="D_SEQ_UC15_UseCa" name="SEQ_UC15_UseCaseView" diagramType="InteractionDiagram"><DiagramProperties><BooleanProperty name="showSequenceNumbers" value="false" /></DiagramProperties><Shapes><Shape id="Stitle0000000000" shapeType="TextBox" x="54" y="65" width="931" height="52" zorder="3" model="Mtitle0000000000" name="UC-15 «Выполнить сверку манифеста при приёмке» — Sequence Diagram (Use-Case View)&#10;Абстрактное описание: обмен сведениями между акторами при передаче груза; системы на этом виде нет"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="931" height="52" /></Shape><Shape id="S100000000000000" shapeType="InteractionActor" x="279" y="219" width="120" height="48" zorder="1" model="M100000000000000" name="Караван-&#10;мастер"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="120" height="48" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S200000000000000" shapeType="InteractionActor" x="677" y="219" width="213" height="48" zorder="2" model="M200000000000000" name="Кладовщик&#10;(принимающая сторона)"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="213" height="48" /><FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" /></Shape><Shape id="S300000000000000" shapeType="CombinedFragment" x="250" y="527" width="696" height="728" zorder="13" model="M300000000000000" name="alt"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="696" height="728" /><ChildShapes><Shape id="So40000000000000" shapeType="InteractionOperand" x="250" y="527" width="696" height="728" zorder="12" model="Mo40000000000000" name="пломба цела"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="696" height="728" /></Shape><Shape id="So50000000000000" shapeType="InteractionOperand" x="250" y="891" width="696" height="364" zorder="11" model="Mo50000000000000" name="альт. поток 2а: пломба нарушена"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="696" height="364" /></Shape></ChildShapes></Shape><Shape id="S600000000000000" shapeType="CombinedFragment" x="264" y="699" width="667" height="320" zorder="10" model="M600000000000000" name="alt"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="667" height="320" /><ChildShapes><Shape id="So70000000000000" shapeType="InteractionOperand" x="264" y="699" width="667" height="320" zorder="9" model="Mo70000000000000" name="основной поток: сверка сошлась"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="667" height="320" /></Shape><Shape id="So80000000000000" shapeType="InteractionOperand" x="264" y="859" width="667" height="160" zorder="7" model="Mo80000000000000" name="альт. поток 5а: расхождение по позициям"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><Caption visible="true" side="Center" x="0" y="0" width="667" height="160" /></Shape></ChildShapes></Shape><Shape id="Snote20000000000" shapeType="NOTE" x="245" y="288" width="630" height="85" zorder="6" model="Mnote20000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote21000000000" shapeType="NOTE" x="245" y="1273" width="630" height="85" zorder="5" model="Mnote21000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote22000000000" shapeType="NOTE" x="332" y="1373" width="582" height="85" zorder="4" model="Mnote22000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape><Shape id="Snote23000000000" shapeType="NOTE" x="454" y="1636" width="683" height="193" zorder="8" model="Mnote23000000000"><DiagramElementProperties><BooleanProperty name="requestResetCaption" value="true" /><BooleanProperty name="requestResetCaptionSize" value="true" /></DiagramElementProperties><FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" /></Shape></Shapes><Connectors><Connector id="Cm90000000000000" shapeType="Message" model="Mm90000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="351" y="412" width="420" height="22" /><Points><Point x="339" y="436" /><Point x="783" y="436" /></Points></Connector><Connector id="Cm10000000000000" shapeType="Message" model="Mm10000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="480" width="420" height="22" /><Points><Point x="783" y="504" /><Point x="339" y="504" /></Points></Connector><Connector id="Cm11000000000000" shapeType="Message" model="Mm11000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="351" y="584" width="420" height="22" /><Points><Point x="339" y="608" /><Point x="783" y="608" /></Points></Connector><Connector id="Cm12000000000000" shapeType="Message" model="Mm12000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="652" width="420" height="22" /><Points><Point x="783" y="676" /><Point x="339" y="676" /></Points></Connector><Connector id="Cm13000000000000" shapeType="Message" model="Mm13000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="756" width="420" height="22" /><Points><Point x="783" y="780" /><Point x="339" y="780" /></Points></Connector><Connector id="Cm14000000000000" shapeType="Message" model="Mm14000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="847" width="420" height="22" /><Points><Point x="783" y="871" /><Point x="339" y="871" /></Points></Connector><Connector id="Cm15000000000000" shapeType="Message" model="Mm15000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="351" y="915" width="420" height="22" /><Points><Point x="339" y="939" /><Point x="783" y="939" /></Points></Connector><Connector id="Cm16000000000000" shapeType="Message" model="Mm16000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="982" width="420" height="22" /><Points><Point x="783" y="1006" /><Point x="339" y="1006" /></Points></Connector><Connector id="Cm17000000000000" shapeType="Message" model="Mm17000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="1083" width="420" height="22" /><Points><Point x="783" y="1107" /><Point x="339" y="1107" /></Points></Connector><Connector id="Cm18000000000000" shapeType="Message" model="Mm18000000000000" from="S100000000000000" to="S200000000000000"><Caption visible="true" side="None" x="351" y="1151" width="420" height="22" /><Points><Point x="339" y="1175" /><Point x="783" y="1175" /></Points></Connector><Connector id="Cm19000000000000" shapeType="Message" model="Mm19000000000000" from="S200000000000000" to="S100000000000000"><Caption visible="true" side="None" x="351" y="1219" width="420" height="22" /><Points><Point x="783" y="1243" /><Point x="339" y="1243" /></Points></Connector><Connector id="CAnote2000000000" shapeType="Anchor" model="Anote20000000000" from="Snote20000000000" to="S100000000000000" /><Connector id="CAnote2100000000" shapeType="Anchor" model="Anote21000000000" from="Snote21000000000" to="S100000000000000" /><Connector id="CAnote2200000000" shapeType="Anchor" model="Anote22000000000" from="Snote22000000000" to="S100000000000000" /></Connectors></Diagram></Diagrams></Project>
+<Project xmlns="http://www.visual-paradigm.com/product/vpuml/modelexporter" name="SEQ_UC15_UseCaseView" umlVersion="2.x" exporterVersion="18.1">
+  <Models>
+    <Model id="1c7c3_MN00100000" modelType="InteractionActor" name="Караван-&#10;мастер">
+      <ModelProperties>
+        <StringProperty name="name" value="Караван-&#10;мастер" />
+        <ModelRefProperty name="referencedActor">
+          <ModelRef id="1c7c3_ACTOR00300" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_ACTOR00300" modelType="Actor" name="Караван-&#10;мастер">
+      <ModelProperties>
+        <StringProperty name="name" value="Караван-&#10;мастер" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_LIFE006000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_MN00800000" modelType="InteractionActor" name="Кладовщик&#10;(принимающая сторона)">
+      <ModelProperties>
+        <StringProperty name="name" value="Кладовщик&#10;(принимающая сторона)" />
+        <ModelRefProperty name="referencedActor">
+          <ModelRef id="1c7c3_ACTOR01000" />
+        </ModelRefProperty>
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_ACTOR01000" modelType="Actor" name="Кладовщик&#10;(принимающая сторона)">
+      <ModelProperties>
+        <StringProperty name="name" value="Кладовщик&#10;(принимающая сторона)" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_LIFE013000" modelType="Freehand" name="">
+      <ModelProperties>
+        <StringProperty name="name" value="" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_MF01500000" modelType="CombinedFragment" name="пломба цела">
+      <ModelProperties>
+        <StringProperty name="name" value="пломба цела" />
+        <StringProperty name="interactionOperator" value="alt" />
+      </ModelProperties>
+      <ChildModels>
+        <Model id="1c7c3_MO01700000" modelType="InteractionOperand" name="пломба цела">
+          <ModelProperties>
+            <StringProperty name="name" value="пломба цела" />
+            <StringProperty name="guard" value="пломба цела" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="1c7c3_MF02300000" modelType="CombinedFragment" name="основной поток: сверка сошлась">
+              <ModelProperties>
+                <StringProperty name="name" value="основной поток: сверка сошлась" />
+                <StringProperty name="interactionOperator" value="alt" />
+              </ModelProperties>
+              <ChildModels>
+                <Model id="1c7c3_MO02500000" modelType="InteractionOperand" name="основной поток: сверка сошлась">
+                  <ModelProperties>
+                    <StringProperty name="name" value="основной поток: сверка сошлась" />
+                    <StringProperty name="guard" value="основной поток: сверка сошлась" />
+                  </ModelProperties>
+                  <ChildModels>
+                    <Model id="1c7c3_MM05100000" modelType="Message" name="5: подтвердить приёмку&#10;(результат сверки — совпадение)">
+                      <ModelProperties>
+                        <StringProperty name="name" value="5: подтвердить приёмку&#10;(результат сверки — совпадение)" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="1c7c3_MN00800000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="1c7c3_MN00100000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="1c7c3_END0520000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="1c7c3_END0530000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00100000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                  </ChildModels>
+                </Model>
+                <Model id="1c7c3_MO02800000" modelType="InteractionOperand" name="альт. поток 5а: расхождение по позициям">
+                  <ModelProperties>
+                    <StringProperty name="name" value="альт. поток 5а: расхождение по позициям" />
+                    <StringProperty name="guard" value="альт. поток 5а: расхождение по позициям" />
+                  </ModelProperties>
+                  <ChildModels>
+                    <Model id="1c7c3_MM05600000" modelType="Message" name="5: перечислить расхождения&#10;(позиция, ожидалось, фактически)">
+                      <ModelProperties>
+                        <StringProperty name="name" value="5: перечислить расхождения&#10;(позиция, ожидалось, фактически)" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="1c7c3_MN00800000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="1c7c3_MN00100000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="1c7c3_END0570000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="1c7c3_END0580000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00100000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                    <Model id="1c7c3_MM06100000" modelType="Message" name="6: сообщить обстоятельства&#10;расхождения со своей стороны">
+                      <ModelProperties>
+                        <StringProperty name="name" value="6: сообщить обстоятельства&#10;расхождения со своей стороны" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="1c7c3_MN00100000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="1c7c3_MN00800000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="1c7c3_END0620000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00100000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="1c7c3_END0630000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                    <Model id="1c7c3_MM06600000" modelType="Message" name="7: закрыть приёмку&#10;(результат сверки — расхождение, комментарий)">
+                      <ModelProperties>
+                        <StringProperty name="name" value="7: закрыть приёмку&#10;(результат сверки — расхождение, комментарий)" />
+                        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                          <ModelRef id="1c7c3_MN00800000" />
+                        </ModelRefProperty>
+                        <ModelRefProperty name="endRelationshipToMetaModelElement">
+                          <ModelRef id="1c7c3_MN00100000" />
+                        </ModelRefProperty>
+                        <BooleanProperty name="asynchronous" value="false" />
+                        <IntegerProperty name="type" value="0" />
+                      </ModelProperties>
+                      <FromEnd>
+                        <Model id="1c7c3_END0670000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00800000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </FromEnd>
+                      <ToEnd>
+                        <Model id="1c7c3_END0680000" modelType="MessageEnd" name="" composite="true">
+                          <ModelProperties>
+                            <StringProperty name="name" value="" />
+                            <ModelRefProperty name="EndModelElement">
+                              <ModelRef id="1c7c3_MN00100000" />
+                            </ModelRefProperty>
+                          </ModelProperties>
+                        </Model>
+                      </ToEnd>
+                    </Model>
+                  </ChildModels>
+                </Model>
+              </ChildModels>
+            </Model>
+            <Model id="1c7c3_MM04100000" modelType="Message" name="3: передать груз-манифест&#10;(позиции и ожидаемые количества)">
+              <ModelProperties>
+                <StringProperty name="name" value="3: передать груз-манифест&#10;(позиции и ожидаемые количества)" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="1c7c3_MN00100000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="1c7c3_MN00800000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="1c7c3_END0420000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00100000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="1c7c3_END0430000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="1c7c3_MM04600000" modelType="Message" name="4: назвать фактические количества&#10;по позициям манифеста">
+              <ModelProperties>
+                <StringProperty name="name" value="4: назвать фактические количества&#10;по позициям манифеста" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="1c7c3_MN00800000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="1c7c3_MN00100000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="1c7c3_END0470000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="1c7c3_END0480000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00100000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+          </ChildModels>
+        </Model>
+        <Model id="1c7c3_MO02000000" modelType="InteractionOperand" name="альт. поток 2а: пломба нарушена">
+          <ModelProperties>
+            <StringProperty name="name" value="альт. поток 2а: пломба нарушена" />
+            <StringProperty name="guard" value="альт. поток 2а: пломба нарушена" />
+          </ModelProperties>
+          <ChildModels>
+            <Model id="1c7c3_MM07100000" modelType="Message" name="3: заявить о нарушении пломбы&#10;и запросить объяснение">
+              <ModelProperties>
+                <StringProperty name="name" value="3: заявить о нарушении пломбы&#10;и запросить объяснение" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="1c7c3_MN00800000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="1c7c3_MN00100000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="1c7c3_END0720000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="1c7c3_END0730000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00100000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="1c7c3_MM07600000" modelType="Message" name="4: сообщить обстоятельства рейса&#10;(инцидент в пути, UC-19)">
+              <ModelProperties>
+                <StringProperty name="name" value="4: сообщить обстоятельства рейса&#10;(инцидент в пути, UC-19)" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="1c7c3_MN00100000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="1c7c3_MN00800000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="1c7c3_END0770000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00100000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="1c7c3_END0780000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+            <Model id="1c7c3_MM08100000" modelType="Message" name="5: закрыть приёмку&#10;(результат сверки — расхождение)">
+              <ModelProperties>
+                <StringProperty name="name" value="5: закрыть приёмку&#10;(результат сверки — расхождение)" />
+                <ModelRefProperty name="endRelationshipFromMetaModelElement">
+                  <ModelRef id="1c7c3_MN00800000" />
+                </ModelRefProperty>
+                <ModelRefProperty name="endRelationshipToMetaModelElement">
+                  <ModelRef id="1c7c3_MN00100000" />
+                </ModelRefProperty>
+                <BooleanProperty name="asynchronous" value="false" />
+                <IntegerProperty name="type" value="0" />
+              </ModelProperties>
+              <FromEnd>
+                <Model id="1c7c3_END0820000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00800000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </FromEnd>
+              <ToEnd>
+                <Model id="1c7c3_END0830000" modelType="MessageEnd" name="" composite="true">
+                  <ModelProperties>
+                    <StringProperty name="name" value="" />
+                    <ModelRefProperty name="EndModelElement">
+                      <ModelRef id="1c7c3_MN00100000" />
+                    </ModelRefProperty>
+                  </ModelProperties>
+                </Model>
+              </ToEnd>
+            </Model>
+          </ChildModels>
+        </Model>
+      </ChildModels>
+    </Model>
+    <Model id="1c7c3_MM03100000" modelType="Message" name="1: предъявить груз и пломбу&#10;(номер пломбы, момент пломбирования)">
+      <ModelProperties>
+        <StringProperty name="name" value="1: предъявить груз и пломбу&#10;(номер пломбы, момент пломбирования)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="1c7c3_MN00100000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="1c7c3_MN00800000" />
+        </ModelRefProperty>
+        <BooleanProperty name="asynchronous" value="false" />
+        <IntegerProperty name="type" value="0" />
+      </ModelProperties>
+      <FromEnd>
+        <Model id="1c7c3_END0320000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="1c7c3_MN00100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="1c7c3_END0330000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="1c7c3_MN00800000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="1c7c3_MM03600000" modelType="Message" name="2: назвать результат осмотра пломбы&#10;(целостность подтверждена / нарушена)">
+      <ModelProperties>
+        <StringProperty name="name" value="2: назвать результат осмотра пломбы&#10;(целостность подтверждена / нарушена)" />
+        <ModelRefProperty name="endRelationshipFromMetaModelElement">
+          <ModelRef id="1c7c3_MN00800000" />
+        </ModelRefProperty>
+        <ModelRefProperty name="endRelationshipToMetaModelElement">
+          <ModelRef id="1c7c3_MN00100000" />
+        </ModelRefProperty>
+        <BooleanProperty name="asynchronous" value="false" />
+        <IntegerProperty name="type" value="0" />
+      </ModelProperties>
+      <FromEnd>
+        <Model id="1c7c3_END0370000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="1c7c3_MN00800000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </FromEnd>
+      <ToEnd>
+        <Model id="1c7c3_END0380000" modelType="MessageEnd" name="" composite="true">
+          <ModelProperties>
+            <StringProperty name="name" value="" />
+            <ModelRefProperty name="EndModelElement">
+              <ModelRef id="1c7c3_MN00100000" />
+            </ModelRefProperty>
+          </ModelProperties>
+        </Model>
+      </ToEnd>
+    </Model>
+    <Model id="1c7c3_NOTE086000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Предусловия: рейс прибыл в точку назначения;&#10;груз опломбирован при отправке, груз-манифест&#10;оформлен кладовщиком отправляющей стороны (FR-12)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Предусловия: рейс прибыл в точку назначения;&lt;br&gt;груз опломбирован при отправке, груз-манифест&lt;br&gt;оформлен кладовщиком отправляющей стороны (FR-12)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_NOTE088000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Постусловия: стороны согласовали результат сверки&#10;(совпадение или расхождение) и состояние пломбы;&#10;результат передаётся в систему отдельным прецедентом" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Постусловия: стороны согласовали результат сверки&lt;br&gt;(совпадение или расхождение) и состояние пломбы;&lt;br&gt;результат передаётся в систему отдельным прецедентом&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_NOTE090000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Альт. поток 1а: кладовщика на принимающей стороне нет.&#10;Приёмку закрывает караван-мастер единолично, второй актор&#10;в обмене не участвует (FR-17)" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;Альт. поток 1а: кладовщика на принимающей стороне нет.&lt;/b&gt;&lt;br&gt;Приёмку закрывает караван-мастер единолично, второй актор&lt;br&gt;в обмене не участвует (FR-17)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_NOTE092000" modelType="NOTE">
+      <ModelProperties>
+        <HTMLProperty name="documentation" plainTextValue="Оба участника — люди: на этом виде описывается передача груза&#10;из рук в руки, системы в обмене нет. Караван-мастер отвечает&#10;за доставку и пломбу, кладовщик принимающей стороны — за сверку.&#10;Нумерация сплошная: номер — шаг обмена. Альтернативные исходы&#10;одного шага несут один номер.&#10;Требования: FR-12 (манифест), FR-15 (пломба и факт доставки),&#10;FR-16 (сверка и её результат), FR-17 (приёмка без кладовщика)." value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;Оба участника — люди: на этом виде описывается передача груза&lt;br&gt;из рук в руки, системы в обмене нет. Караван-мастер отвечает&lt;br&gt;за доставку и пломбу, кладовщик принимающей стороны — за сверку.&lt;br&gt;Нумерация сплошная: номер — шаг обмена. Альтернативные исходы&lt;br&gt;одного шага несут один номер.&lt;br&gt;Требования: FR-12 (манифест), FR-15 (пломба и факт доставки),&lt;br&gt;FR-16 (сверка и её результат), FR-17 (приёмка без кладовщика).&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_AT09400000" modelType="Actor" name="Караван-&#10;мастер">
+      <ModelProperties>
+        <StringProperty name="name" value="Караван-&#10;мастер" />
+      </ModelProperties>
+    </Model>
+    <Model id="1c7c3_AT09600000" modelType="Actor" name="Кладовщик&#10;(принимающая сторона)">
+      <ModelProperties>
+        <StringProperty name="name" value="Кладовщик&#10;(принимающая сторона)" />
+      </ModelProperties>
+    </Model>
+  </Models>
+  <Diagrams>
+    <Diagram id="1c7c3_D_SEQ_UC15" name="SEQ_UC15_UseCaseView" diagramType="InteractionDiagram">
+      <DiagramProperties>
+        <BooleanProperty name="showSequenceNumbers" value="false" />
+        <BooleanProperty name="autoFitShapesSize" value="false" />
+        <BooleanProperty name="alignToGrid" value="false" />
+        <BooleanProperty name="gridVisible" value="false" />
+        <BooleanProperty name="paintConnectorThroughLabel" value="true" />
+        <BooleanProperty name="autoExtendActivations" value="false" />
+        <BooleanProperty name="showActivations" value="false" />
+        <BooleanProperty name="showMessageName" value="false" />
+        <IntegerProperty name="displayLifeLinesAsRobustnessAnalysisIcon" value="1" />
+      </DiagramProperties>
+      <Shapes>
+        <Shape id="1c7c3_S002000000" shapeType="InteractionActor" x="164" y="61" width="66" height="929" zorder="30" model="1c7c3_MN00100000" name="Караван-&#10;мастер">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+          <Caption visible="false" side="Center" x="0" y="0" width="66" height="35" />
+          <ChildShapes>
+            <Shape id="1c7c3_S004000000" shapeType="Actor" x="182" y="61" width="30" height="60" zorder="26" model="1c7c3_ACTOR00300">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="1c7c3_S005000000" shapeType="TextBox" x="164" y="126" width="66" height="38" zorder="1">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Караван-&#10;мастер" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Караван-&lt;br&gt;мастер&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="1c7c3_S007000000" shapeType="Freehand" x="197" y="164" width="2" height="827" zorder="24" model="1c7c3_LIFE006000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                <BooleanProperty name="lifelineGraphic" value="true" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,826.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                <Stroke>
+                  <Dashes>
+                    <Dash value="4" />
+                    <Dash value="4" />
+                  </Dashes>
+                </Stroke>
+              </Line>
+              <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,255,255,0" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S009000000" shapeType="InteractionActor" x="436" y="61" width="171" height="929" zorder="34" model="1c7c3_MN00800000" name="Кладовщик&#10;(принимающая сторона)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:0,0,0,255" weight="1" transparency="100" />
+          <Caption visible="false" side="Center" x="0" y="0" width="171" height="35" />
+          <ChildShapes>
+            <Shape id="1c7c3_S011000000" shapeType="Actor" x="506" y="61" width="30" height="60" zorder="25" model="1c7c3_ACTOR01000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+            </Shape>
+            <Shape id="1c7c3_S012000000" shapeType="TextBox" x="436" y="126" width="171" height="38" zorder="2">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <StringProperty name="plainText" value="Кладовщик&#10;(принимающая сторона)" />
+                <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:13px;font-weight:normal&quot;&gt;Кладовщик&lt;br&gt;(принимающая сторона)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                <IntegerProperty name="modelElementNameAlignment" value="1" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+            </Shape>
+            <Shape id="1c7c3_S014000000" shapeType="Freehand" x="521" y="164" width="2" height="827" zorder="23" model="1c7c3_LIFE013000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+                <ColorProperty name="foreground" value="Cr:120,120,120,255" />
+                <BooleanProperty name="lifelineGraphic" value="true" />
+              </DiagramElementProperties>
+              <FreehandPoints>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,0.0" />
+                  </DiagramElementProperties>
+                </Point>
+                <Point>
+                  <DiagramElementProperties>
+                    <PointProperty name="value" value="Pt:0.0,826.0" />
+                  </DiagramElementProperties>
+                </Point>
+              </FreehandPoints>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <Line cap="0" color="Cr:120,120,120,255" weight="1" transparency="0">
+                <Stroke>
+                  <Dashes>
+                    <Dash value="4" />
+                    <Dash value="4" />
+                  </Dashes>
+                </Stroke>
+              </Line>
+              <FillColor type="1" color="Cr:120,120,120,255" transparency="0" style="0" />
+            </Shape>
+          </ChildShapes>
+          <FillColor type="1" color="Cr:255,255,255,0" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S016000000" shapeType="CombinedFragment" x="144" y="336" width="481" height="503" zorder="36" model="1c7c3_MF01500000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <ChildShapes>
+            <Shape id="1c7c3_S018000000" shapeType="InteractionOperand" x="144" y="336" width="481" height="347" zorder="35" model="1c7c3_MO01700000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <ChildShapes>
+                <Shape id="1c7c3_S019000000" shapeType="TextBox" x="254" y="340" width="365" height="20" zorder="4">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="[пломба цела]" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[пломба цела]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+                <Shape id="1c7c3_S024000000" shapeType="CombinedFragment" x="154" y="454" width="461" height="222" zorder="33" model="1c7c3_MF02300000">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                  <ChildShapes>
+                    <Shape id="1c7c3_S026000000" shapeType="InteractionOperand" x="154" y="454" width="461" height="67" zorder="29" model="1c7c3_MO02500000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                      </DiagramElementProperties>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <ChildShapes>
+                        <Shape id="1c7c3_S027000000" shapeType="TextBox" x="264" y="458" width="345" height="20" zorder="3">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                            <StringProperty name="plainText" value="[основной поток: сверка сошлась]" />
+                            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[основной поток: сверка сошлась]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                            <IntegerProperty name="modelElementNameAlignment" value="1" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                        </Shape>
+                      </ChildShapes>
+                    </Shape>
+                    <Shape id="1c7c3_S029000000" shapeType="InteractionOperand" x="154" y="521" width="461" height="155" zorder="31" model="1c7c3_MO02800000">
+                      <DiagramElementProperties>
+                        <BooleanProperty name="requestResetCaption" value="false" />
+                        <BooleanProperty name="requestResetCaptionSize" value="false" />
+                        <BooleanProperty name="requestFitSize" value="false" />
+                      </DiagramElementProperties>
+                      <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+                      <ChildShapes>
+                        <Shape id="1c7c3_S030000000" shapeType="TextBox" x="160" y="525" width="449" height="20" zorder="5">
+                          <DiagramElementProperties>
+                            <BooleanProperty name="requestResetCaption" value="false" />
+                            <BooleanProperty name="requestResetCaptionSize" value="false" />
+                            <BooleanProperty name="requestFitSize" value="false" />
+                            <StringProperty name="plainText" value="[альт. поток 5а: расхождение по позициям]" />
+                            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[альт. поток 5а: расхождение по позициям]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                            <IntegerProperty name="modelElementNameAlignment" value="1" />
+                          </DiagramElementProperties>
+                          <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                        </Shape>
+                      </ChildShapes>
+                    </Shape>
+                  </ChildShapes>
+                </Shape>
+              </ChildShapes>
+            </Shape>
+            <Shape id="1c7c3_S021000000" shapeType="InteractionOperand" x="144" y="683" width="481" height="156" zorder="32" model="1c7c3_MO02000000">
+              <DiagramElementProperties>
+                <BooleanProperty name="requestResetCaption" value="false" />
+                <BooleanProperty name="requestResetCaptionSize" value="false" />
+                <BooleanProperty name="requestFitSize" value="false" />
+              </DiagramElementProperties>
+              <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+              <ChildShapes>
+                <Shape id="1c7c3_S022000000" shapeType="TextBox" x="150" y="687" width="469" height="20" zorder="6">
+                  <DiagramElementProperties>
+                    <BooleanProperty name="requestResetCaption" value="false" />
+                    <BooleanProperty name="requestResetCaptionSize" value="false" />
+                    <BooleanProperty name="requestFitSize" value="false" />
+                    <StringProperty name="plainText" value="[альт. поток 2а: пломба нарушена]" />
+                    <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;&lt;b&gt;[альт. поток 2а: пломба нарушена]&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+                    <IntegerProperty name="modelElementNameAlignment" value="1" />
+                  </DiagramElementProperties>
+                  <ElementFont name="Arial" size="12" style="1" color="Cr:51,51,51,255" />
+                  <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+                </Shape>
+              </ChildShapes>
+            </Shape>
+          </ChildShapes>
+        </Shape>
+        <Shape id="1c7c3_S035000000" shapeType="TextBox" x="214" y="239" width="290" height="34" zorder="16">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="1: предъявить груз и пломбу&#10;(номер пломбы, момент пломбирования)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;1: предъявить груз и пломбу&lt;br&gt;(номер пломбы, момент пломбирования)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S040000000" shapeType="TextBox" x="214" y="286" width="290" height="34" zorder="15">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="2: назвать результат осмотра пломбы&#10;(целостность подтверждена / нарушена)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;2: назвать результат осмотра пломбы&lt;br&gt;(целостность подтверждена / нарушена)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S045000000" shapeType="TextBox" x="214" y="358" width="290" height="34" zorder="14">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="3: передать груз-манифест&#10;(позиции и ожидаемые количества)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;3: передать груз-манифест&lt;br&gt;(позиции и ожидаемые количества)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S050000000" shapeType="TextBox" x="214" y="405" width="290" height="34" zorder="13">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="4: назвать фактические количества&#10;по позициям манифеста" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;4: назвать фактические количества&lt;br&gt;по позициям манифеста&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S055000000" shapeType="TextBox" x="214" y="476" width="290" height="34" zorder="12">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="5: подтвердить приёмку&#10;(результат сверки — совпадение)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;5: подтвердить приёмку&lt;br&gt;(результат сверки — совпадение)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S060000000" shapeType="TextBox" x="214" y="539" width="290" height="34" zorder="11">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="5: перечислить расхождения&#10;(позиция, ожидалось, фактически)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;5: перечислить расхождения&lt;br&gt;(позиция, ожидалось, фактически)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S065000000" shapeType="TextBox" x="214" y="586" width="290" height="34" zorder="10">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="6: сообщить обстоятельства&#10;расхождения со своей стороны" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;6: сообщить обстоятельства&lt;br&gt;расхождения со своей стороны&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S070000000" shapeType="TextBox" x="214" y="632" width="304" height="34" zorder="17">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="7: закрыть приёмку&#10;(результат сверки — расхождение, комментарий)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;7: закрыть приёмку&lt;br&gt;(результат сверки — расхождение, комментарий)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S075000000" shapeType="TextBox" x="214" y="702" width="290" height="34" zorder="9">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="3: заявить о нарушении пломбы&#10;и запросить объяснение" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;3: заявить о нарушении пломбы&lt;br&gt;и запросить объяснение&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S080000000" shapeType="TextBox" x="214" y="749" width="290" height="34" zorder="8">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="4: сообщить обстоятельства рейса&#10;(инцидент в пути, UC-19)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;4: сообщить обстоятельства рейса&lt;br&gt;(инцидент в пути, UC-19)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S085000000" shapeType="TextBox" x="214" y="796" width="290" height="34" zorder="7">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="5: закрыть приёмку&#10;(результат сверки — расхождение)" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;left&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:12px;font-weight:normal&quot;&gt;5: закрыть приёмку&lt;br&gt;(результат сверки — расхождение)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+        <Shape id="1c7c3_S087000000" shapeType="NOTE" x="141" y="171" width="435" height="59" zorder="21" model="1c7c3_NOTE086000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S089000000" shapeType="NOTE" x="141" y="851" width="435" height="59" zorder="20" model="1c7c3_NOTE088000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S091000000" shapeType="NOTE" x="201" y="919" width="402" height="59" zorder="19" model="1c7c3_NOTE090000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:254,255,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S093000000" shapeType="NOTE" x="285" y="1100" width="471" height="135" zorder="22" model="1c7c3_NOTE092000">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <IntegerProperty name="presentationOption" value="3" />
+            <IntegerProperty name="primitiveShapeType" value="2" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="12" style="0" color="Cr:51,51,51,255" />
+          <FillColor type="1" color="Cr:221,221,221,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S095000000" shapeType="Actor" x="164" y="990" width="66" height="100" zorder="27" model="1c7c3_AT09400000" name="Караван-&#10;мастер">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="66" height="100" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S097000000" shapeType="Actor" x="436" y="990" width="171" height="100" zorder="28" model="1c7c3_AT09600000" name="Кладовщик&#10;(принимающая сторона)">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="true" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="true" side="Center" x="0" y="0" width="171" height="100" />
+          <FillColor type="1" color="Cr:245,245,245,255" transparency="0" style="0" />
+        </Shape>
+        <Shape id="1c7c3_S098000000" shapeType="TextBox" x="5" y="10" width="765" height="40" zorder="18">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestResetCaption" value="false" />
+            <BooleanProperty name="requestResetCaptionSize" value="false" />
+            <BooleanProperty name="requestFitSize" value="false" />
+            <StringProperty name="plainText" value="UC-15 «Выполнить сверку манифеста при приёмке» — Sequence Diagram (Use-Case View)&#10;Абстрактное описание: обмен сведениями между акторами при передаче груза; системы на этом виде нет" />
+            <StringProperty name="htmlText" value="&lt;html&gt;&lt;body&gt;&lt;p align=&quot;center&quot; style=&quot;margin-top:0;margin-bottom:0;font-family:Arial;font-size:14px;font-weight:normal&quot;&gt;&lt;b&gt;UC-15 «Выполнить сверку манифеста при приёмке» — Sequence Diagram (Use-Case View)&lt;/b&gt;&lt;br&gt;&lt;b&gt;Абстрактное описание: обмен сведениями между акторами при передаче груза; системы на этом виде нет&lt;/b&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;" />
+            <IntegerProperty name="modelElementNameAlignment" value="1" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="14" style="1" color="Cr:51,51,51,255" />
+          <Line cap="0" color="Cr:51,51,51,255" weight="1" transparency="0" />
+        </Shape>
+      </Shapes>
+      <Connectors>
+        <Connector id="1c7c3_C034000000" shapeType="Message" model="1c7c3_MM03100000" from="1c7c3_S002000000" to="1c7c3_S009000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="206" y="273" />
+            <Point x="512" y="273" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C039000000" shapeType="Message" model="1c7c3_MM03600000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="320" />
+            <Point x="206" y="320" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C044000000" shapeType="Message" model="1c7c3_MM04100000" from="1c7c3_S002000000" to="1c7c3_S009000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="206" y="392" />
+            <Point x="512" y="392" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C049000000" shapeType="Message" model="1c7c3_MM04600000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="439" />
+            <Point x="206" y="439" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C054000000" shapeType="Message" model="1c7c3_MM05100000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="510" />
+            <Point x="206" y="510" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C059000000" shapeType="Message" model="1c7c3_MM05600000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="573" />
+            <Point x="206" y="573" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C064000000" shapeType="Message" model="1c7c3_MM06100000" from="1c7c3_S002000000" to="1c7c3_S009000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="206" y="620" />
+            <Point x="512" y="620" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C069000000" shapeType="Message" model="1c7c3_MM06600000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="666" />
+            <Point x="206" y="666" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C074000000" shapeType="Message" model="1c7c3_MM07100000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="736" />
+            <Point x="206" y="736" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C079000000" shapeType="Message" model="1c7c3_MM07600000" from="1c7c3_S002000000" to="1c7c3_S009000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="206" y="783" />
+            <Point x="512" y="783" />
+          </Points>
+        </Connector>
+        <Connector id="1c7c3_C084000000" shapeType="Message" model="1c7c3_MM08100000" from="1c7c3_S009000000" to="1c7c3_S002000000" connectorStyle="Oblique">
+          <DiagramElementProperties>
+            <BooleanProperty name="requestRebuild" value="false" />
+            <BooleanProperty name="requestRebuildFromEnd" value="false" />
+            <BooleanProperty name="requestRebuildToEnd" value="false" />
+            <BooleanProperty name="paintThroughLabel" value="true" />
+          </DiagramElementProperties>
+          <ElementFont name="Arial" size="13" style="0" color="Cr:51,51,51,255" />
+          <Caption visible="false" side="None" x="0" y="0" width="0" height="0" />
+          <Points>
+            <Point x="512" y="830" />
+            <Point x="206" y="830" />
+          </Points>
+        </Connector>
+      </Connectors>
+    </Diagram>
+  </Diagrams>
+</Project>

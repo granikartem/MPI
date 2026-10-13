@@ -1,0 +1,459 @@
+{
+  "name": "SM_UC2_UseCaseView",
+  "type": "StateDiagram",
+  "canvas": [
+    904,
+    901
+  ],
+  "title": "UC-2 «Управлять статусами заявки» — State Machine Diagram (Use-Case View)\nАбстрактное описание: состояния заявки и действия акторов",
+  "nodes": [
+    {
+      "key": "Draft",
+      "name": "Черновик\n(Draft)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        543,
+        164,
+        83,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Ready",
+      "name": "Готов к отправке\n(Ready)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        417,
+        288,
+        129,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "EnRoute",
+      "name": "В пути\n(En Route)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        241,
+        412,
+        88,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Delayed",
+      "name": "Задержка\n(Delayed)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        31,
+        564,
+        83,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Delivered",
+      "name": "Доставлен\n(Delivered)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        455,
+        564,
+        89,
+        52
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Closed",
+      "name": "Закрыт\n(Closed)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": "LightGreen",
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        497,
+        700,
+        83,
+        52
+      ],
+      "fill": "Cr:144,238,144,255"
+    },
+    {
+      "key": "Cancelled",
+      "name": "Отменён\n(Cancelled)",
+      "body": [],
+      "parent": null,
+      "stereotype": "",
+      "color": "MistyRose",
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        592,
+        412,
+        91,
+        52
+      ],
+      "fill": "Cr:255,228,225,255"
+    },
+    {
+      "key": "final7",
+      "name": "",
+      "kind": "FinalState2",
+      "body": [],
+      "parent": null,
+      "rect": [
+        579,
+        789,
+        23,
+        23
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "initial8",
+      "name": "",
+      "kind": "InitialPseudoState",
+      "body": [],
+      "parent": null,
+      "rect": [
+        574,
+        68,
+        21,
+        21
+      ],
+      "fill": "Cr:245,245,245,255"
+    }
+  ],
+  "edges": [
+    {
+      "from": "initial8",
+      "to": "Draft",
+      "label": "UC-1: диспетчер создал\nзаявку на перевозку",
+      "kind": "Transition2",
+      "points": [
+        [
+          584,
+          88
+        ],
+        [
+          584,
+          164
+        ]
+      ],
+      "caption": [
+        586,
+        113,
+        154,
+        32
+      ]
+    },
+    {
+      "from": "Draft",
+      "to": "Ready",
+      "label": "Укомплектовать рейс\n(Диспетчер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          551,
+          216
+        ],
+        [
+          506,
+          247
+        ],
+        [
+          486,
+          289
+        ]
+      ],
+      "caption": [
+        514,
+        237,
+        132,
+        32
+      ]
+    },
+    {
+      "from": "Draft",
+      "to": "Cancelled",
+      "label": "Отменить заявку\n(Диспетчер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          625,
+          207
+        ],
+        [
+          664,
+          283
+        ],
+        [
+          647,
+          413
+        ]
+      ],
+      "caption": [
+        664,
+        299,
+        105,
+        32
+      ]
+    },
+    {
+      "from": "Ready",
+      "to": "EnRoute",
+      "label": "Караван вышел на маршрут\n(Караван-мастер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          418,
+          322
+        ],
+        [
+          317,
+          348
+        ],
+        [
+          282,
+          414
+        ]
+      ],
+      "caption": [
+        298,
+        361,
+        168,
+        32
+      ]
+    },
+    {
+      "from": "Ready",
+      "to": "Cancelled",
+      "label": "Отменить рейс до выхода\n(Диспетчер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          476,
+          341
+        ],
+        [
+          477,
+          397
+        ],
+        [
+          592,
+          429
+        ]
+      ],
+      "caption": [
+        486,
+        361,
+        161,
+        32
+      ]
+    },
+    {
+      "from": "EnRoute",
+      "to": "Delayed",
+      "label": "Зафиксировать задержку\n(Караван-мастер / Диспетчер / Система)\n[указана причина]",
+      "kind": "Transition2",
+      "points": [
+        [
+          242,
+          439
+        ],
+        [
+          82,
+          458
+        ],
+        [
+          6,
+          502
+        ],
+        [
+          32,
+          565
+        ]
+      ],
+      "caption": [
+        17,
+        486,
+        266,
+        48
+      ]
+    },
+    {
+      "from": "Delayed",
+      "to": "EnRoute",
+      "label": "Движение возобновлено\n(Караван-мастер / Диспетчер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          99,
+          565
+        ],
+        [
+          250,
+          546
+        ],
+        [
+          287,
+          466
+        ]
+      ],
+      "caption": [
+        288,
+        494,
+        196,
+        32
+      ]
+    },
+    {
+      "from": "EnRoute",
+      "to": "Delivered",
+      "label": "Груз доставлен\n(Караван-мастер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          330,
+          445
+        ],
+        [
+          472,
+          482
+        ],
+        [
+          497,
+          565
+        ]
+      ],
+      "caption": [
+        493,
+        494,
+        112,
+        32
+      ]
+    },
+    {
+      "from": "Delivered",
+      "to": "Closed",
+      "label": "Закрыть рейс\n(Диспетчер)",
+      "kind": "Transition2",
+      "points": [
+        [
+          506,
+          617
+        ],
+        [
+          526,
+          701
+        ]
+      ],
+      "caption": [
+        521,
+        650,
+        83,
+        32
+      ]
+    },
+    {
+      "from": "Closed",
+      "to": "final7",
+      "label": "",
+      "kind": "Transition2",
+      "points": [
+        [
+          554,
+          753
+        ],
+        [
+          580,
+          791
+        ]
+      ],
+      "caption": null
+    },
+    {
+      "from": "Cancelled",
+      "to": "final7",
+      "label": "",
+      "kind": "Transition2",
+      "points": [
+        [
+          637,
+          465
+        ],
+        [
+          593,
+          791
+        ]
+      ],
+      "caption": null
+    }
+  ],
+  "notes": [
+    {
+      "text": "UC-19: инцидент высокой или\nкритической тяжести переводит\nрейс в «Задержку» автоматически\n(актор Система)",
+      "kind": "note",
+      "rect": [
+        132,
+        553,
+        230,
+        76
+      ],
+      "anchor": "Delayed"
+    },
+    {
+      "text": "Отмена возможна только\nдо выхода каравана на маршрут.\n«Закрыт» и «Отменён» — финальные",
+      "kind": "note",
+      "rect": [
+        647,
+        562,
+        251,
+        59
+      ],
+      "anchor": "Cancelled"
+    },
+    {
+      "text": "Переход инициирует актор, указанный в скобках.\nКаждый переход попадает в историю статусов (FR-3)\nи в журнал аудита (RL-4).",
+      "kind": "legend",
+      "rect": [
+        501,
+        819,
+        359,
+        64
+      ]
+    }
+  ],
+  "frames": []
+}

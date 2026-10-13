@@ -1,0 +1,470 @@
+{
+  "name": "SM_UC32_ImplementationView",
+  "type": "StateDiagram",
+  "canvas": [
+    1007,
+    1090
+  ],
+  "title": "UC-32 «Создать организацию» — State Machine Diagram (Implementation View)\nСостояния OrganizationService.create(...) в одной транзакции: классы, методы и HTTP-контракт",
+  "nodes": [
+    {
+      "key": "Received",
+      "name": "Команда принята",
+      "body": [
+        "command : CreateOrganizationCommand",
+        "required(name), normalizeTier(tier)"
+      ],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        639,
+        181,
+        242,
+        68
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Validated",
+      "name": "Данные проверены",
+      "body": [
+        "organizationRepository.findByNameIgnoreCase(name)",
+        "userRepository.findByLoginIgnoreCase(login)",
+        "validateDispatcher(command)"
+      ],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        286,
+        321,
+        311,
+        83
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Active",
+      "name": "Организация ACTIVE",
+      "body": [
+        "organization : Organization",
+        "tenantKey = generateTenantKey()",
+        "status = \"ACTIVE\""
+      ],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        261,
+        476,
+        201,
+        83
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Dispatcher",
+      "name": "Диспетчер назначен",
+      "body": [
+        "dispatcher : AppUser",
+        "passwordHash(initialPassword)",
+        "role = \"DISPATCHER\""
+      ],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        269,
+        648,
+        187,
+        83
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Audited",
+      "name": "Событие записано",
+      "body": [
+        "event : AuditEvent",
+        "type = \"ORGANIZATION_CREATED\""
+      ],
+      "parent": null,
+      "stereotype": "",
+      "color": null,
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        23,
+        803,
+        220,
+        68
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "Rejected",
+      "name": "Отклонено",
+      "body": [
+        "@Transactional — откат"
+      ],
+      "parent": null,
+      "stereotype": "",
+      "color": "MistyRose",
+      "composite": false,
+      "kind": "State2",
+      "rect": [
+        468,
+        810,
+        152,
+        52
+      ],
+      "fill": "Cr:255,228,225,255"
+    },
+    {
+      "key": "final6",
+      "name": "",
+      "kind": "FinalState2",
+      "body": [],
+      "parent": null,
+      "rect": [
+        310,
+        943,
+        23,
+        23
+      ],
+      "fill": "Cr:245,245,245,255"
+    },
+    {
+      "key": "initial7",
+      "name": "",
+      "kind": "InitialPseudoState",
+      "body": [],
+      "parent": null,
+      "rect": [
+        750,
+        68,
+        21,
+        21
+      ],
+      "fill": "Cr:245,245,245,255"
+    }
+  ],
+  "edges": [
+    {
+      "from": "initial7",
+      "to": "Received",
+      "label": "POST /api/organizations\n→ OrganizationController.create(body)\n→ OrganizationService.create(command)",
+      "kind": "Transition2",
+      "points": [
+        [
+          759,
+          88
+        ],
+        [
+          759,
+          181
+        ]
+      ],
+      "caption": [
+        761,
+        113,
+        259,
+        48
+      ]
+    },
+    {
+      "from": "Received",
+      "to": "Validated",
+      "label": "[название и логин свободны,\nуровень подписки известен]",
+      "kind": "Transition2",
+      "points": [
+        [
+          638,
+          247
+        ],
+        [
+          552,
+          282
+        ],
+        [
+          497,
+          321
+        ]
+      ],
+      "caption": [
+        583,
+        270,
+        189,
+        32
+      ]
+    },
+    {
+      "from": "Received",
+      "to": "Rejected",
+      "label": "[название или логин заняты,\nобязательное поле пусто,\nуровень подписки неизвестен]\n/ throw IllegalArgumentException",
+      "kind": "Transition2",
+      "points": [
+        [
+          759,
+          250
+        ],
+        [
+          774,
+          411
+        ],
+        [
+          772,
+          699
+        ],
+        [
+          735,
+          782
+        ],
+        [
+          620,
+          823
+        ]
+      ],
+      "caption": [
+        775,
+        486,
+        223,
+        65
+      ]
+    },
+    {
+      "from": "Validated",
+      "to": "Active",
+      "label": "/ organizationRepository.save(organization)\nINSERT INTO organization",
+      "kind": "Transition2",
+      "points": [
+        [
+          420,
+          405
+        ],
+        [
+          382,
+          477
+        ]
+      ],
+      "caption": [
+        412,
+        426,
+        301,
+        32
+      ]
+    },
+    {
+      "from": "Active",
+      "to": "Dispatcher",
+      "label": "[первый диспетчер задан]\n/ userRepository.save(dispatcher)\nINSERT INTO app_user",
+      "kind": "Transition2",
+      "points": [
+        [
+          357,
+          560
+        ],
+        [
+          345,
+          604
+        ],
+        [
+          350,
+          649
+        ]
+      ],
+      "caption": [
+        352,
+        581,
+        230,
+        48
+      ]
+    },
+    {
+      "from": "Active",
+      "to": "Audited",
+      "label": "[первый диспетчер не задан] (альт. 6а)\n/ auditEventRepository.save(event)",
+      "kind": "Transition2",
+      "points": [
+        [
+          262,
+          526
+        ],
+        [
+          55,
+          602
+        ],
+        [
+          6,
+          690
+        ],
+        [
+          82,
+          804
+        ]
+      ],
+      "caption": [
+        21,
+        675,
+        266,
+        32
+      ]
+    },
+    {
+      "from": "Dispatcher",
+      "to": "Audited",
+      "label": "/ auditEventRepository.save(event)\ndb.audit_event.insertOne(...)",
+      "kind": "Transition2",
+      "points": [
+        [
+          277,
+          728
+        ],
+        [
+          144,
+          745
+        ],
+        [
+          126,
+          804
+        ]
+      ],
+      "caption": [
+        144,
+        752,
+        238,
+        32
+      ]
+    },
+    {
+      "from": "Active",
+      "to": "Rejected",
+      "label": "DataIntegrityViolationException\n(uq_organization_name_ci)",
+      "kind": "Transition2",
+      "points": [
+        [
+          463,
+          527
+        ],
+        [
+          548,
+          586
+        ],
+        [
+          562,
+          713
+        ],
+        [
+          547,
+          811
+        ]
+      ],
+      "caption": [
+        564,
+        675,
+        217,
+        32
+      ]
+    },
+    {
+      "from": "Dispatcher",
+      "to": "Rejected",
+      "label": "DataIntegrityViolationException\n(uq_app_user_login_ci)",
+      "kind": "Transition2",
+      "points": [
+        [
+          352,
+          732
+        ],
+        [
+          363,
+          789
+        ],
+        [
+          467,
+          823
+        ]
+      ],
+      "caption": [
+        366,
+        752,
+        217,
+        32
+      ]
+    },
+    {
+      "from": "Audited",
+      "to": "final6",
+      "label": "commit → OrganizationResponse.from(result)\n→ HTTP 201 Created",
+      "kind": "Transition2",
+      "points": [
+        [
+          146,
+          872
+        ],
+        [
+          197,
+          933
+        ],
+        [
+          310,
+          954
+        ]
+      ],
+      "caption": [
+        188,
+        892,
+        294,
+        32
+      ]
+    },
+    {
+      "from": "Rejected",
+      "to": "final6",
+      "label": "handleBadRequest / handleConflict\n→ HTTP 400 ErrorResponse",
+      "kind": "Transition2",
+      "points": [
+        [
+          525,
+          863
+        ],
+        [
+          452,
+          928
+        ],
+        [
+          333,
+          954
+        ]
+      ],
+      "caption": [
+        501,
+        892,
+        230,
+        32
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "text": "Подпись перехода: событие [сторожевое условие] / эффект.\nУказаны классы, методы и имена аргументов; полные списки\nпараметров конструкторов и запросов не приводятся.\nВсе состояния проходятся внутри одного вызова\nOrganizationService.create(...) с @Transactional.",
+      "kind": "legend",
+      "rect": [
+        438,
+        973,
+        412,
+        99
+      ]
+    }
+  ],
+  "frames": []
+}
