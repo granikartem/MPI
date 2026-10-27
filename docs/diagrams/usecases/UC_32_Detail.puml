@@ -1,24 +1,36 @@
 @startuml UC_32_Detail
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-32. Создать организацию
 
-title UC-32: Создать организацию — диаграмма прецедента
-
-actor "Супер-\nпользователь" as Super
-
-rectangle "Система «Караваны»" {
-  usecase "UC-32: Создать\nорганизацию\n.. extension points ..\nEP-1: Назначение первого\nдиспетчера\nEP-2: Управление подпиской" as UC32 #Gold
-  usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33
-  usecase "UC-34: Управлять\nподписками" as UC34
+actor "Суперпользователь" as SuperUser
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-32. Создать организацию" as UC32
+  usecase "UC-33. Назначить первого диспетчера\nорганизации" as UC33
+  usecase "UC-34. Управлять подписками" as UC34
 }
-
-Super --> UC32
-Super --> UC33
-Super --> UC34
-
-UC33 ..> UC32 : <<extend>>\n(EP-1)
-UC34 ..> UC32 : <<extend>>\n(EP-2)
-
+' edge:R070
+UC33 ..> UC32 : <<extend>>
+' edge:R071
+UC34 ..> UC32 : <<extend>>
+' edge:R046
+SuperUser --> UC32
+' edge:R047
+SuperUser --> UC33
+' edge:R048
+SuperUser --> UC34
+legend bottom
+  Точки расширения и условия:
+  UC33 → UC32 / EP-1: Организация создана; суперпользователь выбрал назначение первого диспетчера сейчас.
+  UC34 → UC32 / EP-2: Организация создана; суперпользователь выбрал активацию или настройку подписки сейчас.
+endlegend
 @enduml

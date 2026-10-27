@@ -1,0 +1,45 @@
+@startuml UC_20_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-20. Инициировать RecoveryRequest
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Полевой пользователь" as FieldUser <<abstract>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-19. Сообщить об инциденте в рейсе" as UC19
+  usecase "UC-20. Инициировать RecoveryRequest" as UC20
+}
+' edge:R069
+UC20 ..> UC19 : <<extend>>
+' edge:R012
+Dispatcher --> UC20
+' edge:R029
+CaravanMaster --> UC20
+' edge:R049
+FieldUser --> UC19
+' edge:R072
+Dispatcher --> UC19
+' edge:R054
+CaravanMaster --|> FieldUser
+' edge:R055
+SecurityCaptain --|> FieldUser
+' edge:R056
+Medic --|> FieldUser
+legend bottom
+  Точки расширения и условия:
+  UC20 → UC19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер
+  решил инициировать реагирование.
+endlegend
+@enduml

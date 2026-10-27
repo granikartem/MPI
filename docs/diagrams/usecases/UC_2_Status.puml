@@ -17,21 +17,32 @@ state "Delivered\nДоставлен" as Delivered
 state "Closed\nЗакрыт" as Closed #LightGreen
 state "Cancelled\nОтменён" as Cancelled #MistyRose
 
+' edge:ST001
 [*] --> Draft : UC-1: заявка создана
 
+' edge:ST002
 Draft --> Ready : Укомплектовать рейс\n<Диспетчер>
+' edge:ST003
 Draft --> Cancelled : Отменить заявку\n<Диспетчер>
 
+' edge:ST004
 Ready --> EnRoute : Караван вышел на маршрут\n<Караван-мастер>\n[FR-10: обязательные роли\nкоманды заполнены — UC-9]
+' edge:ST005
 Ready --> Cancelled : Отменить рейс до выхода\n<Диспетчер>
 
+' edge:ST006
 EnRoute --> Delayed : Зафиксировать задержку\n<Караван-мастер / Диспетчер / Система>\n[причина]
+' edge:ST007
 Delayed --> EnRoute : Движение возобновлено\n<Караван-мастер / Диспетчер>
+' edge:ST008
 EnRoute --> Delivered : Груз доставлен\n<Караван-мастер>
 
+' edge:ST009
 Delivered --> Closed : Закрыть рейс\n<Диспетчер>
 
+' edge:ST010
 Closed --> [*]
+' edge:ST011
 Cancelled --> [*]
 
 note right of Delayed

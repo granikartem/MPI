@@ -1,0 +1,24 @@
+@startuml UC_26_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-26. Создать учётную запись пользователя
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Суперпользователь" as SuperUser
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-26. Создать учётную запись\nпользователя" as UC26
+}
+' edge:R017
+Dispatcher --> UC26
+' edge:R043
+SuperUser --> UC26
+@enduml

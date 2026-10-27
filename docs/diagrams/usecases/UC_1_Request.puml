@@ -1,30 +1,63 @@
 @startuml UC_1_Request
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
 title Управление заявкой и рейсом
 
-actor "Диспетчер\nкараванов" as Dispatcher
-actor "Караван-\nмастер" as CaravanMaster
-
-rectangle "Управление заявкой и рейсом" {
-  usecase "UC-1: Создать заявку\nна перевозку" as UC1 #Gold
-  usecase "UC-2: Управлять\nстатусами заявки" as UC2 #Gold
-  usecase "UC-3: Просмотреть\nреестр рейсов" as UC3 #Gold
-  usecase "UC-4: Поиск и фильтрация\nзавершённых рейсов" as UC4
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+actor "Wasteland Intel" as WI <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-1. Создать заявку на перевозку" as UC1
+  usecase "UC-2. Управлять статусами заявки" as UC2
+  usecase "UC-3. Просмотреть реестр рейсов" as UC3
+  usecase "UC-4. Поиск и фильтрация завершённых\nрейсов" as UC4
+  usecase "UC-5. Выбрать/спланировать маршрут" as UC5
+  usecase "UC-6. Рассчитать ETA" as UC6
+  usecase "UC-7. Рассчитать risk_score" as UC7
+  usecase "UC-8. Получить рекомендацию по\nохране и припасам" as UC8
+  usecase "UC-12. Указать ценность груза" as UC12
 }
-
+' edge:R057
+UC1 ..> UC5 : <<include>>
+' edge:R058
+UC1 ..> UC6 : <<include>>
+' edge:R059
+UC1 ..> UC7 : <<include>>
+' edge:R060
+UC1 ..> UC8 : <<include>>
+' edge:R061
+UC1 ..> UC12 : <<include>>
+' edge:R062
+UC7 ..> UC8 : <<include>>
+' edge:R001
 Dispatcher --> UC1
+' edge:R002
 Dispatcher --> UC2
+' edge:R003
 Dispatcher --> UC3
+' edge:R004
 Dispatcher --> UC4
+' edge:R005
+Dispatcher --> UC5
+' edge:R006
+Dispatcher --> UC6
+' edge:R007
+Dispatcher --> UC7
+' edge:R008
+Dispatcher --> UC8
+' edge:R011
+Dispatcher --> UC12
+' edge:R023
 CaravanMaster --> UC2
-
-legend right
-  |= Цвет |= Значение |
-  | <#Gold> | Значимый прецедент |
-  | <#White> | Обычный прецедент |
-endlegend
+' edge:R050
+WI --> UC7
 @enduml

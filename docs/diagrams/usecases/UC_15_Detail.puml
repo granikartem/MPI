@@ -1,0 +1,24 @@
+@startuml UC_15_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-15. Выполнить сверку манифеста при приёмке
+
+actor "Караван-мастер" as CaravanMaster
+actor "Кладовщик" as Storekeeper
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-15. Выполнить сверку манифеста\nпри приёмке" as UC15
+}
+' edge:R025
+CaravanMaster --> UC15
+' edge:R035
+Storekeeper --> UC15
+@enduml

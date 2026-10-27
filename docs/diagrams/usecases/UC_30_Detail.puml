@@ -1,0 +1,24 @@
+@startuml UC_30_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-30. Сбросить учётные данные пользователя
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Суперпользователь" as SuperUser
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-30. Сбросить учётные данные\nпользователя" as UC30
+}
+' edge:R021
+Dispatcher --> UC30
+' edge:R045
+SuperUser --> UC30
+@enduml

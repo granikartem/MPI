@@ -1,0 +1,36 @@
+@startuml UC_25_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-25. Аутентификация
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+actor "Кладовщик" as Storekeeper
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Суперпользователь" as SuperUser
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-25. Аутентификация" as UC25
+}
+' edge:R016
+Dispatcher --> UC25
+' edge:R031
+CaravanMaster --> UC25
+' edge:R036
+Storekeeper --> UC25
+' edge:R038
+SecurityCaptain --> UC25
+' edge:R040
+Medic --> UC25
+' edge:R042
+SuperUser --> UC25
+@enduml

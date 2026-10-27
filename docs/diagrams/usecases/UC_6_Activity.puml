@@ -1,0 +1,51 @@
+@startuml UC_6_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-6. Рассчитать ETA
+
+' edge:e004
+(*) --> if "Маршрут определён?" as n008 then
+endif
+' edge:e005
+n008 -->[Да] "1. Система получает выбранный маршрут и исходное время\nотправления." as n002
+' edge:e008
+n002 --> if "Данные об обстановке доступны полностью?" as n010 then
+endif
+' edge:e009
+n010 -->[Да] "2. Система определяет протяжённость участков и доступные\nданные об обстановке, влияющие на движение." as n003
+' edge:e011
+n003 --> if "" as n014 then
+endif
+' edge:e016
+n014 --> if "Исходные данные позволяют рассчитать ETA?" as n012 then
+endif
+' edge:e013
+n012 -->[Да] "3. Система рассчитывает время прохождения участков по принятой\nмодели расчёта." as n004
+' edge:e001
+n004 --> "4. Система суммирует время и определяет ожидаемое время\nприбытия." as n005
+' edge:e002
+n005 --> "5. Система сохраняет ETA в данных заявки и показывает\nрезультат диспетчеру." as n006
+' edge:e003
+n006 --> (*1)
+' edge:e014
+n012 -->[Нет] "3а. Исходные данные не позволяют выполнить расчёт — система\nпоказывает причину → завершение без сохранения нового ETA." as n013
+' edge:e015
+n013 --> (*1)
+' edge:e010
+n010 -->[Нет: расчёт с допущениями] "2а. Часть данных об обстановке недоступна — система использует\nдоступные данные и явно отмечает допущения → переход к шагу 3." as n011
+' edge:e012
+n011 --> n014
+' edge:e006
+n008 -->[Нет] "1а. Маршрут не определён — система сообщает о необходимости\nвыбрать маршрут → завершение без расчёта." as n009
+' edge:e007
+n009 --> (*1)
+@enduml

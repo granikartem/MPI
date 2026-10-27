@@ -1,0 +1,31 @@
+@startuml UC_23_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-23. Получить данные об угрозах
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Wasteland Intel" as WI <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-7. Рассчитать risk_score" as UC7
+  usecase "UC-23. Получить данные об угрозах" as UC23
+}
+' edge:R063
+UC7 ..> UC23 : <<include>>
+' edge:R007
+Dispatcher --> UC7
+' edge:R015
+Dispatcher --> UC23
+' edge:R050
+WI --> UC7
+' edge:R051
+WI --> UC23
+@enduml

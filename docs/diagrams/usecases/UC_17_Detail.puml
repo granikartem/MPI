@@ -1,0 +1,30 @@
+@startuml UC_17_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-17. Отметить прохождение контрольной точки
+
+actor "Караван-мастер" as CaravanMaster
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
+  usecase "UC-17. Отметить прохождение\nконтрольной точки" as UC17
+}
+' edge:R066
+UC17 ..> UC16 : <<extend>>
+' edge:R026
+CaravanMaster --> UC16
+' edge:R027
+CaravanMaster --> UC17
+legend bottom
+  Точки расширения и условия:
+  UC17 → UC16 / EP-1: Выбрано событие прибытия на контрольную точку маршрута.
+endlegend
+@enduml

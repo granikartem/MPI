@@ -1,0 +1,52 @@
+@startuml UC_13_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-13. Зарезервировать припасы
+
+' edge:e001
+(*) --> "1. Кладовщик открывает резервирование припасов для рейса." as n002
+' edge:e002
+n002 --> "2. Система показывает доступные запасы воды, еды, боеприпасов,\nремкомплектов и медикаментов." as n003
+' edge:e003
+n003 --> if "" as n014 then
+endif
+' edge:e016
+n014 --> "3. Кладовщик задаёт состав и количество припасов с учётом\nпотребности рейса." as n004
+' edge:e004
+n004 --> "4. Система проверяет количества и наличие требуемых запасов." as n005
+' edge:e007
+n005 --> if "Количество корректно и запасы достаточны?" as n009 then
+endif
+' edge:e008
+n009 -->[Запасов недостаточно] "4а. Запасов недостаточно — система показывает недостающие\nпозиции → возврат к шагу 3." as n010
+' edge:e009
+n010 --> n014
+' edge:e010
+n009 -->[Количество некорректно] "4б. Количество некорректно — система указывает ошибку →\nвозврат к шагу 3." as n011
+' edge:e011
+n011 --> n014
+' edge:e012
+n009 -->[Да] if "Подтвердить резервирование?" as n012 then
+endif
+' edge:e013
+n012 -->[Да] "5. Кладовщик подтверждает резервирование." as n006
+' edge:e005
+n006 --> "6. Система сохраняет резерв, связанный с рейсом, и отображает\nзарезервированные количества." as n007
+' edge:e006
+n007 --> (*1)
+' edge:e014
+n012 -->[Нет: отмена] "5а. Кладовщик отменяет действие → завершение без изменения\nрезервов." as n013
+' edge:e015
+n013 --> (*1)
+' layout only: separate the decision question from an alternative action
+n010 -[hidden]down-> n012
+@enduml

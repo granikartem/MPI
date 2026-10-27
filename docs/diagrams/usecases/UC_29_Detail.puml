@@ -1,0 +1,36 @@
+@startuml UC_29_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-29. Редактировать свои учётные данные
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+actor "Кладовщик" as Storekeeper
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Суперпользователь" as SuperUser
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-29. Редактировать свои учётные\nданные" as UC29
+}
+' edge:R020
+Dispatcher --> UC29
+' edge:R032
+CaravanMaster --> UC29
+' edge:R037
+Storekeeper --> UC29
+' edge:R039
+SecurityCaptain --> UC29
+' edge:R041
+Medic --> UC29
+' edge:R044
+SuperUser --> UC29
+@enduml

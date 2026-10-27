@@ -1,0 +1,30 @@
+@startuml UC_14_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-14. Подтвердить доставку груза (с пломбой)
+
+actor "Караван-мастер" as CaravanMaster
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-14. Подтвердить доставку груза (с\nпломбой)" as UC14
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
+}
+' edge:R068
+UC14 ..> UC16 : <<extend>>
+' edge:R024
+CaravanMaster --> UC14
+' edge:R026
+CaravanMaster --> UC16
+legend bottom
+  Точки расширения и условия:
+  UC14 → UC16 / EP-3: Выбрано событие выдачи груза получателю.
+endlegend
+@enduml

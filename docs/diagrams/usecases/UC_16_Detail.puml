@@ -1,26 +1,45 @@
 @startuml UC_16_Detail
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-16. Зафиксировать прохождение этапа рейса
 
-title UC-16: Зафиксировать прохождение этапа рейса — диаграмма прецедента
-
-actor "Караван-\nмастер" as CM
-actor "NCR Checkpoint\n& Tax Terminal" as NCR <<external>>
-
-rectangle "Система «Караваны»" {
-  usecase "UC-16: Зафиксировать\nпрохождение этапа рейса\n.. extension points ..\nEP-1: Прибытие на КТ\nEP-2: Прохождение КПП\nEP-3: Подтверждение доставки" as UC16 #Gold
-  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
-  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
-  usecase "UC-14: Подтвердить\nдоставку груза\n(с пломбой)" as UC14
+actor "Караван-мастер" as CaravanMaster
+actor "NCR Checkpoint & Tax\nTerminal" as NCR <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-14. Подтвердить доставку груза (с\nпломбой)" as UC14
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
+  usecase "UC-17. Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18. Отметить прохождение КПП (с\nпошлиной)" as UC18
 }
-
-CM --> UC16
-UC18 --> NCR
-
-UC17 ..> UC16 : <<extend>>\n(EP-1)
-UC18 ..> UC16 : <<extend>>\n(EP-2)
-UC14 ..> UC16 : <<extend>>\n(EP-3)
-
+' edge:R066
+UC17 ..> UC16 : <<extend>>
+' edge:R067
+UC18 ..> UC16 : <<extend>>
+' edge:R068
+UC14 ..> UC16 : <<extend>>
+' edge:R024
+CaravanMaster --> UC14
+' edge:R026
+CaravanMaster --> UC16
+' edge:R027
+CaravanMaster --> UC17
+' edge:R028
+CaravanMaster --> UC18
+' edge:R052
+NCR --> UC18
+legend bottom
+  Точки расширения и условия:
+  UC17 → UC16 / EP-1: Выбрано событие прибытия на контрольную точку маршрута.
+  UC18 → UC16 / EP-2: Выбрано событие прохождения КПП с фиксацией пошлины.
+  UC14 → UC16 / EP-3: Выбрано событие выдачи груза получателю.
+endlegend
 @enduml

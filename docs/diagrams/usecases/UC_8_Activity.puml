@@ -1,0 +1,54 @@
+@startuml UC_8_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-8. Получить рекомендацию по охране и припасам
+
+' edge:e001
+(*) --> "1. Система получает итоговый risk_score и сведения о грузе и\nмаршруте." as n002
+' edge:e004
+n002 --> if "Риск рассчитан?" as n008 then
+endif
+' edge:e005
+n008 -->[Да] "2. Система применяет принятые правила определения минимального\nсостава охраны и объёма припасов." as n003
+' edge:e008
+n003 --> if "Данные оценки риска актуальны?" as n010 then
+endif
+' edge:e009
+n010 -->[Да] "3. Система формирует рекомендацию и показывает её вместе с\nуровнем риска." as n004
+' edge:e011
+n004 --> if "" as n015 then
+endif
+' edge:e017
+n015 --> if "Рекомендация принята для подготовки?" as n012 then
+endif
+' edge:e013
+n012 -->[Да] "4. Диспетчер просматривает рекомендацию и использует её при\nподготовке команды и припасов." as n005
+' edge:e002
+n005 --> if "" as n014 then
+endif
+' edge:e016
+n014 --> "5. Система сохраняет рекомендацию в данных заявки." as n006
+' edge:e003
+n006 --> (*1)
+' edge:e014
+n012 -->[Выбран другой состав подготовки] "4а. Диспетчер выбирает другой состав подготовки — решение\nучитывается в UC-9 и UC-13, исходная рекомендация сохраняется\nдля сопоставления → переход к шагу 5." as n013
+' edge:e015
+n013 --> n014
+' edge:e010
+n010 -->[Нет: предупредить об устаревании] "3а. Риск рассчитан по устаревшим данным — рекомендация\nсопровождается предупреждением → переход к шагу 4." as n011
+' edge:e012
+n011 --> n015
+' edge:e006
+n008 -->[Нет] "1а. Риск не рассчитан — система показывает необходимость\nвыполнить UC-7 → завершение без новой рекомендации." as n009
+' edge:e007
+n009 --> (*1)
+@enduml

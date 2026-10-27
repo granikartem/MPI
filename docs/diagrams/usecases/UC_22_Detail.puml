@@ -1,0 +1,21 @@
+@startuml UC_22_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-22. Экспортировать отчёт на голотейп
+
+actor "Диспетчер караванов" as Dispatcher
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-22. Экспортировать отчёт на\nголотейп" as UC22
+}
+' edge:R014
+Dispatcher --> UC22
+@enduml

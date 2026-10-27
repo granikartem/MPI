@@ -1,31 +1,45 @@
 @startuml UC_19_Detail
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-19. Сообщить об инциденте в рейсе
 
-title UC-19: Сообщить об инциденте в рейсе — диаграмма прецедента
-
-actor "Полевой\nпользователь" as Field
-actor "Караван-\nмастер" as CM
-actor "Капитан\nохраны" as SC
-actor "Полевой\nмедик" as Medic
-actor "Диспетчер\nкараванов" as Dispatcher
-
-CM --|> Field
-SC --|> Field
-Medic --|> Field
-
-rectangle "Система «Караваны»" {
-  usecase "UC-19: Сообщить\nоб инциденте в рейсе\n.. extension points ..\nEP-1: Критический инцидент\nзарегистрирован" as UC19 #Gold
-  usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Полевой пользователь" as FieldUser <<abstract>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-19. Сообщить об инциденте в рейсе" as UC19
+  usecase "UC-20. Инициировать RecoveryRequest" as UC20
 }
-
-Field --> UC19
-
-CM --> UC20
+' edge:R069
+UC20 ..> UC19 : <<extend>>
+' edge:R012
 Dispatcher --> UC20
-
-UC20 ..> UC19 : <<extend>>\n(EP-1)
-
+' edge:R029
+CaravanMaster --> UC20
+' edge:R049
+FieldUser --> UC19
+' edge:R072
+Dispatcher --> UC19
+' edge:R054
+CaravanMaster --|> FieldUser
+' edge:R055
+SecurityCaptain --|> FieldUser
+' edge:R056
+Medic --|> FieldUser
+legend bottom
+  Точки расширения и условия:
+  UC20 → UC19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер
+  решил инициировать реагирование.
+endlegend
 @enduml

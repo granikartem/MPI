@@ -1,168 +1,214 @@
 @startuml UC_0_General
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-skinparam nodesep 15
-skinparam ranksep 25
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title Полная диаграмма прецедентов ИС «Караваны» — UC-1…UC-34
 
-title Общая диаграмма прецедентов — ИС «Караваны»
-
-' --- Левая колонка акторов ---
-actor "Диспетчер\nкараванов" as Dispatcher
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
 actor "Кладовщик" as Storekeeper
-actor "Супер-\nпользователь" as SuperUser
-
-' --- Правая колонка акторов ---
-actor "Полевой\nпользователь" as FieldUser
-actor "Караван-\nмастер" as CaravanMaster
-actor "Капитан\nохраны" as SecurityCaptain
-actor "Полевой\nмедик" as Medic
-
-' Наследование полевых ролей от абстрактного актора
-CaravanMaster --|> FieldUser
-SecurityCaptain --|> FieldUser
-Medic --|> FieldUser
-
-' --- Внешние системы ---
-actor "Wasteland\nIntel" as WI <<external>>
-actor "NCR Checkpoint\n& Tax Terminal" as NCR <<external>>
-
-' --- Верхний ряд блоков ---
-rectangle "Управление заявкой и рейсом" as R1 {
-  usecase "UC-1: Создать заявку\nна перевозку" as UC1
-  usecase "UC-2: Управлять\nстатусами заявки" as UC2
-  usecase "UC-3: Просмотреть\nреестр рейсов" as UC3
-  usecase "UC-4: Поиск и фильтрация\nзавершённых рейсов" as UC4
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Суперпользователь" as SuperUser
+actor "Полевой пользователь" as FieldUser <<abstract>>
+actor "Wasteland Intel" as WI <<external>>
+actor "NCR Checkpoint & Tax\nTerminal" as NCR <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-1. Создать заявку на перевозку" as UC1
+  usecase "UC-2. Управлять статусами заявки" as UC2
+  usecase "UC-3. Просмотреть реестр рейсов" as UC3
+  usecase "UC-4. Поиск и фильтрация завершённых\nрейсов" as UC4
+  usecase "UC-5. Выбрать/спланировать маршрут" as UC5
+  usecase "UC-6. Рассчитать ETA" as UC6
+  usecase "UC-7. Рассчитать risk_score" as UC7
+  usecase "UC-8. Получить рекомендацию по\nохране и припасам" as UC8
+  usecase "UC-9. Назначить сотрудников на роли\nрейса" as UC9
+  usecase "UC-10. Просмотреть доступных\nсотрудников" as UC10
+  usecase "UC-11. Создать груз-манифест" as UC11
+  usecase "UC-12. Указать ценность груза" as UC12
+  usecase "UC-13. Зарезервировать припасы" as UC13
+  usecase "UC-14. Подтвердить доставку груза (с\nпломбой)" as UC14
+  usecase "UC-15. Выполнить сверку манифеста\nпри приёмке" as UC15
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
+  usecase "UC-17. Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18. Отметить прохождение КПП (с\nпошлиной)" as UC18
+  usecase "UC-19. Сообщить об инциденте в рейсе" as UC19
+  usecase "UC-20. Инициировать RecoveryRequest" as UC20
+  usecase "UC-21. Сформировать финансовый отчёт\nпо рейсу" as UC21
+  usecase "UC-22. Экспортировать отчёт на\nголотейп" as UC22
+  usecase "UC-23. Получить данные об угрозах" as UC23
+  usecase "UC-24. Получить данные о КПП и\nпошлинах" as UC24
+  usecase "UC-25. Аутентификация" as UC25
+  usecase "UC-26. Создать учётную запись\nпользователя" as UC26
+  usecase "UC-27. Изменить роль пользователя" as UC27
+  usecase "UC-28. Деактивировать учётную запись" as UC28
+  usecase "UC-29. Редактировать свои учётные\nданные" as UC29
+  usecase "UC-30. Сбросить учётные данные\nпользователя" as UC30
+  usecase "UC-31. Назначить/изменить ставку\nсотрудника" as UC31
+  usecase "UC-32. Создать организацию" as UC32
+  usecase "UC-33. Назначить первого диспетчера\nорганизации" as UC33
+  usecase "UC-34. Управлять подписками" as UC34
 }
-
-rectangle "Планирование маршрута\nи оценка рисков" as R2 {
-  usecase "UC-5: Выбрать/\nспланировать маршрут" as UC5
-  usecase "UC-6: Рассчитать ETA" as UC6
-  usecase "UC-7: Рассчитать\nrisk_score" as UC7
-  usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
-}
-
-rectangle "Формирование команды" as R3 {
-  usecase "UC-9: Назначить сотрудников\nна роли рейса" as UC9
-  usecase "UC-10: Просмотреть\nдоступных сотрудников" as UC10
-}
-
-rectangle "Груз и манифест" as R4 {
-  usecase "UC-11: Создать\nгруз-манифест" as UC11
-  usecase "UC-12: Указать\nценность груза" as UC12
-  usecase "UC-13: Зарезервировать\nприпасы" as UC13
-  usecase "UC-14: Подтвердить\nдоставку груза" as UC14
-  usecase "UC-15: Выполнить сверку\nманифеста при приёмке" as UC15
-}
-
-rectangle "Полевые операции" as R5 {
-  usecase "UC-16: Зафиксировать\nпрохождение этапа рейса" as UC16
-  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
-  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
-  usecase "UC-19: Сообщить\nоб инциденте в рейсе" as UC19
-  usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
-}
-
-rectangle "Финансы и интеграции" as R6 {
-  usecase "UC-21: Сформировать\nфинансовый отчёт" as UC21
-  usecase "UC-22: Экспортировать\nотчёт на голотейп" as UC22
-  usecase "UC-23: Получить данные\nоб угрозах" as UC23
-  usecase "UC-24: Получить данные\nо КПП и пошлинах" as UC24
-}
-
-rectangle "Управление пользователями" as R7 {
-  usecase "UC-25: Аутентификация" as UC25
-  usecase "UC-26: Создать учётную\nзапись пользователя" as UC26
-  usecase "UC-27: Изменить роль\nпользователя" as UC27
-  usecase "UC-28: Деактивировать\nучётную запись" as UC28
-  usecase "UC-29: Редактировать\nсвои учётные данные" as UC29
-  usecase "UC-30: Сбросить учётные\nданные пользователя" as UC30
-  usecase "UC-31: Назначить/изменить\nставку сотрудника" as UC31
-}
-
-rectangle "Управление организациями" as R8 {
-  usecase "UC-32: Создать\nорганизацию" as UC32
-  usecase "UC-33: Назначить первого\nдиспетчера организации" as UC33
-  usecase "UC-34: Управлять\nподписками" as UC34
-}
-
-' --- Вертикальное выстраивание блоков в две колонки ---
-R1 -[hidden]down- R3
-R3 -[hidden]down- R5
-R5 -[hidden]down- R7
-
-R2 -[hidden]down- R4
-R4 -[hidden]down- R6
-R6 -[hidden]down- R8
-
-R1 -[hidden]right- R2
-R3 -[hidden]right- R4
-R5 -[hidden]right- R6
-R7 -[hidden]right- R8
-
-' --- Выстраивание акторов ---
-Dispatcher -[hidden]down- Storekeeper
-Storekeeper -[hidden]down- SuperUser
-
-FieldUser -[hidden]down- CaravanMaster
-CaravanMaster -[hidden]down- SecurityCaptain
-SecurityCaptain -[hidden]down- Medic
-
-WI -[hidden]down- NCR
-
-' --- Связи акторов с UC ---
-Dispatcher --> UC1
-Dispatcher --> UC2
-Dispatcher --> UC3
-Dispatcher --> UC4
-Dispatcher --> UC5
-Dispatcher --> UC9
-Dispatcher --> UC10
-Dispatcher --> UC12
-Dispatcher --> UC20
-Dispatcher --> UC21
-Dispatcher --> UC22
-Dispatcher --> UC26
-Dispatcher --> UC27
-Dispatcher --> UC28
-Dispatcher --> UC30
-Dispatcher --> UC31
-
-CaravanMaster --> UC2
-CaravanMaster --> UC14
-CaravanMaster --> UC15
-CaravanMaster --> UC16
-CaravanMaster --> UC17
-CaravanMaster --> UC18
-CaravanMaster --> UC20
-
-' UC-19 — общий для всех полевых ролей через абстрактного актора
-FieldUser --> UC19
-
-Storekeeper --> UC11
-Storekeeper --> UC13
-Storekeeper --> UC15
-
-' UC-25 (Аутентификация) — общая для всех ролей; для упрощения связи опущены
-' (см. диаграмму прецедента UC-25)
-
-SuperUser --> UC30
-SuperUser --> UC32
-SuperUser --> UC33
-SuperUser --> UC34
-
-UC7 --> WI
-UC23 --> WI
-UC18 --> NCR
-UC24 --> NCR
-
-' Связи extends/includes внутри блоков (cross-block связи показаны в детальных UC_*_Detail.puml)
+' edge:R057
+UC1 ..> UC5 : <<include>>
+' edge:R058
+UC1 ..> UC6 : <<include>>
+' edge:R059
+UC1 ..> UC7 : <<include>>
+' edge:R060
+UC1 ..> UC8 : <<include>>
+' edge:R061
+UC1 ..> UC12 : <<include>>
+' edge:R062
 UC7 ..> UC8 : <<include>>
-UC20 ..> UC19 : <<extend>>
+' edge:R063
+UC7 ..> UC23 : <<include>>
+' edge:R064
+UC9 ..> UC10 : <<include>>
+' edge:R065
+UC18 ..> UC24 : <<include>>
+' edge:R066
 UC17 ..> UC16 : <<extend>>
+' edge:R067
 UC18 ..> UC16 : <<extend>>
+' edge:R068
+UC14 ..> UC16 : <<extend>>
+' edge:R069
+UC20 ..> UC19 : <<extend>>
+' edge:R070
 UC33 ..> UC32 : <<extend>>
+' edge:R071
 UC34 ..> UC32 : <<extend>>
-
+' edge:R001
+Dispatcher --> UC1
+' edge:R002
+Dispatcher --> UC2
+' edge:R003
+Dispatcher --> UC3
+' edge:R004
+Dispatcher --> UC4
+' edge:R005
+Dispatcher --> UC5
+' edge:R006
+Dispatcher --> UC6
+' edge:R007
+Dispatcher --> UC7
+' edge:R008
+Dispatcher --> UC8
+' edge:R009
+Dispatcher --> UC9
+' edge:R010
+Dispatcher --> UC10
+' edge:R011
+Dispatcher --> UC12
+' edge:R012
+Dispatcher --> UC20
+' edge:R013
+Dispatcher --> UC21
+' edge:R014
+Dispatcher --> UC22
+' edge:R015
+Dispatcher --> UC23
+' edge:R016
+Dispatcher --> UC25
+' edge:R017
+Dispatcher --> UC26
+' edge:R018
+Dispatcher --> UC27
+' edge:R019
+Dispatcher --> UC28
+' edge:R020
+Dispatcher --> UC29
+' edge:R021
+Dispatcher --> UC30
+' edge:R022
+Dispatcher --> UC31
+' edge:R023
+CaravanMaster --> UC2
+' edge:R024
+CaravanMaster --> UC14
+' edge:R025
+CaravanMaster --> UC15
+' edge:R026
+CaravanMaster --> UC16
+' edge:R027
+CaravanMaster --> UC17
+' edge:R028
+CaravanMaster --> UC18
+' edge:R029
+CaravanMaster --> UC20
+' edge:R030
+CaravanMaster --> UC24
+' edge:R031
+CaravanMaster --> UC25
+' edge:R032
+CaravanMaster --> UC29
+' edge:R033
+Storekeeper --> UC11
+' edge:R034
+Storekeeper --> UC13
+' edge:R035
+Storekeeper --> UC15
+' edge:R036
+Storekeeper --> UC25
+' edge:R037
+Storekeeper --> UC29
+' edge:R038
+SecurityCaptain --> UC25
+' edge:R039
+SecurityCaptain --> UC29
+' edge:R040
+Medic --> UC25
+' edge:R041
+Medic --> UC29
+' edge:R042
+SuperUser --> UC25
+' edge:R043
+SuperUser --> UC26
+' edge:R044
+SuperUser --> UC29
+' edge:R045
+SuperUser --> UC30
+' edge:R046
+SuperUser --> UC32
+' edge:R047
+SuperUser --> UC33
+' edge:R048
+SuperUser --> UC34
+' edge:R049
+FieldUser --> UC19
+' edge:R050
+WI --> UC7
+' edge:R051
+WI --> UC23
+' edge:R052
+NCR --> UC18
+' edge:R053
+NCR --> UC24
+' edge:R072
+Dispatcher --> UC19
+' edge:R054
+CaravanMaster --|> FieldUser
+' edge:R055
+SecurityCaptain --|> FieldUser
+' edge:R056
+Medic --|> FieldUser
+legend bottom
+  Точки расширения и условия:
+  UC17 → UC16 / EP-1: Выбрано событие прибытия на контрольную точку маршрута.
+  UC18 → UC16 / EP-2: Выбрано событие прохождения КПП с фиксацией пошлины.
+  UC14 → UC16 / EP-3: Выбрано событие выдачи груза получателю.
+  UC20 → UC19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер
+  решил инициировать реагирование.
+  UC33 → UC32 / EP-1: Организация создана; суперпользователь выбрал назначение первого диспетчера сейчас.
+  UC34 → UC32 / EP-2: Организация создана; суперпользователь выбрал активацию или настройку подписки сейчас.
+endlegend
 @enduml

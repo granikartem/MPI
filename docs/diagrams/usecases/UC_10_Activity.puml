@@ -1,0 +1,36 @@
+@startuml UC_10_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-10. Просмотреть доступных сотрудников
+
+' edge:e001
+(*) --> "1. Диспетчер открывает список сотрудников для назначения на\nрейс." as n002
+' edge:e002
+n002 --> "2. Система определяет организацию и получает разрешённые\nсведения о её сотрудниках." as n003
+' edge:e005
+n003 --> if "Результат загрузки сотрудников" as n007 then
+endif
+' edge:e006
+n007 -->[Есть доступные сотрудники] "3. Система показывает сотрудников, их статус и текущую\nзанятость." as n004
+' edge:e003
+n004 --> "4. Диспетчер просматривает список и выбирает подходящего\nсотрудника для дальнейшего назначения." as n005
+' edge:e004
+n005 --> (*1)
+' edge:e007
+n007 -->[Доступных сотрудников нет] "3а. Доступных сотрудников нет — система показывает пустое\nсостояние → завершение без назначения." as n008
+' edge:e008
+n008 --> (*1)
+' edge:e009
+n007 -->[Ошибка загрузки] "3б. Сведения не удалось загрузить — система сообщает об ошибке\n→ завершение без изменения данных." as n009
+' edge:e010
+n009 --> (*1)
+@enduml

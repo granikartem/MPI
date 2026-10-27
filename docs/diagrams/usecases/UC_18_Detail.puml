@@ -1,0 +1,40 @@
+@startuml UC_18_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-18. Отметить прохождение КПП (с пошлиной)
+
+actor "Караван-мастер" as CaravanMaster
+actor "NCR Checkpoint & Tax\nTerminal" as NCR <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
+  usecase "UC-18. Отметить прохождение КПП (с\nпошлиной)" as UC18
+  usecase "UC-24. Получить данные о КПП и\nпошлинах" as UC24
+}
+' edge:R065
+UC18 ..> UC24 : <<include>>
+' edge:R067
+UC18 ..> UC16 : <<extend>>
+' edge:R026
+CaravanMaster --> UC16
+' edge:R028
+CaravanMaster --> UC18
+' edge:R030
+CaravanMaster --> UC24
+' edge:R052
+NCR --> UC18
+' edge:R053
+NCR --> UC24
+legend bottom
+  Точки расширения и условия:
+  UC18 → UC16 / EP-2: Выбрано событие прохождения КПП с фиксацией пошлины.
+endlegend
+@enduml

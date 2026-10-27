@@ -1,0 +1,46 @@
+@startuml UC_29_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-29. Редактировать свои учётные данные
+
+' edge:e001
+(*) --> "1. Пользователь открывает настройки своих учётных данных." as n002
+' edge:e002
+n002 --> if "" as n013 then
+endif
+' edge:e014
+n013 --> "2. Пользователь вводит новый логин и/или пароль." as n003
+' edge:e003
+n003 --> "3. Система проверяет допустимость данных и уникальность нового\nлогина." as n004
+' edge:e007
+n004 --> if "Новые учётные данные корректны?" as n009 then
+endif
+' edge:e008
+n009 -->[Нет: логин занят / ошибка данных] "3а. Новый логин занят или данные некорректны — система\nпоказывает ошибку → возврат к шагу 2." as n010
+' edge:e009
+n010 --> n013
+' edge:e010
+n009 -->[Да] if "Подтвердить изменение?" as n011 then
+endif
+' edge:e011
+n011 -->[Да] "4. Пользователь подтверждает изменение." as n005
+' edge:e004
+n005 --> "5. Система сохраняет новые учётные данные и фиксирует факт\nизменения в аудите без сохранения открытого пароля в журнале." as n006
+' edge:e005
+n006 --> "6. Система сообщает об успешном изменении; последующая\nаутентификация использует новые данные." as n007
+' edge:e006
+n007 --> (*1)
+' edge:e012
+n011 -->[Нет: отмена] "4а. Пользователь отменяет изменение → завершение с прежними\nданными." as n012
+' edge:e013
+n012 --> (*1)
+@enduml

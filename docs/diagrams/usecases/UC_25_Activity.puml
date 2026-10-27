@@ -1,0 +1,45 @@
+@startuml UC_25_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-25. Аутентификация
+
+' edge:e001
+(*) --> "1. Пользователь открывает форму входа." as n002
+' edge:e002
+n002 --> if "" as n012 then
+endif
+' edge:e014
+n012 --> "2. Пользователь вводит логин и пароль." as n003
+' edge:e006
+n003 --> if "Результат проверки входа" as n008 then
+endif
+' edge:e007
+n008 -->[Верные данные, активная запись, сервер доступен] "3. Система проверяет учётные данные и активность учётной\nзаписи." as n004
+' edge:e003
+n004 --> "4. Система определяет роль, организацию и доступные полномочия\nпользователя." as n005
+' edge:e004
+n005 --> "5. Система создаёт аутентифицированную сессию и открывает\nдоступный пользователю интерфейс." as n006
+' edge:e005
+n006 --> (*1)
+' edge:e008
+n008 -->[Неверный логин / пароль] "3а. Логин или пароль неверны — система сообщает об отказе без\nпредоставления доступа → возврат к шагу 2." as n009
+' edge:e009
+n009 --> n012
+' edge:e010
+n008 -->[Учётная запись деактивирована] "3б. Учётная запись деактивирована — система отказывает во\nвходе → завершение без сессии." as n010
+' edge:e011
+n010 --> (*1)
+' edge:e012
+n008 -->[Сервер недоступен] "3в. Сервер недоступен — система сообщает об ошибке соединения\n→ завершение без сессии." as n011
+' edge:e013
+n011 --> (*1)
+@enduml

@@ -1,0 +1,41 @@
+@startuml UC_24_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-24. Получить данные о КПП и пошлинах
+
+' edge:e001
+(*) --> "1. Система получает идентификатор КПП из UC-18." as n002
+' edge:e002
+n002 --> "2. Система отправляет запрос в NCR Checkpoint & Tax Terminal." as n003
+' edge:e005
+n003 --> if "NCR-терминал ответил штатно?" as n008 then
+endif
+' edge:e006
+n008 -->[Да] "3. Терминал возвращает сведения о КПП, прохождении, сумме\nпошлины и валюте." as n004
+' edge:e003
+n004 --> "4. Система проверяет соответствие КПП, формат суммы и наличие\nвалюты." as n005
+' edge:e009
+n005 --> if "Ответ корректен и соответствует КПП?" as n010 then
+endif
+' edge:e010
+n010 -->[Да] "5. Система возвращает проверенные сведения вызывающему UC-18." as n006
+' edge:e004
+n006 --> (*1)
+' edge:e011
+n010 -->[Нет] "4а. Ответ некорректен или относится к другому КПП — система не\nпринимает сведения и сообщает об ошибке в UC-18 → завершение\nбез внешних данных." as n011
+' edge:e012
+n011 --> (*1)
+' edge:e007
+n008 -->[Нет: отказ / ошибка / таймаут] "3а. Терминал недоступен, вернул ошибку или истёк таймаут —\nсистема возвращает признак недоступности в UC-18 → завершение\nбез внешних данных." as n009
+' edge:e008
+n009 --> (*1)
+@enduml

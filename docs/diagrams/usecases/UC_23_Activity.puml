@@ -1,0 +1,48 @@
+@startuml UC_23_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-23. Получить данные об угрозах
+
+' edge:e001
+(*) --> "1. Система получает список участков маршрута от вызывающего\nрасчёта UC-7." as n002
+' edge:e002
+n002 --> "2. Система формирует и отправляет запрос Wasteland Intel." as n003
+' edge:e005
+n003 --> if "Wasteland Intel ответил штатно?" as n008 then
+endif
+' edge:e006
+n008 -->[Да] "3. Wasteland Intel возвращает угрозы по участкам и дату\nактуальности." as n004
+' edge:e003
+n004 --> "4. Система проверяет формат, полноту и дату полученных данных." as n005
+' edge:e009
+n005 --> if "Результат проверки ответа" as n010 then
+endif
+' edge:e010
+n010 -->[Формат корректен; данные актуальны] if "" as n013 then
+endif
+' edge:e015
+n013 --> "5. Система возвращает данные и признак актуальности в UC-7." as n006
+' edge:e004
+n006 --> (*1)
+' edge:e011
+n010 -->[Непригодный формат / неполные данные] "4а. Ответ имеет непригодный формат или обязательные данные\nотсутствуют — система возвращает ошибку данных в UC-7 →\nзавершение без принятия ответа." as n011
+' edge:e012
+n011 --> (*1)
+' edge:e013
+n010 -->[Формат корректен; данные старше 24 часов] "4б. Данные старше 24 часов — система помечает их устаревшими →\nпереход к шагу 5." as n012
+' edge:e014
+n012 --> n013
+' edge:e007
+n008 -->[Нет: отказ / ошибка / таймаут] "3а. Внешняя система недоступна, вернула ошибку или истёк\nтаймаут — система возвращает результат недоступности в UC-7 →\nзавершение без данных об угрозах." as n009
+' edge:e008
+n009 --> (*1)
+@enduml

@@ -1,24 +1,26 @@
 @startuml UC_3_Team
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
 title Формирование команды
 
-actor "Диспетчер\nкараванов" as Dispatcher
-
-rectangle "Формирование команды" {
-  usecase "UC-9: Назначить сотрудников\nна роли рейса" as UC9 #Gold
-  usecase "UC-10: Просмотреть\nдоступных сотрудников" as UC10
+actor "Диспетчер караванов" as Dispatcher
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-9. Назначить сотрудников на роли\nрейса" as UC9
+  usecase "UC-10. Просмотреть доступных\nсотрудников" as UC10
 }
-
+' edge:R064
+UC9 ..> UC10 : <<include>>
+' edge:R009
 Dispatcher --> UC9
+' edge:R010
 Dispatcher --> UC10
-
-legend right
-  |= Цвет |= Значение |
-  | <#Gold> | Значимый прецедент |
-  | <#White> | Обычный прецедент |
-endlegend
 @enduml

@@ -1,0 +1,48 @@
+@startuml UC_22_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-22. Экспортировать отчёт на голотейп
+
+' edge:e001
+(*) --> "1. Диспетчер открывает сформированный отчёт и выбирает\nэкспорт." as n002
+' edge:e004
+n002 --> if "Носитель доступен для записи?" as n008 then
+endif
+' edge:e005
+n008 -->[Да] "2. Система показывает выбранный отчёт и предлагает целевой\nноситель выгрузки." as n003
+' edge:e008
+n003 --> if "Подтвердить экспорт?" as n010 then
+endif
+' edge:e009
+n010 -->[Да] "3. Диспетчер подтверждает экспорт на голотейп." as n004
+' edge:e012
+n004 --> if "Запись отчёта выполнена полностью?" as n012 then
+endif
+' edge:e013
+n012 -->[Да] "4. Система записывает отчёт на выбранный носитель." as n005
+' edge:e002
+n005 --> "5. Система проверяет завершение записи и сообщает результат\nэкспорта." as n006
+' edge:e003
+n006 --> (*1)
+' edge:e014
+n012 -->[Нет: ошибка / обрыв] "4а. Запись прервана или не выполнена — система сообщает об\nошибке → завершение без подтверждённого экспорта." as n013
+' edge:e015
+n013 --> (*1)
+' edge:e010
+n010 -->[Нет: отмена] "3а. Диспетчер отменяет экспорт → завершение без записи." as n011
+' edge:e011
+n011 --> (*1)
+' edge:e006
+n008 -->[Нет] "2а. Носитель отсутствует или недоступен для записи — система\nсообщает причину → завершение без подтверждённого экспорта." as n009
+' edge:e007
+n009 --> (*1)
+@enduml

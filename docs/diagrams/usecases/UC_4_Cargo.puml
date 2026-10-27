@@ -1,33 +1,51 @@
 @startuml UC_4_Cargo
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
 title Груз и манифест
 
-actor "Диспетчер\nкараванов" as Dispatcher
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
 actor "Кладовщик" as Storekeeper
-actor "Караван-\nмастер" as CaravanMaster
-
-rectangle "Груз и манифест" {
-  usecase "UC-11: Создать\nгруз-манифест" as UC11 #Gold
-  usecase "UC-12: Указать\nценность груза" as UC12
-  usecase "UC-13: Зарезервировать\nприпасы" as UC13
-  usecase "UC-14: Подтвердить доставку\nгруза (с пломбой)" as UC14 #Gold
-  usecase "UC-15: Выполнить сверку\nманифеста при приёмке" as UC15
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-1. Создать заявку на перевозку" as UC1
+  usecase "UC-11. Создать груз-манифест" as UC11
+  usecase "UC-12. Указать ценность груза" as UC12
+  usecase "UC-13. Зарезервировать припасы" as UC13
+  usecase "UC-14. Подтвердить доставку груза (с\nпломбой)" as UC14
+  usecase "UC-15. Выполнить сверку манифеста\nпри приёмке" as UC15
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
 }
-
-Storekeeper --> UC11
+' edge:R061
+UC1 ..> UC12 : <<include>>
+' edge:R068
+UC14 ..> UC16 : <<extend>>
+' edge:R001
+Dispatcher --> UC1
+' edge:R011
 Dispatcher --> UC12
-Storekeeper --> UC13
+' edge:R024
 CaravanMaster --> UC14
-Storekeeper --> UC15
+' edge:R025
 CaravanMaster --> UC15
-
-legend right
-  |= Цвет |= Значение |
-  | <#Gold> | Значимый прецедент |
-  | <#White> | Обычный прецедент |
+' edge:R026
+CaravanMaster --> UC16
+' edge:R033
+Storekeeper --> UC11
+' edge:R034
+Storekeeper --> UC13
+' edge:R035
+Storekeeper --> UC15
+legend bottom
+  Точки расширения и условия:
+  UC14 → UC16 / EP-3: Выбрано событие выдачи груза получателю.
 endlegend
 @enduml

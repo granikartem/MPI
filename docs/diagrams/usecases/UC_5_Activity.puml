@@ -1,0 +1,56 @@
+@startuml UC_5_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-5. Выбрать/спланировать маршрут
+
+' edge:e001
+(*) --> "1. Диспетчер открывает выбор маршрута заявки." as n002
+' edge:e002
+n002 --> "2. Система показывает доступные шаблоны и контрольные точки." as n003
+' edge:e006
+n003 --> if "" as n016 then
+endif
+' edge:e018
+n016 --> if "Способ задания маршрута" as n009 then
+endif
+' edge:e007
+n009 -->[Выбрать шаблон] "3. Диспетчер выбирает шаблон и просматривает\nпоследовательность участков." as n004
+' edge:e003
+n004 --> if "" as n015 then
+endif
+' edge:e017
+n015 --> "4. Система проверяет наличие точек и связность выбранных\nучастков маршрута." as n005
+' edge:e010
+n005 --> if "Маршрут полон и связен?" as n011 then
+endif
+' edge:e011
+n011 -->[Нет] "4а. Маршрут неполон или участки не связаны — система указывает\nошибку → возврат к шагу 3." as n012
+' edge:e012
+n012 --> n016
+' edge:e013
+n011 -->[Да] if "Подтвердить маршрут?" as n013 then
+endif
+' edge:e014
+n013 -->[Да] "5. Диспетчер подтверждает маршрут." as n006
+' edge:e004
+n006 --> "6. Система связывает маршрут с данными заявки; дальнейшие\nрасчёты выполняются вызывающим сценарием." as n007
+' edge:e005
+n007 --> (*1)
+' edge:e015
+n013 -->[Нет: отмена] "5а. Диспетчер отменяет выбор → завершение с прежним маршрутом\nлибо без маршрута у новой заявки." as n014
+' edge:e016
+n014 --> (*1)
+' edge:e008
+n009 -->[Задать вручную] "3а. Подходящего шаблона нет либо выбран ручной режим —\nдиспетчер задаёт последовательность контрольных точек и\nучастков → переход к шагу 4." as n010
+' edge:e009
+n010 --> n015
+@enduml

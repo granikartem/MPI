@@ -1,0 +1,46 @@
+@startuml UC_11_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-11. Создать груз-манифест
+
+' edge:e001
+(*) --> "1. Кладовщик открывает груз-манифест заявки." as n002
+' edge:e002
+n002 --> if "" as n013 then
+endif
+' edge:e014
+n013 --> "2. Кладовщик вводит позиции груза, количества и сведения об\nупаковке." as n003
+' edge:e003
+n003 --> "3. Кладовщик указывает сведения о пломбах для подготовленного\nгруза." as n004
+' edge:e004
+n004 --> "4. Система проверяет обязательные поля и корректность\nколичества и упаковки." as n005
+' edge:e007
+n005 --> if "Данные манифеста корректны?" as n009 then
+endif
+' edge:e008
+n009 -->[Нет] "4а. Данные позиции или пломбы неполны либо некорректны —\nсистема указывает ошибки → возврат к шагу 2." as n010
+' edge:e009
+n010 --> n013
+' edge:e010
+n009 -->[Да] if "Подтвердить сохранение?" as n011 then
+endif
+' edge:e011
+n011 -->[Да] "5. Кладовщик проверяет сводку и подтверждает сохранение." as n006
+' edge:e005
+n006 --> "6. Система сохраняет цифровой манифест, связывает его с\nзаявкой и фиксирует изменение в аудите." as n007
+' edge:e006
+n007 --> (*1)
+' edge:e012
+n011 -->[Нет: отмена] "5а. Кладовщик отменяет заполнение → завершение без сохранения\nнового манифеста." as n012
+' edge:e013
+n012 --> (*1)
+@enduml

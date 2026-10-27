@@ -1,0 +1,31 @@
+@startuml UC_24_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-24. Получить данные о КПП и пошлинах
+
+actor "Караван-мастер" as CaravanMaster
+actor "NCR Checkpoint & Tax\nTerminal" as NCR <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-18. Отметить прохождение КПП (с\nпошлиной)" as UC18
+  usecase "UC-24. Получить данные о КПП и\nпошлинах" as UC24
+}
+' edge:R065
+UC18 ..> UC24 : <<include>>
+' edge:R028
+CaravanMaster --> UC18
+' edge:R030
+CaravanMaster --> UC24
+' edge:R052
+NCR --> UC18
+' edge:R053
+NCR --> UC24
+@enduml

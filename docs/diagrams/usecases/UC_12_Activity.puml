@@ -1,0 +1,42 @@
+@startuml UC_12_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-12. Указать ценность груза
+
+' edge:e001
+(*) --> "1. Диспетчер открывает поле оценочной ценности груза." as n002
+' edge:e004
+n002 --> if "" as n011 then
+endif
+' edge:e012
+n011 --> if "Продолжить ввод ценности?" as n007 then
+endif
+' edge:e005
+n007 -->[Да] "2. Диспетчер вводит стоимость в крышках." as n003
+' edge:e002
+n003 --> "3. Система проверяет корректность числового значения." as n004
+' edge:e008
+n004 --> if "Ценность — допустимое неотрицательное число?" as n009 then
+endif
+' edge:e009
+n009 -->[Да] "4. Система принимает значение в данные заявки и передаёт его в\nрасчёт risk_score вызывающего сценария." as n005
+' edge:e003
+n005 --> (*1)
+' edge:e010
+n009 -->[Нет] "3а. Значение отрицательное или не является допустимым числом —\nсистема показывает ошибку → возврат к шагу 2." as n010
+' edge:e011
+n010 --> n011
+' edge:e006
+n007 -->[Нет: отмена] "2а. Диспетчер отменяет ввод → завершение с прежним значением." as n008
+' edge:e007
+n008 --> (*1)
+@enduml

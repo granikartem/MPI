@@ -1,0 +1,57 @@
+@startuml UC_4_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-4. Поиск и фильтрация завершённых рейсов
+
+' edge:e001
+(*) --> "1. Диспетчер открывает архив завершённых рейсов." as n002
+' edge:e005
+n002 --> if "Архив содержит завершённые рейсы?" as n008 then
+endif
+' edge:e006
+n008 -->[Да] "2. Система определяет организацию и отображает доступную ей\nисторию завершённых рейсов." as n003
+' edge:e002
+n003 --> if "" as n015 then
+endif
+' edge:e018
+n015 --> "3. Диспетчер задаёт поисковые условия и фильтры по доступным\nполям архива." as n004
+' edge:e003
+n004 --> "4. Система проверяет условия, выполняет поиск только в\nвыбранном архивном срезе организации и показывает результат." as n005
+' edge:e009
+n005 --> if "Результат проверки и поиска" as n010 then
+endif
+' edge:e010
+n010 -->[Условия некорректны] "4а. Условия некорректны — система поясняет ошибку → возврат к\nшагу 3." as n011
+' edge:e011
+n011 --> n015
+' edge:e012
+n010 -->[Совпадений нет] "4б. Совпадений нет — система показывает пустой результат и\nпредлагает изменить условия → возврат к шагу 3." as n012
+' edge:e013
+n012 --> n015
+' edge:e014
+n010 -->[Есть совпадения] if "Найденный рейс доступен организации?" as n013 then
+endif
+' edge:e015
+n013 -->[Да] "5. Диспетчер открывает найденный рейс и просматривает\nсведения, историю и связанные документы." as n006
+' edge:e004
+n006 --> (*1)
+' edge:e016
+n013 -->[Нет] "5а. Рейс недоступен или не принадлежит организации — система\nне раскрывает данные → завершение без изменения данных." as n014
+' edge:e017
+n014 --> (*1)
+' edge:e007
+n008 -->[Нет] "2а. Архив пуст — система показывает пустое состояние →\nзавершение без изменения данных." as n009
+' edge:e008
+n009 --> (*1)
+' layout only: separate the decision question from an alternative action
+n012 -[hidden]down-> n013
+@enduml

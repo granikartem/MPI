@@ -1,0 +1,24 @@
+@startuml UC_2_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-2. Управлять статусами заявки
+
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-2. Управлять статусами заявки" as UC2
+}
+' edge:R002
+Dispatcher --> UC2
+' edge:R023
+CaravanMaster --> UC2
+@enduml

@@ -1,0 +1,46 @@
+@startuml UC_31_Activity
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-31. Назначить/изменить ставку сотрудника
+
+' edge:e001
+(*) --> "1. Диспетчер открывает карточку сотрудника и текущую ставку." as n002
+' edge:e002
+n002 --> if "" as n013 then
+endif
+' edge:e014
+n013 --> "2. Диспетчер вводит новую ставку в принятой для расчётов\nформе." as n003
+' edge:e003
+n003 --> "3. Система проверяет принадлежность сотрудника организации и\nкорректность суммы." as n004
+' edge:e007
+n004 --> if "Сотрудник доступен и сумма корректна?" as n009 then
+endif
+' edge:e008
+n009 -->[Нет] "3а. Сумма некорректна либо сотрудник недоступен — система\nпоказывает причину → возврат к шагу 2." as n010
+' edge:e009
+n010 --> n013
+' edge:e010
+n009 -->[Да] if "Подтвердить изменение ставки?" as n011 then
+endif
+' edge:e011
+n011 -->[Да] "4. Диспетчер подтверждает изменение." as n005
+' edge:e004
+n005 --> "5. Система сохраняет ставку и фиксирует автора, время и\nизменение в аудите." as n006
+' edge:e005
+n006 --> "6. Система показывает обновлённую ставку для последующих\nрасчётов оплаты." as n007
+' edge:e006
+n007 --> (*1)
+' edge:e012
+n011 -->[Нет: отмена] "4а. Диспетчер отменяет изменение → завершение с прежней\nставкой." as n012
+' edge:e013
+n012 --> (*1)
+@enduml

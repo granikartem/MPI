@@ -1,31 +1,53 @@
 @startuml UC_2_Route
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
 title Планирование маршрута и оценка рисков
 
-actor "Диспетчер\nкараванов" as Dispatcher
-
-rectangle "Планирование маршрута и оценка рисков" {
-  usecase "UC-5: Выбрать/спланировать\nмаршрут" as UC5 #Gold
-  usecase "UC-6: Рассчитать\nETA" as UC6
-  usecase "UC-7: Рассчитать\nrisk_score" as UC7
-  usecase "UC-8: Получить рекомендацию\nпо охране и припасам" as UC8
+actor "Диспетчер караванов" as Dispatcher
+actor "Wasteland Intel" as WI <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-1. Создать заявку на перевозку" as UC1
+  usecase "UC-5. Выбрать/спланировать маршрут" as UC5
+  usecase "UC-6. Рассчитать ETA" as UC6
+  usecase "UC-7. Рассчитать risk_score" as UC7
+  usecase "UC-8. Получить рекомендацию по\nохране и припасам" as UC8
+  usecase "UC-23. Получить данные об угрозах" as UC23
 }
-
-actor "Wasteland\nIntel" as WastelandIntel <<external>>
-
+' edge:R057
+UC1 ..> UC5 : <<include>>
+' edge:R058
+UC1 ..> UC6 : <<include>>
+' edge:R059
+UC1 ..> UC7 : <<include>>
+' edge:R060
+UC1 ..> UC8 : <<include>>
+' edge:R062
+UC7 ..> UC8 : <<include>>
+' edge:R063
+UC7 ..> UC23 : <<include>>
+' edge:R001
+Dispatcher --> UC1
+' edge:R005
 Dispatcher --> UC5
+' edge:R006
 Dispatcher --> UC6
+' edge:R007
 Dispatcher --> UC7
+' edge:R008
 Dispatcher --> UC8
-UC7 <-- WastelandIntel
-
-legend right
-  |= Цвет |= Значение |
-  | <#Gold> | Значимый прецедент |
-  | <#White> | Обычный прецедент |
-endlegend
+' edge:R015
+Dispatcher --> UC23
+' edge:R050
+WI --> UC7
+' edge:R051
+WI --> UC23
 @enduml

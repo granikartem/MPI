@@ -1,0 +1,21 @@
+@startuml UC_31_Detail
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
+title UC-31. Назначить/изменить ставку сотрудника
+
+actor "Диспетчер караванов" as Dispatcher
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-31. Назначить/изменить ставку\nсотрудника" as UC31
+}
+' edge:R022
+Dispatcher --> UC31
+@enduml

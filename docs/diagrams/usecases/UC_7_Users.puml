@@ -1,51 +1,68 @@
 @startuml UC_7_Users
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
 title Управление пользователями
 
-actor "Диспетчер\nкараванов" as Dispatcher
-actor "Караван-\nмастер" as CaravanMaster
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
 actor "Кладовщик" as Storekeeper
-actor "Капитан\nохраны" as SecurityCaptain
-actor "Полевой\nмедик" as Medic
-
-rectangle "Управление пользователями" {
-  usecase "UC-25: Аутентификация" as UC25 #Gold
-  usecase "UC-26: Создать учётную\nзапись пользователя" as UC26 #Gold
-  usecase "UC-27: Изменить роль\nпользователя" as UC27
-  usecase "UC-28: Деактивировать\nучётную запись" as UC28
-  usecase "UC-29: Редактировать свои\nучётные данные" as UC29
-  usecase "UC-30: Сбросить учётные\nданные пользователя" as UC30
-  usecase "UC-31: Назначить/изменить\nставку сотрудника" as UC31
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Суперпользователь" as SuperUser
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-25. Аутентификация" as UC25
+  usecase "UC-26. Создать учётную запись\nпользователя" as UC26
+  usecase "UC-27. Изменить роль пользователя" as UC27
+  usecase "UC-28. Деактивировать учётную запись" as UC28
+  usecase "UC-29. Редактировать свои учётные\nданные" as UC29
+  usecase "UC-30. Сбросить учётные данные\nпользователя" as UC30
+  usecase "UC-31. Назначить/изменить ставку\nсотрудника" as UC31
 }
-
-actor "Супер-\nпользователь" as SuperUser
-
+' edge:R016
 Dispatcher --> UC25
+' edge:R017
 Dispatcher --> UC26
+' edge:R018
 Dispatcher --> UC27
+' edge:R019
 Dispatcher --> UC28
+' edge:R020
 Dispatcher --> UC29
+' edge:R021
 Dispatcher --> UC30
+' edge:R022
 Dispatcher --> UC31
+' edge:R031
 CaravanMaster --> UC25
+' edge:R032
 CaravanMaster --> UC29
+' edge:R036
 Storekeeper --> UC25
+' edge:R037
 Storekeeper --> UC29
+' edge:R038
 SecurityCaptain --> UC25
+' edge:R039
 SecurityCaptain --> UC29
+' edge:R040
 Medic --> UC25
+' edge:R041
 Medic --> UC29
-UC25 <-- SuperUser
-UC29 <-- SuperUser
-UC30 <-- SuperUser
-
-legend right
-  |= Цвет |= Значение |
-  | <#Gold> | Значимый прецедент |
-  | <#White> | Обычный прецедент |
-endlegend
+' edge:R042
+SuperUser --> UC25
+' edge:R043
+SuperUser --> UC26
+' edge:R044
+SuperUser --> UC29
+' edge:R045
+SuperUser --> UC30
 @enduml

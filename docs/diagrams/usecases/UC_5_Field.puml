@@ -1,39 +1,76 @@
 @startuml UC_5_Field
-skinparam actorStyle awesome
-skinparam usecaseBackgroundColor #White
-skinparam usecaseBorderColor #333333
-skinparam rectangleBackgroundColor #F5F5F5
-
+!pragma layout smetana
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam backgroundColor white
+skinparam nodesep 75
+skinparam ranksep 100
+skinparam ArrowFontSize 11
+skinparam usecaseBackgroundColor #F5F5F5
+skinparam activityBackgroundColor #F5F5F5
+top to bottom direction
 title Полевые операции
 
-actor "Диспетчер\nкараванов" as Dispatcher
-actor "Караван-\nмастер" as CaravanMaster
-actor "Капитан\nохраны" as SecurityCaptain
-actor "Полевой\nмедик" as Medic
-
-rectangle "Полевые операции" {
-  usecase "UC-16: Подтвердить ключевые\nэтапы рейса" as UC16 #Gold
-  usecase "UC-17: Отметить прохождение\nконтрольной точки" as UC17
-  usecase "UC-18: Отметить прохождение\nКПП (с пошлиной)" as UC18
-  usecase "UC-19: Зафиксировать\nинцидент" as UC19 #Gold
-  usecase "UC-20: Инициировать\nRecoveryRequest" as UC20
+actor "Диспетчер караванов" as Dispatcher
+actor "Караван-мастер" as CaravanMaster
+actor "Капитан охраны" as SecurityCaptain
+actor "Полевой медик" as Medic
+actor "Полевой пользователь" as FieldUser <<abstract>>
+actor "NCR Checkpoint & Tax\nTerminal" as NCR <<external>>
+rectangle "ИС «Караваны»" as SystemBoundary {
+  usecase "UC-14. Подтвердить доставку груза (с\nпломбой)" as UC14
+  usecase "UC-16. Зафиксировать прохождение\nэтапа рейса" as UC16
+  usecase "UC-17. Отметить прохождение\nконтрольной точки" as UC17
+  usecase "UC-18. Отметить прохождение КПП (с\nпошлиной)" as UC18
+  usecase "UC-19. Сообщить об инциденте в рейсе" as UC19
+  usecase "UC-20. Инициировать RecoveryRequest" as UC20
+  usecase "UC-24. Получить данные о КПП и\nпошлинах" as UC24
 }
-
-actor "NCR Checkpoint\n& Tax Terminal" as NCRCheckpoint <<external>>
-
-CaravanMaster --> UC16
-CaravanMaster --> UC17
-CaravanMaster --> UC18
-CaravanMaster --> UC19
-CaravanMaster --> UC20
-SecurityCaptain --> UC19
-Medic --> UC19
+' edge:R065
+UC18 ..> UC24 : <<include>>
+' edge:R066
+UC17 ..> UC16 : <<extend>>
+' edge:R067
+UC18 ..> UC16 : <<extend>>
+' edge:R068
+UC14 ..> UC16 : <<extend>>
+' edge:R069
+UC20 ..> UC19 : <<extend>>
+' edge:R012
 Dispatcher --> UC20
-UC18 <-- NCRCheckpoint
-
-legend right
-  |= Цвет |= Значение |
-  | <#Gold> | Значимый прецедент |
-  | <#White> | Обычный прецедент |
+' edge:R024
+CaravanMaster --> UC14
+' edge:R026
+CaravanMaster --> UC16
+' edge:R027
+CaravanMaster --> UC17
+' edge:R028
+CaravanMaster --> UC18
+' edge:R029
+CaravanMaster --> UC20
+' edge:R030
+CaravanMaster --> UC24
+' edge:R049
+FieldUser --> UC19
+' edge:R052
+NCR --> UC18
+' edge:R053
+NCR --> UC24
+' edge:R072
+Dispatcher --> UC19
+' edge:R054
+CaravanMaster --|> FieldUser
+' edge:R055
+SecurityCaptain --|> FieldUser
+' edge:R056
+Medic --|> FieldUser
+legend bottom
+  Точки расширения и условия:
+  UC17 → UC16 / EP-1: Выбрано событие прибытия на контрольную точку маршрута.
+  UC18 → UC16 / EP-2: Выбрано событие прохождения КПП с фиксацией пошлины.
+  UC14 → UC16 / EP-3: Выбрано событие выдачи груза получателю.
+  UC20 → UC19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер
+  решил инициировать реагирование.
 endlegend
 @enduml
