@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- render: 1440x1160 -->
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-24 · Получить данные о КПП и пошлинах (NCR Checkpoint &amp; Tax Terminal)</title>
+<style>
+  /* шрифты: рендер офлайн из file://, внешние шрифты недоступны */
+  :root { --font-mono: Consolas, "Courier New", ui-monospace, monospace; }
+  /* витрина из трёх телефонов шире стандартной страницы */
+  .page { max-width: 1400px; }
+  /* никаких внутренних скроллов: контент каждого экрана подобран под кадр */
+  .screen .content { overflow: hidden; padding-bottom: 172px; gap: 0; }
+  .screen .content .sec-title { margin-top: 10px; }
+  .screen .kv-row { padding: 4px 0; font-size: 12px; }
+  /* на мобильной кнопке подпись уходит под основную надпись, а не вбок */
+  .action-bar .btn-block { flex-direction: column; gap: 0; font-size: 13px; letter-spacing: 1px; }
+  /* заголовок карточки КПП */
+  .cp-name { font-size: 15px; letter-spacing: 2px; color: var(--fg-bright); }
+  .cp-id {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+    font-size: 10px; letter-spacing: 1px; color: var(--muted); margin: 2px 0 8px;
+  }
+  /* сумма пошлины — главное число ответа терминала NCR */
+  .toll {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+    border-bottom: 1px dashed var(--fg-faint); padding-bottom: 6px; margin-bottom: 6px;
+  }
+  .toll .num { font-size: 30px; letter-spacing: 2px; color: var(--fg-bright); line-height: 1; }
+  .toll .num.na { color: var(--err); font-size: 26px; }
+  .toll .num.local { color: var(--warn); }
+  .toll .cur { font-size: 11px; letter-spacing: 1px; color: var(--fg-dim); text-align: right; }
+  /* строка «запрос → ответ» внешней системы */
+  .io-line {
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+    border: 1px solid var(--fg-faint); background: var(--bg-deep);
+    padding: 5px 8px; font-size: 10px; letter-spacing: 1px; color: var(--muted); margin-top: 8px;
+  }
+  .io-line.warn-b { border-color: var(--warn); color: var(--warn); }
+  .io-line.err-b  { border-color: var(--err);  color: var(--err); }
+  .sys-note { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 8px; line-height: 1.45; }
+  .sys-note::before { content: "// "; color: var(--fg-dim); }
+  /* таймлайн на телефоне компактнее стандартного */
+  .screen .timeline .tl-step { padding: 4px 0; }
+  .screen .timeline .t1 { font-size: 12px; }
+  .screen .timeline .t2 { font-size: 10px; }
+  /* подпись-результат вместо кнопки (офлайн-состояние) */
+  .done-note {
+    border: 1px solid var(--warn);
+    background: rgba(255,184,77,0.08);
+    color: var(--warn);
+    text-align: center;
+    padding: 12px 10px;
+    letter-spacing: 2px;
+    font-size: 14px;
+    display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  }
+  .done-note .sub { font-size: 10px; letter-spacing: 1px; color: var(--fg-dim); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-head">
+    <div class="t">UC-24 · ДАННЫЕ О КПП И ПОШЛИНАХ — NCR CHECKPOINT &amp; TAX TERMINAL</div>
+    <div class="s">PWA КАРАВАН-МАСТЕРА · PIP-BOY 390x844 · РЕЙС #CRV-2281-1047 · R-1047.A · 2281-10-25</div>
+  </div>
+
+  <div class="states-label">КАРТОЧКА ЭТАПА «ПРОХОЖДЕНИЕ КПП NCR» НА ЭКРАНЕ «ЭТАПЫ РЕЙСА»: ДАННЫЕ ПОЛУЧЕНЫ · ТЕРМИНАЛ КПП НЕДОСТУПЕН · НЕТ СВЯЗИ</div>
+
+  <div class="phones">
+
+    <!-- ============ STATE 01 — СВЕДЕНИЯ КПП ПОЛУЧЕНЫ И ПРОВЕРЕНЫ ============ -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 01 — СВЕДЕНИЯ ПОЛУЧЕНЫ · ACK</div>
+      <div class="phone"><div class="screen">
+
+        <div class="statusbar"><span>14:20</span><span class="icons"><span>▂▃▅</span><span>5G</span><span>▮74%</span></span></div>
+
+        <div class="app-header">
+          <div class="h-top"><span class="back">‹</span><div class="h-title">ЭТАПЫ РЕЙСА</div><span class="menu">•••</span></div>
+          <div class="h-sub"><span>РЕЙС · #CRV-2281-1047</span><span class="badge active">EN ROUTE</span></div>
+        </div>
+
+        <div class="conn-banner online">
+          <span class="dot">●</span>
+          <div class="c-text">ONLINE<span class="small">ack 14:19:58 · MOJAVE RELAY 07</span></div>
+        </div>
+
+        <div class="content">
+
+          <div class="timeline">
+            <div class="tl-step done">
+              <span class="mark">✓</span>
+              <div class="info"><div class="t1">Загрузка завершена</div><div class="t2">GOODSPRINGS SUPPLY DEPOT</div></div>
+              <div class="time"><span class="tlbl">ACK</span>08:14</div>
+            </div>
+            <div class="tl-link done"></div>
+            <div class="tl-step current">
+              <span class="mark">◉</span>
+              <div class="info"><div class="t1">Прохождение КПП NCR</div><div class="t2">MOJAVE OUTPOST · ЭТАП 3 ИЗ 5</div></div>
+              <div class="time"><span class="tlbl">NOW</span>14:20</div>
+            </div>
+          </div>
+
+          <div class="sec-title">СВЕДЕНИЯ КПП<span class="badge info">NCR TAX</span></div>
+
+          <div class="box accent">
+            <div class="cp-name">КПП NCR · MOJAVE OUTPOST</div>
+            <div class="cp-id"><span>ИДЕНТИФИКАТОР NCR-CP-MOJ-07</span><span class="badge ok">ACK</span></div>
+
+            <div class="toll"><span class="num">120</span><span class="cur">КРЫШЕК<br>CAPS</span></div>
+
+            <div class="kv">
+              <div class="kv-row"><span class="k">ПРОХОЖДЕНИЕ</span><span class="v">2281-10-25 14:20</span></div>
+              <div class="kv-row"><span class="k">ВАЛЮТА</span><span class="v">CAPS · крышки</span></div>
+              <div class="kv-row"><span class="k">ИСТОЧНИК</span><span class="v">NCR TAX TERMINAL</span></div>
+              <div class="kv-row"><span class="k">СВЕРКА КПП</span><span class="v ok-t">СОВПАДАЕТ</span></div>
+            </div>
+
+            <div class="io-line"><span>ЗАПРОС 14:19:52 ▸ ОТВЕТ 14:19:58</span><span>0.6 c</span></div>
+          </div>
+
+          <div class="sys-note">сведения приняты: КПП совпадает, формат суммы и валюта проверены</div>
+
+        </div>
+
+        <div class="action-bar">
+          <div class="hint">финансовая запись будет создана при подтверждении</div>
+          <button class="btn-ok btn-block">✓ ПОДТВЕРДИТЬ ТЕКУЩИЙ ЭТАП<span class="lbl-sub">КПП NCR · ПОШЛИНА 120 КРЫШЕК</span></button>
+          <div class="coord-panel">
+            <span class="ic">◈</span>
+            <span><b>N 35°28'03"</b></span>
+            <span class="ts">14:20:06</span>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- ============ STATE 02 — ТЕРМИНАЛ КПП НЕДОСТУПЕН ============ -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 02 — ТЕРМИНАЛ КПП НЕДОСТУПЕН</div>
+      <div class="phone"><div class="screen">
+
+        <div class="statusbar"><span>14:21</span><span class="icons"><span>▂▃▅</span><span>5G</span><span>▮73%</span></span></div>
+
+        <div class="app-header">
+          <div class="h-top"><span class="back">‹</span><div class="h-title">ЭТАПЫ РЕЙСА</div><span class="menu">•••</span></div>
+          <div class="h-sub"><span>РЕЙС · #CRV-2281-1047</span><span class="badge active">EN ROUTE</span></div>
+        </div>
+
+        <div class="conn-banner online">
+          <span class="dot">●</span>
+          <div class="c-text">ONLINE<span class="small">связь есть · терминал NCR не отвечает</span></div>
+        </div>
+
+        <div class="content">
+
+          <div class="alert error">
+            <div class="left"><span class="sym">✕</span><div>ДАННЫЕ КПП НЕ ПОЛУЧЕНЫ<span class="sub">таймаут 10 с · попытка 2 из 3</span></div></div>
+            <span class="act">[ ↻ ПОВТОРИТЬ ]</span>
+          </div>
+
+          <div class="sec-title mt8">СВЕДЕНИЯ КПП<span class="badge err">НЕТ ОТВЕТА</span></div>
+
+          <div class="box accent">
+            <div class="cp-name">КПП NCR · MOJAVE OUTPOST</div>
+            <div class="cp-id"><span>ИДЕНТИФИКАТОР NCR-CP-MOJ-07</span><span class="badge err">ERR</span></div>
+
+            <div class="toll"><span class="num na">Н/Д</span><span class="cur">ПОШЛИНА<br>НЕ ПОЛУЧЕНА</span></div>
+
+            <div class="kv">
+              <div class="kv-row"><span class="k">ПРОХОЖДЕНИЕ</span><span class="v">2281-10-25 14:21</span></div>
+              <div class="kv-row"><span class="k">ВАЛЮТА</span><span class="v err">Н/Д</span></div>
+              <div class="kv-row"><span class="k">ИСТОЧНИК</span><span class="v err">NCR TAX TERMINAL ✕</span></div>
+              <div class="kv-row"><span class="k">ПОВТОР ЧЕРЕЗ</span><span class="v err">00:38</span></div>
+            </div>
+
+            <div class="io-line err-b"><span>ЗАПРОС 14:19:12 ▸ ОТВЕТА НЕТ</span><span>TIMEOUT</span></div>
+          </div>
+
+          <div class="sys-note">ответ с чужим КПП или неверным форматом суммы отклоняется так же — как отсутствие данных</div>
+          <div class="sys-note">сумму можно внести вручную в карточке этапа UC-18</div>
+
+        </div>
+
+        <div class="action-bar">
+          <div class="hint">этап подтверждается без внешних сведений о пошлине</div>
+          <button class="btn-ok btn-block">✓ ПОДТВЕРДИТЬ ТЕКУЩИЙ ЭТАП<span class="lbl-sub">КПП NCR · ПОШЛИНА Н/Д</span></button>
+          <div class="coord-panel">
+            <span class="ic">◈</span>
+            <span><b>N 35°28'03"</b></span>
+            <span class="ts">14:21:30</span>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- ============ STATE 03 — НЕТ СВЯЗИ · ЛОКАЛЬНАЯ ОЧЕРЕДЬ ============ -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 03 — НЕТ СВЯЗИ · QUEUED</div>
+      <div class="phone"><div class="screen">
+
+        <div class="statusbar"><span>14:22</span><span class="icons"><span class="warn-t">▂▁▁</span><span class="warn-t">NO SIGNAL</span><span>▮72%</span></span></div>
+
+        <div class="app-header">
+          <div class="h-top"><span class="back">‹</span><div class="h-title">ЭТАПЫ РЕЙСА</div><span class="menu">•••</span></div>
+          <div class="h-sub"><span>РЕЙС · #CRV-2281-1047</span><span class="badge active">EN ROUTE</span></div>
+        </div>
+
+        <div class="conn-banner offline">
+          <span class="dot">●</span>
+          <div class="c-text">OFFLINE<span class="small">последний ack 14:19:58 · 1 событие в очереди</span></div>
+        </div>
+
+        <div class="content">
+
+          <div class="alert warn">
+            <div class="left"><span class="sym">◌</span><div>ЗАПРОС К КПП ОТЛОЖЕН<span class="sub">уйдёт при появлении связи</span></div></div>
+            <span class="act">[ ↻ СЕЙЧАС ]</span>
+          </div>
+
+          <div class="sec-title mt8">СВЕДЕНИЯ КПП<span class="badge warn">LOCAL</span></div>
+
+          <div class="box accent">
+            <div class="cp-name">КПП NCR · MOJAVE OUTPOST ◌</div>
+            <div class="cp-id"><span>ИДЕНТИФИКАТОР NCR-CP-MOJ-07</span><span class="badge warn">QUEUED</span></div>
+
+            <div class="toll"><span class="num local">120</span><span class="cur">КРЫШЕК<br>ПО КЭШУ</span></div>
+
+            <div class="kv">
+              <div class="kv-row"><span class="k">ПРОХОЖДЕНИЕ</span><span class="v warn">2281-10-25 14:20 · LOCAL</span></div>
+              <div class="kv-row"><span class="k">ВАЛЮТА</span><span class="v">CAPS · крышки</span></div>
+              <div class="kv-row"><span class="k">ИСТОЧНИК</span><span class="v warn">КЭШ ДО ПОТЕРИ СВЯЗИ</span></div>
+              <div class="kv-row"><span class="k">СТАТУС ЗАПРОСА</span><span class="v warn">QUEUED · 1</span></div>
+            </div>
+
+            <div class="io-line warn-b"><span>ЗАПРОС ОТЛОЖЕН 14:22:04</span><span>◌ QUEUED</span></div>
+          </div>
+
+          <div class="sys-note">сведения не подтверждены терминалом: будут сверены после синхронизации</div>
+
+        </div>
+
+        <div class="action-bar">
+          <div class="hint">время, координаты и сумма сохранены исходные</div>
+          <div class="done-note">◌ LOCAL · 14:20<span class="sub">ЭТАП КПП ЖДЁТ СИНХРОНИЗАЦИИ</span></div>
+          <div class="coord-panel offline">
+            <span class="ic">◈</span>
+            <span><b>N 35°28'03"</b></span>
+            <span class="ts">14:20:06</span>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

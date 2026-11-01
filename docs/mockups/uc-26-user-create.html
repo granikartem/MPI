@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!-- render: 1440x1230 -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>UC-26 // СОЗДАТЬ УЧЁТНУЮ ЗАПИСЬ</title>
+<link rel="stylesheet" href="assets/robco.css">
+<style>
+  /* только раскладка этого экрана */
+  .terminal { grid-template-rows: 54px auto 36px; }
+  .term-content, .term-aside { overflow: visible; }
+  .toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .toolbar .sp { flex: 1; }
+  .toolbar .select, .toolbar .input { height: 26px; font-size: 11px; }
+  .toolbar .input { width: 186px; flex: 0 0 auto; }
+  .toolbar .select { width: 164px; flex: 0 0 auto; }
+  table.usr { font-size: 11px; }
+  table.usr th, table.usr td { padding: 5px 8px; }
+  table.usr .c-fio  { width: 160px; }
+  table.usr .c-log  { width: 166px; }
+  table.usr .c-role { width: 176px; }
+  table.usr .c-st   { width: 124px; }
+  table.usr .c-rate { width: 104px; }
+  table.usr .c-last { width: 108px; }
+  table.usr .c-act  { width: 92px; text-align: center; }
+  table.usr td, table.usr th { white-space: nowrap; }
+  table.usr .btn-sm { white-space: nowrap; }
+  table.usr .you { font-size: 10px; color: var(--fg-dim); }
+  .pw-row { display: flex; gap: 6px; align-items: center; }
+  .pw-row .input { flex: 1; letter-spacing: 2px; }
+  .st-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .st-grid .box { min-height: 112px; }
+  .st-h { font-size: 10px; letter-spacing: 1px; color: var(--fg); display: block; margin-bottom: 6px; }
+  .st-h .n { color: var(--fg-dim); }
+  .st-grid .box.e { border-color: var(--err); }
+  .st-grid .box.e .st-h { color: var(--err); }
+  .st-grid .box.s { border-color: var(--ok); }
+  .st-grid .box.s .st-h { color: var(--ok); }
+  .st-grid .alert { padding: 5px 7px; font-size: 10px; }
+  .mini-list { font-size: 10px; line-height: 1.6; color: var(--fg-dim); letter-spacing: 1px; }
+  .mini-list b { color: var(--fg); font-weight: normal; }
+  .inline-note { font-size: 10px; letter-spacing: 1px; color: var(--fg-dim); }
+  .audit { font-size: 10px; line-height: 1.5; letter-spacing: 0.5px; }
+  .audit .ln { border-bottom: 1px dotted var(--fg-faint); padding: 4px 0; color: var(--fg-dim); }
+  .audit .ln:last-child { border-bottom: none; }
+  .audit .ln b { color: var(--fg); font-weight: normal; }
+  .audit .ln .tm { color: var(--muted); }
+  .role-list { font-size: 11px; line-height: 1.8; }
+  .role-list .r { display: flex; justify-content: space-between; gap: 8px; }
+  .role-list .r .x { color: var(--fg-dim); font-size: 10px; }
+  .role-list .r.no { color: var(--fg-faint); }
+  .role-list .r.no .x { color: var(--err); }
+  .form-actions { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+  .form-actions .sp { flex: 1; }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <header class="term-header">
+    <div>
+      <div class="sys-title">CARAVAN // DISPATCH TERMINAL</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · 2281-10-23 14:07</div>
+    </div>
+    <div class="hdr-center">
+      <span class="mode">АДМИН · ПОЛЬЗОВАТЕЛИ</span>
+      <div class="mt4">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    </div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY · tnt_0041</div>
+      <div class="user">USER :: DISP_ALICE.HAWTHORNE · CLR-3</div>
+    </div>
+  </header>
+
+  <div class="term-main">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li>РЕЕСТР РЕЙСОВ</li>
+        <li>НОВАЯ ЗАЯВКА</li>
+        <li>ОЦЕНКА РИСКА</li>
+        <li>ИНЦИДЕНТЫ</li>
+        <li>БРИГАДЫ</li>
+        <li>ОТЧЁТЫ</li>
+        <li class="active">АДМИН</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:12:43<br>NODE: MCCARRAN-04<br>ОРГАНИЗАЦИЯ: tnt_0041<br>ПОЛЬЗОВАТЕЛЕЙ: 6</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="toolbar">
+        <button class="btn-primary">[ + НОВЫЙ ПОЛЬЗОВАТЕЛЬ ]</button>
+        <span class="inline-note">форма ниже · шаг 2</span>
+        <span class="sp"></span>
+        <input class="input" value="" placeholder="поиск по ФИО или логину">
+        <select class="select">
+          <option>РОЛЬ: все</option>
+          <option>Диспетчер караванов</option>
+          <option>Караван-мастер</option>
+          <option>Кладовщик</option>
+          <option>Капитан охраны</option>
+          <option>Полевой медик</option>
+        </select>
+        <select class="select">
+          <option>СТАТУС: все</option>
+          <option>Активен</option>
+          <option>Заблокирован</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">▰ ПОЛЬЗОВАТЕЛИ ОРГАНИЗАЦИИ<span class="tag">CRIMSON CARAVAN COMPANY · tnt_0041 · ЧУЖИЕ ОРГАНИЗАЦИИ НЕ ПОКАЗЫВАЮТСЯ</span></div>
+        <div class="panel-body">
+          <div class="table-wrap">
+            <table class="table usr">
+              <thead>
+                <tr>
+                  <th class="c-fio">ФИО</th>
+                  <th class="c-log">ЛОГИН</th>
+                  <th class="c-role">РОЛЬ</th>
+                  <th class="c-st">СТАТУС</th>
+                  <th class="c-rate num">СТАВКА, КРЫШ./СУТ</th>
+                  <th class="c-last">ПОСЛ. ВХОД</th>
+                  <th class="c-act">ДЕЙСТВИЕ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Хоторн А. <span class="you">· вы</span></td>
+                  <td>disp.alice.hawthorne</td><td>Диспетчер караванов</td>
+                  <td><span class="badge ok">АКТИВЕН</span></td><td class="num k">штатная</td><td class="k">14:07</td>
+                  <td class="c-act"><button class="btn btn-sm">[ РОЛЬ ]</button></td>
+                </tr>
+                <tr>
+                  <td>Кассиди Дж.</td><td>j.cassidy</td><td>Караван-мастер</td>
+                  <td><span class="badge ok">АКТИВЕН</span></td><td class="num">180</td><td class="k">11:52</td>
+                  <td class="c-act"><button class="btn btn-sm">[ РОЛЬ ]</button></td>
+                </tr>
+                <tr>
+                  <td>Сэнт-Джеймс А.</td><td>a.saint-james</td><td>Капитан охраны</td>
+                  <td><span class="badge ok">АКТИВЕН</span></td><td class="num">140</td><td class="k">10-22 18:30</td>
+                  <td class="c-act"><button class="btn btn-sm">[ РОЛЬ ]</button></td>
+                </tr>
+                <tr>
+                  <td>Гаррет М.</td><td>m.garrett</td><td>Полевой медик</td>
+                  <td><span class="badge ok">АКТИВЕН</span></td><td class="num">120</td><td class="k">09:21</td>
+                  <td class="c-act"><button class="btn btn-sm">[ РОЛЬ ]</button></td>
+                </tr>
+                <tr>
+                  <td>Васкес Л.</td><td>l.vasquez</td><td>Кладовщик</td>
+                  <td><span class="badge ok">АКТИВЕН</span></td><td class="num">90</td><td class="k">10-21 16:04</td>
+                  <td class="c-act"><button class="btn btn-sm">[ РОЛЬ ]</button></td>
+                </tr>
+                <tr class="dimmed">
+                  <td>Райт Б.</td><td>b.wright</td><td>Кладовщик</td>
+                  <td><span class="badge muted">ЗАБЛОКИРОВАН</span></td><td class="num">90</td><td class="k">—</td>
+                  <td class="c-act"><button class="btn btn-sm disabled">[ РОЛЬ ]</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mini-list mt8">ВСЕГО В ОРГАНИЗАЦИИ: <b>6</b> · АКТИВНЫХ <b>5</b> · ЗАБЛОКИРОВАН <b>1</b> · ДИСПЕТЧЕРОВ <b>1</b></div>
+        </div>
+      </div>
+
+      <div class="panel mt12">
+        <div class="panel-title">▰ НОВАЯ УЧЁТНАЯ ЗАПИСЬ<span class="tag">ШАГ 2 · ВВОД ДАННЫХ · ШАГ 4 · ПОДТВЕРЖДЕНИЕ</span></div>
+        <div class="panel-body">
+          <div class="form-grid">
+            <div class="field">
+              <label>ФИО</label>
+              <input class="input" value="Нуньес Рауль Х.">
+              <div class="hint">как в путевых документах</div>
+            </div>
+            <div class="field">
+              <label>ЛОГИН</label>
+              <input class="input" value="r.nunez">
+              <div class="hint">латиница, точка-разделитель · проверка уникальности в tnt_0041</div>
+            </div>
+            <div class="field">
+              <label>НАЧАЛЬНЫЙ ПАРОЛЬ</label>
+              <div class="pw-row">
+                <input class="input" value="••••••••••••">
+                <button class="btn btn-sm">[ СГЕНЕРИРОВАТЬ ]</button>
+              </div>
+              <div class="hint">12 символов · выдаётся пользователю лично, в аудит не попадает</div>
+            </div>
+            <div class="field">
+              <label>РОЛЬ</label>
+              <select class="select">
+                <option>Кладовщик</option>
+                <option>Диспетчер караванов</option>
+                <option>Караван-мастер</option>
+                <option>Капитан охраны</option>
+                <option>Полевой медик</option>
+              </select>
+              <div class="hint">роль определяет полномочия после входа</div>
+            </div>
+            <div class="field">
+              <label>ОРГАНИЗАЦИЯ</label>
+              <input class="input disabled" value="Crimson Caravan Company · tnt_0041" disabled>
+              <div class="hint">поле не редактируется — запись создаётся в вашей организации</div>
+            </div>
+            <div class="field">
+              <label>ДОПОЛНИТЕЛЬНО</label>
+              <label class="chk checked"><span class="box-i"></span>Потребовать смену пароля при первом входе</label>
+              <label class="chk"><span class="box-i"></span>Выдать доступ к Pip-Boy PWA</label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <span class="inline-note">обязательные поля заполнены · логин свободен · роль в пределах полномочий</span>
+            <span class="sp"></span>
+            <button class="btn">[ ОТМЕНА ]</button>
+            <button class="btn-primary">[ СОЗДАТЬ УЧЁТНУЮ ЗАПИСЬ ]</button>
+          </div>
+        </div>
+        <div class="panel-foot">◆ ПОСЛЕ СОЗДАНИЯ ЗАПИСЬ ПОЯВИТСЯ В СПИСКЕ ВЫШЕ СО СТАТУСОМ «АКТИВЕН»</div>
+      </div>
+
+      <div class="panel mt12">
+        <div class="panel-title">▰ СОСТОЯНИЯ ФОРМЫ СОЗДАНИЯ<span class="tag">ПРОВЕРКИ ШАГА 3 · ПОТОКИ 3а · 3б</span></div>
+        <div class="panel-body">
+          <div class="st-grid">
+
+            <div class="box e">
+              <span class="st-h"><span class="n">ШАГ 3 ·</span> ПОЛЕ НЕ ЗАПОЛНЕНО</span>
+              <div class="field">
+                <label>ФИО</label>
+                <input class="input error" value="">
+                <div class="hint err">обязательное поле</div>
+              </div>
+              <div class="mt8"><button class="btn-primary disabled">[ СОЗДАТЬ ]</button></div>
+            </div>
+
+            <div class="box e">
+              <span class="st-h"><span class="n">3а ·</span> ЛОГИН ЗАНЯТ</span>
+              <div class="field">
+                <label>ЛОГИН</label>
+                <input class="input error" value="m.garrett">
+                <div class="hint err">Логин уже занят</div>
+              </div>
+              <div class="mt8"><span class="inline-note">возврат к шагу 2</span></div>
+            </div>
+
+            <div class="box e">
+              <span class="st-h"><span class="n">3б ·</span> РОЛЬ ВНЕ ПОЛНОМОЧИЙ</span>
+              <div class="alert error">
+                <div class="left"><span class="sym">⛔</span><div>РОЛЬ НЕДОСТУПНА ДИСПЕТЧЕРУ<span class="sub">создание отклонено · пользователь не создан</span></div></div>
+              </div>
+              <div class="mt8"><span class="badge err">ОТКЛОНЕНО</span>
+                <span class="inline-note">Суперпользователь платформы</span></div>
+            </div>
+
+            <div class="box s">
+              <span class="st-h"><span class="n">ШАГИ 5–6 ·</span> УСПЕХ</span>
+              <div class="alert success">
+                <div class="left"><span class="sym">✓</span><div>УЧЁТНАЯ ЗАПИСЬ r.nunez СОЗДАНА<span class="sub">строка добавлена в список · аудит записан</span></div></div>
+              </div>
+              <div class="mt8"><span class="badge ok">АКТИВЕН</span>
+                <span class="inline-note">Нуньес Рауль Х. · Кладовщик</span></div>
+            </div>
+
+          </div>
+          <div class="alert error mt12">
+            <div class="left"><span class="sym">✖</span><div>НЕ УДАЛОСЬ СОЗДАТЬ УЧЁТНУЮ ЗАПИСЬ<span class="sub">сбой записи на узле MCCARRAN-04 в 14:06:58 · данные формы сохранены</span></div></div>
+            <span class="act">[ ПОВТОРИТЬ ]</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="term-aside">
+
+      <div class="sec-title">ПОЛНОМОЧИЯ ДИСПЕТЧЕРА<span class="dim">CLR-3</span></div>
+      <div class="role-list">
+        <div class="r">Диспетчер караванов<span class="x">доступна</span></div>
+        <div class="r">Караван-мастер<span class="x">доступна</span></div>
+        <div class="r">Кладовщик<span class="x">доступна</span></div>
+        <div class="r">Капитан охраны<span class="x">доступна</span></div>
+        <div class="r">Полевой медик<span class="x">доступна</span></div>
+        <div class="r no">Суперпользователь<span class="x">вне полномочий</span></div>
+      </div>
+      <div class="mini-list mt8">ОРГАНИЗАЦИЯ ЗАДАНА КОНТЕКСТОМ СЕССИИ: <b>tnt_0041</b>. СОЗДАНИЕ ЗАПИСЕЙ В ДРУГИХ ОРГАНИЗАЦИЯХ ОТКЛОНЯЕТСЯ (3б).</div>
+
+      <div class="sec-title mt12">ПРОВЕРКИ ПЕРЕД СОЗДАНИЕМ<span class="dim">ШАГ 3</span></div>
+      <div class="kv">
+        <div class="kv-row"><span class="k">ОБЯЗАТЕЛЬНЫЕ ПОЛЯ</span><span class="v ok-t">✓ заполнены</span></div>
+        <div class="kv-row"><span class="k">ЛОГИН СВОБОДЕН</span><span class="v ok-t">✓ r.nunez</span></div>
+        <div class="kv-row"><span class="k">РОЛЬ ДОПУСТИМА</span><span class="v ok-t">✓ Кладовщик</span></div>
+        <div class="kv-row"><span class="k">ОРГАНИЗАЦИЯ</span><span class="v ok-t">✓ tnt_0041</span></div>
+      </div>
+
+      <div class="sec-title mt12">ЖУРНАЛ АУДИТА<span class="dim">ПОСЛЕДНЕЕ</span></div>
+      <div class="box">
+        <div class="audit">
+          <div class="ln"><span class="tm">14:07 ·</span> ОТКРЫТА ФОРМА СОЗДАНИЯ<br><b>disp.alice.hawthorne</b></div>
+          <div class="ln"><span class="tm">10:12 ·</span> ЗАБЛОКИРОВАН <b>b.wright</b><br>автор <b>disp.alice.hawthorne</b></div>
+          <div class="ln"><span class="tm">10-22 ·</span> СОЗДАН ПОЛЬЗОВАТЕЛЬ <b>m.garrett</b><br>роль Полевой медик</div>
+          <div class="ln"><span class="tm">10-21 ·</span> СОЗДАН ПОЛЬЗОВАТЕЛЬ <b>l.vasquez</b><br>роль Кладовщик · автор <b>disp.alice.hawthorne</b></div>
+        </div>
+      </div>
+      <div class="mini-list mt8">В АУДИТ ПИШУТСЯ <b>АВТОР, ВРЕМЯ И СОДЕРЖАНИЕ</b> ДЕЙСТВИЯ. ПАРОЛЬ НЕ РАСКРЫВАЕТСЯ.</div>
+
+    </aside>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> READY · АДМИН · ПОЛЬЗОВАТЕЛИ ОРГАНИЗАЦИИ · F1 HELP</div>
+    <div class="foot-buttons">
+      <button class="btn">[ ОТМЕНА ]</button>
+      <button class="btn-primary">[ СОЗДАТЬ УЧЁТНУЮ ЗАПИСЬ ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

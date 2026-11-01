@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- render: 1440x1700 -->
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-34 · Управление подписками организаций</title>
+<style>
+  /* только специфика этого экрана */
+  :root { --font-mono: Consolas, "Courier New", monospace;
+          --font-ui:   Consolas, "Courier New", monospace; }
+
+  /* каркас растёт под содержимое: внутренних скроллов нет */
+  .terminal { grid-template-rows: 54px auto 36px; min-height: 0; }
+  .term-main, .term-content, .term-aside, .term-nav { min-height: auto; overflow: visible; }
+  .table-wrap { overflow: visible; }
+
+  /* таблица подписок */
+  table.sub { font-size: 10px; table-layout: fixed; width: 100%; }
+  table.sub th, table.sub td { padding: 5px 6px; }
+  table.sub .c-tnt  { width: 72px; }
+  table.sub .c-org  { width: auto; }
+  table.sub .c-lvl  { width: 92px; }
+  table.sub .c-fee  { width: 64px; }
+  table.sub .c-till { width: 102px; }
+  table.sub .c-usr  { width: 50px; }
+  table.sub .c-state{ width: 108px; }
+  table.sub .c-chg  { width: 98px; }
+  table.sub .c-act  { width: 78px; }
+  table.sub .btn-sm { font-size: 9px; padding: 2px 5px; }
+  table.sub th { white-space: normal; line-height: 1.25; vertical-align: bottom; }
+  table.sub td { vertical-align: top; }
+  table.sub tfoot td { border-top: 1px solid var(--fg); border-bottom: none; color: var(--fg-bright); letter-spacing: 1px; }
+  table.sub tfoot tr { background: rgba(var(--accent-rgb), 0.07); }
+  .org-main { color: var(--fg-bright); }
+  .sub2 { font-size: 10px; color: var(--fg-dim); line-height: 1.35; }
+  .sub2 b { color: var(--fg); font-weight: normal; }
+  .st-txt { font-size: 11px; letter-spacing: 1px; }
+  .st-txt.blocked { color: var(--err); }
+  .st-txt.active  { color: var(--ok); }
+  table.sub .btn-sm { white-space: nowrap; }
+
+  /* действия над подпиской */
+  .act-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+  .act-form .full { grid-column: 1 / -1; }
+  .delta { display: grid; grid-template-columns: 1fr 24px 1fr; align-items: center; gap: 8px; }
+  .delta .cellx { border: 1px solid var(--fg-faint); background: var(--bg-deep); padding: 6px 10px; }
+  .delta .cellx.new { border-color: var(--fg); }
+  .delta .cap { font-size: 9px; letter-spacing: 2px; color: var(--fg-dim); display: block; }
+  .delta .big { font-size: 15px; letter-spacing: 1px; color: var(--fg-bright); }
+  .delta .arr { text-align: center; color: var(--fg); font-size: 16px; }
+
+  /* правая колонка */
+  .term-aside .box { font-size: 11px; line-height: 1.5; }
+  .term-aside .kv .k { font-size: 10px; }
+  .note { font-size: 10px; color: var(--fg-dim); line-height: 1.5; }
+  /* .right в robco.css — утилита «выровнять вправо»; абзацы в правой колонке читаются слева */
+  .panel-body.split > .right .note,
+  .panel-body.split > .right .delta { text-align: left; }
+  .audit { font-size: 10px; line-height: 1.5; }
+  .audit .ln { padding: 3px 0; border-bottom: 1px dashed var(--fg-faint); }
+  .audit .ln:last-child { border-bottom: none; }
+  .audit .ev { color: var(--fg-bright); }
+
+  /* витрина состояний экрана */
+  .st-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .st-row .modal { width: 100%; }
+  .tiles.four .tn { font-size: 11px; }
+  .tiles.four .ts { font-size: 9px; }
+  .st-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .st-grid .box { font-size: 10px; line-height: 1.5; min-height: 92px; }
+  .st-grid .st-h { font-size: 10px; letter-spacing: 1px; color: var(--fg); display: block; margin-bottom: 4px; }
+  .st-grid .box.e { border-color: var(--err); }
+  .st-grid .box.e .st-h { color: var(--err); }
+  .st-grid .btn, .st-grid .btn-primary { font-size: 10px; padding: 3px 8px; }
+  .modal-overlay.inline { padding: 0; background: none; }
+</style>
+</head>
+<body class="theme-amber">
+<div class="terminal">
+
+  <header class="term-header">
+    <div>
+      <div class="sys-title">CARAVAN // PLATFORM ADMIN</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · 2281-10-23 14:07</div>
+    </div>
+    <div class="hdr-center">
+      <span class="mode">SUBSCRIPTIONS</span>
+      <div class="mt4">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    </div>
+    <div class="hdr-right">
+      <div class="org">ORG :: VAULT-TEC PLATFORM OPERATIONS</div>
+      <div class="user">USER :: SU.VAULT-TEC.ADMIN · PLATFORM OPERATOR (SU) · CLR-9</div>
+    </div>
+  </header>
+
+  <div class="term-main">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- SU CONSOLE --</div>
+      <ul>
+        <li>РЕЕСТР ОРГАНИЗАЦИЙ</li>
+        <li>НОВАЯ ОРГАНИЗАЦИЯ</li>
+        <li class="active">ПОДПИСКИ</li>
+        <li>ПОЛЬЗОВАТЕЛИ</li>
+        <li>ЖУРНАЛ АУДИТА</li>
+        <li>УЗЛЫ И КАНАЛЫ</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:04:19<br>NODE: MCCARRAN-04<br>РЕЖИМ: SUPERUSER<br>ОРГАНИЗАЦИЙ: 4</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="alert info">
+        <div class="left">
+          <span class="sym">▸</span>
+          <div>АВТОМАТИЧЕСКАЯ ОБРАБОТКА ИСТЕЧЕНИЯ ВЫПОЛНЕНА<span class="sub">2281-10-21 02:00 система зафиксировала истечение подписки tnt_0043, применила режим доступа по политике лицензирования и записала событие в аудит (альт. 1б) · ручное изменение не требовалось</span></div>
+        </div>
+        <span class="act">[ ЖУРНАЛ АУДИТА ]</span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table sub">
+          <caption>ПОДПИСКИ ОРГАНИЗАЦИЙ ПЛАТФОРМЫ · СОСТОЯНИЕ НА 2281-10-23 14:07</caption>
+          <thead>
+            <tr>
+              <th class="c-tnt">TENANT</th>
+              <th class="c-org">ОРГАНИЗАЦИЯ</th>
+              <th class="c-lvl">УРОВЕНЬ</th>
+              <th class="c-fee num">ПЛАТА/МЕС</th>
+              <th class="c-till">СРОК ДЕЙСТВИЯ</th>
+              <th class="c-usr num">ПОЛЬЗ.</th>
+              <th class="c-state">СОСТОЯНИЕ</th>
+              <th class="c-chg">ИЗМЕНЕНИЕ</th>
+              <th class="c-act">ДЕЙСТВИЯ</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr class="selected">
+              <td>tnt_0041</td>
+              <td><div class="org-main">Crimson Caravan Company</div><div class="sub2">Mojave · NV · Freeside North Gate</div></td>
+              <td>STANDARD<div class="sub2">до 25 пользователей</div></td>
+              <td class="num">600</td>
+              <td>2281-11-23<div class="sub2">осталось 31 дн.</div></td>
+              <td class="num">12</td>
+              <td><span class="st-txt active">ACTIVE</span><div class="sub2">доступ полный</div></td>
+              <td class="sub2">2281-10-23 13:52<br><b>SU.ADMIN</b></td>
+              <td><button class="btn btn-sm">[ ОТКРЫТА ]</button></td>
+            </tr>
+
+            <tr>
+              <td>tnt_0042</td>
+              <td><div class="org-main">Gun Runners</div><div class="sub2">Mojave · NV · Outer Vegas</div></td>
+              <td>PRO<div class="sub2">без ограничения</div></td>
+              <td class="num">1&nbsp;500</td>
+              <td>2282-01-31<div class="sub2">осталось 100 дн.</div></td>
+              <td class="num">34</td>
+              <td><span class="st-txt active">ACTIVE</span><div class="sub2">доступ полный</div></td>
+              <td class="sub2">2281-09-30 09:14<br><b>SU.ADMIN</b></td>
+              <td><button class="btn btn-sm">[ ОТКРЫТЬ ]</button></td>
+            </tr>
+
+            <tr>
+              <td>tnt_0043</td>
+              <td><div class="org-main">Happy Trails Caravan Co.</div><div class="sub2">Utah · Hopeville route</div></td>
+              <td>BASIC<div class="sub2">до 5 пользователей</div></td>
+              <td class="num">200</td>
+              <td class="err-t">2281-10-21<div class="sub2">срок истёк</div></td>
+              <td class="num">4</td>
+              <td><span class="st-txt blocked">BLOCKED</span><div class="sub2">доступ приостановлен</div></td>
+              <td class="sub2">2281-10-21 02:00<br><b>СИСТЕМА</b><br>истечение срока</td>
+              <td><button class="btn btn-sm">[ ОТКРЫТЬ ]</button></td>
+            </tr>
+
+            <tr>
+              <td>tnt_0044</td>
+              <td><div class="org-main">Mojave Express</div><div class="sub2">Mojave · NV · Primm · Vikki &amp; Vance</div></td>
+              <td>BASIC<div class="sub2">до 5 пользователей</div></td>
+              <td class="num">200</td>
+              <td>2281-11-23<div class="sub2">осталось 31 дн.</div></td>
+              <td class="num warn-t">0</td>
+              <td><span class="st-txt active">ACTIVE</span><div class="sub2 warn-t">диспетчер не назначен</div></td>
+              <td class="sub2">2281-10-23 13:52<br><b>SU.ADMIN</b><br>организация создана</td>
+              <td><button class="btn btn-sm">[ ОТКРЫТЬ ]</button></td>
+            </tr>
+
+          </tbody>
+          <tfoot>
+            <tr>
+              <td class="k">ИТОГО</td>
+              <td>4 ОРГАНИЗАЦИИ · 3 ACTIVE · 1 BLOCKED</td>
+              <td>BASIC 2 · STANDARD 1 · PRO 1</td>
+              <td class="num">2&nbsp;500</td>
+              <td>продление 2281-11-23</td>
+              <td class="num">50</td>
+              <td colspan="3">сбор с активных подписок: 2&nbsp;300 крышек</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">▰ ПОДПИСКА · tnt_0041 CRIMSON CARAVAN COMPANY<span class="tag">ШАГИ 2–4 ПОТОКА</span></div>
+        <div class="panel-body split">
+          <div class="left">
+
+            <div class="sec-title">ТЕКУЩЕЕ СОСТОЯНИЕ<span class="dim">ШАГ 2</span></div>
+            <div class="kv">
+              <div class="kv-row"><span class="k">УРОВЕНЬ</span><span class="v">STANDARD · 600 крышек/мес</span></div>
+              <div class="kv-row"><span class="k">СРОК ДЕЙСТВИЯ</span><span class="v">2281-10-23 … 2281-11-23 (31 день)</span></div>
+              <div class="kv-row"><span class="k">СОСТОЯНИЕ</span><span class="v">ACTIVE · доступ полный</span></div>
+              <div class="kv-row"><span class="k">АВТОПРОДЛЕНИЕ</span><span class="v">ВКЛЮЧЕНО · списание 2281-11-23</span></div>
+              <div class="kv-row"><span class="k">ПОЛЬЗОВАТЕЛЕЙ</span><span class="v">12 из 25</span></div>
+            </div>
+
+            <div class="sec-title">ДЕЙСТВИЕ НАД ПОДПИСКОЙ<span class="dim">ШАГ 3</span></div>
+            <div class="tiles four">
+              <div class="tile selected"><span class="ic">↑</span><span class="tn">СМЕНИТЬ УРОВЕНЬ</span><span class="ts">STANDARD → PRO</span></div>
+              <div class="tile"><span class="ic">⟳</span><span class="tn">ПРОДЛИТЬ</span><span class="ts">+1 / +3 / +12 мес</span></div>
+              <div class="tile"><span class="ic">✕</span><span class="tn">ЗАБЛОКИРОВАТЬ</span><span class="ts">с указанием причины</span></div>
+              <div class="tile disabled"><span class="ic">✓</span><span class="tn">АКТИВИРОВАТЬ</span><span class="ts">подписка уже активна</span></div>
+            </div>
+
+            <div class="sec-title">ПАРАМЕТРЫ ДЕЙСТВИЯ<span class="dim">ШАГ 4</span></div>
+            <div class="act-form">
+              <div class="field">
+                <label>НОВЫЙ УРОВЕНЬ</label>
+                <select class="select"><option>PRO — 1 500 крышек/мес</option></select>
+                <div class="hint">BASIC 200 · STANDARD 600 · PRO 1 500</div>
+              </div>
+              <div class="field">
+                <label>ДАТА ПРИМЕНЕНИЯ</label>
+                <input class="input" value="2281-10-23">
+                <div class="hint">[YYYY-MM-DD] · не раньше сегодняшней даты</div>
+              </div>
+              <div class="field">
+                <label>ДОПЛАТА ЗА ОСТАТОК ПЕРИОДА</label>
+                <div class="suffixed">
+                  <input class="input disabled" value="930" disabled>
+                  <span class="suffix">CAPS ◉</span>
+                </div>
+                <div class="hint">перерасчёт за 31 день до 2281-11-23</div>
+              </div>
+              <div class="field">
+                <label>СРОК ДЕЙСТВИЯ ПОСЛЕ ИЗМЕНЕНИЯ</label>
+                <input class="input disabled" value="2281-11-23" disabled>
+                <div class="hint">смена уровня не сдвигает дату продления</div>
+              </div>
+              <div class="field full">
+                <label>ПРИЧИНА / КОММЕНТАРИЙ ДЛЯ АУДИТА</label>
+                <textarea class="textarea">Заявка организации №114 от 2281-10-22: рост числа рейсов, требуется снятие лимита пользователей.</textarea>
+                <div class="hint">попадёт в запись журнала аудита вместе с прежним и новым уровнем</div>
+              </div>
+              <div class="field full">
+                <label class="chk checked"><span class="box-i"></span>Записать изменение в журнал аудита (обязательно)</label>
+                <label class="chk checked"><span class="box-i"></span>Применить права доступа организации сразу после сохранения</label>
+                <label class="chk"><span class="box-i"></span>Уведомить диспетчера организации disp.alice.hawthorne</label>
+              </div>
+            </div>
+
+          </div>
+          <div class="right">
+
+            <div class="sec-title">ЧТО ИЗМЕНИТСЯ<span class="dim">ШАГ 5</span></div>
+            <div class="delta">
+              <div class="cellx"><span class="cap">БЫЛО</span><span class="big">STANDARD</span><div class="sub2">600 крышек/мес · 25 польз.</div></div>
+              <div class="arr">⟶</div>
+              <div class="cellx new"><span class="cap">СТАНЕТ</span><span class="big">PRO</span><div class="sub2">1 500 крышек/мес · без лимита</div></div>
+            </div>
+
+            <div class="box accent">
+              <div class="kv">
+                <div class="kv-row"><span class="k">СОСТОЯНИЕ</span><span class="v">ACTIVE (без изменений)</span></div>
+                <div class="kv-row"><span class="k">СРОК</span><span class="v">до 2281-11-23</span></div>
+                <div class="kv-row"><span class="k">СПИСАНИЕ СЕЙЧАС</span><span class="v">930 крышек</span></div>
+                <div class="kv-row"><span class="k">СО СЛЕДУЮЩЕГО</span><span class="v">1 500 крышек/мес</span></div>
+                <div class="kv-row"><span class="k">АУДИТ</span><span class="v">SUB.LEVEL.CHANGE</span></div>
+              </div>
+            </div>
+
+            <div class="alert warn">
+              <div class="left">
+                <span class="sym">⚠</span>
+                <div>ДАННЫЕ ОРГАНИЗАЦИИ НЕ ЗАТРАГИВАЮТСЯ<span class="sub">изменение подписки меняет только уровень, срок и права доступа</span></div>
+              </div>
+            </div>
+
+            <div class="note">Отмена действия (альт. 4а) завершает сценарий с прежней подпиской STANDARD, записи в аудит не создаётся.</div>
+
+            <div class="sec-title">ПРАВИЛА ДЕЙСТВИЙ</div>
+            <div class="box">
+              <div class="note">
+                ПРОДЛИТЬ — сдвигает срок на +1 / +3 / +12 мес, уровень не меняется;<br>
+                СМЕНИТЬ УРОВЕНЬ — BASIC ⇄ STANDARD ⇄ PRO с перерасчётом за остаток периода;<br>
+                ЗАБЛОКИРОВАТЬ — требует причины, пользователи теряют доступ (ACTIVE → BLOCKED);<br>
+                РАЗБЛОКИРОВАТЬ / АКТИВИРОВАТЬ — возвращает доступ (BLOCKED → ACTIVE);<br>
+                любое действие фиксируется в журнале аудита.
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="panel-foot"><span>◆ ПАРАМЕТРЫ ПРОВЕРЕНЫ 14:07 · ОШИБОК НЕТ</span><span>ПРИМЕНЕНИЕ ДОСТУПА — СРАЗУ ПОСЛЕ СОХРАНЕНИЯ (ШАГ 6)</span></div>
+      </div>
+
+      <div class="states-label">СОСТОЯНИЯ ЭКРАНА, НЕ СОВМЕСТИМЫЕ С ТЕКУЩИМ</div>
+      <div class="st-row">
+
+        <div class="modal-overlay inline">
+          <div class="modal danger">
+            <div class="modal-head">▰ ПОДТВЕРЖДЕНИЕ БЛОКИРОВКИ ПОДПИСКИ<span class="x">[X]</span></div>
+            <div class="modal-body">
+              <div>Заблокировать подписку <span class="bright">tnt_0043 · Happy Trails Caravan Co.</span> (BASIC, 200 крышек/мес)? Пользователи организации (4) потеряют доступ к системе; данные организации и рейсы сохраняются.</div>
+              <div class="field">
+                <label>ПРИЧИНА БЛОКИРОВКИ</label>
+                <select class="select"><option>Истёк срок подписки, оплата не поступила</option></select>
+                <div class="hint">причина обязательна и попадает в журнал аудита</div>
+              </div>
+              <div class="kv">
+                <div class="kv-row"><span class="k">СОСТОЯНИЕ</span><span class="v err">ACTIVE → BLOCKED</span></div>
+                <div class="kv-row"><span class="k">АУДИТ</span><span class="v">SUB.BLOCK · SU.VAULT-TEC.ADMIN · 2281-10-23 14:07</span></div>
+              </div>
+            </div>
+            <div class="modal-foot">
+              <button class="btn">[ ОТМЕНА ]</button>
+              <button class="btn-danger">[ ЗАБЛОКИРОВАТЬ ]</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="st-grid">
+          <div class="box">
+            <span class="st-h">⟳ ЗАГРУЗКА</span>
+            <span class="dim">Загрузка подписок организаций... таблица и панель подписки не показываются до получения полных данных.</span>
+          </div>
+          <div class="box">
+            <span class="st-h">ПУСТОЙ РЕЕСТР</span>
+            <span class="dim">организаций на платформе нет — управлять нечем.</span>
+            <div class="mt4"><button class="btn-primary">[ СОЗДАТЬ ОРГАНИЗАЦИЮ (UC-32) ]</button></div>
+          </div>
+          <div class="box e">
+            <span class="st-h">ОШИБКА СЕРВЕРА</span>
+            <span class="dim">подписки не получены, частичный список не показывается.</span>
+            <div class="mt4"><button class="btn">[ ПОВТОРИТЬ ЗАГРУЗКУ ]</button></div>
+          </div>
+          <div class="box e">
+            <span class="st-h">ПАРАМЕТРЫ НЕКОРРЕКТНЫ (АЛЬТ. 5а)</span>
+            <span class="dim">дата применения раньше текущей — <span class="err-t">укажите дату не раньше 2281-10-23</span>; подписка не сохранена, возврат к шагу 4.</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <aside class="term-aside">
+
+      <div class="sec-title">УРОВНИ ПОДПИСКИ</div>
+      <div class="box">
+        <div class="kv">
+          <div class="kv-row"><span class="k">BASIC</span><span class="v">200 крышек/мес</span></div>
+          <div class="kv-row"><span class="k">STANDARD</span><span class="v">600 крышек/мес</span></div>
+          <div class="kv-row"><span class="k">PRO</span><span class="v">1 500 крышек/мес</span></div>
+        </div>
+        <div class="note mt4">уровень определяет лимит пользователей и набор доступных отчётов</div>
+      </div>
+
+      <div class="sec-title">СОСТОЯНИЯ ПОДПИСКИ</div>
+      <div class="box">
+        <div class="kv">
+          <div class="kv-row"><span class="k">ACTIVE</span><span class="v">доступ полный</span></div>
+          <div class="kv-row"><span class="k">BLOCKED</span><span class="v err">доступ приостановлен</span></div>
+        </div>
+        <div class="note mt4">истечение срока обрабатывается автоматически: режим доступа применяется по политике лицензирования, данные организации не удаляются</div>
+      </div>
+
+      <div class="sec-title">ЖУРНАЛ АУДИТА<span class="dim">ПОСЛЕДНИЕ</span></div>
+      <div class="audit">
+        <div class="ln">2281-10-23 13:52 · <span class="ev">SUB.ACTIVATE</span><br><span class="dim">tnt_0044 · SU · BASIC, организация создана</span></div>
+        <div class="ln">2281-10-21 02:00 · <span class="ev">SUB.EXPIRE</span><br><span class="dim">tnt_0043 · СИСТЕМА · ACTIVE → BLOCKED</span></div>
+        <div class="ln">2281-10-18 11:40 · <span class="ev">SUB.RENEW</span><br><span class="dim">tnt_0042 · SU · PRO, +12 мес</span></div>
+        <div class="ln">2281-09-30 09:14 · <span class="ev">SUB.LEVEL.CHANGE</span><br><span class="dim">tnt_0042 · SU · STANDARD → PRO</span></div>
+        <div class="ln">2281-09-12 16:02 · <span class="ev">SUB.UNBLOCK</span><br><span class="dim">tnt_0043 · SU · оплата получена</span></div>
+      </div>
+
+      <div class="ascii-sep">────────────────────────────</div>
+      <div class="note">СБОР ЗА 2281-10: 2 300 КРЫШЕК<br>ПЛАНОВЫХ ПРОДЛЕНИЙ В НОЯБРЕ: 2</div>
+
+    </aside>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> READY · ВЫБРАНА tnt_0041 · ДЕЙСТВИЕ: СМЕНА УРОВНЯ STANDARD → PRO · F1 HELP</div>
+    <div class="foot-buttons">
+      <button class="btn">[ ОТМЕНИТЬ ДЕЙСТВИЕ ]</button>
+      <button class="btn-danger">[ ЗАБЛОКИРОВАТЬ ]</button>
+      <button class="btn-primary">[ СОХРАНИТЬ ПОДПИСКУ ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

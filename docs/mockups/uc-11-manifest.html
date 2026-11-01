@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!-- render: 1440x820 -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>UC-11 // ГРУЗ-МАНИФЕСТ РЕЙСА</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/robco.css">
+<style>
+  /* только раскладка этого экрана */
+  .terminal { grid-template-rows: 54px auto 36px; }
+  .term-content, .term-aside { overflow: visible; }
+  .mf-head { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  table.mf td, table.mf th { padding-top: 4px; padding-bottom: 4px; }
+  table.mf .c-no   { width: 34px; }
+  table.mf .c-qty  { width: 96px; }
+  table.mf .c-unit { width: 76px; }
+  table.mf .c-pack { width: 236px; }
+  table.mf .c-pl   { width: 64px; }
+  table.mf .c-act  { width: 78px; text-align: center; }
+  table.mf tr.row-err td { background: rgba(255,74,74,0.10); }
+  table.mf tr.row-err td:first-child { box-shadow: inset 3px 0 0 var(--err); }
+  table.mf .inline-in {
+    display: inline-block; min-width: 54px; padding: 1px 5px; text-align: right;
+    border: 1px solid var(--fg-faint); background: var(--bg-deep); color: var(--fg);
+  }
+  table.mf .inline-in.error { border-color: var(--err); color: var(--err); }
+  .seal-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .seal {
+    border: 1px solid var(--fg-faint); background: var(--bg-deep);
+    padding: 2px 6px; font-size: 11px; letter-spacing: 1px; color: var(--fg);
+  }
+  .seal .x { color: var(--fg-faint); margin-left: 6px; }
+  .seal-add { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+  .seal-add .input { width: 210px; }
+  .note { font-size: 10px; letter-spacing: 1px; }
+  .empty-box { text-align: center; padding: 12px 8px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <header class="term-header">
+    <div class="hdr-left">
+      <div class="sys-title">CARAVAN // CARGO TERMINAL</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · WAREHOUSE / MANIFEST</div>
+    </div>
+    <div class="hdr-center">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY · tnt_0041</div>
+      <div class="user">USER :: STOR_H.BRANDT · CLEARANCE 2</div>
+    </div>
+  </header>
+
+  <div class="term-main">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li>РЕЕСТР РЕЙСОВ</li>
+        <li>КАРТОЧКА ЗАЯВКИ</li>
+        <li class="active">МАНИФЕСТ</li>
+        <li>ПРИПАСЫ</li>
+        <li>ПЛОМБЫ И ОПИСИ</li>
+        <li>ЖУРНАЛ АУДИТА</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:21:08<br>NODE: FREESIDE-WH-02<br>РОЛЬ: КЛАДОВЩИК</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="alert error">
+        <div class="left">
+          <span class="sym">⨯</span>
+          <div>НЕ УДАЛОСЬ СОХРАНИТЬ МАНИФЕСТ
+            <span class="sub">сервер: 503 MANIFEST_STORE_UNAVAILABLE · попытка 14:06:58 · черновик сохранён локально</span>
+          </div>
+        </div>
+        <span class="act">[ ПОВТОРИТЬ ]</span>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">▰ ГРУЗ-МАНИФЕСТ · ЗАЯВКА #CRV-2281-1047<span class="tag">MANIFEST DRAFT rev.3<br>2281-10-23 / 14:07</span></div>
+        <div class="panel-body">
+
+          <div class="mf-head kv">
+            <div class="kv-row"><span class="k">МАРШРУТ</span><span class="v">R-1047.A</span></div>
+            <div class="kv-row"><span class="k">ВЫХОД</span><span class="v">2281-10-25 · 06:00–10:00</span></div>
+            <div class="kv-row"><span class="k">ПЛЕЧО</span><span class="v">Goodsprings → Primm → Nipton → Novac → New&nbsp;Vegas</span></div>
+            <div class="kv-row"><span class="k">ЦЕННОСТЬ ГРУЗА</span><span class="v">4&nbsp;250 CAPS</span></div>
+            <div class="kv-row"><span class="k">СКЛАД ПОГРУЗКИ</span><span class="v">GOODSPRINGS SUPPLY DEPOT</span></div>
+            <div class="kv-row"><span class="k">СТАТУС ЗАЯВКИ</span><span class="v"><span class="badge warn">ГОТОВ</span></span></div>
+          </div>
+
+          <div class="sec-title">ПОЗИЦИИ ГРУЗА<span class="dim">позиций: 7 · мест: 30</span></div>
+
+          <div class="table-wrap">
+            <table class="table mf">
+              <thead>
+                <tr>
+                  <th class="c-no">№</th>
+                  <th>НАИМЕНОВАНИЕ</th>
+                  <th class="num c-qty">КОЛИЧЕСТВО</th>
+                  <th class="c-unit">ЕДИНИЦА</th>
+                  <th class="c-pack">УПАКОВКА</th>
+                  <th class="num c-pl">МЕСТ</th>
+                  <th class="c-act">ДЕЙСТВИЕ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="k">01</td><td>Вода очищенная, фляга 1&nbsp;л</td>
+                  <td class="num"><span class="inline-in">120</span></td><td class="k">ЕД</td>
+                  <td>Ящик деревянный ×12</td><td class="num">10</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+                <tr>
+                  <td class="k">02</td><td>Брамин-стейк вяленый</td>
+                  <td class="num"><span class="inline-in">60</span></td><td class="k">КГ</td>
+                  <td>Мешок джутовый ×10&nbsp;кг</td><td class="num">6</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+                <tr>
+                  <td class="k">03</td><td>Патрон .308</td>
+                  <td class="num"><span class="inline-in">240</span></td><td class="k">ШТ</td>
+                  <td>Цинк герметичный ×120</td><td class="num">2</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+                <tr>
+                  <td class="k">04</td><td>Стимпак</td>
+                  <td class="num"><span class="inline-in">8</span></td><td class="k">ШТ</td>
+                  <td>Кейс медицинский, опломбирован</td><td class="num">1</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+                <tr class="row-err">
+                  <td class="k">05</td><td>Ремкомплект оружейный</td>
+                  <td class="num"><span class="inline-in error">0</span></td><td class="err-t">—</td>
+                  <td class="err-t">не указана</td><td class="num">2</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+                <tr>
+                  <td class="k">06</td><td>Блок конденсатора HELIOS ONE</td>
+                  <td class="num"><span class="inline-in">4</span></td><td class="k">ШТ</td>
+                  <td>Паллета + стяжка</td><td class="num">4</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+                <tr>
+                  <td class="k">07</td><td>Кожа брамина, сырьё</td>
+                  <td class="num"><span class="inline-in">90</span></td><td class="k">КГ</td>
+                  <td>Тюк прессованный ×18&nbsp;кг</td><td class="num">5</td>
+                  <td class="c-act"><button class="btn btn-sm">[ ✕ ]</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="field mt4">
+            <div class="hint err">СТРОКА 05: укажите количество больше 0 и выберите упаковку — обязательные поля (проверка выполняется при сохранении)</div>
+          </div>
+
+          <div class="mt8">
+            <button class="btn">[ + ПОЗИЦИЯ ]</button>
+            <span class="muted note" style="margin-left:10px;">новая строка добавляется в конец описи</span>
+          </div>
+
+          <div class="sec-title">НОМЕРА ПЛОМБ<span class="dim">пломб: 4</span></div>
+          <div class="seal-row">
+            <span class="seal">SEAL-2281-77412<span class="x">✕</span></span>
+            <span class="seal">SEAL-2281-77413<span class="x">✕</span></span>
+            <span class="seal">SEAL-2281-77418<span class="x">✕</span></span>
+            <span class="seal">SEAL-2281-77421<span class="x">✕</span></span>
+          </div>
+          <div class="seal-add">
+            <input class="input" value="SEAL-2281-">
+            <button class="btn btn-sm">[ ДОБАВИТЬ ПЛОМБУ ]</button>
+            <span class="muted note">формат SEAL-YYYY-NNNNN · пломба привязывается к месту</span>
+          </div>
+
+        </div>
+        <div class="panel-foot">◆ АВТОСОХРАНЕНИЕ 14:06 · ЧЕРНОВИК ХРАНИТСЯ ЛОКАЛЬНО<span class="dim" style="margin-left:auto;">ИЗМЕНЕНИЕ ПОПАДЁТ В ЖУРНАЛ АУДИТА ПОСЛЕ СОХРАНЕНИЯ</span></div>
+      </div>
+
+    </section>
+
+    <aside class="term-aside">
+
+      <div class="panel">
+        <div class="panel-title">◢ СВОДКА МАНИФЕСТА</div>
+        <div class="panel-body">
+          <div class="kv">
+            <div class="kv-row"><span class="k">ПОЗИЦИЙ</span><span class="v">7</span></div>
+            <div class="kv-row"><span class="k">МЕСТ</span><span class="v">30</span></div>
+            <div class="kv-row"><span class="k">МАССА БРУТТО</span><span class="v">412 кг</span></div>
+            <div class="kv-row"><span class="k">ОБЪЁМ</span><span class="v">3.4 м³</span></div>
+            <div class="kv-row"><span class="k">ЦЕННОСТЬ</span><span class="v">4&nbsp;250 CAPS</span></div>
+            <div class="kv-row"><span class="k">ПЛОМБ</span><span class="v">4</span></div>
+            <div class="kv-row"><span class="k">ОШИБОК ПРОВЕРКИ</span><span class="v err">1</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="states-label">СОСТОЯНИЕ: ПУСТОЙ МАНИФЕСТ</div>
+      <div class="box">
+        <div class="empty-box">
+          <div class="dim">В манифесте ещё нет позиций</div>
+          <div class="muted note mt4">добавьте первую позицию груза</div>
+          <div class="mt8"><button class="btn btn-sm">[ + ПОЗИЦИЯ ]</button></div>
+        </div>
+      </div>
+
+      <div class="states-label mt8">СОСТОЯНИЕ: ЗАГРУЗКА</div>
+      <div class="box">
+        <div class="dim" style="font-size:11px;letter-spacing:1px;">ЗАГРУЗКА МАНИФЕСТА<span class="blink"> _</span></div>
+        <div class="pbar mt4"><div class="fill" style="width:64%"></div></div>
+      </div>
+
+      <div class="alert warn mt8">
+        <div class="left">
+          <span class="sym">⚠</span>
+          <div>ФИНАЛЬНЫЙ СТАТУС = ПРОСМОТР
+            <span class="sub">при ЗАКРЫТ / ОТМЕНЁН правка позиций и пломб заблокирована</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ascii-sep mt8">──────────────────────</div>
+      <div class="muted note">// раздел «МАНИФЕСТ» виден только роли КЛАДОВЩИК в пределах своей организации</div>
+
+    </aside>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> ЧЕРНОВИК · F1 HELP · <span class="err-inline">СОХРАНЕНИЕ 503 — ПОВТОРИТЕ</span></div>
+    <div class="foot-buttons">
+      <button class="btn">[ ОТМЕНИТЬ ]</button>
+      <button class="btn">[ ПОВТОРИТЬ ]</button>
+      <button class="btn-primary">[ СОХРАНИТЬ МАНИФЕСТ ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

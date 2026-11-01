@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- render: 1440x1180 -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-9 // КОМАНДА РЕЙСА</title>
+<style>
+  /* только раскладка этого экрана */
+  .crew-top { display: grid; grid-template-columns: 1fr 300px; gap: 14px; align-items: start; margin-bottom: 10px; }
+  .crew-top .kv-row { padding: 3px 0; }
+
+  .slot { border: 1px solid var(--fg-faint); background: var(--bg-deep); margin-bottom: 8px; }
+  .slot.open { border-color: var(--err); }
+  .slot-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 10px;
+    background: rgba(var(--accent-rgb), 0.05);
+    border-bottom: 1px solid var(--fg-faint);
+    font-size: 12px; letter-spacing: 2px; color: var(--fg-bright);
+  }
+  .slot.open .slot-head { border-bottom-color: var(--err); }
+  .slot-head .cap { color: var(--fg-dim); letter-spacing: 1px; font-size: 10px; }
+  .slot-body { padding: 6px 10px 8px; }
+
+  .emp { display: grid; grid-template-columns: 268px 1fr 124px 104px; align-items: center; gap: 10px; font-size: 12px; padding: 5px 2px; }
+  .emp + .emp { border-top: 1px dotted var(--fg-faint); }
+  .emp .nm { color: var(--fg-bright); letter-spacing: 1px; }
+  .emp .ro { color: var(--fg-dim); font-size: 10px; letter-spacing: 1px; }
+  .emp .busy { color: var(--warn); font-size: 11px; letter-spacing: 1px; }
+  .emp .off { color: var(--fg-faint); font-size: 11px; letter-spacing: 1px; }
+  .emp .free { color: var(--ok); font-size: 11px; letter-spacing: 1px; }
+  .emp .rate { text-align: right; color: var(--fg-dim); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .emp .act { text-align: right; }
+  .why { font-size: 10px; color: var(--err); letter-spacing: 0.5px; padding: 2px 2px 4px; }
+  .why::before { content: "// "; color: var(--err); }
+
+  .guards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 14px; }
+  .guards .g { display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 3px 2px; }
+  .guards .g .nm { color: var(--fg-bright); letter-spacing: 1px; }
+  .guards .g .ro { color: var(--fg-dim); font-size: 10px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <header class="term-header">
+    <div>
+      <div class="sys-title">CARAVAN // DISPATCH TERMINAL</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07</div>
+    </div>
+    <div class="hdr-center">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY · tnt_0041</div>
+      <div class="user">USER :: DISP_ALICE.HAWTHORNE · CLR-3</div>
+    </div>
+  </header>
+
+  <div class="term-main">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li>РЕЕСТР РЕЙСОВ</li>
+        <li>НОВАЯ ЗАЯВКА</li>
+        <li class="active">КОМАНДА РЕЙСА</li>
+        <li>СОТРУДНИКИ</li>
+        <li>ОЦЕНКА РИСКА</li>
+        <li>ИНЦИДЕНТЫ</li>
+        <li>ОТЧЁТЫ</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:12:43<br>NODE: MCCARRAN-04<br>DATE: 2281-10-23 14:07</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="panel">
+        <div class="panel-title">▰ КОМАНДА РЕЙСА · ЗАЯВКА #CRV-2281-1047<span class="tag">МАРШРУТ R-1047.A<br>РЕДАКТИРОВАНИЕ СОСТАВА</span></div>
+        <div class="panel-body">
+
+          <div class="crew-top">
+            <div class="box">
+              <div class="kv">
+                <div class="kv-row"><span class="k">МАРШРУТ</span><span class="v">Goodsprings → Primm → Nipton → Novac → New Vegas</span></div>
+                <div class="kv-row"><span class="k">ВЫХОД · ОКНО</span><span class="v">2281-10-25 · 06:00–10:00</span></div>
+                <div class="kv-row"><span class="k">ETA</span><span class="v">2281-10-26 10:40</span></div>
+                <div class="kv-row"><span class="k">СТАТУС ЗАЯВКИ</span><span class="v">НА СОГЛАСОВАНИИ</span></div>
+              </div>
+            </div>
+            <div class="box accent">
+              <div class="progress-meta"><span class="label">ОБЯЗАТЕЛЬНЫЕ РОЛИ</span><span class="pct"><b>3</b> / 4</span></div>
+              <div class="progress">
+                <div class="seg filled"></div><div class="seg filled"></div><div class="seg filled"></div><div class="seg"></div>
+              </div>
+              <div class="mt8" style="font-size:10px;letter-spacing:1px;color:var(--fg-dim)">НЕ ЗАПОЛНЕНО: ПОЛЕВОЙ МЕДИК</div>
+            </div>
+          </div>
+
+          <div class="alert error solid">
+            <div class="left"><span class="sym">⛔</span><div>ВЫПУСК ЗАБЛОКИРОВАН · НЕ ЗАПОЛНЕНА ОБЯЗАТЕЛЬНАЯ РОЛЬ<span class="sub">нехватка: ПОЛЕВОЙ МЕДИК — 1 чел. (М. Гаррет отозван на INC-2281-0417) · та же причина будет показана в окне «Статус рейса» при переходе «В ПУТИ»</span></div></div>
+            <span class="act">[ ПЕРЕЙТИ К РОЛИ ]</span>
+          </div>
+
+          <div class="sec-title mt12">СЛОТЫ РОЛЕЙ<span class="dim">5 слотов · назначено 7 чел.</span></div>
+
+          <div class="slot">
+            <div class="slot-head">КАРАВАН-МАСТЕР <span class="chip warn">ОБЯЗАТЕЛЬНО</span><span class="grow"></span><span class="badge ok">НАЗНАЧЕН</span></div>
+            <div class="slot-body">
+              <div class="emp">
+                <div><div class="nm">Дж. Кассиди</div><div class="ro">КАРАВАН-МАСТЕР · CLR-3 · tnt_0041</div></div>
+                <div class="free">СВОБОДЕН · допуск к R-1047.A подтверждён</div>
+                <div class="rate">260&#160;CAPS / сут</div>
+                <div class="act"><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slot">
+            <div class="slot-head">КАПИТАН ОХРАНЫ <span class="chip warn">ОБЯЗАТЕЛЬНО</span><span class="grow"></span><span class="badge ok">НАЗНАЧЕН</span></div>
+            <div class="slot-body">
+              <div class="emp">
+                <div><div class="nm">А. Сэнт-Джеймс</div><div class="ro">КАПИТАН ОХРАНЫ · CLR-2 · tnt_0041</div></div>
+                <div class="free">СВОБОДЕН · предыдущий рейс закрыт 2281-10-21</div>
+                <div class="rate">240&#160;CAPS / сут</div>
+                <div class="act"><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slot open">
+            <div class="slot-head">ПОЛЕВОЙ МЕДИК <span class="chip warn">ОБЯЗАТЕЛЬНО</span><span class="grow"></span><span class="badge err">НЕ НАЗНАЧЕН</span></div>
+            <div class="slot-body">
+              <div class="sec-title" style="margin-top:2px">ДОСТУПНЫЕ СОТРУДНИКИ · РОЛЬ «ПОЛЕВОЙ МЕДИК»<span class="dim">показано 3 из 3 · данные на 14:07</span></div>
+              <div class="emp">
+                <div><div class="nm">Э. Вэнс</div><div class="ro">ПОЛЕВОЙ МЕДИК · CLR-2 · tnt_0041</div></div>
+                <div class="free">СВОБОДЕН · назначений на 2281-10-25 нет</div>
+                <div class="rate">180&#160;CAPS / сут</div>
+                <div class="act"><button class="btn-primary btn-sm">[ НАЗНАЧИТЬ ]</button></div>
+              </div>
+              <div class="emp">
+                <div><div class="nm">М. Гаррет</div><div class="ro">ПОЛЕВОЙ МЕДИК · CLR-3 · tnt_0041</div></div>
+                <div class="off">НЕДОСТУПЕН · отозван на INC-2281-0417</div>
+                <div class="rate">210&#160;CAPS / сут</div>
+                <div class="act"><button class="btn btn-sm disabled">[ НАЗНАЧИТЬ ]</button></div>
+              </div>
+              <div class="why">назначение недоступно: сотрудник отозван на инцидент INC-2281-0417</div>
+              <div class="emp">
+                <div><div class="nm">Л. Пирсон</div><div class="ro">ФЕЛЬДШЕР · CLR-1 · tnt_0041</div></div>
+                <div class="busy">ЗАНЯТ · рейс #CRV-2281-1042 до 2281-10-27</div>
+                <div class="rate">140&#160;CAPS / сут</div>
+                <div class="act"><button class="btn btn-sm disabled">[ НАЗНАЧИТЬ ]</button></div>
+              </div>
+              <div class="why">назначение недоступно: занятость пересекается с окном выхода 2281-10-25 06:00–10:00</div>
+            </div>
+          </div>
+
+          <div class="slot">
+            <div class="slot-head">ОХРАННИКИ <span class="chip warn">ОБЯЗАТЕЛЬНО</span><span class="cap">ТРЕБУЕТСЯ 4 ЧЕЛ.</span><span class="grow"></span><span class="badge ok">НАЗНАЧЕНО 4 / 4</span></div>
+            <div class="slot-body">
+              <div class="guards">
+                <div class="g"><div><div class="nm">К. Бойд</div><div class="ro">ОХРАННИК · СВОБОДЕН</div></div><span class="grow"></span><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+                <div class="g"><div><div class="nm">Р. Делакруа</div><div class="ro">ОХРАННИК · СВОБОДЕН</div></div><span class="grow"></span><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+                <div class="g"><div><div class="nm">Т. Макбрайд</div><div class="ro">ОХРАННИК · СВОБОДЕН</div></div><span class="grow"></span><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+                <div class="g"><div><div class="nm">Х. Суарес</div><div class="ro">ОХРАННИК · СВОБОДЕН</div></div><span class="grow"></span><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slot">
+            <div class="slot-head">ПОГОНЩИК БРАМИНОВ <span class="chip muted">НЕОБЯЗАТЕЛЬНО</span><span class="grow"></span><span class="badge ok">НАЗНАЧЕН</span></div>
+            <div class="slot-body">
+              <div class="emp">
+                <div><div class="nm">Б. Райт</div><div class="ro">ПОГОНЩИК БРАМИНОВ · CLR-1 · tnt_0041</div></div>
+                <div class="free">СВОБОДЕН · 2 брамина закреплены за рейсом</div>
+                <div class="rate">120&#160;CAPS / сут</div>
+                <div class="act"><button class="btn btn-sm">[ СНЯТЬ ]</button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert error mt12">
+            <div class="left"><span class="sym">✖</span><div>ОШИБКА СОХРАНЕНИЯ СОСТАВА<span class="sub">ответ сервера: E-409 CREW_CONFLICT — «Л. Пирсон уже назначен на рейс #CRV-2281-1042»; состав не изменён</span></div></div>
+            <span class="act">[ ПОВТОРИТЬ ]</span>
+          </div>
+
+        </div>
+        <div class="panel-foot">◆ ЧЕРНОВИК СОСТАВА 14:05 · ИЗМЕНЕНИЯ НЕ ПРИМЕНЕНЫ ДО СОХРАНЕНИЯ</div>
+      </div>
+
+    </section>
+
+    <aside class="term-aside">
+
+      <div class="panel">
+        <div class="panel-title">◢ ПРОВЕРКА СОСТАВА</div>
+        <div class="panel-body">
+          <div class="kv">
+            <div class="kv-row"><span class="k">ОБЯЗАТЕЛЬНЫЕ РОЛИ</span><span class="v err">3 / 4</span></div>
+            <div class="kv-row"><span class="k">ПРИНАДЛЕЖНОСТЬ ОРГ.</span><span class="v">7 / 7 OK</span></div>
+            <div class="kv-row"><span class="k">ПЕРЕСЕЧЕНИЯ</span><span class="v warn">1</span></div>
+            <div class="kv-row"><span class="k">КВАЛИФИКАЦИЯ</span><span class="v">OK</span></div>
+            <div class="kv-row"><span class="k">ВСЕГО В БРИГАДЕ</span><span class="v">7 чел.</span></div>
+            <div class="kv-row"><span class="k">ФОНД ОПЛАТЫ</span><span class="v">1&#160;380&#160;CAPS</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert warn mt8">
+        <div class="left"><span class="sym">⚠</span><div>ПЕРЕХОД «В ПУТИ» НЕДОСТУПЕН<span class="sub">UC-2, поток 6а: причина — незаполненная обязательная роль</span></div></div>
+      </div>
+
+      <div class="panel mt8">
+        <div class="panel-title">◢ СВОДКА РЕЙСА<span class="tag">MODEL v2.3.1</span></div>
+        <div class="panel-body">
+          <div class="kv">
+            <div class="kv-row"><span class="k">РЕЙС</span><span class="v">#CRV-2281-1047</span></div>
+            <div class="kv-row"><span class="k">ДИСТАНЦИЯ</span><span class="v">148 mi</span></div>
+            <div class="kv-row"><span class="k">ЦЕННОСТЬ ГРУЗА</span><span class="v">4&#160;250&#160;CAPS</span></div>
+            <div class="kv-row"><span class="k">СТОИМОСТЬ РЕЙСА</span><span class="v">1&#160;150&#160;CAPS</span></div>
+            <div class="kv-row"><span class="k">ОХРАНА</span><span class="v">4 чел.</span></div>
+          </div>
+          <div class="mt8" style="display:flex;align-items:center;gap:8px">
+            <span class="dim" style="font-size:10px;letter-spacing:2px">RISK_SCORE 67/100</span>
+            <span class="grow"></span>
+            <span class="risk high">HIGH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel mt8">
+        <div class="panel-title">◢ ПОДСКАЗКА</div>
+        <div class="panel-body">
+          <div class="muted" style="font-size:11px;line-height:1.5">
+            Роль можно оставить незаполненной — остальные назначения всё равно будут проверены при сохранении.<br><br>
+            Полный список сотрудников организации — пункт меню <span class="bright">СОТРУДНИКИ</span>.
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> EDIT CREW · ЗАЯВКА #CRV-2281-1047 · F1 HELP</div>
+    <div class="foot-buttons">
+      <button class="btn">[ ОТМЕНИТЬ ]</button>
+      <button class="btn-primary">[ СОХРАНИТЬ КОМАНДУ ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

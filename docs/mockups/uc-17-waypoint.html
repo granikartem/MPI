@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- render: 1440x1080 -->
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-17 · Отметить прохождение контрольной точки</title>
+<style>
+  /* шрифты: рендер офлайн из file://, внешние шрифты недоступны */
+  :root { --font-mono: Consolas, "Courier New", ui-monospace, monospace; }
+  /* витрина из трёх телефонов шире стандартной страницы */
+  .page { max-width: 1400px; }
+  /* никаких внутренних скроллов: контент каждого экрана подобран под кадр */
+  .screen .content { overflow: hidden; padding-bottom: 178px; gap: 0; }
+  .screen .content .sec-title { margin-top: 12px; }
+  /* подпись «ОТМЕЧЕНО» вместо кнопки — состояние «точка уже отмечена» */
+  .done-note {
+    border: 1px solid var(--ok);
+    background: rgba(var(--ok-rgb), 0.08);
+    color: var(--ok);
+    text-align: center;
+    padding: 13px 10px;
+    letter-spacing: 2px;
+    font-size: 15px;
+    min-height: 60px;
+    display: flex; flex-direction: column; justify-content: center; gap: 3px;
+  }
+  .done-note .sub { font-size: 10px; letter-spacing: 1px; color: var(--fg-dim); }
+  .done-note.queued { border-color: var(--warn); background: rgba(255,184,77,0.08); color: var(--warn); }
+  .cp-name { font-size: 17px; letter-spacing: 2px; color: var(--fg-bright); margin-bottom: 2px; }
+  .cp-sub  { font-size: 10px; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+  .screen .kv-row { padding: 5px 0; font-size: 12px; }
+  /* на мобильной кнопке подпись уходит под основную надпись, а не вбок */
+  .action-bar .btn-block { flex-direction: column; gap: 0; }
+  .sys-note { font-size: 10px; color: var(--muted); letter-spacing: 1px; margin-top: 6px; }
+  .sys-note::before { content: "// "; color: var(--fg-dim); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="page-head">
+    <div class="t">UC-17 · КОНТРОЛЬНАЯ ТОЧКА — ОТМЕТКА ПРОХОЖДЕНИЯ</div>
+    <div class="s">CARAVAN PWA · PIP-BOY 390x844 · РЕЙС #CRV-2281-1047 · R-1047.A</div>
+  </div>
+
+  <div class="states-label">СОСТОЯНИЯ ЭКРАНА: ОТМЕТКА · УЖЕ ОТМЕЧЕНО · НЕТ СВЯЗИ</div>
+
+  <div class="phones">
+
+    <!-- ============ STATE 01 — ONLINE, ТОЧКА ЕЩЁ НЕ ОТМЕЧЕНА ============ -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 01 — ONLINE · ОТМЕТКА ДОСТУПНА</div>
+      <div class="phone"><div class="screen">
+
+        <div class="statusbar"><span>11:05</span><span class="icons"><span>▂▃▅</span><span>5G</span><span>▮82%</span></span></div>
+
+        <div class="app-header">
+          <div class="h-top"><span class="back">‹</span><div class="h-title">КОНТРОЛЬНАЯ ТОЧКА</div><span class="menu">•••</span></div>
+          <div class="h-sub"><span>РЕЙС · #CRV-2281-1047</span><span class="badge active">EN ROUTE</span></div>
+        </div>
+
+        <div class="conn-banner online">
+          <span class="dot">●</span>
+          <div class="c-text">ONLINE<span class="small">ack 11:05:02 · MOJAVE RELAY 07</span></div>
+        </div>
+
+        <div class="content">
+
+          <div class="box accent">
+            <div class="cp-name">PRIMM · CP-02</div>
+            <div class="cp-sub">КОНТРОЛЬНАЯ ТОЧКА МАРШРУТА R-1047.A</div>
+            <div class="kv">
+              <div class="kv-row"><span class="k">ПОРЯДОК</span><span class="v">2 из 5 · после GOODSPRINGS</span></div>
+              <div class="kv-row"><span class="k">ПЛАНОВОЕ ETA</span><span class="v">2281-10-25 11:20</span></div>
+              <div class="kv-row"><span class="k">ПРОХОЖДЕНИЕ</span><span class="v">2281-10-25 11:05</span></div>
+              <div class="kv-row"><span class="k">КООРДИНАТЫ ⌖</span><span class="v muted">только чтение</span></div>
+            </div>
+            <div class="sys-note">время прохождения подставлено системой</div>
+          </div>
+
+          <div class="sec-title">МАРШРУТ<span class="dim">2/5</span></div>
+
+          <div class="timeline">
+            <div class="tl-step done">
+              <span class="mark">✓</span>
+              <div class="info"><div class="t1">Выход · Goodsprings</div><div class="t2">GOODSPRINGS SUPPLY DEPOT</div></div>
+              <div class="time"><span class="tlbl">ACK</span>08:14</div>
+            </div>
+            <div class="tl-link done"></div>
+            <div class="tl-step current">
+              <span class="mark">2</span>
+              <div class="info"><div class="t1">Прибытие · Primm</div><div class="t2">CP-02 · ТЕКУЩАЯ ТОЧКА</div></div>
+              <div class="time"><span class="tlbl">ФАКТ</span>11:05</div>
+            </div>
+            <div class="tl-link"></div>
+            <div class="tl-step pending">
+              <span class="mark">3</span>
+              <div class="info"><div class="t1">Прохождение КПП</div><div class="t2">MOJAVE OUTPOST · КПП NCR</div></div>
+              <div class="time"><span class="tlbl">ETA</span>14:20</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="action-bar">
+          <div class="hint">запись уйдёт в CHECKPOINTLOG рейса</div>
+          <button class="btn-ok btn-block">✓ ОТМЕТИТЬ ПРОХОЖДЕНИЕ<span class="lbl-sub">PRIMM · CP-02 · 11:05</span></button>
+          <div class="coord-panel">
+            <span class="ic">⌖</span>
+            <span><b>N 35°36'42"</b> &nbsp; <b>W 115°23'11"</b></span>
+            <span class="ts">11:05:14</span>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- ============ STATE 02 — ТОЧКА УЖЕ ОТМЕЧЕНА ============ -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 02 — УЖЕ ОТМЕЧЕНО · ACK</div>
+      <div class="phone"><div class="screen">
+
+        <div class="statusbar"><span>11:07</span><span class="icons"><span>▂▃▅</span><span>5G</span><span>▮81%</span></span></div>
+
+        <div class="app-header">
+          <div class="h-top"><span class="back">‹</span><div class="h-title">КОНТРОЛЬНАЯ ТОЧКА</div><span class="menu">•••</span></div>
+          <div class="h-sub"><span>РЕЙС · #CRV-2281-1047</span><span class="badge active">EN ROUTE</span></div>
+        </div>
+
+        <div class="conn-banner online">
+          <span class="dot">●</span>
+          <div class="c-text">ONLINE<span class="small">ack 11:05:12 · запись принята сервером</span></div>
+        </div>
+
+        <div class="content">
+
+          <div class="alert success">
+            <div class="left"><span class="sym">✓</span><div>ОТМЕТКА СОХРАНЕНА<span class="sub">CHECKPOINTLOG · CPL-2281-0338</span></div></div>
+            <span class="badge ok">ACK</span>
+          </div>
+
+          <div class="box accent mt8">
+            <div class="cp-name">PRIMM · CP-02 ✓</div>
+            <div class="cp-sub">КОНТРОЛЬНАЯ ТОЧКА МАРШРУТА R-1047.A</div>
+            <div class="kv">
+              <div class="kv-row"><span class="k">ПЛАНОВОЕ ETA</span><span class="v">2281-10-25 11:20</span></div>
+              <div class="kv-row"><span class="k">ОТМЕЧЕНО</span><span class="v ok-t">2281-10-25 11:05</span></div>
+              <div class="kv-row"><span class="k">КООРДИНАТЫ ⌖</span><span class="v muted">только чтение</span></div>
+            </div>
+          </div>
+
+          <div class="sec-title">МАРШРУТ<span class="dim">2/5</span></div>
+
+          <div class="timeline">
+            <div class="tl-step done">
+              <span class="mark">✓</span>
+              <div class="info"><div class="t1">Выход · Goodsprings</div><div class="t2">GOODSPRINGS SUPPLY DEPOT</div></div>
+              <div class="time"><span class="tlbl">ACK</span>08:14</div>
+            </div>
+            <div class="tl-link done"></div>
+            <div class="tl-step done">
+              <span class="mark">✓</span>
+              <div class="info"><div class="t1">Прибытие · Primm</div><div class="t2">CP-02 · ОТМЕЧЕНА</div></div>
+              <div class="time"><span class="tlbl">ACK</span>11:05</div>
+            </div>
+            <div class="tl-link"></div>
+            <div class="tl-step pending">
+              <span class="mark">3</span>
+              <div class="info"><div class="t1">Прохождение КПП</div><div class="t2">MOJAVE OUTPOST · КПП NCR</div></div>
+              <div class="time"><span class="tlbl">ETA</span>14:20</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="action-bar">
+          <div class="hint">повторная отметка точки невозможна</div>
+          <div class="done-note">✓ ОТМЕЧЕНО · 11:05<span class="sub">ACK 11:05:12 · ДИСПЕТЧЕР УВЕДОМЛЁН</span></div>
+          <div class="coord-panel">
+            <span class="ic">⌖</span>
+            <span><b>N 35°36'42"</b> &nbsp; <b>W 115°23'11"</b></span>
+            <span class="ts">11:05:14</span>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+    <!-- ============ STATE 03 — OFFLINE, ЛОКАЛЬНАЯ ОЧЕРЕДЬ ============ -->
+    <div class="phone-col">
+      <div class="phone-label">STATE 03 — OFFLINE · QUEUED</div>
+      <div class="phone"><div class="screen">
+
+        <div class="statusbar"><span>11:06</span><span class="icons"><span class="warn-t">▂▁▁</span><span class="warn-t">NO SIGNAL</span><span>▮80%</span></span></div>
+
+        <div class="app-header">
+          <div class="h-top"><span class="back">‹</span><div class="h-title">КОНТРОЛЬНАЯ ТОЧКА</div><span class="menu">•••</span></div>
+          <div class="h-sub"><span>РЕЙС · #CRV-2281-1047</span><span class="badge active">EN ROUTE</span></div>
+        </div>
+
+        <div class="conn-banner offline">
+          <span class="dot">●</span>
+          <div class="c-text">OFFLINE<span class="small">последний ack 10:41:08 · 1 событие в очереди</span></div>
+        </div>
+
+        <div class="content">
+
+          <div class="alert warn">
+            <div class="left"><span class="sym">◌</span><div>ОТМЕТКА В ЛОКАЛЬНОЙ ОЧЕРЕДИ<span class="sub">уйдёт при восстановлении связи</span></div></div>
+            <span class="act">[ ПОВТОР ]</span>
+          </div>
+
+          <div class="box accent mt8">
+            <div class="cp-name">PRIMM · CP-02 ◌</div>
+            <div class="cp-sub">КОНТРОЛЬНАЯ ТОЧКА МАРШРУТА R-1047.A</div>
+            <div class="kv">
+              <div class="kv-row"><span class="k">ПЛАНОВОЕ ETA</span><span class="v">2281-10-25 11:20</span></div>
+              <div class="kv-row"><span class="k">ОТМЕЧЕНО</span><span class="v warn">2281-10-25 11:05 · локально</span></div>
+              <div class="kv-row"><span class="k">КООРДИНАТЫ ⌖</span><span class="v muted">сохранены исходные</span></div>
+            </div>
+          </div>
+
+          <div class="sec-title">МАРШРУТ<span class="dim">2/5</span></div>
+
+          <div class="timeline">
+            <div class="tl-step done">
+              <span class="mark">✓</span>
+              <div class="info"><div class="t1">Выход · Goodsprings</div><div class="t2">GOODSPRINGS SUPPLY DEPOT</div></div>
+              <div class="time"><span class="tlbl">ACK</span>08:14</div>
+            </div>
+            <div class="tl-link done"></div>
+            <div class="tl-step queued">
+              <span class="mark">◌</span>
+              <div class="info"><div class="t1">Прибытие · Primm</div><div class="t2">CP-02 · ЖДЁТ ОТПРАВКИ</div></div>
+              <div class="time"><span class="tlbl">LOCAL</span>11:05</div>
+            </div>
+            <div class="tl-link queued"></div>
+            <div class="tl-step pending">
+              <span class="mark">3</span>
+              <div class="info"><div class="t1">Прохождение КПП</div><div class="t2">MOJAVE OUTPOST · КПП NCR</div></div>
+              <div class="time"><span class="tlbl">ETA</span>14:20</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="action-bar">
+          <div class="hint">время и координаты сохранены исходные</div>
+          <div class="done-note queued">◌ QUEUED · 11:05<span class="sub">ОТПРАВКА ПРИ ВОССТАНОВЛЕНИИ СВЯЗИ</span></div>
+          <div class="coord-panel offline">
+            <span class="ic">⌖</span>
+            <span><b>N 35°36'42"</b> &nbsp; <b>W 115°23'11"</b></span>
+            <span class="ts">11:05:14</span>
+          </div>
+        </div>
+
+      </div></div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

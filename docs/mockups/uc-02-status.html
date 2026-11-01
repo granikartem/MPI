@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- render: 1440x1200 -->
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-2 · Управлять статусами заявки</title>
+<style>
+  /* только специфика этого экрана */
+  :root { --font-mono: Consolas, "Courier New", monospace; }
+  /* рендер без внутренних скроллов: контент помещается целиком */
+  .term-main, .term-content, .term-aside, .term-nav { min-height: auto; overflow: visible; }
+  .table-wrap { overflow: visible; }
+
+  .status-line { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .status-line .cur { display: flex; align-items: center; gap: 10px; }
+  .status-line .cur .lbl { font-size: 10px; letter-spacing: 2px; color: var(--fg-dim); }
+  .status-line .cur .big { font-size: 20px; letter-spacing: 3px; color: var(--warn); }
+  .status-line .meta { font-size: 10px; color: var(--fg-dim); text-align: right; line-height: 1.5; letter-spacing: 1px; }
+
+  .trans { display: flex; flex-direction: column; gap: 4px; }
+  .tr-row {
+    display: grid; grid-template-columns: 150px 1fr 132px;
+    align-items: center; gap: 10px;
+    border: 1px solid var(--fg-faint); background: var(--bg-deep); padding: 5px 9px;
+  }
+  .tr-row.selected { border-color: var(--fg); background: rgba(51,255,102,0.10); }
+  .tr-row.blocked  { border-style: dashed; }
+  .tr-go   { font-size: 13px; letter-spacing: 1px; color: var(--fg-bright); white-space: nowrap; }
+  .tr-row.blocked .tr-go { color: var(--fg-dim); }
+  .tr-name { font-size: 12px; color: var(--fg); }
+  .tr-role { font-size: 10px; color: var(--fg-dim); letter-spacing: 0.5px; margin-top: 1px; }
+  .tr-row.blocked .tr-role.err-t { color: var(--err); }
+  .tr-act  { text-align: right; }
+
+  table.hist { font-size: 11px; }
+  table.hist td { vertical-align: top; }
+  table.hist .c-when { width: 118px; white-space: nowrap; }
+  table.hist .c-go   { width: 182px; }
+  table.hist .c-who  { width: 172px; }
+  .hist-go { color: var(--fg-bright); white-space: nowrap; }
+
+  .brig { display: flex; flex-direction: column; gap: 3px; }
+  .brig .m { display: flex; justify-content: space-between; gap: 8px; font-size: 11px; padding: 2px 0; border-bottom: 1px dotted var(--fg-faint); }
+  .brig .m:last-child { border-bottom: none; }
+  .brig .m .r { color: var(--fg-dim); font-size: 10px; letter-spacing: 1px; white-space: nowrap; }
+  .brig .m.bad .n, .brig .m.bad .r { color: var(--err); }
+
+  .note { font-size: 10px; color: var(--muted); letter-spacing: 0.5px; }
+  .audit { font-size: 10px; line-height: 1.6; color: var(--fg-dim); }
+  .foot-note { font-size: 10px; color: var(--err); align-self: center; }
+
+  /* статусная модель в правой колонке */
+  .sm-model { display: flex; flex-direction: column; gap: 4px; }
+  .sm-row { display: flex; align-items: center; gap: 8px; font-size: 10px; letter-spacing: 1px; }
+  .sm-row .badge { min-width: 86px; text-align: center; }
+  .sm-row.cur { outline: 1px solid var(--fg-faint); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <header class="term-header">
+    <div>
+      <div class="sys-title">CARAVAN // DISPATCH TERMINAL</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · 2281-10-23 14:07</div>
+    </div>
+    <div class="hdr-center">
+      <span class="mode">УПРАВЛЕНИЕ СТАТУСОМ</span>
+      <div class="mt4">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    </div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY · tnt_0041</div>
+      <div class="user">USER :: DISP_ALICE.HAWTHORNE · CLR-3</div>
+    </div>
+  </header>
+
+  <div class="term-main">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li class="active">РЕЕСТР РЕЙСОВ</li>
+        <li>НОВАЯ ЗАЯВКА</li>
+        <li>ОЦЕНКА РИСКА</li>
+        <li>ИНЦИДЕНТЫ</li>
+        <li>БРИГАДЫ</li>
+        <li>АРХИВ РЕЙСОВ</li>
+        <li>ОТЧЁТЫ</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:12:43<br>NODE: MCCARRAN-04<br>ЗАЯВКА: #CRV-2281-1047</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="modal-overlay inline">
+        <div class="modal wide">
+
+          <div class="modal-head">▰ СТАТУС ЗАЯВКИ · #CRV-2281-1047<span class="x">[X]</span></div>
+
+          <div class="modal-body">
+
+            <div class="box accent status-line">
+              <div class="cur">
+                <span class="lbl">ТЕКУЩИЙ СТАТУС</span>
+                <span class="big">ЗАДЕРЖАН</span>
+                <span class="badge warn">DELAYED</span>
+              </div>
+              <div class="meta">
+                МАРШРУТ R-1047.A · GOODSPRINGS → NEW VEGAS<br>
+                С 2281-10-23 12:05 · АКТОР: СИСТЕМА (СОБЫТИЕ UC-19)
+              </div>
+            </div>
+
+            <div class="alert error">
+              <div class="left">
+                <span class="sym">✖</span>
+                <div>ПЕРЕХОД НЕ ПРЕДУСМОТРЕН СТАТУСНОЙ МОДЕЛЬЮ: ЗАДЕРЖАН ⟶ ДОСТАВЛЕН<span class="sub">допустимые действия из текущего статуса перечислены ниже</span></div>
+              </div>
+              <span class="act">[ СКРЫТЬ ]</span>
+            </div>
+
+            <div class="sec-title">ДОСТУПНЫЕ ПЕРЕХОДЫ<span class="dim">из статуса ЗАДЕРЖАН · 4</span></div>
+
+            <div class="trans">
+
+              <div class="tr-row selected">
+                <div class="tr-go">⟶ ГОТОВ</div>
+                <div>
+                  <div class="tr-name">Снять задержку</div>
+                  <div class="tr-role">роль: Диспетчер караванов · причина обязательна</div>
+                </div>
+                <div class="tr-act"><span class="badge active">ВЫБРАН</span></div>
+              </div>
+
+              <div class="tr-row blocked">
+                <div class="tr-go">⟶ В ПУТИ</div>
+                <div>
+                  <div class="tr-name">Караван вышел на маршрут</div>
+                  <div class="tr-role err-t">FR-10 · не заполнены обязательные роли: полевой медик (М. Гаррет отозван на INC-2281-0417)</div>
+                </div>
+                <div class="tr-act"><span class="badge err">ЗАБЛОКИРОВАН</span></div>
+              </div>
+
+              <div class="tr-row blocked">
+                <div class="tr-go">⟶ ЗАКРЫТ</div>
+                <div>
+                  <div class="tr-name">Закрыть рейс</div>
+                  <div class="tr-role err-t">роль не имеет права: допустимо для «Администратор организации», ваша роль — «Диспетчер караванов»</div>
+                </div>
+                <div class="tr-act"><span class="badge muted">НЕТ ПРАВ</span></div>
+              </div>
+
+              <div class="tr-row">
+                <div class="tr-go">⟶ ОТМЕНЁН</div>
+                <div>
+                  <div class="tr-name">Отменить рейс</div>
+                  <div class="tr-role">роль: Диспетчер караванов · причина обязательна</div>
+                </div>
+                <div class="tr-act"><button class="btn-danger btn-sm">[ ВЫБРАТЬ ]</button></div>
+              </div>
+
+            </div>
+
+            <div class="sec-title mt8">ПАРАМЕТРЫ ПЕРЕХОДА<span class="dim">шаг 3</span></div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label>РОЛЬ АКТОРА</label>
+                <select class="select">
+                  <option>Диспетчер караванов</option>
+                  <option>Караван-мастер</option>
+                  <option>Администратор организации</option>
+                </select>
+                <div class="hint">права на переход проверяются на шаге 5</div>
+              </div>
+              <div class="field">
+                <label>ФИО (ДЛЯ ЖУРНАЛА)</label>
+                <input class="input" value="Alice Hawthorne">
+                <div class="hint">disp.alice.hawthorne · a.hawthorne@crimson.cvn</div>
+              </div>
+              <div class="field full">
+                <label>ПРИЧИНА ПЕРЕХОДА</label>
+                <textarea class="textarea error" placeholder="причина не заполнена"></textarea>
+                <div class="hint err">Укажите причину перехода — для перехода «Снять задержку» причина обязательна</div>
+              </div>
+            </div>
+
+            <label class="chk checked mt4"><span class="box-i"></span>Уведомить бригадира (Дж. Кассиди) и диспетчера смены</label>
+
+            <div class="sec-title mt8">ИСТОРИЯ ИЗМЕНЕНИЙ СТАТУСА (FR-3)<span class="dim">3 записи</span></div>
+
+            <div class="table-wrap">
+              <table class="table hist">
+                <thead>
+                  <tr><th class="c-when">КОГДА</th><th class="c-go">ПЕРЕХОД</th><th class="c-who">КТО</th><th>ПРИЧИНА</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2281-10-23 12:05</td>
+                    <td class="hist-go">ГОТОВ ⟶ ЗАДЕРЖАН</td>
+                    <td><span class="badge info">СИСТЕМА</span></td>
+                    <td>событие UC-19: INC-2281-0417, нападение рейдеров, NIPTON RUINS</td>
+                  </tr>
+                  <tr>
+                    <td>2281-10-22 09:14</td>
+                    <td class="hist-go">ЧЕРНОВИК ⟶ ГОТОВ</td>
+                    <td>Диспетчер · A. Hawthorne</td>
+                    <td>бригада назначена, risk_score 67 HIGH принят</td>
+                  </tr>
+                  <tr>
+                    <td>2281-10-21 16:30</td>
+                    <td class="hist-go">— ⟶ ЧЕРНОВИК</td>
+                    <td>Диспетчер · A. Hawthorne</td>
+                    <td>создание заявки (UC-1)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="note">// в финальных статусах ЗАКРЫТ и ОТМЕНЁН переходов нет — карточка и история открываются только для просмотра</div>
+
+          </div>
+
+          <div class="modal-foot">
+            <span class="foot-note grow">переход не выполнен: не указана причина</span>
+            <button class="btn">[ ЗАКРЫТЬ ]</button>
+            <button class="btn-primary disabled">[ ВЫПОЛНИТЬ ПЕРЕХОД ]</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="term-aside">
+
+      <div class="sec-title">КАРТОЧКА ЗАЯВКИ</div>
+      <div class="kv">
+        <div class="kv-row"><span class="k">ЗАЯВКА</span><span class="v">#CRV-2281-1047</span></div>
+        <div class="kv-row"><span class="k">МАРШРУТ</span><span class="v">R-1047.A</span></div>
+        <div class="kv-row"><span class="k">ОТКУДА</span><span class="v">Goodsprings</span></div>
+        <div class="kv-row"><span class="k">КУДА</span><span class="v">New Vegas</span></div>
+        <div class="kv-row"><span class="k">ВЫХОД</span><span class="v warn">2281-10-25 06:00</span></div>
+        <div class="kv-row"><span class="k">ETA</span><span class="v">2281-10-26 10:40</span></div>
+        <div class="kv-row"><span class="k">ГРУЗ</span><span class="v">4&nbsp;250 CAPS</span></div>
+        <div class="kv-row"><span class="k">ДИСТАНЦИЯ</span><span class="v">148 mi</span></div>
+      </div>
+
+      <div class="score high mt8">
+        <div class="lbl">RISK_SCORE</div>
+        <div class="val">67<span class="slash">/100</span></div>
+        <div class="tag">HIGH</div>
+      </div>
+      <div class="risk-scale">
+        <div class="cell">LOW</div><div class="cell">MID</div><div class="cell on-high">HIGH</div><div class="cell">CRIT</div>
+      </div>
+
+      <div class="sec-title mt8">СОСТАВ БРИГАДЫ (FR-10)<span class="dim">3/4</span></div>
+      <div class="box brig">
+        <div class="m"><span class="n">Дж. Кассиди</span><span class="r">КАРАВАН-МАСТЕР</span></div>
+        <div class="m"><span class="n">А. Сэнт-Джеймс</span><span class="r">КАПИТАН ОХРАНЫ</span></div>
+        <div class="m"><span class="n">Б. Райт</span><span class="r">ПОГОНЩИК</span></div>
+        <div class="m bad"><span class="n">М. Гаррет</span><span class="r">МЕДИК — ОТОЗВАН</span></div>
+      </div>
+
+      <div class="alert warn mt8">
+        <div class="left">
+          <span class="sym">⚠</span>
+          <div>ИНЦИДЕНТ INC-2281-0417<span class="sub">нападение рейдеров · NIPTON RUINS · 2281-10-23 12:05</span></div>
+        </div>
+      </div>
+
+      <div class="sec-title mt8">ЖУРНАЛ АУДИТА<span class="dim">шаг 9</span></div>
+      <div class="box audit">
+        каждое изменение статуса пишется в журнал аудита:<br>
+        actor · role · from → to · reason · ts<br>
+        последняя запись: 2281-10-23 12:05
+      </div>
+
+      <div class="sec-title mt8">СТАТУСНАЯ МОДЕЛЬ<span class="dim">шаг 2</span></div>
+      <div class="box sm-model">
+        <div class="sm-row"><span class="badge muted">ЧЕРНОВИК</span><span class="dim">заявка создана (UC-1)</span></div>
+        <div class="sm-row"><span class="badge info">ГОТОВ</span><span class="dim">бригада и груз подтверждены</span></div>
+        <div class="sm-row"><span class="badge active">В ПУТИ</span><span class="dim">караван вышел на маршрут</span></div>
+        <div class="sm-row cur"><span class="badge warn">ЗАДЕРЖАН</span><span class="bright">текущий статус</span></div>
+        <div class="sm-row"><span class="badge ok">ДОСТАВЛЕН</span><span class="dim">груз сдан получателю</span></div>
+        <div class="sm-row"><span class="badge muted">ЗАКРЫТ</span><span class="dim">финальный · переходов нет</span></div>
+        <div class="sm-row"><span class="badge err">ОТМЕНЁН</span><span class="dim">финальный · переходов нет</span></div>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> READY · КАРТОЧКА #CRV-2281-1047 · <span class="err-inline">ПЕРЕХОД НЕ ВЫПОЛНЕН</span> · F1 HELP</div>
+    <div class="foot-buttons">
+      <button class="btn">[ НАЗАД К РЕЕСТРУ ]</button>
+      <button class="btn">[ ИСТОРИЯ РЕЙСА ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

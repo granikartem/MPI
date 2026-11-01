@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- render: 1440x1300 -->
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-31 · Ставка сотрудника</title>
+<style>
+  /* шрифты: рендер офлайн из file://, внешние шрифты недоступны */
+  :root { --font-mono: Consolas, "Courier New", ui-monospace, monospace; }
+  /* никаких внутренних скроллов — контент помещается в кадр целиком */
+  .terminal { grid-template-rows: 54px auto 36px; min-height: 0; }
+  .term-main, .term-content, .term-aside, .term-nav { min-height: auto; overflow: visible; }
+  .table-wrap { overflow: visible; }
+
+  /* вкладки карточки сотрудника — собраны из существующих токенов темы */
+  .tabrow { display: flex; gap: 4px; border-bottom: 1px solid var(--fg-faint); padding-bottom: 6px; margin-bottom: 10px; }
+  .tabrow .tb {
+    border: 1px solid var(--fg-faint); padding: 3px 13px;
+    font-size: 11px; letter-spacing: 1px; color: var(--fg-dim);
+  }
+  .tabrow .tb.on {
+    border-color: var(--fg); color: var(--fg-bright);
+    background: rgba(var(--accent-rgb), 0.14);
+  }
+  .tabrow .tb.on::before { content: "> "; }
+  .tabrow .sp { flex: 1; }
+
+  .u-card { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; }
+
+  /* действующая ставка — крупное табло */
+  .rate-now { display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: center; }
+  .rate-now .big { font-size: 38px; line-height: 1; color: var(--fg-bright); letter-spacing: 2px; }
+  .rate-now .unit { font-size: 12px; color: var(--fg-dim); letter-spacing: 2px; margin-top: 4px; }
+  .rate-now .cap { font-size: 10px; letter-spacing: 2px; color: var(--fg-dim); margin-bottom: 4px; }
+
+  .act-row { display: flex; align-items: center; gap: 10px; }
+  .act-row .grow { flex: 1; }
+
+  /* история изменений ставки */
+  table.hist { font-size: 11px; }
+  table.hist th, table.hist td { padding: 4px 8px; }
+  table.hist .c-per { width: 220px; }
+  table.hist .c-rate { width: 140px; }
+  table.hist .c-who { width: 200px; }
+
+  /* список пользователей со ставками */
+  table.usr { font-size: 11px; }
+  table.usr th, table.usr td { padding: 5px 8px; }
+  table.usr .c-fio { width: 170px; }
+  table.usr .c-log { width: 186px; }
+  table.usr .c-role { width: 196px; white-space: nowrap; }
+  table.usr .c-rate { width: 150px; }
+  table.usr .c-from { width: 130px; }
+  table.usr .c-act { width: 130px; }
+  table.usr .nm { color: var(--fg-bright); }
+  table.usr .btn, table.usr .btn-sm { white-space: nowrap; }
+
+  .note { font-size: 10px; letter-spacing: 1px; }
+  .note::before { content: "// "; color: var(--fg-dim); }
+  .state-box { padding: 8px 9px; }
+  .state-box .ttl { font-size: 11px; letter-spacing: 1px; color: var(--fg-bright); margin-bottom: 5px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <header class="term-header">
+    <div>
+      <div class="sys-title">CARAVAN // USER ADMIN TERMINAL</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · КАРТОЧКА СОТРУДНИКА / ОПЛАТА</div>
+    </div>
+    <div class="hdr-center">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY · tnt_0041</div>
+      <div class="user">USER :: DISP_ALICE.HAWTHORNE · CLR-3</div>
+    </div>
+  </header>
+
+  <div class="term-main">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li>РЕЕСТР РЕЙСОВ</li>
+        <li>НОВАЯ ЗАЯВКА</li>
+        <li>БРИГАДЫ</li>
+        <li class="active">ПОЛЬЗОВАТЕЛИ</li>
+        <li>ЖУРНАЛ АУДИТА</li>
+        <li>ОТЧЁТЫ</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:12:43<br>NODE: MCCARRAN-04<br>РОЛЬ: ДИСПЕТЧЕР<br>2281-10-23 / 14:07</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="panel">
+        <div class="panel-title">▰ КАРТОЧКА СОТРУДНИКА · А. СЭНТ-ДЖЕЙМС<span class="tag">usr_0041_03 · tnt_0041</span></div>
+        <div class="panel-body">
+
+          <div class="tabrow">
+            <span class="tb">ПРОФИЛЬ</span>
+            <span class="tb">ДОСТУП</span>
+            <span class="tb on">ОПЛАТА</span>
+            <span class="tb">НАЗНАЧЕНИЯ</span>
+            <span class="tb">АУДИТ</span>
+            <span class="sp"></span>
+            <span class="tb">ЗАКРЫТЬ КАРТОЧКУ [X]</span>
+          </div>
+
+          <div class="box accent">
+            <div class="u-card kv">
+              <div class="kv-row"><span class="k">ФИО</span><span class="v">А. Сэнт-Джеймс</span></div>
+              <div class="kv-row"><span class="k">ЛОГИН</span><span class="v">crew.a.stjames</span></div>
+              <div class="kv-row"><span class="k">РОЛЬ</span><span class="v">КАПИТАН ОХРАНЫ · CLR-2</span></div>
+              <div class="kv-row"><span class="k">ОРГАНИЗАЦИЯ</span><span class="v">Crimson Caravan Company · tnt_0041</span></div>
+              <div class="kv-row"><span class="k">СТАТУС</span><span class="v"><span class="badge ok">АКТИВЕН</span></span></div>
+              <div class="kv-row"><span class="k">ТЕКУЩЕЕ НАЗНАЧЕНИЕ</span><span class="v">рейс #CRV-2281-1047 · выход 2281-10-25</span></div>
+            </div>
+          </div>
+
+          <div class="sec-title">ДЕЙСТВУЮЩАЯ СТАВКА<span class="dim">применяется при расчёте оплаты рейсов</span></div>
+
+          <div class="box">
+            <div class="rate-now">
+              <div>
+                <div class="cap">ТЕКУЩАЯ СТАВКА</div>
+                <div class="big">240</div>
+                <div class="unit">CAPS / СУТ</div>
+              </div>
+              <div class="kv">
+                <div class="kv-row"><span class="k">ДЕЙСТВУЕТ С</span><span class="v">2281-04-01</span></div>
+                <div class="kv-row"><span class="k">НАЗНАЧИЛ</span><span class="v">disp.alice.hawthorne</span></div>
+                <div class="kv-row"><span class="k">КОММЕНТАРИЙ</span><span class="v">повышение после перевода в капитаны охраны</span></div>
+                <div class="kv-row"><span class="k">ПРИМЕНЕНА В РАСЧЁТАХ</span><span class="v">4 рейса · 11 сут · 2&nbsp;640 CAPS</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sec-title">НОВАЯ СТАВКА</div>
+
+          <div class="form-grid three">
+            <div class="field">
+              <label>НОВАЯ СТАВКА, КРЫШЕК / СУТ</label>
+              <div class="suffixed">
+                <input class="input" value="260">
+                <span class="suffix">CAPS ◉</span>
+              </div>
+              <div class="hint">целое число больше 0</div>
+            </div>
+            <div class="field">
+              <label>ДАТА ВСТУПЛЕНИЯ В СИЛУ</label>
+              <input class="input" value="2281-11-01">
+              <div class="hint">[YYYY-MM-DD] · не раньше 2281-10-23</div>
+            </div>
+            <div class="field">
+              <label>КОММЕНТАРИЙ</label>
+              <input class="input" value="надбавка за маршрут Nipton">
+              <div class="hint">виден в истории изменений ставки</div>
+            </div>
+          </div>
+
+          <div class="alert warn">
+            <div class="left">
+              <span class="sym">⚠</span>
+              <div>РАНЕЕ СОХРАНЁННЫЕ ФИНАНСОВЫЕ ОТЧЁТЫ НЕ ПЕРЕСЧИТЫВАЮТСЯ
+                <span class="sub">отчёт по рейсу #CRV-2281-1047 закрыт по ставке 240 CAPS / сут · новая ставка применится к рейсам с выходом от 2281-11-01</span>
+              </div>
+            </div>
+            <span class="act">[ ПОДРОБНЕЕ ]</span>
+          </div>
+
+          <div class="act-row mt12">
+            <span class="grow muted note">изменение ставки попадёт в журнал аудита: автор, время и обе суммы</span>
+            <button class="btn">[ ОТМЕНА ]</button>
+            <button class="btn-primary">[ СОХРАНИТЬ СТАВКУ ]</button>
+          </div>
+
+          <div class="sec-title">ИСТОРИЯ ИЗМЕНЕНИЙ СТАВКИ<span class="dim">записей: 3</span></div>
+
+          <div class="table-wrap">
+            <table class="table hist">
+              <thead>
+                <tr>
+                  <th class="c-per">ПЕРИОД</th>
+                  <th class="num c-rate">СТАВКА, CAPS/СУТ</th>
+                  <th class="c-who">КТО ИЗМЕНИЛ</th>
+                  <th>КОММЕНТАРИЙ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="selected">
+                  <td>2281-04-01 — н.в.</td><td class="num">240</td><td>disp.alice.hawthorne</td>
+                  <td>повышение после перевода в капитаны охраны</td>
+                </tr>
+                <tr>
+                  <td>2280-09-01 — 2281-03-31</td><td class="num">200</td><td>disp.alice.hawthorne</td>
+                  <td>базовая ставка охранника сопровождения</td>
+                </tr>
+                <tr>
+                  <td>2280-04-12 — 2280-08-31</td><td class="num">160</td><td>disp.alice.hawthorne</td>
+                  <td>испытательный срок, маршруты до Primm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="panel-foot">◆ ЧЕРНОВИК НЕ СОХРАНЯЕТСЯ<span class="dim" style="margin-left:auto;">СТАВКА ИСПОЛЬЗУЕТСЯ ТОЛЬКО В РАСЧЁТАХ ОПЛАТЫ РЕЙСОВ</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">▰ ПОЛЬЗОВАТЕЛИ ОРГАНИЗАЦИИ · СТАВКИ<span class="tag">tnt_0041 · АКТИВНЫХ 7</span></div>
+        <div class="panel-body">
+          <div class="table-wrap">
+            <table class="table usr">
+              <thead>
+                <tr>
+                  <th class="c-fio">ФИО</th>
+                  <th class="c-log">ЛОГИН</th>
+                  <th class="c-role">РОЛЬ</th>
+                  <th class="num c-rate">СТАВКА, CAPS/СУТ</th>
+                  <th class="c-from">ДЕЙСТВУЕТ С</th>
+                  <th class="c-act">ДЕЙСТВИЕ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="nm">А. Хоторн</td><td>disp.alice.hawthorne</td><td>ДИСПЕТЧЕР КАРАВАНОВ</td>
+                  <td class="num muted">не применяется</td><td class="k">—</td>
+                  <td class="c-act"><button class="btn btn-sm disabled">[ СТАВКА ]</button></td></tr>
+                <tr><td class="nm">Дж. Кассиди</td><td>crew.j.cassidy</td><td>КАРАВАН-МАСТЕР</td>
+                  <td class="num">260</td><td class="k">2281-01-15</td>
+                  <td class="c-act"><button class="btn btn-sm">[ СТАВКА ]</button></td></tr>
+                <tr class="selected"><td class="nm">А. Сэнт-Джеймс</td><td>crew.a.stjames</td><td>КАПИТАН ОХРАНЫ</td>
+                  <td class="num">240</td><td class="k">2281-04-01</td>
+                  <td class="c-act"><button class="btn-primary btn-sm">[ СТАВКА ]</button></td></tr>
+                <tr><td class="nm">М. Гаррет</td><td>crew.m.garrett</td><td>ПОЛЕВОЙ МЕДИК</td>
+                  <td class="num">210</td><td class="k">2281-03-02</td>
+                  <td class="c-act"><button class="btn btn-sm">[ СТАВКА ]</button></td></tr>
+                <tr><td class="nm">Б. Райт</td><td>crew.b.wright</td><td>ПОГОНЩИК БРАМИНОВ</td>
+                  <td class="num">120</td><td class="k">2281-07-30</td>
+                  <td class="c-act"><button class="btn btn-sm">[ СТАВКА ]</button></td></tr>
+                <tr><td class="nm">Л. Пирсон</td><td>crew.l.pearson</td><td>ФЕЛЬДШЕР</td>
+                  <td class="num">140</td><td class="k">2281-02-20</td>
+                  <td class="c-act"><button class="btn btn-sm">[ СТАВКА ]</button></td></tr>
+                <tr><td class="nm">Х. Брандт</td><td>stor.h.brandt</td><td>КЛАДОВЩИК</td>
+                  <td class="num muted">Ставка не назначена</td><td class="k">—</td>
+                  <td class="c-act"><button class="btn btn-sm">[ СТАВКА ]</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="note mt8 muted">в расчёт оплаты рейса берётся ставка, действующая на дату выхода каравана; у диспетчера ставка не применяется — он в рейсы не ходит</div>
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="term-aside">
+
+      <div class="panel">
+        <div class="panel-title">◢ ПРОВЕРКИ СИСТЕМЫ</div>
+        <div class="panel-body">
+          <div class="kv">
+            <div class="kv-row"><span class="k">СОТРУДНИК</span><span class="v ok-t">tnt_0041 · ДОСТУПЕН</span></div>
+            <div class="kv-row"><span class="k">СУММА</span><span class="v ok-t">260 · ЦЕЛОЕ > 0</span></div>
+            <div class="kv-row"><span class="k">ДАТА</span><span class="v ok-t">2281-11-01 · OK</span></div>
+            <div class="kv-row"><span class="k">ПЕРЕСЕЧЕНИЕ ПЕРИОДОВ</span><span class="v muted">НЕТ</span></div>
+            <div class="kv-row"><span class="k">ИЗМЕНЕНИЕ</span><span class="v">240 → 260 CAPS · +8%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="states-label mt8">СОСТОЯНИЕ: НЕКОРРЕКТНАЯ СУММА</div>
+      <div class="box state-box">
+        <div class="field">
+          <label>НОВАЯ СТАВКА, КРЫШЕК / СУТ</label>
+          <div class="suffixed">
+            <input class="input error" value="-40.5">
+            <span class="suffix">CAPS ◉</span>
+          </div>
+          <div class="hint err">Ставка указывается в крышках, целое число</div>
+        </div>
+        <div class="mt4"><button class="btn-primary btn-sm disabled">[ СОХРАНИТЬ СТАВКУ ]</button></div>
+      </div>
+
+      <div class="states-label mt8">СОСТОЯНИЕ: СТАВКА НЕ НАЗНАЧЕНА</div>
+      <div class="box state-box">
+        <div class="ttl">Х. БРАНДТ · КЛАДОВЩИК</div>
+        <div class="kv">
+          <div class="kv-row"><span class="k">ДЕЙСТВУЮЩАЯ СТАВКА</span><span class="v muted">Ставка не назначена</span></div>
+          <div class="kv-row"><span class="k">ИСТОРИЯ</span><span class="v muted">записей нет</span></div>
+        </div>
+        <div class="mt4"><button class="btn btn-sm">[ НАЗНАЧИТЬ СТАВКУ ]</button></div>
+      </div>
+
+      <div class="states-label mt8">СОСТОЯНИЕ: УСПЕХ</div>
+      <div class="box state-box">
+        <div class="alert success">
+          <div class="left">
+            <span class="sym">✓</span>
+            <div>СТАВКА СОХРАНЕНА
+              <span class="sub">260 CAPS / сут с 2281-11-01 · строка добавлена в историю и в журнал аудита 14:08:47</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="states-label mt8">СОСТОЯНИЕ: ОШИБКА</div>
+      <div class="box state-box">
+        <div class="alert error">
+          <div class="left">
+            <span class="sym">⨯</span>
+            <div>НЕ УДАЛОСЬ СОХРАНИТЬ СТАВКУ
+              <span class="sub">сервер: 503 PAYROLL_STORE_UNAVAILABLE · действующей остаётся 240 CAPS / сут</span>
+            </div>
+          </div>
+          <span class="act">[ ПОВТОРИТЬ ]</span>
+        </div>
+      </div>
+
+      <div class="ascii-sep mt8">──────────────────────</div>
+      <div class="note muted">ставку правит только диспетчер своей организации; сотрудник видит её в карточке, но не редактирует</div>
+
+    </aside>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> КАРТОЧКА СОТРУДНИКА · ВКЛАДКА «ОПЛАТА» · F1 HELP</div>
+    <div class="foot-buttons">
+      <button class="btn">[ НАЗАД ]</button>
+      <button class="btn">[ ОТМЕНА ]</button>
+      <button class="btn-primary">[ СОХРАНИТЬ СТАВКУ ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

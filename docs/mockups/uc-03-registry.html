@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<!-- render: 1440x1200 -->
+<link rel="stylesheet" href="assets/robco.css">
+<title>UC-3 · Реестр рейсов</title>
+<style>
+  /* только специфика этого экрана */
+  :root { --font-mono: Consolas, "Courier New", monospace; }
+  /* рендер без внутренних скроллов: контент помещается целиком */
+  .term-main, .term-content, .term-nav { min-height: auto; overflow: visible; }
+  .table-wrap { overflow: visible; }
+
+  /* срезы реестра + сортировка */
+  .slices { display: flex; align-items: center; gap: 8px; }
+  .slices .sp { flex: 1; }
+  .slices .sort { display: flex; align-items: center; gap: 6px; font-size: 10px; color: var(--fg-dim); letter-spacing: 1px; }
+  .slices .sort .select { width: 210px; font-size: 11px; padding: 3px 8px; }
+
+  /* сводка по срезу */
+  .sum { display: grid; grid-template-columns: 150px 1fr 1fr 220px; gap: 10px; }
+  .sum .box { display: flex; flex-direction: column; gap: 3px; }
+  .sum .cap { font-size: 10px; letter-spacing: 2px; color: var(--fg-dim); margin-bottom: 2px; }
+  .sum .huge { font-size: 38px; line-height: 1; color: var(--fg-bright); letter-spacing: 2px; }
+  .sum .rowline { display: flex; justify-content: space-between; font-size: 11px; padding: 1px 0; }
+  .sum .rowline .n { color: var(--fg-bright); }
+  .sum .att { font-size: 24px; line-height: 1.1; color: var(--warn); letter-spacing: 2px; }
+
+  /* фильтры */
+  .filters { display: grid; grid-template-columns: 1fr 1fr 230px; gap: 12px; align-items: start; }
+  .fl-cap { font-size: 10px; letter-spacing: 2px; color: var(--fg-dim); margin-bottom: 4px; }
+  .fl-cap::before { content: "> "; color: var(--fg); }
+  .chip.on { border-style: solid; color: var(--bg); background: var(--fg); text-shadow: none; }
+  .chip.on.warn { background: var(--warn); border-color: var(--warn); }
+  .chip-row { line-height: 1.9; }
+  .fl-act { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+
+  /* таблица реестра */
+  table.reg { font-size: 11px; }
+  table.reg th, table.reg td { padding: 5px 7px; }
+  table.reg .c-id   { width: 124px; }
+  table.reg .c-ab   { width: 148px; }
+  table.reg .c-dep  { width: 88px; }
+  table.reg .c-carg { width: 136px; }
+  table.reg .c-eta  { width: 88px; }
+  table.reg .c-risk { width: 176px; }
+  table.reg .c-st   { width: 92px; }
+  table.reg .c-att  { width: 142px; }
+  table.reg .c-chg  { width: 104px; }
+  table.reg .c-act  { width: 100px; }
+  table.reg .btn, table.reg .btn-sm { white-space: nowrap; }
+  .id-main { color: var(--fg-bright); white-space: nowrap; }
+  .id-sub  { font-size: 10px; color: var(--fg-dim); }
+  .ab { line-height: 1.4; }
+  .ab .to { color: var(--fg-dim); }
+  .riskcell { display: flex; align-items: center; gap: 6px; }
+  .riskcell .num { font-size: 15px; letter-spacing: 1px; min-width: 26px; text-align: right; }
+  .riskcell .num.low { color: var(--risk-low); }
+  .riskcell .num.mid { color: var(--risk-mid); }
+  .riskcell .num.high { color: var(--risk-high); }
+  .riskcell .num.crit { color: var(--risk-crit); }
+  .riskcell .num.na { color: var(--muted); font-size: 13px; }
+  .rec { font-size: 10px; color: var(--fg-dim); line-height: 1.3; margin-top: 2px; }
+  .att-txt { font-size: 10px; color: var(--warn); line-height: 1.35; }
+  .chg { font-size: 10px; line-height: 1.35; color: var(--fg-dim); }
+  .chg b { color: var(--fg); font-weight: normal; }
+
+  /* витрина состояний экрана */
+  .st-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .st-grid .box { font-size: 10px; line-height: 1.5; min-height: 74px; }
+  .st-grid .st-h { font-size: 10px; letter-spacing: 1px; color: var(--fg); display: block; margin-bottom: 3px; }
+  .st-grid .box.e { border-color: var(--err); }
+  .st-grid .box.e .st-h { color: var(--err); }
+  .legend { font-size: 10px; color: var(--fg-dim); letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="terminal">
+
+  <header class="term-header">
+    <div>
+      <div class="sys-title">CARAVAN // DISPATCH TERMINAL</div>
+      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · 2281-10-23 14:07</div>
+    </div>
+    <div class="hdr-center">
+      <span class="mode">РЕЕСТР РЕЙСОВ</span>
+      <div class="mt4">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
+    </div>
+    <div class="hdr-right">
+      <div class="org">ORG :: CRIMSON CARAVAN COMPANY · tnt_0041</div>
+      <div class="user">USER :: DISP_ALICE.HAWTHORNE · CLR-3</div>
+    </div>
+  </header>
+
+  <div class="term-main no-aside">
+
+    <nav class="term-nav">
+      <div class="nav-title">-- MAIN MENU --</div>
+      <ul>
+        <li class="active">РЕЕСТР РЕЙСОВ</li>
+        <li>НОВАЯ ЗАЯВКА</li>
+        <li>ОЦЕНКА РИСКА</li>
+        <li>ИНЦИДЕНТЫ</li>
+        <li>БРИГАДЫ</li>
+        <li>АРХИВ РЕЙСОВ</li>
+        <li>ОТЧЁТЫ</li>
+      </ul>
+      <div class="nav-foot">SESSION: 00:12:43<br>NODE: MCCARRAN-04<br>ОРГАНИЗАЦИЯ: tnt_0041</div>
+    </nav>
+
+    <section class="term-content">
+
+      <div class="slices">
+        <button class="btn-primary">[ АКТИВНЫЕ · 6 ]</button>
+        <button class="btn">[ АРХИВ · 24 ]</button>
+        <span class="sp"></span>
+        <div class="sort">
+          ПОРЯДОК:
+          <select class="select">
+            <option>Номер заявки — по убыванию</option>
+            <option>ETA — по возрастанию</option>
+            <option>risk_score — по убыванию</option>
+            <option>Дата отправки — по убыванию</option>
+            <option>Последнее изменение статуса</option>
+          </select>
+        </div>
+        <button class="btn btn-sm">[ СБРОСИТЬ ФИЛЬТРЫ ]</button>
+        <button class="btn btn-sm">[ ОБНОВИТЬ ]</button>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">▰ СВОДКА ПО СРЕЗУ «АКТИВНЫЕ»<span class="tag">ОРГАНИЗАЦИЯ tnt_0041 · ДРУГИЕ ОРГАНИЗАЦИИ НЕ ПОКАЗЫВАЮТСЯ</span></div>
+        <div class="panel-body">
+          <div class="sum">
+
+            <div class="box accent">
+              <div class="cap">РЕЙСОВ В СРЕЗЕ</div>
+              <div class="huge">6</div>
+              <div class="dim">из 30 в организации</div>
+            </div>
+
+            <div class="box">
+              <div class="cap">ПО СТАТУСАМ</div>
+              <div class="rowline"><span class="muted">ЧЕРНОВИК</span><span class="n">1</span></div>
+              <div class="rowline"><span class="muted">ГОТОВ</span><span class="n">1</span></div>
+              <div class="rowline"><span class="muted">В ПУТИ</span><span class="n">2</span></div>
+              <div class="rowline"><span class="muted">ЗАДЕРЖАН</span><span class="n">1</span></div>
+              <div class="rowline"><span class="muted">ОТМЕНЁН</span><span class="n">1</span></div>
+            </div>
+
+            <div class="box">
+              <div class="cap">ПО УРОВНЯМ РИСКА</div>
+              <div class="rowline"><span><span class="risk low">LOW</span></span><span class="n">1</span></div>
+              <div class="rowline"><span><span class="risk mid">MID</span></span><span class="n">2</span></div>
+              <div class="rowline"><span><span class="risk high">HIGH</span></span><span class="n">1</span></div>
+              <div class="rowline"><span><span class="risk crit">CRIT</span></span><span class="n">1</span></div>
+              <div class="rowline"><span class="muted">Н/Д — ТРЕБУЕТ ПЕРЕСЧЁТА</span><span class="n">1</span></div>
+            </div>
+
+            <div class="box accent">
+              <div class="cap">ТРЕБУЮТ ВНИМАНИЯ</div>
+              <div class="att">3 РЕЙСА</div>
+              <div class="dim mt4">инцидент на маршруте · уровень CRIT · risk_score не рассчитан</div>
+            </div>
+
+          </div>
+        </div>
+        <div class="panel-foot"><span>◆ СВОДКА СЧИТАЕТСЯ ПО СРЕЗУ И НЕ МЕНЯЕТСЯ ПРИ ОТБОРЕ И СОРТИРОВКЕ (ШАГ 8)</span><span>ОБНОВЛЕНО 14:07:02</span></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">▰ ОТБОР<span class="tag">ФИЛЬТРЫ НЕ СУЖАЮТ СРЕЗ · ПОКАЗАНО 6 ИЗ 6</span></div>
+        <div class="panel-body">
+          <div class="filters">
+
+            <div>
+              <div class="fl-cap">СТАТУС</div>
+              <div class="chip-row">
+                <span class="chip on">ЧЕРНОВИК</span><span class="chip on">ГОТОВ</span><span class="chip on">В ПУТИ</span><span class="chip on warn">ЗАДЕРЖАН</span><span class="chip on">ОТМЕНЁН</span><span class="chip muted">ДОСТАВЛЕН</span><span class="chip muted">ЗАКРЫТ</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="fl-cap">УРОВЕНЬ РИСКА</div>
+              <div class="chip-row">
+                <span class="chip on">LOW</span><span class="chip on">MID</span><span class="chip on">HIGH</span><span class="chip on crit">CRIT</span><span class="chip on">Н/Д</span>
+              </div>
+              <label class="chk mt4"><span class="box-i"></span>только требующие внимания (3)</label>
+            </div>
+
+            <div class="fl-act">
+              <div class="legend">ЦВЕТ ВСЕГДА С ТЕКСТОВОЙ ПОДПИСЬЮ:</div>
+              <div class="risk-scale">
+                <div class="cell">LOW</div><div class="cell">MID</div><div class="cell">HIGH</div><div class="cell">CRIT</div>
+              </div>
+              <button class="btn btn-sm">[ СБРОСИТЬ ФИЛЬТРЫ ]</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="alert warn">
+        <div class="left">
+          <span class="sym">⚠</span>
+          <div>RISK_SCORE У 2 РЕЙСОВ НЕ АКТУАЛЕН<span class="sub">#CRV-2281-1044 — не рассчитан, требует пересчёта · #CRV-2281-1043 — расчёт по данным старше 24 ч</span></div>
+        </div>
+        <span class="act">[ ПЕРЕСЧИТАТЬ ВСЕ ]</span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table reg">
+          <caption>АКТИВНЫЕ РЕЙСЫ · CRIMSON CARAVAN COMPANY · СОРТИРОВКА ПО НОМЕРУ ЗАЯВКИ ▼</caption>
+          <thead>
+            <tr>
+              <th class="c-id">МАРШРУТ</th>
+              <th class="c-ab">ОТКУДА → КУДА</th>
+              <th class="c-dep">ОТПРАВКА</th>
+              <th class="c-carg">ГРУЗ</th>
+              <th class="c-eta">ETA</th>
+              <th class="c-risk">RISK_SCORE</th>
+              <th class="c-st">СТАТУС</th>
+              <th class="c-att">ВНИМАНИЕ</th>
+              <th class="c-chg">ИЗМЕНЕНИЕ СТАТУСА</th>
+              <th class="c-act">ДЕЙСТВИЯ</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr class="selected">
+              <td><div class="id-main">#CRV-2281-1047</div><div class="id-sub">R-1047.A</div></td>
+              <td class="ab">Goodsprings<br><span class="to">→ New Vegas</span></td>
+              <td>2281-10-25<div class="id-sub">06:00–10:00</div></td>
+              <td>Медикаменты<div class="id-sub">4&nbsp;250 CAPS</div></td>
+              <td>2281-10-26<div class="id-sub">10:40</div></td>
+              <td>
+                <div class="riskcell"><span class="num high">67</span><span class="risk high">HIGH</span></div>
+                <div class="rec">усилить охрану, выход только в окне</div>
+              </td>
+              <td><span class="badge warn">ЗАДЕРЖАН</span></td>
+              <td class="att-txt">⚠ инцидент INC-2281-0417 на участке Nipton</td>
+              <td class="chg">10-23 12:05<br><b>Система</b></td>
+              <td><button class="btn btn-sm">[ СТАТУС ]</button></td>
+            </tr>
+
+            <tr>
+              <td><div class="id-main">#CRV-2281-1046</div><div class="id-sub">R-1046.C</div></td>
+              <td class="ab">Primm<br><span class="to">→ Novac</span></td>
+              <td>2281-10-22<div class="id-sub">07:10</div></td>
+              <td>Вода, фильтры<div class="id-sub">1&nbsp;870 CAPS</div></td>
+              <td>2281-10-23<div class="id-sub">18:20</div></td>
+              <td>
+                <div class="riskcell"><span class="num mid">42</span><span class="risk mid">MID</span></div>
+                <div class="rec">штатный конвой, 2 охранника</div>
+              </td>
+              <td><span class="badge active">В ПУТИ</span></td>
+              <td class="muted">—</td>
+              <td class="chg">10-22 07:12<br><b>Дж. Кассиди</b></td>
+              <td><button class="btn btn-sm">[ СТАТУС ]</button></td>
+            </tr>
+
+            <tr>
+              <td><div class="id-main">#CRV-2281-1045</div><div class="id-sub">R-1045.B</div></td>
+              <td class="ab">Novac<br><span class="to">→ Nipton</span></td>
+              <td>2281-10-21<div class="id-sub">05:40</div></td>
+              <td>Боеприпасы<div class="id-sub">6&nbsp;400 CAPS</div></td>
+              <td>2281-10-23<div class="id-sub">21:15</div></td>
+              <td>
+                <div class="riskcell"><span class="num crit">88</span><span class="risk crit">CRIT</span></div>
+                <div class="rec">маршрут не рекомендован, требуется решение диспетчера</div>
+              </td>
+              <td><span class="badge active">В ПУТИ</span></td>
+              <td class="att-txt">⚠ уровень CRIT · отклонение от маршрута 11 mi</td>
+              <td class="chg">10-21 05:44<br><b>Караван-мастер</b></td>
+              <td><button class="btn btn-sm">[ СТАТУС ]</button></td>
+            </tr>
+
+            <tr>
+              <td><div class="id-main">#CRV-2281-1044</div><div class="id-sub">R-1044.A</div></td>
+              <td class="ab">Goodsprings<br><span class="to">→ Primm</span></td>
+              <td>2281-10-24<div class="id-sub">08:00</div></td>
+              <td>Броня, инструмент<div class="id-sub">2&nbsp;310 CAPS</div></td>
+              <td>2281-10-24<div class="id-sub">16:30</div></td>
+              <td>
+                <div class="riskcell"><span class="num na">Н/Д</span><span class="risk">НЕ РАССЧИТАН</span></div>
+                <div class="rec">требует пересчёта (UC-7)</div>
+                <button class="btn btn-sm mt4">[ ПЕРЕСЧИТАТЬ РИСК ]</button>
+              </td>
+              <td><span class="badge info">ГОТОВ</span></td>
+              <td class="att-txt">⚠ risk_score не рассчитан (UC-7)</td>
+              <td class="chg">10-22 15:30<br><b>A. Hawthorne</b></td>
+              <td><button class="btn btn-sm">[ СТАТУС ]</button></td>
+            </tr>
+
+            <tr>
+              <td><div class="id-main">#CRV-2281-1043</div><div class="id-sub">R-1043.A</div></td>
+              <td class="ab">Nipton<br><span class="to">→ New Vegas</span></td>
+              <td>2281-10-26<div class="id-sub">09:00</div></td>
+              <td>Химпрепараты<div class="id-sub">980 CAPS</div></td>
+              <td>2281-10-26<div class="id-sub">19:40</div></td>
+              <td>
+                <div class="riskcell"><span class="num low">29</span><span class="risk low">LOW</span><span class="chip muted">устар.</span></div>
+                <div class="rec">расчёт от 2281-10-21 08:30, данные старше 24 ч</div>
+              </td>
+              <td><span class="badge muted">ЧЕРНОВИК</span></td>
+              <td class="muted">—</td>
+              <td class="chg">10-23 09:05<br><b>A. Hawthorne</b></td>
+              <td><button class="btn btn-sm">[ СТАТУС ]</button></td>
+            </tr>
+
+            <tr class="dimmed">
+              <td><div class="id-main">#CRV-2281-1042</div><div class="id-sub">R-1042.D</div></td>
+              <td class="ab">Mojave Outpost<br><span class="to">→ Goodsprings</span></td>
+              <td>2281-10-20<div class="id-sub">06:20</div></td>
+              <td>Корма для браминов<div class="id-sub">1&nbsp;150 CAPS</div></td>
+              <td class="muted">—</td>
+              <td>
+                <div class="riskcell"><span class="num mid">51</span><span class="risk mid">MID</span></div>
+                <div class="rec">расчёт сохранён в карточке</div>
+              </td>
+              <td><span class="badge err">ОТМЕНЁН</span></td>
+              <td class="muted">финальный статус · только просмотр (альт. 9а) · уйдёт в срез «АРХИВ»</td>
+              <td class="chg">10-21 10:12<br><b>A. Hawthorne</b></td>
+              <td><button class="btn btn-sm disabled">[ ПРОСМОТР ]</button></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="states-label">СОСТОЯНИЯ ЭКРАНА, НЕ СОВМЕСТИМЫЕ С ЗАПОЛНЕННЫМ РЕЕСТРОМ</div>
+      <div class="st-grid">
+        <div class="box"><span class="st-h">⟳ ЗАГРУЗКА</span><span class="dim">Загрузка реестра рейсов... частичные данные не показываются</span></div>
+        <div class="box"><span class="st-h">ОРГАНИЗАЦИЯ НЕ ВЫБРАНА</span><span class="dim">выберите организацию: tnt_0041, tnt_0042, tnt_0043 — до выбора рейсы не раскрываются (альт. 1а)</span></div>
+        <div class="box"><span class="st-h">НЕТ ЗАЯВОК</span><span class="dim">в организации нет заявок — <span class="bright">[ СОЗДАТЬ ЗАЯВКУ (UC-1) ]</span> (альт. 3а)</span></div>
+        <div class="box e"><span class="st-h">СЕРВЕР НЕДОСТУПЕН</span><span class="dim">данные не получены, частичный реестр не показывается — <span class="err-t">[ ПОВТОРИТЬ ]</span> (альт. 3б)</span></div>
+        <div class="box"><span class="st-h">ПУСТОЙ РЕЗУЛЬТАТ ОТБОРА</span><span class="dim">под фильтры не подошёл ни один рейс; сводка по срезу сохраняется — [ СБРОСИТЬ ФИЛЬТРЫ ] (альт. 8а)</span></div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer class="term-footer">
+    <div class="foot-status"><span class="dot">●</span> READY · СРЕЗ «АКТИВНЫЕ» · 6 РЕЙСОВ · 3 ТРЕБУЮТ ВНИМАНИЯ · ORG tnt_0041 · F1 HELP</div>
+    <div class="foot-buttons">
+      <button class="btn">[ АРХИВ РЕЙСОВ ]</button>
+      <button class="btn-primary">[ ОТКРЫТЬ КАРТОЧКУ ]</button>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
