@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-7 · Рассчитать risk_score — макет экрана</title>
+<!-- render: 1400x1150 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><div class="registry-head"><h2>Реестр рейсов</h2><div class="registry-meta"><div class="muted small">данные на 2287-10-21 14:20 · показано 2 · в срезе 3</div><button class="link">Обновить</button></div></div><div class="registry-table"><table><thead><tr><th>Маршрут (id · название)</th><th>Откуда → Куда</th><th>Отправка</th><th>Груз</th><th>ETA</th><th>risk_score</th><th>Статус</th><th></th></tr></thead><tbody><tr><td><span class="route-code">R-1043</span> Южный объезд</td><td>Goodsprings &rarr; New Vegas</td><td>2287-10-21</td><td>Медикаменты<div class="muted small">5 000 крышек</div></td><td>1 д 12 ч</td><td><button class="risk-badge" style="border-color:#ff9800;color:#ff9800">risk 74 ⓘ</button><div class="muted small">Высокий</div></td><td><span class="status-badge" style="border-color:#33ccff;color:#33ccff">В пути</span></td><td><button class="link">Пересчитать риск</button></td></tr><tr><td><span class="route-code">R-1041</span> Прямой тракт</td><td>Goodsprings &rarr; Novac</td><td>2287-10-20</td><td>Патроны<div class="muted small">12 400 крышек</div></td><td>9 ч</td><td><button class="risk-badge" style="border-color:#ff4444;color:#ff4444">risk 86 ⓘ</button><div class="muted small">Критический</div></td><td><span class="status-badge" style="border-color:#ff9800;color:#ff9800">Задержка</span></td><td><button class="link">Пересчитать риск</button></td></tr></tbody></table></div></div></main>
+</div>
+<div class="modal-overlay"><div class="modal"><div class="modal-head"><h3>Как получен risk_score</h3><button class="link">✕</button></div><div class="muted small">R-1043 · Goodsprings → New Vegas · Южный объезд через Primm</div><div class="muted small modal-asof">Источник: Wasteland Intel, данные на 2287-10-21 13:50</div><table class="inner"><thead><tr><th>Участок</th><th>Угроза</th><th>Уровень</th></tr></thead><tbody><tr><td>Goodsprings → Primm</td><td>Рейдеры</td><td>3</td></tr><tr><td>Primm → Nipton</td><td>Когти смерти</td><td>4</td></tr><tr><td>Nipton → Novac</td><td>Гули</td><td>2</td></tr><tr><td>Novac → New Vegas</td><td>Чисто</td><td>0</td></tr></tbody></table><div class="derivation"><div class="step"><span>Сумма уровней угроз</span><b>9</b></div><div class="step"><span>База = сумма × 6 (макс. 100)</span><b>54</b></div><div class="step"><span>Ценность груза 5 000 крышек (5 000–19 999 → +20)</span><b>+20</b></div><div class="step total"><span>Итог = min(100, база + коэф. груза)</span><b>74</b></div></div><div class="rec modal-rec">Рекомендуется охрана 3 чел. и запас воды на 2 суток.</div><div class="modal-actions"><button class="danger">Удалить оценку</button><div class="muted small">после удаления нажмите «Пересчитать риск» в реестре — оценка появится заново</div></div></div></div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-7. Рассчитать risk_score</b><br>risk_score раскрывается тем же модальным окном, что и в коде (components/RiskModal.tsx): источник данных и их возраст, вклад каждого участка, арифметика оценки и вытекающая из неё рекомендация (UC-8).</div></div>
+</body>
+</html>

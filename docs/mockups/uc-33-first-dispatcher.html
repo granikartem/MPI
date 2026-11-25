@@ -2,247 +2,29 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<!-- render: 1440x1180 -->
-<link rel="stylesheet" href="assets/robco.css">
-<title>UC-33 · Назначение первого диспетчера организации</title>
-<style>
-  /* только специфика этого экрана */
-  :root { --font-mono: Consolas, "Courier New", monospace;
-          --font-ui:   Consolas, "Courier New", monospace; }
-
-  /* каркас растёт под содержимое: внутренних скроллов нет */
-  .terminal { grid-template-rows: 54px auto 36px; min-height: 0; }
-  .term-main, .term-content, .term-aside, .term-nav { min-height: auto; overflow: visible; }
-
-  /* карточка организации: две колонки пар «ключ — значение» */
-  .org-kv { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
-
-  /* сводка в правой колонке */
-  .term-aside .box { font-size: 11px; line-height: 1.5; }
-  .term-aside .box .bh { font-size: 10px; letter-spacing: 2px; color: var(--fg-bright); display: block; margin-bottom: 5px; }
-  .term-aside .kv .k { font-size: 10px; }
-  .checks { font-size: 11px; line-height: 1.7; }
-  .checks .ok-t { margin-right: 4px; }
-  .note { font-size: 10px; color: var(--fg-dim); line-height: 1.5; }
-
-  /* поле логина: подпись-проверка под строкой */
-  .hint.ok { color: var(--ok); }
-
-  /* витрина состояний экрана */
-  .st-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .st-grid .box { font-size: 10px; line-height: 1.5; min-height: 118px; }
-  .st-grid .st-h { font-size: 10px; letter-spacing: 1px; color: var(--fg); display: block; margin-bottom: 4px; }
-  .st-grid .box.e { border-color: var(--err); }
-  .st-grid .box.e .st-h { color: var(--err); }
-  .st-grid .input, .st-grid .select { font-size: 10px; padding: 3px 6px; }
-  .st-grid .btn, .st-grid .btn-primary { font-size: 10px; padding: 3px 8px; }
-  .st-grid label { font-size: 9px; }
-</style>
+<title>UC-33 · Назначить первого диспетчера организации — макет экрана</title>
+<!-- render: 1500x1150 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
 </head>
-<body class="theme-amber">
-<div class="terminal">
-
-  <header class="term-header">
-    <div>
-      <div class="sys-title">CARAVAN // PLATFORM ADMIN</div>
-      <div class="sys-sub">ROBCO TERMLINK v4.21.07 · 2281-10-23 14:07</div>
-    </div>
-    <div class="hdr-center">
-      <span class="mode">ASSIGN FIRST DISPATCHER</span>
-      <div class="mt4">[ LINK ][ MOJAVE RELAY 07 ] = ONLINE</div>
-    </div>
-    <div class="hdr-right">
-      <div class="org">ORG :: VAULT-TEC PLATFORM OPERATIONS</div>
-      <div class="user">USER :: SU.VAULT-TEC.ADMIN · PLATFORM OPERATOR (SU) · CLR-9</div>
-    </div>
-  </header>
-
-  <div class="term-main">
-
-    <nav class="term-nav">
-      <div class="nav-title">-- SU CONSOLE --</div>
-      <ul>
-        <li class="active">РЕЕСТР ОРГАНИЗАЦИЙ</li>
-        <li>НОВАЯ ОРГАНИЗАЦИЯ</li>
-        <li>ПОДПИСКИ</li>
-        <li>ПОЛЬЗОВАТЕЛИ</li>
-        <li>ЖУРНАЛ АУДИТА</li>
-        <li>УЗЛЫ И КАНАЛЫ</li>
-      </ul>
-      <div class="nav-foot">SESSION: 00:04:19<br>NODE: MCCARRAN-04<br>РЕЖИМ: SUPERUSER</div>
-    </nav>
-
-    <section class="term-content">
-
-      <div class="stepper">
-        <div class="step done"><span class="num">✓</span>ДАННЫЕ ОРГАНИЗАЦИИ</div>
-        <span class="step-arrow">⟶</span>
-        <div class="step active"><span class="num">2</span>ПЕРВЫЙ ДИСПЕТЧЕР</div>
-        <span class="step-arrow">⟶</span>
-        <div class="step"><span class="num">3</span>ПОДТВЕРЖДЕНИЕ</div>
-      </div>
-
-      <div class="alert info">
-        <div class="left">
-          <span class="sym">▸</span>
-          <div>ОРГАНИЗАЦИЯ СОЗДАНА, ПОЛЬЗОВАТЕЛЕЙ НЕТ<span class="sub">шаг «первый диспетчер» мастера UC-32 был пропущен (SKIP) 2281-10-23 13:52 · назначение запущено из реестра организаций</span></div>
-        </div>
-        <span class="act">[ К РЕЕСТРУ ОРГАНИЗАЦИЙ ]</span>
-      </div>
-
-      <div class="panel">
-        <div class="panel-title">▰ ОРГАНИЗАЦИЯ<span class="tag">ВЫБРАНА В РЕЕСТРЕ · ШАГ 1</span></div>
-        <div class="panel-body">
-          <div class="org-kv">
-            <div class="kv">
-              <div class="kv-row"><span class="k">TENANT</span><span class="v">tnt_0044</span></div>
-              <div class="kv-row"><span class="k">НАЗВАНИЕ</span><span class="v">Mojave Express</span></div>
-              <div class="kv-row"><span class="k">РЕГИОН</span><span class="v">Mojave · NV</span></div>
-            </div>
-            <div class="kv">
-              <div class="kv-row"><span class="k">ПОДПИСКА</span><span class="v">BASIC · 200 крышек/мес</span></div>
-              <div class="kv-row"><span class="k">АДРЕС</span><span class="v">Primm · Vikki &amp; Vance</span></div>
-              <div class="kv-row"><span class="k">ПОЛЬЗОВАТЕЛЕЙ</span><span class="v warn">0 · первый диспетчер не назначен</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="panel-foot"><span>◆ СОЗДАНА 2281-10-23 13:52 · SU.VAULT-TEC.ADMIN</span><span>СТАТУС: <span class="badge warn">БЕЗ ДИСПЕТЧЕРА</span></span></div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-title">▰ ПЕРВЫЙ ДИСПЕТЧЕР ОРГАНИЗАЦИИ<span class="tag">ШАГ 3 ПОТОКА · ВВОД УЧЁТНЫХ ДАННЫХ</span></div>
-        <div class="panel-body">
-
-          <div class="form-grid">
-            <div class="field full">
-              <label>ФИО ДИСПЕТЧЕРА</label>
-              <input class="input" value="Johnson Nash">
-              <div class="hint">как в кадровой записи организации · обязательное поле</div>
-            </div>
-
-            <div class="field">
-              <label>ЛОГИН</label>
-              <input class="input" value="disp.j.nash">
-              <div class="hint ok">✓ логин свободен · проверено 2281-10-23 14:07</div>
-            </div>
-
-            <div class="field">
-              <label>EMAIL</label>
-              <input class="input" value="j.nash@mojave.exp">
-              <div class="hint">на этот адрес уйдут начальные учётные данные</div>
-            </div>
-
-            <div class="field">
-              <label>НАЧАЛЬНЫЙ ПАРОЛЬ</label>
-              <div class="suffixed">
-                <input class="input" value="Mj7-kx42-QD">
-                <span class="suffix">⟳ AUTO</span>
-              </div>
-              <div class="hint">сгенерирован системой · [ ПЕРЕГЕНЕРИРОВАТЬ ]</div>
-            </div>
-
-            <div class="field">
-              <label>РОЛЬ</label>
-              <select class="select disabled" disabled><option>Диспетчер</option></select>
-              <div class="hint">роль зафиксирована прецедентом, изменить нельзя · CLEARANCE 3</div>
-            </div>
-
-            <div class="field full">
-              <div class="sec-title">ПАРАМЕТРЫ УЧЁТНОЙ ЗАПИСИ<span class="dim">tnt_0044</span></div>
-              <label class="chk checked"><span class="box-i"></span>Создать учётную запись активной и привязать к организации tnt_0044</label>
-              <label class="chk checked"><span class="box-i"></span>Потребовать смену пароля при первом входе</label>
-              <label class="chk checked"><span class="box-i"></span>Отправить учётные данные на j.nash@mojave.exp</label>
-            </div>
-          </div>
-
-        </div>
-        <div class="panel-foot"><span>◆ ПРОВЕРКА ПОЛЕЙ ВЫПОЛНЕНА 14:07 · ОШИБОК НЕТ</span><span>ОТМЕНА НАЗНАЧЕНИЯ СОХРАНЯЕТ ОРГАНИЗАЦИЮ (АЛЬТ. 5а)</span></div>
-      </div>
-
-      <div class="states-label">СОСТОЯНИЯ ЭКРАНА, НЕ СОВМЕСТИМЫЕ С ЗАПОЛНЕННОЙ ФОРМОЙ</div>
-      <div class="st-grid">
-
-        <div class="box e">
-          <span class="st-h">ЛОГИН ЗАНЯТ (АЛЬТ. 4а)</span>
-          <div class="field">
-            <label>ЛОГИН</label>
-            <input class="input error" value="disp.nash">
-            <div class="hint err">логин занят в организации tnt_0043 — выберите другой</div>
-          </div>
-          <div class="mt4"><button class="btn-primary disabled">[ СОЗДАТЬ ДИСПЕТЧЕРА ]</button></div>
-        </div>
-
-        <div class="box">
-          <span class="st-h">ДИСПЕТЧЕР УЖЕ НАЗНАЧЕН (АЛЬТ. 4б)</span>
-          <span class="dim">форма недоступна: у tnt_0042 Gun Runners первый диспетчер назначен 2281-09-14, повторное первоначальное назначение отклонено.</span>
-          <div class="mt4"><span class="badge muted">ФОРМА ЗАБЛОКИРОВАНА</span></div>
-          <div class="mt4 dim">дальнейшие учётные записи заводит сам диспетчер организации (UC-26)</div>
-        </div>
-
-        <div class="box">
-          <span class="st-h">ОТМЕНА НАЗНАЧЕНИЯ (АЛЬТ. 5а)</span>
-          <span class="dim">назначение завершается без пользователя, ранее созданная организация tnt_0044 сохраняется и остаётся в реестре со статусом «без диспетчера».</span>
-          <div class="mt4"><button class="btn">[ ОТМЕНИТЬ ]</button> <button class="btn">[ К РЕЕСТРУ ]</button></div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <aside class="term-aside">
-
-      <div class="sec-title">БУДЕТ СОЗДАНО<span class="dim">2 ОБЪЕКТА</span></div>
-
-      <div class="box accent">
-        <span class="bh">USER</span>
-        <div class="kv">
-          <div class="kv-row"><span class="k">ЛОГИН</span><span class="v">disp.j.nash</span></div>
-          <div class="kv-row"><span class="k">РОЛЬ</span><span class="v">ДИСПЕТЧЕР</span></div>
-          <div class="kv-row"><span class="k">ОРГАНИЗАЦИЯ</span><span class="v">tnt_0044</span></div>
-          <div class="kv-row"><span class="k">СТАТУС</span><span class="v">АКТИВНА</span></div>
-        </div>
-      </div>
-
-      <div class="box accent">
-        <span class="bh">AUDIT</span>
-        <div class="kv">
-          <div class="kv-row"><span class="k">СОБЫТИЕ</span><span class="v">ORG.FIRST_DISPATCHER.ASSIGN</span></div>
-          <div class="kv-row"><span class="k">АКТОР</span><span class="v">SU.VAULT-TEC.ADMIN</span></div>
-          <div class="kv-row"><span class="k">ВРЕМЯ</span><span class="v">2281-10-23 14:07</span></div>
-        </div>
-      </div>
-
-      <div class="sec-title">ПРОВЕРКИ СИСТЕМЫ<span class="dim">ШАГ 4</span></div>
-      <div class="checks">
-        <div><span class="ok-t">✓</span>обязательные поля заполнены</div>
-        <div><span class="ok-t">✓</span>логин уникален в платформе</div>
-        <div><span class="ok-t">✓</span>первый диспетчер ещё не назначен</div>
-        <div><span class="ok-t">✓</span>подписка организации активна</div>
-      </div>
-
-      <div class="sec-title">ПОСЛЕ ПОДТВЕРЖДЕНИЯ</div>
-      <div class="note">
-        1. учётная запись создаётся активной и связывается с tnt_0044;<br>
-        2. действие фиксируется в журнале аудита;<br>
-        3. дальнейшие учётные записи организации заводит сам диспетчер (UC-26);<br>
-        4. суперпользователь возвращается в реестр организаций.
-      </div>
-
-      <div class="ascii-sep">────────────────────────────</div>
-      <div class="note">ТАРИФ BASIC · 200 КРЫШЕК/МЕС<br>ЛИМИТ ПОЛЬЗОВАТЕЛЕЙ: ЗАНЯТО 0 ИЗ 5</div>
-
-    </aside>
-
-  </div>
-
-  <footer class="term-footer">
-    <div class="foot-status"><span class="dot">●</span> READY · ORG tnt_0044 · ПОЛЬЗОВАТЕЛЕЙ 0 · ВАЛИДАЦИЯ ПРОЙДЕНА · F1 HELP</div>
-    <div class="foot-buttons">
-      <button class="btn">[ ОТМЕНИТЬ НАЗНАЧЕНИЕ ]</button>
-      <button class="btn-primary">[ СОЗДАТЬ ДИСПЕТЧЕРА ]</button>
-    </div>
-  </footer>
-
+<body>
+<div class="admin-console">
+<header class="admin-header">
+<div><h1>ROBCO PLATFORM // SUPERUSER CONSOLE</h1><div class="admin-sub">PLATFORM v4.21.07 · TENANT OPS</div></div>
+<div class="admin-mode">SUPERUSER MODE</div>
+<div class="admin-user">ROLE :: PLATFORM OPERATOR<br>API :: ONLINE</div>
+</header>
+<div class="admin-grid">
+<aside class="admin-nav"><div class="nav-title">-- PLATFORM --</div>
+<button class="nav-item active">[>] ORGANIZATIONS</button><button class="nav-item">[ ] SUBSCRIPTIONS</button><button class="nav-item">[ ] AUDIT LOG</button><button class="nav-item">[ ] DISPATCH</button>
+<div class="nav-foot">TENANTS :: 7<br>ACTIVE USERS :: 41<br>STATUS :: NOMINAL</div></aside>
+<main class="admin-main"><form class="admin-panel"><div class="admin-panel-title"><span>CREATE ORGANIZATION</span><span>WIZARD · STEP 2 / 2</span></div><div class="admin-info">Первый диспетчер получает права администратора учётных записей внутри своей организации.</div><div class="admin-stepper"><div class="admin-step">[1] ORGANIZATION</div><div class="admin-step active">[2] FIRST DISPATCHER</div></div><section class="admin-block"><h2>STEP 2 · FIRST DISPATCHER</h2><label class="check-row full"><input type="checkbox"> SKIP · создать организацию без диспетчера</label><label>FULL NAME<input type="text" value="Изабелла Санторо"></label><label>LOGIN<input type="text" value="i.santoro"></label><label>INITIAL PASSWORD<input type="text" value="Gr7-freeside-02"></label><label>EMAIL / HOLOPHONE<input type="text" value="i.santoro@gunrunners.mojave"></label></section><div class="admin-success">Проверка пройдена: логин i.santoro свободен.</div><div class="admin-actions"><button>BACK</button><button class="create-button">CREATE ORGANIZATION</button></div></form></main>
+<aside class="admin-summary"><h2>SUMMARY</h2><div class="sum-sec"><div class="sum-head">-- ORGANIZATION --</div><div class="sum-row"><span>Name</span><b>Gun Runners</b></div><div class="sum-row"><span>Tier</span><b>STANDARD</b></div><div class="sum-row"><span>Billing</span><b>600 caps / мес.</b></div><div class="sum-row"><span>Region</span><b>Mojave · New Vegas</b></div></div><div class="sum-sec"><div class="sum-head">-- FIRST DISPATCHER --</div><div class="sum-row"><span>Status</span><b>будет создан</b></div><div class="sum-row"><span>Login</span><b>i.santoro</b></div><div class="sum-row"><span>Access</span><b>ORG ADMIN</b></div></div><div class="sum-effect"><b>БУДЕТ СОЗДАНО</b><span>+ TENANT scope</span><span>+ ORG catalog row</span><span>+ USER account</span><span>+ AUDIT event</span></div></aside>
 </div>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-33. Назначить первого диспетчера организации</b><br>Шаг 2 того же мастера. Флажок «SKIP» оставляет организацию без диспетчера — альтернативный поток прецедента; остальные поля при этом гаснут, а не исчезают, чтобы состав формы не прыгал.</div></div>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-13 · Зарезервировать припасы — макет экрана</title>
+<!-- render: 1180x800 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><form class="card"><h2>Резерв припасов · рейс R-1043</h2><div class="muted small">Рекомендация по рейсу: вода на 2 суток, стимуляторы 2 шт (UC-8)</div><table><thead><tr><th>Припас</th><th>Нужно</th><th>На складе</th><th>Резервируем</th></tr></thead><tbody><tr><td>Чистая вода</td><td>24 л</td><td>180 л</td><td><input type="number" value="24"></td></tr><tr><td>Стимуляторы</td><td>2 шт</td><td>14 шт</td><td><input type="number" value="2"></td></tr><tr><td>Патроны 5.56</td><td>120 шт</td><td>90 шт</td><td><input type="number" value="90" class="input-error"></td></tr></tbody></table><div class="error">Патронов на складе меньше запрошенного: 90 из 120. Резерв будет создан на доступное количество.</div><div class="mock-actions"><button>Зарезервировать</button><button class="link">Отмена</button></div></form></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-13. Зарезервировать припасы</b><br>Резервирование припасов под рекомендацию UC-8. Нехватка на складе показана сообщением об ошибке и подсветкой поля — это альтернативный поток прецедента, а не отдельный экран.</div></div>
+</body>
+</html>

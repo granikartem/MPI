@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-31 · Назначить/изменить ставку сотрудника — макет экрана</title>
+<!-- render: 1180x900 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><form class="card"><h2>Ставка сотрудника</h2><label>Сотрудник<select><option selected>Бун · Охранник</option><option>Маркус · Охранник</option><option>Кэсседи · Караван-мастер</option></select></label><label>Текущая ставка (крышек/сут)<input type="text" value="90" disabled></label><label>Новая ставка (крышек/сут)<input type="number" value="105" class="mock-focus"></label><label>Действует с<input type="date" value="2287-11-01"></label><div class="muted small">Ставка применяется к рейсам, начатым после указанной даты. Уже сформированные отчёты не пересчитываются.</div><div class="mock-actions"><button>Сохранить ставку</button><button class="link">Отмена</button></div></form></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-31. Назначить/изменить ставку сотрудника</b><br>Ставка влияет на финансовый отчёт (UC-21), поэтому на экране явно сказано, с какого момента она действует и что прошлые отчёты не меняются.</div></div>
+</body>
+</html>

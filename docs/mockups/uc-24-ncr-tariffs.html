@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-24 · Получить данные о КПП и пошлинах — макет экрана</title>
+<!-- render: 1180x800 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><h2>NCR Checkpoint &amp; Tax Terminal · КПП и ставки</h2><div class="muted small">Последнее обновление: 2287-10-22 08:30 · данные актуальны</div><table class="inner"><thead><tr><th>КПП</th><th>Положение</th><th>Ставка</th><th>Обновлено</th></tr></thead><tbody><tr><td>Mojave Outpost</td><td>Goodsprings → Primm</td><td>4% от ценности груза</td><td>2287-10-22 08:30</td></tr><tr><td>Camp Searchlight</td><td>Nipton → Novac</td><td>120 крышек фикс.</td><td>2287-10-22 08:30</td></tr><tr><td>Hoover Dam</td><td>Novac → New Vegas</td><td>6% от ценности груза</td><td>2287-10-21 20:10</td></tr></tbody></table><div class="muted small">При недоступности терминала пошлина вводится вручную по квитанции (альтернативный поток UC-18).</div><div class="mock-actions"><button class="link">Обновить сейчас</button></div></div></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-24. Получить данные о КПП и пошлинах</b><br>Второй интеграционный прецедент, построен так же, как UC-23: кэш ставок, возраст данных и правило на случай недоступности внешней системы.</div></div>
+</body>
+</html>

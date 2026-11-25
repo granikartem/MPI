@@ -19,6 +19,11 @@ rectangle "ИС «Караваны»" as SystemBoundary {
   usecase "UC-7. Рассчитать risk_score" as UC7
   usecase "UC-8. Получить рекомендацию по\nохране и припасам" as UC8
   usecase "UC-23. Получить данные об угрозах" as UC23
+  usecase "UC-7.1. Агрегировать угрозы по\nучасткам маршрута" as UC7_1
+  usecase "UC-7.2. Применить коэффициент\nценности груза" as UC7_2
+  usecase "UC-7.3. Сохранить risk_score и\nпоказать его диспетчеру" as UC7_3
+  usecase "UC-7.4. Установить «Н/Д, требует\nпересчёта»" as UC7_4
+  usecase "UC-7.5. Пометить расчёт устаревшими\nданными" as UC7_5
 }
 ' edge:R059
 UC1 ..> UC7 : <<include>>
@@ -28,16 +33,33 @@ UC1 ..> UC8 : <<include>>
 UC7 ..> UC8 : <<include>>
 ' edge:R063
 UC7 ..> UC23 : <<include>>
+' edge:R139
+UC7 ..> UC7_1 : <<include>>
+' edge:R140
+UC7 ..> UC7_2 : <<include>>
+' edge:R141
+UC7 ..> UC7_3 : <<include>>
+' edge:R142
+UC7_4 ..> UC7 : <<extend>>
+' edge:R143
+UC7_5 ..> UC7 : <<extend>>
 ' edge:R001
 Dispatcher --> UC1
 ' edge:R007
 Dispatcher --> UC7
 ' edge:R008
 Dispatcher --> UC8
-' edge:R015
-Dispatcher --> UC23
-' edge:R050
-WI --> UC7
 ' edge:R051
 WI --> UC23
+legend bottom
+  Части основного потока (include):
+  UC-7.1 — Агрегировать угрозы по участкам маршрута (шаг 3).
+  UC-7.2 — Применить коэффициент ценности груза (шаг 4).
+  UC-7.3 — Сохранить risk_score и показать его диспетчеру (шаг 5).
+  Точки расширения и условия:
+  UC-7.4 → UC-7 / EP-1: Wasteland Intel недоступен либо ответ непригоден (альт. 2а).
+  UC-7.5 → UC-7 / EP-2: Данные об угрозах старше 24 часов (альт. 2б).
+  Данные об угрозах система получает не напрямую, а через UC-23;
+  внешняя система связана с UC-23, а не с расчётом.
+endlegend
 @enduml

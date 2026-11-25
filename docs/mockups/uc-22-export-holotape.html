@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-22 · Экспортировать отчёт на голотейп — макет экрана</title>
+<!-- render: 1180x800 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><form class="card"><h2>Экспорт отчёта · рейс R-1035</h2><label>Формат<select><option selected>Голотейп (.holo)</option><option>Печать на терминале</option><option>Текстовый дамп</option></select></label><label class="check-row"><input type="checkbox" checked> включить журнал изменений статусов</label><label class="check-row"><input type="checkbox"> включить акт расхождения манифеста</label><div class="mock-actions"><button>Экспортировать</button><button class="link">Отмена</button></div><div class="registry-state"><div class="muted">Готово: R-1035-report.holo · 24 КБ</div><div class="registry-state-actions"><button class="link">Записать на голотейп</button><button class="link">Сохранить копию</button></div></div></form></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-22. Экспортировать отчёт на голотейп</b><br>Экспорт — продолжение UC-21, поэтому отчёт не выбирается заново: он уже открыт. Форма сведена к формату и двум необязательным вложениям; результат показан тем же блоком состояния, что и в реестре.</div></div>
+</body>
+</html>

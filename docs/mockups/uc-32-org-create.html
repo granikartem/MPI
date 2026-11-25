@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-32 · Создать организацию — макет экрана</title>
+<!-- render: 1500x1150 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="admin-console">
+<header class="admin-header">
+<div><h1>ROBCO PLATFORM // SUPERUSER CONSOLE</h1><div class="admin-sub">PLATFORM v4.21.07 · TENANT OPS</div></div>
+<div class="admin-mode">SUPERUSER MODE</div>
+<div class="admin-user">ROLE :: PLATFORM OPERATOR<br>API :: ONLINE</div>
+</header>
+<div class="admin-grid">
+<aside class="admin-nav"><div class="nav-title">-- PLATFORM --</div>
+<button class="nav-item active">[>] ORGANIZATIONS</button><button class="nav-item">[ ] SUBSCRIPTIONS</button><button class="nav-item">[ ] AUDIT LOG</button><button class="nav-item">[ ] DISPATCH</button>
+<div class="nav-foot">TENANTS :: 7<br>ACTIVE USERS :: 41<br>STATUS :: NOMINAL</div></aside>
+<main class="admin-main"><form class="admin-panel"><div class="admin-panel-title"><span>CREATE ORGANIZATION</span><span>WIZARD · STEP 1 / 2</span></div><div class="admin-info">Организация создаётся вместе с изолированным tenant-пространством. Уровень подписки определяет лимиты и объём данных Wasteland Intel.</div><div class="admin-stepper"><div class="admin-step active">[1] ORGANIZATION</div><div class="admin-step">[2] FIRST DISPATCHER</div></div><section class="admin-block"><h2>STEP 1 · ORGANIZATION</h2><label>NAME<input type="text" value="Gun Runners"></label><label>REGION<input type="text" value="Mojave · New Vegas"></label><div class="full"><div class="field-title">SUBSCRIPTION TIER · УРОВЕНЬ ПОДПИСКИ</div><div class="tier-grid"><button class="tier-card"><b>BASIC</b><span>200 caps / мес.</span><small>до 3 диспетчеров</small><small>до 50 рейсов / мес</small><small>Intel: базовый</small></button><button class="tier-card selected"><b>STANDARD</b><span>600 caps / мес.</span><small>до 10 диспетчеров</small><small>до 300 рейсов / мес</small><small>Intel: расширенный</small></button><button class="tier-card"><b>PRO</b><span>1 500 caps / мес.</span><small>без лимита</small><small>SLA 99.5%</small><small>Intel: live-feed + API</small></button></div></div><label class="full">LEGAL ADDRESS<textarea>Freeside, северные ворота, склад 2</textarea></label><label>PRIMARY CONTACT<input type="text" value="Изабелла Санторо"></label><label>HOLOPHONE / EMAIL<input type="text" value="ops@gunrunners.mojave"></label></section><div class="admin-actions"><button>BACK</button><button class="create-button">NEXT · FIRST DISPATCHER</button></div></form></main>
+<aside class="admin-summary"><h2>SUMMARY</h2><div class="sum-sec"><div class="sum-head">-- ORGANIZATION --</div><div class="sum-row"><span>Name</span><b>Gun Runners</b></div><div class="sum-row"><span>Tier</span><b>STANDARD</b></div><div class="sum-row"><span>Billing</span><b>600 caps / мес.</b></div><div class="sum-row"><span>Region</span><b>Mojave · New Vegas</b></div></div><div class="sum-sec"><div class="sum-head">-- FIRST DISPATCHER --</div><div class="sum-row"><span>Status</span><b>шаг 2</b></div><div class="sum-row"><span>Login</span><b>—</b></div><div class="sum-row"><span>Access</span><b>—</b></div></div><div class="sum-effect"><b>БУДЕТ СОЗДАНО</b><span>+ TENANT scope</span><span>+ ORG catalog row</span><span>+ AUDIT event</span></div></aside>
+</div>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-32. Создать организацию</b><br>Консоль суперпользователя — единственное место, где трёхколоночная раскладка действительно реализована (pages/Organizations.tsx). Шаг 1 мастера: реквизиты организации и уровень подписки; правая колонка показывает, что будет создано.</div></div>
+</body>
+</html>

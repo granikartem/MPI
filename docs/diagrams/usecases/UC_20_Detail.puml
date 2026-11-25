@@ -14,32 +14,43 @@ title UC-20. Инициировать RecoveryRequest
 
 actor "Диспетчер караванов" as Dispatcher
 actor "Караван-мастер" as CaravanMaster
-actor "Капитан охраны" as SecurityCaptain
-actor "Полевой медик" as Medic
-actor "Полевой пользователь" as FieldUser <<abstract>>
 rectangle "ИС «Караваны»" as SystemBoundary {
   usecase "UC-19. Сообщить об инциденте в рейсе" as UC19
   usecase "UC-20. Инициировать RecoveryRequest" as UC20
+  usecase "UC-20.1. Открыть зарегистрированный\nинцидент рейса" as UC20_1
+  usecase "UC-20.2. Указать вид помощи и\nнеобходимые сведения" as UC20_2
+  usecase "UC-20.3. Проверить связь запроса с\nинцидентом и рейсом" as UC20_3
+  usecase "UC-20.4. Сохранить RecoveryRequest и\nпоказать результат" as UC20_4
+  usecase "UC-20.5. Сообщить о недоступности\nсервера" as UC20_5
+  usecase "UC-20.6. Пояснить неполные данные\nзапроса" as UC20_6
 }
 ' edge:R069
 UC20 ..> UC19 : <<extend>>
+' edge:R219
+UC20 ..> UC20_1 : <<include>>
+' edge:R220
+UC20 ..> UC20_2 : <<include>>
+' edge:R221
+UC20 ..> UC20_3 : <<include>>
+' edge:R222
+UC20 ..> UC20_4 : <<include>>
+' edge:R223
+UC20_5 ..> UC20 : <<extend>>
+' edge:R224
+UC20_6 ..> UC20 : <<extend>>
 ' edge:R012
 Dispatcher --> UC20
 ' edge:R029
 CaravanMaster --> UC20
-' edge:R049
-FieldUser --> UC19
-' edge:R072
-Dispatcher --> UC19
-' edge:R054
-CaravanMaster --|> FieldUser
-' edge:R055
-SecurityCaptain --|> FieldUser
-' edge:R056
-Medic --|> FieldUser
 legend bottom
+  Части основного потока (include):
+  UC-20.1 — Открыть зарегистрированный инцидент рейса (шаги 1–2).
+  UC-20.2 — Указать вид помощи и необходимые сведения (шаг 3).
+  UC-20.3 — Проверить связь запроса с инцидентом и рейсом (шаг 4).
+  UC-20.4 — Сохранить RecoveryRequest и показать результат (шаг 6).
   Точки расширения и условия:
-  UC20 → UC19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер
-  решил инициировать реагирование.
+  UC-20 → UC-19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер решил инициировать реагирование.
+  UC-20.5 → UC-20 / EP-2: Сервер недоступен, создание запроса не подтверждено (альт. 6а).
+  UC-20.6 → UC-20 / EP-3: Данные неполны либо инцидент недоступен (альт. 4а).
 endlegend
 @enduml

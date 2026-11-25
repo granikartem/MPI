@@ -8,8 +8,11 @@
 что все перечисленные функции уже реализованы.
 
 Для каждого прецедента приведены основной и альтернативные потоки, постусловия, диаграмма
-прецедента и диаграмма активности. Оба вида диаграмм доступны в PlantUML и в родном XML
-Visual Paradigm. Связи `include` направлены от включающего к включаемому прецеденту, `extend` —
+прецедента и макет экрана. Диаграмма прецедента доступна в PlantUML и в родном XML Visual
+Paradigm. Части основного потока показаны на диаграмме как подпрецеденты `UC-N.k`: это не
+отдельные пункты каталога, а логические части прецедента `UC-N`, перечисленные в легенде
+вместе с номерами шагов сценария. Значимые альтернативы показаны расширениями с условием
+точки расширения. Связи `include` направлены от включающего к включаемому прецеденту, `extend` —
 от расширяющего к базовому. Переход между экранами и предварительный вход в систему сами по себе
 не создают связей `include` или `extend`.
 
@@ -83,15 +86,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-1](diagrams/out/UC_1_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_1_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_1_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_1_Detail.puml)
 
-![Диаграмма активности UC-1](diagrams/out/UC_1_Activity.png)
+![Макет UC-1](mockups/shots/uc-01-create-request.png)
 
-[PlantUML — активность](diagrams/usecases/UC_1_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_1_Activity.xml)
-
-![Макет UC-1](mockups/caravan_dispatch.png)
-
-[Исходник макета](mockups/uc1_create_request.html)
+[Исходник макета](mockups/uc-01-create-request.html)
 
 ---
 
@@ -110,15 +109,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-2](diagrams/out/UC_2_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_2_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_2_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_2_Detail.puml)
 
-![Диаграмма активности UC-2](diagrams/out/UC_2_Activity.png)
+![Макет UC-2](mockups/shots/uc-02-request-status.png)
 
-[PlantUML — активность](diagrams/usecases/UC_2_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_2_Activity.xml)
-
-![Макет UC-2](mockups/shots/uc-02-status.png)
-
-[Исходник макета](mockups/uc-02-status.html)
+[Исходник макета](mockups/uc-02-request-status.html)
 
 ---
 
@@ -137,11 +132,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-3](diagrams/out/UC_3_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_3_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_3_Detail.xml)
-
-![Диаграмма активности UC-3](diagrams/out/UC_3_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_3_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_3_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_3_Detail.puml)
 
 ![Макет UC-3](mockups/shots/uc-03-registry.png)
 
@@ -164,11 +155,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-4](diagrams/out/UC_4_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_4_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_4_Detail.xml)
-
-![Диаграмма активности UC-4](diagrams/out/UC_4_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_4_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_4_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_4_Detail.puml)
 
 ![Макет UC-4](mockups/shots/uc-04-archive-search.png)
 
@@ -191,11 +178,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-5](diagrams/out/UC_5_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_5_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_5_Detail.xml)
-
-![Диаграмма активности UC-5](diagrams/out/UC_5_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_5_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_5_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_5_Detail.puml)
 
 ![Макет UC-5](mockups/shots/uc-05-route-plan.png)
 
@@ -218,11 +201,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-6](diagrams/out/UC_6_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_6_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_6_Detail.xml)
-
-![Диаграмма активности UC-6](diagrams/out/UC_6_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_6_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_6_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_6_Detail.puml)
 
 ![Макет UC-6](mockups/shots/uc-06-eta.png)
 
@@ -246,17 +225,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-7](diagrams/out/UC_7_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_7_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_7_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_7_Detail.puml)
 
-![Диаграмма активности UC-7](diagrams/out/UC_7_Activity.png)
+![Макет UC-7](mockups/shots/uc-07-risk-score.png)
 
-[PlantUML — активность](diagrams/usecases/UC_7_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_7_Activity.xml)
-
-![Макет UC-7 — успешный расчёт](mockups/risk_assessment_1.png)
-
-![Макет UC-7 — обработка ошибок](mockups/risk_assessment_2.png)
-
-[Исходник макета](mockups/uc7_risk_score.html)
+[Исходник макета](mockups/uc-07-risk-score.html)
 
 ---
 
@@ -275,15 +248,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-8](diagrams/out/UC_8_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_8_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_8_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_8_Detail.puml)
 
-![Диаграмма активности UC-8](diagrams/out/UC_8_Activity.png)
+![Макет UC-8](mockups/shots/uc-08-recommendation.png)
 
-[PlantUML — активность](diagrams/usecases/UC_8_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_8_Activity.xml)
-
-![Макет UC-8](mockups/shots/uc-08-escort-advice.png)
-
-[Исходник макета](mockups/uc-08-escort-advice.html)
+[Исходник макета](mockups/uc-08-recommendation.html)
 
 ---
 
@@ -303,15 +272,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-9](diagrams/out/UC_9_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_9_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_9_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_9_Detail.puml)
 
-![Диаграмма активности UC-9](diagrams/out/UC_9_Activity.png)
+![Макет UC-9](mockups/shots/uc-09-assign-staff.png)
 
-[PlantUML — активность](diagrams/usecases/UC_9_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_9_Activity.xml)
-
-![Макет UC-9](mockups/shots/uc-09-crew-assign.png)
-
-[Исходник макета](mockups/uc-09-crew-assign.html)
+[Исходник макета](mockups/uc-09-assign-staff.html)
 
 ---
 
@@ -330,15 +295,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-10](diagrams/out/UC_10_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_10_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_10_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_10_Detail.puml)
 
-![Диаграмма активности UC-10](diagrams/out/UC_10_Activity.png)
+![Макет UC-10](mockups/shots/uc-10-staff-available.png)
 
-[PlantUML — активность](diagrams/usecases/UC_10_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_10_Activity.xml)
-
-![Макет UC-10](mockups/shots/uc-10-crew-available.png)
-
-[Исходник макета](mockups/uc-10-crew-available.html)
+[Исходник макета](mockups/uc-10-staff-available.html)
 
 ---
 
@@ -357,11 +318,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-11](diagrams/out/UC_11_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_11_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_11_Detail.xml)
-
-![Диаграмма активности UC-11](diagrams/out/UC_11_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_11_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_11_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_11_Detail.puml)
 
 ![Макет UC-11](mockups/shots/uc-11-manifest.png)
 
@@ -384,11 +341,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-12](diagrams/out/UC_12_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_12_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_12_Detail.xml)
-
-![Диаграмма активности UC-12](diagrams/out/UC_12_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_12_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_12_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_12_Detail.puml)
 
 ![Макет UC-12](mockups/shots/uc-12-cargo-value.png)
 
@@ -411,15 +364,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-13](diagrams/out/UC_13_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_13_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_13_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_13_Detail.puml)
 
-![Диаграмма активности UC-13](diagrams/out/UC_13_Activity.png)
+![Макет UC-13](mockups/shots/uc-13-supplies-reserve.png)
 
-[PlantUML — активность](diagrams/usecases/UC_13_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_13_Activity.xml)
-
-![Макет UC-13](mockups/shots/uc-13-supplies.png)
-
-[Исходник макета](mockups/uc-13-supplies.html)
+[Исходник макета](mockups/uc-13-supplies-reserve.html)
 
 ---
 
@@ -439,15 +388,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-14](diagrams/out/UC_14_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_14_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_14_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_14_Detail.puml)
 
-![Диаграмма активности UC-14](diagrams/out/UC_14_Activity.png)
+![Макет UC-14](mockups/shots/uc-14-delivery-confirm.png)
 
-[PlantUML — активность](diagrams/usecases/UC_14_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_14_Activity.xml)
-
-![Макет UC-14](mockups/shots/uc-14-delivery-seal.png)
-
-[Исходник макета](mockups/uc-14-delivery-seal.html)
+[Исходник макета](mockups/uc-14-delivery-confirm.html)
 
 ---
 
@@ -466,11 +411,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-15](diagrams/out/UC_15_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_15_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_15_Detail.xml)
-
-![Диаграмма активности UC-15](diagrams/out/UC_15_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_15_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_15_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_15_Detail.puml)
 
 ![Макет UC-15](mockups/shots/uc-15-manifest-check.png)
 
@@ -494,15 +435,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-16](diagrams/out/UC_16_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_16_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_16_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_16_Detail.puml)
 
-![Диаграмма активности UC-16](diagrams/out/UC_16_Activity.png)
+![Макет UC-16](mockups/shots/uc-16-stage-log.png)
 
-[PlantUML — активность](diagrams/usecases/UC_16_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_16_Activity.xml)
-
-![Макет UC-16](mockups/caravan_stages.png)
-
-[Исходник макета](mockups/uc16_caravan_stages.html)
+[Исходник макета](mockups/uc-16-stage-log.html)
 
 ---
 
@@ -522,15 +459,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-17](diagrams/out/UC_17_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_17_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_17_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_17_Detail.puml)
 
-![Диаграмма активности UC-17](diagrams/out/UC_17_Activity.png)
+![Макет UC-17](mockups/shots/uc-17-checkpoint.png)
 
-[PlantUML — активность](diagrams/usecases/UC_17_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_17_Activity.xml)
-
-![Макет UC-17](mockups/shots/uc-17-waypoint.png)
-
-[Исходник макета](mockups/uc-17-waypoint.html)
+[Исходник макета](mockups/uc-17-checkpoint.html)
 
 ---
 
@@ -550,15 +483,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-18](diagrams/out/UC_18_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_18_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_18_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_18_Detail.puml)
 
-![Диаграмма активности UC-18](diagrams/out/UC_18_Activity.png)
+![Макет UC-18](mockups/shots/uc-18-ncr-gate.png)
 
-[PlantUML — активность](diagrams/usecases/UC_18_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_18_Activity.xml)
-
-![Макет UC-18](mockups/shots/uc-18-checkpoint-toll.png)
-
-[Исходник макета](mockups/uc-18-checkpoint-toll.html)
+[Исходник макета](mockups/uc-18-ncr-gate.html)
 
 ---
 
@@ -578,15 +507,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-19](diagrams/out/UC_19_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_19_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_19_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_19_Detail.puml)
 
-![Диаграмма активности UC-19](diagrams/out/UC_19_Activity.png)
+![Макет UC-19](mockups/shots/uc-19-incident.png)
 
-[PlantUML — активность](diagrams/usecases/UC_19_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_19_Activity.xml)
-
-![Макет UC-19](mockups/incident_report.png)
-
-[Исходник макета](mockups/uc19_incident_report.html)
+[Исходник макета](mockups/uc-19-incident.html)
 
 ---
 
@@ -606,15 +531,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-20](diagrams/out/UC_20_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_20_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_20_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_20_Detail.puml)
 
-![Диаграмма активности UC-20](diagrams/out/UC_20_Activity.png)
+![Макет UC-20](mockups/shots/uc-20-recovery-request.png)
 
-[PlantUML — активность](diagrams/usecases/UC_20_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_20_Activity.xml)
-
-![Макет UC-20](mockups/shots/uc-20-recovery.png)
-
-[Исходник макета](mockups/uc-20-recovery.html)
+[Исходник макета](mockups/uc-20-recovery-request.html)
 
 ---
 
@@ -633,15 +554,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-21](diagrams/out/UC_21_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_21_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_21_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_21_Detail.puml)
 
-![Диаграмма активности UC-21](diagrams/out/UC_21_Activity.png)
+![Макет UC-21](mockups/shots/uc-21-financial-report.png)
 
-[PlantUML — активность](diagrams/usecases/UC_21_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_21_Activity.xml)
-
-![Макет UC-21](mockups/shots/uc-21-finance-report.png)
-
-[Исходник макета](mockups/uc-21-finance-report.html)
+[Исходник макета](mockups/uc-21-financial-report.html)
 
 ---
 
@@ -660,15 +577,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-22](diagrams/out/UC_22_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_22_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_22_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_22_Detail.puml)
 
-![Диаграмма активности UC-22](diagrams/out/UC_22_Activity.png)
+![Макет UC-22](mockups/shots/uc-22-export-holotape.png)
 
-[PlantUML — активность](diagrams/usecases/UC_22_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_22_Activity.xml)
-
-![Макет UC-22](mockups/shots/uc-22-holotape-export.png)
-
-[Исходник макета](mockups/uc-22-holotape-export.html)
+[Исходник макета](mockups/uc-22-export-holotape.html)
 
 ---
 
@@ -687,11 +600,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-23](diagrams/out/UC_23_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_23_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_23_Detail.xml)
-
-![Диаграмма активности UC-23](diagrams/out/UC_23_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_23_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_23_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_23_Detail.puml)
 
 ![Макет UC-23](mockups/shots/uc-23-intel-threats.png)
 
@@ -714,15 +623,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-24](diagrams/out/UC_24_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_24_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_24_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_24_Detail.puml)
 
-![Диаграмма активности UC-24](diagrams/out/UC_24_Activity.png)
+![Макет UC-24](mockups/shots/uc-24-ncr-tariffs.png)
 
-[PlantUML — активность](diagrams/usecases/UC_24_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_24_Activity.xml)
-
-![Макет UC-24](mockups/shots/uc-24-ncr-tolls.png)
-
-[Исходник макета](mockups/uc-24-ncr-tolls.html)
+[Исходник макета](mockups/uc-24-ncr-tariffs.html)
 
 ---
 
@@ -741,11 +646,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-25](diagrams/out/UC_25_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_25_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_25_Detail.xml)
-
-![Диаграмма активности UC-25](diagrams/out/UC_25_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_25_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_25_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_25_Detail.puml)
 
 ![Макет UC-25](mockups/shots/uc-25-login.png)
 
@@ -768,11 +669,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-26](diagrams/out/UC_26_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_26_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_26_Detail.xml)
-
-![Диаграмма активности UC-26](diagrams/out/UC_26_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_26_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_26_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_26_Detail.puml)
 
 ![Макет UC-26](mockups/shots/uc-26-user-create.png)
 
@@ -795,11 +692,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-27](diagrams/out/UC_27_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_27_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_27_Detail.xml)
-
-![Диаграмма активности UC-27](diagrams/out/UC_27_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_27_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_27_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_27_Detail.puml)
 
 ![Макет UC-27](mockups/shots/uc-27-user-role.png)
 
@@ -822,11 +715,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-28](diagrams/out/UC_28_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_28_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_28_Detail.xml)
-
-![Диаграмма активности UC-28](diagrams/out/UC_28_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_28_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_28_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_28_Detail.puml)
 
 ![Макет UC-28](mockups/shots/uc-28-user-deactivate.png)
 
@@ -849,11 +738,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-29](diagrams/out/UC_29_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_29_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_29_Detail.xml)
-
-![Диаграмма активности UC-29](diagrams/out/UC_29_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_29_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_29_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_29_Detail.puml)
 
 ![Макет UC-29](mockups/shots/uc-29-profile-edit.png)
 
@@ -876,11 +761,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-30](diagrams/out/UC_30_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_30_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_30_Detail.xml)
-
-![Диаграмма активности UC-30](diagrams/out/UC_30_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_30_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_30_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_30_Detail.puml)
 
 ![Макет UC-30](mockups/shots/uc-30-credentials-reset.png)
 
@@ -903,15 +784,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-31](diagrams/out/UC_31_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_31_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_31_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_31_Detail.puml)
 
-![Диаграмма активности UC-31](diagrams/out/UC_31_Activity.png)
+![Макет UC-31](mockups/shots/uc-31-employee-rate.png)
 
-[PlantUML — активность](diagrams/usecases/UC_31_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_31_Activity.xml)
-
-![Макет UC-31](mockups/shots/uc-31-crew-rate.png)
-
-[Исходник макета](mockups/uc-31-crew-rate.html)
+[Исходник макета](mockups/uc-31-employee-rate.html)
 
 ---
 
@@ -931,15 +808,11 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-32](diagrams/out/UC_32_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_32_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_32_Detail.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_32_Detail.puml)
 
-![Диаграмма активности UC-32](diagrams/out/UC_32_Activity.png)
+![Макет UC-32](mockups/shots/uc-32-org-create.png)
 
-[PlantUML — активность](diagrams/usecases/UC_32_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_32_Activity.xml)
-
-![Макет UC-32](mockups/create_org.png)
-
-[Исходник макета](mockups/uc32_create_organization.html)
+[Исходник макета](mockups/uc-32-org-create.html)
 
 ---
 
@@ -959,11 +832,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-33](diagrams/out/UC_33_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_33_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_33_Detail.xml)
-
-![Диаграмма активности UC-33](diagrams/out/UC_33_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_33_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_33_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_33_Detail.puml)
 
 ![Макет UC-33](mockups/shots/uc-33-first-dispatcher.png)
 
@@ -987,11 +856,7 @@ Visual Paradigm. Связи `include` направлены от включающ
 
 ![Диаграмма прецедента UC-34](diagrams/out/UC_34_Detail.png)
 
-[PlantUML — прецедент](diagrams/usecases/UC_34_Detail.puml) · [Visual Paradigm XML — прецедент](diagrams/vp/out/usecases/UC_34_Detail.xml)
-
-![Диаграмма активности UC-34](diagrams/out/UC_34_Activity.png)
-
-[PlantUML — активность](diagrams/usecases/UC_34_Activity.puml) · [Visual Paradigm XML — активность](diagrams/vp/out/usecases/UC_34_Activity.xml)
+[PlantUML — прецедент](diagrams/usecases/UC_34_Detail.puml)
 
 ![Макет UC-34](mockups/shots/uc-34-subscription.png)
 

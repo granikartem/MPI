@@ -54,7 +54,7 @@ Backend по слоям внутри модулей: `web` (Controller/DTO) → 
 - `POST /api/requests`, `GET /api/requests` (реестр).
 
 **Frontend:**
-- Форма создания заявки (макет: [mockups/caravan_dispatch.png](mockups/caravan_dispatch.png)).
+- Форма создания заявки (макет: [форма создания заявки](mockups/shots/uc-01-create-request.png)).
 - Реестр заявок со статусом и risk_score.
 
 ## 6. UC-7 — Рассчитать risk_score (Артём)
@@ -72,7 +72,7 @@ Backend по слоям внутри модулей: `web` (Controller/DTO) → 
 - `POST /api/requests/{id}/risk-score`.
 
 **Frontend:**
-- Виджет risk_score в карточке заявки (макеты: [норма](mockups/risk_assessment_1.png), [ошибки](mockups/risk_assessment_2.png)).
+- Виджет risk_score в карточке заявки (макет: [окно risk_score](mockups/shots/uc-07-risk-score.png)).
 - Три состояния виджета.
 
 ## 7. Порядок работ

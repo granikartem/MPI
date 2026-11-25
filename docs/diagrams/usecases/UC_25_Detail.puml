@@ -12,25 +12,45 @@ skinparam activityBackgroundColor #F5F5F5
 top to bottom direction
 title UC-25. Аутентификация
 
-actor "Диспетчер караванов" as Dispatcher
-actor "Караван-мастер" as CaravanMaster
-actor "Кладовщик" as Storekeeper
-actor "Капитан охраны" as SecurityCaptain
-actor "Полевой медик" as Medic
-actor "Суперпользователь" as SuperUser
+actor "Пользователь системы" as SystemUser
 rectangle "ИС «Караваны»" as SystemBoundary {
   usecase "UC-25. Аутентификация" as UC25
+  usecase "UC-25.1. Ввести логин и пароль" as UC25_1
+  usecase "UC-25.2. Проверить учётные данные и\nактивность записи" as UC25_2
+  usecase "UC-25.3. Определить роль,\nорганизацию и полномочия" as UC25_3
+  usecase "UC-25.4. Создать сессию и открыть\nдоступный интерфейс" as UC25_4
+  usecase "UC-25.5. Отказать при неверных\nучётных данных" as UC25_5
+  usecase "UC-25.6. Отказать деактивированной\nучётной записи" as UC25_6
+  usecase "UC-25.7. Сообщить об ошибке\nсоединения" as UC25_7
 }
-' edge:R016
-Dispatcher --> UC25
-' edge:R031
-CaravanMaster --> UC25
-' edge:R036
-Storekeeper --> UC25
-' edge:R038
-SecurityCaptain --> UC25
-' edge:R040
-Medic --> UC25
-' edge:R042
-SuperUser --> UC25
+' edge:R252
+UC25 ..> UC25_1 : <<include>>
+' edge:R253
+UC25 ..> UC25_2 : <<include>>
+' edge:R254
+UC25 ..> UC25_3 : <<include>>
+' edge:R255
+UC25 ..> UC25_4 : <<include>>
+' edge:R256
+UC25_5 ..> UC25 : <<extend>>
+' edge:R257
+UC25_6 ..> UC25 : <<extend>>
+' edge:R258
+UC25_7 ..> UC25 : <<extend>>
+' edge:R259
+SystemUser --> UC25
+legend bottom
+  Части основного потока (include):
+  UC-25.1 — Ввести логин и пароль (шаг 2).
+  UC-25.2 — Проверить учётные данные и активность записи (шаг 3).
+  UC-25.3 — Определить роль, организацию и полномочия (шаг 4).
+  UC-25.4 — Создать сессию и открыть доступный интерфейс (шаг 5).
+  Точки расширения и условия:
+  UC-25.5 → UC-25 / EP-1: Логин или пароль неверны (альт. 3а).
+  UC-25.6 → UC-25 / EP-2: Учётная запись деактивирована (альт. 3б).
+  UC-25.7 → UC-25 / EP-3: Сервер недоступен, сессия не создаётся (альт. 3в).
+  Вход выполняется одинаково для всех ролей, поэтому вместо шести отдельных актёров
+  введена одна роль «Пользователь системы». Роль, организация и полномочия
+  определяются уже внутри сценария, в UC-25.3.
+endlegend
 @enduml

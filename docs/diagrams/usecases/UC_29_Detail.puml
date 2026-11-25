@@ -12,25 +12,41 @@ skinparam activityBackgroundColor #F5F5F5
 top to bottom direction
 title UC-29. Редактировать свои учётные данные
 
-actor "Диспетчер караванов" as Dispatcher
-actor "Караван-мастер" as CaravanMaster
-actor "Кладовщик" as Storekeeper
-actor "Капитан охраны" as SecurityCaptain
-actor "Полевой медик" as Medic
-actor "Суперпользователь" as SuperUser
+actor "Аутентифицированный\nпользователь" as AuthUser
 rectangle "ИС «Караваны»" as SystemBoundary {
   usecase "UC-29. Редактировать свои учётные\nданные" as UC29
+  usecase "UC-29.1. Ввести новый логин и/или\nпароль" as UC29_1
+  usecase "UC-29.2. Проверить допустимость\nданных и уникальность логина" as UC29_2
+  usecase "UC-29.3. Сохранить новые учётные\nданные" as UC29_3
+  usecase "UC-29.4. Зафиксировать изменение в\nаудите без пароля" as UC29_4
+  usecase "UC-29.5. Сообщить об успешном\nизменении" as UC29_5
+  usecase "UC-29.6. Показать ошибку занятого\nлогина" as UC29_6
 }
-' edge:R020
-Dispatcher --> UC29
-' edge:R032
-CaravanMaster --> UC29
-' edge:R037
-Storekeeper --> UC29
-' edge:R039
-SecurityCaptain --> UC29
-' edge:R041
-Medic --> UC29
-' edge:R044
-SuperUser --> UC29
+' edge:R281
+UC29 ..> UC29_1 : <<include>>
+' edge:R282
+UC29 ..> UC29_2 : <<include>>
+' edge:R283
+UC29 ..> UC29_3 : <<include>>
+' edge:R284
+UC29 ..> UC29_4 : <<include>>
+' edge:R285
+UC29 ..> UC29_5 : <<include>>
+' edge:R286
+UC29_6 ..> UC29 : <<extend>>
+' edge:R287
+AuthUser --> UC29
+legend bottom
+  Части основного потока (include):
+  UC-29.1 — Ввести новый логин и/или пароль (шаг 2).
+  UC-29.2 — Проверить допустимость данных и уникальность логина (шаг 3).
+  UC-29.3 — Сохранить новые учётные данные (шаг 5).
+  UC-29.4 — Зафиксировать изменение в аудите без пароля (шаг 5).
+  UC-29.5 — Сообщить об успешном изменении (шаг 6).
+  Точки расширения и условия:
+  UC-29.6 → UC-29 / EP-1: Новый логин занят либо данные некорректны (альт. 3а).
+  Сценарий одинаков для всех ролей и всегда применяется к собственной записи,
+  поэтому показан один актёр «Аутентифицированный пользователь»,
+  а не шесть ролей с одинаковыми связями.
+endlegend
 @enduml

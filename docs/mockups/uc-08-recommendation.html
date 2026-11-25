@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-8 · Получить рекомендацию по охране и припасам — макет экрана</title>
+<!-- render: 1180x900 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><h2>Рекомендация по рейсу R-1043</h2><div class="muted small">Получатель: диспетчер караванов (автор заявки). Рекомендация показывается в карточке рейса и в окне risk_score.</div><div class="derivation"><div class="step"><span>risk_score</span><b>74 · Высокий</b></div><div class="step"><span>Длительность рейса</span><b>1 д 12 ч</b></div><div class="step"><span>Ценность груза</span><b>5 000 крышек</b></div></div><table class="inner"><thead><tr><th>Что рекомендовано</th><th>Норма</th><th>Основание</th></tr></thead><tbody><tr><td>Охрана</td><td>3 чел.</td><td>risk 60–79 → 3 охранника</td></tr><tr><td>Вода</td><td>2 сут.</td><td>36 ч в пути + запас 12 ч</td></tr><tr><td>Стимуляторы</td><td>2 шт.</td><td>угроза «Когти смерти» на участке Primm → Nipton</td></tr></tbody></table><div class="rec">Рекомендуется охрана 3 чел. и запас воды на 2 суток.</div><div class="mock-actions"><button>Перейти к назначению ролей</button><button class="link">Зарезервировать припасы</button></div></div></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-8. Получить рекомендацию по охране и припасам</b><br>Экран отвечает на вопрос «кому система формирует рекомендацию»: адресат назван первой же строкой — это диспетчер, создавший заявку. Две кнопки внизу ведут в прецеденты, которые рекомендацию потребляют: UC-9 и UC-13.</div></div>
+</body>
+</html>

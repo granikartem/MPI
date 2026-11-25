@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-10 · Просмотреть доступных сотрудников — макет экрана</title>
+<!-- render: 1180x800 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><div class="registry-head"><h2>Сотрудники организации</h2><div class="registry-meta"><div class="muted small">на 2287-10-21 · свободных 4 из 7</div><button class="link">Обновить</button></div></div><div class="filter-bar"><div class="filter-group"><div class="filter-title">Роль</div><div class="chips"><button class="chip">Караван-мастер</button><button class="chip active">Охранник</button><button class="chip">Медик</button><button class="chip">Кладовщик</button></div></div><div class="filter-group"><label class="check-row"><input type="checkbox" checked> только свободные</label></div></div><table><thead><tr><th>Сотрудник</th><th>Роль</th><th>Ставка</th><th>Доступен с</th><th>Текущий рейс</th></tr></thead><tbody><tr><td>Бун</td><td>Охранник</td><td>90 крышек/сут</td><td>2287-10-21</td><td>—</td></tr><tr><td>Маркус</td><td>Охранник</td><td>90 крышек/сут</td><td>2287-10-21</td><td>—</td></tr><tr><td>Рауль</td><td>Охранник</td><td>85 крышек/сут</td><td>2287-10-23</td><td><span class="route-code">R-1041</span> в пути</td></tr><tr><td>Вероника</td><td>Охранник</td><td>95 крышек/сут</td><td>2287-10-22</td><td><span class="route-code">R-1038</span> готов к отправке</td></tr></tbody></table></div></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-10. Просмотреть доступных сотрудников</b><br>Список сотрудников с занятостью. Фильтр по роли и переключатель «только свободные» — тот же набор элементов, что и в отборе реестра, другой словарь значений.</div></div>
+</body>
+</html>

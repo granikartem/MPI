@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-16 · Зафиксировать прохождение этапа рейса — макет экрана</title>
+<!-- render: 1180x800 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // FIELD TERMINAL</h1>
+<div class="header-actions"><button class="link">← к списку рейсов</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все рейсы</button><h2>Рейс R-1043 · Goodsprings &rarr; New Vegas</h2><div class="muted small">Караван-мастер Кэсседи · отправление 2287-10-21 · этап 3 из 5</div></div><div class="card"><h2>Этапы рейса R-1043</h2><div class="status-current"><span class="muted">Текущий статус:</span><span class="status-badge" style="border-color:#33ccff;color:#33ccff">В пути</span></div><table><thead><tr><th>Этап</th><th>Пункт</th><th>План</th><th>Факт</th><th></th></tr></thead><tbody><tr><td>1</td><td>Goodsprings → Primm</td><td>2287-10-21 14:00</td><td>2287-10-21 13:40</td><td><span class="muted">пройден</span></td></tr><tr><td>2</td><td>Primm → Nipton</td><td>2287-10-21 21:00</td><td>2287-10-21 21:25</td><td><span class="muted">пройден</span></td></tr><tr><td>3</td><td>Nipton → Novac</td><td>2287-10-22 09:00</td><td>—</td><td><button>Отметить прохождение</button></td></tr><tr><td>4</td><td>Novac → New Vegas</td><td>2287-10-22 18:00</td><td>—</td><td><span class="muted">недоступен</span></td></tr></tbody></table><div class="muted small">Этапы отмечаются по порядку: следующий становится доступен после предыдущего. Отставание от плана переводит рейс в статус «Задержка».</div></div></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-16. Зафиксировать прохождение этапа рейса</b><br>Журнал этапов рейса: пройденные — фактом и временем, текущий — единственной активной кнопкой. Такой порядок снимает вопрос «какой этап отмечать» и делает экран пригодным для работы на ходу.</div></div>
+</body>
+</html>

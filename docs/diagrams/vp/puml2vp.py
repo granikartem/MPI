@@ -69,11 +69,13 @@ def fill_of(svg_color):
 class Conv(object):
     """Общая часть конвертации: раскладка, проект, заметки, запись."""
 
-    def __init__(self, name, diagram_type):
+    def __init__(self, name, diagram_type, puml_dir=None, out_dir=None, svg_dir=None):
         self.name = name
-        self.puml = os.path.join(PUML_DIR, name + '.puml')
+        self.puml_dir = puml_dir or PUML_DIR
+        self.out_dir = out_dir or OUT_DIR
+        self.puml = os.path.join(self.puml_dir, name + '.puml')
         self.src = open(self.puml, encoding='utf-8').read()
-        self.L = svgpos.layout_of(self.puml, SVG_DIR, JAR)
+        self.L = svgpos.layout_of(self.puml, svg_dir or SVG_DIR, JAR)
         self.p = Project(name)
         self.d = self.p.diagram(name, diagram_type)
         self.shapes = {}          # ключ -> (модель, фигура)
@@ -216,8 +218,8 @@ class Conv(object):
         for s in self._fills:
             self.d.finish_fill(s)
         self._restack()
-        os.makedirs(OUT_DIR, exist_ok=True)
-        path = os.path.join(OUT_DIR, self.name + '.xml')
+        os.makedirs(self.out_dir, exist_ok=True)
+        path = os.path.join(self.out_dir, self.name + '.xml')
         self.p.write(path)
         return path
 

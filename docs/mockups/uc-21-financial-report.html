@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-21 · Сформировать финансовый отчёт по рейсу — макет экрана</title>
+<!-- render: 1180x1250 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><div class="registry-head"><h2>Отчёты по рейсам</h2><div class="registry-meta"><div class="muted small">завершённых рейсов 9</div><button class="link">Обновить</button></div></div><div class="filter-bar"><div class="filter-group"><div class="filter-title">Поиск рейса</div><input type="text" value="R-10" placeholder="id рейса, маршрут, пункт" class="mock-focus"></div><div class="filter-group"><div class="filter-title">Период</div><select><option selected>Октябрь 2287</option><option>Сентябрь 2287</option><option>Весь архив</option></select></div><div class="filter-group"><div class="filter-title">Статус</div><div class="chips"><button class="chip active" style="border-color:#33ff66;color:#33ff66">Доставлен</button><button class="chip active" style="border-color:#55aa77;color:#55aa77">Закрыт</button></div></div></div><table><thead><tr><th>Рейс</th><th>Маршрут</th><th>Завершён</th><th>Статус отчёта</th><th></th></tr></thead><tbody><tr><td><span class="route-code">R-1035</span></td><td>Goodsprings &rarr; New Vegas</td><td>2287-10-18</td><td>сформирован</td><td><button class="link">Открыть</button></td></tr><tr><td><span class="route-code">R-1029</span></td><td>Primm &rarr; Novac</td><td>2287-10-12</td><td>не сформирован</td><td><button>Сформировать</button></td></tr><tr><td><span class="route-code">R-1012</span></td><td>Primm &rarr; New Vegas</td><td>2287-09-30</td><td>сформирован</td><td><button class="link">Открыть</button></td></tr></tbody></table></div><div class="card"><h2>Финансовый отчёт · рейс R-1035</h2><div class="muted small">Goodsprings → New Vegas · завершён 2287-10-18 · сформирован 2287-10-21 14:05</div><div class="derivation"><div class="step"><span>Оплата за перевозку</span><b>3 200 крышек</b></div><div class="step"><span>Оплата сотрудников (4 чел. × 2 сут.)</span><b>−820 крышек</b></div><div class="step"><span>Пошлины КПП</span><b>−240 крышек</b></div><div class="step"><span>Припасы и расходники</span><b>−310 крышек</b></div><div class="step"><span>Списание по расхождению манифеста</span><b>−60 крышек</b></div><div class="step total"><span>Итог по рейсу</span><b>1 770 крышек</b></div></div><div class="mock-actions"><button>Экспортировать на голотейп</button><button class="link">Пересчитать</button></div></div></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-21. Сформировать финансовый отчёт по рейсу</b><br>Замечание «непонятно, как найти нужный отчёт» закрыто первой карточкой: поиск по рейсу, период и статус отчёта, а в строке — действие «Сформировать» или «Открыть». Вторая карточка — сам отчёт с раскрытой арифметикой.</div></div>
+</body>
+</html>

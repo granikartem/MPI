@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-2 · Управлять статусами заявки — макет экрана</title>
+<!-- render: 1180x1350 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><div class="registry-head"><h2>Реестр рейсов</h2><div class="registry-meta"><div class="muted small">данные на 2287-10-21 14:20 · показано 3 · в срезе 3</div><button class="link">Обновить</button></div></div><div class="registry-table"><table><thead><tr><th>Маршрут</th><th>Откуда → Куда</th><th>Статус</th><th>Изменение статуса</th><th></th></tr></thead><tbody><tr><td><span class="route-code">R-1043</span> Южный объезд</td><td>Goodsprings &rarr; New Vegas</td><td><span class="status-badge" style="border-color:#33ccff;color:#33ccff">В пути</span></td><td><div class="small">2287-10-21 09:40</div><div class="muted small">Джед Мастерсон</div></td><td><button class="link">Статус</button></td></tr><tr><td><span class="route-code">R-1041</span> Прямой тракт</td><td>Goodsprings &rarr; Novac</td><td><span class="status-badge" style="border-color:#ff9800;color:#ff9800">Задержка</span></td><td><div class="small">2287-10-21 11:05</div><div class="muted small">Кэсседи</div></td><td><button class="link">Статус</button></td></tr><tr><td><span class="route-code">R-1038</span> Северный обход</td><td>Primm &rarr; New Vegas</td><td><span class="status-badge" style="border-color:#ffd633;color:#ffd633">Готов к отправке</span></td><td><div class="small">2287-10-20 18:12</div><div class="muted small">Джед Мастерсон</div></td><td><button class="link">Статус</button></td></tr></tbody></table></div></div></main>
+</div>
+<div class="modal-overlay"><div class="modal"><div class="modal-head"><h3>Статус рейса</h3><button class="link">✕</button></div><div class="muted small">Goodsprings → New Vegas · Южный объезд через Primm</div><div class="status-current"><span class="muted">Текущий статус:</span><span class="status-badge" style="border-color:#33ccff;color:#33ccff">В пути</span></div><div class="actor-row"><label>Роль актора<select><option selected>Диспетчер караванов</option><option>Караван-мастер</option></select></label><label>ФИО (для журнала)<input type="text" value="Джед Мастерсон" placeholder="Например, Кэсседи"></label></div><label>Причина перехода<textarea placeholder="Обязательна при фиксации задержки"></textarea></label><div class="transitions"><div class="transition"><div class="transition-head"><button>Зафиксировать задержку</button><span class="status-badge" style="border-color:#ff9800;color:#ff9800">→ Задержка</span></div></div><div class="transition"><div class="transition-head"><button>Отметить доставку</button><span class="status-badge" style="border-color:#33ff66;color:#33ff66">→ Доставлен</span></div><div class="muted small">доступно после отметки последнего этапа рейса</div></div><div class="transition"><div class="transition-head"><button>Отменить рейс</button><span class="status-badge" style="border-color:#ff4444;color:#ff4444">→ Отменён</span></div></div></div><div class="derivation"><div class="muted small">История изменений статуса (FR-3)</div></div><table class="inner"><thead><tr><th>Когда</th><th>Переход</th><th>Кто</th><th>Причина</th></tr></thead><tbody><tr><td>2287-10-21 09:40</td><td>READY &rarr; EN_ROUTE</td><td>Джед Мастерсон</td><td>—</td></tr><tr><td>2287-10-20 17:02</td><td>DRAFT &rarr; READY</td><td>Джед Мастерсон</td><td>манифест и охрана подтверждены</td></tr></tbody></table></div></div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-2. Управлять статусами заявки</b><br>Переход статуса выполняется в модальном окне поверх реестра — так же, как в коде (components/StatusModal.tsx). Видны только разрешённые статусной моделью переходы, причина обязательна при фиксации задержки, журнал переходов — внизу окна (FR-3).</div></div>
+</body>
+</html>

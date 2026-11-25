@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-18 · Отметить прохождение КПП (с пошлиной) — макет экрана</title>
+<!-- render: 1180x850 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // FIELD TERMINAL</h1>
+<div class="header-actions"><button class="link">← к списку рейсов</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все рейсы</button><h2>Рейс R-1043 · Goodsprings &rarr; New Vegas</h2><div class="muted small">Караван-мастер Кэсседи · отправление 2287-10-21 · этап 3 из 5</div></div><form class="card"><h2>Прохождение КПП</h2><label>КПП<select><option selected>NCR · Mojave Outpost</option><option>NCR · Camp Searchlight</option><option>NCR · Hoover Dam</option></select></label><label>Пошлина (крышек)<input type="number" value="240"></label><div class="muted small">Ставка получена из NCR Checkpoint &amp; Tax Terminal, данные на 2287-10-22 08:30 (UC-24): 4% от ценности груза.</div><label>Номер квитанции<input type="text" value="NCR-TX-55102"></label><label>Время прохождения<input type="text" value="2287-10-22 10:05"></label><div class="mock-actions"><button>Отметить прохождение</button><button class="link">Пошлина оспорена</button></div></form></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-18. Отметить прохождение КПП (с пошлиной)</b><br>Сумма пошлины приходит из интеграции и подставляется в поле, но остаётся редактируемой — на случай расхождения с квитанцией. Источник и возраст данных подписаны под полем, как и в окне risk_score.</div></div>
+</body>
+</html>

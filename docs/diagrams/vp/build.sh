@@ -4,6 +4,9 @@
 # Использование:
 #   ./build.sh SM_UC2_UseCaseView [ещё имена...]
 #   ./build.sh --all                 # всё, что лежит в out/*.xml
+#   ./build.sh --all-uc              # детальные прецеденты: out/usecases/UC_*_Detail.xml
+#
+# Имя ищется сначала в out/, затем в его подкаталогах.
 #
 # Учтены грабли, описанные в docs/VisualParadigm.md §4–5:
 #   * запускать утилиты можно только из каталога scripts: внутри они делают pushd ..\bin;
@@ -35,6 +38,9 @@ names=("$@")
 if [ "${1:-}" = "--all" ]; then
     names=()
     for f in "$HERE"/out/*.xml; do names+=("$(basename "$f" .xml)"); done
+elif [ "${1:-}" = "--all-uc" ]; then
+    names=()
+    for f in "$HERE"/out/usecases/UC_*_Detail.xml; do names+=("$(basename "$f" .xml)"); done
 fi
 [ "${#names[@]}" -gt 0 ] || { echo "нечего собирать" >&2; exit 2; }
 
@@ -48,7 +54,8 @@ win() { printf '%s' "$(cd "$(dirname "$1")" && pwd -W)/$(basename "$1")" | tr '/
 
 for n in "${names[@]}"; do
     xml="$HERE/out/$n.xml"
-    [ -f "$xml" ] || { echo "ПРОПУСК $n: нет $xml" >&2; rc=1; continue; }
+    [ -f "$xml" ] || xml=$(ls "$HERE"/out/*/"$n.xml" 2>/dev/null | head -1)
+    [ -n "$xml" ] && [ -f "$xml" ] || { echo "ПРОПУСК $n: нет out/$n.xml" >&2; rc=1; continue; }
     rm -rf "$WORK/$n.vpp" "$WORK/$n.vpp.bak_"* "$WORK/img_$n"
     log="$WORK/$n.log"
 

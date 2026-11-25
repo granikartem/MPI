@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-9 · Назначить сотрудников на роли рейса — макет экрана</title>
+<!-- render: 1180x950 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // DISPATCH TERMINAL</h1>
+<div class="header-actions"><button class="link">консоль организаций</button><button class="link">← на главную</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все организации</button><h2>Рейсы · Crimson Caravan Company</h2><div class="muted small">STANDARD · tenant crimson</div></div><div class="card"><h2>Роли рейса R-1043</h2><div class="muted small">Рекомендация по рейсу: охрана 3 чел. (UC-8)</div><div class="actor-row"><label>Роль<select><option selected>Охранник</option><option>Караван-мастер</option><option>Полевой медик</option><option>Кладовщик</option></select></label><label>Сотрудник<select><option selected>Маркус · свободен с 2287-10-21</option><option>Рауль · свободен с 2287-10-23</option><option>Бун · свободен с 2287-10-21</option></select></label></div><div class="mock-actions"><button>Назначить</button></div><table><thead><tr><th>Роль</th><th>Сотрудник</th><th>Ставка</th><th>Статус назначения</th><th></th></tr></thead><tbody><tr><td>Караван-мастер</td><td>Кэсседи</td><td>120 крышек/сут</td><td>подтверждено</td><td><button class="link">Снять</button></td></tr><tr><td>Охранник</td><td>Бун</td><td>90 крышек/сут</td><td>подтверждено</td><td><button class="link">Снять</button></td></tr><tr><td>Охранник</td><td>Маркус</td><td>90 крышек/сут</td><td>ожидает подтверждения</td><td><button class="link">Снять</button></td></tr><tr><td>Полевой медик</td><td>док Усанаги</td><td>110 крышек/сут</td><td>подтверждено</td><td><button class="link">Снять</button></td></tr></tbody></table><div class="muted small">Назначено 2 охранника из 3 рекомендованных.</div></div></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-9. Назначить сотрудников на роли рейса</b><br>Назначение ролей: одна строка выбора «роль + сотрудник» и таблица уже назначенных. Доступность сотрудника видна прямо в списке; полный список с занятостью — отдельный прецедент UC-10.</div></div>
+</body>
+</html>

@@ -12,25 +12,46 @@ skinparam activityBackgroundColor #F5F5F5
 top to bottom direction
 title UC-19. Сообщить об инциденте в рейсе
 
-actor "Диспетчер караванов" as Dispatcher
 actor "Караван-мастер" as CaravanMaster
 actor "Капитан охраны" as SecurityCaptain
 actor "Полевой медик" as Medic
 actor "Полевой пользователь" as FieldUser <<abstract>>
+actor "Диспетчер караванов" as Dispatcher
 rectangle "ИС «Караваны»" as SystemBoundary {
   usecase "UC-19. Сообщить об инциденте в рейсе" as UC19
   usecase "UC-20. Инициировать RecoveryRequest" as UC20
+  usecase "UC-19.1. Заполнить тип, тяжесть и\nописание инцидента" as UC19_1
+  usecase "UC-19.2. Зафиксировать время,\nкоординаты и идентификатор события" as UC19_2
+  usecase "UC-19.3. Зарегистрировать инцидент в\nрейсе" as UC19_3
+  usecase "UC-19.4. Уведомить диспетчера о\nзарегистрированном инциденте" as UC19_4
+  usecase "UC-19.5. Перевести рейс в Delayed" as UC19_5
+  usecase "UC-19.6. Сохранить сообщение в\nлокальной очереди" as UC19_6
+  usecase "UC-19.7. Показать ошибки\nобязательных полей" as UC19_7
 }
 ' edge:R069
 UC20 ..> UC19 : <<extend>>
+' edge:R211
+UC19 ..> UC19_1 : <<include>>
+' edge:R212
+UC19 ..> UC19_2 : <<include>>
+' edge:R213
+UC19 ..> UC19_3 : <<include>>
+' edge:R214
+UC19 ..> UC19_4 : <<include>>
+' edge:R215
+UC19_5 ..> UC19 : <<extend>>
+' edge:R216
+UC19_6 ..> UC19 : <<extend>>
+' edge:R217
+UC19_7 ..> UC19 : <<extend>>
+' edge:R049
+FieldUser --> UC19
+' edge:R218
+Dispatcher --> UC19_4
 ' edge:R012
 Dispatcher --> UC20
 ' edge:R029
 CaravanMaster --> UC20
-' edge:R049
-FieldUser --> UC19
-' edge:R072
-Dispatcher --> UC19
 ' edge:R054
 CaravanMaster --|> FieldUser
 ' edge:R055
@@ -38,8 +59,17 @@ SecurityCaptain --|> FieldUser
 ' edge:R056
 Medic --|> FieldUser
 legend bottom
+  Части основного потока (include):
+  UC-19.1 — Заполнить тип, тяжесть и описание инцидента (шаги 3–5).
+  UC-19.2 — Зафиксировать время, координаты и идентификатор события (шаги 2, 7).
+  UC-19.3 — Зарегистрировать инцидент в рейсе (шаг 8).
+  UC-19.4 — Уведомить диспетчера о зарегистрированном инциденте (шаг 9).
   Точки расширения и условия:
-  UC20 → UC19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер
-  решил инициировать реагирование.
+  UC-20 → UC-19 / EP-1: Инцидент высокой или критической тяжести зарегистрирован; диспетчер или караван-мастер решил инициировать реагирование.
+  UC-19.5 → UC-19 / EP-2: Тяжесть высокая или критическая при статусе En Route (шаг 8, альт. 8а).
+  UC-19.6 → UC-19 / EP-3: Связи нет; регистрация и уведомление выполняются после синхронизации (альт. 7а).
+  UC-19.7 → UC-19 / EP-4: Обязательные поля формы не заполнены (альт. 6б).
+  Диспетчер — второстепенный актёр: он не заполняет форму, а получает уведомление
+  из UC-19.4 и может инициировать UC-20.
 endlegend
 @enduml

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>UC-19 · Сообщить об инциденте в рейсе — макет экрана</title>
+<!-- render: 1180x900 -->
+<!-- Шрифт Share Tech Mono (как в frontend/index.html) намеренно не подключается
+     ссылкой на Google Fonts: макеты должны открываться и рендериться без сети.
+     Семейство в CSS то же самое, при отсутствии шрифта работает запасной
+     моноширинный стек. -->
+<link rel="stylesheet" href="assets/karavany.css">
+</head>
+<body>
+<div class="app">
+<header><div class="header-top"><h1>CARAVAN // FIELD TERMINAL</h1>
+<div class="header-actions"><button class="link">← к списку рейсов</button></div></div>
+<div class="health"><span class="dot ok"></span> сервер: ok · PG: ok · Mongo: ok</div>
+</header>
+<main><div class="card org-banner"><button class="link">← все рейсы</button><h2>Рейс R-1043 · Goodsprings &rarr; New Vegas</h2><div class="muted small">Караван-мастер Кэсседи · отправление 2287-10-21 · этап 3 из 5</div></div><form class="card"><h2>Инцидент в рейсе R-1043</h2><label>Тип инцидента<select><option selected>Нападение</option><option>Поломка</option><option>Потеря груза</option><option>Травма сотрудника</option><option>Погодные условия</option></select></label><div class="filter-group"><div class="filter-title">Серьёзность</div><div class="chips"><button class="chip" style="border-color:#33ff66;color:#33ff66">Низкая</button><button class="chip" style="border-color:#ffd633;color:#ffd633">Средняя</button><button class="chip active" style="border-color:#ff9800;color:#ff9800">Высокая</button><button class="chip" style="border-color:#ff4444;color:#ff4444">Критическая</button></div></div><label>Место<input type="text" value="Участок Nipton → Novac, 12 км от Nipton"></label><label>Описание<textarea placeholder="Что произошло, последствия для груза и людей">Нападение рейдеров, двое охранников ранены, груз цел.</textarea></label><div class="mock-actions"><button>Отправить сообщение</button><button class="link">Запросить эвакуацию</button></div></form></main>
+</div>
+<div class="mock-caption-bar"><div class="mock-caption"><b>UC-19. Сообщить об инциденте в рейсе</b><br>Карточка инцидента. Сообщение уходит диспетчеру рейса — он и есть получатель уведомления на диаграмме прецедента. Критическая серьёзность предлагает сразу перейти к запросу эвакуации (UC-20).</div></div>
+</body>
+</html>
