@@ -1165,7 +1165,7 @@ ARM-устройства, потребление памяти в предела�
 |---|---|---|---|
 | Фреймворк модульных и интеграционных тестов | JUnit 5 (Jupiter) | JUnit Team | 5.10 (в составе Spring Boot 3.3.5) |
 | Проверки и заглушки в тестах | AssertJ, Mockito | AssertJ / Mockito | 3.25 / 5.11 (в составе Spring Boot 3.3.5) |
-| Интеграционные тесты и проверки API в обход интерфейса | Spring Boot Test, Spring MockMvc | VMware (Spring) | 3.3.5 |
+| Интеграционные тесты и проверки API в обход интерфейса | Spring Boot Test, Spring MockMvc; `spring-security-test` для подстановки ролей | VMware (Spring) | 3.3.5; Spring Security 6.3 (в составе Spring Boot 3.3.5) |
 | Хранилища для интеграционных тестов | Testcontainers (модули PostgreSQL, MongoDB) | Docker Inc. (AtomicJar) | 1.20 |
 | Миграции БД без запуска приложения | Flyway CLI | Redgate | совместимая с Flyway backend; фиксируется перед прогоном |
 | Заглушка внешних API | WireMock | WireMock Inc. | 3.9.1 |
@@ -1177,6 +1177,8 @@ ARM-устройства, потребление памяти в предела�
 | Статистика и планы SQL-запросов | `pg_stat_statements`, `EXPLAIN ANALYZE` | PostgreSQL Global Development Group | 16 |
 | Полевой клиент, сеть и профиль интерфейса | Chrome DevTools (Device Mode, Network, Application, Performance) | Google | в составе выбранного Chrome |
 | Динамический анализ безопасности | ZAP (Zed Attack Proxy) | ZAP / Checkmarx | 2.15 |
+| Статический анализ безопасности кода | SpotBugs с плагином FindSecBugs (Find Security Bugs) | SpotBugs / OWASP | 4.8 / 1.13 |
+| Проверка уязвимостей зависимостей | `npm audit`; OWASP Dependency-Check | npm Inc.; OWASP | npm 10; 10.0 |
 | Клиенты СУБД, генерация тестовых данных | psql; mongosh, MongoDB Compass | PostgreSQL GDG; MongoDB Inc. | 16; 2.x / 1.4x |
 | Непрерывная интеграция: сборка из помеченной ревизии, модульные и интеграционные тесты, релизный пакет | GitHub Actions | GitHub | - |
 | Работа на «Гелиосе» | `pkg info`, `sockstat`, скрипты запуска и остановки компонентов проекта | FreeBSD | 14.3-STABLE |
